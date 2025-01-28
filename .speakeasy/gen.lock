@@ -1,0 +1,2273 @@
+lockVersion: 2.0.0
+id: 97e9fd40-98a0-465e-9d1a-259beac76207
+management:
+  docChecksum: 1a47bb514ae48a9faf4b780d305b821e
+  docVersion: v3
+  speakeasyVersion: 1.472.1
+  generationVersion: 2.493.34
+  releaseVersion: 0.0.1
+  configChecksum: 598e1f0389e98e1b5d3d623e7406dc05
+features:
+  python:
+    additionalDependencies: 1.0.0
+    constsAndDefaults: 1.0.5
+    core: 5.10.4
+    defaultEnabledRetries: 0.2.0
+    devContainers: 3.0.0
+    enumUnions: 0.1.0
+    envVarSecurityUsage: 0.3.2
+    flatRequests: 1.0.1
+    flattening: 3.1.0
+    globalSecurity: 3.0.2
+    globalSecurityCallbacks: 1.0.0
+    globalSecurityFlattening: 1.0.0
+    globalServerURLs: 3.1.0
+    methodArguments: 1.0.2
+    responseFormat: 1.0.1
+    retries: 3.0.2
+    sdkHooks: 1.0.0
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - .python-version
+  - .vscode/settings.json
+  - USAGE.md
+  - docs/models/action.md
+  - docs/models/apikey.md
+  - docs/models/apikeyuser.md
+  - docs/models/assignment.md
+  - docs/models/assignservervirtualnetworkattributes.md
+  - docs/models/assignservervirtualnetworkdata.md
+  - docs/models/assignservervirtualnetworkrequestbody.md
+  - docs/models/assignservervirtualnetworktype.md
+  - docs/models/attributes.md
+  - docs/models/author.md
+  - docs/models/bandwidthpackages.md
+  - docs/models/bandwidthpackagesattributes.md
+  - docs/models/bandwidthpackagesproject.md
+  - docs/models/bandwidthpackagestype.md
+  - docs/models/bandwidthplan.md
+  - docs/models/bandwidthplanattributes.md
+  - docs/models/bandwidthplans.md
+  - docs/models/bandwidthplantype.md
+  - docs/models/billingmethod.md
+  - docs/models/billingmodel.md
+  - docs/models/billingtype.md
+  - docs/models/billingusage.md
+  - docs/models/billingusageattributes.md
+  - docs/models/billingusagedata.md
+  - docs/models/billingusageproject.md
+  - docs/models/brl.md
+  - docs/models/country.md
+  - docs/models/cpu.md
+  - docs/models/createapikey.md
+  - docs/models/createapikeyattributes.md
+  - docs/models/createapikeytype.md
+  - docs/models/createfirewallassignmentattributes.md
+  - docs/models/createfirewallassignmentdata.md
+  - docs/models/createfirewallassignmentrequest.md
+  - docs/models/createfirewallassignmentrequestbody.md
+  - docs/models/createfirewallassignmenttype.md
+  - docs/models/createfirewallattributes.md
+  - docs/models/createfirewalldata.md
+  - docs/models/createfirewallrequestbody.md
+  - docs/models/createfirewallrules.md
+  - docs/models/createfirewalltype.md
+  - docs/models/createipmisessionrequest.md
+  - docs/models/createprojectattributes.md
+  - docs/models/createprojectdata.md
+  - docs/models/createprojectenvironment.md
+  - docs/models/createprojectrequestbody.md
+  - docs/models/createprojectresponsebody.md
+  - docs/models/createprojecttype.md
+  - docs/models/createserveractionattributes.md
+  - docs/models/createserveractiondata.md
+  - docs/models/createserveractionrequest.md
+  - docs/models/createserveractionrequestbody.md
+  - docs/models/createserveractiontype.md
+  - docs/models/createserverattributes.md
+  - docs/models/createserverbilling.md
+  - docs/models/createserverdata.md
+  - docs/models/createserveroperatingsystem.md
+  - docs/models/createserveroutofbandattributes.md
+  - docs/models/createserveroutofbanddata.md
+  - docs/models/createserveroutofbandrequest.md
+  - docs/models/createserveroutofbandrequestbody.md
+  - docs/models/createserveroutofbandtype.md
+  - docs/models/createserverplan.md
+  - docs/models/createserverreinstallattributes.md
+  - docs/models/createserverreinstalldata.md
+  - docs/models/createserverreinstalloperatingsystem.md
+  - docs/models/createserverreinstallraid.md
+  - docs/models/createserverreinstallrequest.md
+  - docs/models/createserverreinstallrequestbody.md
+  - docs/models/createserverreinstalltype.md
+  - docs/models/createserverrequestbody.md
+  - docs/models/createserversite.md
+  - docs/models/createservertype.md
+  - docs/models/createtagattributes.md
+  - docs/models/createtagdata.md
+  - docs/models/createtagrequestbody.md
+  - docs/models/createtagtype.md
+  - docs/models/createvirtualnetworkattributes.md
+  - docs/models/createvirtualnetworkdata.md
+  - docs/models/createvirtualnetworkrequestbody.md
+  - docs/models/createvirtualnetworksite.md
+  - docs/models/createvirtualnetworktype.md
+  - docs/models/credentials.md
+  - docs/models/currency.md
+  - docs/models/customtag.md
+  - docs/models/customtagattributes.md
+  - docs/models/customtagtype.md
+  - docs/models/data.md
+  - docs/models/deleteapikeyrequest.md
+  - docs/models/deletefirewallassignmentrequest.md
+  - docs/models/deletefirewallrequest.md
+  - docs/models/deleteprojectrequest.md
+  - docs/models/deleteprojectsshkeyrequest.md
+  - docs/models/deleteprojectuserdatarequest.md
+  - docs/models/deletestoragefilesystemsrequest.md
+  - docs/models/deletevirtualnetworksassignmentsrequest.md
+  - docs/models/deletevpnsessionrequest.md
+  - docs/models/deployconfig.md
+  - docs/models/deployconfigattributes.md
+  - docs/models/deployconfigdata.md
+  - docs/models/deployconfigerror.md
+  - docs/models/destroyserverrequest.md
+  - docs/models/destroytagrequest.md
+  - docs/models/destroyteammemberrequest.md
+  - docs/models/destroyvirtualnetworkrequest.md
+  - docs/models/distro.md
+  - docs/models/drives.md
+  - docs/models/environment.md
+  - docs/models/errorobject.md
+  - docs/models/errorobjectmeta.md
+  - docs/models/errors.md
+  - docs/models/events.md
+  - docs/models/eventsattributes.md
+  - docs/models/eventsproject.md
+  - docs/models/eventsteam.md
+  - docs/models/family.md
+  - docs/models/features.md
+  - docs/models/filesystemdata.md
+  - docs/models/filesystemdataattributes.md
+  - docs/models/filesystemdataproject.md
+  - docs/models/filesystemdatatype.md
+  - docs/models/filterfamily.md
+  - docs/models/filterlocation.md
+  - docs/models/filterstocklevel.md
+  - docs/models/filtertype.md
+  - docs/models/firewall.md
+  - docs/models/firewallattributes.md
+  - docs/models/firewallproject.md
+  - docs/models/firewalls.md
+  - docs/models/firewallserver.md
+  - docs/models/firewallserverattributes.md
+  - docs/models/firewallserverserver.md
+  - docs/models/firewallservertype.md
+  - docs/models/firewalltype.md
+  - docs/models/getbandwidthplansrequest.md
+  - docs/models/getbillingusagerequest.md
+  - docs/models/geteventsrequest.md
+  - docs/models/geteventsresponsebody.md
+  - docs/models/getfirewallassignmentsrequest.md
+  - docs/models/getfirewallrequest.md
+  - docs/models/getiprequest.md
+  - docs/models/getipsrequest.md
+  - docs/models/getplanrequest.md
+  - docs/models/getplansoperatingsystemresponsebody.md
+  - docs/models/getplansrequest.md
+  - docs/models/getplansresponsebody.md
+  - docs/models/getprojectsrequest.md
+  - docs/models/getprojectsshkeyrequest.md
+  - docs/models/getprojectsshkeyresponsebody.md
+  - docs/models/getprojectsshkeysrequest.md
+  - docs/models/getprojectuserdatarequest.md
+  - docs/models/getprojectusersdatarequest.md
+  - docs/models/getprojectusersdataresponsebody.md
+  - docs/models/getregionrequest.md
+  - docs/models/getroleidrequest.md
+  - docs/models/getrolesresponsebody.md
+  - docs/models/getserverdeployconfigrequest.md
+  - docs/models/getserveroutofbandrequest.md
+  - docs/models/getserverrequest.md
+  - docs/models/getserversrequest.md
+  - docs/models/getstoragefilesystemsrequest.md
+  - docs/models/gettrafficconsumptionrequest.md
+  - docs/models/gettrafficquotarequest.md
+  - docs/models/getuserprofileresponsebody.md
+  - docs/models/getvirtualnetworkrequest.md
+  - docs/models/getvirtualnetworkresponsebody.md
+  - docs/models/getvirtualnetworksassignmentsrequest.md
+  - docs/models/getvirtualnetworksrequest.md
+  - docs/models/getvpnsessionsmeta.md
+  - docs/models/getvpnsessionsrequest.md
+  - docs/models/getvpnsessionsresponsebody.md
+  - docs/models/gpu.md
+  - docs/models/ipaddress.md
+  - docs/models/ipaddressattributes.md
+  - docs/models/ipaddresses.md
+  - docs/models/ipaddressproject.md
+  - docs/models/ipaddressregion.md
+  - docs/models/ipaddresstype.md
+  - docs/models/ipmisession.md
+  - docs/models/ipmisessionattributes.md
+  - docs/models/ipmisessiondata.md
+  - docs/models/ipmisessiontype.md
+  - docs/models/ipmistatus.md
+  - docs/models/listfirewallsrequest.md
+  - docs/models/location.md
+  - docs/models/locations.md
+  - docs/models/membership.md
+  - docs/models/membershipattributes.md
+  - docs/models/membershipdata.md
+  - docs/models/membershiprole.md
+  - docs/models/memory.md
+  - docs/models/meta.md
+  - docs/models/metadata.md
+  - docs/models/nics.md
+  - docs/models/operatingsystem.md
+  - docs/models/operatingsystems.md
+  - docs/models/operatingsystemsattributes.md
+  - docs/models/outofbandconnection.md
+  - docs/models/outofbandconnectionattributes.md
+  - docs/models/outofbandconnectiondata.md
+  - docs/models/outofbandconnectionsshkey.md
+  - docs/models/packages.md
+  - docs/models/patchcurrentteamattributes.md
+  - docs/models/patchcurrentteamcurrency.md
+  - docs/models/patchcurrentteamdata.md
+  - docs/models/patchcurrentteamrequest.md
+  - docs/models/patchcurrentteamrequestbody.md
+  - docs/models/patchcurrentteamresponsebody.md
+  - docs/models/patchcurrentteamtype.md
+  - docs/models/patchstoragefilesystemsattributes.md
+  - docs/models/patchstoragefilesystemsdata.md
+  - docs/models/patchstoragefilesystemsrequest.md
+  - docs/models/patchstoragefilesystemsrequestbody.md
+  - docs/models/patchstoragefilesystemsresponsebody.md
+  - docs/models/patchstoragefilesystemstype.md
+  - docs/models/patchuserprofileattributes.md
+  - docs/models/patchuserprofiledata.md
+  - docs/models/patchuserprofilerequest.md
+  - docs/models/patchuserprofilerequestbody.md
+  - docs/models/patchuserprofileresponsebody.md
+  - docs/models/patchuserprofilerole.md
+  - docs/models/patchuserprofiletype.md
+  - docs/models/period.md
+  - docs/models/plan.md
+  - docs/models/plandata.md
+  - docs/models/plandataattributes.md
+  - docs/models/plandataattributestype.md
+  - docs/models/plandatabrl.md
+  - docs/models/plandatapricing.md
+  - docs/models/plandataregions.md
+  - docs/models/plandatatype.md
+  - docs/models/plandatausd.md
+  - docs/models/postapikeyresponsebody.md
+  - docs/models/postprojectsshkeyattributes.md
+  - docs/models/postprojectsshkeydata.md
+  - docs/models/postprojectsshkeyrequest.md
+  - docs/models/postprojectsshkeyrequestbody.md
+  - docs/models/postprojectsshkeyresponsebody.md
+  - docs/models/postprojectsshkeytype.md
+  - docs/models/postprojectuserdataattributes.md
+  - docs/models/postprojectuserdatadata.md
+  - docs/models/postprojectuserdatarequest.md
+  - docs/models/postprojectuserdatarequestbody.md
+  - docs/models/postprojectuserdatatype.md
+  - docs/models/poststoragefilesystemsattributes.md
+  - docs/models/poststoragefilesystemsdata.md
+  - docs/models/poststoragefilesystemsrequestbody.md
+  - docs/models/poststoragefilesystemsresponsebody.md
+  - docs/models/poststoragefilesystemstype.md
+  - docs/models/postteamattributes.md
+  - docs/models/postteamcurrency.md
+  - docs/models/postteamdata.md
+  - docs/models/postteammembersattributes.md
+  - docs/models/postteammembersdata.md
+  - docs/models/postteammembersrequestbody.md
+  - docs/models/postteammembersrole.md
+  - docs/models/postteammemberstype.md
+  - docs/models/postteamrequestbody.md
+  - docs/models/postteamresponsebody.md
+  - docs/models/postteamtype.md
+  - docs/models/postvpnsessionattributes.md
+  - docs/models/postvpnsessiondata.md
+  - docs/models/postvpnsessionrequestbody.md
+  - docs/models/postvpnsessionsite.md
+  - docs/models/postvpnsessiontype.md
+  - docs/models/pricing.md
+  - docs/models/products.md
+  - docs/models/project.md
+  - docs/models/projectattributes.md
+  - docs/models/projectbilling.md
+  - docs/models/projectinclude.md
+  - docs/models/projects.md
+  - docs/models/projectstats.md
+  - docs/models/protocol.md
+  - docs/models/provisioningtype.md
+  - docs/models/putprojectsshkeyattributes.md
+  - docs/models/putprojectsshkeydata.md
+  - docs/models/putprojectsshkeyrequest.md
+  - docs/models/putprojectsshkeyrequestbody.md
+  - docs/models/putprojectsshkeyresponsebody.md
+  - docs/models/putprojectsshkeytype.md
+  - docs/models/putprojectuserdataattributes.md
+  - docs/models/putprojectuserdatadata.md
+  - docs/models/putprojectuserdatarequest.md
+  - docs/models/putprojectuserdatarequestbody.md
+  - docs/models/putprojectuserdatatype.md
+  - docs/models/putvpnsessionrequest.md
+  - docs/models/quotainmbps.md
+  - docs/models/quotaintb.md
+  - docs/models/quotaperproject.md
+  - docs/models/quotaperregion.md
+  - docs/models/raid.md
+  - docs/models/region.md
+  - docs/models/regionattributes.md
+  - docs/models/regioncountry.md
+  - docs/models/regiondata.md
+  - docs/models/regionresourcedata.md
+  - docs/models/regions.md
+  - docs/models/regionsattributes.md
+  - docs/models/regionsdata.md
+  - docs/models/role.md
+  - docs/models/roledata.md
+  - docs/models/roledataattributes.md
+  - docs/models/roledatatype.md
+  - docs/models/rules.md
+  - docs/models/security.md
+  - docs/models/server.md
+  - docs/models/server1.md
+  - docs/models/serveraction.md
+  - docs/models/serveractionattributes.md
+  - docs/models/serveractiondata.md
+  - docs/models/serveractionmeta.md
+  - docs/models/serveractiontype.md
+  - docs/models/serverdata.md
+  - docs/models/serverdataattributes.md
+  - docs/models/serverdatafeatures.md
+  - docs/models/serverdataplan.md
+  - docs/models/serverdataspecs.md
+  - docs/models/servererror.md
+  - docs/models/serverexitrescuemoderequest.md
+  - docs/models/serverlockrequest.md
+  - docs/models/servermeta.md
+  - docs/models/serverrescue.md
+  - docs/models/serverrescuemeta.md
+  - docs/models/servers.md
+  - docs/models/serverscheduledeletion.md
+  - docs/models/serverscheduledeletionattributes.md
+  - docs/models/serverscheduledeletiondata.md
+  - docs/models/serverscheduledeletionrequest.md
+  - docs/models/serverscheduledeletiontype.md
+  - docs/models/serversmeta.md
+  - docs/models/serverstartrescuemoderequest.md
+  - docs/models/serverunlockrequest.md
+  - docs/models/serverunscheduledeletionrequest.md
+  - docs/models/site.md
+  - docs/models/specs.md
+  - docs/models/sshkey.md
+  - docs/models/sshkeydata.md
+  - docs/models/sshkeydataattributes.md
+  - docs/models/sshkeydatatype.md
+  - docs/models/stats.md
+  - docs/models/status.md
+  - docs/models/stocklevel.md
+  - docs/models/storageplan.md
+  - docs/models/storageplandata.md
+  - docs/models/storageplanpricing.md
+  - docs/models/storageplans.md
+  - docs/models/target.md
+  - docs/models/team.md
+  - docs/models/teamattributes.md
+  - docs/models/teambilling.md
+  - docs/models/teaminclude.md
+  - docs/models/teammembers.md
+  - docs/models/teammembersdata.md
+  - docs/models/teammembersrole.md
+  - docs/models/teams.md
+  - docs/models/teamsmeta.md
+  - docs/models/traffic.md
+  - docs/models/trafficattributes.md
+  - docs/models/trafficdata.md
+  - docs/models/trafficdatadata.md
+  - docs/models/trafficquota.md
+  - docs/models/trafficquotaattributes.md
+  - docs/models/trafficquotadata.md
+  - docs/models/trafficquotatype.md
+  - docs/models/trafficregions.md
+  - docs/models/traffictype.md
+  - docs/models/type.md
+  - docs/models/unit.md
+  - docs/models/updateapikey.md
+  - docs/models/updateapikeyattributes.md
+  - docs/models/updateapikeydata.md
+  - docs/models/updateapikeyrequest.md
+  - docs/models/updateapikeyresponsebody.md
+  - docs/models/updateapikeytype.md
+  - docs/models/updatefirewallattributes.md
+  - docs/models/updatefirewalldata.md
+  - docs/models/updatefirewallprotocol.md
+  - docs/models/updatefirewallrequest.md
+  - docs/models/updatefirewallrequestbody.md
+  - docs/models/updatefirewallrules.md
+  - docs/models/updatefirewalltype.md
+  - docs/models/updateplansbandwidthattributes.md
+  - docs/models/updateplansbandwidthdata.md
+  - docs/models/updateplansbandwidthrequestbody.md
+  - docs/models/updateplansbandwidthtype.md
+  - docs/models/updateprojectattributes.md
+  - docs/models/updateprojectdata.md
+  - docs/models/updateprojectenvironment.md
+  - docs/models/updateprojectrequest.md
+  - docs/models/updateprojectrequestbody.md
+  - docs/models/updateprojectresponsebody.md
+  - docs/models/updateprojecttype.md
+  - docs/models/updateserverattributes.md
+  - docs/models/updateserverbilling.md
+  - docs/models/updateserverdeployconfigattributes.md
+  - docs/models/updateserverdeployconfigoperatingsystem.md
+  - docs/models/updateserverdeployconfigraid.md
+  - docs/models/updateserverdeployconfigrequest.md
+  - docs/models/updateserverdeployconfigrequestbody.md
+  - docs/models/updateserverdeployconfigtype.md
+  - docs/models/updateserverrequest.md
+  - docs/models/updateserverrequestbody.md
+  - docs/models/updateservertype.md
+  - docs/models/updatetagattributes.md
+  - docs/models/updatetagdata.md
+  - docs/models/updatetagrequest.md
+  - docs/models/updatetagrequestbody.md
+  - docs/models/updatetagtype.md
+  - docs/models/updatevirtualnetworkattributes.md
+  - docs/models/updatevirtualnetworkdata.md
+  - docs/models/updatevirtualnetworkrequest.md
+  - docs/models/updatevirtualnetworkrequestbody.md
+  - docs/models/updatevirtualnetworktype.md
+  - docs/models/usagetype.md
+  - docs/models/usd.md
+  - docs/models/user.md
+  - docs/models/userattributes.md
+  - docs/models/userdata.md
+  - docs/models/userdataproperties.md
+  - docs/models/userdatapropertiesattributes.md
+  - docs/models/userdatapropertiestype.md
+  - docs/models/userinclude.md
+  - docs/models/userincluderole.md
+  - docs/models/userrole.md
+  - docs/models/userteam.md
+  - docs/models/userteamattributes.md
+  - docs/models/userteambilling.md
+  - docs/models/userteams.md
+  - docs/models/userteamsmeta.md
+  - docs/models/userupdate.md
+  - docs/models/userupdateattributes.md
+  - docs/models/utils/retryconfig.md
+  - docs/models/virtualnetwork.md
+  - docs/models/virtualnetwork1.md
+  - docs/models/virtualnetworkassignment.md
+  - docs/models/virtualnetworkassignmentattributes.md
+  - docs/models/virtualnetworkassignments.md
+  - docs/models/virtualnetworkassignmentsmeta.md
+  - docs/models/virtualnetworkattributes.md
+  - docs/models/virtualnetworkattributes1.md
+  - docs/models/virtualnetworkattributesregion.md
+  - docs/models/virtualnetworkattributessite.md
+  - docs/models/virtualnetworkerror.md
+  - docs/models/virtualnetworkregion.md
+  - docs/models/virtualnetworks.md
+  - docs/models/virtualnetworksite.md
+  - docs/models/virtualnetworksmeta.md
+  - docs/models/virtualnetworktype.md
+  - docs/models/virtualnetworktype1.md
+  - docs/models/vpnsessiondatawithpassword.md
+  - docs/models/vpnsessiondatawithpasswordattributes.md
+  - docs/models/vpnsessiondatawithpasswordstatus.md
+  - docs/models/vpnsessiondatawithpasswordtype.md
+  - docs/models/vpnsessionwithpassword.md
+  - docs/sdks/apikeys/README.md
+  - docs/sdks/billing/README.md
+  - docs/sdks/eventssdk/README.md
+  - docs/sdks/firewallssdk/README.md
+  - docs/sdks/ipaddressessdk/README.md
+  - docs/sdks/latitudesh/README.md
+  - docs/sdks/operatingsystemssdk/README.md
+  - docs/sdks/plans/README.md
+  - docs/sdks/privatenetworks/README.md
+  - docs/sdks/projectssdk/README.md
+  - docs/sdks/regionssdk/README.md
+  - docs/sdks/roles/README.md
+  - docs/sdks/serverssdk/README.md
+  - docs/sdks/sshkeys/README.md
+  - docs/sdks/storage/README.md
+  - docs/sdks/tags/README.md
+  - docs/sdks/teamsmembers/README.md
+  - docs/sdks/teamssdk/README.md
+  - docs/sdks/trafficsdk/README.md
+  - docs/sdks/userdatasdk/README.md
+  - docs/sdks/userprofile/README.md
+  - docs/sdks/vpnsessions/README.md
+  - poetry.toml
+  - py.typed
+  - pylintrc
+  - pyproject.toml
+  - scripts/prepare-readme.py
+  - scripts/publish.sh
+  - src/latitudesh_python_sdk/__init__.py
+  - src/latitudesh_python_sdk/_hooks/__init__.py
+  - src/latitudesh_python_sdk/_hooks/sdkhooks.py
+  - src/latitudesh_python_sdk/_hooks/types.py
+  - src/latitudesh_python_sdk/_version.py
+  - src/latitudesh_python_sdk/api_keys.py
+  - src/latitudesh_python_sdk/basesdk.py
+  - src/latitudesh_python_sdk/billing.py
+  - src/latitudesh_python_sdk/events_sdk.py
+  - src/latitudesh_python_sdk/firewalls_sdk.py
+  - src/latitudesh_python_sdk/httpclient.py
+  - src/latitudesh_python_sdk/ip_addresses_sdk.py
+  - src/latitudesh_python_sdk/models/__init__.py
+  - src/latitudesh_python_sdk/models/api_key.py
+  - src/latitudesh_python_sdk/models/apierror.py
+  - src/latitudesh_python_sdk/models/assign_server_virtual_networkop.py
+  - src/latitudesh_python_sdk/models/bandwidth_packages.py
+  - src/latitudesh_python_sdk/models/bandwidth_plan.py
+  - src/latitudesh_python_sdk/models/bandwidth_plans.py
+  - src/latitudesh_python_sdk/models/billing_usage.py
+  - src/latitudesh_python_sdk/models/create_api_key.py
+  - src/latitudesh_python_sdk/models/create_firewall_assignmentop.py
+  - src/latitudesh_python_sdk/models/create_firewallop.py
+  - src/latitudesh_python_sdk/models/create_ipmi_sessionop.py
+  - src/latitudesh_python_sdk/models/create_projectop.py
+  - src/latitudesh_python_sdk/models/create_server_actionop.py
+  - src/latitudesh_python_sdk/models/create_server_out_of_bandop.py
+  - src/latitudesh_python_sdk/models/create_server_reinstallop.py
+  - src/latitudesh_python_sdk/models/create_serverop.py
+  - src/latitudesh_python_sdk/models/create_tagop.py
+  - src/latitudesh_python_sdk/models/create_virtual_networkop.py
+  - src/latitudesh_python_sdk/models/custom_tag.py
+  - src/latitudesh_python_sdk/models/delete_api_keyop.py
+  - src/latitudesh_python_sdk/models/delete_firewall_assignmentop.py
+  - src/latitudesh_python_sdk/models/delete_firewallop.py
+  - src/latitudesh_python_sdk/models/delete_project_ssh_keyop.py
+  - src/latitudesh_python_sdk/models/delete_project_user_dataop.py
+  - src/latitudesh_python_sdk/models/delete_projectop.py
+  - src/latitudesh_python_sdk/models/delete_storage_filesystemsop.py
+  - src/latitudesh_python_sdk/models/delete_virtual_networks_assignmentsop.py
+  - src/latitudesh_python_sdk/models/delete_vpn_sessionop.py
+  - src/latitudesh_python_sdk/models/deploy_config.py
+  - src/latitudesh_python_sdk/models/destroy_serverop.py
+  - src/latitudesh_python_sdk/models/destroy_tagop.py
+  - src/latitudesh_python_sdk/models/destroy_team_memberop.py
+  - src/latitudesh_python_sdk/models/destroy_virtual_networkop.py
+  - src/latitudesh_python_sdk/models/error_object.py
+  - src/latitudesh_python_sdk/models/events.py
+  - src/latitudesh_python_sdk/models/filesystem_data.py
+  - src/latitudesh_python_sdk/models/firewall.py
+  - src/latitudesh_python_sdk/models/firewall_server.py
+  - src/latitudesh_python_sdk/models/firewalls.py
+  - src/latitudesh_python_sdk/models/get_bandwidth_plansop.py
+  - src/latitudesh_python_sdk/models/get_billing_usageop.py
+  - src/latitudesh_python_sdk/models/get_eventsop.py
+  - src/latitudesh_python_sdk/models/get_firewall_assignmentsop.py
+  - src/latitudesh_python_sdk/models/get_firewallop.py
+  - src/latitudesh_python_sdk/models/get_ipop.py
+  - src/latitudesh_python_sdk/models/get_ipsop.py
+  - src/latitudesh_python_sdk/models/get_planop.py
+  - src/latitudesh_python_sdk/models/get_plans_operating_systemop.py
+  - src/latitudesh_python_sdk/models/get_plansop.py
+  - src/latitudesh_python_sdk/models/get_project_ssh_keyop.py
+  - src/latitudesh_python_sdk/models/get_project_ssh_keysop.py
+  - src/latitudesh_python_sdk/models/get_project_user_dataop.py
+  - src/latitudesh_python_sdk/models/get_project_users_dataop.py
+  - src/latitudesh_python_sdk/models/get_projectsop.py
+  - src/latitudesh_python_sdk/models/get_regionop.py
+  - src/latitudesh_python_sdk/models/get_role_idop.py
+  - src/latitudesh_python_sdk/models/get_rolesop.py
+  - src/latitudesh_python_sdk/models/get_server_deploy_configop.py
+  - src/latitudesh_python_sdk/models/get_server_out_of_bandop.py
+  - src/latitudesh_python_sdk/models/get_serverop.py
+  - src/latitudesh_python_sdk/models/get_serversop.py
+  - src/latitudesh_python_sdk/models/get_storage_filesystemsop.py
+  - src/latitudesh_python_sdk/models/get_traffic_consumptionop.py
+  - src/latitudesh_python_sdk/models/get_traffic_quotaop.py
+  - src/latitudesh_python_sdk/models/get_user_profileop.py
+  - src/latitudesh_python_sdk/models/get_virtual_networkop.py
+  - src/latitudesh_python_sdk/models/get_virtual_networks_assignmentsop.py
+  - src/latitudesh_python_sdk/models/get_virtual_networksop.py
+  - src/latitudesh_python_sdk/models/get_vpn_sessionsop.py
+  - src/latitudesh_python_sdk/models/ip_address.py
+  - src/latitudesh_python_sdk/models/ip_addresses.py
+  - src/latitudesh_python_sdk/models/ipmi_session.py
+  - src/latitudesh_python_sdk/models/list_firewallsop.py
+  - src/latitudesh_python_sdk/models/membership.py
+  - src/latitudesh_python_sdk/models/operating_systems.py
+  - src/latitudesh_python_sdk/models/out_of_band_connection.py
+  - src/latitudesh_python_sdk/models/patch_current_teamop.py
+  - src/latitudesh_python_sdk/models/patch_storage_filesystemsop.py
+  - src/latitudesh_python_sdk/models/patch_user_profileop.py
+  - src/latitudesh_python_sdk/models/plan.py
+  - src/latitudesh_python_sdk/models/plan_data.py
+  - src/latitudesh_python_sdk/models/post_api_keyop.py
+  - src/latitudesh_python_sdk/models/post_project_ssh_keyop.py
+  - src/latitudesh_python_sdk/models/post_project_user_dataop.py
+  - src/latitudesh_python_sdk/models/post_storage_filesystemsop.py
+  - src/latitudesh_python_sdk/models/post_team_membersop.py
+  - src/latitudesh_python_sdk/models/post_teamop.py
+  - src/latitudesh_python_sdk/models/post_vpn_sessionop.py
+  - src/latitudesh_python_sdk/models/project.py
+  - src/latitudesh_python_sdk/models/project_include.py
+  - src/latitudesh_python_sdk/models/projects.py
+  - src/latitudesh_python_sdk/models/put_project_ssh_keyop.py
+  - src/latitudesh_python_sdk/models/put_project_user_dataop.py
+  - src/latitudesh_python_sdk/models/put_vpn_sessionop.py
+  - src/latitudesh_python_sdk/models/region.py
+  - src/latitudesh_python_sdk/models/region_resource_data.py
+  - src/latitudesh_python_sdk/models/regions.py
+  - src/latitudesh_python_sdk/models/role.py
+  - src/latitudesh_python_sdk/models/role_data.py
+  - src/latitudesh_python_sdk/models/security.py
+  - src/latitudesh_python_sdk/models/server.py
+  - src/latitudesh_python_sdk/models/server_action.py
+  - src/latitudesh_python_sdk/models/server_data.py
+  - src/latitudesh_python_sdk/models/server_exit_rescue_modeop.py
+  - src/latitudesh_python_sdk/models/server_lockop.py
+  - src/latitudesh_python_sdk/models/server_rescue.py
+  - src/latitudesh_python_sdk/models/server_schedule_deletion.py
+  - src/latitudesh_python_sdk/models/server_schedule_deletionop.py
+  - src/latitudesh_python_sdk/models/server_start_rescue_modeop.py
+  - src/latitudesh_python_sdk/models/server_unlockop.py
+  - src/latitudesh_python_sdk/models/server_unschedule_deletionop.py
+  - src/latitudesh_python_sdk/models/servers.py
+  - src/latitudesh_python_sdk/models/ssh_key.py
+  - src/latitudesh_python_sdk/models/ssh_key_data.py
+  - src/latitudesh_python_sdk/models/storage_plan.py
+  - src/latitudesh_python_sdk/models/storage_plans.py
+  - src/latitudesh_python_sdk/models/team.py
+  - src/latitudesh_python_sdk/models/team_include.py
+  - src/latitudesh_python_sdk/models/team_members.py
+  - src/latitudesh_python_sdk/models/teams.py
+  - src/latitudesh_python_sdk/models/traffic.py
+  - src/latitudesh_python_sdk/models/traffic_quota.py
+  - src/latitudesh_python_sdk/models/update_api_key.py
+  - src/latitudesh_python_sdk/models/update_api_keyop.py
+  - src/latitudesh_python_sdk/models/update_firewallop.py
+  - src/latitudesh_python_sdk/models/update_plans_bandwidthop.py
+  - src/latitudesh_python_sdk/models/update_projectop.py
+  - src/latitudesh_python_sdk/models/update_server_deploy_configop.py
+  - src/latitudesh_python_sdk/models/update_serverop.py
+  - src/latitudesh_python_sdk/models/update_tagop.py
+  - src/latitudesh_python_sdk/models/update_virtual_networkop.py
+  - src/latitudesh_python_sdk/models/user.py
+  - src/latitudesh_python_sdk/models/user_data.py
+  - src/latitudesh_python_sdk/models/user_data_properties.py
+  - src/latitudesh_python_sdk/models/user_include.py
+  - src/latitudesh_python_sdk/models/user_team.py
+  - src/latitudesh_python_sdk/models/user_teams.py
+  - src/latitudesh_python_sdk/models/user_update.py
+  - src/latitudesh_python_sdk/models/virtual_network.py
+  - src/latitudesh_python_sdk/models/virtual_network1.py
+  - src/latitudesh_python_sdk/models/virtual_network_assignment.py
+  - src/latitudesh_python_sdk/models/virtual_network_assignments.py
+  - src/latitudesh_python_sdk/models/virtual_networks.py
+  - src/latitudesh_python_sdk/models/vpn_session_data_with_password.py
+  - src/latitudesh_python_sdk/models/vpn_session_with_password.py
+  - src/latitudesh_python_sdk/operating_systems_sdk.py
+  - src/latitudesh_python_sdk/plans.py
+  - src/latitudesh_python_sdk/private_networks.py
+  - src/latitudesh_python_sdk/projects_sdk.py
+  - src/latitudesh_python_sdk/py.typed
+  - src/latitudesh_python_sdk/regions_sdk.py
+  - src/latitudesh_python_sdk/roles.py
+  - src/latitudesh_python_sdk/sdk.py
+  - src/latitudesh_python_sdk/sdkconfiguration.py
+  - src/latitudesh_python_sdk/servers_sdk.py
+  - src/latitudesh_python_sdk/ssh_keys.py
+  - src/latitudesh_python_sdk/storage.py
+  - src/latitudesh_python_sdk/tags.py
+  - src/latitudesh_python_sdk/teams_members.py
+  - src/latitudesh_python_sdk/teams_sdk.py
+  - src/latitudesh_python_sdk/traffic_sdk.py
+  - src/latitudesh_python_sdk/types/__init__.py
+  - src/latitudesh_python_sdk/types/basemodel.py
+  - src/latitudesh_python_sdk/user_data_sdk.py
+  - src/latitudesh_python_sdk/user_profile.py
+  - src/latitudesh_python_sdk/utils/__init__.py
+  - src/latitudesh_python_sdk/utils/annotations.py
+  - src/latitudesh_python_sdk/utils/enums.py
+  - src/latitudesh_python_sdk/utils/eventstreaming.py
+  - src/latitudesh_python_sdk/utils/forms.py
+  - src/latitudesh_python_sdk/utils/headers.py
+  - src/latitudesh_python_sdk/utils/logger.py
+  - src/latitudesh_python_sdk/utils/metadata.py
+  - src/latitudesh_python_sdk/utils/queryparams.py
+  - src/latitudesh_python_sdk/utils/requestbodies.py
+  - src/latitudesh_python_sdk/utils/retries.py
+  - src/latitudesh_python_sdk/utils/security.py
+  - src/latitudesh_python_sdk/utils/serializers.py
+  - src/latitudesh_python_sdk/utils/url.py
+  - src/latitudesh_python_sdk/utils/values.py
+  - src/latitudesh_python_sdk/vpn_sessions.py
+examples:
+  get-api-keys: {}
+  post-api-key:
+    API Key Created:
+      requestBody:
+        application/json: {"data": {"type": "api_keys", "attributes": {"name": "App Token"}}}
+      responses:
+        "201":
+          application/json: {"data": {"id": "tok_zlkg1DegdvZE5", "type": "api_keys", "attributes": {"name": "App Token", "api_version": "2023-06-01", "token_last_slice": "e4212", "last_used_at": "2023-07-19T23:00:35.172Z", "user": {"id": "user_GbXk2EvJ3NH2BWxAxGa8t00BWGG", "email": "darwin@moore.example"}, "created_at": "2024-08-09T13:59:09+00:00", "updated_at": "2024-08-09T13:59:09+00:00"}}}
+    Bad Request:
+      requestBody:
+        application/json: {"data": {"type": "api_keys", "attributes": {"name": "foobar"}}}
+      responses:
+        "400":
+          application/json: {"errors": [{"code": "bad_request", "status": "400", "title": "Request Error", "detail": "data.attributes.token cannot be written"}]}
+    Unprocessable Entity:
+      requestBody:
+        application/json: {"data": {"type": "api_keys", "attributes": {}}}
+  update-api-key:
+    API Key Updated:
+      parameters:
+        path:
+          api_key_id: "tok_7vYAZqGBdMQ94"
+      requestBody:
+        application/json: {"data": {"id": "tok_7vYAZqGBdMQ94", "type": "api_keys", "attributes": {"name": "App Token", "api_version": "2023-06-01"}}}
+      responses:
+        "200":
+          application/json: {"data": {"id": "tok_7vYAZqGBdMQ94", "type": "api_keys", "attributes": {"name": "App Token", "api_version": "2023-06-01", "token_last_slice": "b45e0", "last_used_at": "2024-02-14T12:12:20.353Z", "user": {"id": "user_wLKkXMLR1mtRW3K6npzkc90xljN", "email": "sharlene@vandervort.example"}, "created_at": "2024-08-15T14:55:46+00:00", "updated_at": "2024-08-15T14:55:46+00:00"}}}
+    API Key Not Found:
+      parameters:
+        path:
+          api_key_id: "invalid-api-key"
+      requestBody:
+        application/json: {"data": {"id": "invalid-api-key", "type": "api_keys", "attributes": {"name": "App Token", "api_version": "2023-06-01"}}}
+      responses:
+        "400":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+    Bad Request:
+      parameters:
+        path:
+          api_key_id: "tok_x1ZJrdx5qg4LV"
+      requestBody:
+        application/json: {"data": {"id": "tok_x1ZJrdx5qg4LV", "type": "api_keys", "attributes": {"name": "Name of the API Key", "api_version": "2023-06-01"}}}
+  delete-api-key:
+    API Key Deleted:
+      parameters:
+        path:
+          api_key_id: "tok_Av9BVDavORm1W"
+    API Key Not Found:
+      parameters:
+        path:
+          api_key_id: "invalid"
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+  get-billing-usage:
+    Success:
+      parameters:
+        query:
+          filter[products][]: ["si_9553572a-a415-42d5-b9ff-7d1167c03dce", "si_5e33ce0d-863a-4a2c-8789-d0bc9fe0105d"]
+          filter[plan]: "plan.name"
+          filter[project]: "proj_RMLydp7XOQKr1"
+      responses:
+        "200":
+          application/json: {"data": {"id": "", "attributes": {"project": {"id": "proj_RMLydp7XOQKr1", "slug": "ethir-anduin", "name": "Ethir Anduin"}, "period": {"start": "2024-07-19T13:59:10+00:00", "end": "2024-08-19T13:59:10+00:00"}, "price": 0, "threshold": 10000, "products": []}}}
+  get-events:
+    Success:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "evt_6WeGoqAnDP7nz", "attributes": {"action": "user_data.create", "created_at": "2024-08-09T13:59:12+00:00", "author": {"id": "user_1we8NVgbmaFKz2LzMVAguAwJpYk", "name": "Marci Dach", "email": "loyd.koss@herman.test"}, "project": {"id": "proj_LA73qk4wDaJ2o", "name": "Harondor", "slug": "harondor"}, "team": {"id": "team_A4Wp6A44nBf3oJBay0avFP9Wk84", "name": "King-Schaefer"}, "target": {"id": "ud_QraYDPm5OpjwW", "name": "user_data"}}}]}
+  create-firewall:
+    with valid parameters:
+      requestBody:
+        application/json: {"data": {"type": "firewalls", "attributes": {"name": "my-firewall", "project": "aerodynamic-wool-bottle", "rules": [{"from": "192.168.42.72", "to": "192.168.43.51", "protocol": "TCP", "port": "80"}, {"from": "192.168.1.16/28", "to": "192.168.1.30", "protocol": "TCP", "port": "80"}, {"from": "192.168.1.16-192.168.1.32", "to": "192.168.1.40", "protocol": "UDP", "port": "3000-4000"}]}}}
+    with invalid parameters:
+      requestBody:
+        application/json: {"data": {"type": "firewalls", "attributes": {"name": "<value>", "project": "<value>"}}}
+      responses:
+        "422":
+          application/json: {"errors": [{"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "must be filled"}, {"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "must be a string"}, {"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "is missing"}]}
+  list-firewalls:
+    Success:
+      parameters:
+        query:
+          filter[project]: "lightweight-iron-clock"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "fw_pRMLydp0dQKr1", "type": "firewalls", "attributes": {"name": "Mraz Group", "rules": [{"from": "201.163.71.60", "to": "51.234.168.169", "port": "80", "protocol": "TCP"}], "project": {"id": "proj_5LA73qkjdaJ2o", "slug": "lightweight-iron-clock", "name": "Lightweight Iron Clock"}}}]}
+  get-firewall:
+    Success:
+      parameters:
+        path:
+          firewall_id: "fw_zGr47qlMDAg0m"
+    Not Found:
+      parameters:
+        path:
+          firewall_id: "fw_123"
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+  update-firewall:
+    Unprocessable Entity:
+      parameters:
+        path:
+          firewall_id: "fw_6059EqYkOQj8p"
+      requestBody:
+        application/json: {"data": {"type": "firewalls", "attributes": {"rules": []}}}
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "must have at least one rule"}]}
+    Success:
+      parameters:
+        path:
+          firewall_id: "fw_6VE1Wd37dXnZJ"
+      requestBody:
+        application/json: {"data": {"type": "firewalls", "attributes": {"name": "new-name", "rules": [{"from": "192.168.42.72", "to": "192.168.43.51", "protocol": "TCP", "port": 80}]}}}
+    Not Found:
+      parameters:
+        path:
+          firewall_id: "fw_123"
+      requestBody:
+        application/json: {}
+  delete-firewall:
+    Not Found:
+      parameters:
+        path:
+          firewall_id: "fw_123"
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+    Unprocessable Entity:
+      parameters:
+        path:
+          firewall_id: "fw_VLMmAD8EOwop2"
+  create-firewall-assignment:
+    Created:
+      parameters:
+        path:
+          firewall_id: "fw_6A05EdQ1dvKYQ"
+      requestBody:
+        application/json: {"data": {"type": "firewall_assignments", "attributes": {"server_id": "sv_xkjQwdENqYNVP"}}}
+    Forbidden:
+      parameters:
+        path:
+          firewall_id: "fw_w5AEmq7XDBkWX"
+      requestBody:
+        application/json: {"data": {"type": "firewall_assignments", "attributes": {"server_id": "sv_VLMmAD8EOwop2"}}}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+    Not Found:
+      parameters:
+        path:
+          firewall_id: "fw_6059EqYkOQj8p"
+      requestBody:
+        application/json: {"data": {"type": "firewall_assignments", "attributes": {"server_id": "sv_93YjJOLydvZ87"}}}
+    Unprocessable Entity:
+      parameters:
+        path:
+          firewall_id: "fw_6VE1Wd37dXnZJ"
+      requestBody:
+        application/json: {"data": {"type": "firewall_assignments", "attributes": {"server_id": "sv_zGr47qlMDAg0m"}}}
+    Conflict:
+      parameters:
+        path:
+          firewall_id: "fw_VaNmodjeObE8W"
+      requestBody:
+        application/json: {"data": {"type": "firewall_assignments", "attributes": {"server_id": "sv_w5AEmq7XDBkWX"}}}
+  get-firewall-assignments:
+    Not Found:
+      parameters:
+        path:
+          firewall_id: "fw_93YjJOLydvZ87"
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+    Ok:
+      parameters:
+        path:
+          firewall_id: "fw_w5AEmq7XDBkWX"
+  delete-firewall-assignment:
+    Forbidden:
+      parameters:
+        path:
+          firewall_id: "fw_zlkg1DegdvZE5"
+          assignment_id: "fwasg_zGr47qlMDAg0m"
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+    Not Found:
+      parameters:
+        path:
+          firewall_id: "fw_r0MK4O4kDa95w"
+          assignment_id: "fwasg_93YjJOLydvZ87"
+  get-ips:
+    when filtering by a server that has assigned IPs:
+      parameters:
+        query:
+          filter[server]: "85"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "ip_Ee8pKq05DWAob", "attributes": {"address": "206.183.132.98", "cidr": "<value>", "family": "IPv4", "gateway": "<value>", "netmask": "255.255.255.255", "type": "Public", "public": true, "management": true, "project": {"id": "proj_LYV8DZYQq5QoE", "name": "River Entwash"}, "region": {}, "available": false, "assignment": {"server_id": "sv_WeGoqAanqP7nz", "hostname": "Enormous Wooden Coat", "assigned_at": "2023-11-28T00:00:00.000Z"}}}]}
+    when filtering by a server that does not have assigned IPs:
+      parameters:
+        query:
+          filter[server]: "sv_LGXPdWpgqnNWk"
+      responses:
+        "200":
+          application/json: {"data": []}
+    when both the project and server ID filters are provided:
+      parameters:
+        query:
+          filter[server]: "87"
+          filter[project]: "128"
+      responses:
+        "422":
+          application/json: {"errors": [{"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "must have a project or a server"}]}
+    'when a project ID filter is provided ':
+      parameters:
+        query:
+          filter[project]: "123"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "ip_lQraYDPeOpjwW", "attributes": {"address": "133.73.23.169", "cidr": "<value>", "family": "IPv4", "gateway": "<value>", "netmask": "255.255.255.255", "type": "Public", "public": true, "management": true, "project": {"id": "proj_QraYDPm5OpjwW", "name": "Nan Curunír"}, "region": {}, "available": true, "assignment": {}}}]}
+    when there are no IPs matching the project filter:
+      parameters:
+        query:
+          filter[project]: "127"
+      responses:
+        "200":
+          application/json: {"data": []}
+    without filters:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "ip_RLYV8DZ2D5QoE", "attributes": {"address": "176.199.53.186", "cidr": "<value>", "family": "IPv4", "gateway": "<value>", "netmask": "255.255.255.255", "type": "Public", "public": true, "management": true, "project": {"id": "proj_pbV0DgVKq4AWz", "name": "Breredon"}, "region": {}, "available": true, "assignment": {}}}, {"id": "ip_lpbV0DgRq4AWz", "attributes": {"address": "67.233.183.187", "cidr": "<value>", "family": "IPv4", "gateway": "<value>", "netmask": "255.255.255.255", "type": "Public", "public": true, "management": true, "project": {"id": "proj_pbV0DgVKq4AWz", "name": "Breredon"}, "region": {}, "available": true, "assignment": {}}}]}
+  get-ip:
+    when basic GET:
+      parameters:
+        path:
+          ip_id: "ip_5AEmq7wMqBkWX"
+        query: {}
+    when there are no IPs matching the server filter:
+      parameters:
+        path:
+          ip_id: "invalid"
+        query: {}
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+  get-team-members:
+    Success:
+      responses:
+        "200":
+          application/json: {"data": [{}, {}, {}]}
+  post-team-members:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "memberships", "attributes": {"first_name": "Ramon", "last_name": "Stracke", "email": "dian_davis@connelly-yost.test", "role": "collaborator"}}}
+      responses:
+        "201":
+          application/json: {"data": {"id": "user_Qkm7dXv2D8nZV", "attributes": {"first_name": "Ramon", "last_name": "Stracke", "email": "dian_davis@connelly-yost.test", "role": "collaborator", "mfa_enabled": false, "created_at": "2024-08-09T13:59:13+00:00", "updated_at": "2024-08-09T13:59:13+00:00"}}}
+    Unprocessable Entity:
+      requestBody:
+        application/json: {"data": {"type": "memberships", "attributes": {"first_name": "Weldon", "last_name": "Harber", "email": "Zita.Pacocha48@yahoo.com", "role": "collaborator"}}}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "is missing"}]}
+    Forbidden:
+      requestBody:
+        application/json: {"data": {"type": "memberships", "attributes": {"first_name": "Vera", "last_name": "Tremblay", "email": "enriqueta_mills@lind-stroman.example", "role": "collaborator"}}}
+  destroy-team-member:
+    Success:
+      parameters:
+        path:
+          user_id: "user_Gr47qlE1DAg0m"
+    Not Found:
+      parameters:
+        path:
+          user_id: "user_w49QDBlzdagKb"
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+    Forbidden:
+      parameters:
+        path:
+          user_id: "user_5AEmq7vxdBkWX"
+  get-plans-operating-system:
+    Success:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "os_VaNmodjeObE8W", "attributes": {"features": {}, "name": "Mojave (10.14) 15.16", "slug": "rockylinux_8", "distro": "jenkins-paucek", "user": "Jae", "version": "15.16", "provisionable_on": ["Specialty Retailers 74", "Diamonds & Gemstones 75"]}}]}
+  get-plans:
+    Success:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "plan_w49QDBvnDagKb", "type": "plans", "attributes": {"slug": "commodity-chemicals-83", "features": [], "specs": {"cpu": {}, "memory": {}, "drives": [], "nics": [], "gpu": {}}, "regions": []}}]}
+  get-plan:
+    Success:
+      parameters:
+        path:
+          plan_id: "plan_VE1Wd3aXDXnZJ"
+      responses:
+        "200":
+          application/json: {"data": {"id": "plan_VE1Wd3aXDXnZJ", "type": "plans", "attributes": {"slug": "industrial-suppliers-84", "features": [], "specs": {"cpu": {"type": "E-2276G", "clock": 3.8, "cores": 6, "count": 1}, "memory": {"total": "32"}, "drives": [{"count": 1, "size": "3.8TB", "type": "SSD"}], "nics": [{"count": 1, "type": "10 Gbps"}], "gpu": {"count": 4, "type": "NVIDIA H100"}}, "regions": [{"name": "Brazil", "deploys_instantly": [], "locations": {"available": ["SAO"], "in_stock": ["SAO"]}, "stock_level": "medium", "pricing": {"USD": {"hour": 10, "month": 50, "year": 100}, "BRL": {"hour": 53, "month": 108.5, "year": 205}}}]}}}
+    Not found:
+      parameters:
+        path:
+          plan_id: "dot.23"
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Route not found", "detail": "The requested URL does not exist, please check our documentation", "meta": {}}]}
+  get-bandwidth-plans:
+    Success:
+      parameters:
+        header:
+          API-Version: "2023-06-01"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "116equatorial-guinea", "type": "bandwidth_plan", "attributes": {"region": "116Equatorial Guinea", "locations": ["SITE1", "SITE2"], "pricing": {"usd": {"monthly": 5000}, "brl": {"monthly": 2000}}}}]}
+  update-plans-bandwidth:
+    Success:
+      requestBody:
+        application/json: {"data": {"type": "bandwidth_packages", "attributes": {"project": "proj_QraYDPQNOpjwW", "quantity": 5, "region_slug": "brazil"}}}
+    Forbidden:
+      requestBody:
+        application/json: {"data": {"type": "bandwidth_packages", "attributes": {"project": "proj_1R3zq2PROWxyn", "quantity": 5, "region_slug": "brazil"}}}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+  get-storage-plans:
+    Sucess:
+      responses:
+        "200":
+          application/json: {"data": [{}]}
+  get-projects:
+    Filtered by tag:
+      parameters:
+        query:
+          filter[tags]: "tag_3neyM8YlxMuKkm2AgPVMcamM2yv"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "proj_g1mbDweZdLv5B", "attributes": {"name": "Withywindle Valley", "slug": "withywindle-valley", "description": "Practical Copper Lamp", "billing_type": "Hourly", "billing_method": "Normal", "cost": "885.35", "environment": "Production", "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "containers": 0, "vlans": 0}, "billing": {}, "team": {"id": "team_yL20jzeXxbTlMvWmnzl1HpKGY8LM", "name": "Erdman, Nader and Reinger", "slug": "erdman-nader-and-reinger", "description": "Erdman, Nader and Reinger", "address": "81530 Tifany Rue, South Chang, OH 06146-0332", "status": "verified", "feature_flags": []}, "created_at": "2024-08-09T13:59:17+00:00", "updated_at": "2024-08-09T13:59:17+00:00"}}]}
+    Filtered by multiple tags:
+      parameters:
+        query:
+          filter[tags]: "tag_yY8NQ0P1pjHl7aGRYXm7CL88vVg,tag_8LAMjpzElRTK6xaJp1RgTGWAw5M"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "proj_Gr47ql4vqAg0m", "attributes": {"name": "Arvernien", "slug": "arvernien", "description": "Ergonomic Linen Plate", "billing_type": "Hourly", "billing_method": "Normal", "cost": "999.99", "environment": "Staging", "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "containers": 0, "vlans": 0}, "billing": {}, "team": {"id": "team_Y2Jzp5la8mSrBenN9PeRiGLa2e83", "name": "Vandervort LLC", "slug": "vandervort-llc", "description": "Vandervort LLC", "address": "7704 Aletha Stravenue, New Jordan, TN 83942-3134", "status": "verified", "feature_flags": []}, "created_at": "2024-08-09T13:59:17+00:00", "updated_at": "2024-08-09T13:59:17+00:00"}}]}
+    Success:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "proj_LMmAD8E4Owop2", "attributes": {"name": "Ice of the North", "slug": "ice-of-the-north", "description": "Intelligent Cotton Coat", "billing_type": "Hourly", "billing_method": "Normal", "cost": "99.65", "environment": "Development", "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "containers": 0, "vlans": 0}, "billing": {}, "team": {"id": "team_y9MKKMbxK9SlYrvkZBzKip4geynn", "name": "Heller LLC", "slug": "heller-llc", "description": "Heller LLC", "address": "Apt. 169 3740 Todd Gateway, Port Anton, NY 19923-5838", "status": "verified", "feature_flags": []}, "created_at": "2024-08-09T13:59:17+00:00", "updated_at": "2024-08-09T13:59:17+00:00"}}]}
+  create-project:
+    Success:
+      requestBody:
+        application/json: {"data": {"type": "projects", "attributes": {"name": "Ward Inc", "provisioning_type": "on_demand", "description": "Breaded fried chicken with waffles. Served with maple syrup.", "environment": "Development"}}}
+      responses:
+        "201":
+          application/json: {"data": {"id": "proj_5AEmq70xDBkWX", "attributes": {"name": "Ward Inc", "slug": "ward-inc", "description": "Breaded fried chicken with waffles. Served with maple syrup.", "billing_type": "Normal", "billing_method": "Normal", "environment": "Development", "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "containers": 0, "vlans": 0}, "billing": {"subscription_id": "sub_j3w5q0v1o0q2xb", "type": "Normal", "method": "Normal"}, "team": {"id": "team_zP6EwwX01VT8e4gp415of1j8ZRbn", "name": "Schimmel, Turcotte and Ruecker", "slug": "schimmel-turcotte-and-ruecker", "description": "Schimmel, Turcotte and Ruecker", "address": "Suite 887 951 Connelly Bridge, Port Rosariaburgh, GA 37792-5239", "status": "verified", "feature_flags": []}, "created_at": "2024-08-09T13:59:17+00:00", "updated_at": "2024-08-09T13:59:17+00:00"}}}
+    Forbidden:
+      requestBody:
+        application/json: {"data": {"type": "projects", "attributes": {"name": "Dach, Pfannerstill and Schuster", "provisioning_type": "on_demand", "description": "Smoked salmon, poached eggs, diced red onions and Hollandaise sauce on an English muffin. With a side of roasted potatoes.", "environment": "Development"}}}
+      responses:
+        "400":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to change attributes: name, description, environment, provisioning_type", "meta": {}}]}
+    Unprocessable Entity:
+      requestBody:
+        application/json: {"data": {"type": "projects", "attributes": {"name": "123", "provisioning_type": "reserved"}}}
+    Bad Request:
+      requestBody:
+        application/json: {"data": {"type": "projects", "attributes": {"name": "Stokes-Heathcote", "provisioning_type": "on_demand", "description": "Fresh Norwegian salmon, lightly brushed with our herbed Dijon mustard sauce, with choice of two sides.", "environment": "Development"}}}
+  update-project:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_v9BVDal3qRm1W"
+      requestBody:
+        application/json: {"data": {"id": "proj_v9BVDal3qRm1W", "type": "projects", "attributes": {"name": "A brand new name for the virtual network", "description": "A brand new description for the virtual network", "bandwidth_alert": false, "tags": ["tag_x4mmPZJ4N6UB7XjXP6mEuBz4r9Y", "tag_NGo0yaojbAt8ljQ1MooEIrrBLjg"]}}}
+      responses:
+        "200":
+          application/json: {"data": {"id": "proj_v9BVDal3qRm1W", "attributes": {"name": "Moore-Durgan", "slug": "moore-durgan", "description": "Sequi occaecati eaque exercitationem.", "billing_type": "Normal", "billing_method": "Normal", "environment": "Production", "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "containers": 0, "vlans": 0}, "billing": {"subscription_id": "sub_smj0mj4jojfbku", "type": "Normal", "method": "Normal"}, "team": {"id": "team_Mw9zeeMPlJs5XEemYA9ktVXGPyw1", "name": "Kuphal, Davis and Doyle", "slug": "kuphal-davis-and-doyle", "description": "Kuphal, Davis and Doyle", "address": "24731 Lang Mountains, Port Caseyhaven, NM 35034-8851", "status": "verified", "feature_flags": []}, "created_at": "2024-08-09T13:59:18+00:00", "updated_at": "2024-08-09T13:59:18+00:00"}}}
+    Forbidden:
+      parameters:
+        path:
+          project_id: "proj_A05EdQM4dvKYQ"
+      requestBody:
+        application/json: {"data": {"id": "proj_A05EdQM4dvKYQ", "type": "projects", "attributes": {"name": "Moore-Durgan", "description": "Sequi occaecati eaque exercitationem.", "environment": "Production", "bandwidth_alert": true}}}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+    Not found:
+      parameters:
+        path:
+          project_id: "invalid-id"
+      requestBody:
+        application/json: {"data": {"id": "invalid-id", "type": "projects", "attributes": {"name": "Moore-Durgan", "description": "Sequi occaecati eaque exercitationem.", "environment": "Production", "bandwidth_alert": true}}}
+    Unprocessable Entity:
+      parameters:
+        path:
+          project_id: "proj_lkg1DeYLDvZE5"
+      requestBody:
+        application/json: {"data": {"id": "proj_lkg1DeYLDvZE5", "type": "projects", "attributes": {"name": "123", "description": "A brand new description for the virtual network", "bandwidth_alert": false}}}
+    Tag not updated:
+      parameters:
+        path:
+          project_id: "proj_0MK4O44ROa95w"
+      requestBody:
+        application/json: {"data": {"id": "proj_0MK4O44ROa95w", "type": "projects", "attributes": {"name": "A brand new name for the virtual network", "description": "A brand new description for the virtual network", "bandwidth_alert": false, "tags": ["invalid-tag"]}}}
+      responses:
+        "200":
+          application/json: {"data": {"id": "proj_0MK4O44ROa95w", "attributes": {"name": "Moore-Durgan", "slug": "moore-durgan", "description": "Sequi occaecati eaque exercitationem.", "billing_type": "Normal", "billing_method": "Normal", "environment": "Production", "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "containers": 0, "vlans": 0}, "billing": {"subscription_id": "sub_1hp460i0ckvm35", "type": "Normal", "method": "Normal"}, "team": {"id": "team_o3329MRR6QcrAylRbpvnUkRZbE9", "name": "Mueller, Fisher and Bogisich", "slug": "mueller-fisher-and-bogisich", "description": "Mueller, Fisher and Bogisich", "address": "Apt. 569 596 Dorethea Crescent, West Shonnaborough, NC 17769", "status": "verified", "feature_flags": []}, "created_at": "2024-08-09T13:59:18+00:00", "updated_at": "2024-08-09T13:59:18+00:00"}}}
+  delete-project:
+    Not found:
+      parameters:
+        path:
+          project_id: "invalid"
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+    Unprocessable Entity:
+      parameters:
+        path:
+          project_id: "proj_k0Ryqv9adW36X"
+    Forbidden:
+      parameters:
+        path:
+          project_id: "proj_GnzRD5lvqM5yw"
+  get-regions:
+    Success:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "loc_KN4ydzW9qVob3", "attributes": {"slug": "wyman-schulist", "name": "Wyman-Schulist", "country": {"slug": "dooley-inc", "name": "Dooley Inc"}}}]}
+  get-region:
+    Success:
+      parameters:
+        path:
+          region_id: "reg_3YjJOLE4dvZ87"
+      responses:
+        "200":
+          application/json: {"data": {"id": "loc_w49QDBzzDagKb", "attributes": {"slug": "mayer-fahey", "name": "Mayer-Fahey", "country": {"slug": "swaniawski,-o'reilly-and-white", "name": "Swaniawski, O'Reilly and White"}}}}
+    Not found:
+      parameters:
+        path:
+          region_id: "reg_Gr47qlAeDAg0m"
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+  get-roles:
+    Success:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "role_aNmodjz0dbE8W", "type": "roles", "attributes": {"name": "collaborator"}}]}
+  get-role-id:
+    Success:
+      parameters:
+        path:
+          role_id: "role_vYAZqGw7qMQ94"
+      responses:
+        "200":
+          application/json: {"data": {"id": "role_vYAZqGw7qMQ94", "type": "roles", "attributes": {"name": "billing"}}}
+    Not found:
+      parameters:
+        path:
+          role_id: "invalid"
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+  get-servers:
+    when project filter:
+      parameters:
+        query:
+          filter[project]: "proj_695BdKNeOevVo"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "sv_w49QDBmQqagKb", "type": "servers", "attributes": {"hostname": "Hostname", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "181.211.173.17", "created_at": "1726537801488", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_3YjJOL5NdvZ87", "name": "Hotel & Lodging REITs 107", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "Lake Laveraville", "country": "148Faroe Islands", "site": {"id": "loc_g1mbDweZdLv5B", "name": "Lake Laveraville", "slug": "region-slug", "facility": "Denesikborough"}}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB"}, "project": {"id": "proj_059EqYV2DQj8p", "name": "Nardol", "slug": "nardol", "description": "Synergistic Copper Chair", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_ev1XeMM7YvTNV27rmQjwIVMgKE0", "name": "Gerlach-Kuhn", "slug": "gerlach-kuhn", "description": "Gerlach-Kuhn", "address": "Suite 157 92214 Keven Hollow, Stephaniamouth, CO 05996-3669", "status": "verified", "feature_flags": []}}}, {"id": "sv_LGXPdWl8qnNWk", "type": "servers", "attributes": {"hostname": "container", "status": "unknown", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "106.218.10.168", "created_at": "1707987546189", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_3YjJOL5NdvZ87", "name": "c3.xlarge.x86-106", "billing": "hourly"}, "operating_system": {}, "region": {"city": "São Paulo", "country": "United Kingdom", "site": {"id": "loc_W6Q2D9xGqKLpr", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB"}, "project": {"id": "proj_695BdKNeOevVo", "name": "Small Steel Computer", "slug": "small-steel-computer", "description": "Durable Wooden Coat", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 2, "vlans": 0}}, "team": {"id": "team_Xxmx5yMzA2ty74gyGe4BSyPge8Z", "name": "McDermott, Orn and Huel", "slug": "mcdermott-orn-and-huel", "description": "McDermott, Orn and Huel", "address": "Apt. 804 88035 Sanford Garden, Walkerfort, CT 34761", "status": "verified", "feature_flags": []}}}], "meta": {}}
+    when region filter:
+      parameters:
+        query:
+          filter[region]: "region-slug"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "sv_LMmAD8E4Owop2", "type": "servers", "attributes": {"hostname": "Hostname", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "119.205.86.17", "created_at": "1720817410832", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_w49QDBmQqagKb", "name": "Tobacco 108", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "North Chang", "country": "149Guernsey", "site": {"id": "loc_RMLydpoXOQKr1", "name": "North Chang", "slug": "region-slug", "facility": "Reynoldsfurt"}}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB"}, "project": {"id": "proj_VE1Wd3VXOXnZJ", "name": "Maggot's Farm", "slug": "maggot-s-farm", "description": "Durable Aluminum Lamp", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_4Vj68G18vPT4QGLnemnZhpAKZ7o", "name": "Conroy Inc", "slug": "conroy-inc", "description": "Conroy Inc", "address": "Suite 579 806 Maile Shoals, Port Rosarioland, PA 18245", "status": "verified", "feature_flags": []}}}, {"id": "sv_3YjJOL5NdvZ87", "type": "servers", "attributes": {"hostname": "container", "status": "unknown", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "83.9.6.230", "created_at": "1735845973053", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_w49QDBmQqagKb", "name": "g3.h100.large-107", "billing": "hourly"}, "operating_system": {}, "region": {"city": "São Paulo", "country": "Colombia", "site": {"id": "loc_LMmAD8E4Owop2", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB"}, "project": {"id": "proj_wg3ZDrY4q5QlP", "name": "Fantastic Plastic Knife", "slug": "fantastic-plastic-knife", "description": "Mediocre Wool Shirt", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 2, "vlans": 0}}, "team": {"id": "team_X43LBXE7R2fya97WW6WGcpKA7LJ", "name": "Kautzer Group", "slug": "kautzer-group", "description": "Kautzer Group", "address": "Suite 967 1851 Stroman Locks, Lueilwitztown, KS 49997-2295", "status": "verified", "feature_flags": []}}}], "meta": {}}
+    with a `eql` filter:
+      parameters:
+        query:
+          filter[ram][eql]: 32
+      responses:
+        "200":
+          application/json: {"data": [{"id": "sv_Qkm7dX7zO8nZV", "type": "servers", "attributes": {"hostname": "Hostname", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "40.45.241.147", "created_at": "1735183651712", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_lkg1DeVgOvZE5", "name": "c3.large.x86-49", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "São Paulo", "country": "Chile", "site": {"id": "loc_0MK4O4Zkqa95w", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "specs": {"cpu": "", "disk": "", "ram": "32 GB"}, "project": {"id": "proj_g1mbDwrZqLv5B", "name": "Rustic Silk Bench", "slug": "rustic-silk-bench", "description": "Durable Leather Computer", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 4, "prefixes": 0, "servers": 4, "vlans": 0}}, "team": {"id": "team_yB8xg6B4z5UR47wVMV5nurMPN5p", "name": "210 Team", "slug": "210-team", "description": "210 Team", "address": "Apt. 247 810 Andres Rue, Greenfelderfurt, MS 84867", "status": "verified", "feature_flags": []}}}], "meta": {}}
+    with a `gte` filter:
+      parameters:
+        query:
+          filter[ram][gte]: 40
+      responses:
+        "200":
+          application/json: {"data": [{"id": "sv_3YjJOLLyOvZ87", "type": "servers", "attributes": {"hostname": "64GB-RAM", "status": "unknown", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "163.207.195.188", "created_at": "1726049278690", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_vYAZqGYBOMQ94", "name": "c2.xlarge.x86-50", "billing": "hourly"}, "operating_system": {}, "region": {"city": "São Paulo", "country": "United States", "site": {"id": "loc_1ZJrdxw5Og4LV", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "specs": {"cpu": "", "disk": "", "ram": "64 GB"}, "project": {"id": "proj_RMLydp7XOQKr1", "name": "Aerodynamic Granite Coat", "slug": "aerodynamic-granite-coat", "description": "Fantastic Linen Coat", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 4, "prefixes": 0, "servers": 4, "vlans": 0}}, "team": {"id": "team_bGY8AkePP5iyYaZQV6ArczJJZ2r", "name": "212 Team", "slug": "212-team", "description": "212 Team", "address": "Apt. 529 60108 Anderson Tunnel, Clintburgh, NV 36102-3275", "status": "verified", "feature_flags": []}}}], "meta": {}}
+    with a `lte` filter:
+      parameters:
+        query:
+          filter[ram][lte]: 40
+      responses:
+        "200":
+          application/json: {"data": [{"id": "sv_w49QDBa5qagKb", "type": "servers", "attributes": {"hostname": "Hostname", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "195.144.101.31", "created_at": "1708741633913", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_0MK4O4Zkqa95w", "name": "m4.metal.medium-51", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "São Paulo", "country": "United Kingdom", "site": {"id": "loc_v9BVDaGvdRm1W", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "specs": {"cpu": "", "disk": "", "ram": "32 GB"}, "project": {"id": "proj_Gr47qlevDAg0m", "name": "Incredible Leather Chair", "slug": "incredible-leather-chair", "description": "Synergistic Granite Lamp", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 4, "prefixes": 0, "servers": 4, "vlans": 0}}, "team": {"id": "team_36w1ywyVa9hKpe3XLwNgS0PXPgnW", "name": "214 Team", "slug": "214-team", "description": "214 Team", "address": "64107 Nelia Stravenue, Bethstad, OK 80991-9722", "status": "verified", "feature_flags": []}}}], "meta": {}}
+    when trying to filter by tag:
+      parameters:
+        query:
+          filter[tags]: "tag_YLNQJ4a0gXfo883Z79X2Crp19AA"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "sv_KN4ydzwvqVob3", "type": "servers", "attributes": {"hostname": "Hostname", "status": "on", "ipmi_status": "Normal", "role": "140_Goodbye Forreste", "locked": false, "primary_ipv4": "98.117.114.215", "created_at": "1735810369656", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_LGXPdWl8qnNWk", "name": "Food Retailers & Wholesalers 105", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "Donaldville", "country": "146Nepal", "site": {"id": "loc_W6Q2D9xGqKLpr", "name": "Donaldville", "slug": "region-slug", "facility": "Lynchport"}}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB"}, "project": {"id": "proj_5AEmq7JMdBkWX", "name": "Doriath", "slug": "doriath", "description": "Small Iron Bench", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 2, "vlans": 0}}, "team": {"id": "team_mKBW8roJAQhGx2JVPY29TWW5bxZk", "name": "McGlynn Inc", "slug": "mcglynn-inc", "description": "McGlynn Inc", "address": "755 Thad Canyon, South Rickey, NE 05247", "status": "verified", "feature_flags": []}}}], "meta": {}}
+    Filtered by multiple tags:
+      parameters:
+        query:
+          filter[tags]: "tag_YKgY82ABrlFo97lJNoymcQ1GwG5,tag_nZZJmPJBogHJln4Vnyw5hxjKloa"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "sv_LGXPdWl8qnNWk", "type": "servers", "attributes": {"hostname": "Hostname", "status": "on", "ipmi_status": "Normal", "role": "143_Pumpkin-spice Nu", "locked": false, "primary_ipv4": "208.248.188.171", "created_at": "1728903451714", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_0L6WO141DPlXy", "name": "Fixed Line Telecommunications 106", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "Murphytown", "country": "147Bahamas", "site": {"id": "loc_LMmAD8E4Owop2", "name": "Murphytown", "slug": "region-slug", "facility": "Kertzmannhaven"}}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB"}, "project": {"id": "proj_kjQwdEMXdYNVP", "name": "Forest of Region", "slug": "forest-of-region", "description": "Mediocre Steel Chair", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 2, "vlans": 0}}, "team": {"id": "team_nnWY1e6AEkUJYMvJ407bcL1jkMQ", "name": "Kihn Inc", "slug": "kihn-inc", "description": "Kihn Inc", "address": "Apt. 186 1568 Turner Course, North Dale, NE 18642", "status": "verified", "feature_flags": []}}}], "meta": {}}
+    when no filters:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "sv_Qkm7dXQRq8nZV", "type": "servers", "attributes": {"hostname": "Hostname", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "202.255.177.60", "created_at": "1730056473217", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_WeGoqAZNDP7nz", "name": "Asset Managers 104", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "São Paulo", "country": "United Kingdom", "site": {"id": "loc_0L6WO141DPlXy", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB"}, "project": {"id": "proj_Gr47qlKvdAg0m", "name": "Rushock Bog", "slug": "rushock-bog", "description": "Durable Granite Lamp", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_gewa0Yb4E4HVyz25lk80H0LGyja", "name": "Rodriguez-Deckow", "slug": "rodriguez-deckow", "description": "Rodriguez-Deckow", "address": "Apt. 440 33867 Beatty Green, North Xochitlfort, AZ 52686", "status": "verified", "feature_flags": []}}}, {"id": "sv_WVQJDM5BDRbyE", "type": "servers", "attributes": {"hostname": "container", "status": "unknown", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "79.40.5.223", "created_at": "1722057287750", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_WeGoqAZNDP7nz", "name": "g3.a100.medium-103", "billing": "hourly"}, "operating_system": {}, "region": {"city": "São Paulo", "country": "United Kingdom", "site": {"id": "loc_0L6WO141DPlXy", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB"}, "project": {"id": "proj_vYAZqG44DMQ94", "name": "Ergonomic Paper Car", "slug": "ergonomic-paper-car", "description": "Incredible Granite Car", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 2, "vlans": 0}}, "team": {"id": "team_J8gX2nGPz2sMvKE1X67bFr1zEnN", "name": "MacGyver, Williamson and O'Reilly", "slug": "macgyver-williamson-and-o-reilly", "description": "MacGyver, Williamson and O'Reilly", "address": "Suite 208 3803 Ernest Path, Port Rory, ME 80128", "status": "verified", "feature_flags": []}}}], "meta": {}}
+  create-server:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "servers", "attributes": {"project": "proj_WeGoqAWNOP7nz", "plan": "c2-small-x86", "site": "SAO", "operating_system": "ubuntu_22_04_x64_lts", "hostname": "BRC1"}}}
+      responses:
+        "201":
+          application/json: {"data": {"id": "sv_yQrJdNAGO30gv", "type": "servers", "attributes": {"hostname": "BRC1", "status": "off", "role": "Bare Metal", "primary_ipv4": "51.53.200.243", "plan": {"id": "plan_z2A3DV6QDnawP", "name": "c2.small.x86", "billing": "hourly"}, "specs": {"cpu": "Xeon E-2186G CPU @ 3.80GHz (6 cores)", "disk": "500 GB SSD", "ram": "32 GB"}}}, "meta": {}}
+    Unprocessable Entity:
+      requestBody:
+        application/json: {"data": {"type": "servers", "attributes": {"project": "proj_3YjJOLQNdvZ87", "plan": "c2-small-x86", "site": "SAO", "operating_system": "ubuntu_22_04_x64_lts", "hostname": "BRC1", "ssh_keys": ["ssh_93YjJOLydvZ87"]}}}
+      responses:
+        "400":
+          application/json: {"errors": [{"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "The following SSH Keys were not found in project 'proj_3YjJOLQNdvZ87': [\"ssh_93YjJOLydvZ87\"]."}]}
+    Unpermited parameter:
+      requestBody:
+        application/json: {"data": {"type": "servers"}}
+    Payment Required:
+      requestBody:
+        application/json: {"data": {"type": "servers", "attributes": {"project": "proj_LMmAD8X4Dwop2", "plan": "c2-small-x86", "site": "SAO", "operating_system": "ubuntu_22_04_x64_lts", "hostname": "BRC1", "billing": "monthly"}}}
+  get-server:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_RMLydp70OQKr1"
+        query: {}
+      responses:
+        "200":
+          application/json: {"data": {"id": "sv_RMLydp70OQKr1", "type": "servers", "attributes": {"hostname": "Hostname", "status": "on", "ipmi_status": "Normal", "role": "Bare Metal", "locked": false, "primary_ipv4": "201.124.12.72", "created_at": "1721563367633", "scheduled_deletion_at": "<value>", "plan": {"id": "plan_1ZJrdxw5Og4LV", "name": "c2.large.arm", "billing": "hourly"}, "operating_system": {"name": "Ubuntu (18.04 x64 LTS)", "slug": "ubuntu_18_04_x64_lts", "version": "18.04 x64 LTS", "features": {"raid": true, "ssh_keys": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "bionic"}}, "region": {"city": "São Paulo", "country": "Chile", "site": {"id": "loc_LA73qk6jdaJ2o", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "specs": {"cpu": "", "disk": "", "ram": ""}, "project": {"id": "proj_5AEmq7wMqBkWX", "name": "Ergonomic Aluminum Pants", "slug": "ergonomic-aluminum-pants", "description": "Synergistic Rubber Pants", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {}, "stats": {"ip_addresses": 1, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_ZNmBXZAYQ1CGRgvp0J9mf9kXngGN", "name": "216 Team", "slug": "216-team", "description": "216 Team", "address": "36972 Johnny Harbor, Shauntaberg, TN 96887-7803", "status": "verified", "feature_flags": []}}}, "meta": {}}
+  update-server:
+    Unpermitted parameter:
+      parameters:
+        path:
+          server_id: "sv_Gr47qleMDAg0m"
+      requestBody:
+        application/json: {"id": "sv_81EVOtR1N4J2Z"}
+    Reserved project:
+      parameters:
+        path:
+          server_id: "sv_5AEmq7wXqBkWX"
+      requestBody:
+        application/json: {"id": "sv_81EVOtR1N4J2Z"}
+      responses:
+        "422":
+          application/json: {"errors": [{"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "reserved servers can not change the billing period"}]}
+    Locked server:
+      parameters:
+        path:
+          server_id: "sv_kjQwdE0NOYNVP"
+      requestBody:
+        application/json: {"id": "sv_81EVOtR1N4J2Z"}
+    Success:
+      parameters:
+        path:
+          server_id: "sv_059EqYEkqQj8p"
+      requestBody:
+        application/json: {"id": "sv_81EVOtR1N4J2Z"}
+    Unprocessable Entity:
+      parameters:
+        path:
+          server_id: "sv_5AEmq7wMqBkWX"
+      requestBody:
+        application/json: {"id": "sv_81EVOtR1N4J2Z"}
+      responses:
+        "422":
+          application/json: {"errors": [{"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "We could not find the project you are trying to move the server to."}]}
+  destroy-server:
+    Unsupported operation for device:
+      parameters:
+        path:
+          server_id: "sv_1R3zq2rxqWxyn"
+        query: {}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "SERVER_DEVICE_ROLE_ERROR", "status": "unprocessable_entity", "title": "Unsupported operation for device", "detail": "Only bare metal servers can be deleted", "meta": {}}]}
+    Not Acceptable:
+      parameters:
+        path:
+          server_id: "sv_GMy1Db3NON50m"
+        query: {}
+    Unprocessable Entity:
+      parameters:
+        path:
+          server_id: "sv_enPbqoJJdA2MQ"
+        query: {}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "Reserved servers cannot be directly deleted. Please schedule the deletion to the end of the billing cycle"}]}
+    Locked:
+      parameters:
+        path:
+          server_id: "sv_0MoLqJNgq57pY"
+        query: {}
+    Forbidden:
+      parameters:
+        path:
+          server_id: "sv_Qkm7dXQRq8nZV"
+        query: {}
+  get-server-deploy-config:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_VLMmAD8EOwop2"
+      responses:
+        "200":
+          application/json: {"data": {"id": "sv_VLMmAD8EOwop2", "attributes": {"operating_system": "windows_server_2019_std_uefi", "hostname": "Stim", "raid": "raid-0", "ssh_keys": ["ssh_AW6Q2D9lqKLpr"]}}}
+  update-server-deploy-config:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_KN4ydzwvqVob3"
+      requestBody:
+        application/json: {"type": "deploy_config"}
+      responses:
+        "200":
+          application/json: {"data": {"id": "sv_KN4ydzwvqVob3", "attributes": {"operating_system": "ubuntu_20_04_x64_lts", "hostname": "my-hostname", "raid": "raid-1", "ssh_keys": ["ssh_GlxWpD6KOm6rk"]}}}
+        "422":
+          application/json: {"data": {"id": "sv_KN4ydzwvqVob3", "attributes": {"operating_system": "ubuntu_20_04_x64_lts", "hostname": "my-hostname", "raid": "raid-1", "ssh_keys": ["ssh_GlxWpD6KOm6rk"]}}}
+    Unprocessable Entity:
+      parameters:
+        path:
+          server_id: "sv_WeGoqAZNDP7nz"
+      requestBody:
+        application/json: {"type": "deploy_config"}
+    Not Acceptable:
+      parameters:
+        path:
+          server_id: "sv_LGXPdWl8qnNWk"
+      requestBody:
+        application/json: {"type": "deploy_config"}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "SSH_KEY_OWNERSHIP_ERROR", "status": "not_acceptable", "title": "Could not add ssh keys", "detail": "The following keys do not exist on the project: [\"ssh_AW6Q2D9lqKLpr\"]", "meta": {}}]}
+    Forbidden:
+      parameters:
+        path:
+          server_id: "sv_0L6WO141DPlXy"
+      requestBody:
+        application/json: {"type": "deploy_config"}
+  server-lock:
+    Ok:
+      parameters:
+        path:
+          server_id: "sv_3YjJOL5NdvZ87"
+      responses:
+        "200":
+          application/json: {"data": {"id": "sv_3YjJOL5NdvZ87", "type": "servers", "attributes": {"hostname": "Intelligent Rubber Coat", "status": "unknown", "ipmi_status": "Normal", "role": "Network Unmanaged", "locked": true, "primary_ipv4": "229.155.169.224", "created_at": "1709382164681", "scheduled_deletion_at": "<value>", "region": {"city": "Dallas", "country": "United States", "site": {"id": "loc_vYAZqGNJdMQ94", "name": "Dallas", "slug": "DAL", "facility": "Dallas"}}, "project": {"id": "proj_059EqYVjDQj8p", "name": "Fantastic Aluminum Bench", "slug": "fantastic-aluminum-bench", "description": "Heavy Duty Bronze Chair", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "sub_ag26w4ee4kzc8l", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_83g5G2L8kzFK3ZLzan8BI2kM4J2", "name": "364 Team", "slug": "364-team", "description": "364 Team", "address": "3629 Kemberly Villages, North Mitchellfort, SC 87742", "status": "verified"}}}}
+    Not Found:
+      parameters:
+        path:
+          server_id: "invalid"
+    Forbidden:
+      parameters:
+        path:
+          server_id: "sv_w49QDBmQqagKb"
+  server-unlock:
+    Ok:
+      parameters:
+        path:
+          server_id: "sv_W6Q2D9xGqKLpr"
+      responses:
+        "200":
+          application/json: {"data": {"id": "sv_W6Q2D9xGqKLpr", "type": "servers", "attributes": {"hostname": "Practical Granite Shirt", "status": "unknown", "ipmi_status": "Normal", "role": "Network Unmanaged", "locked": false, "primary_ipv4": "128.217.235.164", "created_at": "1724273385010", "scheduled_deletion_at": "<value>", "region": {"city": "London", "country": "United Kingdom", "site": {"id": "loc_1ZJrdxe4qg4LV", "name": "London", "slug": "LON", "facility": "London"}}, "project": {"id": "proj_lkg1DeZaOvZE5", "name": "Incredible Wooden Pants", "slug": "incredible-wooden-pants", "description": "Gorgeous Cotton Hat", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": "<value>", "billing": {"subscription_id": "sub_y3y8p6o7bxqsir", "type": "Normal", "method": "Normal"}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 1, "vlans": 0}}, "team": {"id": "team_Xp7QNgEnzWIrY7w1Xr3ySMyx6P1", "name": "369 Team", "slug": "369-team", "description": "369 Team", "address": "Apt. 356 3638 Gilbert Divide, Hermannchester, HI 56104", "status": "verified"}}}}
+    Not Found:
+      parameters:
+        path:
+          server_id: "invalid"
+    Forbidden:
+      parameters:
+        path:
+          server_id: "sv_LMmAD8E4Owop2"
+  create-server-out-of-band:
+    Created:
+      parameters:
+        path:
+          server_id: "sv_g1mbDweZdLv5B"
+      requestBody:
+        application/json: {"data": {"type": "out_of_band", "attributes": {"ssh_key_id": "ssh_NGnzRD5ADM5yw"}}}
+      responses:
+        "201":
+          application/json: {"data": {"id": "obc_mw49QDB5qagKb", "type": "out_of_band", "attributes": {"ssh_key": {"id": "ssh_NGnzRD5ADM5yw", "description": "swaniawski-gleason.test", "fingerprint": "be:8b:60:6e:75:4f:5e:9c:ce:5f:99:c6:4e:e9:f7:92"}, "created_at": "2025-01-24T18:28:52+00:00", "username": "server-1", "credentials": {"user": "loura", "password": "vzwe3rmyft"}, "port": "2222", "access_ip": "189.1.2.0", "server_id": "sv_g1mbDweZdLv5B", "status": "connected"}}}
+    Forbidden:
+      parameters:
+        path:
+          server_id: "sv_RMLydpoXOQKr1"
+      requestBody:
+        application/json: {"data": {"type": "out_of_band", "attributes": {"ssh_key_id": "ssh_aKXgRdR3qv9k5"}}}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+    Not found:
+      parameters:
+        path:
+          server_id: "invalid-server"
+      requestBody:
+        application/json: {"data": {"type": "out_of_band", "attributes": {"ssh_key_id": "ssh_m1R3zq2bqWxyn"}}}
+    when the server is being provisioned:
+      parameters:
+        path:
+          server_id: "sv_5AEmq7xMDBkWX"
+      requestBody:
+        application/json: {"data": {"type": "out_of_band", "attributes": {"ssh_key_id": "ssh_vGMy1DbgON50m"}}}
+  get-server-out-of-band:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_kjQwdEmXdYNVP"
+      responses:
+        "200":
+          application/json: {"data": {"id": "obc_AW6Q2D9lqKLpr", "type": "out_of_band", "attributes": {"ssh_key": {"id": "ssh_8WVQJDMwdRbyE", "description": "considine.test", "fingerprint": "59:a0:c0:f9:69:ad:de:43:10:0e:fc:ef:3a:5c:3e:ea"}, "created_at": "2025-01-24T18:28:52+00:00", "username": "server-1", "credentials": {"user": "chi_crooks", "password": "5b58q5uj1n"}, "port": "2222", "access_ip": "189.1.2.0", "server_id": "sv_kjQwdEmXdYNVP", "status": "connected"}}}
+    Not Found:
+      parameters:
+        path:
+          server_id: "sv_059EqYX2dQj8p"
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+  create-server-action:
+    Created:
+      parameters:
+        path:
+          server_id: "sv_A05EdQM4dvKYQ"
+      requestBody:
+        application/json: {"data": {"type": "actions", "attributes": {"action": "reboot"}}}
+      responses:
+        "201":
+          application/json: {"data": {"id": "act_y1DbwMQGjPON5", "type": "actions", "attributes": {"status": "Rebooting device"}}, "meta": {}}
+    Forbidden:
+      parameters:
+        path:
+          server_id: "sv_z2A3DVpQdnawP"
+      requestBody:
+        application/json: {"data": {"type": "actions", "attributes": {"action": "power_off"}}}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+  create-ipmi-session:
+    Created:
+      parameters:
+        path:
+          server_id: "sv_vYAZqGyJOMQ94"
+      responses:
+        "201":
+          application/json: {"data": {"id": "ipmi_mw49QDB5qagKb", "type": "ipmi_sessions", "attributes": {"ipmi_address": "62.112.214.64", "ipmi_username": "customer_access", "ipmi_password": "ipmi_password"}}}
+    Forbidden:
+      parameters:
+        path:
+          server_id: "sv_0MK4O44ROa95w"
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+    Not found:
+      parameters:
+        path:
+          server_id: "invalid"
+    Unprocessable entity:
+      parameters:
+        path:
+          server_id: "sv_v9BVDal3qRm1W"
+  server-start-rescue-mode:
+    Created:
+      parameters:
+        path:
+          server_id: "sv_LA73qkJwdaJ2o"
+      responses:
+        "201":
+          application/json: {"meta": {}}
+    Forbidden:
+      parameters:
+        path:
+          server_id: "sv_pbV0DgjKq4AWz"
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+    Not Acceptable:
+      parameters:
+        path:
+          server_id: "sv_LYV8DZAQq5QoE"
+  server-exit-rescue-mode:
+    Success:
+      parameters:
+        path:
+          server_id: "sv_e8pKq0xYqWAob"
+      responses:
+        "200":
+          application/json: {"meta": {}}
+    Forbidden:
+      parameters:
+        path:
+          server_id: "sv_QraYDP15OpjwW"
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+    Not Acceptable:
+      parameters:
+        path:
+          server_id: "sv_8NkvdyGKDeLpx"
+  server-schedule-deletion:
+    Created:
+      parameters:
+        path:
+          server_id: "sv_lxWpD6WvOm6rk"
+      responses:
+        "201":
+          application/json: {"data": {"id": "sv_lxWpD6WvOm6rk", "type": "schedule_deletion", "attributes": {"server_id": "sv_lxWpD6WvOm6rk", "scheduled_deletion_at": "2025-02-24T12:28:54Z"}}}
+    Forbidden:
+      parameters:
+        path:
+          server_id: "sv_695BdK25OevVo"
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+    when request deletion time is invalid:
+      parameters:
+        path:
+          server_id: "sv_yQrJdNMGO30gv"
+    when server is locked:
+      parameters:
+        path:
+          server_id: "sv_k0Ryqv9adW36X"
+  server-unschedule-deletion:
+    Forbidden:
+      parameters:
+        path:
+          server_id: "sv_GnzRD5lvqM5yw"
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+  create-server-reinstall:
+    Created:
+      parameters:
+        path:
+          server_id: "sv_KXgRdRRodv9k5"
+      requestBody:
+        application/json: {"data": {"type": "reinstalls", "attributes": {"operating_system": "ubuntu_22_04_x64_lts", "hostname": "BRC1", "ssh_keys": ["35"], "user_data": 10, "raid": "raid-1"}}}
+    Forbidden:
+      parameters:
+        path:
+          server_id: "sv_1R3zq2JxqWxyn"
+      requestBody:
+        application/json: {"data": {"type": "reinstalls", "attributes": {"operating_system": "ubuntu_22_04_x64_lts", "hostname": "BRC1"}}}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+    Not Found:
+      parameters:
+        path:
+          server_id: "sv_GMy1Db2NDN50m"
+      requestBody:
+        application/json: {"data": {"type": "reinstalls", "attributes": {"operating_system": "ubuntu_22_04_x64_lts", "hostname": "BRC1", "ssh_keys": ["36"], "user_data": 12, "raid": "raid-1"}}}
+    Unprocessable Entity:
+      parameters:
+        path:
+          server_id: "sv_5xyZOnLMqWM0l"
+      requestBody:
+        application/json: {"data": {"type": "reinstalls", "attributes": {"operating_system": "ubuntu_22_04_x64_lts", "hostname": "BRC1"}}}
+    Locked server:
+      parameters:
+        path:
+          server_id: "sv_KN4ydzxvDVob3"
+      requestBody:
+        application/json: {"data": {"type": "reinstalls", "attributes": {"operating_system": "ubuntu_22_04_x64_lts", "hostname": "BRC1", "ssh_keys": ["37"], "user_data": 18, "raid": "raid-1"}}}
+  get-project-ssh-keys:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_v9BVDaN5ORm1W"
+        query: {}
+      responses:
+        "200":
+          application/json: {"data": [{"id": "ssh_m5xyZOnNOWM0l", "type": "ssh_keys", "attributes": {"name": "kuhic.test", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCvG4B1ryFtHGT6NZpQvUgFYh3gMBUlK/C7ofzq1ORbcahyUaFQ/0fs3d1i+tRTO/hNi24qc8kUvA0nWj4AW081VQ4kamt0UhiS4umJGJs0bl+8po2pDU5Az7jZ/TRJOZ2xAZK7RJx/At4hwJYgpogELUWEC+v7W+Mirk9oKaAQ7h3z7/i/pXi+yZ+8kKVyjNJX6UZwNWiM5c/drGRTqDNQ+hLey2+PVpMDUxE+vOEzYMd93HKc5lVYLwPX/SqrX6kKPZqU1gZr63uhBWL9F1qA8UNUAxWD3Lc5FmWNmNKkf2a4aZ6sWtSGl3Zaibb8lF7eZyyYtvCS8wQdPK7CjysP", "fingerprint": "9c:05:52:dd:1c:37:62:7b:90:53:8b:ac:d9:29:7f:e5", "user": {"id": "user_LkzkXnr0W1tL1o7GKJ5bf57aP1nn", "first_name": "Evangelina", "last_name": "Braun", "email": "tamesha.wuckert@mann-mills.example", "created_at": "2024-08-20T00:00:00.000Z", "updated_at": "2024-06-25T00:00:00.000Z", "role": {"id": "role_4zQMJ1ojYwhK8079Q1LpU0MbGQVx", "name": "collaborator", "created_at": "2024-09-13T00:00:00.000Z", "updated_at": "2025-05-21T00:00:00.000Z"}}, "created_at": "2025-01-24T18:28:56+00:00", "updated_at": "2025-01-24T18:28:56+00:00"}}]}
+    when trying to filter by tag:
+      parameters:
+        path:
+          project_id: "proj_LA73qkKWqaJ2o"
+        query:
+          filter[tags]: "tag_K3oJoeZZzxcjJjkRAYNetrEAbJgj"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "ssh_GKN4ydzgqVob3", "type": "ssh_keys", "attributes": {"name": "murazik.test", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCviG84gTN3jqfMQOY++CM0WNvgqp9y9O2yxum+06WMfoJn/HUKWbMkKf47zE+pDdIWPwmbpYQPJqhS/sK7VZthZgqmCmXBHS386FMmVac1PuFUS9diGv0WKdAs+OKwaaUGEq5WVSDDxNscMcQGigyWAcY19tTqAESB345JnwAUPfQBnoiuV/cL+ikFHLaAVZGz7FEOcixD+dnsDBrK2mPwoi0XBrZf+coahUVS+jtA2DlCkkAMAvSGvoVsYQjq3b/LWsL1dszVsAuvAizhj8oG+3v9RjnLFDIG6+ifYKH5NMwUNqyw/3Yd1n+dhbjn5OO0fa8rIUx76Hz/WBlAsj6x", "fingerprint": "40:64:02:78:21:3f:7e:44:c1:ac:5f:68:44:9f:9d:98", "user": {"id": "user_ZyR5gZA48kUmogvyxQ0ECbEJJVN", "first_name": "Joel", "last_name": "Huel", "email": "francene.fay@beahan.example", "created_at": "2024-04-25T00:00:00.000Z", "updated_at": "2024-08-30T00:00:00.000Z", "role": {"id": "role_LRZA1XwVblULNyVyy9jaf57JGrLm", "name": "collaborator", "created_at": "2024-04-06T00:00:00.000Z", "updated_at": "2025-12-04T00:00:00.000Z"}}, "created_at": "2025-01-24T18:28:56+00:00", "updated_at": "2025-01-24T18:28:56+00:00"}}]}
+    Filtered by multiple tags:
+      parameters:
+        path:
+          project_id: "proj_pbV0Dg2Gq4AWz"
+        query:
+          filter[tags]: "tag_o4RpPBP7bQfz1KoeE74NiJ001RK,tag_7bgxB1xazzSlj9oQrW1QSWwg7Q6W"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "ssh_6WeGoqAnDP7nz", "type": "ssh_keys", "attributes": {"name": "zboncak-hudson.test", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBqB2lXJATsyii0VfffMeIIQD/T9e9M+Sl7tpQm5WWFnGkaZzS1eotPC8T7YWJaugN1YZMG8fKaKWNrTRqNqgYgOgOYEf12lba5GFZy/6ueawD+4RGIMXbheaFnuX2hh5KpOrcad54Z/10yH/+XaN/uJ8Ro2JfJU7l19HEVyVtN4Ac+v+APqyOGOPGnGN9kcAYMjcKNhf0tD92CM9Taf3mubhuXyDYv5L+dq11st7U9YzKqw5nE2Ht66MUfEYVYkaUNgvHPjNoFdEVCuH5NIVA4tzFQzpUlo6xGTKflvlUeXUy9Sb3AyZiCwF1QYelxYU9CHjvO/UDQudeF/ItiAj1", "fingerprint": "3b:96:24:47:9a:3c:a7:49:da:28:cb:6a:d3:d7:54:9e", "user": {"id": "user_mmbJGgBw5pfrylRx0xGlsv0vogQ", "first_name": "Roy", "last_name": "Macejkovic", "email": "trinidad.leannon@senger-powlowski.test", "created_at": "2024-02-09T00:00:00.000Z", "updated_at": "2024-04-27T00:00:00.000Z", "role": {"id": "role_MrLmaMXR34S5BBrN20YVTpyN2m2", "name": "collaborator", "created_at": "2024-04-01T00:00:00.000Z", "updated_at": "2025-10-08T00:00:00.000Z"}}, "created_at": "2025-01-24T18:28:56+00:00", "updated_at": "2025-01-24T18:28:56+00:00"}}]}
+  post-project-ssh-key:
+    Created:
+      parameters:
+        path:
+          project_id: "proj_e8pKq0BGOWAob"
+      requestBody:
+        application/json: {"data": {"type": "ssh_keys", "attributes": {"name": "SSH Key", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx"}}}
+      responses:
+        "201":
+          application/json: {"data": {"id": "ssh_3YjJOLMydvZ87", "type": "ssh_keys", "attributes": {"name": "SSH Key", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx", "fingerprint": "0a:00:34:53:51:0e:a5:4e:06:2c:d7:16:88:96:82:f3", "user": {"id": "user_5wzpneYQeRU5KPLNV0avijG69E4", "first_name": "Michael", "last_name": "Moore", "email": "yasmin_wilkinson@muller-cassin.test", "created_at": "2024-10-18T00:00:00.000Z", "updated_at": "2025-01-16T00:00:00.000Z", "role": {"id": "role_yw6AYGBgGgUl7l0ApVaWiLv6m0X", "name": "collaborator", "created_at": "2024-10-11T00:00:00.000Z", "updated_at": "2025-11-18T00:00:00.000Z"}}, "created_at": "2025-01-24T18:28:56+00:00", "updated_at": "2025-01-24T18:28:56+00:00"}}}
+    Bad Request:
+      parameters:
+        path:
+          project_id: "proj_QraYDP41DpjwW"
+      requestBody:
+        application/json: {"data": {"type": "ssh_keys", "attributes": {"name": "SSH Key", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDOLFnjGP3Jsh1usHNS2EILgfqZNC9pOvNqBZqxH+qNAdZdQCzy2csMuiq+ZwLA8Mm4Vo5CvSgBHs/kuZRUKyTl+79YUMZIj8PhHzL4XbdqX1ZnAIklHWcJaveB0+UXLEPKGzFIFq+FkuwtiXQsVe5NnSpIDYgpzhqEs38NsnXvsubKphGUdARDhaxvMdUUl4YsAtLHKMzSyIvE6xwfTtIVwA9bZt/8GoBzrn9px9PEcf25Rgd2NhOYs3WYcZuwvRmfcFdi2vGhVqTPqL9n16R/n5jknxHYrTyqWNxJdpdvg2YqXpN7vnFNoOjYFD6EahJ0pF/+WL4tPCIkLfoaVaSx"}}}
+    Unprocessable Entity:
+      parameters:
+        path:
+          project_id: "proj_8Nkvdyj8qeLpx"
+      requestBody:
+        application/json: {"data": {"type": "ssh_keys", "attributes": {"name": "<value>", "public_key": "1234"}}}
+  get-project-ssh-key:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_LYV8DZW1O5QoE"
+          ssh_key_id: "ssh_j0L6WO1QOPlXy"
+      responses:
+        "200":
+          application/json: {"data": {"id": "ssh_j0L6WO1QOPlXy", "type": "ssh_keys", "attributes": {"name": "keebler.example", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDFaNis75tWAPSabGLZLadN+90eT+s4i9/nK5aUYQDxUfX8HqSyHsjJPlCGOHWiUbHUWeAAD8byM849iXp7L1wjztY0LShE54TZtPz889mwhZUio7/fK26L3jQcF/vvtaBcna62NkThiG5YXiZawb8TaV38p6rP6R9m67GEd4/eesrCoX23LC7OjFb5+rmqzzfXEDN2VAagXKP0KZwQngR//oX6ZBL0JotCtnDs+VtPiC9fAHQWKUqaiXgVQrOeH9YzphHHu7p4iKh7Jr8g2vI+pS9w2U35ufJAdgLnys4ccM9BY/ERdDNd8WpFlJ6UlAmiN+zUbwNrx91KJ77x/1Wz", "fingerprint": "8d:e5:8a:ac:a2:39:aa:1d:d0:ba:44:72:9b:08:ef:c0", "user": {"id": "user_91PERPlP6VuE7pPoA002SXXA6Y9", "first_name": "Tobie", "last_name": "Dooley", "email": "lincoln_mosciski@turcotte-kling.test", "created_at": "2024-02-22T00:00:00.000Z", "updated_at": "2024-03-15T00:00:00.000Z", "role": {"id": "role_BLx956GRWXixaePwX8mJtMMWRyxg", "name": "collaborator", "created_at": "2024-02-04T00:00:00.000Z", "updated_at": "2025-02-04T00:00:00.000Z"}}, "created_at": "2025-01-24T18:28:56+00:00", "updated_at": "2025-01-24T18:28:56+00:00"}}}
+  put-project-ssh-key:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_KXgRdRMKOv9k5"
+          ssh_key_id: "ssh_5AEmq71XOBkWX"
+      requestBody:
+        application/json: {"data": {"id": "ssh_5AEmq71XOBkWX", "type": "ssh_keys", "attributes": {"tags": ["tag_oe32gQbvrbszzPGaL7EEiJXvynQ", "tag_5rgE2mnBYpFzG9eGN7E8C67b2eMe"], "name": "New SSH Key Name"}}}
+      responses:
+        "200":
+          application/json: {"data": {"id": "ssh_5AEmq71XOBkWX", "type": "ssh_keys", "attributes": {"name": "jones.test", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCrG56YgXL7tRnU63MXZGnyBUoJvdpUWXbW9mm/hZqQ2ljJsDQLyTK7d1eg1CG8ESMPrHpzRk8D86b5Yq9Tpw7GZeQS2+zzJmGJBi4VjsG5V+g+Akt3uSJQ7aWi++Oi17Oz4laVr2rAx/JBnmrpF8CoEbS/syqeViK8OJP6W4eJt3IOEQxADAICVzRfeRjP8sHLeVDe2b9InYQK/MAPBCiXQ8vAeA+nMvqE8mjGGbUZTj9sSpcIYfxGFbXrY/snwV2SAwD9WYvJxDuyzfGHCxLGia9pSBqyXzc/dOp62qW5P0ZvKF7K1TKzJMqKrsaiQCxkEBFzdfIA/e5ZuoJEHe7x", "fingerprint": "7f:93:8d:7c:27:5b:a4:91:1e:95:8b:0a:c8:0f:5f:03", "user": {"id": "user_57G07rnbZWsz8kl01X5wULE4jNK", "first_name": "Oliver", "last_name": "Dickens", "email": "joslyn_runte@cronin-keeling.example", "created_at": "2024-02-08T00:00:00.000Z", "updated_at": "2024-08-05T00:00:00.000Z", "role": {"id": "role_KlpyAP1BQpUjA3P6V4leiV1wL6K", "name": "collaborator", "created_at": "2024-03-01T00:00:00.000Z", "updated_at": "2025-02-03T00:00:00.000Z"}}, "created_at": "2025-01-24T18:28:57+00:00", "updated_at": "2025-01-24T18:28:57+00:00"}}}
+    Bad Request:
+      parameters:
+        path:
+          project_id: "proj_695BdKggdevVo"
+          ssh_key_id: "ssh_W6Q2D9plqKLpr"
+      requestBody:
+        application/json: {"data": {"id": "ssh_W6Q2D9plqKLpr", "type": "ssh_keys", "attributes": {"name": "New SSH Key Name"}}}
+    Unprocessable Entity:
+      parameters:
+        path:
+          project_id: "proj_yQrJdNemO30gv"
+          ssh_key_id: "ssh_LMmAD8pEDwop2"
+      requestBody:
+        application/json: {"data": {"id": "ssh_LMmAD8pEDwop2", "type": "ssh_keys", "attributes": {"name": "<value>"}}}
+    Tag not Updated:
+      parameters:
+        path:
+          project_id: "proj_wg3ZDrMyq5QlP"
+          ssh_key_id: "ssh_RMLydp20DQKr1"
+      requestBody:
+        application/json: {"data": {"id": "ssh_RMLydp20DQKr1", "type": "ssh_keys", "attributes": {"tags": ["invalid-tag"], "name": "New SSH Key Name"}}}
+      responses:
+        "200":
+          application/json: {"data": {"id": "ssh_RMLydp20DQKr1", "type": "ssh_keys", "attributes": {"name": "murray-torphy.example", "public_key": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPzRdc+wo3bdjvipb+huWGbWuVFaBmYc5JCh2BSQcz15dYjhn+9iBPLoTE26Kzf3VBMoBQXXCQTPd95vZ1j6vO1Wab5ny9KRJ0BVbCcbU499kq57p5SvX9zXpdVMN3rTKlpEJZKoq042EZ335MW4Qk7OX9bKGzYb4hBOzxbVCblZ7rYYS2UdJmYmNT6t+S1BmRC9RGKvZerDw9rfaLlHE3XpY3gjDegxCknsaYMxuSMYSz51ZQDrFSy4Nu1o+lD37HPfHaB800D1pyLqwmZNqRuzBqAjyXdth5LtMcZQVW7Cuua/L8Zuy5ZYqvDxxRuAyA4bnpcLD54V0K8JkUQlQh", "fingerprint": "d1:2f:ca:c0:9c:8c:5d:26:14:96:63:90:ed:04:b4:e1", "user": {"id": "user_45VV42PV1ocK2EMjoRBKf0MMBwyP", "first_name": "Hannelore", "last_name": "Pfeffer", "email": "patrick@swaniawski-schiller.test", "created_at": "2024-11-30T00:00:00.000Z", "updated_at": "2024-10-18T00:00:00.000Z", "role": {"id": "role_bgJrVRxYeZSPlGry458ji0PRYXj", "name": "collaborator", "created_at": "2024-03-06T00:00:00.000Z", "updated_at": "2025-10-06T00:00:00.000Z"}}, "created_at": "2025-01-24T18:28:57+00:00", "updated_at": "2025-01-24T18:28:57+00:00"}}}
+  delete-project-ssh-key:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_1R3zq28EOWxyn"
+          ssh_key_id: "ssh_kjQwdEGNDYNVP"
+    Not Found:
+      parameters:
+        path:
+          project_id: "proj_GMy1DbW0ON50m"
+          ssh_key_id: "123"
+  post-storage-filesystems:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "filesystems", "attributes": {"project": "proj_WVQJDMAvDRbyE", "name": "my-data", "size_in_gb": 1500}}}
+      responses:
+        "201":
+          application/json: {"data": {"id": "fs_AW6Q2D9lqKLpr", "type": "filesystems", "attributes": {"name": "my-data", "size_in_gb": 1500, "project": {"id": "proj_WVQJDMAvDRbyE", "name": "Small Silk Gloves", "slug": "small-silk-gloves"}}}}
+    Conflict:
+      requestBody:
+        application/json: {"data": {"type": "filesystems", "attributes": {"project": "proj_0MoLqJZ0q57pY", "name": "my-data", "size_in_gb": 1500}}}
+    Forbidden:
+      requestBody:
+        application/json: {"data": {"type": "filesystems", "attributes": {"project": "proj_Qkm7dXXAd8nZV", "name": "my-data", "size_in_gb": 1500}}}
+    Unprocessable Entity:
+      requestBody:
+        application/json: {"data": {"type": "filesystems", "attributes": {}}}
+  get-storage-filesystems:
+    Success:
+      parameters:
+        query:
+          filter[project]: "aerodynamic-marble-shoes"
+  delete-storage-filesystems:
+    Not Found:
+      parameters:
+        path:
+          filesystem_id: "fs_123"
+    Forbidden:
+      parameters:
+        path:
+          filesystem_id: "fs_zlkg1DegdvZE5"
+  patch-storage-filesystems:
+    Success:
+      parameters:
+        path:
+          filesystem_id: "fs_7vYAZqGBdMQ94"
+      requestBody:
+        application/json: {"data": {"id": "fs_7vYAZqGBdMQ94", "type": "filesystems", "attributes": {"size_in_gb": 1501}}}
+      responses:
+        "200":
+          application/json: {"data": {"id": "fs_7vYAZqGBdMQ94", "type": "filesystems", "attributes": {"name": "Fantastic Plastic Wallet", "size_in_gb": 1501, "project": {"id": "proj_5AEmq7jedBkWX", "name": "Intelligent Silk Gloves", "slug": "intelligent-silk-gloves"}}}}
+    Validation Error:
+      parameters:
+        path:
+          filesystem_id: "fs_r0MK4O4kDa95w"
+      requestBody:
+        application/json: {"data": {"id": "fs_r0MK4O4kDa95w", "type": "filesystems", "attributes": {"size_in_gb": 1499}}}
+    Forbidden:
+      parameters:
+        path:
+          filesystem_id: "fs_x1ZJrdx5qg4LV"
+      requestBody:
+        application/json: {"data": {"id": "fs_x1ZJrdx5qg4LV", "type": "filesystems", "attributes": {"size_in_gb": 1501}}}
+  get-tags: {}
+  create-tag:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "tags", "attributes": {"name": "Tag Name", "description": "Tag Description", "color": "#bebebe"}}}
+    when any attribute is missing or not filled:
+      requestBody:
+        application/json: {"data": {"type": "tags", "attributes": {"name": "Tag Name", "description": "", "color": "#ffffff"}}}
+    when color is in wrong format:
+      requestBody:
+        application/json: {"data": {"type": "tags", "attributes": {"name": "Tag Name", "description": "Tag Description", "color": "bebebe"}}}
+    when name is already taken:
+      requestBody:
+        application/json: {"data": {"type": "tags", "attributes": {"name": "Nurwë", "description": "Tag Description", "color": "#bebebe"}}}
+    when description is too long:
+      requestBody:
+        application/json: {"data": {"type": "tags", "attributes": {"name": "Tag Name", "description": "wfakjzp0fa4mdt24qq4rn60wsuxnkuktn7nhc4x8yoyiymjsgljb5lwtj5fqjap2bq8is4lg5kjlrbkxu5h2lajqe5wsqmk1ur7v35tb4yf3l4krm9lvud079vteze6ox6gmpax8v8gy809sriab3484vjf2eb9i5bnuqhidyhn7n030lsuvrygfjm9lfu7fnbez8yk24hh50xw8k7hfakny42dv2w93azpap4qjzegta7foywi68aw15kwy8bof", "color": "#bebebe"}}}
+  update-tag:
+    Success:
+      parameters:
+        path:
+          tag_id: "tag_45arv64V5ZcKj8n7yro2SLa1NNy"
+      requestBody:
+        application/json: {"data": {"id": "tag_45arv64V5ZcKj8n7yro2SLa1NNy", "type": "tags", "attributes": {"name": "Tag Name", "color": "#ffffff"}}}
+    when name is already taken:
+      parameters:
+        path:
+          tag_id: "tag_e4BoAabYwah3ppLV1eL0tjw3G6x"
+      requestBody:
+        application/json: {"data": {"id": "tag_e4BoAabYwah3ppLV1eL0tjw3G6x", "type": "tags", "attributes": {"name": "Tag Name 2", "color": "#ffffff"}}}
+    when any attribute is blank:
+      parameters:
+        path:
+          tag_id: "tag_EVKJkz6yZZug6yzla8aGu7Y9AVE"
+      requestBody:
+        application/json: {"data": {"id": "tag_EVKJkz6yZZug6yzla8aGu7Y9AVE", "type": "tags", "attributes": {"name": "", "color": "#ffffff"}}}
+    when color is invalid:
+      parameters:
+        path:
+          tag_id: "tag_gmW3XzrNVjUZ5A2XNxmyfgm9KKV"
+      requestBody:
+        application/json: {"data": {"id": "tag_gmW3XzrNVjUZ5A2XNxmyfgm9KKV", "type": "tags", "attributes": {"color": "bebebe"}}}
+    when description is too long:
+      parameters:
+        path:
+          tag_id: "tag_rGvk6LpeextV7AkKz8oyh8LGRWy"
+      requestBody:
+        application/json: {"data": {"id": "tag_rGvk6LpeextV7AkKz8oyh8LGRWy", "type": "tags", "attributes": {"description": "02vv3b19v78xkl49ahbx6yeqoj10ixz7zirue982rx4n457w5p4emunycom7pcizwfprbxym5smn1p1g0zjbvg9jsk71werij6mwdgv4nkuvl13rpab4zicpulol2xg2ti82ymoo5d3hkbmzzgedr8idznkn47tizi8v4tki7vr5kd3fvx9oncty382yutzniwpa7qd9jnkfklh9zcd4ebpvk1wresntbuo84e1thhg8xzxab7lkn4u1oxr18sq7", "color": "#ffffff"}}}
+    Not Found:
+      parameters:
+        path:
+          tag_id: "invalid"
+      requestBody:
+        application/json: {"data": {"id": "invalid", "type": "tags", "attributes": {"name": "Tag Name", "color": "#ffffff"}}}
+  destroy-tag:
+    Not Found:
+      parameters:
+        path:
+          tag_id: "invalid-id"
+  get-team:
+    Success:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "team_RwXKRBagN8fA1Aj0WlzYTpmr3mn", "attributes": {"name": "508 Team", "slug": "508-team", "address": "Suite 596 5487 Bartoletti Highway, Port Nieves, IL 31082", "currency": "2st", "created_at": "2024-04-12T00:00:00+00:00", "updated_at": "2024-10-14T00:00:00+00:00", "enforce_mfa": false, "users": [{"id": "user_8nEgkz35M7HKZVoJQyrlU62ng4X", "first_name": "Hildred", "last_name": "Anderson", "email": "darrell@kunze.test", "created_at": "2024-08-30T00:00:00.000Z", "updated_at": "2024-09-23T00:00:00.000Z", "role": {"id": "role_wJ6k3kgN1zIRrAb40XA8Il3jr6Y", "name": "Georgann", "created_at": "2024-11-21T00:00:00.000Z", "updated_at": "2026-01-15T00:00:00.000Z"}}], "projects": [], "owner": {"id": "user_8nEgkz35M7HKZVoJQyrlU62ng4X", "first_name": "Hildred", "last_name": "Anderson", "email": "darrell@kunze.test", "created_at": "2024-08-30T00:00:00.000Z", "updated_at": "2024-09-23T00:00:00.000Z", "role": {"id": "role_wJ6k3kgN1zIRrAb40XA8Il3jr6Y", "name": "Georgann", "created_at": "2024-11-21T00:00:00.000Z", "updated_at": "2026-01-15T00:00:00.000Z"}}, "billing": {}, "feature_flags": ["feature_flag_1", "feature_flag_2"]}}], "meta": {}}
+  post-team:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "teams", "attributes": {"name": "Name", "currency": "USD", "address": "Address"}}}
+      responses:
+        "201":
+          application/json: {"data": {"id": "team_3v5AWWw8ZwSKJWEjPr8Bt7evxRz", "attributes": {"name": "Name", "slug": "name", "address": "Address", "currency": "USD", "enforce_mfa": false}}}
+    Unprocessable Entity:
+      requestBody:
+        application/json: {"data": {"type": "teams", "attributes": {"name": "", "currency": "BRL", "address": ""}}}
+      responses:
+        "406":
+          application/json: {"errors": [{"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "must be filled"}, {"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "must be filled"}, {"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "must be filled"}]}
+    Not Acceptable:
+      requestBody:
+        application/json: {"data": {"type": "teams", "attributes": {"name": "Name", "currency": "USD", "address": "Address"}}}
+  patch-current-team:
+    Success:
+      parameters:
+        path:
+          team_id: "49d41738-140a-4ee5-991e-c708f208e050"
+      requestBody:
+        application/json: {"data": {"id": "team_2zLy9LxYpgH4Le2LGN02fMwNX9Xg", "type": "teams", "attributes": {"address": "Address", "name": "Name", "currency": "USD"}}}
+      responses:
+        "200":
+          application/json: {"data": {"id": "team_2zLy9LxYpgH4Le2LGN02fMwNX9Xg", "attributes": {"name": "Cormier-Jakubowski", "slug": "cormier-jakubowski", "address": "275 Roxanne Forge", "currency": "BBD", "enforce_mfa": false}}}
+    Forbidden:
+      parameters:
+        path:
+          team_id: "2aaf2ac7-8f25-488d-af3e-3680affd76dc"
+      requestBody:
+        application/json: {"data": {"id": "team_3Ez9r5kAZntK7E0eeKAriNvbg8B", "type": "teams", "attributes": {"address": "Address", "name": "Name", "currency": "USD"}}}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to update team information", "meta": {}}]}
+    Not Found:
+      parameters:
+        path:
+          team_id: "d7ff21e7-6fe3-4e9d-9d3c-43eca17d51de"
+      requestBody:
+        application/json: {"data": {"id": "d7ff21e7-6fe3-4e9d-9d3c-43eca17d51de", "type": "teams", "attributes": {"address": "Address", "name": "Name", "currency": "USD"}}}
+  get-traffic-consumption:
+    with server filter:
+      parameters:
+        query:
+          filter[server]: 185
+          filter[date][gte]: "2024-12-24T18:28:59Z"
+          filter[date][lte]: "2025-01-24T18:28:59Z"
+      responses:
+        "200":
+          application/json: {"data": {"id": "", "type": "traffic", "attributes": {"from_date": 1735064939, "to_date": 1737743339, "regions": [{"region_slug": "brazil", "total_inbound_gb": 102, "total_outbound_gb": 241, "total_inbound_95th_percentile_mbps": 1832.91, "total_outbound_95th_percentile_mbps": 1819.99, "data": [{"date": "2021-07-01T00:00:00.000+00:00", "inbound_gb": 10, "outbound_gb": 102, "avg_outbound_speed_mbps": 1.19, "avg_inbound_speed_mbps": 0.13}, {"date": "2021-07-02T00:00:00.000+00:00", "inbound_gb": 2, "outbound_gb": 6, "avg_outbound_speed_mbps": 0.08, "avg_inbound_speed_mbps": 0.02}, {"date": "2021-07-03T00:00:00.000+00:00", "inbound_gb": 5, "outbound_gb": 15, "avg_outbound_speed_mbps": 0.18, "avg_inbound_speed_mbps": 0.06}, {"date": "2021-07-04T00:00:00.000+00:00", "inbound_gb": 57, "outbound_gb": 32, "avg_outbound_speed_mbps": 0.38, "avg_inbound_speed_mbps": 0.66}, {"date": "2021-07-05T00:00:00.000+00:00", "inbound_gb": 11, "outbound_gb": 59, "avg_outbound_speed_mbps": 0.69, "avg_inbound_speed_mbps": 0.13}, {"date": "2021-07-06T00:00:00.000+00:00", "inbound_gb": 17, "outbound_gb": 27, "avg_outbound_speed_mbps": 0.32, "avg_inbound_speed_mbps": 0.2}]}], "total_inbound_gb": 102, "total_outbound_gb": 241, "total_inbound_95th_percentile_mbps": 1832.91, "total_outbound_95th_percentile_mbps": 1819.99}}}
+    when the period is less than 1 day:
+      parameters:
+        query:
+          filter[server]: 187
+          filter[date][gte]: "2025-01-24T10:28:59Z"
+          filter[date][lte]: "2025-01-24T18:28:59Z"
+      responses:
+        "200":
+          application/json: {"data": {"id": "", "type": "traffic", "attributes": {"from_date": 1737714539, "to_date": 1737743339, "regions": [], "total_inbound_gb": 0, "total_outbound_gb": 0, "total_inbound_95th_percentile_mbps": 0, "total_outbound_95th_percentile_mbps": 0}}}
+    with project filter:
+      parameters:
+        query:
+          filter[project]: 299
+          filter[date][gte]: "2024-12-24T18:28:59Z"
+          filter[date][lte]: "2025-01-24T18:28:59Z"
+      responses:
+        "200":
+          application/json: {"data": {"id": "", "type": "traffic", "attributes": {"from_date": 1735064939, "to_date": 1737743339, "regions": [{"region_slug": "brazil", "total_inbound_gb": 102, "total_outbound_gb": 241, "total_inbound_95th_percentile_mbps": 1832.91, "total_outbound_95th_percentile_mbps": 1819.99, "data": [{"date": "2021-07-01T00:00:00.000+00:00", "inbound_gb": 10, "outbound_gb": 102, "avg_outbound_speed_mbps": 1.19, "avg_inbound_speed_mbps": 0.13}, {"date": "2021-07-02T00:00:00.000+00:00", "inbound_gb": 2, "outbound_gb": 6, "avg_outbound_speed_mbps": 0.08, "avg_inbound_speed_mbps": 0.02}, {"date": "2021-07-03T00:00:00.000+00:00", "inbound_gb": 5, "outbound_gb": 15, "avg_outbound_speed_mbps": 0.18, "avg_inbound_speed_mbps": 0.06}, {"date": "2021-07-04T00:00:00.000+00:00", "inbound_gb": 57, "outbound_gb": 32, "avg_outbound_speed_mbps": 0.38, "avg_inbound_speed_mbps": 0.66}, {"date": "2021-07-05T00:00:00.000+00:00", "inbound_gb": 11, "outbound_gb": 59, "avg_outbound_speed_mbps": 0.69, "avg_inbound_speed_mbps": 0.13}, {"date": "2021-07-06T00:00:00.000+00:00", "inbound_gb": 17, "outbound_gb": 27, "avg_outbound_speed_mbps": 0.32, "avg_inbound_speed_mbps": 0.2}]}], "total_inbound_gb": 102, "total_outbound_gb": 241, "total_inbound_95th_percentile_mbps": 1832.91, "total_outbound_95th_percentile_mbps": 1819.99}}}
+    when the period filter is the deprecated format:
+      parameters:
+        query:
+          filter[project]: 301
+          filter[date][gte]: "2025-01-24T10:28:59Z"
+          filter[date][lte]: "2025-01-24T18:28:59Z"
+      responses:
+        "200":
+          application/json: {"data": {"id": "", "type": "traffic", "attributes": {"from_date": 1737714539, "to_date": 1737743339, "regions": [{"region_slug": "brazil", "total_inbound_gb": 102, "total_outbound_gb": 241, "total_inbound_95th_percentile_mbps": 1832.91, "total_outbound_95th_percentile_mbps": 1819.99, "data": [{"date": "2021-07-01T00:00:00.000+00:00", "inbound_gb": 10, "outbound_gb": 102, "avg_outbound_speed_mbps": 1.19, "avg_inbound_speed_mbps": 0.13}, {"date": "2021-07-02T00:00:00.000+00:00", "inbound_gb": 2, "outbound_gb": 6, "avg_outbound_speed_mbps": 0.08, "avg_inbound_speed_mbps": 0.02}, {"date": "2021-07-03T00:00:00.000+00:00", "inbound_gb": 5, "outbound_gb": 15, "avg_outbound_speed_mbps": 0.18, "avg_inbound_speed_mbps": 0.06}, {"date": "2021-07-04T00:00:00.000+00:00", "inbound_gb": 57, "outbound_gb": 32, "avg_outbound_speed_mbps": 0.38, "avg_inbound_speed_mbps": 0.66}, {"date": "2021-07-05T00:00:00.000+00:00", "inbound_gb": 11, "outbound_gb": 59, "avg_outbound_speed_mbps": 0.69, "avg_inbound_speed_mbps": 0.13}, {"date": "2021-07-06T00:00:00.000+00:00", "inbound_gb": 17, "outbound_gb": 27, "avg_outbound_speed_mbps": 0.32, "avg_inbound_speed_mbps": 0.2}]}], "total_inbound_gb": 102, "total_outbound_gb": 241, "total_inbound_95th_percentile_mbps": 1832.91, "total_outbound_95th_percentile_mbps": 1819.99}}}
+    with invalid filter:
+      parameters:
+        query:
+          filter[date][gte]: "invalid"
+          filter[date][lte]: "invalid"
+  get-traffic-quota:
+    when `billing_method` is `Normal`:
+      responses:
+        "200":
+          application/json: {"data": {"id": "traffic_quota", "type": "traffic_quota", "attributes": {"quota_per_project": [{"project_id": "proj_LMmAD8z2dwop2", "project_slug": "lightweight-granite-shirt", "billing_method": "Normal", "quota_per_region": [{"region_id": "reg_9QDB5qag", "region_slug": "brazil", "quota_in_tb": {"granted": 20, "additional": 0, "total": 20}, "quota_in_mbps": {"granted": 0, "additional": 0, "total": 0}}]}]}}}
+    when `billing_method` is `95th percentile`:
+      responses:
+        "200":
+          application/json: {"data": {"id": "traffic_quota", "type": "traffic_quota", "attributes": {"quota_per_project": [{"project_id": "proj_g1mbDwjkqLv5B", "project_slug": "awesome-steel-table", "billing_method": "95th percentile", "quota_per_region": [{"region_id": "reg_9QDB5qag", "region_slug": "brazil", "quota_in_tb": {"granted": 0, "additional": 0, "total": 0}, "quota_in_mbps": {"granted": 0, "additional": 0, "total": 200}}]}]}}}
+    Service not available:
+      responses:
+        "503":
+          application/json: {"errors": [{"code": "QUOTA_ERROR", "status": "service_unavailable", "title": "Could not get your quota", "detail": "Please try again in a few moments", "meta": {}}]}
+  get-project-users-data:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_Gr47qlMADAg0m"
+        query:
+          extra_fields[user_data]: "decoded_content"
+      responses:
+        "200":
+          application/json: {"data": [{}]}
+    Not Found:
+      parameters:
+        path:
+          project_id: "123"
+        query:
+          extra_fields[user_data]: "decoded_content"
+  post-project-user-data:
+    Created:
+      parameters:
+        path:
+          project_id: "proj_VE1Wd3GadXnZJ"
+      requestBody:
+        application/json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
+      responses:
+        "201":
+          application/json: {"data": {"id": "ud_z8Nkvdy1deLpx", "type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "created_at": "2025-01-24T18:29:00+00:00", "updated_at": "2025-01-24T18:29:00+00:00"}}}
+    Bad Request:
+      parameters:
+        path:
+          project_id: "proj_aNmodj0oDbE8W"
+      requestBody:
+        application/json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "User Data base64 encoded content"}}}
+    Not Found:
+      parameters:
+        path:
+          project_id: "123"
+      requestBody:
+        application/json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "#cloud-config\\nruncmd:\\n - [ touch,  /home/ubuntu/test ]"}}}
+    when content is not present:
+      parameters:
+        path:
+          project_id: "proj_A05EdQW5DvKYQ"
+      requestBody:
+        application/json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "<value>"}}}
+    when description is not present:
+      parameters:
+        path:
+          project_id: "proj_z2A3DV4wdnawP"
+      requestBody:
+        application/json: {"data": {"type": "user_data", "attributes": {"description": "independence across same dilate provided next about yearly uh-huh editor", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
+    when content is not base64 encoded:
+      parameters:
+        path:
+          project_id: "proj_lkg1De6ROvZE5"
+      requestBody:
+        application/json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "I am not base64 encoded"}}}
+  get-project-user-data:
+    Success:
+      parameters:
+        path:
+          project_id: "proj_kjQwdEa7dYNVP"
+          user_data_id: "ud_Ee8pKq05DWAob"
+        query:
+          extra_fields[user_data]: "decoded_content"
+      responses:
+        "200":
+          application/json: {"data": {"id": "ud_Ee8pKq05DWAob", "type": "user_data", "attributes": {"description": "Breaded fried chicken with waffles. Served with maple syrup.", "content": "VGhyZWUgZWdnIG9tZWxldCB3aXRoIFJvcXVlZm9ydCBjaGVlc2UsIGNoaXZlcywgYW5kIGhhbS4gV2l0aCBhIHNpZGUgb2Ygcm9hc3RlZCBwb3RhdG9lcywgYW5kIHlvdXIgY2hvaWNlIG9mIHRvYXN0IG9yIGNyb2lzc2FudC4=", "created_at": "2025-01-24T18:29:00+00:00", "updated_at": "2025-01-24T18:29:00+00:00"}}}
+    Not Found:
+      parameters:
+        path:
+          project_id: "123"
+          user_data_id: "123"
+        query:
+          extra_fields[user_data]: "decoded_content"
+  put-project-user-data:
+    when only content is present:
+      parameters:
+        path:
+          project_id: "proj_vYAZqG44DMQ94"
+          user_data_id: "ud_GlxWpD6KOm6rk"
+      requestBody:
+        application/json: {"data": {"id": "ud_GlxWpD6KOm6rk", "type": "user_data", "attributes": {"content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
+      responses:
+        "200":
+          application/json: {"data": {"id": "ud_GlxWpD6KOm6rk", "type": "user_data", "attributes": {"description": "28-day aged 300g USDA Certified Prime Ribeye, rosemary-thyme garlic butter, with choice of two sides.", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "created_at": "2025-01-24T18:29:00+00:00", "updated_at": "2025-01-24T18:29:00+00:00"}}}
+    when only description is present:
+      parameters:
+        path:
+          project_id: "proj_0MK4O41wda95w"
+          user_data_id: "ud_2695BdKrOevVo"
+      requestBody:
+        application/json: {"data": {"id": "ud_2695BdKrOevVo", "type": "user_data", "attributes": {"description": "New Name"}}}
+      responses:
+        "200":
+          application/json: {"data": {"id": "ud_2695BdKrOevVo", "type": "user_data", "attributes": {"description": "New Name", "content": "VGhyZWUgZWdnIG9tZWxldCB3aXRoIFJvcXVlZm9ydCBjaGVlc2UsIGNoaXZlcywgYW5kIGhhbS4gV2l0aCBhIHNpZGUgb2Ygcm9hc3RlZCBwb3RhdG9lcywgYW5kIHlvdXIgY2hvaWNlIG9mIHRvYXN0IG9yIGNyb2lzc2FudC4=", "created_at": "2025-01-24T18:29:00+00:00", "updated_at": "2025-01-24T18:29:00+00:00"}}}
+    when both content and description are present:
+      parameters:
+        path:
+          project_id: "proj_1ZJrdxvyDg4LV"
+          user_data_id: "ud_byQrJdNJd30gv"
+      requestBody:
+        application/json: {"data": {"id": "ud_byQrJdNJd30gv", "type": "user_data", "attributes": {"description": "New Name", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
+      responses:
+        "200":
+          application/json: {"data": {"id": "ud_byQrJdNJd30gv", "type": "user_data", "attributes": {"description": "New Name", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "created_at": "2025-01-24T18:29:00+00:00", "updated_at": "2025-01-24T18:29:00+00:00"}}}
+    Bad Request:
+      parameters:
+        path:
+          project_id: "proj_v9BVDap8qRm1W"
+          user_data_id: "ud_Qk0Ryqv1dW36X"
+      requestBody:
+        application/json: {"data": {"id": "ud_Qk0Ryqv1dW36X", "type": "user_data", "attributes": {"content": "New User Data content"}}}
+    Not Found:
+      parameters:
+        path:
+          project_id: "proj_LA73qkVodaJ2o"
+          user_data_id: "invalid"
+      requestBody:
+        application/json: {"data": {"id": "invalid", "type": "user_data", "attributes": {"content": "New User Content"}}}
+    when description is not present:
+      parameters:
+        path:
+          project_id: "proj_pbV0Dgbzq4AWz"
+          user_data_id: "ud_NGnzRD5ADM5yw"
+      requestBody:
+        application/json: {"data": {"id": "ud_NGnzRD5ADM5yw", "type": "user_data", "attributes": {"description": "freely chow why kindly overplay equal ugh"}}}
+    when content is not present:
+      parameters:
+        path:
+          project_id: "proj_LYV8DZK3O5QoE"
+          user_data_id: "ud_aKXgRdR3qv9k5"
+      requestBody:
+        application/json: {"data": {"id": "ud_aKXgRdR3qv9k5", "type": "user_data", "attributes": {"content": "<value>"}}}
+  delete-project-user-data:
+    Not Found:
+      parameters:
+        path:
+          project_id: "proj_QraYDPA3OpjwW"
+          user_data_id: "123"
+  get-user-profile:
+    Success:
+      responses:
+        "200":
+          application/json: {"data": {"id": "user_mRJv961RRkCrgvB4n58jcMk39nK", "attributes": {"first_name": "Christopher", "last_name": "Kuhlman", "email": "bob@beier.test", "role": {"id": "role_bLBxB3WypvsyzZ0v0L72Sznvj6X", "name": "collaborator", "created_at": "2024-09-17T00:00:00.000Z", "updated_at": "2025-06-12T00:00:00.000Z"}}}}
+  patch-user-profile:
+    Success:
+      parameters:
+        path:
+          id: "user_NbleJol13Qc8aV3BYR7Ri37MY15L"
+      requestBody:
+        application/json: {"data": {"id": "user_NbleJol13Qc8aV3BYR7Ri37MY15L", "type": "users", "attributes": {"role": "collaborator"}}}
+      responses:
+        "200":
+          application/json: {"data": {"id": "user_NbleJol13Qc8aV3BYR7Ri37MY15L", "attributes": {"first_name": "Milton", "last_name": "Littel", "email": "percy.yost@mertz.test", "role": "owner"}}}
+    Forbidden:
+      parameters:
+        path:
+          id: "user_X2ZmwNYNJlSykYAYzVQ0FV93EBE"
+      requestBody:
+        application/json: {"data": {"id": "user_X2ZmwNYNJlSykYAYzVQ0FV93EBE", "type": "users", "attributes": {"role": "collaborator"}}}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to update users", "meta": {}}]}
+    Unprocessable Entity:
+      parameters:
+        path:
+          id: "user_g1mbDwlBOLv5B"
+      requestBody:
+        application/json: {"data": {"id": "user_g1mbDwlBOLv5B", "type": "users", "attributes": {}}}
+  get-user-teams:
+    Success:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "team_wmzQWe969KtXAjokv236SbE7KQmN", "attributes": {"name": "544 Team", "slug": "544-team", "address": "Apt. 400 5221 Necole Locks, Miaburgh, NY 64979", "currency": "BRL", "created_at": "2024-12-31T00:00:00+00:00", "updated_at": "2024-10-09T00:00:00+00:00", "owner": {"id": "user_BnoAkbm6vzCPl0AgNLK0fzRNVvY", "first_name": "Julian", "last_name": "Kulas", "email": "alden.swift@roberts.example", "created_at": "2024-05-25T00:00:00.000Z", "updated_at": "2024-12-04T00:00:00.000Z", "role": {"id": "role_2Nk7emM73otKV2K9Gox4FG78QxK", "name": "collaborator", "created_at": "2025-01-01T00:00:00.000Z", "updated_at": "2025-02-10T00:00:00.000Z"}}, "billing": {"id": "bill_mw49QDB5qagKb", "customer_billing_id": "cus_9uw5e0lx5jqr1f"}}}], "meta": {}}
+  get-virtual-networks:
+    filtered by site:
+      parameters:
+        query:
+          filter[location]: "SAO"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "vlan_okJ61ln8", "type": "virtual_networks", "attributes": {"vid": 2040, "description": "Testing vlans", "region": {"city": "São Paulo", "country": "Mexico", "site": {"id": "loc_WVQJDMVBORbyE", "facility": "São Paulo", "name": "São Paulo", "slug": "SAO"}}, "assignments_count": 1}}], "meta": {}}
+    filtered by project:
+      parameters:
+        query:
+          filter[project]: "awesome-cotton-bag"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "vlan_okJ61ln8", "type": "virtual_networks", "attributes": {"vid": 2040, "description": "Testing vlans", "region": {"city": "São Paulo", "country": "Argentina", "site": {"id": "loc_0MoLqJggD57pY", "facility": "São Paulo", "name": "São Paulo", "slug": "SAO"}}, "assignments_count": 1}}], "meta": {}}
+    List virtual networks filtered by tag:
+      parameters:
+        query:
+          filter[tags]: "tag_9Mk835MMXPcEjlrgop7Js5XAZ20"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "vlan_mw49QDB5qagKb", "type": "virtual_networks", "attributes": {"vid": 2040, "description": "Voluptatum ut quas nisi.", "region": {"city": "Santiago", "country": "Chile", "site": {"id": "loc_KN4ydzxvDVob3", "facility": "Santiago", "name": "Santiago", "slug": "SAN"}}, "assignments_count": 1}}], "meta": {}}
+    Filtered by multiple tags:
+      parameters:
+        query:
+          filter[tags]: "tag_wMP0jyvKLNhRJo8nyNJgHYLNeRY,tag_jZA6W2Zy14f0vbVoxPWVSxLPmEZ"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "vlan_VLMmAD8EOwop2", "type": "virtual_networks", "attributes": {"vid": 2040, "description": "Suscipit rerum eum laudantium.", "region": {"city": "Tokyo 3", "country": "Japan", "site": {"id": "loc_WeGoqAWNOP7nz", "facility": "Tokyo 3", "name": "Tokyo 3", "slug": "TY10"}}, "assignments_count": 1}}], "meta": {}}
+    without filters:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "vlan_okJ61ln8", "type": "virtual_networks", "attributes": {"vid": 2040, "description": "Testing vlans", "region": {"city": "São Paulo", "country": "Australia", "site": {"id": "loc_1R3zq2JxqWxyn", "facility": "São Paulo", "name": "São Paulo", "slug": "SAO"}}, "assignments_count": 1}}], "meta": {}}
+  create-virtual-network:
+    when the user is allowed to create:
+      requestBody:
+        application/json: {"data": {"type": "virtual_network", "attributes": {"description": "São Paulo VLAN", "site": "MIA", "project": "awesome-copper-car"}}}
+    validation error:
+      requestBody:
+        application/json: {"data": {"type": "virtual_network", "attributes": {"description": "São Paulo VLAN", "project": "<value>"}}}
+      responses:
+        "422":
+          application/json: {"errors": [{"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "is missing"}, {"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "is missing"}]}
+    when the project has reached max_vlans:
+      requestBody:
+        application/json: {"data": {"type": "virtual_network", "attributes": {"description": "São Paulo VLAN", "site": "MIA", "project": "lightweight-marble-lamp"}}}
+      responses:
+        "422":
+          application/json: {"errors": [{"code": "VLAN_LIMIT_REACHED", "status": "unprocessable_entity", "title": "Vlan creation limit reached", "detail": "You can only create 5 virtual networks. Contact support if you want more.", "meta": {}}]}
+  update-virtual-network:
+    when the user is allowed to update virtual networks:
+      parameters:
+        path:
+          vlan_id: "vlan_pRMLydp0dQKr1"
+      requestBody:
+        application/json: {"id": "vlan_81EVOtR1N4J2Z", "data": {"type": "virtual_networks", "attributes": {"description": "Test virtual network update"}}}
+    Unpermited parameter:
+      parameters:
+        path:
+          vlan_id: "vlan_zGr47qlMDAg0m"
+      requestBody:
+        application/json: {"id": "vlan_81EVOtR1N4J2Z", "data": {"type": "virtual_networks", "attributes": {"description": "Test virtual network update"}}}
+    Success:
+      parameters:
+        path:
+          vlan_id: "vlan_6VE1Wd37dXnZJ"
+      requestBody:
+        application/json: {"id": "vlan_81EVOtR1N4J2Z", "data": {"type": "virtual_networks", "attributes": {"tags": ["tag_e2JeLWLW6giNK8kn6jQPhyzLEzE", "tag_e9PK9eJ0QxCNbVkG0QEZUMb0pJ5"], "description": "Test virtual network update"}}}
+    Tag not updated:
+      parameters:
+        path:
+          vlan_id: "vlan_xkjQwdENqYNVP"
+      requestBody:
+        application/json: {"id": "vlan_81EVOtR1N4J2Z", "data": {"type": "virtual_networks", "attributes": {"tags": ["invalid-tag"], "description": "Test virtual network update"}}}
+  destroy-virtual-network:
+    Not Acceptable:
+      parameters:
+        path:
+          vlan_id: "invalid-id"
+      responses:
+        "406":
+          application/json: {"errors": [{"code": "VIRTUAL_NETWORK_DELETION_ERROR", "status": "not_acceptable", "title": "Virtual Network Deletion Restriction", "detail": "Please remove all assignments from this virtual network before deleting it", "meta": {}}]}
+  get-virtual-network:
+    List private networks:
+      parameters:
+        path:
+          vlan_id: "vlan_W6Q2D9ordKLpr"
+      responses:
+        "200":
+          application/json: {"data": {"id": "vlan_W6Q2D9ordKLpr", "type": "virtual_networks", "attributes": {"vid": 2040, "description": "Testing vlans", "region": {"city": "São Paulo", "country": "Germany", "site": {"id": "loc_VE1Wd3VXOXnZJ", "facility": "São Paulo", "name": "São Paulo", "slug": "SAO"}}, "assignments_count": 1}}}
+  get-virtual-networks-assignments:
+    when filtering by server_id:
+      parameters:
+        query:
+          filter[server]: "206"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "vnasg_5AEmq7YMOBkWX", "attributes": {"virtual_network_id": "vlan_g1mbDwGZDLv5B", "vid": 2, "description": "Lakin Inc", "status": "connecting"}}], "meta": {}}
+    when filtering by vid:
+      parameters:
+        query:
+          filter[vid]: "8"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "vnasg_aNmodj9yObE8W", "attributes": {"virtual_network_id": "vlan_kjQwdEPXOYNVP", "vid": 8, "description": "Marquardt and Sons", "status": "connecting"}}], "meta": {}}
+    when no filters are applied:
+      responses:
+        "200":
+          application/json: {"data": [{"id": "vnasg_0L6WO181DPlXy", "attributes": {"virtual_network_id": "vlan_Z8rodmpGO1jLB", "vid": 5, "description": "Wolff Inc", "status": "connected"}}, {"id": "vnasg_LMmAD834qwop2", "attributes": {"virtual_network_id": "vlan_3YjJOLBNqvZ87", "vid": 0, "description": "Robel LLC", "status": "connecting"}}], "meta": {}}
+  assign-server-virtual-network:
+    Created:
+      requestBody:
+        application/json: {"data": {"type": "virtual_network_assignment", "attributes": {"server_id": "sv_059EqYVjDQj8p", "virtual_network_id": "vlan_g1mbDwG0DLv5B"}}}
+    Forbidden:
+      requestBody:
+        application/json: {"data": {"type": "virtual_network_assignment", "attributes": {"server_id": "sv_VE1Wd3VQOXnZJ", "virtual_network_id": "vlan_5AEmq7YeOBkWX"}}}
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+    validation error:
+      requestBody:
+        application/json: {"data": {"type": "virtual_network_assignment", "attributes": {}}}
+  delete-virtual-networks-assignments:
+    Forbidden:
+      parameters:
+        path:
+          assignment_id: "vnasg_695BdKagDevVo"
+      responses:
+        "403":
+          application/json: {"errors": [{"code": "USER_AUTHORIZATION_ERROR", "status": "forbidden", "title": "User Authorization Error", "detail": "You are not authorized to perform this action.", "meta": {}}]}
+    Locked:
+      parameters:
+        path:
+          assignment_id: "vnasg_WVQJDMgvdRbyE"
+  get-vpn-sessions:
+    when there is a site filter:
+      parameters:
+        query:
+          filter[location]: "SAO"
+      responses:
+        "200":
+          application/json: {"data": [{"id": "vpn_zGr47qlMDAg0m", "type": "vpn_sessions", "attributes": {"user_name": "Faustino", "port": "8443", "host": "fw02.maxi.host", "region": {"city": "São Paulo", "country": "Chile", "site": {"id": "loc_0MK4O4m2da95w", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "expires_at": "2025-01-24T18:30:03+00:00", "created_at": "2025-01-24T18:29:03+00:00", "updated_at": "2025-01-24T18:29:03+00:00"}}], "meta": {}}
+    when the site filter is invalid:
+      parameters:
+        query:
+          filter[location]: "CHI"
+      responses:
+        "422":
+          application/json: {"errors": [{"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "Invalid value provided: 'foobar'."}]}
+  post-vpn-session:
+    Created:
+      requestBody:
+        application/json: {"data": {"attributes": {"site": "SAO", "server_id": "sv_v9BVDa45qRm1W"}}}
+      responses:
+        "201":
+          application/json: {"data": {"id": "vpn_xkjQwdENqYNVP", "type": "vpn_sessions", "attributes": {"user_name": "Valda", "password": "hKnyg0zmq9", "port": "8443", "host": "fw02.maxi.host", "region": {"city": "São Paulo", "country": "Chile", "site": {"id": "loc_v9BVDa45qRm1W", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "expires_at": "2025-01-24T18:30:03+00:00", "created_at": "2025-01-24T18:29:03+00:00", "updated_at": "2025-01-24T18:29:03+00:00"}}}
+    Unprocessable Entity:
+      requestBody:
+        application/json: {"data": {"attributes": {"site": "CHI", "server_id": "sv_LA73qkGWqaJ2o"}}}
+      responses:
+        "422":
+          application/json: {"errors": [{"code": "VALIDATION_ERROR", "status": "422", "title": "Validation Error", "detail": "must be one of: SAO"}]}
+  put-vpn-session:
+    VPN Session Password Reset:
+      parameters:
+        path:
+          vpn_session_id: "vpn_6VE1Wd37dXnZJ"
+      responses:
+        "200":
+          application/json: {"data": {"id": "vpn_6VE1Wd37dXnZJ", "type": "vpn_sessions", "attributes": {"user_name": "Thad", "password": "TRY7xP569", "port": "8443", "host": "fw02.maxi.host", "region": {"city": "São Paulo", "country": "Mexico", "site": {"id": "loc_pbV0DgQGd4AWz", "name": "São Paulo", "slug": "SAO", "facility": "São Paulo"}}, "expires_at": "2025-01-24T18:30:04+00:00", "created_at": "2025-01-24T18:29:04+00:00", "updated_at": "2025-01-24T18:29:04+00:00"}}}
+    Not Found:
+      parameters:
+        path:
+          vpn_session_id: "invalid"
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+  delete-vpn-session:
+    Not Found:
+      parameters:
+        path:
+          vpn_session_id: "invalid"
+      responses:
+        "404":
+          application/json: {"errors": [{"code": "not_found", "status": "404", "title": "Error", "detail": "Specified Record Not Found", "meta": {}}]}
+examplesVersion: 1.0.0
+generatedTests: {}

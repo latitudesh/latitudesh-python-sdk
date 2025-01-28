@@ -1,0 +1,10 @@
+# PatchUserProfileData
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `id`                                                                                   | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `type`                                                                                 | [models.PatchUserProfileType](../models/patchuserprofiletype.md)                       | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `attributes`                                                                           | [Optional[models.PatchUserProfileAttributes]](../models/patchuserprofileattributes.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |

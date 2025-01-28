@@ -1,0 +1,18 @@
+# Products
+
+
+## Fields
+
+| Field                                                                | Type                                                                 | Required                                                             | Description                                                          |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `id`                                                                 | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `resource`                                                           | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `name`                                                               | *Optional[str]*                                                      | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `start`                                                              | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `end`                                                                | [date](https://docs.python.org/3/library/datetime.html#date-objects) | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `unit`                                                               | [Optional[models.Unit]](../models/unit.md)                           | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `unit_price`                                                         | *Optional[float]*                                                    | :heavy_minus_sign:                                                   | The unit price of the product in cents                               |
+| `usage_type`                                                         | [Optional[models.UsageType]](../models/usagetype.md)                 | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `quantity`                                                           | *Optional[float]*                                                    | :heavy_minus_sign:                                                   | N/A                                                                  |
+| `price`                                                              | *Optional[float]*                                                    | :heavy_minus_sign:                                                   | The total usage price of the product in cents                        |
+| `metadata`                                                           | [Optional[models.Metadata]](../models/metadata.md)                   | :heavy_minus_sign:                                                   | N/A                                                                  |

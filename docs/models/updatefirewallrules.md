@@ -1,0 +1,11 @@
+# UpdateFirewallRules
+
+
+## Fields
+
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `from_`                                                                        | *Optional[str]*                                                                | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `to`                                                                           | *Optional[str]*                                                                | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `protocol`                                                                     | [Optional[models.UpdateFirewallProtocol]](../models/updatefirewallprotocol.md) | :heavy_minus_sign:                                                             | N/A                                                                            |
+| `port`                                                                         | *Optional[int]*                                                                | :heavy_minus_sign:                                                             | N/A                                                                            |

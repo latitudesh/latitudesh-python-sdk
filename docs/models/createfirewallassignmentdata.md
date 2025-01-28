@@ -1,0 +1,9 @@
+# CreateFirewallAssignmentData
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                 | [models.CreateFirewallAssignmentType](../models/createfirewallassignmenttype.md)                       | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `attributes`                                                                                           | [Optional[models.CreateFirewallAssignmentAttributes]](../models/createfirewallassignmentattributes.md) | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |

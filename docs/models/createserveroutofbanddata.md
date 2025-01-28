@@ -1,0 +1,9 @@
+# CreateServerOutOfBandData
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `type`                                                                                           | [models.CreateServerOutOfBandType](../models/createserveroutofbandtype.md)                       | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `attributes`                                                                                     | [Optional[models.CreateServerOutOfBandAttributes]](../models/createserveroutofbandattributes.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |

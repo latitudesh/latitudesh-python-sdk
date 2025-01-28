@@ -1,0 +1,18 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    Latitude.sh API:
+        inputs:
+            - location: ../API/swagger/v3/swagger.json
+        registry:
+            location: registry.speakeasyapi.dev/latitude/latitude/latitude-sh-api
+targets:
+    latitudesh:
+        target: python
+        source: Latitude.sh API
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/latitude/latitude/latitude-sh-api-python-code-samples
+            labelOverride:
+                fixedValue: Python (SDK)
+            blocking: false

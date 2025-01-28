@@ -1,0 +1,9 @@
+# PatchStorageFilesystemsRequest
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `filesystem_id`                                                                                        | *str*                                                                                                  | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `request_body`                                                                                         | [Optional[models.PatchStorageFilesystemsRequestBody]](../models/patchstoragefilesystemsrequestbody.md) | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |

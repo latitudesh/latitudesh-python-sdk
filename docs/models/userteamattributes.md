@@ -1,0 +1,16 @@
+# UserTeamAttributes
+
+
+## Fields
+
+| Field                                                            | Type                                                             | Required                                                         | Description                                                      |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `name`                                                           | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `slug`                                                           | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `description`                                                    | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `address`                                                        | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `currency`                                                       | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `created_at`                                                     | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `updated_at`                                                     | *Optional[str]*                                                  | :heavy_minus_sign:                                               | N/A                                                              |
+| `owner`                                                          | [Optional[models.UserInclude]](../models/userinclude.md)         | :heavy_minus_sign:                                               | N/A                                                              |
+| `billing`                                                        | [Optional[models.UserTeamBilling]](../models/userteambilling.md) | :heavy_minus_sign:                                               | N/A                                                              |

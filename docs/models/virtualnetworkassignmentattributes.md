@@ -1,0 +1,12 @@
+# VirtualNetworkAssignmentAttributes
+
+
+## Fields
+
+| Field                | Type                 | Required             | Description          |
+| -------------------- | -------------------- | -------------------- | -------------------- |
+| `virtual_network_id` | *Optional[str]*      | :heavy_minus_sign:   | N/A                  |
+| `vid`                | *Optional[int]*      | :heavy_minus_sign:   | N/A                  |
+| `server_id`          | *Optional[str]*      | :heavy_minus_sign:   | N/A                  |
+| `description`        | *Optional[str]*      | :heavy_minus_sign:   | N/A                  |
+| `status`             | *Optional[str]*      | :heavy_minus_sign:   | N/A                  |

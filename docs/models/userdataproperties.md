@@ -1,0 +1,10 @@
+# UserDataProperties
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `type`                                                                                     | [models.UserDataPropertiesType](../models/userdatapropertiestype.md)                       | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `id`                                                                                       | *Optional[str]*                                                                            | :heavy_minus_sign:                                                                         | N/A                                                                                        |
+| `attributes`                                                                               | [Optional[models.UserDataPropertiesAttributes]](../models/userdatapropertiesattributes.md) | :heavy_minus_sign:                                                                         | N/A                                                                                        |

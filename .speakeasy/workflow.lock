@@ -1,0 +1,36 @@
+speakeasyVersion: 1.472.1
+sources:
+    Latitude.sh API:
+        sourceNamespace: latitude-sh-api
+        sourceRevisionDigest: sha256:2e87efe8509508c21472d96d95fc4496f59a4dd1c83b6596a09a8cd951029ee8
+        sourceBlobDigest: sha256:a8a8999cc0a72920394f5d83872c90df8e5636c65eb42bd650dc300f4e0c5578
+        tags:
+            - latest
+            - v3
+targets:
+    latitudesh:
+        source: Latitude.sh API
+        sourceNamespace: latitude-sh-api
+        sourceRevisionDigest: sha256:2e87efe8509508c21472d96d95fc4496f59a4dd1c83b6596a09a8cd951029ee8
+        sourceBlobDigest: sha256:a8a8999cc0a72920394f5d83872c90df8e5636c65eb42bd650dc300f4e0c5578
+        codeSamplesNamespace: latitude-sh-api-python-code-samples
+        codeSamplesRevisionDigest: sha256:8b20819819a7bcdfceaf2cbd8c3d94ee25bbd4eaddf44c183c07e27b5f52ca86
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        Latitude.sh API:
+            inputs:
+                - location: ../API/swagger/v3/swagger.json
+            registry:
+                location: registry.speakeasyapi.dev/latitude/latitude/latitude-sh-api
+    targets:
+        latitudesh:
+            target: python
+            source: Latitude.sh API
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/latitude/latitude/latitude-sh-api-python-code-samples
+                labelOverride:
+                    fixedValue: Python (SDK)
+                blocking: false

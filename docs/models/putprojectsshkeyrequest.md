@@ -1,0 +1,10 @@
+# PutProjectSSHKeyRequest
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `project_id`                                                                             | *str*                                                                                    | :heavy_check_mark:                                                                       | Project ID or Slug                                                                       |
+| `ssh_key_id`                                                                             | *str*                                                                                    | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `request_body`                                                                           | [Optional[models.PutProjectSSHKeyRequestBody]](../models/putprojectsshkeyrequestbody.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |

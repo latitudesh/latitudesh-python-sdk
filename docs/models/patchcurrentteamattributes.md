@@ -1,0 +1,11 @@
+# PatchCurrentTeamAttributes
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `address`                                                                          | *Optional[str]*                                                                    | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `name`                                                                             | *Optional[str]*                                                                    | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `currency`                                                                         | [Optional[models.PatchCurrentTeamCurrency]](../models/patchcurrentteamcurrency.md) | :heavy_minus_sign:                                                                 | N/A                                                                                |
+| `referred_code`                                                                    | *Optional[str]*                                                                    | :heavy_minus_sign:                                                                 | N/A                                                                                |

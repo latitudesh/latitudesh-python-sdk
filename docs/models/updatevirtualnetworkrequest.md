@@ -1,0 +1,9 @@
+# UpdateVirtualNetworkRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `vlan_id`                                                                                        | *str*                                                                                            | :heavy_check_mark:                                                                               | The Virtual Network ID                                                                           |
+| `request_body`                                                                                   | [Optional[models.UpdateVirtualNetworkRequestBody]](../models/updatevirtualnetworkrequestbody.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |

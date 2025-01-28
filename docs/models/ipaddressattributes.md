@@ -1,0 +1,19 @@
+# IPAddressAttributes
+
+
+## Fields
+
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `address`                                                          | *Optional[str]*                                                    | :heavy_minus_sign:                                                 | N/A                                                                |
+| `cidr`                                                             | *Optional[str]*                                                    | :heavy_minus_sign:                                                 | N/A                                                                |
+| `family`                                                           | [Optional[models.Family]](../models/family.md)                     | :heavy_minus_sign:                                                 | N/A                                                                |
+| `gateway`                                                          | *Optional[str]*                                                    | :heavy_minus_sign:                                                 | N/A                                                                |
+| `netmask`                                                          | *Optional[str]*                                                    | :heavy_minus_sign:                                                 | N/A                                                                |
+| `type`                                                             | [Optional[models.IPAddressType]](../models/ipaddresstype.md)       | :heavy_minus_sign:                                                 | N/A                                                                |
+| `public`                                                           | *Optional[bool]*                                                   | :heavy_minus_sign:                                                 | N/A                                                                |
+| `management`                                                       | *Optional[bool]*                                                   | :heavy_minus_sign:                                                 | N/A                                                                |
+| `project`                                                          | [Optional[models.IPAddressProject]](../models/ipaddressproject.md) | :heavy_minus_sign:                                                 | N/A                                                                |
+| `region`                                                           | [Optional[models.IPAddressRegion]](../models/ipaddressregion.md)   | :heavy_minus_sign:                                                 | N/A                                                                |
+| `available`                                                        | *Optional[bool]*                                                   | :heavy_minus_sign:                                                 | N/A                                                                |
+| `assignment`                                                       | [Optional[models.Assignment]](../models/assignment.md)             | :heavy_minus_sign:                                                 | N/A                                                                |

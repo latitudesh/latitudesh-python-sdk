@@ -1,0 +1,9 @@
+# UpdateServerDeployConfigRequest
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `server_id`                                                                                              | *str*                                                                                                    | :heavy_check_mark:                                                                                       | The Server ID                                                                                            |
+| `request_body`                                                                                           | [Optional[models.UpdateServerDeployConfigRequestBody]](../models/updateserverdeployconfigrequestbody.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |

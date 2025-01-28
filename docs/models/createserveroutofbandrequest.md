@@ -1,0 +1,9 @@
+# CreateServerOutOfBandRequest
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `server_id`                                                                                        | *str*                                                                                              | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `request_body`                                                                                     | [Optional[models.CreateServerOutOfBandRequestBody]](../models/createserveroutofbandrequestbody.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
