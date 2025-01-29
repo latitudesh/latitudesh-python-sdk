@@ -3,7 +3,7 @@ speakeasyVersion: latest
 sources:
     Latitude.sh API:
         inputs:
-            - location: ../API/swagger/v3/swagger.json
+            - location: https://api.latitude.sh/api-docs/v3/swagger.json
         registry:
             location: registry.speakeasyapi.dev/latitude/latitude/latitude-sh-api
 targets:
