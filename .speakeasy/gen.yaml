@@ -16,11 +16,7 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 python:
-<<<<<<< Updated upstream
-  version: 0.0.1
-=======
   version: 0.0.3
->>>>>>> Stashed changes
   additionalDependencies:
     dev: {}
     main: {}
