@@ -26,7 +26,8 @@ class UpdateFirewallRulesTypedDict(TypedDict):
     from_: NotRequired[str]
     to: NotRequired[str]
     protocol: NotRequired[UpdateFirewallProtocol]
-    port: NotRequired[int]
+    port: NotRequired[str]
+    r"""Port number or range (e.g., \"80\", \"80-443\")"""
 
 
 class UpdateFirewallRules(BaseModel):
@@ -36,7 +37,8 @@ class UpdateFirewallRules(BaseModel):
 
     protocol: Optional[UpdateFirewallProtocol] = None
 
-    port: Optional[int] = None
+    port: Optional[str] = None
+    r"""Port number or range (e.g., \"80\", \"80-443\")"""
 
 
 class UpdateFirewallAttributesTypedDict(TypedDict):
