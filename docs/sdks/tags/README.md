@@ -70,7 +70,6 @@ with Latitudesh(
             "attributes": {
                 "name": "Tag Name",
                 "description": "Tag Description",
-                "color": "#bebebe",
             },
         },
     })
@@ -118,7 +117,6 @@ with Latitudesh(
         "type": latitudesh_python_sdk.UpdateTagType.TAGS,
         "attributes": {
             "name": "Tag Name",
-            "color": "#ffffff",
         },
     })
 

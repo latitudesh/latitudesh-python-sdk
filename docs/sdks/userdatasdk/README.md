@@ -26,7 +26,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.get_project_users_data(project_id="proj_Gr47qlMADAg0m", extra_fields_user_data="decoded_content")
+    res = latitudesh.user_data.get_project_users_data(project_id="proj_Gr47qlMADAg0m")
 
     # Handle response
     print(res)
@@ -113,7 +113,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.get_project_user_data(project_id="proj_kjQwdEa7dYNVP", user_data_id="ud_Ee8pKq05DWAob", extra_fields_user_data="decoded_content")
+    res = latitudesh.user_data.get_project_user_data(project_id="proj_kjQwdEa7dYNVP", user_data_id="ud_Ee8pKq05DWAob")
 
     # Handle response
     print(res)

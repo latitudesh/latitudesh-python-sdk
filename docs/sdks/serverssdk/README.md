@@ -182,7 +182,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.update_server(server_id="sv_Gr47qleMDAg0m", id="sv_81EVOtR1N4J2Z")
+    latitudesh.servers.update_server(server_id="sv_Gr47qleMDAg0m")
 
     # Use the SDK ...
 

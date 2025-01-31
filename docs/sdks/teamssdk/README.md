@@ -116,7 +116,6 @@ with Latitudesh(
         "attributes": {
             "address": "Address",
             "name": "Name",
-            "currency": latitudesh_python_sdk.PatchCurrentTeamCurrency.USD,
         },
     })
 

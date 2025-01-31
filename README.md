@@ -56,7 +56,7 @@ The SDK can be installed with either *pip* or *poetry* package managers.
 *PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
 
 ```bash
-pip install git+<UNSET>.git
+pip install git+https://github.com/latitudesh/latitudesh-python-sdk.git
 ```
 
 ### Poetry
@@ -64,7 +64,7 @@ pip install git+<UNSET>.git
 *Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
 
 ```bash
-poetry add git+<UNSET>.git
+poetry add git+https://github.com/latitudesh/latitudesh-python-sdk.git
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -390,9 +390,7 @@ with Latitudesh(
         res = latitudesh.api_keys.post_api_key(request={
             "data": {
                 "type": latitudesh_python_sdk.CreateAPIKeyType.API_KEYS,
-                "attributes": {
-                    "name": "App Token",
-                },
+                "attributes": {},
             },
         })
 

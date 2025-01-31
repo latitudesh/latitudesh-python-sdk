@@ -110,7 +110,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.plans.get_bandwidth_plans(api_version="2023-06-01")
+    res = latitudesh.plans.get_bandwidth_plans()
 
     # Handle response
     print(res)
