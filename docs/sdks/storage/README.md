@@ -31,7 +31,6 @@ with Latitudesh(
             "attributes": {
                 "project": "proj_WVQJDMAvDRbyE",
                 "name": "my-data",
-                "size_in_gb": 1500,
             },
         },
     })
@@ -142,9 +141,7 @@ with Latitudesh(
     res = latitudesh.storage.patch_storage_filesystems(filesystem_id="fs_7vYAZqGBdMQ94", data={
         "id": "fs_7vYAZqGBdMQ94",
         "type": latitudesh_python_sdk.PatchStorageFilesystemsType.FILESYSTEMS,
-        "attributes": {
-            "size_in_gb": 1501,
-        },
+        "attributes": {},
     })
 
     # Handle response

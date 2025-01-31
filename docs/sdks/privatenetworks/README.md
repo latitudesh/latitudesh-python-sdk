@@ -123,10 +123,8 @@ with Latitudesh(
 
     res = latitudesh.private_networks.update_virtual_network(vlan_id="vlan_pRMLydp0dQKr1", data={
         "type": latitudesh_python_sdk.UpdateVirtualNetworkType.VIRTUAL_NETWORKS,
-        "attributes": {
-            "description": "Test virtual network update",
-        },
-    }, id="vlan_81EVOtR1N4J2Z")
+        "attributes": {},
+    })
 
     # Handle response
     print(res)

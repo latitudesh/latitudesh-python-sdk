@@ -122,11 +122,7 @@ with Latitudesh(
 
     res = latitudesh.projects.update_project(project_id="proj_v9BVDal3qRm1W", data={
         "type": latitudesh_python_sdk.UpdateProjectType.PROJECTS,
-        "id": "proj_v9BVDal3qRm1W",
         "attributes": {
-            "name": "A brand new name for the virtual network",
-            "description": "A brand new description for the virtual network",
-            "bandwidth_alert": False,
             "tags": [
                 "tag_x4mmPZJ4N6UB7XjXP6mEuBz4r9Y",
                 "tag_NGo0yaojbAt8ljQ1MooEIrrBLjg",

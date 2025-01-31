@@ -3,10 +3,10 @@
 import importlib.metadata
 
 __title__: str = "latitudesh-python-sdk"
-__version__: str = "0.0.3"
+__version__: str = "0.0.4"
 __openapi_doc_version__: str = "v3"
-__gen_version__: str = "2.497.8"
-__user_agent__: str = "speakeasy-sdk/python 0.0.3 2.497.8 v3 latitudesh-python-sdk"
+__gen_version__: str = "2.500.4"
+__user_agent__: str = "speakeasy-sdk/python 0.0.4 2.500.4 v3 latitudesh-python-sdk"
 
 try:
     if __package__ is not None:

@@ -67,9 +67,7 @@ with Latitudesh(
     res = latitudesh.api_keys.post_api_key(request={
         "data": {
             "type": latitudesh_python_sdk.CreateAPIKeyType.API_KEYS,
-            "attributes": {
-                "name": "App Token",
-            },
+            "attributes": {},
         },
     })
 
@@ -115,10 +113,7 @@ with Latitudesh(
     res = latitudesh.api_keys.update_api_key(api_key_id="tok_7vYAZqGBdMQ94", data={
         "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
         "id": "tok_7vYAZqGBdMQ94",
-        "attributes": {
-            "name": "App Token",
-            "api_version": "2023-06-01",
-        },
+        "attributes": {},
     })
 
     # Handle response

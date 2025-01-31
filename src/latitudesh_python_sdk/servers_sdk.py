@@ -348,12 +348,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.Server)
         if utils.match_response(http_res, ["400", "402", "422"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -447,12 +447,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.Server)
         if utils.match_response(http_res, ["400", "402", "422"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -749,15 +749,15 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
-            raise models.ServerError(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
+            raise models.ServerError(data=response_data)
         if utils.match_response(http_res, ["422", "423"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -866,15 +866,15 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return
         if utils.match_response(http_res, "400", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
-            raise models.ServerError(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
+            raise models.ServerError(data=response_data)
         if utils.match_response(http_res, ["422", "423"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -964,12 +964,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
         if utils.match_response(http_res, ["403", "406", "422"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, ["423", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1059,12 +1059,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
         if utils.match_response(http_res, ["403", "406", "422"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, ["423", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1349,15 +1349,17 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.DeployConfig)
         if utils.match_response(http_res, ["403", "406"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.DeployConfigErrorData)
-            raise models.DeployConfigError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.DeployConfigErrorData
+            )
+            raise models.DeployConfigError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -1466,15 +1468,17 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.DeployConfig)
         if utils.match_response(http_res, ["403", "406"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "422", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.DeployConfigErrorData)
-            raise models.DeployConfigError(data=data)
+            response_data = utils.unmarshal_json(
+                http_res.text, models.DeployConfigErrorData
+            )
+            raise models.DeployConfigError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -1935,12 +1939,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.OutOfBandConnection)
         if utils.match_response(http_res, ["403", "404"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, ["406", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -2041,12 +2045,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.OutOfBandConnection)
         if utils.match_response(http_res, ["403", "404"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, ["406", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -2133,12 +2137,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.OutOfBandConnection)
         if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -2225,12 +2229,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.OutOfBandConnection)
         if utils.match_response(http_res, "404", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -2337,12 +2341,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ServerAction)
         if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -2449,12 +2453,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ServerAction)
         if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -2547,12 +2551,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.IpmiSession)
         if utils.match_response(http_res, ["403", "404", "422"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -2645,12 +2649,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.IpmiSession)
         if utils.match_response(http_res, ["403", "404", "422"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -2739,12 +2743,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ServerRescue)
         if utils.match_response(http_res, ["403", "406"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -2833,12 +2837,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ServerRescue)
         if utils.match_response(http_res, ["403", "406"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -2927,12 +2931,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ServerRescue)
         if utils.match_response(http_res, ["403", "406"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -3021,12 +3025,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ServerRescue)
         if utils.match_response(http_res, ["403", "406"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -3115,12 +3119,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ServerScheduleDeletion)
         if utils.match_response(http_res, ["403", "406", "423"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -3209,12 +3213,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/json"):
             return utils.unmarshal_json(http_res.text, models.ServerScheduleDeletion)
         if utils.match_response(http_res, ["403", "406", "423"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -3303,12 +3307,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
         if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -3397,12 +3401,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
         if utils.match_response(http_res, "403", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -3503,15 +3507,15 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "*"):
             return
         if utils.match_response(http_res, ["403", "404", "422"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "423", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
-            raise models.ServerError(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
+            raise models.ServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -3612,15 +3616,15 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        data: Any = None
+        response_data: Any = None
         if utils.match_response(http_res, "201", "*"):
             return
         if utils.match_response(http_res, ["403", "404", "422"], "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "423", "application/json"):
-            data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
-            raise models.ServerError(data=data)
+            response_data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
+            raise models.ServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

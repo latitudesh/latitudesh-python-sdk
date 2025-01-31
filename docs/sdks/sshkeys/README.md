@@ -156,13 +156,11 @@ with Latitudesh(
 
     res = latitudesh.ssh_keys.put_project_ssh_key(project_id="proj_KXgRdRMKOv9k5", ssh_key_id="ssh_5AEmq71XOBkWX", data={
         "type": latitudesh_python_sdk.PutProjectSSHKeyType.SSH_KEYS,
-        "id": "ssh_5AEmq71XOBkWX",
         "attributes": {
             "tags": [
                 "tag_oe32gQbvrbszzPGaL7EEiJXvynQ",
                 "tag_5rgE2mnBYpFzG9eGN7E8C67b2eMe",
             ],
-            "name": "New SSH Key Name",
         },
     })
 
