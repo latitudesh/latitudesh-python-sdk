@@ -12,18 +12,18 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PostProjectUserDataType(str, Enum):
+class PostProjectUserDataUserDataType(str, Enum):
     USER_DATA = "user_data"
 
 
-class PostProjectUserDataAttributesTypedDict(TypedDict):
+class PostProjectUserDataUserDataAttributesTypedDict(TypedDict):
     description: str
     r"""description of the User Data"""
     content: str
     r"""base64 encoded content of the User Data"""
 
 
-class PostProjectUserDataAttributes(BaseModel):
+class PostProjectUserDataUserDataAttributes(BaseModel):
     description: str
     r"""description of the User Data"""
 
@@ -31,29 +31,29 @@ class PostProjectUserDataAttributes(BaseModel):
     r"""base64 encoded content of the User Data"""
 
 
-class PostProjectUserDataDataTypedDict(TypedDict):
-    type: PostProjectUserDataType
-    attributes: NotRequired[PostProjectUserDataAttributesTypedDict]
+class PostProjectUserDataUserDataDataTypedDict(TypedDict):
+    type: PostProjectUserDataUserDataType
+    attributes: NotRequired[PostProjectUserDataUserDataAttributesTypedDict]
 
 
-class PostProjectUserDataData(BaseModel):
-    type: PostProjectUserDataType
+class PostProjectUserDataUserDataData(BaseModel):
+    type: PostProjectUserDataUserDataType
 
-    attributes: Optional[PostProjectUserDataAttributes] = None
-
-
-class PostProjectUserDataRequestBodyTypedDict(TypedDict):
-    data: PostProjectUserDataDataTypedDict
+    attributes: Optional[PostProjectUserDataUserDataAttributes] = None
 
 
-class PostProjectUserDataRequestBody(BaseModel):
-    data: PostProjectUserDataData
+class PostProjectUserDataUserDataRequestBodyTypedDict(TypedDict):
+    data: PostProjectUserDataUserDataDataTypedDict
+
+
+class PostProjectUserDataUserDataRequestBody(BaseModel):
+    data: PostProjectUserDataUserDataData
 
 
 class PostProjectUserDataRequestTypedDict(TypedDict):
     project_id: str
     r"""Project ID or Slug"""
-    request_body: NotRequired[PostProjectUserDataRequestBodyTypedDict]
+    request_body: NotRequired[PostProjectUserDataUserDataRequestBodyTypedDict]
 
 
 class PostProjectUserDataRequest(BaseModel):
@@ -63,6 +63,6 @@ class PostProjectUserDataRequest(BaseModel):
     r"""Project ID or Slug"""
 
     request_body: Annotated[
-        Optional[PostProjectUserDataRequestBody],
+        Optional[PostProjectUserDataUserDataRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None

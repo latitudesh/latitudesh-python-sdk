@@ -12,11 +12,11 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class CreateServerReinstallType(str, Enum):
+class CreateServerReinstallServersType(str, Enum):
     REINSTALLS = "reinstalls"
 
 
-class CreateServerReinstallOperatingSystem(str, Enum):
+class CreateServerReinstallServersOperatingSystem(str, Enum):
     r"""The OS selected for the reinstall process"""
 
     IPXE = "ipxe"
@@ -46,34 +46,51 @@ class CreateServerReinstallOperatingSystem(str, Enum):
     ROCKYLINUX_8 = "rockylinux_8"
 
 
-class CreateServerReinstallRaid(str, Enum):
+class CreateServerReinstallServersPartitionsTypedDict(TypedDict):
+    size_in_gb: NotRequired[int]
+    path: NotRequired[str]
+    filesystem_type: NotRequired[str]
+
+
+class CreateServerReinstallServersPartitions(BaseModel):
+    size_in_gb: Optional[int] = None
+
+    path: Optional[str] = None
+
+    filesystem_type: Optional[str] = None
+
+
+class CreateServerReinstallServersRaid(str, Enum):
     r"""RAID mode for the server"""
 
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
 
 
-class CreateServerReinstallAttributesTypedDict(TypedDict):
-    operating_system: NotRequired[CreateServerReinstallOperatingSystem]
+class CreateServerReinstallServersAttributesTypedDict(TypedDict):
+    operating_system: NotRequired[CreateServerReinstallServersOperatingSystem]
     r"""The OS selected for the reinstall process"""
     hostname: NotRequired[str]
     r"""The server hostname to set upon reinstall"""
+    partitions: NotRequired[List[CreateServerReinstallServersPartitionsTypedDict]]
     ssh_keys: NotRequired[List[str]]
     r"""SSH Keys to set upon reinstall"""
     user_data: NotRequired[int]
     r"""User data to set upon reinstall"""
-    raid: NotRequired[CreateServerReinstallRaid]
+    raid: NotRequired[CreateServerReinstallServersRaid]
     r"""RAID mode for the server"""
     ipxe: NotRequired[str]
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected."""
 
 
-class CreateServerReinstallAttributes(BaseModel):
-    operating_system: Optional[CreateServerReinstallOperatingSystem] = None
+class CreateServerReinstallServersAttributes(BaseModel):
+    operating_system: Optional[CreateServerReinstallServersOperatingSystem] = None
     r"""The OS selected for the reinstall process"""
 
     hostname: Optional[str] = None
     r"""The server hostname to set upon reinstall"""
+
+    partitions: Optional[List[CreateServerReinstallServersPartitions]] = None
 
     ssh_keys: Optional[List[str]] = None
     r"""SSH Keys to set upon reinstall"""
@@ -81,35 +98,35 @@ class CreateServerReinstallAttributes(BaseModel):
     user_data: Optional[int] = None
     r"""User data to set upon reinstall"""
 
-    raid: Optional[CreateServerReinstallRaid] = None
+    raid: Optional[CreateServerReinstallServersRaid] = None
     r"""RAID mode for the server"""
 
     ipxe: Optional[str] = None
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected."""
 
 
-class CreateServerReinstallDataTypedDict(TypedDict):
-    type: CreateServerReinstallType
-    attributes: NotRequired[CreateServerReinstallAttributesTypedDict]
+class CreateServerReinstallServersDataTypedDict(TypedDict):
+    type: CreateServerReinstallServersType
+    attributes: NotRequired[CreateServerReinstallServersAttributesTypedDict]
 
 
-class CreateServerReinstallData(BaseModel):
-    type: CreateServerReinstallType
+class CreateServerReinstallServersData(BaseModel):
+    type: CreateServerReinstallServersType
 
-    attributes: Optional[CreateServerReinstallAttributes] = None
-
-
-class CreateServerReinstallRequestBodyTypedDict(TypedDict):
-    data: CreateServerReinstallDataTypedDict
+    attributes: Optional[CreateServerReinstallServersAttributes] = None
 
 
-class CreateServerReinstallRequestBody(BaseModel):
-    data: CreateServerReinstallData
+class CreateServerReinstallServersRequestBodyTypedDict(TypedDict):
+    data: CreateServerReinstallServersDataTypedDict
+
+
+class CreateServerReinstallServersRequestBody(BaseModel):
+    data: CreateServerReinstallServersData
 
 
 class CreateServerReinstallRequestTypedDict(TypedDict):
     server_id: str
-    request_body: NotRequired[CreateServerReinstallRequestBodyTypedDict]
+    request_body: NotRequired[CreateServerReinstallServersRequestBodyTypedDict]
 
 
 class CreateServerReinstallRequest(BaseModel):
@@ -118,6 +135,6 @@ class CreateServerReinstallRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[CreateServerReinstallRequestBody],
+        Optional[CreateServerReinstallServersRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None

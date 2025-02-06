@@ -22,9 +22,9 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.billing.get_billing_usage(filter_project="proj_RMLydp7XOQKr1", filter_products=[
-        "si_9553572a-a415-42d5-b9ff-7d1167c03dce",
-        "si_5e33ce0d-863a-4a2c-8789-d0bc9fe0105d",
+    res = latitudesh.billing.get_billing_usage(filter_project="proj_6059EqYkOQj8p", filter_products=[
+        "si_fhvti2pa",
+        "si_h3r2mheb",
     ], filter_plan="plan.name")
 
     # Handle response

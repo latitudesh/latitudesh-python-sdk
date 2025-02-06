@@ -25,7 +25,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.get_projects(filter_tags="tag_3neyM8YlxMuKkm2AgPVMcamM2yv")
+    res = latitudesh.projects.get_projects(filter_tags="tag_ezo5vGxZXVU3ozExYeXaCMJzvp0")
 
     # Handle response
     print(res)
@@ -72,12 +72,12 @@ with Latitudesh(
 
     res = latitudesh.projects.create_project(request={
         "data": {
-            "type": latitudesh_python_sdk.CreateProjectType.PROJECTS,
+            "type": latitudesh_python_sdk.CreateProjectProjectsType.PROJECTS,
             "attributes": {
-                "name": "Ward Inc",
-                "provisioning_type": latitudesh_python_sdk.ProvisioningType.ON_DEMAND,
-                "description": "Breaded fried chicken with waffles. Served with maple syrup.",
-                "environment": latitudesh_python_sdk.CreateProjectEnvironment.DEVELOPMENT,
+                "name": "Mosciski Group",
+                "provisioning_type": latitudesh_python_sdk.CreateProjectProvisioningType.ON_DEMAND,
+                "description": "Three egg whites with spinach, mushrooms, caramelized onions, tomatoes and low-fat feta cheese. With herbed quinoa, and your choice of rye or whole-grain toast.",
+                "environment": latitudesh_python_sdk.CreateProjectProjectsEnvironment.DEVELOPMENT,
             },
         },
     })
@@ -89,10 +89,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `request`                                                                   | [models.CreateProjectRequestBody](../../models/createprojectrequestbody.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
-| `retries`                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)            | :heavy_minus_sign:                                                          | Configuration to override the default retry behavior of the client.         |
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `request`                                                                                   | [models.CreateProjectProjectsRequestBody](../../models/createprojectprojectsrequestbody.md) | :heavy_check_mark:                                                                          | The request object to use for the request.                                                  |
+| `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
 
 ### Response
 
@@ -100,10 +100,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 400, 403, 422      | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 400, 403, 422            | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## update_project
 
@@ -120,12 +120,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.update_project(project_id="proj_v9BVDal3qRm1W", data={
-        "type": latitudesh_python_sdk.UpdateProjectType.PROJECTS,
+    res = latitudesh.projects.update_project(project_id="proj_Z8rodm2Yq1jLB", data={
+        "type": latitudesh_python_sdk.UpdateProjectProjectsType.PROJECTS,
         "attributes": {
             "tags": [
-                "tag_x4mmPZJ4N6UB7XjXP6mEuBz4r9Y",
-                "tag_NGo0yaojbAt8ljQ1MooEIrrBLjg",
+                "tag_zNzZ1bp9Nos8E1YzEzGGce8vkMp",
+                "tag_L8KGx7Rp46sLPgmGPeARFEMLyxw",
             ],
         },
     })
@@ -137,11 +137,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `project_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | The project ID or Slug                                              |
-| `data`                                                              | [models.UpdateProjectData](../../models/updateprojectdata.md)       | :heavy_check_mark:                                                  | N/A                                                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `project_id`                                                                  | *str*                                                                         | :heavy_check_mark:                                                            | The project ID or Slug                                                        |
+| `data`                                                                        | [models.UpdateProjectProjectsData](../../models/updateprojectprojectsdata.md) | :heavy_check_mark:                                                            | N/A                                                                           |
+| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |
 
 ### Response
 
@@ -149,10 +149,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 404, 422      | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## delete_project
 
@@ -183,7 +183,7 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 404, 422      | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |

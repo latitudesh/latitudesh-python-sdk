@@ -12,11 +12,11 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class UpdateTagType(str, Enum):
+class UpdateTagTagsType(str, Enum):
     TAGS = "tags"
 
 
-class UpdateTagAttributesTypedDict(TypedDict):
+class UpdateTagTagsAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""Name of the Tag"""
     description: NotRequired[str]
@@ -25,7 +25,7 @@ class UpdateTagAttributesTypedDict(TypedDict):
     r"""Color of the Tag"""
 
 
-class UpdateTagAttributes(BaseModel):
+class UpdateTagTagsAttributes(BaseModel):
     name: Optional[str] = None
     r"""Name of the Tag"""
 
@@ -36,31 +36,31 @@ class UpdateTagAttributes(BaseModel):
     r"""Color of the Tag"""
 
 
-class UpdateTagDataTypedDict(TypedDict):
+class UpdateTagTagsDataTypedDict(TypedDict):
     id: NotRequired[str]
-    type: NotRequired[UpdateTagType]
-    attributes: NotRequired[UpdateTagAttributesTypedDict]
+    type: NotRequired[UpdateTagTagsType]
+    attributes: NotRequired[UpdateTagTagsAttributesTypedDict]
 
 
-class UpdateTagData(BaseModel):
+class UpdateTagTagsData(BaseModel):
     id: Optional[str] = None
 
-    type: Optional[UpdateTagType] = None
+    type: Optional[UpdateTagTagsType] = None
 
-    attributes: Optional[UpdateTagAttributes] = None
-
-
-class UpdateTagRequestBodyTypedDict(TypedDict):
-    data: NotRequired[UpdateTagDataTypedDict]
+    attributes: Optional[UpdateTagTagsAttributes] = None
 
 
-class UpdateTagRequestBody(BaseModel):
-    data: Optional[UpdateTagData] = None
+class UpdateTagTagsRequestBodyTypedDict(TypedDict):
+    data: NotRequired[UpdateTagTagsDataTypedDict]
+
+
+class UpdateTagTagsRequestBody(BaseModel):
+    data: Optional[UpdateTagTagsData] = None
 
 
 class UpdateTagRequestTypedDict(TypedDict):
     tag_id: str
-    request_body: NotRequired[UpdateTagRequestBodyTypedDict]
+    request_body: NotRequired[UpdateTagTagsRequestBodyTypedDict]
 
 
 class UpdateTagRequest(BaseModel):
@@ -69,6 +69,6 @@ class UpdateTagRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[UpdateTagRequestBody],
+        Optional[UpdateTagTagsRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None

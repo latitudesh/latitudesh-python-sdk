@@ -1,0 +1,10 @@
+# UpdateProjectProjectsData
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `type`                                                                                           | [models.UpdateProjectProjectsType](../models/updateprojectprojectstype.md)                       | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `id`                                                                                             | *Optional[str]*                                                                                  | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `attributes`                                                                                     | [Optional[models.UpdateProjectProjectsAttributes]](../models/updateprojectprojectsattributes.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |

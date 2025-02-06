@@ -13,68 +13,68 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class UpdateFirewallType(str, Enum):
+class UpdateFirewallFirewallsType(str, Enum):
     FIREWALLS = "firewalls"
 
 
-class UpdateFirewallProtocol(str, Enum):
+class UpdateFirewallFirewallsProtocol(str, Enum):
     TCP = "TCP"
     UDP = "UDP"
 
 
-class UpdateFirewallRulesTypedDict(TypedDict):
+class UpdateFirewallFirewallsRulesTypedDict(TypedDict):
     from_: NotRequired[str]
     to: NotRequired[str]
-    protocol: NotRequired[UpdateFirewallProtocol]
+    protocol: NotRequired[UpdateFirewallFirewallsProtocol]
     port: NotRequired[str]
     r"""Port number or range (e.g., \"80\", \"80-443\")"""
 
 
-class UpdateFirewallRules(BaseModel):
+class UpdateFirewallFirewallsRules(BaseModel):
     from_: Annotated[Optional[str], pydantic.Field(alias="from")] = None
 
     to: Optional[str] = None
 
-    protocol: Optional[UpdateFirewallProtocol] = None
+    protocol: Optional[UpdateFirewallFirewallsProtocol] = None
 
     port: Optional[str] = None
     r"""Port number or range (e.g., \"80\", \"80-443\")"""
 
 
-class UpdateFirewallAttributesTypedDict(TypedDict):
+class UpdateFirewallFirewallsAttributesTypedDict(TypedDict):
     name: NotRequired[str]
-    rules: NotRequired[List[UpdateFirewallRulesTypedDict]]
+    rules: NotRequired[List[UpdateFirewallFirewallsRulesTypedDict]]
 
 
-class UpdateFirewallAttributes(BaseModel):
+class UpdateFirewallFirewallsAttributes(BaseModel):
     name: Optional[str] = None
 
-    rules: Optional[List[UpdateFirewallRules]] = None
+    rules: Optional[List[UpdateFirewallFirewallsRules]] = None
 
 
-class UpdateFirewallDataTypedDict(TypedDict):
-    type: UpdateFirewallType
-    attributes: NotRequired[UpdateFirewallAttributesTypedDict]
+class UpdateFirewallFirewallsDataTypedDict(TypedDict):
+    type: UpdateFirewallFirewallsType
+    attributes: NotRequired[UpdateFirewallFirewallsAttributesTypedDict]
 
 
-class UpdateFirewallData(BaseModel):
-    type: UpdateFirewallType
+class UpdateFirewallFirewallsData(BaseModel):
+    type: UpdateFirewallFirewallsType
 
-    attributes: Optional[UpdateFirewallAttributes] = None
-
-
-class UpdateFirewallRequestBodyTypedDict(TypedDict):
-    data: UpdateFirewallDataTypedDict
+    attributes: Optional[UpdateFirewallFirewallsAttributes] = None
 
 
-class UpdateFirewallRequestBody(BaseModel):
-    data: UpdateFirewallData
+class UpdateFirewallFirewallsRequestBodyTypedDict(TypedDict):
+    data: UpdateFirewallFirewallsDataTypedDict
+
+
+class UpdateFirewallFirewallsRequestBody(BaseModel):
+    data: UpdateFirewallFirewallsData
 
 
 class UpdateFirewallRequestTypedDict(TypedDict):
     firewall_id: str
     r"""The Firewall ID"""
-    request_body: NotRequired[UpdateFirewallRequestBodyTypedDict]
+    request_body: NotRequired[UpdateFirewallFirewallsRequestBodyTypedDict]
 
 
 class UpdateFirewallRequest(BaseModel):
@@ -84,6 +84,6 @@ class UpdateFirewallRequest(BaseModel):
     r"""The Firewall ID"""
 
     request_body: Annotated[
-        Optional[UpdateFirewallRequestBody],
+        Optional[UpdateFirewallFirewallsRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None

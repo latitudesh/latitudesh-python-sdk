@@ -8,63 +8,63 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class CreateProjectType(str, Enum):
+class CreateProjectProjectsType(str, Enum):
     PROJECTS = "projects"
 
 
-class ProvisioningType(str, Enum):
+class CreateProjectProvisioningType(str, Enum):
     r"""The provisioning type of the project. Default: on_demand"""
 
     RESERVED = "reserved"
     ON_DEMAND = "on_demand"
 
 
-class CreateProjectEnvironment(str, Enum):
+class CreateProjectProjectsEnvironment(str, Enum):
     DEVELOPMENT = "Development"
     STAGING = "Staging"
     PRODUCTION = "Production"
 
 
-class CreateProjectAttributesTypedDict(TypedDict):
+class CreateProjectProjectsAttributesTypedDict(TypedDict):
     name: str
     r"""The project name. Must be unique."""
-    provisioning_type: ProvisioningType
+    provisioning_type: CreateProjectProvisioningType
     r"""The provisioning type of the project. Default: on_demand"""
     description: NotRequired[str]
     r"""The project description."""
-    environment: NotRequired[CreateProjectEnvironment]
+    environment: NotRequired[CreateProjectProjectsEnvironment]
 
 
-class CreateProjectAttributes(BaseModel):
+class CreateProjectProjectsAttributes(BaseModel):
     name: str
     r"""The project name. Must be unique."""
 
-    provisioning_type: ProvisioningType
+    provisioning_type: CreateProjectProvisioningType
     r"""The provisioning type of the project. Default: on_demand"""
 
     description: Optional[str] = None
     r"""The project description."""
 
-    environment: Optional[CreateProjectEnvironment] = None
+    environment: Optional[CreateProjectProjectsEnvironment] = None
 
 
-class CreateProjectDataTypedDict(TypedDict):
-    type: CreateProjectType
-    attributes: NotRequired[CreateProjectAttributesTypedDict]
+class CreateProjectProjectsDataTypedDict(TypedDict):
+    type: CreateProjectProjectsType
+    attributes: NotRequired[CreateProjectProjectsAttributesTypedDict]
 
 
-class CreateProjectData(BaseModel):
-    type: CreateProjectType
+class CreateProjectProjectsData(BaseModel):
+    type: CreateProjectProjectsType
 
-    attributes: Optional[CreateProjectAttributes] = None
-
-
-class CreateProjectRequestBodyTypedDict(TypedDict):
-    data: NotRequired[CreateProjectDataTypedDict]
+    attributes: Optional[CreateProjectProjectsAttributes] = None
 
 
-class CreateProjectRequestBody(BaseModel):
-    data: Optional[CreateProjectData] = None
+class CreateProjectProjectsRequestBodyTypedDict(TypedDict):
+    data: NotRequired[CreateProjectProjectsDataTypedDict]
+
+
+class CreateProjectProjectsRequestBody(BaseModel):
+    data: Optional[CreateProjectProjectsData] = None
 
 
 class CreateProjectResponseBodyTypedDict(TypedDict):

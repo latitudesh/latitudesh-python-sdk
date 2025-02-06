@@ -12,41 +12,41 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class CreateFirewallAssignmentType(str, Enum):
+class CreateFirewallAssignmentFirewallsType(str, Enum):
     FIREWALL_ASSIGNMENTS = "firewall_assignments"
 
 
-class CreateFirewallAssignmentAttributesTypedDict(TypedDict):
+class CreateFirewallAssignmentFirewallsAttributesTypedDict(TypedDict):
     server_id: str
 
 
-class CreateFirewallAssignmentAttributes(BaseModel):
+class CreateFirewallAssignmentFirewallsAttributes(BaseModel):
     server_id: str
 
 
-class CreateFirewallAssignmentDataTypedDict(TypedDict):
-    type: CreateFirewallAssignmentType
-    attributes: NotRequired[CreateFirewallAssignmentAttributesTypedDict]
+class CreateFirewallAssignmentFirewallsDataTypedDict(TypedDict):
+    type: CreateFirewallAssignmentFirewallsType
+    attributes: NotRequired[CreateFirewallAssignmentFirewallsAttributesTypedDict]
 
 
-class CreateFirewallAssignmentData(BaseModel):
-    type: CreateFirewallAssignmentType
+class CreateFirewallAssignmentFirewallsData(BaseModel):
+    type: CreateFirewallAssignmentFirewallsType
 
-    attributes: Optional[CreateFirewallAssignmentAttributes] = None
-
-
-class CreateFirewallAssignmentRequestBodyTypedDict(TypedDict):
-    data: CreateFirewallAssignmentDataTypedDict
+    attributes: Optional[CreateFirewallAssignmentFirewallsAttributes] = None
 
 
-class CreateFirewallAssignmentRequestBody(BaseModel):
-    data: CreateFirewallAssignmentData
+class CreateFirewallAssignmentFirewallsRequestBodyTypedDict(TypedDict):
+    data: CreateFirewallAssignmentFirewallsDataTypedDict
+
+
+class CreateFirewallAssignmentFirewallsRequestBody(BaseModel):
+    data: CreateFirewallAssignmentFirewallsData
 
 
 class CreateFirewallAssignmentRequestTypedDict(TypedDict):
     firewall_id: str
     r"""The Firewall ID"""
-    request_body: NotRequired[CreateFirewallAssignmentRequestBodyTypedDict]
+    request_body: NotRequired[CreateFirewallAssignmentFirewallsRequestBodyTypedDict]
 
 
 class CreateFirewallAssignmentRequest(BaseModel):
@@ -56,6 +56,6 @@ class CreateFirewallAssignmentRequest(BaseModel):
     r"""The Firewall ID"""
 
     request_body: Annotated[
-        Optional[CreateFirewallAssignmentRequestBody],
+        Optional[CreateFirewallAssignmentFirewallsRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None

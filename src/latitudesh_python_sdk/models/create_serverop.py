@@ -7,11 +7,11 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class CreateServerType(str, Enum):
+class CreateServerServersType(str, Enum):
     SERVERS = "servers"
 
 
-class CreateServerPlan(str, Enum):
+class CreateServerServersPlan(str, Enum):
     r"""The plan to choose server from"""
 
     C2_LARGE_X86 = "c2-large-x86"
@@ -30,7 +30,7 @@ class CreateServerPlan(str, Enum):
     S3_LARGE_X86 = "s3-large-x86"
 
 
-class CreateServerSite(str, Enum):
+class CreateServerServersSite(str, Enum):
     r"""The site to deploy the server"""
 
     ASH = "ASH"
@@ -54,7 +54,7 @@ class CreateServerSite(str, Enum):
     TYO2 = "TYO2"
 
 
-class CreateServerOperatingSystem(str, Enum):
+class CreateServerServersOperatingSystem(str, Enum):
     r"""The operating system for the new server"""
 
     IPXE = "ipxe"
@@ -84,14 +84,14 @@ class CreateServerOperatingSystem(str, Enum):
     ROCKYLINUX_8 = "rockylinux_8"
 
 
-class Raid(str, Enum):
+class CreateServerRaid(str, Enum):
     r"""RAID mode for the server"""
 
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
 
 
-class CreateServerBilling(str, Enum):
+class CreateServerServersBilling(str, Enum):
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
 
     HOURLY = "hourly"
@@ -99,14 +99,14 @@ class CreateServerBilling(str, Enum):
     YEARLY = "yearly"
 
 
-class CreateServerAttributesTypedDict(TypedDict):
+class CreateServerServersAttributesTypedDict(TypedDict):
     project: NotRequired[str]
     r"""The project (ID or Slug) to deploy the server"""
-    plan: NotRequired[CreateServerPlan]
+    plan: NotRequired[CreateServerServersPlan]
     r"""The plan to choose server from"""
-    site: NotRequired[CreateServerSite]
+    site: NotRequired[CreateServerServersSite]
     r"""The site to deploy the server"""
-    operating_system: NotRequired[CreateServerOperatingSystem]
+    operating_system: NotRequired[CreateServerServersOperatingSystem]
     r"""The operating system for the new server"""
     hostname: NotRequired[str]
     r"""The server hostname"""
@@ -114,25 +114,25 @@ class CreateServerAttributesTypedDict(TypedDict):
     r"""SSH Keys to set on the server"""
     user_data: NotRequired[str]
     r"""User data to set on the server"""
-    raid: NotRequired[Raid]
+    raid: NotRequired[CreateServerRaid]
     r"""RAID mode for the server"""
     ipxe: NotRequired[str]
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
-    billing: NotRequired[CreateServerBilling]
+    billing: NotRequired[CreateServerServersBilling]
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
 
 
-class CreateServerAttributes(BaseModel):
+class CreateServerServersAttributes(BaseModel):
     project: Optional[str] = None
     r"""The project (ID or Slug) to deploy the server"""
 
-    plan: Optional[CreateServerPlan] = None
+    plan: Optional[CreateServerServersPlan] = None
     r"""The plan to choose server from"""
 
-    site: Optional[CreateServerSite] = None
+    site: Optional[CreateServerServersSite] = None
     r"""The site to deploy the server"""
 
-    operating_system: Optional[CreateServerOperatingSystem] = None
+    operating_system: Optional[CreateServerServersOperatingSystem] = None
     r"""The operating system for the new server"""
 
     hostname: Optional[str] = None
@@ -144,30 +144,30 @@ class CreateServerAttributes(BaseModel):
     user_data: Optional[str] = None
     r"""User data to set on the server"""
 
-    raid: Optional[Raid] = None
+    raid: Optional[CreateServerRaid] = None
     r"""RAID mode for the server"""
 
     ipxe: Optional[str] = None
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
 
-    billing: Optional[CreateServerBilling] = None
+    billing: Optional[CreateServerServersBilling] = None
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
 
 
-class CreateServerDataTypedDict(TypedDict):
-    type: CreateServerType
-    attributes: NotRequired[CreateServerAttributesTypedDict]
+class CreateServerServersDataTypedDict(TypedDict):
+    type: CreateServerServersType
+    attributes: NotRequired[CreateServerServersAttributesTypedDict]
 
 
-class CreateServerData(BaseModel):
-    type: CreateServerType
+class CreateServerServersData(BaseModel):
+    type: CreateServerServersType
 
-    attributes: Optional[CreateServerAttributes] = None
-
-
-class CreateServerRequestBodyTypedDict(TypedDict):
-    data: NotRequired[CreateServerDataTypedDict]
+    attributes: Optional[CreateServerServersAttributes] = None
 
 
-class CreateServerRequestBody(BaseModel):
-    data: Optional[CreateServerData] = None
+class CreateServerServersRequestBodyTypedDict(TypedDict):
+    data: NotRequired[CreateServerServersDataTypedDict]
+
+
+class CreateServerServersRequestBody(BaseModel):
+    data: Optional[CreateServerServersData] = None

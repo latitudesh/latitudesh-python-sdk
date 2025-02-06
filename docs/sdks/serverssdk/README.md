@@ -39,7 +39,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get_servers(filter_project="proj_695BdKNeOevVo", filter_region="region-slug", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_YLNQJ4a0gXfo883Z79X2Crp19AA")
+    res = latitudesh.servers.get_servers(filter_project="proj_W6Q2D9lGqKLpr", filter_region="SAO", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_EVZVklJKJpUXr3eZ46ylUoEJXZP")
 
     # Handle response
     print(res)
@@ -94,12 +94,12 @@ with Latitudesh(
 
     res = latitudesh.servers.create_server(request={
         "data": {
-            "type": latitudesh_python_sdk.CreateServerType.SERVERS,
+            "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
             "attributes": {
-                "project": "proj_WeGoqAWNOP7nz",
-                "plan": latitudesh_python_sdk.CreateServerPlan.C2_SMALL_X86,
-                "site": latitudesh_python_sdk.CreateServerSite.SAO,
-                "operating_system": latitudesh_python_sdk.CreateServerOperatingSystem.UBUNTU_22_04_X64_LTS,
+                "project": "proj_LGXPdWK8dnNWk",
+                "plan": latitudesh_python_sdk.CreateServerServersPlan.C2_SMALL_X86,
+                "site": latitudesh_python_sdk.CreateServerServersSite.SAO,
+                "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_22_04_X64_LTS,
                 "hostname": "BRC1",
             },
         },
@@ -112,10 +112,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `request`                                                                 | [models.CreateServerRequestBody](../../models/createserverrequestbody.md) | :heavy_check_mark:                                                        | The request object to use for the request.                                |
-| `retries`                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)          | :heavy_minus_sign:                                                        | Configuration to override the default retry behavior of the client.       |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `request`                                                                               | [models.CreateServerServersRequestBody](../../models/createserverserversrequestbody.md) | :heavy_check_mark:                                                                      | The request object to use for the request.                                              |
+| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
 
 ### Response
 
@@ -123,10 +123,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 400, 402, 422      | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 400, 402, 422            | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_server
 
@@ -190,21 +190,21 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `server_id`                                                                       | *str*                                                                             | :heavy_check_mark:                                                                | N/A                                                                               |
-| `id`                                                                              | *Optional[str]*                                                                   | :heavy_minus_sign:                                                                | N/A                                                                               |
-| `type`                                                                            | [Optional[models.UpdateServerType]](../../models/updateservertype.md)             | :heavy_minus_sign:                                                                | N/A                                                                               |
-| `attributes`                                                                      | [Optional[models.UpdateServerAttributes]](../../models/updateserverattributes.md) | :heavy_minus_sign:                                                                | N/A                                                                               |
-| `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `server_id`                                                                                     | *str*                                                                                           | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `id`                                                                                            | *Optional[str]*                                                                                 | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `type`                                                                                          | [Optional[models.UpdateServerServersType]](../../models/updateserverserverstype.md)             | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `attributes`                                                                                    | [Optional[models.UpdateServerServersAttributes]](../../models/updateserverserversattributes.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ServerError | 400                | application/json   |
-| models.ErrorObject | 422, 423           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ServerError       | 400                      | application/vnd.api+json |
+| models.ErrorObject       | 402, 422, 423            | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## destroy_server
 
@@ -220,7 +220,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.destroy_server(server_id="sv_1R3zq2rxqWxyn")
+    latitudesh.servers.destroy_server(server_id="sv_GMy1Db3NON50m")
 
     # Use the SDK ...
 
@@ -236,10 +236,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 406, 422      | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 406, 422            | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_server_deploy_config
 
@@ -255,7 +255,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get_server_deploy_config(server_id="sv_VLMmAD8EOwop2")
+    res = latitudesh.servers.get_server_deploy_config(server_id="sv_xkjQwdENqYNVP")
 
     # Handle response
     print(res)
@@ -294,7 +294,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.update_server_deploy_config(server_id="sv_KN4ydzwvqVob3", type_=latitudesh_python_sdk.UpdateServerDeployConfigType.DEPLOY_CONFIG)
+    res = latitudesh.servers.update_server_deploy_config(server_id="sv_Z8rodmnGq1jLB", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
 
     # Handle response
     print(res)
@@ -303,12 +303,12 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
-| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `server_id`                                                                                               | *str*                                                                                                     | :heavy_check_mark:                                                                                        | The Server ID                                                                                             |
-| `type`                                                                                                    | [models.UpdateServerDeployConfigType](../../models/updateserverdeployconfigtype.md)                       | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
-| `attributes`                                                                                              | [Optional[models.UpdateServerDeployConfigAttributes]](../../models/updateserverdeployconfigattributes.md) | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
-| `retries`                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                          | :heavy_minus_sign:                                                                                        | Configuration to override the default retry behavior of the client.                                       |
+| Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `server_id`                                                                                                             | *str*                                                                                                                   | :heavy_check_mark:                                                                                                      | The Server ID                                                                                                           |
+| `type`                                                                                                                  | [models.UpdateServerDeployConfigServersType](../../models/updateserverdeployconfigserverstype.md)                       | :heavy_check_mark:                                                                                                      | N/A                                                                                                                     |
+| `attributes`                                                                                                            | [Optional[models.UpdateServerDeployConfigServersAttributes]](../../models/updateserverdeployconfigserversattributes.md) | :heavy_minus_sign:                                                                                                      | N/A                                                                                                                     |
+| `retries`                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                        | :heavy_minus_sign:                                                                                                      | Configuration to override the default retry behavior of the client.                                                     |
 
 ### Response
 
@@ -318,8 +318,8 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 406                 | application/json         |
-| models.DeployConfigError | 422                      | application/json         |
+| models.ErrorObject       | 403, 406                 | application/vnd.api+json |
+| models.DeployConfigError | 422                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## server_lock
@@ -336,7 +336,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.server_lock(server_id="sv_3YjJOL5NdvZ87")
+    res = latitudesh.servers.server_lock(server_id="sv_w49QDBmQqagKb")
 
     # Handle response
     print(res)
@@ -374,7 +374,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.server_unlock(server_id="sv_W6Q2D9xGqKLpr")
+    res = latitudesh.servers.server_unlock(server_id="sv_LMmAD8E4Owop2")
 
     # Handle response
     print(res)
@@ -413,8 +413,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create_server_out_of_band(server_id="sv_g1mbDweZdLv5B", data={
-        "type": latitudesh_python_sdk.CreateServerOutOfBandType.OUT_OF_BAND,
+    res = latitudesh.servers.create_server_out_of_band(server_id="sv_RMLydpoXOQKr1", data={
+        "type": latitudesh_python_sdk.CreateServerOutOfBandServersType.OUT_OF_BAND,
         "attributes": {
             "ssh_key_id": "ssh_NGnzRD5ADM5yw",
         },
@@ -427,11 +427,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `server_id`                                                                   | *str*                                                                         | :heavy_check_mark:                                                            | N/A                                                                           |
-| `data`                                                                        | [models.CreateServerOutOfBandData](../../models/createserveroutofbanddata.md) | :heavy_check_mark:                                                            | N/A                                                                           |
-| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `server_id`                                                                                 | *str*                                                                                       | :heavy_check_mark:                                                                          | N/A                                                                                         |
+| `data`                                                                                      | [models.CreateServerOutOfBandServersData](../../models/createserveroutofbandserversdata.md) | :heavy_check_mark:                                                                          | N/A                                                                                         |
+| `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
 
 ### Response
 
@@ -439,10 +439,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 404           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_server_out_of_band
 
@@ -458,7 +458,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get_server_out_of_band(server_id="sv_kjQwdEmXdYNVP")
+    res = latitudesh.servers.get_server_out_of_band(server_id="sv_059EqYX2dQj8p")
 
     # Handle response
     print(res)
@@ -478,10 +478,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 404                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## create_server_action
 
@@ -502,10 +502,10 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create_server_action(server_id="sv_A05EdQM4dvKYQ", data={
-        "type": latitudesh_python_sdk.CreateServerActionType.ACTIONS,
+    res = latitudesh.servers.create_server_action(server_id="sv_z2A3DVpQdnawP", data={
+        "type": latitudesh_python_sdk.CreateServerActionServersType.ACTIONS,
         "attributes": {
-            "action": latitudesh_python_sdk.Action.REBOOT,
+            "action": latitudesh_python_sdk.CreateServerActionAction.REBOOT,
         },
     })
 
@@ -516,11 +516,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `server_id`                                                             | *str*                                                                   | :heavy_check_mark:                                                      | N/A                                                                     |
-| `data`                                                                  | [models.CreateServerActionData](../../models/createserveractiondata.md) | :heavy_check_mark:                                                      | N/A                                                                     |
-| `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `server_id`                                                                           | *str*                                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `data`                                                                                | [models.CreateServerActionServersData](../../models/createserveractionserversdata.md) | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `retries`                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                      | :heavy_minus_sign:                                                                    | Configuration to override the default retry behavior of the client.                   |
 
 ### Response
 
@@ -528,10 +528,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## create_ipmi_session
 
@@ -551,7 +551,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create_ipmi_session(server_id="sv_vYAZqGyJOMQ94")
+    res = latitudesh.servers.create_ipmi_session(server_id="sv_0MK4O44ROa95w")
 
     # Handle response
     print(res)
@@ -571,10 +571,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 404, 422      | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## server_start_rescue_mode
 
@@ -590,7 +590,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.server_start_rescue_mode(server_id="sv_LA73qkJwdaJ2o")
+    res = latitudesh.servers.server_start_rescue_mode(server_id="sv_pbV0DgjKq4AWz")
 
     # Handle response
     print(res)
@@ -610,10 +610,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 406           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 406                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## server_exit_rescue_mode
 
@@ -629,7 +629,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.server_exit_rescue_mode(server_id="sv_e8pKq0xYqWAob")
+    res = latitudesh.servers.server_exit_rescue_mode(server_id="sv_QraYDP15OpjwW")
 
     # Handle response
     print(res)
@@ -649,10 +649,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 406           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 406                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## server_schedule_deletion
 
@@ -668,7 +668,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.server_schedule_deletion(server_id="sv_lxWpD6WvOm6rk")
+    res = latitudesh.servers.server_schedule_deletion(server_id="sv_yQrJdNMGO30gv")
 
     # Handle response
     print(res)
@@ -688,10 +688,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 406, 423      | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 406, 423            | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## server_unschedule_deletion
 
@@ -707,7 +707,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.server_unschedule_deletion(server_id="sv_GnzRD5lvqM5yw")
+    latitudesh.servers.server_unschedule_deletion(server_id="sv_1R3zq2JxqWxyn")
 
     # Use the SDK ...
 
@@ -722,10 +722,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## create_server_reinstall
 
@@ -742,16 +742,23 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.create_server_reinstall(server_id="sv_KXgRdRRodv9k5", data={
-        "type": latitudesh_python_sdk.CreateServerReinstallType.REINSTALLS,
+    latitudesh.servers.create_server_reinstall(server_id="sv_GMy1Db2NDN50m", data={
+        "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
         "attributes": {
-            "operating_system": latitudesh_python_sdk.CreateServerReinstallOperatingSystem.UBUNTU_22_04_X64_LTS,
+            "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.UBUNTU_22_04_X64_LTS,
             "hostname": "BRC1",
+            "partitions": [
+                {
+                    "size_in_gb": 300,
+                    "path": "/",
+                    "filesystem_type": "ext4",
+                },
+            ],
             "ssh_keys": [
                 "35",
             ],
             "user_data": 10,
-            "raid": latitudesh_python_sdk.CreateServerReinstallRaid.RAID_1,
+            "raid": latitudesh_python_sdk.CreateServerReinstallServersRaid.RAID_1,
         },
     })
 
@@ -761,16 +768,16 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `server_id`                                                                   | *str*                                                                         | :heavy_check_mark:                                                            | N/A                                                                           |
-| `data`                                                                        | [models.CreateServerReinstallData](../../models/createserverreinstalldata.md) | :heavy_check_mark:                                                            | N/A                                                                           |
-| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `server_id`                                                                                 | *str*                                                                                       | :heavy_check_mark:                                                                          | N/A                                                                                         |
+| `data`                                                                                      | [models.CreateServerReinstallServersData](../../models/createserverreinstallserversdata.md) | :heavy_check_mark:                                                                          | N/A                                                                                         |
+| `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 404, 422      | application/json   |
-| models.ServerError | 423                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
+| models.ServerError       | 423                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |

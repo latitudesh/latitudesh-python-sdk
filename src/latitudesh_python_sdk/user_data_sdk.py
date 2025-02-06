@@ -54,7 +54,7 @@ class UserDataSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -81,7 +81,7 @@ class UserDataSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.GetProjectUsersDataResponseBody
             )
@@ -150,7 +150,7 @@ class UserDataSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -177,7 +177,7 @@ class UserDataSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.GetProjectUsersDataResponseBody
             )
@@ -206,7 +206,8 @@ class UserDataSDK(BaseSDK):
         *,
         project_id: str,
         data: Union[
-            models.PostProjectUserDataData, models.PostProjectUserDataDataTypedDict
+            models.PostProjectUserDataUserDataData,
+            models.PostProjectUserDataUserDataDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -235,8 +236,10 @@ class UserDataSDK(BaseSDK):
 
         request = models.PostProjectUserDataRequest(
             project_id=project_id,
-            request_body=models.PostProjectUserDataRequestBody(
-                data=utils.get_pydantic_model(data, models.PostProjectUserDataData),
+            request_body=models.PostProjectUserDataUserDataRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PostProjectUserDataUserDataData
+                ),
             ),
         )
 
@@ -250,7 +253,7 @@ class UserDataSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -258,7 +261,7 @@ class UserDataSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PostProjectUserDataRequestBody],
+                Optional[models.PostProjectUserDataUserDataRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -284,7 +287,7 @@ class UserDataSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.UserData)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -311,7 +314,8 @@ class UserDataSDK(BaseSDK):
         *,
         project_id: str,
         data: Union[
-            models.PostProjectUserDataData, models.PostProjectUserDataDataTypedDict
+            models.PostProjectUserDataUserDataData,
+            models.PostProjectUserDataUserDataDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -340,8 +344,10 @@ class UserDataSDK(BaseSDK):
 
         request = models.PostProjectUserDataRequest(
             project_id=project_id,
-            request_body=models.PostProjectUserDataRequestBody(
-                data=utils.get_pydantic_model(data, models.PostProjectUserDataData),
+            request_body=models.PostProjectUserDataUserDataRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PostProjectUserDataUserDataData
+                ),
             ),
         )
 
@@ -355,7 +361,7 @@ class UserDataSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -363,7 +369,7 @@ class UserDataSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PostProjectUserDataRequestBody],
+                Optional[models.PostProjectUserDataUserDataRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -389,7 +395,7 @@ class UserDataSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.UserData)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -459,7 +465,7 @@ class UserDataSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -486,7 +492,7 @@ class UserDataSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.UserData)
         if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -556,7 +562,7 @@ class UserDataSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -583,7 +589,7 @@ class UserDataSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.UserData)
         if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -611,7 +617,8 @@ class UserDataSDK(BaseSDK):
         project_id: str,
         user_data_id: str,
         data: Union[
-            models.PutProjectUserDataData, models.PutProjectUserDataDataTypedDict
+            models.PutProjectUserDataUserDataData,
+            models.PutProjectUserDataUserDataDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -642,8 +649,10 @@ class UserDataSDK(BaseSDK):
         request = models.PutProjectUserDataRequest(
             project_id=project_id,
             user_data_id=user_data_id,
-            request_body=models.PutProjectUserDataRequestBody(
-                data=utils.get_pydantic_model(data, models.PutProjectUserDataData),
+            request_body=models.PutProjectUserDataUserDataRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PutProjectUserDataUserDataData
+                ),
             ),
         )
 
@@ -657,7 +666,7 @@ class UserDataSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -665,7 +674,7 @@ class UserDataSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PutProjectUserDataRequestBody],
+                Optional[models.PutProjectUserDataUserDataRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -691,7 +700,7 @@ class UserDataSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.UserData)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -719,7 +728,8 @@ class UserDataSDK(BaseSDK):
         project_id: str,
         user_data_id: str,
         data: Union[
-            models.PutProjectUserDataData, models.PutProjectUserDataDataTypedDict
+            models.PutProjectUserDataUserDataData,
+            models.PutProjectUserDataUserDataDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -750,8 +760,10 @@ class UserDataSDK(BaseSDK):
         request = models.PutProjectUserDataRequest(
             project_id=project_id,
             user_data_id=user_data_id,
-            request_body=models.PutProjectUserDataRequestBody(
-                data=utils.get_pydantic_model(data, models.PutProjectUserDataData),
+            request_body=models.PutProjectUserDataUserDataRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PutProjectUserDataUserDataData
+                ),
             ),
         )
 
@@ -765,7 +777,7 @@ class UserDataSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -773,7 +785,7 @@ class UserDataSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PutProjectUserDataRequestBody],
+                Optional[models.PutProjectUserDataUserDataRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -799,7 +811,7 @@ class UserDataSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.UserData)
         if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

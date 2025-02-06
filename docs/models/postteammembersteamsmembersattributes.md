@@ -1,0 +1,11 @@
+# PostTeamMembersTeamsMembersAttributes
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `email`                                                                                | *str*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `role`                                                                                 | [models.PostTeamMembersTeamsMembersRole](../models/postteammembersteamsmembersrole.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `first_name`                                                                           | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `last_name`                                                                            | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | N/A                                                                                    |

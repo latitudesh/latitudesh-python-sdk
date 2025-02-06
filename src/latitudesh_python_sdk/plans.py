@@ -72,7 +72,7 @@ class Plans(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -99,7 +99,7 @@ class Plans(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.GetPlansResponseBody)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -184,7 +184,7 @@ class Plans(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -211,7 +211,7 @@ class Plans(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.GetPlansResponseBody)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -272,7 +272,7 @@ class Plans(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -300,9 +300,9 @@ class Plans(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Plan)
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -364,7 +364,7 @@ class Plans(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -392,9 +392,9 @@ class Plans(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Plan)
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -461,7 +461,7 @@ class Plans(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -488,7 +488,7 @@ class Plans(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.BandwidthPlans)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -554,7 +554,7 @@ class Plans(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -581,7 +581,7 @@ class Plans(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.BandwidthPlans)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -608,8 +608,8 @@ class Plans(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.UpdatePlansBandwidthRequestBody,
-                models.UpdatePlansBandwidthRequestBodyTypedDict,
+                models.UpdatePlansBandwidthPlansRequestBody,
+                models.UpdatePlansBandwidthPlansRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -638,9 +638,9 @@ class Plans(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.UpdatePlansBandwidthRequestBody]
+                request, Optional[models.UpdatePlansBandwidthPlansRequestBody]
             )
-        request = cast(Optional[models.UpdatePlansBandwidthRequestBody], request)
+        request = cast(Optional[models.UpdatePlansBandwidthPlansRequestBody], request)
 
         req = self._build_request(
             method="POST",
@@ -652,7 +652,7 @@ class Plans(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -660,7 +660,7 @@ class Plans(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.UpdatePlansBandwidthRequestBody],
+                Optional[models.UpdatePlansBandwidthPlansRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -687,9 +687,9 @@ class Plans(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.BandwidthPackages)
-        if utils.match_response(http_res, "403", "application/json"):
+        if utils.match_response(http_res, "403", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -717,8 +717,8 @@ class Plans(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.UpdatePlansBandwidthRequestBody,
-                models.UpdatePlansBandwidthRequestBodyTypedDict,
+                models.UpdatePlansBandwidthPlansRequestBody,
+                models.UpdatePlansBandwidthPlansRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -747,9 +747,9 @@ class Plans(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.UpdatePlansBandwidthRequestBody]
+                request, Optional[models.UpdatePlansBandwidthPlansRequestBody]
             )
-        request = cast(Optional[models.UpdatePlansBandwidthRequestBody], request)
+        request = cast(Optional[models.UpdatePlansBandwidthPlansRequestBody], request)
 
         req = self._build_request_async(
             method="POST",
@@ -761,7 +761,7 @@ class Plans(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -769,7 +769,7 @@ class Plans(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.UpdatePlansBandwidthRequestBody],
+                Optional[models.UpdatePlansBandwidthPlansRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -796,9 +796,9 @@ class Plans(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.BandwidthPackages)
-        if utils.match_response(http_res, "403", "application/json"):
+        if utils.match_response(http_res, "403", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -853,7 +853,7 @@ class Plans(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -880,7 +880,7 @@ class Plans(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.StoragePlans)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -934,7 +934,7 @@ class Plans(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -961,7 +961,7 @@ class Plans(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.StoragePlans)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

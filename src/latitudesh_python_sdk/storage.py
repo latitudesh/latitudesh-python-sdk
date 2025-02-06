@@ -14,8 +14,8 @@ class Storage(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.PostStorageFilesystemsRequestBody,
-                models.PostStorageFilesystemsRequestBodyTypedDict,
+                models.PostStorageFilesystemsStorageRequestBody,
+                models.PostStorageFilesystemsStorageRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -43,9 +43,11 @@ class Storage(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.PostStorageFilesystemsRequestBody]
+                request, Optional[models.PostStorageFilesystemsStorageRequestBody]
             )
-        request = cast(Optional[models.PostStorageFilesystemsRequestBody], request)
+        request = cast(
+            Optional[models.PostStorageFilesystemsStorageRequestBody], request
+        )
 
         req = self._build_request(
             method="POST",
@@ -57,7 +59,7 @@ class Storage(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -65,7 +67,7 @@ class Storage(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PostStorageFilesystemsRequestBody],
+                Optional[models.PostStorageFilesystemsStorageRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -91,7 +93,7 @@ class Storage(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.PostStorageFilesystemsResponseBody
             )
@@ -120,8 +122,8 @@ class Storage(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.PostStorageFilesystemsRequestBody,
-                models.PostStorageFilesystemsRequestBodyTypedDict,
+                models.PostStorageFilesystemsStorageRequestBody,
+                models.PostStorageFilesystemsStorageRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -149,9 +151,11 @@ class Storage(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.PostStorageFilesystemsRequestBody]
+                request, Optional[models.PostStorageFilesystemsStorageRequestBody]
             )
-        request = cast(Optional[models.PostStorageFilesystemsRequestBody], request)
+        request = cast(
+            Optional[models.PostStorageFilesystemsStorageRequestBody], request
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -163,7 +167,7 @@ class Storage(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -171,7 +175,7 @@ class Storage(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PostStorageFilesystemsRequestBody],
+                Optional[models.PostStorageFilesystemsStorageRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -197,7 +201,7 @@ class Storage(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.PostStorageFilesystemsResponseBody
             )
@@ -586,8 +590,8 @@ class Storage(BaseSDK):
         *,
         filesystem_id: str,
         data: Union[
-            models.PatchStorageFilesystemsData,
-            models.PatchStorageFilesystemsDataTypedDict,
+            models.PatchStorageFilesystemsStorageData,
+            models.PatchStorageFilesystemsStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -615,8 +619,10 @@ class Storage(BaseSDK):
 
         request = models.PatchStorageFilesystemsRequest(
             filesystem_id=filesystem_id,
-            request_body=models.PatchStorageFilesystemsRequestBody(
-                data=utils.get_pydantic_model(data, models.PatchStorageFilesystemsData),
+            request_body=models.PatchStorageFilesystemsStorageRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PatchStorageFilesystemsStorageData
+                ),
             ),
         )
 
@@ -630,7 +636,7 @@ class Storage(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -638,7 +644,7 @@ class Storage(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PatchStorageFilesystemsRequestBody],
+                Optional[models.PatchStorageFilesystemsStorageRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -664,7 +670,7 @@ class Storage(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.PatchStorageFilesystemsResponseBody
             )
@@ -693,8 +699,8 @@ class Storage(BaseSDK):
         *,
         filesystem_id: str,
         data: Union[
-            models.PatchStorageFilesystemsData,
-            models.PatchStorageFilesystemsDataTypedDict,
+            models.PatchStorageFilesystemsStorageData,
+            models.PatchStorageFilesystemsStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -722,8 +728,10 @@ class Storage(BaseSDK):
 
         request = models.PatchStorageFilesystemsRequest(
             filesystem_id=filesystem_id,
-            request_body=models.PatchStorageFilesystemsRequestBody(
-                data=utils.get_pydantic_model(data, models.PatchStorageFilesystemsData),
+            request_body=models.PatchStorageFilesystemsStorageRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PatchStorageFilesystemsStorageData
+                ),
             ),
         )
 
@@ -737,7 +745,7 @@ class Storage(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -745,7 +753,7 @@ class Storage(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PatchStorageFilesystemsRequestBody],
+                Optional[models.PatchStorageFilesystemsStorageRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -771,7 +779,7 @@ class Storage(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.PatchStorageFilesystemsResponseBody
             )

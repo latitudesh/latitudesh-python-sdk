@@ -1,0 +1,10 @@
+# PatchCurrentTeamTeamsData
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `id`                                                                                             | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `type`                                                                                           | [models.PatchCurrentTeamTeamsType](../models/patchcurrentteamteamstype.md)                       | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `attributes`                                                                                     | [Optional[models.PatchCurrentTeamTeamsAttributes]](../models/patchcurrentteamteamsattributes.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |

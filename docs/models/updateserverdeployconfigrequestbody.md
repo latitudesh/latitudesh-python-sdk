@@ -1,9 +1,0 @@
-# UpdateServerDeployConfigRequestBody
-
-
-## Fields
-
-| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                 | [models.UpdateServerDeployConfigType](../models/updateserverdeployconfigtype.md)                       | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
-| `attributes`                                                                                           | [Optional[models.UpdateServerDeployConfigAttributes]](../models/updateserverdeployconfigattributes.md) | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |

@@ -12,50 +12,50 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class UpdateServerType(str, Enum):
+class UpdateServerServersType(str, Enum):
     SERVERS = "servers"
 
 
-class UpdateServerBilling(str, Enum):
+class UpdateServerServersBilling(str, Enum):
     HOURLY = "hourly"
     MONTHLY = "monthly"
     YEARLY = "yearly"
 
 
-class UpdateServerAttributesTypedDict(TypedDict):
+class UpdateServerServersAttributesTypedDict(TypedDict):
     hostname: NotRequired[str]
-    billing: NotRequired[UpdateServerBilling]
+    billing: NotRequired[UpdateServerServersBilling]
     tags: NotRequired[List[str]]
     project: NotRequired[str]
 
 
-class UpdateServerAttributes(BaseModel):
+class UpdateServerServersAttributes(BaseModel):
     hostname: Optional[str] = "new-hostname"
 
-    billing: Optional[UpdateServerBilling] = UpdateServerBilling.MONTHLY
+    billing: Optional[UpdateServerServersBilling] = UpdateServerServersBilling.MONTHLY
 
     tags: Optional[List[str]] = None
 
     project: Optional[str] = None
 
 
-class UpdateServerRequestBodyTypedDict(TypedDict):
+class UpdateServerServersRequestBodyTypedDict(TypedDict):
     id: NotRequired[str]
-    type: NotRequired[UpdateServerType]
-    attributes: NotRequired[UpdateServerAttributesTypedDict]
+    type: NotRequired[UpdateServerServersType]
+    attributes: NotRequired[UpdateServerServersAttributesTypedDict]
 
 
-class UpdateServerRequestBody(BaseModel):
+class UpdateServerServersRequestBody(BaseModel):
     id: Optional[str] = "sv_81EVOtR1N4J2Z"
 
-    type: Optional[UpdateServerType] = None
+    type: Optional[UpdateServerServersType] = None
 
-    attributes: Optional[UpdateServerAttributes] = None
+    attributes: Optional[UpdateServerServersAttributes] = None
 
 
 class UpdateServerRequestTypedDict(TypedDict):
     server_id: str
-    request_body: NotRequired[UpdateServerRequestBodyTypedDict]
+    request_body: NotRequired[UpdateServerServersRequestBodyTypedDict]
 
 
 class UpdateServerRequest(BaseModel):
@@ -64,6 +64,6 @@ class UpdateServerRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[UpdateServerRequestBody],
+        Optional[UpdateServerServersRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None

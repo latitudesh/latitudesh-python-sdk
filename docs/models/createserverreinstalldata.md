@@ -1,9 +1,0 @@
-# CreateServerReinstallData
-
-
-## Fields
-
-| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `type`                                                                                           | [models.CreateServerReinstallType](../models/createserverreinstalltype.md)                       | :heavy_check_mark:                                                                               | N/A                                                                                              |
-| `attributes`                                                                                     | [Optional[models.CreateServerReinstallAttributes]](../models/createserverreinstallattributes.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |

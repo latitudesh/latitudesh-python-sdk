@@ -13,56 +13,56 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PatchUserProfileType(str, Enum):
+class PatchUserProfileUserProfileType(str, Enum):
     USERS = "users"
 
 
-class PatchUserProfileRole(str, Enum):
+class PatchUserProfileUserProfileRole(str, Enum):
     ADMINISTRATOR = "administrator"
     BILLING = "billing"
     COLLABORATOR = "collaborator"
     OWNER = "owner"
 
 
-class PatchUserProfileAttributesTypedDict(TypedDict):
+class PatchUserProfileUserProfileAttributesTypedDict(TypedDict):
     first_name: NotRequired[str]
     last_name: NotRequired[str]
-    role: NotRequired[PatchUserProfileRole]
+    role: NotRequired[PatchUserProfileUserProfileRole]
 
 
-class PatchUserProfileAttributes(BaseModel):
+class PatchUserProfileUserProfileAttributes(BaseModel):
     first_name: Optional[str] = None
 
     last_name: Optional[str] = None
 
-    role: Optional[PatchUserProfileRole] = None
+    role: Optional[PatchUserProfileUserProfileRole] = None
 
 
-class PatchUserProfileDataTypedDict(TypedDict):
+class PatchUserProfileUserProfileDataTypedDict(TypedDict):
     id: str
-    type: PatchUserProfileType
-    attributes: NotRequired[PatchUserProfileAttributesTypedDict]
+    type: PatchUserProfileUserProfileType
+    attributes: NotRequired[PatchUserProfileUserProfileAttributesTypedDict]
 
 
-class PatchUserProfileData(BaseModel):
+class PatchUserProfileUserProfileData(BaseModel):
     id: str
 
-    type: PatchUserProfileType
+    type: PatchUserProfileUserProfileType
 
-    attributes: Optional[PatchUserProfileAttributes] = None
-
-
-class PatchUserProfileRequestBodyTypedDict(TypedDict):
-    data: PatchUserProfileDataTypedDict
+    attributes: Optional[PatchUserProfileUserProfileAttributes] = None
 
 
-class PatchUserProfileRequestBody(BaseModel):
-    data: PatchUserProfileData
+class PatchUserProfileUserProfileRequestBodyTypedDict(TypedDict):
+    data: PatchUserProfileUserProfileDataTypedDict
+
+
+class PatchUserProfileUserProfileRequestBody(BaseModel):
+    data: PatchUserProfileUserProfileData
 
 
 class PatchUserProfileRequestTypedDict(TypedDict):
     id: str
-    request_body: NotRequired[PatchUserProfileRequestBodyTypedDict]
+    request_body: NotRequired[PatchUserProfileUserProfileRequestBodyTypedDict]
 
 
 class PatchUserProfileRequest(BaseModel):
@@ -71,7 +71,7 @@ class PatchUserProfileRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[PatchUserProfileRequestBody],
+        Optional[PatchUserProfileUserProfileRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None
 

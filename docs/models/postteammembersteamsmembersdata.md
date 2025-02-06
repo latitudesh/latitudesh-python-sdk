@@ -1,0 +1,9 @@
+# PostTeamMembersTeamsMembersData
+
+
+## Fields
+
+| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                       | [models.PostTeamMembersTeamsMembersType](../models/postteammembersteamsmemberstype.md)                       | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `attributes`                                                                                                 | [Optional[models.PostTeamMembersTeamsMembersAttributes]](../models/postteammembersteamsmembersattributes.md) | :heavy_minus_sign:                                                                                           | N/A                                                                                                          |

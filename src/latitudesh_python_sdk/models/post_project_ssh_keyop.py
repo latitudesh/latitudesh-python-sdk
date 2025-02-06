@@ -13,18 +13,18 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PostProjectSSHKeyType(str, Enum):
+class PostProjectSSHKeySSHKeysType(str, Enum):
     SSH_KEYS = "ssh_keys"
 
 
-class PostProjectSSHKeyAttributesTypedDict(TypedDict):
+class PostProjectSSHKeySSHKeysAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""Name of the SSH Key"""
     public_key: NotRequired[str]
     r"""SSH Public Key"""
 
 
-class PostProjectSSHKeyAttributes(BaseModel):
+class PostProjectSSHKeySSHKeysAttributes(BaseModel):
     name: Optional[str] = None
     r"""Name of the SSH Key"""
 
@@ -32,29 +32,29 @@ class PostProjectSSHKeyAttributes(BaseModel):
     r"""SSH Public Key"""
 
 
-class PostProjectSSHKeyDataTypedDict(TypedDict):
-    type: PostProjectSSHKeyType
-    attributes: NotRequired[PostProjectSSHKeyAttributesTypedDict]
+class PostProjectSSHKeySSHKeysDataTypedDict(TypedDict):
+    type: PostProjectSSHKeySSHKeysType
+    attributes: NotRequired[PostProjectSSHKeySSHKeysAttributesTypedDict]
 
 
-class PostProjectSSHKeyData(BaseModel):
-    type: PostProjectSSHKeyType
+class PostProjectSSHKeySSHKeysData(BaseModel):
+    type: PostProjectSSHKeySSHKeysType
 
-    attributes: Optional[PostProjectSSHKeyAttributes] = None
-
-
-class PostProjectSSHKeyRequestBodyTypedDict(TypedDict):
-    data: PostProjectSSHKeyDataTypedDict
+    attributes: Optional[PostProjectSSHKeySSHKeysAttributes] = None
 
 
-class PostProjectSSHKeyRequestBody(BaseModel):
-    data: PostProjectSSHKeyData
+class PostProjectSSHKeySSHKeysRequestBodyTypedDict(TypedDict):
+    data: PostProjectSSHKeySSHKeysDataTypedDict
+
+
+class PostProjectSSHKeySSHKeysRequestBody(BaseModel):
+    data: PostProjectSSHKeySSHKeysData
 
 
 class PostProjectSSHKeyRequestTypedDict(TypedDict):
     project_id: str
     r"""Project ID or Slug"""
-    request_body: NotRequired[PostProjectSSHKeyRequestBodyTypedDict]
+    request_body: NotRequired[PostProjectSSHKeySSHKeysRequestBodyTypedDict]
 
 
 class PostProjectSSHKeyRequest(BaseModel):
@@ -64,7 +64,7 @@ class PostProjectSSHKeyRequest(BaseModel):
     r"""Project ID or Slug"""
 
     request_body: Annotated[
-        Optional[PostProjectSSHKeyRequestBody],
+        Optional[PostProjectSSHKeySSHKeysRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None
 

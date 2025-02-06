@@ -44,7 +44,7 @@ class Tags(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -71,7 +71,7 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.CustomTag)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -128,7 +128,7 @@ class Tags(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -155,7 +155,7 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.CustomTag)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -181,7 +181,10 @@ class Tags(BaseSDK):
         self,
         *,
         request: Optional[
-            Union[models.CreateTagRequestBody, models.CreateTagRequestBodyTypedDict]
+            Union[
+                models.CreateTagTagsRequestBody,
+                models.CreateTagTagsRequestBodyTypedDict,
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -208,8 +211,10 @@ class Tags(BaseSDK):
             base_url = server_url
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, Optional[models.CreateTagRequestBody])
-        request = cast(Optional[models.CreateTagRequestBody], request)
+            request = utils.unmarshal(
+                request, Optional[models.CreateTagTagsRequestBody]
+            )
+        request = cast(Optional[models.CreateTagTagsRequestBody], request)
 
         req = self._build_request(
             method="POST",
@@ -221,11 +226,11 @@ class Tags(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.CreateTagRequestBody]
+                request, False, True, "json", Optional[models.CreateTagTagsRequestBody]
             ),
             timeout_ms=timeout_ms,
         )
@@ -251,7 +256,7 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.CustomTag)
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -277,7 +282,10 @@ class Tags(BaseSDK):
         self,
         *,
         request: Optional[
-            Union[models.CreateTagRequestBody, models.CreateTagRequestBodyTypedDict]
+            Union[
+                models.CreateTagTagsRequestBody,
+                models.CreateTagTagsRequestBodyTypedDict,
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -304,8 +312,10 @@ class Tags(BaseSDK):
             base_url = server_url
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, Optional[models.CreateTagRequestBody])
-        request = cast(Optional[models.CreateTagRequestBody], request)
+            request = utils.unmarshal(
+                request, Optional[models.CreateTagTagsRequestBody]
+            )
+        request = cast(Optional[models.CreateTagTagsRequestBody], request)
 
         req = self._build_request_async(
             method="POST",
@@ -317,11 +327,11 @@ class Tags(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.CreateTagRequestBody]
+                request, False, True, "json", Optional[models.CreateTagTagsRequestBody]
             ),
             timeout_ms=timeout_ms,
         )
@@ -347,7 +357,7 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.CustomTag)
         if utils.match_response(http_res, ["422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -374,7 +384,7 @@ class Tags(BaseSDK):
         *,
         tag_id: str,
         data: Optional[
-            Union[models.UpdateTagData, models.UpdateTagDataTypedDict]
+            Union[models.UpdateTagTagsData, models.UpdateTagTagsDataTypedDict]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -403,8 +413,8 @@ class Tags(BaseSDK):
 
         request = models.UpdateTagRequest(
             tag_id=tag_id,
-            request_body=models.UpdateTagRequestBody(
-                data=utils.get_pydantic_model(data, Optional[models.UpdateTagData]),
+            request_body=models.UpdateTagTagsRequestBody(
+                data=utils.get_pydantic_model(data, Optional[models.UpdateTagTagsData]),
             ),
         )
 
@@ -418,7 +428,7 @@ class Tags(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -426,7 +436,7 @@ class Tags(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.UpdateTagRequestBody],
+                Optional[models.UpdateTagTagsRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -452,7 +462,7 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.CustomTag)
         if utils.match_response(http_res, ["404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -479,7 +489,7 @@ class Tags(BaseSDK):
         *,
         tag_id: str,
         data: Optional[
-            Union[models.UpdateTagData, models.UpdateTagDataTypedDict]
+            Union[models.UpdateTagTagsData, models.UpdateTagTagsDataTypedDict]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -508,8 +518,8 @@ class Tags(BaseSDK):
 
         request = models.UpdateTagRequest(
             tag_id=tag_id,
-            request_body=models.UpdateTagRequestBody(
-                data=utils.get_pydantic_model(data, Optional[models.UpdateTagData]),
+            request_body=models.UpdateTagTagsRequestBody(
+                data=utils.get_pydantic_model(data, Optional[models.UpdateTagTagsData]),
             ),
         )
 
@@ -523,7 +533,7 @@ class Tags(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -531,7 +541,7 @@ class Tags(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.UpdateTagRequestBody],
+                Optional[models.UpdateTagTagsRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -557,7 +567,7 @@ class Tags(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.CustomTag)
         if utils.match_response(http_res, ["404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

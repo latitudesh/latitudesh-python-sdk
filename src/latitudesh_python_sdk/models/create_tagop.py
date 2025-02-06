@@ -7,11 +7,11 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class CreateTagType(str, Enum):
+class CreateTagTagsType(str, Enum):
     TAGS = "tags"
 
 
-class CreateTagAttributesTypedDict(TypedDict):
+class CreateTagTagsAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""Name of the Tag"""
     description: NotRequired[str]
@@ -20,7 +20,7 @@ class CreateTagAttributesTypedDict(TypedDict):
     r"""Color of the Tag"""
 
 
-class CreateTagAttributes(BaseModel):
+class CreateTagTagsAttributes(BaseModel):
     name: Optional[str] = None
     r"""Name of the Tag"""
 
@@ -31,20 +31,20 @@ class CreateTagAttributes(BaseModel):
     r"""Color of the Tag"""
 
 
-class CreateTagDataTypedDict(TypedDict):
-    type: NotRequired[CreateTagType]
-    attributes: NotRequired[CreateTagAttributesTypedDict]
+class CreateTagTagsDataTypedDict(TypedDict):
+    type: NotRequired[CreateTagTagsType]
+    attributes: NotRequired[CreateTagTagsAttributesTypedDict]
 
 
-class CreateTagData(BaseModel):
-    type: Optional[CreateTagType] = None
+class CreateTagTagsData(BaseModel):
+    type: Optional[CreateTagTagsType] = None
 
-    attributes: Optional[CreateTagAttributes] = None
-
-
-class CreateTagRequestBodyTypedDict(TypedDict):
-    data: NotRequired[CreateTagDataTypedDict]
+    attributes: Optional[CreateTagTagsAttributes] = None
 
 
-class CreateTagRequestBody(BaseModel):
-    data: Optional[CreateTagData] = None
+class CreateTagTagsRequestBodyTypedDict(TypedDict):
+    data: NotRequired[CreateTagTagsDataTypedDict]
+
+
+class CreateTagTagsRequestBody(BaseModel):
+    data: Optional[CreateTagTagsData] = None

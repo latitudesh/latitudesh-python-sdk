@@ -61,7 +61,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.regions.get_region(region_id="reg_3YjJOLE4dvZ87")
+    res = latitudesh.regions.get_region(region_id="reg_Qkm7dXPed8nZV")
 
     # Handle response
     print(res)
@@ -81,7 +81,7 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 404                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |

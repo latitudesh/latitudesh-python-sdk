@@ -12,18 +12,18 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PutProjectUserDataType(str, Enum):
+class PutProjectUserDataUserDataType(str, Enum):
     USER_DATA = "user_data"
 
 
-class PutProjectUserDataAttributesTypedDict(TypedDict):
+class PutProjectUserDataUserDataAttributesTypedDict(TypedDict):
     description: NotRequired[str]
     r"""description dummy user data"""
     content: NotRequired[str]
     r"""encoded content of the User Data"""
 
 
-class PutProjectUserDataAttributes(BaseModel):
+class PutProjectUserDataUserDataAttributes(BaseModel):
     description: Optional[str] = None
     r"""description dummy user data"""
 
@@ -31,33 +31,33 @@ class PutProjectUserDataAttributes(BaseModel):
     r"""encoded content of the User Data"""
 
 
-class PutProjectUserDataDataTypedDict(TypedDict):
+class PutProjectUserDataUserDataDataTypedDict(TypedDict):
     id: str
-    type: PutProjectUserDataType
-    attributes: NotRequired[PutProjectUserDataAttributesTypedDict]
+    type: PutProjectUserDataUserDataType
+    attributes: NotRequired[PutProjectUserDataUserDataAttributesTypedDict]
 
 
-class PutProjectUserDataData(BaseModel):
+class PutProjectUserDataUserDataData(BaseModel):
     id: str
 
-    type: PutProjectUserDataType
+    type: PutProjectUserDataUserDataType
 
-    attributes: Optional[PutProjectUserDataAttributes] = None
-
-
-class PutProjectUserDataRequestBodyTypedDict(TypedDict):
-    data: PutProjectUserDataDataTypedDict
+    attributes: Optional[PutProjectUserDataUserDataAttributes] = None
 
 
-class PutProjectUserDataRequestBody(BaseModel):
-    data: PutProjectUserDataData
+class PutProjectUserDataUserDataRequestBodyTypedDict(TypedDict):
+    data: PutProjectUserDataUserDataDataTypedDict
+
+
+class PutProjectUserDataUserDataRequestBody(BaseModel):
+    data: PutProjectUserDataUserDataData
 
 
 class PutProjectUserDataRequestTypedDict(TypedDict):
     project_id: str
     r"""Project ID or Slug"""
     user_data_id: str
-    request_body: NotRequired[PutProjectUserDataRequestBodyTypedDict]
+    request_body: NotRequired[PutProjectUserDataUserDataRequestBodyTypedDict]
 
 
 class PutProjectUserDataRequest(BaseModel):
@@ -71,6 +71,6 @@ class PutProjectUserDataRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[PutProjectUserDataRequestBody],
+        Optional[PutProjectUserDataUserDataRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None

@@ -63,11 +63,11 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_profile.patch_user_profile(id="user_NbleJol13Qc8aV3BYR7Ri37MY15L", data={
-        "id": "user_NbleJol13Qc8aV3BYR7Ri37MY15L",
-        "type": latitudesh_python_sdk.PatchUserProfileType.USERS,
+    res = latitudesh.user_profile.patch_user_profile(id="user_QJPQJNXX62cWNMr9BZ0kcXGgKzpW", data={
+        "id": "user_QJPQJNXX62cWNMr9BZ0kcXGgKzpW",
+        "type": latitudesh_python_sdk.PatchUserProfileUserProfileType.USERS,
         "attributes": {
-            "role": latitudesh_python_sdk.PatchUserProfileRole.COLLABORATOR,
+            "role": latitudesh_python_sdk.PatchUserProfileUserProfileRole.COLLABORATOR,
         },
     })
 
@@ -78,11 +78,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `data`                                                              | [models.PatchUserProfileData](../../models/patchuserprofiledata.md) | :heavy_check_mark:                                                  | N/A                                                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `id`                                                                                      | *str*                                                                                     | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `data`                                                                                    | [models.PatchUserProfileUserProfileData](../../models/patchuserprofileuserprofiledata.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |
 
 ### Response
 
@@ -90,10 +90,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_user_teams
 

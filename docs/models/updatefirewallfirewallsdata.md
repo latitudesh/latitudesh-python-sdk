@@ -1,0 +1,9 @@
+# UpdateFirewallFirewallsData
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `type`                                                                                               | [models.UpdateFirewallFirewallsType](../models/updatefirewallfirewallstype.md)                       | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `attributes`                                                                                         | [Optional[models.UpdateFirewallFirewallsAttributes]](../models/updatefirewallfirewallsattributes.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

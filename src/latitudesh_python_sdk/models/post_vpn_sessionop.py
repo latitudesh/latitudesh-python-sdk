@@ -7,11 +7,11 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class PostVpnSessionType(str, Enum):
+class PostVPNSessionVPNSessionsType(str, Enum):
     VPN_SESSIONS = "vpn_sessions"
 
 
-class PostVpnSessionSite(str, Enum):
+class PostVPNSessionVPNSessionsSite(str, Enum):
     ASH = "ASH"
     BGT = "BGT"
     BUE = "BUE"
@@ -33,31 +33,31 @@ class PostVpnSessionSite(str, Enum):
     TYO2 = "TYO2"
 
 
-class PostVpnSessionAttributesTypedDict(TypedDict):
-    site: NotRequired[PostVpnSessionSite]
+class PostVPNSessionVPNSessionsAttributesTypedDict(TypedDict):
+    site: NotRequired[PostVPNSessionVPNSessionsSite]
     server_id: NotRequired[str]
 
 
-class PostVpnSessionAttributes(BaseModel):
-    site: Optional[PostVpnSessionSite] = None
+class PostVPNSessionVPNSessionsAttributes(BaseModel):
+    site: Optional[PostVPNSessionVPNSessionsSite] = None
 
     server_id: Optional[str] = None
 
 
-class PostVpnSessionDataTypedDict(TypedDict):
-    type: NotRequired[PostVpnSessionType]
-    attributes: NotRequired[PostVpnSessionAttributesTypedDict]
+class PostVPNSessionVPNSessionsDataTypedDict(TypedDict):
+    type: NotRequired[PostVPNSessionVPNSessionsType]
+    attributes: NotRequired[PostVPNSessionVPNSessionsAttributesTypedDict]
 
 
-class PostVpnSessionData(BaseModel):
-    type: Optional[PostVpnSessionType] = None
+class PostVPNSessionVPNSessionsData(BaseModel):
+    type: Optional[PostVPNSessionVPNSessionsType] = None
 
-    attributes: Optional[PostVpnSessionAttributes] = None
-
-
-class PostVpnSessionRequestBodyTypedDict(TypedDict):
-    data: NotRequired[PostVpnSessionDataTypedDict]
+    attributes: Optional[PostVPNSessionVPNSessionsAttributes] = None
 
 
-class PostVpnSessionRequestBody(BaseModel):
-    data: Optional[PostVpnSessionData] = None
+class PostVPNSessionVPNSessionsRequestBodyTypedDict(TypedDict):
+    data: NotRequired[PostVPNSessionVPNSessionsDataTypedDict]
+
+
+class PostVPNSessionVPNSessionsRequestBody(BaseModel):
+    data: Optional[PostVPNSessionVPNSessionsData] = None

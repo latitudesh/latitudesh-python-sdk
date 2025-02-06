@@ -1,0 +1,9 @@
+# CreateVirtualNetworkPrivateNetworksData
+
+
+## Fields
+
+| Field                                                                                                              | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                             | [models.CreateVirtualNetworkPrivateNetworksType](../models/createvirtualnetworkprivatenetworkstype.md)             | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `attributes`                                                                                                       | [models.CreateVirtualNetworkPrivateNetworksAttributes](../models/createvirtualnetworkprivatenetworksattributes.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |

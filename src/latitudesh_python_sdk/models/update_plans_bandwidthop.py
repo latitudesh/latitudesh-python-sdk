@@ -7,11 +7,11 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class UpdatePlansBandwidthType(str, Enum):
+class UpdatePlansBandwidthPlansType(str, Enum):
     BANDWIDTH_PACKAGES = "bandwidth_packages"
 
 
-class UpdatePlansBandwidthAttributesTypedDict(TypedDict):
+class UpdatePlansBandwidthPlansAttributesTypedDict(TypedDict):
     project: NotRequired[str]
     r"""The project (ID or Slug) to add bandwidth"""
     quantity: NotRequired[int]
@@ -20,7 +20,7 @@ class UpdatePlansBandwidthAttributesTypedDict(TypedDict):
     r"""The region to add bandwidth"""
 
 
-class UpdatePlansBandwidthAttributes(BaseModel):
+class UpdatePlansBandwidthPlansAttributes(BaseModel):
     project: Optional[str] = None
     r"""The project (ID or Slug) to add bandwidth"""
 
@@ -31,20 +31,20 @@ class UpdatePlansBandwidthAttributes(BaseModel):
     r"""The region to add bandwidth"""
 
 
-class UpdatePlansBandwidthDataTypedDict(TypedDict):
-    type: NotRequired[UpdatePlansBandwidthType]
-    attributes: NotRequired[UpdatePlansBandwidthAttributesTypedDict]
+class UpdatePlansBandwidthPlansDataTypedDict(TypedDict):
+    type: NotRequired[UpdatePlansBandwidthPlansType]
+    attributes: NotRequired[UpdatePlansBandwidthPlansAttributesTypedDict]
 
 
-class UpdatePlansBandwidthData(BaseModel):
-    type: Optional[UpdatePlansBandwidthType] = None
+class UpdatePlansBandwidthPlansData(BaseModel):
+    type: Optional[UpdatePlansBandwidthPlansType] = None
 
-    attributes: Optional[UpdatePlansBandwidthAttributes] = None
-
-
-class UpdatePlansBandwidthRequestBodyTypedDict(TypedDict):
-    data: NotRequired[UpdatePlansBandwidthDataTypedDict]
+    attributes: Optional[UpdatePlansBandwidthPlansAttributes] = None
 
 
-class UpdatePlansBandwidthRequestBody(BaseModel):
-    data: Optional[UpdatePlansBandwidthData] = None
+class UpdatePlansBandwidthPlansRequestBodyTypedDict(TypedDict):
+    data: NotRequired[UpdatePlansBandwidthPlansDataTypedDict]
+
+
+class UpdatePlansBandwidthPlansRequestBody(BaseModel):
+    data: Optional[UpdatePlansBandwidthPlansData] = None

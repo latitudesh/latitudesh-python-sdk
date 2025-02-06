@@ -12,11 +12,11 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class UpdateServerDeployConfigType(str, Enum):
+class UpdateServerDeployConfigServersType(str, Enum):
     DEPLOY_CONFIG = "deploy_config"
 
 
-class UpdateServerDeployConfigOperatingSystem(str, Enum):
+class UpdateServerDeployConfigServersOperatingSystem(str, Enum):
     IPXE = "ipxe"
     WINDOWS_SERVER_2019_STD_V1 = "windows_server_2019_std_v1"
     UBUNTU_22_04_X64_LTS = "ubuntu_22_04_x64_lts"
@@ -44,53 +44,70 @@ class UpdateServerDeployConfigOperatingSystem(str, Enum):
     ROCKYLINUX_8 = "rockylinux_8"
 
 
-class UpdateServerDeployConfigRaid(str, Enum):
+class UpdateServerDeployConfigServersRaid(str, Enum):
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
 
 
-class UpdateServerDeployConfigAttributesTypedDict(TypedDict):
+class UpdateServerDeployConfigPartitionsTypedDict(TypedDict):
+    size_in_gb: NotRequired[int]
+    path: NotRequired[str]
+    filesystem_type: NotRequired[str]
+
+
+class UpdateServerDeployConfigPartitions(BaseModel):
+    size_in_gb: Optional[int] = None
+
+    path: Optional[str] = None
+
+    filesystem_type: Optional[str] = None
+
+
+class UpdateServerDeployConfigServersAttributesTypedDict(TypedDict):
     hostname: NotRequired[str]
-    operating_system: NotRequired[UpdateServerDeployConfigOperatingSystem]
-    raid: NotRequired[UpdateServerDeployConfigRaid]
+    operating_system: NotRequired[UpdateServerDeployConfigServersOperatingSystem]
+    raid: NotRequired[UpdateServerDeployConfigServersRaid]
     user_data: NotRequired[int]
     r"""User data to configure the server"""
     ssh_keys: NotRequired[List[int]]
+    partitions: NotRequired[List[UpdateServerDeployConfigPartitionsTypedDict]]
     ipxe_url: NotRequired[str]
     r"""URL where iPXE script is stored on, necessary for custom image deployments. This attribute is required when operating system iPXE is selected."""
 
 
-class UpdateServerDeployConfigAttributes(BaseModel):
+class UpdateServerDeployConfigServersAttributes(BaseModel):
     hostname: Optional[str] = None
 
-    operating_system: Optional[UpdateServerDeployConfigOperatingSystem] = None
+    operating_system: Optional[UpdateServerDeployConfigServersOperatingSystem] = None
 
-    raid: Optional[UpdateServerDeployConfigRaid] = None
+    raid: Optional[UpdateServerDeployConfigServersRaid] = None
 
     user_data: Optional[int] = None
     r"""User data to configure the server"""
 
     ssh_keys: Optional[List[int]] = None
 
+    partitions: Optional[List[UpdateServerDeployConfigPartitions]] = None
+
     ipxe_url: Optional[str] = None
     r"""URL where iPXE script is stored on, necessary for custom image deployments. This attribute is required when operating system iPXE is selected."""
 
 
-class UpdateServerDeployConfigRequestBodyTypedDict(TypedDict):
-    type: UpdateServerDeployConfigType
-    attributes: NotRequired[UpdateServerDeployConfigAttributesTypedDict]
+class UpdateServerDeployConfigServersRequestBodyTypedDict(TypedDict):
+    type: UpdateServerDeployConfigServersType
+    attributes: NotRequired[UpdateServerDeployConfigServersAttributesTypedDict]
 
 
-class UpdateServerDeployConfigRequestBody(BaseModel):
-    type: UpdateServerDeployConfigType
+class UpdateServerDeployConfigServersRequestBody(BaseModel):
+    type: UpdateServerDeployConfigServersType
 
-    attributes: Optional[UpdateServerDeployConfigAttributes] = None
+    attributes: Optional[UpdateServerDeployConfigServersAttributes] = None
 
 
 class UpdateServerDeployConfigRequestTypedDict(TypedDict):
     server_id: str
     r"""The Server ID"""
-    request_body: NotRequired[UpdateServerDeployConfigRequestBodyTypedDict]
+    request_body: NotRequired[UpdateServerDeployConfigServersRequestBodyTypedDict]
 
 
 class UpdateServerDeployConfigRequest(BaseModel):
@@ -100,6 +117,6 @@ class UpdateServerDeployConfigRequest(BaseModel):
     r"""The Server ID"""
 
     request_body: Annotated[
-        Optional[UpdateServerDeployConfigRequestBody],
+        Optional[UpdateServerDeployConfigServersRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None

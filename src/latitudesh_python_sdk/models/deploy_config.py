@@ -7,11 +7,26 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class DeployConfigPartitionsTypedDict(TypedDict):
+    path: NotRequired[str]
+    size_in_gb: NotRequired[int]
+    filesystem_type: NotRequired[str]
+
+
+class DeployConfigPartitions(BaseModel):
+    path: Optional[str] = None
+
+    size_in_gb: Optional[int] = None
+
+    filesystem_type: Optional[str] = None
+
+
 class DeployConfigAttributesTypedDict(TypedDict):
     operating_system: NotRequired[str]
     hostname: NotRequired[str]
     raid: NotRequired[str]
     ssh_keys: NotRequired[List[str]]
+    partitions: NotRequired[List[DeployConfigPartitionsTypedDict]]
 
 
 class DeployConfigAttributes(BaseModel):
@@ -22,6 +37,8 @@ class DeployConfigAttributes(BaseModel):
     raid: Optional[str] = None
 
     ssh_keys: Optional[List[str]] = None
+
+    partitions: Optional[List[DeployConfigPartitions]] = None
 
 
 class DeployConfigDataTypedDict(TypedDict):

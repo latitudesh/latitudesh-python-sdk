@@ -8,11 +8,11 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class CreateFirewallType(str, Enum):
+class CreateFirewallFirewallsType(str, Enum):
     FIREWALLS = "firewalls"
 
 
-class Protocol(str, Enum):
+class CreateFirewallProtocol(str, Enum):
     TCP = "TCP"
     UDP = "UDP"
 
@@ -20,7 +20,7 @@ class Protocol(str, Enum):
 class CreateFirewallRulesTypedDict(TypedDict):
     from_: NotRequired[str]
     to: NotRequired[str]
-    protocol: NotRequired[Protocol]
+    protocol: NotRequired[CreateFirewallProtocol]
     port: NotRequired[str]
     r"""Port number or range (e.g., \"80\", \"80-443\")"""
 
@@ -30,19 +30,19 @@ class CreateFirewallRules(BaseModel):
 
     to: Optional[str] = None
 
-    protocol: Optional[Protocol] = None
+    protocol: Optional[CreateFirewallProtocol] = None
 
     port: Optional[str] = None
     r"""Port number or range (e.g., \"80\", \"80-443\")"""
 
 
-class CreateFirewallAttributesTypedDict(TypedDict):
+class CreateFirewallFirewallsAttributesTypedDict(TypedDict):
     name: str
     project: str
     rules: NotRequired[List[CreateFirewallRulesTypedDict]]
 
 
-class CreateFirewallAttributes(BaseModel):
+class CreateFirewallFirewallsAttributes(BaseModel):
     name: str
 
     project: str
@@ -50,20 +50,20 @@ class CreateFirewallAttributes(BaseModel):
     rules: Optional[List[CreateFirewallRules]] = None
 
 
-class CreateFirewallDataTypedDict(TypedDict):
-    type: CreateFirewallType
-    attributes: NotRequired[CreateFirewallAttributesTypedDict]
+class CreateFirewallFirewallsDataTypedDict(TypedDict):
+    type: CreateFirewallFirewallsType
+    attributes: NotRequired[CreateFirewallFirewallsAttributesTypedDict]
 
 
-class CreateFirewallData(BaseModel):
-    type: CreateFirewallType
+class CreateFirewallFirewallsData(BaseModel):
+    type: CreateFirewallFirewallsType
 
-    attributes: Optional[CreateFirewallAttributes] = None
-
-
-class CreateFirewallRequestBodyTypedDict(TypedDict):
-    data: CreateFirewallDataTypedDict
+    attributes: Optional[CreateFirewallFirewallsAttributes] = None
 
 
-class CreateFirewallRequestBody(BaseModel):
-    data: CreateFirewallData
+class CreateFirewallFirewallsRequestBodyTypedDict(TypedDict):
+    data: CreateFirewallFirewallsDataTypedDict
+
+
+class CreateFirewallFirewallsRequestBody(BaseModel):
+    data: CreateFirewallFirewallsData

@@ -57,7 +57,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -84,7 +84,7 @@ class PrivateNetworks(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VirtualNetworks)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -154,7 +154,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -181,7 +181,7 @@ class PrivateNetworks(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VirtualNetworks)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -208,8 +208,8 @@ class PrivateNetworks(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.CreateVirtualNetworkRequestBody,
-                models.CreateVirtualNetworkRequestBodyTypedDict,
+                models.CreateVirtualNetworkPrivateNetworksRequestBody,
+                models.CreateVirtualNetworkPrivateNetworksRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -238,9 +238,11 @@ class PrivateNetworks(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.CreateVirtualNetworkRequestBody]
+                request, Optional[models.CreateVirtualNetworkPrivateNetworksRequestBody]
             )
-        request = cast(Optional[models.CreateVirtualNetworkRequestBody], request)
+        request = cast(
+            Optional[models.CreateVirtualNetworkPrivateNetworksRequestBody], request
+        )
 
         req = self._build_request(
             method="POST",
@@ -252,7 +254,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -260,7 +262,7 @@ class PrivateNetworks(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.CreateVirtualNetworkRequestBody],
+                Optional[models.CreateVirtualNetworkPrivateNetworksRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -287,9 +289,9 @@ class PrivateNetworks(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VirtualNetwork)
-        if utils.match_response(http_res, "422", "application/json"):
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -317,8 +319,8 @@ class PrivateNetworks(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.CreateVirtualNetworkRequestBody,
-                models.CreateVirtualNetworkRequestBodyTypedDict,
+                models.CreateVirtualNetworkPrivateNetworksRequestBody,
+                models.CreateVirtualNetworkPrivateNetworksRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -347,9 +349,11 @@ class PrivateNetworks(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.CreateVirtualNetworkRequestBody]
+                request, Optional[models.CreateVirtualNetworkPrivateNetworksRequestBody]
             )
-        request = cast(Optional[models.CreateVirtualNetworkRequestBody], request)
+        request = cast(
+            Optional[models.CreateVirtualNetworkPrivateNetworksRequestBody], request
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -361,7 +365,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -369,7 +373,7 @@ class PrivateNetworks(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.CreateVirtualNetworkRequestBody],
+                Optional[models.CreateVirtualNetworkPrivateNetworksRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -396,9 +400,9 @@ class PrivateNetworks(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VirtualNetwork)
-        if utils.match_response(http_res, "422", "application/json"):
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -426,7 +430,8 @@ class PrivateNetworks(BaseSDK):
         *,
         vlan_id: str,
         data: Union[
-            models.UpdateVirtualNetworkData, models.UpdateVirtualNetworkDataTypedDict
+            models.UpdateVirtualNetworkPrivateNetworksData,
+            models.UpdateVirtualNetworkPrivateNetworksDataTypedDict,
         ],
         id: Optional[str] = "vlan_81EVOtR1N4J2Z",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -457,9 +462,11 @@ class PrivateNetworks(BaseSDK):
 
         request = models.UpdateVirtualNetworkRequest(
             vlan_id=vlan_id,
-            request_body=models.UpdateVirtualNetworkRequestBody(
+            request_body=models.UpdateVirtualNetworkPrivateNetworksRequestBody(
                 id=id,
-                data=utils.get_pydantic_model(data, models.UpdateVirtualNetworkData),
+                data=utils.get_pydantic_model(
+                    data, models.UpdateVirtualNetworkPrivateNetworksData
+                ),
             ),
         )
 
@@ -473,7 +480,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -481,7 +488,7 @@ class PrivateNetworks(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.UpdateVirtualNetworkRequestBody],
+                Optional[models.UpdateVirtualNetworkPrivateNetworksRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -508,9 +515,9 @@ class PrivateNetworks(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VirtualNetwork)
-        if utils.match_response(http_res, "403", "application/json"):
+        if utils.match_response(http_res, "403", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(
                 http_res.text, models.VirtualNetworkErrorData
             )
@@ -540,7 +547,8 @@ class PrivateNetworks(BaseSDK):
         *,
         vlan_id: str,
         data: Union[
-            models.UpdateVirtualNetworkData, models.UpdateVirtualNetworkDataTypedDict
+            models.UpdateVirtualNetworkPrivateNetworksData,
+            models.UpdateVirtualNetworkPrivateNetworksDataTypedDict,
         ],
         id: Optional[str] = "vlan_81EVOtR1N4J2Z",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -571,9 +579,11 @@ class PrivateNetworks(BaseSDK):
 
         request = models.UpdateVirtualNetworkRequest(
             vlan_id=vlan_id,
-            request_body=models.UpdateVirtualNetworkRequestBody(
+            request_body=models.UpdateVirtualNetworkPrivateNetworksRequestBody(
                 id=id,
-                data=utils.get_pydantic_model(data, models.UpdateVirtualNetworkData),
+                data=utils.get_pydantic_model(
+                    data, models.UpdateVirtualNetworkPrivateNetworksData
+                ),
             ),
         )
 
@@ -587,7 +597,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -595,7 +605,7 @@ class PrivateNetworks(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.UpdateVirtualNetworkRequestBody],
+                Optional[models.UpdateVirtualNetworkPrivateNetworksRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -622,9 +632,9 @@ class PrivateNetworks(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VirtualNetwork)
-        if utils.match_response(http_res, "403", "application/json"):
+        if utils.match_response(http_res, "403", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(
                 http_res.text, models.VirtualNetworkErrorData
             )
@@ -691,7 +701,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -721,7 +731,7 @@ class PrivateNetworks(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "406", "application/json"):
+        if utils.match_response(http_res, "406", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -786,7 +796,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -816,7 +826,7 @@ class PrivateNetworks(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "406", "application/json"):
+        if utils.match_response(http_res, "406", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -881,7 +891,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -908,7 +918,7 @@ class PrivateNetworks(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.GetVirtualNetworkResponseBody
             )
@@ -974,7 +984,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1001,7 +1011,7 @@ class PrivateNetworks(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.GetVirtualNetworkResponseBody
             )
@@ -1073,7 +1083,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1100,7 +1110,7 @@ class PrivateNetworks(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VirtualNetworkAssignments)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1170,7 +1180,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1197,7 +1207,7 @@ class PrivateNetworks(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VirtualNetworkAssignments)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1224,8 +1234,8 @@ class PrivateNetworks(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.AssignServerVirtualNetworkRequestBody,
-                models.AssignServerVirtualNetworkRequestBodyTypedDict,
+                models.AssignServerVirtualNetworkPrivateNetworksRequestBody,
+                models.AssignServerVirtualNetworkPrivateNetworksRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1251,9 +1261,13 @@ class PrivateNetworks(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.AssignServerVirtualNetworkRequestBody]
+                request,
+                Optional[models.AssignServerVirtualNetworkPrivateNetworksRequestBody],
             )
-        request = cast(Optional[models.AssignServerVirtualNetworkRequestBody], request)
+        request = cast(
+            Optional[models.AssignServerVirtualNetworkPrivateNetworksRequestBody],
+            request,
+        )
 
         req = self._build_request(
             method="POST",
@@ -1265,7 +1279,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -1273,7 +1287,7 @@ class PrivateNetworks(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.AssignServerVirtualNetworkRequestBody],
+                Optional[models.AssignServerVirtualNetworkPrivateNetworksRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -1300,9 +1314,9 @@ class PrivateNetworks(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VirtualNetworkAssignment)
-        if utils.match_response(http_res, ["403", "422"], "application/json"):
+        if utils.match_response(http_res, ["403", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1330,8 +1344,8 @@ class PrivateNetworks(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.AssignServerVirtualNetworkRequestBody,
-                models.AssignServerVirtualNetworkRequestBodyTypedDict,
+                models.AssignServerVirtualNetworkPrivateNetworksRequestBody,
+                models.AssignServerVirtualNetworkPrivateNetworksRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1357,9 +1371,13 @@ class PrivateNetworks(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.AssignServerVirtualNetworkRequestBody]
+                request,
+                Optional[models.AssignServerVirtualNetworkPrivateNetworksRequestBody],
             )
-        request = cast(Optional[models.AssignServerVirtualNetworkRequestBody], request)
+        request = cast(
+            Optional[models.AssignServerVirtualNetworkPrivateNetworksRequestBody],
+            request,
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -1371,7 +1389,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -1379,7 +1397,7 @@ class PrivateNetworks(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.AssignServerVirtualNetworkRequestBody],
+                Optional[models.AssignServerVirtualNetworkPrivateNetworksRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -1406,9 +1424,9 @@ class PrivateNetworks(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VirtualNetworkAssignment)
-        if utils.match_response(http_res, ["403", "422"], "application/json"):
+        if utils.match_response(http_res, ["403", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1473,7 +1491,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1503,7 +1521,7 @@ class PrivateNetworks(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["403", "423"], "application/json"):
+        if utils.match_response(http_res, ["403", "423"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1568,7 +1586,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1598,7 +1616,7 @@ class PrivateNetworks(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["403", "423"], "application/json"):
+        if utils.match_response(http_res, ["403", "423"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
