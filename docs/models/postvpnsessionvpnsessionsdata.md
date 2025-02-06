@@ -1,0 +1,9 @@
+# PostVPNSessionVPNSessionsData
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                   | [Optional[models.PostVPNSessionVPNSessionsType]](../models/postvpnsessionvpnsessionstype.md)             | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
+| `attributes`                                                                                             | [Optional[models.PostVPNSessionVPNSessionsAttributes]](../models/postvpnsessionvpnsessionsattributes.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |

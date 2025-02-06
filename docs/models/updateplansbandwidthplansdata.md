@@ -1,0 +1,9 @@
+# UpdatePlansBandwidthPlansData
+
+
+## Fields
+
+| Field                                                                                                    | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                   | [Optional[models.UpdatePlansBandwidthPlansType]](../models/updateplansbandwidthplanstype.md)             | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |
+| `attributes`                                                                                             | [Optional[models.UpdatePlansBandwidthPlansAttributes]](../models/updateplansbandwidthplansattributes.md) | :heavy_minus_sign:                                                                                       | N/A                                                                                                      |

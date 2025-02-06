@@ -1,0 +1,9 @@
+# PostProjectSSHKeySSHKeysData
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                 | [models.PostProjectSSHKeySSHKeysType](../models/postprojectsshkeysshkeystype.md)                       | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `attributes`                                                                                           | [Optional[models.PostProjectSSHKeySSHKeysAttributes]](../models/postprojectsshkeysshkeysattributes.md) | :heavy_minus_sign:                                                                                     | N/A                                                                                                    |

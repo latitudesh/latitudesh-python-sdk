@@ -1,0 +1,9 @@
+# CreateFirewallFirewallsData
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `type`                                                                                               | [models.CreateFirewallFirewallsType](../models/createfirewallfirewallstype.md)                       | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `attributes`                                                                                         | [Optional[models.CreateFirewallFirewallsAttributes]](../models/createfirewallfirewallsattributes.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

@@ -1,0 +1,9 @@
+# CreateProjectProjectsData
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `type`                                                                                           | [models.CreateProjectProjectsType](../models/createprojectprojectstype.md)                       | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `attributes`                                                                                     | [Optional[models.CreateProjectProjectsAttributes]](../models/createprojectprojectsattributes.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |

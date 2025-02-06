@@ -1,0 +1,10 @@
+# PutProjectSSHKeySSHKeysData
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `type`                                                                                               | [models.PutProjectSSHKeySSHKeysType](../models/putprojectsshkeysshkeystype.md)                       | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `id`                                                                                                 | *Optional[str]*                                                                                      | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `attributes`                                                                                         | [Optional[models.PutProjectSSHKeySSHKeysAttributes]](../models/putprojectsshkeysshkeysattributes.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
