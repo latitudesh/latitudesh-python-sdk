@@ -29,7 +29,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.get_virtual_networks(filter_location="SAO", filter_project="awesome-cotton-bag", filter_tags="tag_9Mk835MMXPcEjlrgop7Js5XAZ20")
+    res = latitudesh.private_networks.get_virtual_networks(filter_location="SAO", filter_project="lightweight-iron-keyboard", filter_tags="tag_jVnnao8eYWSQW5EKKR4QH5bQllx")
 
     # Handle response
     print(res)
@@ -73,11 +73,11 @@ with Latitudesh(
 
     res = latitudesh.private_networks.create_virtual_network(request={
         "data": {
-            "type": latitudesh_python_sdk.CreateVirtualNetworkType.VIRTUAL_NETWORK,
+            "type": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK,
             "attributes": {
                 "description": "São Paulo VLAN",
-                "project": "awesome-copper-car",
-                "site": latitudesh_python_sdk.CreateVirtualNetworkSite.MIA,
+                "project": "aerodynamic-marble-bench",
+                "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
             },
         },
     })
@@ -89,10 +89,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `request`                                                                                 | [models.CreateVirtualNetworkRequestBody](../../models/createvirtualnetworkrequestbody.md) | :heavy_check_mark:                                                                        | The request object to use for the request.                                                |
-| `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |
+| Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                               | [models.CreateVirtualNetworkPrivateNetworksRequestBody](../../models/createvirtualnetworkprivatenetworksrequestbody.md) | :heavy_check_mark:                                                                                                      | The request object to use for the request.                                                                              |
+| `retries`                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                        | :heavy_minus_sign:                                                                                                      | Configuration to override the default retry behavior of the client.                                                     |
 
 ### Response
 
@@ -100,10 +100,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 422                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 422                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## update_virtual_network
 
@@ -122,7 +122,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.private_networks.update_virtual_network(vlan_id="vlan_pRMLydp0dQKr1", data={
-        "type": latitudesh_python_sdk.UpdateVirtualNetworkType.VIRTUAL_NETWORKS,
+        "type": latitudesh_python_sdk.UpdateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORKS,
         "attributes": {},
     })
 
@@ -133,12 +133,12 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `vlan_id`                                                                   | *str*                                                                       | :heavy_check_mark:                                                          | The Virtual Network ID                                                      |
-| `data`                                                                      | [models.UpdateVirtualNetworkData](../../models/updatevirtualnetworkdata.md) | :heavy_check_mark:                                                          | N/A                                                                         |
-| `id`                                                                        | *Optional[str]*                                                             | :heavy_minus_sign:                                                          | N/A                                                                         |
-| `retries`                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)            | :heavy_minus_sign:                                                          | Configuration to override the default retry behavior of the client.         |
+| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `vlan_id`                                                                                                 | *str*                                                                                                     | :heavy_check_mark:                                                                                        | The Virtual Network ID                                                                                    |
+| `data`                                                                                                    | [models.UpdateVirtualNetworkPrivateNetworksData](../../models/updatevirtualnetworkprivatenetworksdata.md) | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `id`                                                                                                      | *Optional[str]*                                                                                           | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
+| `retries`                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                          | :heavy_minus_sign:                                                                                        | Configuration to override the default retry behavior of the client.                                       |
 
 ### Response
 
@@ -148,7 +148,7 @@ with Latitudesh(
 
 | Error Type                 | Status Code                | Content Type               |
 | -------------------------- | -------------------------- | -------------------------- |
-| models.VirtualNetworkError | 403                        | application/json           |
+| models.VirtualNetworkError | 403                        | application/vnd.api+json   |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
 ## destroy_virtual_network
@@ -181,10 +181,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 406                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 406                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_virtual_network
 
@@ -240,7 +240,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.get_virtual_networks_assignments(filter_server="206", filter_vid="8")
+    res = latitudesh.private_networks.get_virtual_networks_assignments(filter_server="208", filter_vid="4")
 
     # Handle response
     print(res)
@@ -283,9 +283,9 @@ with Latitudesh(
 
     res = latitudesh.private_networks.assign_server_virtual_network(request={
         "data": {
-            "type": latitudesh_python_sdk.AssignServerVirtualNetworkType.VIRTUAL_NETWORK_ASSIGNMENT,
+            "type": latitudesh_python_sdk.AssignServerVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK_ASSIGNMENT,
             "attributes": {
-                "server_id": "sv_059EqYVjDQj8p",
+                "server_id": "sv_aNmodj6ZdbE8W",
                 "virtual_network_id": vlan_g1mbDwG0DLv5B,
             },
         },
@@ -298,10 +298,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
-| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `request`                                                                                             | [models.AssignServerVirtualNetworkRequestBody](../../models/assignservervirtualnetworkrequestbody.md) | :heavy_check_mark:                                                                                    | The request object to use for the request.                                                            |
-| `retries`                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                      | :heavy_minus_sign:                                                                                    | Configuration to override the default retry behavior of the client.                                   |
+| Parameter                                                                                                                           | Type                                                                                                                                | Required                                                                                                                            | Description                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                                           | [models.AssignServerVirtualNetworkPrivateNetworksRequestBody](../../models/assignservervirtualnetworkprivatenetworksrequestbody.md) | :heavy_check_mark:                                                                                                                  | The request object to use for the request.                                                                                          |
+| `retries`                                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                    | :heavy_minus_sign:                                                                                                                  | Configuration to override the default retry behavior of the client.                                                                 |
 
 ### Response
 
@@ -309,10 +309,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 422           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 422                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## delete_virtual_networks_assignments
 
@@ -344,7 +344,7 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 423           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 423                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |

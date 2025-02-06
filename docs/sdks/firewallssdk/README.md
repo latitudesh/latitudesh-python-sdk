@@ -31,27 +31,27 @@ with Latitudesh(
 
     res = latitudesh.firewalls.create_firewall(request={
         "data": {
-            "type": latitudesh_python_sdk.CreateFirewallType.FIREWALLS,
+            "type": latitudesh_python_sdk.CreateFirewallFirewallsType.FIREWALLS,
             "attributes": {
                 "name": "my-firewall",
-                "project": "aerodynamic-wool-bottle",
+                "project": "small-rubber-lamp",
                 "rules": [
                     {
                         "from_": "192.168.42.72",
                         "to": "192.168.43.51",
-                        "protocol": latitudesh_python_sdk.Protocol.TCP,
+                        "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
                         "port": "80",
                     },
                     {
-                        "from_": "192.168.1.16/28",
+                        "from_": "192.168.1.16",
                         "to": "192.168.1.30",
-                        "protocol": latitudesh_python_sdk.Protocol.TCP,
+                        "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
                         "port": "80",
                     },
                     {
-                        "from_": "192.168.1.16-192.168.1.32",
-                        "to": "192.168.1.40",
-                        "protocol": latitudesh_python_sdk.Protocol.UDP,
+                        "from_": "192.168.1.10",
+                        "to": "192.168.1.20",
+                        "protocol": latitudesh_python_sdk.CreateFirewallProtocol.UDP,
                         "port": "3000-4000",
                     },
                 ],
@@ -66,10 +66,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `request`                                                                     | [models.CreateFirewallRequestBody](../../models/createfirewallrequestbody.md) | :heavy_check_mark:                                                            | The request object to use for the request.                                    |
-| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `request`                                                                                       | [models.CreateFirewallFirewallsRequestBody](../../models/createfirewallfirewallsrequestbody.md) | :heavy_check_mark:                                                                              | The request object to use for the request.                                                      |
+| `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
 
 ### Response
 
@@ -77,10 +77,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 422                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 422                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## list_firewalls
 
@@ -96,7 +96,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.list_firewalls(filter_project="lightweight-iron-clock")
+    res = latitudesh.firewalls.list_firewalls(filter_project="aerodynamic-silk-pants")
 
     # Handle response
     print(res)
@@ -134,7 +134,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.get_firewall(firewall_id="fw_zGr47qlMDAg0m")
+    res = latitudesh.firewalls.get_firewall(firewall_id="fw_xkjQwdENqYNVP")
 
     # Handle response
     print(res)
@@ -154,10 +154,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 404                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## update_firewall
 
@@ -174,8 +174,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.update_firewall(firewall_id="fw_6059EqYkOQj8p", data={
-        "type": latitudesh_python_sdk.UpdateFirewallType.FIREWALLS,
+    res = latitudesh.firewalls.update_firewall(firewall_id="fw_VaNmodjeObE8W", data={
+        "type": latitudesh_python_sdk.UpdateFirewallFirewallsType.FIREWALLS,
         "attributes": {
             "rules": [
 
@@ -190,11 +190,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `firewall_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | The Firewall ID                                                     |
-| `data`                                                              | [models.UpdateFirewallData](../../models/updatefirewalldata.md)     | :heavy_check_mark:                                                  | N/A                                                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `firewall_id`                                                                     | *str*                                                                             | :heavy_check_mark:                                                                | The Firewall ID                                                                   |
+| `data`                                                                            | [models.UpdateFirewallFirewallsData](../../models/updatefirewallfirewallsdata.md) | :heavy_check_mark:                                                                | N/A                                                                               |
+| `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
 
 ### Response
 
@@ -202,10 +202,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 404, 422           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## delete_firewall
 
@@ -236,10 +236,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 404, 422           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## create_firewall_assignment
 
@@ -256,10 +256,10 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.create_firewall_assignment(firewall_id="fw_6A05EdQ1dvKYQ", data={
-        "type": latitudesh_python_sdk.CreateFirewallAssignmentType.FIREWALL_ASSIGNMENTS,
+    res = latitudesh.firewalls.create_firewall_assignment(firewall_id="fw_Av9BVDavORm1W", data={
+        "type": latitudesh_python_sdk.CreateFirewallAssignmentFirewallsType.FIREWALL_ASSIGNMENTS,
         "attributes": {
-            "server_id": "sv_xkjQwdENqYNVP",
+            "server_id": "sv_2695BdKrOevVo",
         },
     })
 
@@ -270,11 +270,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| `firewall_id`                                                                       | *str*                                                                               | :heavy_check_mark:                                                                  | The Firewall ID                                                                     |
-| `data`                                                                              | [models.CreateFirewallAssignmentData](../../models/createfirewallassignmentdata.md) | :heavy_check_mark:                                                                  | N/A                                                                                 |
-| `retries`                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                    | :heavy_minus_sign:                                                                  | Configuration to override the default retry behavior of the client.                 |
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `firewall_id`                                                                                         | *str*                                                                                                 | :heavy_check_mark:                                                                                    | The Firewall ID                                                                                       |
+| `data`                                                                                                | [models.CreateFirewallAssignmentFirewallsData](../../models/createfirewallassignmentfirewallsdata.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `retries`                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                      | :heavy_minus_sign:                                                                                    | Configuration to override the default retry behavior of the client.                                   |
 
 ### Response
 
@@ -282,10 +282,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 404, 409, 422 | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 404, 409, 422       | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_firewall_assignments
 
@@ -321,10 +321,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 404                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## delete_firewall_assignment
 
@@ -340,7 +340,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.firewalls.delete_firewall_assignment(firewall_id="fw_zlkg1DegdvZE5", assignment_id="fwasg_zGr47qlMDAg0m")
+    latitudesh.firewalls.delete_firewall_assignment(firewall_id="fw_2695BdKrOevVo", assignment_id="fwasg_6059EqYkOQj8p")
 
     # Use the SDK ...
 
@@ -356,7 +356,7 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 404           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |

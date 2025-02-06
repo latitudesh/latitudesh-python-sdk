@@ -8,11 +8,11 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class PostStorageFilesystemsType(str, Enum):
+class PostStorageFilesystemsStorageType(str, Enum):
     FILESYSTEMS = "filesystems"
 
 
-class PostStorageFilesystemsAttributesTypedDict(TypedDict):
+class PostStorageFilesystemsStorageAttributesTypedDict(TypedDict):
     project: str
     r"""Project ID or slug"""
     name: str
@@ -21,7 +21,7 @@ class PostStorageFilesystemsAttributesTypedDict(TypedDict):
     r"""Size in GB (not required, default is 1500)"""
 
 
-class PostStorageFilesystemsAttributes(BaseModel):
+class PostStorageFilesystemsStorageAttributes(BaseModel):
     project: str
     r"""Project ID or slug"""
 
@@ -32,23 +32,23 @@ class PostStorageFilesystemsAttributes(BaseModel):
     r"""Size in GB (not required, default is 1500)"""
 
 
-class PostStorageFilesystemsDataTypedDict(TypedDict):
-    type: PostStorageFilesystemsType
-    attributes: PostStorageFilesystemsAttributesTypedDict
+class PostStorageFilesystemsStorageDataTypedDict(TypedDict):
+    type: PostStorageFilesystemsStorageType
+    attributes: PostStorageFilesystemsStorageAttributesTypedDict
 
 
-class PostStorageFilesystemsData(BaseModel):
-    type: PostStorageFilesystemsType
+class PostStorageFilesystemsStorageData(BaseModel):
+    type: PostStorageFilesystemsStorageType
 
-    attributes: PostStorageFilesystemsAttributes
-
-
-class PostStorageFilesystemsRequestBodyTypedDict(TypedDict):
-    data: PostStorageFilesystemsDataTypedDict
+    attributes: PostStorageFilesystemsStorageAttributes
 
 
-class PostStorageFilesystemsRequestBody(BaseModel):
-    data: PostStorageFilesystemsData
+class PostStorageFilesystemsStorageRequestBodyTypedDict(TypedDict):
+    data: PostStorageFilesystemsStorageDataTypedDict
+
+
+class PostStorageFilesystemsStorageRequestBody(BaseModel):
+    data: PostStorageFilesystemsStorageData
 
 
 class PostStorageFilesystemsResponseBodyTypedDict(TypedDict):

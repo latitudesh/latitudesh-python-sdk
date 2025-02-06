@@ -66,7 +66,7 @@ with Latitudesh(
 
     res = latitudesh.tags.create_tag(request={
         "data": {
-            "type": latitudesh_python_sdk.CreateTagType.TAGS,
+            "type": latitudesh_python_sdk.CreateTagTagsType.TAGS,
             "attributes": {
                 "name": "Tag Name",
                 "description": "Tag Description",
@@ -81,10 +81,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `request`                                                           | [models.CreateTagRequestBody](../../models/createtagrequestbody.md) | :heavy_check_mark:                                                  | The request object to use for the request.                          |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `request`                                                                   | [models.CreateTagTagsRequestBody](../../models/createtagtagsrequestbody.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
+| `retries`                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)            | :heavy_minus_sign:                                                          | Configuration to override the default retry behavior of the client.         |
 
 ### Response
 
@@ -112,9 +112,9 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.tags.update_tag(tag_id="tag_45arv64V5ZcKj8n7yro2SLa1NNy", data={
-        "id": "tag_45arv64V5ZcKj8n7yro2SLa1NNy",
-        "type": latitudesh_python_sdk.UpdateTagType.TAGS,
+    res = latitudesh.tags.update_tag(tag_id="tag_G2KoaVpQ1MC2mxGN1wjyhZgpYmE", data={
+        "id": "tag_G2KoaVpQ1MC2mxGN1wjyhZgpYmE",
+        "type": latitudesh_python_sdk.UpdateTagTagsType.TAGS,
         "attributes": {
             "name": "Tag Name",
         },
@@ -127,11 +127,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `tag_id`                                                            | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `data`                                                              | [Optional[models.UpdateTagData]](../../models/updatetagdata.md)     | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `tag_id`                                                                | *str*                                                                   | :heavy_check_mark:                                                      | N/A                                                                     |
+| `data`                                                                  | [Optional[models.UpdateTagTagsData]](../../models/updatetagtagsdata.md) | :heavy_minus_sign:                                                      | N/A                                                                     |
+| `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
 
 ### Response
 

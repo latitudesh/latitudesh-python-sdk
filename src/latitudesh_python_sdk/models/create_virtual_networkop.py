@@ -7,11 +7,11 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class CreateVirtualNetworkType(str, Enum):
+class CreateVirtualNetworkPrivateNetworksType(str, Enum):
     VIRTUAL_NETWORK = "virtual_network"
 
 
-class CreateVirtualNetworkSite(str, Enum):
+class CreateVirtualNetworkPrivateNetworksSite(str, Enum):
     r"""Site ID or slug"""
 
     ASH = "ASH"
@@ -35,38 +35,38 @@ class CreateVirtualNetworkSite(str, Enum):
     TYO2 = "TYO2"
 
 
-class CreateVirtualNetworkAttributesTypedDict(TypedDict):
+class CreateVirtualNetworkPrivateNetworksAttributesTypedDict(TypedDict):
     description: str
     project: str
     r"""Project ID or slug"""
-    site: NotRequired[CreateVirtualNetworkSite]
+    site: NotRequired[CreateVirtualNetworkPrivateNetworksSite]
     r"""Site ID or slug"""
 
 
-class CreateVirtualNetworkAttributes(BaseModel):
+class CreateVirtualNetworkPrivateNetworksAttributes(BaseModel):
     description: str
 
     project: str
     r"""Project ID or slug"""
 
-    site: Optional[CreateVirtualNetworkSite] = None
+    site: Optional[CreateVirtualNetworkPrivateNetworksSite] = None
     r"""Site ID or slug"""
 
 
-class CreateVirtualNetworkDataTypedDict(TypedDict):
-    type: CreateVirtualNetworkType
-    attributes: CreateVirtualNetworkAttributesTypedDict
+class CreateVirtualNetworkPrivateNetworksDataTypedDict(TypedDict):
+    type: CreateVirtualNetworkPrivateNetworksType
+    attributes: CreateVirtualNetworkPrivateNetworksAttributesTypedDict
 
 
-class CreateVirtualNetworkData(BaseModel):
-    type: CreateVirtualNetworkType
+class CreateVirtualNetworkPrivateNetworksData(BaseModel):
+    type: CreateVirtualNetworkPrivateNetworksType
 
-    attributes: CreateVirtualNetworkAttributes
-
-
-class CreateVirtualNetworkRequestBodyTypedDict(TypedDict):
-    data: CreateVirtualNetworkDataTypedDict
+    attributes: CreateVirtualNetworkPrivateNetworksAttributes
 
 
-class CreateVirtualNetworkRequestBody(BaseModel):
-    data: CreateVirtualNetworkData
+class CreateVirtualNetworkPrivateNetworksRequestBodyTypedDict(TypedDict):
+    data: CreateVirtualNetworkPrivateNetworksDataTypedDict
+
+
+class CreateVirtualNetworkPrivateNetworksRequestBody(BaseModel):
+    data: CreateVirtualNetworkPrivateNetworksData

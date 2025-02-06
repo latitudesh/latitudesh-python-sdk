@@ -63,10 +63,10 @@ with Latitudesh(
 
     res = latitudesh.teams.post_team(request={
         "data": {
-            "type": latitudesh_python_sdk.PostTeamType.TEAMS,
+            "type": latitudesh_python_sdk.PostTeamTeamsType.TEAMS,
             "attributes": {
                 "name": "Name",
-                "currency": latitudesh_python_sdk.PostTeamCurrency.USD,
+                "currency": latitudesh_python_sdk.PostTeamTeamsCurrency.USD,
                 "address": "Address",
             },
         },
@@ -79,10 +79,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `request`                                                           | [models.PostTeamRequestBody](../../models/postteamrequestbody.md)   | :heavy_check_mark:                                                  | The request object to use for the request.                          |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `request`                                                                   | [models.PostTeamTeamsRequestBody](../../models/postteamteamsrequestbody.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
+| `retries`                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)            | :heavy_minus_sign:                                                          | Configuration to override the default retry behavior of the client.         |
 
 ### Response
 
@@ -90,10 +90,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 406, 422           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 406, 422                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## patch_current_team
 
@@ -110,9 +110,9 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.teams.patch_current_team(team_id="49d41738-140a-4ee5-991e-c708f208e050", data={
-        "id": "team_2zLy9LxYpgH4Le2LGN02fMwNX9Xg",
-        "type": latitudesh_python_sdk.PatchCurrentTeamType.TEAMS,
+    res = latitudesh.teams.patch_current_team(team_id="7d6111de-ae7e-41af-9a8c-c5808e6d9807", data={
+        "id": "team_pEmgv7yvm7cl6KmKa5GPF3eRYvj",
+        "type": latitudesh_python_sdk.PatchCurrentTeamTeamsType.TEAMS,
         "attributes": {
             "address": "Address",
             "name": "Name",
@@ -126,11 +126,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `team_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
-| `data`                                                              | [models.PatchCurrentTeamData](../../models/patchcurrentteamdata.md) | :heavy_check_mark:                                                  | N/A                                                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `team_id`                                                                     | *str*                                                                         | :heavy_check_mark:                                                            | N/A                                                                           |
+| `data`                                                                        | [models.PatchCurrentTeamTeamsData](../../models/patchcurrentteamteamsdata.md) | :heavy_check_mark:                                                            | N/A                                                                           |
+| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |
 
 ### Response
 
@@ -138,7 +138,7 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 404           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |

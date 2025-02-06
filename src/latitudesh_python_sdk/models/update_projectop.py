@@ -13,62 +13,62 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class UpdateProjectType(str, Enum):
+class UpdateProjectProjectsType(str, Enum):
     PROJECTS = "projects"
 
 
-class UpdateProjectEnvironment(str, Enum):
+class UpdateProjectProjectsEnvironment(str, Enum):
     DEVELOPMENT = "Development"
     STAGING = "Staging"
     PRODUCTION = "Production"
 
 
-class UpdateProjectAttributesTypedDict(TypedDict):
+class UpdateProjectProjectsAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     description: NotRequired[str]
-    environment: NotRequired[UpdateProjectEnvironment]
+    environment: NotRequired[UpdateProjectProjectsEnvironment]
     bandwidth_alert: NotRequired[bool]
     tags: NotRequired[List[str]]
 
 
-class UpdateProjectAttributes(BaseModel):
+class UpdateProjectProjectsAttributes(BaseModel):
     name: Optional[str] = "A brand new name for the virtual network"
 
     description: Optional[str] = "A brand new description for the virtual network"
 
-    environment: Optional[UpdateProjectEnvironment] = None
+    environment: Optional[UpdateProjectProjectsEnvironment] = None
 
     bandwidth_alert: Optional[bool] = False
 
     tags: Optional[List[str]] = None
 
 
-class UpdateProjectDataTypedDict(TypedDict):
-    type: UpdateProjectType
+class UpdateProjectProjectsDataTypedDict(TypedDict):
+    type: UpdateProjectProjectsType
     id: NotRequired[str]
-    attributes: NotRequired[UpdateProjectAttributesTypedDict]
+    attributes: NotRequired[UpdateProjectProjectsAttributesTypedDict]
 
 
-class UpdateProjectData(BaseModel):
-    type: UpdateProjectType
+class UpdateProjectProjectsData(BaseModel):
+    type: UpdateProjectProjectsType
 
     id: Optional[str] = "proj_81EVOtR1N4J2Z"
 
-    attributes: Optional[UpdateProjectAttributes] = None
+    attributes: Optional[UpdateProjectProjectsAttributes] = None
 
 
-class UpdateProjectRequestBodyTypedDict(TypedDict):
-    data: UpdateProjectDataTypedDict
+class UpdateProjectProjectsRequestBodyTypedDict(TypedDict):
+    data: UpdateProjectProjectsDataTypedDict
 
 
-class UpdateProjectRequestBody(BaseModel):
-    data: UpdateProjectData
+class UpdateProjectProjectsRequestBody(BaseModel):
+    data: UpdateProjectProjectsData
 
 
 class UpdateProjectRequestTypedDict(TypedDict):
     project_id: str
     r"""The project ID or Slug"""
-    request_body: NotRequired[UpdateProjectRequestBodyTypedDict]
+    request_body: NotRequired[UpdateProjectProjectsRequestBodyTypedDict]
 
 
 class UpdateProjectRequest(BaseModel):
@@ -78,7 +78,7 @@ class UpdateProjectRequest(BaseModel):
     r"""The project ID or Slug"""
 
     request_body: Annotated[
-        Optional[UpdateProjectRequestBody],
+        Optional[UpdateProjectProjectsRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None
 

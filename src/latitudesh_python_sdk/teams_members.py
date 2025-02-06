@@ -41,7 +41,7 @@ class TeamsMembers(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -68,7 +68,7 @@ class TeamsMembers(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.TeamMembers)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -122,7 +122,7 @@ class TeamsMembers(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -149,7 +149,7 @@ class TeamsMembers(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.TeamMembers)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -176,8 +176,8 @@ class TeamsMembers(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.PostTeamMembersRequestBody,
-                models.PostTeamMembersRequestBodyTypedDict,
+                models.PostTeamMembersTeamsMembersRequestBody,
+                models.PostTeamMembersTeamsMembersRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -203,9 +203,9 @@ class TeamsMembers(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.PostTeamMembersRequestBody]
+                request, Optional[models.PostTeamMembersTeamsMembersRequestBody]
             )
-        request = cast(Optional[models.PostTeamMembersRequestBody], request)
+        request = cast(Optional[models.PostTeamMembersTeamsMembersRequestBody], request)
 
         req = self._build_request(
             method="POST",
@@ -217,7 +217,7 @@ class TeamsMembers(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -225,7 +225,7 @@ class TeamsMembers(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PostTeamMembersRequestBody],
+                Optional[models.PostTeamMembersTeamsMembersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -252,9 +252,9 @@ class TeamsMembers(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Membership)
-        if utils.match_response(http_res, ["403", "422"], "application/json"):
+        if utils.match_response(http_res, ["403", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -282,8 +282,8 @@ class TeamsMembers(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.PostTeamMembersRequestBody,
-                models.PostTeamMembersRequestBodyTypedDict,
+                models.PostTeamMembersTeamsMembersRequestBody,
+                models.PostTeamMembersTeamsMembersRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -309,9 +309,9 @@ class TeamsMembers(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.PostTeamMembersRequestBody]
+                request, Optional[models.PostTeamMembersTeamsMembersRequestBody]
             )
-        request = cast(Optional[models.PostTeamMembersRequestBody], request)
+        request = cast(Optional[models.PostTeamMembersTeamsMembersRequestBody], request)
 
         req = self._build_request_async(
             method="POST",
@@ -323,7 +323,7 @@ class TeamsMembers(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -331,7 +331,7 @@ class TeamsMembers(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PostTeamMembersRequestBody],
+                Optional[models.PostTeamMembersTeamsMembersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -358,9 +358,9 @@ class TeamsMembers(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Membership)
-        if utils.match_response(http_res, ["403", "422"], "application/json"):
+        if utils.match_response(http_res, ["403", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -422,7 +422,7 @@ class TeamsMembers(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -452,7 +452,7 @@ class TeamsMembers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, ["403", "4XX"], "*"):
@@ -514,7 +514,7 @@ class TeamsMembers(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -544,7 +544,7 @@ class TeamsMembers(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, ["403", "4XX"], "*"):

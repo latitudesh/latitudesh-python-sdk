@@ -27,9 +27,9 @@ with Latitudesh(
 
     res = latitudesh.storage.post_storage_filesystems(request={
         "data": {
-            "type": latitudesh_python_sdk.PostStorageFilesystemsType.FILESYSTEMS,
+            "type": latitudesh_python_sdk.PostStorageFilesystemsStorageType.FILESYSTEMS,
             "attributes": {
-                "project": "proj_WVQJDMAvDRbyE",
+                "project": "proj_0MoLqJZ0q57pY",
                 "name": "my-data",
             },
         },
@@ -42,10 +42,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `request`                                                                                     | [models.PostStorageFilesystemsRequestBody](../../models/poststoragefilesystemsrequestbody.md) | :heavy_check_mark:                                                                            | The request object to use for the request.                                                    |
-| `retries`                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                              | :heavy_minus_sign:                                                                            | Configuration to override the default retry behavior of the client.                           |
+| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                                   | [models.PostStorageFilesystemsStorageRequestBody](../../models/poststoragefilesystemsstoragerequestbody.md) | :heavy_check_mark:                                                                                          | The request object to use for the request.                                                                  |
+| `retries`                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                            | :heavy_minus_sign:                                                                                          | Configuration to override the default retry behavior of the client.                                         |
 
 ### Response
 
@@ -71,7 +71,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.storage.get_storage_filesystems(filter_project="aerodynamic-marble-shoes")
+    latitudesh.storage.get_storage_filesystems(filter_project="intelligent-cotton-bench")
 
     # Use the SDK ...
 
@@ -140,7 +140,7 @@ with Latitudesh(
 
     res = latitudesh.storage.patch_storage_filesystems(filesystem_id="fs_7vYAZqGBdMQ94", data={
         "id": "fs_7vYAZqGBdMQ94",
-        "type": latitudesh_python_sdk.PatchStorageFilesystemsType.FILESYSTEMS,
+        "type": latitudesh_python_sdk.PatchStorageFilesystemsStorageType.FILESYSTEMS,
         "attributes": {},
     })
 
@@ -151,11 +151,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
-| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `filesystem_id`                                                                   | *str*                                                                             | :heavy_check_mark:                                                                | N/A                                                                               |
-| `data`                                                                            | [models.PatchStorageFilesystemsData](../../models/patchstoragefilesystemsdata.md) | :heavy_check_mark:                                                                | N/A                                                                               |
-| `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `filesystem_id`                                                                                 | *str*                                                                                           | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `data`                                                                                          | [models.PatchStorageFilesystemsStorageData](../../models/patchstoragefilesystemsstoragedata.md) | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
 
 ### Response
 

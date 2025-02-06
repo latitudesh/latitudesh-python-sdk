@@ -71,7 +71,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.plans.get_plan(plan_id="plan_VE1Wd3aXDXnZJ")
+    res = latitudesh.plans.get_plan(plan_id="plan_w49QDB55qagKb")
 
     # Handle response
     print(res)
@@ -91,10 +91,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 404                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_bandwidth_plans
 
@@ -153,9 +153,9 @@ with Latitudesh(
 
     res = latitudesh.plans.update_plans_bandwidth(request={
         "data": {
-            "type": latitudesh_python_sdk.UpdatePlansBandwidthType.BANDWIDTH_PACKAGES,
+            "type": latitudesh_python_sdk.UpdatePlansBandwidthPlansType.BANDWIDTH_PACKAGES,
             "attributes": {
-                "project": "proj_QraYDPQNOpjwW",
+                "project": "proj_1ZJrdxNnDg4LV",
                 "quantity": 5,
                 "region_slug": "brazil",
             },
@@ -169,10 +169,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
-| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `request`                                                                                 | [models.UpdatePlansBandwidthRequestBody](../../models/updateplansbandwidthrequestbody.md) | :heavy_check_mark:                                                                        | The request object to use for the request.                                                |
-| `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `request`                                                                                           | [models.UpdatePlansBandwidthPlansRequestBody](../../models/updateplansbandwidthplansrequestbody.md) | :heavy_check_mark:                                                                                  | The request object to use for the request.                                                          |
+| `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |
 
 ### Response
 
@@ -180,10 +180,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_storage_plans
 

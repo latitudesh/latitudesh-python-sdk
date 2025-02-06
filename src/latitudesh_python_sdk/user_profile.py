@@ -44,7 +44,7 @@ class UserProfile(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -71,7 +71,7 @@ class UserProfile(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.GetUserProfileResponseBody
             )
@@ -130,7 +130,7 @@ class UserProfile(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -157,7 +157,7 @@ class UserProfile(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.GetUserProfileResponseBody
             )
@@ -185,7 +185,10 @@ class UserProfile(BaseSDK):
         self,
         *,
         id: str,
-        data: Union[models.PatchUserProfileData, models.PatchUserProfileDataTypedDict],
+        data: Union[
+            models.PatchUserProfileUserProfileData,
+            models.PatchUserProfileUserProfileDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -213,8 +216,10 @@ class UserProfile(BaseSDK):
 
         request = models.PatchUserProfileRequest(
             id=id,
-            request_body=models.PatchUserProfileRequestBody(
-                data=utils.get_pydantic_model(data, models.PatchUserProfileData),
+            request_body=models.PatchUserProfileUserProfileRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PatchUserProfileUserProfileData
+                ),
             ),
         )
 
@@ -228,7 +233,7 @@ class UserProfile(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -236,7 +241,7 @@ class UserProfile(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PatchUserProfileRequestBody],
+                Optional[models.PatchUserProfileUserProfileRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -263,11 +268,11 @@ class UserProfile(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.PatchUserProfileResponseBody
             )
-        if utils.match_response(http_res, "403", "application/json"):
+        if utils.match_response(http_res, "403", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, ["422", "4XX"], "*"):
@@ -294,7 +299,10 @@ class UserProfile(BaseSDK):
         self,
         *,
         id: str,
-        data: Union[models.PatchUserProfileData, models.PatchUserProfileDataTypedDict],
+        data: Union[
+            models.PatchUserProfileUserProfileData,
+            models.PatchUserProfileUserProfileDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -322,8 +330,10 @@ class UserProfile(BaseSDK):
 
         request = models.PatchUserProfileRequest(
             id=id,
-            request_body=models.PatchUserProfileRequestBody(
-                data=utils.get_pydantic_model(data, models.PatchUserProfileData),
+            request_body=models.PatchUserProfileUserProfileRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PatchUserProfileUserProfileData
+                ),
             ),
         )
 
@@ -337,7 +347,7 @@ class UserProfile(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -345,7 +355,7 @@ class UserProfile(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PatchUserProfileRequestBody],
+                Optional[models.PatchUserProfileUserProfileRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -372,11 +382,11 @@ class UserProfile(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.PatchUserProfileResponseBody
             )
-        if utils.match_response(http_res, "403", "application/json"):
+        if utils.match_response(http_res, "403", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, ["422", "4XX"], "*"):
@@ -434,7 +444,7 @@ class UserProfile(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -461,7 +471,7 @@ class UserProfile(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.UserTeams)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -518,7 +528,7 @@ class UserProfile(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -545,7 +555,7 @@ class UserProfile(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.UserTeams)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

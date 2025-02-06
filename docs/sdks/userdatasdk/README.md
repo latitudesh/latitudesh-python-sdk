@@ -26,7 +26,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.get_project_users_data(project_id="proj_Gr47qlMADAg0m")
+    res = latitudesh.user_data.get_project_users_data(project_id="proj_kjQwdEa7dYNVP")
 
     # Handle response
     print(res)
@@ -67,8 +67,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.post_project_user_data(project_id="proj_VE1Wd3GadXnZJ", data={
-        "type": latitudesh_python_sdk.PostProjectUserDataType.USER_DATA,
+    res = latitudesh.user_data.post_project_user_data(project_id="proj_A05EdQW5DvKYQ", data={
+        "type": latitudesh_python_sdk.PostProjectUserDataUserDataType.USER_DATA,
         "attributes": {
             "description": "User Data description",
             "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd",
@@ -82,11 +82,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                 | Type                                                                      | Required                                                                  | Description                                                               |
-| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `project_id`                                                              | *str*                                                                     | :heavy_check_mark:                                                        | Project ID or Slug                                                        |
-| `data`                                                                    | [models.PostProjectUserDataData](../../models/postprojectuserdatadata.md) | :heavy_check_mark:                                                        | N/A                                                                       |
-| `retries`                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)          | :heavy_minus_sign:                                                        | Configuration to override the default retry behavior of the client.       |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `project_id`                                                                              | *str*                                                                                     | :heavy_check_mark:                                                                        | Project ID or Slug                                                                        |
+| `data`                                                                                    | [models.PostProjectUserDataUserDataData](../../models/postprojectuserdatauserdatadata.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |
 
 ### Response
 
@@ -113,7 +113,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.get_project_user_data(project_id="proj_kjQwdEa7dYNVP", user_data_id="ud_Ee8pKq05DWAob")
+    res = latitudesh.user_data.get_project_user_data(project_id="proj_VE1Wd3GadXnZJ", user_data_id="ud_Ee8pKq05DWAob")
 
     # Handle response
     print(res)
@@ -155,9 +155,9 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.put_project_user_data(project_id="proj_vYAZqG44DMQ94", user_data_id="ud_GlxWpD6KOm6rk", data={
+    res = latitudesh.user_data.put_project_user_data(project_id="proj_1ZJrdxvyDg4LV", user_data_id="ud_GlxWpD6KOm6rk", data={
         "id": "ud_GlxWpD6KOm6rk",
-        "type": latitudesh_python_sdk.PutProjectUserDataType.USER_DATA,
+        "type": latitudesh_python_sdk.PutProjectUserDataUserDataType.USER_DATA,
         "attributes": {
             "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd",
         },
@@ -170,12 +170,12 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `project_id`                                                            | *str*                                                                   | :heavy_check_mark:                                                      | Project ID or Slug                                                      |
-| `user_data_id`                                                          | *str*                                                                   | :heavy_check_mark:                                                      | N/A                                                                     |
-| `data`                                                                  | [models.PutProjectUserDataData](../../models/putprojectuserdatadata.md) | :heavy_check_mark:                                                      | N/A                                                                     |
-| `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `project_id`                                                                            | *str*                                                                                   | :heavy_check_mark:                                                                      | Project ID or Slug                                                                      |
+| `user_data_id`                                                                          | *str*                                                                                   | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `data`                                                                                  | [models.PutProjectUserDataUserDataData](../../models/putprojectuserdatauserdatadata.md) | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
 
 ### Response
 
@@ -202,7 +202,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.user_data.delete_project_user_data(project_id="proj_QraYDPA3OpjwW", user_data_id="123")
+    latitudesh.user_data.delete_project_user_data(project_id="proj_lxWpD62zDm6rk", user_data_id="123")
 
     # Use the SDK ...
 

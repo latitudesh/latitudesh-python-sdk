@@ -8,27 +8,27 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class PostTeamType(str, Enum):
+class PostTeamTeamsType(str, Enum):
     TEAMS = "teams"
 
 
-class PostTeamCurrency(str, Enum):
+class PostTeamTeamsCurrency(str, Enum):
     USD = "USD"
     BRL = "BRL"
 
 
-class PostTeamAttributesTypedDict(TypedDict):
+class PostTeamTeamsAttributesTypedDict(TypedDict):
     name: str
-    currency: PostTeamCurrency
+    currency: PostTeamTeamsCurrency
     address: NotRequired[str]
     referred_code: NotRequired[str]
     r"""Supported only for first team creation"""
 
 
-class PostTeamAttributes(BaseModel):
+class PostTeamTeamsAttributes(BaseModel):
     name: str
 
-    currency: PostTeamCurrency
+    currency: PostTeamTeamsCurrency
 
     address: Optional[str] = None
 
@@ -36,23 +36,23 @@ class PostTeamAttributes(BaseModel):
     r"""Supported only for first team creation"""
 
 
-class PostTeamDataTypedDict(TypedDict):
-    type: PostTeamType
-    attributes: NotRequired[PostTeamAttributesTypedDict]
+class PostTeamTeamsDataTypedDict(TypedDict):
+    type: PostTeamTeamsType
+    attributes: NotRequired[PostTeamTeamsAttributesTypedDict]
 
 
-class PostTeamData(BaseModel):
-    type: PostTeamType
+class PostTeamTeamsData(BaseModel):
+    type: PostTeamTeamsType
 
-    attributes: Optional[PostTeamAttributes] = None
-
-
-class PostTeamRequestBodyTypedDict(TypedDict):
-    data: PostTeamDataTypedDict
+    attributes: Optional[PostTeamTeamsAttributes] = None
 
 
-class PostTeamRequestBody(BaseModel):
-    data: PostTeamData
+class PostTeamTeamsRequestBodyTypedDict(TypedDict):
+    data: PostTeamTeamsDataTypedDict
+
+
+class PostTeamTeamsRequestBody(BaseModel):
+    data: PostTeamTeamsData
 
 
 class PostTeamResponseBodyTypedDict(TypedDict):

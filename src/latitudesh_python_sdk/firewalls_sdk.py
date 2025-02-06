@@ -14,8 +14,8 @@ class FirewallsSDK(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.CreateFirewallRequestBody,
-                models.CreateFirewallRequestBodyTypedDict,
+                models.CreateFirewallFirewallsRequestBody,
+                models.CreateFirewallFirewallsRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -43,9 +43,9 @@ class FirewallsSDK(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.CreateFirewallRequestBody]
+                request, Optional[models.CreateFirewallFirewallsRequestBody]
             )
-        request = cast(Optional[models.CreateFirewallRequestBody], request)
+        request = cast(Optional[models.CreateFirewallFirewallsRequestBody], request)
 
         req = self._build_request(
             method="POST",
@@ -57,11 +57,15 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.CreateFirewallRequestBody]
+                request,
+                False,
+                True,
+                "json",
+                Optional[models.CreateFirewallFirewallsRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -88,9 +92,9 @@ class FirewallsSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Firewall)
-        if utils.match_response(http_res, "422", "application/json"):
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -118,8 +122,8 @@ class FirewallsSDK(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.CreateFirewallRequestBody,
-                models.CreateFirewallRequestBodyTypedDict,
+                models.CreateFirewallFirewallsRequestBody,
+                models.CreateFirewallFirewallsRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -147,9 +151,9 @@ class FirewallsSDK(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.CreateFirewallRequestBody]
+                request, Optional[models.CreateFirewallFirewallsRequestBody]
             )
-        request = cast(Optional[models.CreateFirewallRequestBody], request)
+        request = cast(Optional[models.CreateFirewallFirewallsRequestBody], request)
 
         req = self._build_request_async(
             method="POST",
@@ -161,11 +165,15 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.CreateFirewallRequestBody]
+                request,
+                False,
+                True,
+                "json",
+                Optional[models.CreateFirewallFirewallsRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -192,9 +200,9 @@ class FirewallsSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Firewall)
-        if utils.match_response(http_res, "422", "application/json"):
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -258,7 +266,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -285,7 +293,7 @@ class FirewallsSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Firewalls)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -348,7 +356,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -375,7 +383,7 @@ class FirewallsSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Firewalls)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -438,7 +446,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -466,9 +474,9 @@ class FirewallsSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Firewall)
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -532,7 +540,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -560,9 +568,9 @@ class FirewallsSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Firewall)
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -589,7 +597,10 @@ class FirewallsSDK(BaseSDK):
         self,
         *,
         firewall_id: str,
-        data: Union[models.UpdateFirewallData, models.UpdateFirewallDataTypedDict],
+        data: Union[
+            models.UpdateFirewallFirewallsData,
+            models.UpdateFirewallFirewallsDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -616,8 +627,8 @@ class FirewallsSDK(BaseSDK):
 
         request = models.UpdateFirewallRequest(
             firewall_id=firewall_id,
-            request_body=models.UpdateFirewallRequestBody(
-                data=utils.get_pydantic_model(data, models.UpdateFirewallData),
+            request_body=models.UpdateFirewallFirewallsRequestBody(
+                data=utils.get_pydantic_model(data, models.UpdateFirewallFirewallsData),
             ),
         )
 
@@ -631,7 +642,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -639,7 +650,7 @@ class FirewallsSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.UpdateFirewallRequestBody],
+                Optional[models.UpdateFirewallFirewallsRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -666,9 +677,9 @@ class FirewallsSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Firewall)
-        if utils.match_response(http_res, ["404", "422"], "application/json"):
+        if utils.match_response(http_res, ["404", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -695,7 +706,10 @@ class FirewallsSDK(BaseSDK):
         self,
         *,
         firewall_id: str,
-        data: Union[models.UpdateFirewallData, models.UpdateFirewallDataTypedDict],
+        data: Union[
+            models.UpdateFirewallFirewallsData,
+            models.UpdateFirewallFirewallsDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -722,8 +736,8 @@ class FirewallsSDK(BaseSDK):
 
         request = models.UpdateFirewallRequest(
             firewall_id=firewall_id,
-            request_body=models.UpdateFirewallRequestBody(
-                data=utils.get_pydantic_model(data, models.UpdateFirewallData),
+            request_body=models.UpdateFirewallFirewallsRequestBody(
+                data=utils.get_pydantic_model(data, models.UpdateFirewallFirewallsData),
             ),
         )
 
@@ -737,7 +751,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -745,7 +759,7 @@ class FirewallsSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.UpdateFirewallRequestBody],
+                Optional[models.UpdateFirewallFirewallsRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -772,9 +786,9 @@ class FirewallsSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Firewall)
-        if utils.match_response(http_res, ["404", "422"], "application/json"):
+        if utils.match_response(http_res, ["404", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -838,7 +852,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -868,7 +882,7 @@ class FirewallsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["404", "422"], "application/json"):
+        if utils.match_response(http_res, ["404", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -932,7 +946,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -962,7 +976,7 @@ class FirewallsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["404", "422"], "application/json"):
+        if utils.match_response(http_res, ["404", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -990,8 +1004,8 @@ class FirewallsSDK(BaseSDK):
         *,
         firewall_id: str,
         data: Union[
-            models.CreateFirewallAssignmentData,
-            models.CreateFirewallAssignmentDataTypedDict,
+            models.CreateFirewallAssignmentFirewallsData,
+            models.CreateFirewallAssignmentFirewallsDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1019,9 +1033,9 @@ class FirewallsSDK(BaseSDK):
 
         request = models.CreateFirewallAssignmentRequest(
             firewall_id=firewall_id,
-            request_body=models.CreateFirewallAssignmentRequestBody(
+            request_body=models.CreateFirewallAssignmentFirewallsRequestBody(
                 data=utils.get_pydantic_model(
-                    data, models.CreateFirewallAssignmentData
+                    data, models.CreateFirewallAssignmentFirewallsData
                 ),
             ),
         )
@@ -1036,7 +1050,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -1044,7 +1058,7 @@ class FirewallsSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.CreateFirewallAssignmentRequestBody],
+                Optional[models.CreateFirewallAssignmentFirewallsRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -1071,10 +1085,10 @@ class FirewallsSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.FirewallServer)
         if utils.match_response(
-            http_res, ["403", "404", "409", "422"], "application/json"
+            http_res, ["403", "404", "409", "422"], "application/vnd.api+json"
         ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
@@ -1103,8 +1117,8 @@ class FirewallsSDK(BaseSDK):
         *,
         firewall_id: str,
         data: Union[
-            models.CreateFirewallAssignmentData,
-            models.CreateFirewallAssignmentDataTypedDict,
+            models.CreateFirewallAssignmentFirewallsData,
+            models.CreateFirewallAssignmentFirewallsDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1132,9 +1146,9 @@ class FirewallsSDK(BaseSDK):
 
         request = models.CreateFirewallAssignmentRequest(
             firewall_id=firewall_id,
-            request_body=models.CreateFirewallAssignmentRequestBody(
+            request_body=models.CreateFirewallAssignmentFirewallsRequestBody(
                 data=utils.get_pydantic_model(
-                    data, models.CreateFirewallAssignmentData
+                    data, models.CreateFirewallAssignmentFirewallsData
                 ),
             ),
         )
@@ -1149,7 +1163,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -1157,7 +1171,7 @@ class FirewallsSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.CreateFirewallAssignmentRequestBody],
+                Optional[models.CreateFirewallAssignmentFirewallsRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -1184,10 +1198,10 @@ class FirewallsSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.FirewallServer)
         if utils.match_response(
-            http_res, ["403", "404", "409", "422"], "application/json"
+            http_res, ["403", "404", "409", "422"], "application/vnd.api+json"
         ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
@@ -1252,7 +1266,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1280,9 +1294,9 @@ class FirewallsSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.FirewallServer)
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1346,7 +1360,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1374,9 +1388,9 @@ class FirewallsSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.FirewallServer)
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1443,7 +1457,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1473,7 +1487,7 @@ class FirewallsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["403", "404"], "application/json"):
+        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1540,7 +1554,7 @@ class FirewallsSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1570,7 +1584,7 @@ class FirewallsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["403", "404"], "application/json"):
+        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):

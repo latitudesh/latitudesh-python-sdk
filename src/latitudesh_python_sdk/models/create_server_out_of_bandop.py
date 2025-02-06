@@ -12,42 +12,42 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class CreateServerOutOfBandType(str, Enum):
+class CreateServerOutOfBandServersType(str, Enum):
     OUT_OF_BAND = "out_of_band"
 
 
-class CreateServerOutOfBandAttributesTypedDict(TypedDict):
+class CreateServerOutOfBandServersAttributesTypedDict(TypedDict):
     ssh_key_id: NotRequired[str]
     r"""SSH Key ID to set for out of band"""
 
 
-class CreateServerOutOfBandAttributes(BaseModel):
+class CreateServerOutOfBandServersAttributes(BaseModel):
     ssh_key_id: Optional[str] = None
     r"""SSH Key ID to set for out of band"""
 
 
-class CreateServerOutOfBandDataTypedDict(TypedDict):
-    type: CreateServerOutOfBandType
-    attributes: NotRequired[CreateServerOutOfBandAttributesTypedDict]
+class CreateServerOutOfBandServersDataTypedDict(TypedDict):
+    type: CreateServerOutOfBandServersType
+    attributes: NotRequired[CreateServerOutOfBandServersAttributesTypedDict]
 
 
-class CreateServerOutOfBandData(BaseModel):
-    type: CreateServerOutOfBandType
+class CreateServerOutOfBandServersData(BaseModel):
+    type: CreateServerOutOfBandServersType
 
-    attributes: Optional[CreateServerOutOfBandAttributes] = None
-
-
-class CreateServerOutOfBandRequestBodyTypedDict(TypedDict):
-    data: CreateServerOutOfBandDataTypedDict
+    attributes: Optional[CreateServerOutOfBandServersAttributes] = None
 
 
-class CreateServerOutOfBandRequestBody(BaseModel):
-    data: CreateServerOutOfBandData
+class CreateServerOutOfBandServersRequestBodyTypedDict(TypedDict):
+    data: CreateServerOutOfBandServersDataTypedDict
+
+
+class CreateServerOutOfBandServersRequestBody(BaseModel):
+    data: CreateServerOutOfBandServersData
 
 
 class CreateServerOutOfBandRequestTypedDict(TypedDict):
     server_id: str
-    request_body: NotRequired[CreateServerOutOfBandRequestBodyTypedDict]
+    request_body: NotRequired[CreateServerOutOfBandServersRequestBodyTypedDict]
 
 
 class CreateServerOutOfBandRequest(BaseModel):
@@ -56,6 +56,6 @@ class CreateServerOutOfBandRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[CreateServerOutOfBandRequestBody],
+        Optional[CreateServerOutOfBandServersRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None

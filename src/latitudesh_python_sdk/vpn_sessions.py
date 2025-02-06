@@ -48,7 +48,7 @@ class VPNSessions(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -76,11 +76,11 @@ class VPNSessions(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.GetVpnSessionsResponseBody
             )
-        if utils.match_response(http_res, "422", "application/json"):
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -142,7 +142,7 @@ class VPNSessions(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -170,11 +170,11 @@ class VPNSessions(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.GetVpnSessionsResponseBody
             )
-        if utils.match_response(http_res, "422", "application/json"):
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -202,8 +202,8 @@ class VPNSessions(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.PostVpnSessionRequestBody,
-                models.PostVpnSessionRequestBodyTypedDict,
+                models.PostVPNSessionVPNSessionsRequestBody,
+                models.PostVPNSessionVPNSessionsRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -233,9 +233,9 @@ class VPNSessions(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.PostVpnSessionRequestBody]
+                request, Optional[models.PostVPNSessionVPNSessionsRequestBody]
             )
-        request = cast(Optional[models.PostVpnSessionRequestBody], request)
+        request = cast(Optional[models.PostVPNSessionVPNSessionsRequestBody], request)
 
         req = self._build_request(
             method="POST",
@@ -247,11 +247,15 @@ class VPNSessions(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.PostVpnSessionRequestBody]
+                request,
+                False,
+                True,
+                "json",
+                Optional[models.PostVPNSessionVPNSessionsRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -278,9 +282,9 @@ class VPNSessions(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VpnSessionWithPassword)
-        if utils.match_response(http_res, "422", "application/json"):
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -308,8 +312,8 @@ class VPNSessions(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.PostVpnSessionRequestBody,
-                models.PostVpnSessionRequestBodyTypedDict,
+                models.PostVPNSessionVPNSessionsRequestBody,
+                models.PostVPNSessionVPNSessionsRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -339,9 +343,9 @@ class VPNSessions(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.PostVpnSessionRequestBody]
+                request, Optional[models.PostVPNSessionVPNSessionsRequestBody]
             )
-        request = cast(Optional[models.PostVpnSessionRequestBody], request)
+        request = cast(Optional[models.PostVPNSessionVPNSessionsRequestBody], request)
 
         req = self._build_request_async(
             method="POST",
@@ -353,11 +357,15 @@ class VPNSessions(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.PostVpnSessionRequestBody]
+                request,
+                False,
+                True,
+                "json",
+                Optional[models.PostVPNSessionVPNSessionsRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -384,9 +392,9 @@ class VPNSessions(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VpnSessionWithPassword)
-        if utils.match_response(http_res, "422", "application/json"):
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -451,7 +459,7 @@ class VPNSessions(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -479,9 +487,9 @@ class VPNSessions(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VpnSessionWithPassword)
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -546,7 +554,7 @@ class VPNSessions(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -574,9 +582,9 @@ class VPNSessions(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.VpnSessionWithPassword)
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -641,7 +649,7 @@ class VPNSessions(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -671,7 +679,7 @@ class VPNSessions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -736,7 +744,7 @@ class VPNSessions(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -766,7 +774,7 @@ class VPNSessions(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):

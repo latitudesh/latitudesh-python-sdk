@@ -93,7 +93,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -120,7 +120,7 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Servers)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -226,7 +226,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -253,7 +253,7 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Servers)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -280,7 +280,8 @@ class ServersSDK(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.CreateServerRequestBody, models.CreateServerRequestBodyTypedDict
+                models.CreateServerServersRequestBody,
+                models.CreateServerServersRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -305,8 +306,10 @@ class ServersSDK(BaseSDK):
             base_url = server_url
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, Optional[models.CreateServerRequestBody])
-        request = cast(Optional[models.CreateServerRequestBody], request)
+            request = utils.unmarshal(
+                request, Optional[models.CreateServerServersRequestBody]
+            )
+        request = cast(Optional[models.CreateServerServersRequestBody], request)
 
         req = self._build_request(
             method="POST",
@@ -318,11 +321,15 @@ class ServersSDK(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.CreateServerRequestBody]
+                request,
+                False,
+                True,
+                "json",
+                Optional[models.CreateServerServersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -349,9 +356,11 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Server)
-        if utils.match_response(http_res, ["400", "402", "422"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "402", "422"], "application/vnd.api+json"
+        ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -379,7 +388,8 @@ class ServersSDK(BaseSDK):
         *,
         request: Optional[
             Union[
-                models.CreateServerRequestBody, models.CreateServerRequestBodyTypedDict
+                models.CreateServerServersRequestBody,
+                models.CreateServerServersRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -404,8 +414,10 @@ class ServersSDK(BaseSDK):
             base_url = server_url
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, Optional[models.CreateServerRequestBody])
-        request = cast(Optional[models.CreateServerRequestBody], request)
+            request = utils.unmarshal(
+                request, Optional[models.CreateServerServersRequestBody]
+            )
+        request = cast(Optional[models.CreateServerServersRequestBody], request)
 
         req = self._build_request_async(
             method="POST",
@@ -417,11 +429,15 @@ class ServersSDK(BaseSDK):
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.CreateServerRequestBody]
+                request,
+                False,
+                True,
+                "json",
+                Optional[models.CreateServerServersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -448,9 +464,11 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Server)
-        if utils.match_response(http_res, ["400", "402", "422"], "application/json"):
+        if utils.match_response(
+            http_res, ["400", "402", "422"], "application/vnd.api+json"
+        ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -518,7 +536,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -545,7 +563,7 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Server)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -612,7 +630,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -639,7 +657,7 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Server)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -666,9 +684,12 @@ class ServersSDK(BaseSDK):
         *,
         server_id: str,
         id: Optional[str] = "sv_81EVOtR1N4J2Z",
-        type_: Optional[models.UpdateServerType] = None,
+        type_: Optional[models.UpdateServerServersType] = None,
         attributes: Optional[
-            Union[models.UpdateServerAttributes, models.UpdateServerAttributesTypedDict]
+            Union[
+                models.UpdateServerServersAttributes,
+                models.UpdateServerServersAttributesTypedDict,
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -696,11 +717,11 @@ class ServersSDK(BaseSDK):
 
         request = models.UpdateServerRequest(
             server_id=server_id,
-            request_body=models.UpdateServerRequestBody(
+            request_body=models.UpdateServerServersRequestBody(
                 id=id,
                 type=type_,
                 attributes=utils.get_pydantic_model(
-                    attributes, Optional[models.UpdateServerAttributes]
+                    attributes, Optional[models.UpdateServerServersAttributes]
                 ),
             ),
         )
@@ -715,7 +736,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -723,7 +744,7 @@ class ServersSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.UpdateServerRequestBody],
+                Optional[models.UpdateServerServersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -745,17 +766,19 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "423", "4XX", "5XX"],
+            error_status_codes=["400", "402", "422", "423", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, "400", "application/json"):
+        if utils.match_response(http_res, "400", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
             raise models.ServerError(data=response_data)
-        if utils.match_response(http_res, ["422", "423"], "application/json"):
+        if utils.match_response(
+            http_res, ["402", "422", "423"], "application/vnd.api+json"
+        ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -783,9 +806,12 @@ class ServersSDK(BaseSDK):
         *,
         server_id: str,
         id: Optional[str] = "sv_81EVOtR1N4J2Z",
-        type_: Optional[models.UpdateServerType] = None,
+        type_: Optional[models.UpdateServerServersType] = None,
         attributes: Optional[
-            Union[models.UpdateServerAttributes, models.UpdateServerAttributesTypedDict]
+            Union[
+                models.UpdateServerServersAttributes,
+                models.UpdateServerServersAttributesTypedDict,
+            ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -813,11 +839,11 @@ class ServersSDK(BaseSDK):
 
         request = models.UpdateServerRequest(
             server_id=server_id,
-            request_body=models.UpdateServerRequestBody(
+            request_body=models.UpdateServerServersRequestBody(
                 id=id,
                 type=type_,
                 attributes=utils.get_pydantic_model(
-                    attributes, Optional[models.UpdateServerAttributes]
+                    attributes, Optional[models.UpdateServerServersAttributes]
                 ),
             ),
         )
@@ -832,7 +858,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -840,7 +866,7 @@ class ServersSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.UpdateServerRequestBody],
+                Optional[models.UpdateServerServersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -862,17 +888,19 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "423", "4XX", "5XX"],
+            error_status_codes=["400", "402", "422", "423", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, "400", "application/json"):
+        if utils.match_response(http_res, "400", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
             raise models.ServerError(data=response_data)
-        if utils.match_response(http_res, ["422", "423"], "application/json"):
+        if utils.match_response(
+            http_res, ["402", "422", "423"], "application/vnd.api+json"
+        ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -937,7 +965,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -967,7 +995,9 @@ class ServersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["403", "406", "422"], "application/json"):
+        if utils.match_response(
+            http_res, ["403", "406", "422"], "application/vnd.api+json"
+        ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, ["423", "4XX"], "*"):
@@ -1032,7 +1062,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1062,7 +1092,9 @@ class ServersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["403", "406", "422"], "application/json"):
+        if utils.match_response(
+            http_res, ["403", "406", "422"], "application/vnd.api+json"
+        ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, ["423", "4XX"], "*"):
@@ -1124,7 +1156,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1151,7 +1183,7 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.DeployConfig)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1212,7 +1244,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1239,7 +1271,7 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.DeployConfig)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1265,11 +1297,11 @@ class ServersSDK(BaseSDK):
         self,
         *,
         server_id: str,
-        type_: models.UpdateServerDeployConfigType,
+        type_: models.UpdateServerDeployConfigServersType,
         attributes: Optional[
             Union[
-                models.UpdateServerDeployConfigAttributes,
-                models.UpdateServerDeployConfigAttributesTypedDict,
+                models.UpdateServerDeployConfigServersAttributes,
+                models.UpdateServerDeployConfigServersAttributesTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1297,10 +1329,11 @@ class ServersSDK(BaseSDK):
 
         request = models.UpdateServerDeployConfigRequest(
             server_id=server_id,
-            request_body=models.UpdateServerDeployConfigRequestBody(
+            request_body=models.UpdateServerDeployConfigServersRequestBody(
                 type=type_,
                 attributes=utils.get_pydantic_model(
-                    attributes, Optional[models.UpdateServerDeployConfigAttributes]
+                    attributes,
+                    Optional[models.UpdateServerDeployConfigServersAttributes],
                 ),
             ),
         )
@@ -1315,7 +1348,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -1323,7 +1356,7 @@ class ServersSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.UpdateServerDeployConfigRequestBody],
+                Optional[models.UpdateServerDeployConfigServersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -1350,12 +1383,12 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.DeployConfig)
-        if utils.match_response(http_res, ["403", "406"], "application/json"):
+        if utils.match_response(http_res, ["403", "406"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, "422", "application/json"):
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(
                 http_res.text, models.DeployConfigErrorData
             )
@@ -1384,11 +1417,11 @@ class ServersSDK(BaseSDK):
         self,
         *,
         server_id: str,
-        type_: models.UpdateServerDeployConfigType,
+        type_: models.UpdateServerDeployConfigServersType,
         attributes: Optional[
             Union[
-                models.UpdateServerDeployConfigAttributes,
-                models.UpdateServerDeployConfigAttributesTypedDict,
+                models.UpdateServerDeployConfigServersAttributes,
+                models.UpdateServerDeployConfigServersAttributesTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -1416,10 +1449,11 @@ class ServersSDK(BaseSDK):
 
         request = models.UpdateServerDeployConfigRequest(
             server_id=server_id,
-            request_body=models.UpdateServerDeployConfigRequestBody(
+            request_body=models.UpdateServerDeployConfigServersRequestBody(
                 type=type_,
                 attributes=utils.get_pydantic_model(
-                    attributes, Optional[models.UpdateServerDeployConfigAttributes]
+                    attributes,
+                    Optional[models.UpdateServerDeployConfigServersAttributes],
                 ),
             ),
         )
@@ -1434,7 +1468,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -1442,7 +1476,7 @@ class ServersSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.UpdateServerDeployConfigRequestBody],
+                Optional[models.UpdateServerDeployConfigServersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -1469,12 +1503,12 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.DeployConfig)
-        if utils.match_response(http_res, ["403", "406"], "application/json"):
+        if utils.match_response(http_res, ["403", "406"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, "422", "application/json"):
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(
                 http_res.text, models.DeployConfigErrorData
             )
@@ -1540,7 +1574,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1567,7 +1601,7 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Server1)
         if utils.match_response(http_res, ["403", "404", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1630,7 +1664,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1657,7 +1691,7 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Server1)
         if utils.match_response(http_res, ["403", "404", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1720,7 +1754,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1747,7 +1781,7 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Server1)
         if utils.match_response(http_res, ["403", "404", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -1810,7 +1844,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1837,7 +1871,7 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.Server1)
         if utils.match_response(http_res, ["403", "404", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -1864,7 +1898,8 @@ class ServersSDK(BaseSDK):
         *,
         server_id: str,
         data: Union[
-            models.CreateServerOutOfBandData, models.CreateServerOutOfBandDataTypedDict
+            models.CreateServerOutOfBandServersData,
+            models.CreateServerOutOfBandServersDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1890,8 +1925,10 @@ class ServersSDK(BaseSDK):
 
         request = models.CreateServerOutOfBandRequest(
             server_id=server_id,
-            request_body=models.CreateServerOutOfBandRequestBody(
-                data=utils.get_pydantic_model(data, models.CreateServerOutOfBandData),
+            request_body=models.CreateServerOutOfBandServersRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.CreateServerOutOfBandServersData
+                ),
             ),
         )
 
@@ -1905,7 +1942,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -1913,7 +1950,7 @@ class ServersSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.CreateServerOutOfBandRequestBody],
+                Optional[models.CreateServerOutOfBandServersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -1940,9 +1977,9 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.OutOfBandConnection)
-        if utils.match_response(http_res, ["403", "404"], "application/json"):
+        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, ["406", "4XX"], "*"):
@@ -1970,7 +2007,8 @@ class ServersSDK(BaseSDK):
         *,
         server_id: str,
         data: Union[
-            models.CreateServerOutOfBandData, models.CreateServerOutOfBandDataTypedDict
+            models.CreateServerOutOfBandServersData,
+            models.CreateServerOutOfBandServersDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1996,8 +2034,10 @@ class ServersSDK(BaseSDK):
 
         request = models.CreateServerOutOfBandRequest(
             server_id=server_id,
-            request_body=models.CreateServerOutOfBandRequestBody(
-                data=utils.get_pydantic_model(data, models.CreateServerOutOfBandData),
+            request_body=models.CreateServerOutOfBandServersRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.CreateServerOutOfBandServersData
+                ),
             ),
         )
 
@@ -2011,7 +2051,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -2019,7 +2059,7 @@ class ServersSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.CreateServerOutOfBandRequestBody],
+                Optional[models.CreateServerOutOfBandServersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -2046,9 +2086,9 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.OutOfBandConnection)
-        if utils.match_response(http_res, ["403", "404"], "application/json"):
+        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, ["406", "4XX"], "*"):
@@ -2110,7 +2150,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -2138,9 +2178,9 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.OutOfBandConnection)
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -2202,7 +2242,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -2230,9 +2270,9 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.OutOfBandConnection)
-        if utils.match_response(http_res, "404", "application/json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -2260,7 +2300,8 @@ class ServersSDK(BaseSDK):
         *,
         server_id: str,
         data: Union[
-            models.CreateServerActionData, models.CreateServerActionDataTypedDict
+            models.CreateServerActionServersData,
+            models.CreateServerActionServersDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2292,8 +2333,10 @@ class ServersSDK(BaseSDK):
 
         request = models.CreateServerActionRequest(
             server_id=server_id,
-            request_body=models.CreateServerActionRequestBody(
-                data=utils.get_pydantic_model(data, models.CreateServerActionData),
+            request_body=models.CreateServerActionServersRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.CreateServerActionServersData
+                ),
             ),
         )
 
@@ -2307,7 +2350,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -2315,7 +2358,7 @@ class ServersSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.CreateServerActionRequestBody],
+                Optional[models.CreateServerActionServersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -2342,9 +2385,9 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.ServerAction)
-        if utils.match_response(http_res, "403", "application/json"):
+        if utils.match_response(http_res, "403", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -2372,7 +2415,8 @@ class ServersSDK(BaseSDK):
         *,
         server_id: str,
         data: Union[
-            models.CreateServerActionData, models.CreateServerActionDataTypedDict
+            models.CreateServerActionServersData,
+            models.CreateServerActionServersDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2404,8 +2448,10 @@ class ServersSDK(BaseSDK):
 
         request = models.CreateServerActionRequest(
             server_id=server_id,
-            request_body=models.CreateServerActionRequestBody(
-                data=utils.get_pydantic_model(data, models.CreateServerActionData),
+            request_body=models.CreateServerActionServersRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.CreateServerActionServersData
+                ),
             ),
         )
 
@@ -2419,7 +2465,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -2427,7 +2473,7 @@ class ServersSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.CreateServerActionRequestBody],
+                Optional[models.CreateServerActionServersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -2454,9 +2500,9 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.ServerAction)
-        if utils.match_response(http_res, "403", "application/json"):
+        if utils.match_response(http_res, "403", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -2524,7 +2570,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -2552,9 +2598,11 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.IpmiSession)
-        if utils.match_response(http_res, ["403", "404", "422"], "application/json"):
+        if utils.match_response(
+            http_res, ["403", "404", "422"], "application/vnd.api+json"
+        ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -2622,7 +2670,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -2650,9 +2698,11 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.IpmiSession)
-        if utils.match_response(http_res, ["403", "404", "422"], "application/json"):
+        if utils.match_response(
+            http_res, ["403", "404", "422"], "application/vnd.api+json"
+        ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -2716,7 +2766,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -2744,9 +2794,9 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.ServerRescue)
-        if utils.match_response(http_res, ["403", "406"], "application/json"):
+        if utils.match_response(http_res, ["403", "406"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -2810,7 +2860,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -2838,9 +2888,9 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.ServerRescue)
-        if utils.match_response(http_res, ["403", "406"], "application/json"):
+        if utils.match_response(http_res, ["403", "406"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -2904,7 +2954,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -2932,9 +2982,9 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.ServerRescue)
-        if utils.match_response(http_res, ["403", "406"], "application/json"):
+        if utils.match_response(http_res, ["403", "406"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -2998,7 +3048,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -3026,9 +3076,9 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.ServerRescue)
-        if utils.match_response(http_res, ["403", "406"], "application/json"):
+        if utils.match_response(http_res, ["403", "406"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -3092,7 +3142,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -3120,9 +3170,11 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.ServerScheduleDeletion)
-        if utils.match_response(http_res, ["403", "406", "423"], "application/json"):
+        if utils.match_response(
+            http_res, ["403", "406", "423"], "application/vnd.api+json"
+        ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -3186,7 +3238,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -3214,9 +3266,11 @@ class ServersSDK(BaseSDK):
         )
 
         response_data: Any = None
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.ServerScheduleDeletion)
-        if utils.match_response(http_res, ["403", "406", "423"], "application/json"):
+        if utils.match_response(
+            http_res, ["403", "406", "423"], "application/vnd.api+json"
+        ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -3280,7 +3334,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -3310,7 +3364,7 @@ class ServersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "403", "application/json"):
+        if utils.match_response(http_res, "403", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -3374,7 +3428,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -3404,7 +3458,7 @@ class ServersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "403", "application/json"):
+        if utils.match_response(http_res, "403", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -3432,7 +3486,8 @@ class ServersSDK(BaseSDK):
         *,
         server_id: str,
         data: Union[
-            models.CreateServerReinstallData, models.CreateServerReinstallDataTypedDict
+            models.CreateServerReinstallServersData,
+            models.CreateServerReinstallServersDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -3458,8 +3513,10 @@ class ServersSDK(BaseSDK):
 
         request = models.CreateServerReinstallRequest(
             server_id=server_id,
-            request_body=models.CreateServerReinstallRequestBody(
-                data=utils.get_pydantic_model(data, models.CreateServerReinstallData),
+            request_body=models.CreateServerReinstallServersRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.CreateServerReinstallServersData
+                ),
             ),
         )
 
@@ -3473,7 +3530,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -3481,7 +3538,7 @@ class ServersSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.CreateServerReinstallRequestBody],
+                Optional[models.CreateServerReinstallServersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -3510,10 +3567,12 @@ class ServersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "*"):
             return
-        if utils.match_response(http_res, ["403", "404", "422"], "application/json"):
+        if utils.match_response(
+            http_res, ["403", "404", "422"], "application/vnd.api+json"
+        ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, "423", "application/json"):
+        if utils.match_response(http_res, "423", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
             raise models.ServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -3541,7 +3600,8 @@ class ServersSDK(BaseSDK):
         *,
         server_id: str,
         data: Union[
-            models.CreateServerReinstallData, models.CreateServerReinstallDataTypedDict
+            models.CreateServerReinstallServersData,
+            models.CreateServerReinstallServersDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -3567,8 +3627,10 @@ class ServersSDK(BaseSDK):
 
         request = models.CreateServerReinstallRequest(
             server_id=server_id,
-            request_body=models.CreateServerReinstallRequestBody(
-                data=utils.get_pydantic_model(data, models.CreateServerReinstallData),
+            request_body=models.CreateServerReinstallServersRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.CreateServerReinstallServersData
+                ),
             ),
         )
 
@@ -3582,7 +3644,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -3590,7 +3652,7 @@ class ServersSDK(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.CreateServerReinstallRequestBody],
+                Optional[models.CreateServerReinstallServersRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -3619,10 +3681,12 @@ class ServersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "*"):
             return
-        if utils.match_response(http_res, ["403", "404", "422"], "application/json"):
+        if utils.match_response(
+            http_res, ["403", "404", "422"], "application/vnd.api+json"
+        ):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, "423", "application/json"):
+        if utils.match_response(http_res, "423", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
             raise models.ServerError(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):

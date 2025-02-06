@@ -7,48 +7,48 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class PostTeamMembersType(str, Enum):
+class PostTeamMembersTeamsMembersType(str, Enum):
     MEMBERSHIPS = "memberships"
 
 
-class PostTeamMembersRole(str, Enum):
+class PostTeamMembersTeamsMembersRole(str, Enum):
     OWNER = "owner"
     ADMINISTRATOR = "administrator"
     COLLABORATOR = "collaborator"
     BILLING = "billing"
 
 
-class PostTeamMembersAttributesTypedDict(TypedDict):
+class PostTeamMembersTeamsMembersAttributesTypedDict(TypedDict):
     email: str
-    role: PostTeamMembersRole
+    role: PostTeamMembersTeamsMembersRole
     first_name: NotRequired[str]
     last_name: NotRequired[str]
 
 
-class PostTeamMembersAttributes(BaseModel):
+class PostTeamMembersTeamsMembersAttributes(BaseModel):
     email: str
 
-    role: PostTeamMembersRole
+    role: PostTeamMembersTeamsMembersRole
 
     first_name: Optional[str] = None
 
     last_name: Optional[str] = None
 
 
-class PostTeamMembersDataTypedDict(TypedDict):
-    type: PostTeamMembersType
-    attributes: NotRequired[PostTeamMembersAttributesTypedDict]
+class PostTeamMembersTeamsMembersDataTypedDict(TypedDict):
+    type: PostTeamMembersTeamsMembersType
+    attributes: NotRequired[PostTeamMembersTeamsMembersAttributesTypedDict]
 
 
-class PostTeamMembersData(BaseModel):
-    type: PostTeamMembersType
+class PostTeamMembersTeamsMembersData(BaseModel):
+    type: PostTeamMembersTeamsMembersType
 
-    attributes: Optional[PostTeamMembersAttributes] = None
-
-
-class PostTeamMembersRequestBodyTypedDict(TypedDict):
-    data: PostTeamMembersDataTypedDict
+    attributes: Optional[PostTeamMembersTeamsMembersAttributes] = None
 
 
-class PostTeamMembersRequestBody(BaseModel):
-    data: PostTeamMembersData
+class PostTeamMembersTeamsMembersRequestBodyTypedDict(TypedDict):
+    data: PostTeamMembersTeamsMembersDataTypedDict
+
+
+class PostTeamMembersTeamsMembersRequestBody(BaseModel):
+    data: PostTeamMembersTeamsMembersData

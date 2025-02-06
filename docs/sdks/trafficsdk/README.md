@@ -22,7 +22,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.traffic.get_traffic_consumption(filter_date_gte="2024-12-24T18:28:59Z", filter_date_lte="2025-01-24T18:28:59Z", filter_server=185, filter_project=299)
+    res = latitudesh.traffic.get_traffic_consumption(filter_date_gte="2025-01-05T21:14:55Z", filter_date_lte="2025-02-05T21:14:55Z", filter_server=187, filter_project=301)
 
     # Handle response
     print(res)
@@ -83,7 +83,7 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 503                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 503                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |

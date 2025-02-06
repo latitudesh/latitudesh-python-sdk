@@ -13,50 +13,50 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PutProjectSSHKeyType(str, Enum):
+class PutProjectSSHKeySSHKeysType(str, Enum):
     SSH_KEYS = "ssh_keys"
 
 
-class PutProjectSSHKeyAttributesTypedDict(TypedDict):
+class PutProjectSSHKeySSHKeysAttributesTypedDict(TypedDict):
     tags: NotRequired[List[str]]
     name: NotRequired[str]
     r"""Name of the SSH Key"""
 
 
-class PutProjectSSHKeyAttributes(BaseModel):
+class PutProjectSSHKeySSHKeysAttributes(BaseModel):
     tags: Optional[List[str]] = None
 
     name: Optional[str] = "New SSH Key Name"
     r"""Name of the SSH Key"""
 
 
-class PutProjectSSHKeyDataTypedDict(TypedDict):
-    type: PutProjectSSHKeyType
+class PutProjectSSHKeySSHKeysDataTypedDict(TypedDict):
+    type: PutProjectSSHKeySSHKeysType
     id: NotRequired[str]
-    attributes: NotRequired[PutProjectSSHKeyAttributesTypedDict]
+    attributes: NotRequired[PutProjectSSHKeySSHKeysAttributesTypedDict]
 
 
-class PutProjectSSHKeyData(BaseModel):
-    type: PutProjectSSHKeyType
+class PutProjectSSHKeySSHKeysData(BaseModel):
+    type: PutProjectSSHKeySSHKeysType
 
     id: Optional[str] = "ssh_81EVOtR1N4J2Z"
 
-    attributes: Optional[PutProjectSSHKeyAttributes] = None
+    attributes: Optional[PutProjectSSHKeySSHKeysAttributes] = None
 
 
-class PutProjectSSHKeyRequestBodyTypedDict(TypedDict):
-    data: PutProjectSSHKeyDataTypedDict
+class PutProjectSSHKeySSHKeysRequestBodyTypedDict(TypedDict):
+    data: PutProjectSSHKeySSHKeysDataTypedDict
 
 
-class PutProjectSSHKeyRequestBody(BaseModel):
-    data: PutProjectSSHKeyData
+class PutProjectSSHKeySSHKeysRequestBody(BaseModel):
+    data: PutProjectSSHKeySSHKeysData
 
 
 class PutProjectSSHKeyRequestTypedDict(TypedDict):
     project_id: str
     r"""Project ID or Slug"""
     ssh_key_id: str
-    request_body: NotRequired[PutProjectSSHKeyRequestBodyTypedDict]
+    request_body: NotRequired[PutProjectSSHKeySSHKeysRequestBodyTypedDict]
 
 
 class PutProjectSSHKeyRequest(BaseModel):
@@ -70,7 +70,7 @@ class PutProjectSSHKeyRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[PutProjectSSHKeyRequestBody],
+        Optional[PutProjectSSHKeySSHKeysRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None
 

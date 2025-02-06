@@ -89,10 +89,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 400, 422           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 400, 422                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## update_api_key
 
@@ -110,9 +110,9 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.api_keys.update_api_key(api_key_id="tok_7vYAZqGBdMQ94", data={
+    res = latitudesh.api_keys.update_api_key(api_key_id="tok_pRMLydp0dQKr1", data={
         "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
-        "id": "tok_7vYAZqGBdMQ94",
+        "id": "tok_pRMLydp0dQKr1",
         "attributes": {},
     })
 
@@ -135,10 +135,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 400, 404           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 400, 404                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## delete_api_key
 
@@ -155,7 +155,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.api_keys.delete_api_key(api_key_id="tok_Av9BVDavORm1W")
+    latitudesh.api_keys.delete_api_key(api_key_id="tok_xkjQwdENqYNVP")
 
     # Use the SDK ...
 
@@ -170,7 +170,7 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 404                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |

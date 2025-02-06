@@ -12,11 +12,11 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class CreateServerActionType(str, Enum):
+class CreateServerActionServersType(str, Enum):
     ACTIONS = "actions"
 
 
-class Action(str, Enum):
+class CreateServerActionAction(str, Enum):
     r"""The action to perform on the server"""
 
     POWER_ON = "power_on"
@@ -24,38 +24,38 @@ class Action(str, Enum):
     REBOOT = "reboot"
 
 
-class CreateServerActionAttributesTypedDict(TypedDict):
-    action: Action
+class CreateServerActionServersAttributesTypedDict(TypedDict):
+    action: CreateServerActionAction
     r"""The action to perform on the server"""
 
 
-class CreateServerActionAttributes(BaseModel):
-    action: Action
+class CreateServerActionServersAttributes(BaseModel):
+    action: CreateServerActionAction
     r"""The action to perform on the server"""
 
 
-class CreateServerActionDataTypedDict(TypedDict):
-    type: CreateServerActionType
-    attributes: NotRequired[CreateServerActionAttributesTypedDict]
+class CreateServerActionServersDataTypedDict(TypedDict):
+    type: CreateServerActionServersType
+    attributes: NotRequired[CreateServerActionServersAttributesTypedDict]
 
 
-class CreateServerActionData(BaseModel):
-    type: CreateServerActionType
+class CreateServerActionServersData(BaseModel):
+    type: CreateServerActionServersType
 
-    attributes: Optional[CreateServerActionAttributes] = None
-
-
-class CreateServerActionRequestBodyTypedDict(TypedDict):
-    data: CreateServerActionDataTypedDict
+    attributes: Optional[CreateServerActionServersAttributes] = None
 
 
-class CreateServerActionRequestBody(BaseModel):
-    data: CreateServerActionData
+class CreateServerActionServersRequestBodyTypedDict(TypedDict):
+    data: CreateServerActionServersDataTypedDict
+
+
+class CreateServerActionServersRequestBody(BaseModel):
+    data: CreateServerActionServersData
 
 
 class CreateServerActionRequestTypedDict(TypedDict):
     server_id: str
-    request_body: NotRequired[CreateServerActionRequestBodyTypedDict]
+    request_body: NotRequired[CreateServerActionServersRequestBodyTypedDict]
 
 
 class CreateServerActionRequest(BaseModel):
@@ -64,6 +64,6 @@ class CreateServerActionRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[CreateServerActionRequestBody],
+        Optional[CreateServerActionServersRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None

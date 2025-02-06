@@ -1,9 +1,0 @@
-# AssignServerVirtualNetworkData
-
-
-## Fields
-
-| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `type`                                                                                                     | [models.AssignServerVirtualNetworkType](../models/assignservervirtualnetworktype.md)                       | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
-| `attributes`                                                                                               | [Optional[models.AssignServerVirtualNetworkAttributes]](../models/assignservervirtualnetworkattributes.md) | :heavy_minus_sign:                                                                                         | N/A                                                                                                        |

@@ -54,7 +54,7 @@ class SSHKeys(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -81,7 +81,7 @@ class SSHKeys(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.SSHKey)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -148,7 +148,7 @@ class SSHKeys(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -175,7 +175,7 @@ class SSHKeys(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.SSHKey)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
@@ -202,7 +202,8 @@ class SSHKeys(BaseSDK):
         *,
         project_id: str,
         data: Union[
-            models.PostProjectSSHKeyData, models.PostProjectSSHKeyDataTypedDict
+            models.PostProjectSSHKeySSHKeysData,
+            models.PostProjectSSHKeySSHKeysDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -231,8 +232,10 @@ class SSHKeys(BaseSDK):
 
         request = models.PostProjectSSHKeyRequest(
             project_id=project_id,
-            request_body=models.PostProjectSSHKeyRequestBody(
-                data=utils.get_pydantic_model(data, models.PostProjectSSHKeyData),
+            request_body=models.PostProjectSSHKeySSHKeysRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PostProjectSSHKeySSHKeysData
+                ),
             ),
         )
 
@@ -246,7 +249,7 @@ class SSHKeys(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -254,7 +257,7 @@ class SSHKeys(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PostProjectSSHKeyRequestBody],
+                Optional[models.PostProjectSSHKeySSHKeysRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -280,7 +283,7 @@ class SSHKeys(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.PostProjectSSHKeyResponseBody
             )
@@ -309,7 +312,8 @@ class SSHKeys(BaseSDK):
         *,
         project_id: str,
         data: Union[
-            models.PostProjectSSHKeyData, models.PostProjectSSHKeyDataTypedDict
+            models.PostProjectSSHKeySSHKeysData,
+            models.PostProjectSSHKeySSHKeysDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -338,8 +342,10 @@ class SSHKeys(BaseSDK):
 
         request = models.PostProjectSSHKeyRequest(
             project_id=project_id,
-            request_body=models.PostProjectSSHKeyRequestBody(
-                data=utils.get_pydantic_model(data, models.PostProjectSSHKeyData),
+            request_body=models.PostProjectSSHKeySSHKeysRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PostProjectSSHKeySSHKeysData
+                ),
             ),
         )
 
@@ -353,7 +359,7 @@ class SSHKeys(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -361,7 +367,7 @@ class SSHKeys(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PostProjectSSHKeyRequestBody],
+                Optional[models.PostProjectSSHKeySSHKeysRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -387,7 +393,7 @@ class SSHKeys(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "201", "application/json"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.PostProjectSSHKeyResponseBody
             )
@@ -456,7 +462,7 @@ class SSHKeys(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -483,7 +489,7 @@ class SSHKeys(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.GetProjectSSHKeyResponseBody
             )
@@ -552,7 +558,7 @@ class SSHKeys(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -579,7 +585,7 @@ class SSHKeys(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.GetProjectSSHKeyResponseBody
             )
@@ -608,7 +614,10 @@ class SSHKeys(BaseSDK):
         *,
         project_id: str,
         ssh_key_id: str,
-        data: Union[models.PutProjectSSHKeyData, models.PutProjectSSHKeyDataTypedDict],
+        data: Union[
+            models.PutProjectSSHKeySSHKeysData,
+            models.PutProjectSSHKeySSHKeysDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -638,8 +647,8 @@ class SSHKeys(BaseSDK):
         request = models.PutProjectSSHKeyRequest(
             project_id=project_id,
             ssh_key_id=ssh_key_id,
-            request_body=models.PutProjectSSHKeyRequestBody(
-                data=utils.get_pydantic_model(data, models.PutProjectSSHKeyData),
+            request_body=models.PutProjectSSHKeySSHKeysRequestBody(
+                data=utils.get_pydantic_model(data, models.PutProjectSSHKeySSHKeysData),
             ),
         )
 
@@ -653,7 +662,7 @@ class SSHKeys(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -661,7 +670,7 @@ class SSHKeys(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PutProjectSSHKeyRequestBody],
+                Optional[models.PutProjectSSHKeySSHKeysRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -687,7 +696,7 @@ class SSHKeys(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.PutProjectSSHKeyResponseBody
             )
@@ -716,7 +725,10 @@ class SSHKeys(BaseSDK):
         *,
         project_id: str,
         ssh_key_id: str,
-        data: Union[models.PutProjectSSHKeyData, models.PutProjectSSHKeyDataTypedDict],
+        data: Union[
+            models.PutProjectSSHKeySSHKeysData,
+            models.PutProjectSSHKeySSHKeysDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -746,8 +758,8 @@ class SSHKeys(BaseSDK):
         request = models.PutProjectSSHKeyRequest(
             project_id=project_id,
             ssh_key_id=ssh_key_id,
-            request_body=models.PutProjectSSHKeyRequestBody(
-                data=utils.get_pydantic_model(data, models.PutProjectSSHKeyData),
+            request_body=models.PutProjectSSHKeySSHKeysRequestBody(
+                data=utils.get_pydantic_model(data, models.PutProjectSSHKeySSHKeysData),
             ),
         )
 
@@ -761,7 +773,7 @@ class SSHKeys(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -769,7 +781,7 @@ class SSHKeys(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PutProjectSSHKeyRequestBody],
+                Optional[models.PutProjectSSHKeySSHKeysRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -795,7 +807,7 @@ class SSHKeys(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "200", "application/json"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(
                 http_res.text, models.PutProjectSSHKeyResponseBody
             )

@@ -7,35 +7,37 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class AssignServerVirtualNetworkType(str, Enum):
+class AssignServerVirtualNetworkPrivateNetworksType(str, Enum):
     VIRTUAL_NETWORK_ASSIGNMENT = "virtual_network_assignment"
 
 
-class AssignServerVirtualNetworkAttributesTypedDict(TypedDict):
+class AssignServerVirtualNetworkPrivateNetworksAttributesTypedDict(TypedDict):
     server_id: str
     virtual_network_id: int
 
 
-class AssignServerVirtualNetworkAttributes(BaseModel):
+class AssignServerVirtualNetworkPrivateNetworksAttributes(BaseModel):
     server_id: str
 
     virtual_network_id: int
 
 
-class AssignServerVirtualNetworkDataTypedDict(TypedDict):
-    type: AssignServerVirtualNetworkType
-    attributes: NotRequired[AssignServerVirtualNetworkAttributesTypedDict]
+class AssignServerVirtualNetworkPrivateNetworksDataTypedDict(TypedDict):
+    type: AssignServerVirtualNetworkPrivateNetworksType
+    attributes: NotRequired[
+        AssignServerVirtualNetworkPrivateNetworksAttributesTypedDict
+    ]
 
 
-class AssignServerVirtualNetworkData(BaseModel):
-    type: AssignServerVirtualNetworkType
+class AssignServerVirtualNetworkPrivateNetworksData(BaseModel):
+    type: AssignServerVirtualNetworkPrivateNetworksType
 
-    attributes: Optional[AssignServerVirtualNetworkAttributes] = None
-
-
-class AssignServerVirtualNetworkRequestBodyTypedDict(TypedDict):
-    data: NotRequired[AssignServerVirtualNetworkDataTypedDict]
+    attributes: Optional[AssignServerVirtualNetworkPrivateNetworksAttributes] = None
 
 
-class AssignServerVirtualNetworkRequestBody(BaseModel):
-    data: Optional[AssignServerVirtualNetworkData] = None
+class AssignServerVirtualNetworkPrivateNetworksRequestBodyTypedDict(TypedDict):
+    data: NotRequired[AssignServerVirtualNetworkPrivateNetworksDataTypedDict]
+
+
+class AssignServerVirtualNetworkPrivateNetworksRequestBody(BaseModel):
+    data: Optional[AssignServerVirtualNetworkPrivateNetworksData] = None

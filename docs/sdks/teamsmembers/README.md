@@ -63,12 +63,12 @@ with Latitudesh(
 
     res = latitudesh.teams_members.post_team_members(request={
         "data": {
-            "type": latitudesh_python_sdk.PostTeamMembersType.MEMBERSHIPS,
+            "type": latitudesh_python_sdk.PostTeamMembersTeamsMembersType.MEMBERSHIPS,
             "attributes": {
-                "email": "dian_davis@connelly-yost.test",
-                "role": latitudesh_python_sdk.PostTeamMembersRole.COLLABORATOR,
-                "first_name": "Ramon",
-                "last_name": "Stracke",
+                "email": "theron_keeling@balistreri.test",
+                "role": latitudesh_python_sdk.PostTeamMembersTeamsMembersRole.COLLABORATOR,
+                "first_name": "Dianne",
+                "last_name": "Bahringer",
             },
         },
     })
@@ -80,10 +80,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                       | Type                                                                            | Required                                                                        | Description                                                                     |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `request`                                                                       | [models.PostTeamMembersRequestBody](../../models/postteammembersrequestbody.md) | :heavy_check_mark:                                                              | The request object to use for the request.                                      |
-| `retries`                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                | :heavy_minus_sign:                                                              | Configuration to override the default retry behavior of the client.             |
+| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `request`                                                                                               | [models.PostTeamMembersTeamsMembersRequestBody](../../models/postteammembersteamsmembersrequestbody.md) | :heavy_check_mark:                                                                                      | The request object to use for the request.                                                              |
+| `retries`                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                        | :heavy_minus_sign:                                                                                      | Configuration to override the default retry behavior of the client.                                     |
 
 ### Response
 
@@ -91,10 +91,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 403, 422           | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 422                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## destroy_team_member
 
@@ -110,7 +110,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.teams_members.destroy_team_member(user_id="user_Gr47qlE1DAg0m")
+    latitudesh.teams_members.destroy_team_member(user_id="user_GMy1DbMLqN50m")
 
     # Use the SDK ...
 
@@ -125,7 +125,7 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type         | Status Code        | Content Type       |
-| ------------------ | ------------------ | ------------------ |
-| models.ErrorObject | 404                | application/json   |
-| models.APIError    | 4XX, 5XX           | \*/\*              |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |

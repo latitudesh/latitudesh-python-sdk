@@ -66,6 +66,37 @@ pip install git+https://github.com/latitudesh/latitudesh-python-sdk.git
 ```bash
 poetry add git+https://github.com/latitudesh/latitudesh-python-sdk.git
 ```
+
+### Shell and script usage with `uv`
+
+You can use this SDK in a Python shell with [uv](https://docs.astral.sh/uv/) and the `uvx` command that comes with it like so:
+
+```shell
+uvx --from latitudesh-python-sdk python
+```
+
+It's also possible to write a standalone Python script without needing to set up a whole project like so:
+
+```python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "latitudesh-python-sdk",
+# ]
+# ///
+
+from latitudesh_python_sdk import Latitudesh
+
+sdk = Latitudesh(
+  # SDK arguments
+)
+
+# Rest of script here...
+```
+
+Once that is saved to a file, you can run it with `uv run script.py` where
+`script.py` can be replaced with the actual file name.
 <!-- End SDK Installation [installation] -->
 
 <!-- Start IDE Support [idesupport] -->
@@ -369,10 +400,10 @@ By default, an API error will raise a models.APIError exception, which has the f
 
 When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `post_api_key_async` method may raise the following exceptions:
 
-| Error Type         | Status Code | Content Type     |
-| ------------------ | ----------- | ---------------- |
-| models.ErrorObject | 400, 422    | application/json |
-| models.APIError    | 4XX, 5XX    | \*/\*            |
+| Error Type         | Status Code | Content Type             |
+| ------------------ | ----------- | ------------------------ |
+| models.ErrorObject | 400, 422    | application/vnd.api+json |
+| models.APIError    | 4XX, 5XX    | \*/\*                    |
 
 ### Example
 

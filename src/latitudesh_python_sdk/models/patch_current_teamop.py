@@ -13,57 +13,59 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PatchCurrentTeamType(str, Enum):
+class PatchCurrentTeamTeamsType(str, Enum):
     TEAMS = "teams"
 
 
-class PatchCurrentTeamCurrency(str, Enum):
+class PatchCurrentTeamTeamsCurrency(str, Enum):
     USD = "USD"
     BRL = "BRL"
 
 
-class PatchCurrentTeamAttributesTypedDict(TypedDict):
+class PatchCurrentTeamTeamsAttributesTypedDict(TypedDict):
     address: NotRequired[str]
     name: NotRequired[str]
-    currency: NotRequired[PatchCurrentTeamCurrency]
+    currency: NotRequired[PatchCurrentTeamTeamsCurrency]
     referred_code: NotRequired[str]
 
 
-class PatchCurrentTeamAttributes(BaseModel):
+class PatchCurrentTeamTeamsAttributes(BaseModel):
     address: Optional[str] = None
 
     name: Optional[str] = None
 
-    currency: Optional[PatchCurrentTeamCurrency] = PatchCurrentTeamCurrency.USD
+    currency: Optional[PatchCurrentTeamTeamsCurrency] = (
+        PatchCurrentTeamTeamsCurrency.USD
+    )
 
     referred_code: Optional[str] = None
 
 
-class PatchCurrentTeamDataTypedDict(TypedDict):
+class PatchCurrentTeamTeamsDataTypedDict(TypedDict):
     id: str
-    type: PatchCurrentTeamType
-    attributes: NotRequired[PatchCurrentTeamAttributesTypedDict]
+    type: PatchCurrentTeamTeamsType
+    attributes: NotRequired[PatchCurrentTeamTeamsAttributesTypedDict]
 
 
-class PatchCurrentTeamData(BaseModel):
+class PatchCurrentTeamTeamsData(BaseModel):
     id: str
 
-    type: PatchCurrentTeamType
+    type: PatchCurrentTeamTeamsType
 
-    attributes: Optional[PatchCurrentTeamAttributes] = None
-
-
-class PatchCurrentTeamRequestBodyTypedDict(TypedDict):
-    data: PatchCurrentTeamDataTypedDict
+    attributes: Optional[PatchCurrentTeamTeamsAttributes] = None
 
 
-class PatchCurrentTeamRequestBody(BaseModel):
-    data: PatchCurrentTeamData
+class PatchCurrentTeamTeamsRequestBodyTypedDict(TypedDict):
+    data: PatchCurrentTeamTeamsDataTypedDict
+
+
+class PatchCurrentTeamTeamsRequestBody(BaseModel):
+    data: PatchCurrentTeamTeamsData
 
 
 class PatchCurrentTeamRequestTypedDict(TypedDict):
     team_id: str
-    request_body: NotRequired[PatchCurrentTeamRequestBodyTypedDict]
+    request_body: NotRequired[PatchCurrentTeamTeamsRequestBodyTypedDict]
 
 
 class PatchCurrentTeamRequest(BaseModel):
@@ -72,7 +74,7 @@ class PatchCurrentTeamRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[PatchCurrentTeamRequestBody],
+        Optional[PatchCurrentTeamTeamsRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None
 
