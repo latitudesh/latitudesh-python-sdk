@@ -9,7 +9,7 @@ from typing import Mapping, Optional, Union, cast
 
 
 class Tags(BaseSDK):
-    def get_tags(
+    def list(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -34,6 +34,8 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
             path="/tags",
@@ -60,6 +62,7 @@ class Tags(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-tags",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -93,7 +96,7 @@ class Tags(BaseSDK):
             http_res,
         )
 
-    async def get_tags_async(
+    async def list_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -118,6 +121,8 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
             path="/tags",
@@ -144,6 +149,7 @@ class Tags(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-tags",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -177,7 +183,7 @@ class Tags(BaseSDK):
             http_res,
         )
 
-    def create_tag(
+    def create(
         self,
         *,
         request: Optional[
@@ -209,6 +215,8 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -245,6 +253,7 @@ class Tags(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-tag",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -278,7 +287,7 @@ class Tags(BaseSDK):
             http_res,
         )
 
-    async def create_tag_async(
+    async def create_async(
         self,
         *,
         request: Optional[
@@ -310,6 +319,8 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -346,6 +357,7 @@ class Tags(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-tag",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -379,7 +391,7 @@ class Tags(BaseSDK):
             http_res,
         )
 
-    def update_tag(
+    def update(
         self,
         *,
         tag_id: str,
@@ -410,6 +422,8 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateTagRequest(
             tag_id=tag_id,
@@ -451,6 +465,7 @@ class Tags(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-tag",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -484,7 +499,7 @@ class Tags(BaseSDK):
             http_res,
         )
 
-    async def update_tag_async(
+    async def update_async(
         self,
         *,
         tag_id: str,
@@ -515,6 +530,8 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateTagRequest(
             tag_id=tag_id,
@@ -556,6 +573,7 @@ class Tags(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-tag",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -589,7 +607,7 @@ class Tags(BaseSDK):
             http_res,
         )
 
-    def destroy_tag(
+    def delete(
         self,
         *,
         tag_id: str,
@@ -616,6 +634,8 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DestroyTagRequest(
             tag_id=tag_id,
@@ -647,6 +667,7 @@ class Tags(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="destroy-tag",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -680,7 +701,7 @@ class Tags(BaseSDK):
             http_res,
         )
 
-    async def destroy_tag_async(
+    async def delete_async(
         self,
         *,
         tag_id: str,
@@ -707,6 +728,8 @@ class Tags(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DestroyTagRequest(
             tag_id=tag_id,
@@ -738,6 +761,7 @@ class Tags(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="destroy-tag",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

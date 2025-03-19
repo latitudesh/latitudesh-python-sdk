@@ -5,26 +5,26 @@
 
 ### Available Operations
 
-* [get_servers](#get_servers) - List all Servers
-* [create_server](#create_server) - Deploy Server
-* [get_server](#get_server) - Retrieve a Server
-* [update_server](#update_server) - Update Server
-* [destroy_server](#destroy_server) - Remove Server
-* [get_server_deploy_config](#get_server_deploy_config) - Retrieve Deploy Config
-* [update_server_deploy_config](#update_server_deploy_config) - Update Deploy Config
-* [server_lock](#server_lock) - Lock the server
-* [server_unlock](#server_unlock) - Unlock the server
-* [create_server_out_of_band](#create_server_out_of_band) - Start Out of Band Connection
-* [get_server_out_of_band](#get_server_out_of_band) - List Out of Band Connections
-* [create_server_action](#create_server_action) - Run Server Action
+* [list](#list) - List all Servers
+* [create](#create) - Deploy Server
+* [get](#get) - Retrieve a Server
+* [update](#update) - Update Server
+* [delete](#delete) - Remove Server
+* [get_deploy_config](#get_deploy_config) - Retrieve Deploy Config
+* [update_deploy_config](#update_deploy_config) - Update Deploy Config
+* [lock](#lock) - Lock the server
+* [unlock](#unlock) - Unlock the server
+* [create_out_of_band_connection](#create_out_of_band_connection) - Start Out of Band Connection
+* [list_out_of_band_connections](#list_out_of_band_connections) - List Out of Band Connections
+* [actions](#actions) - Run Server Action
 * [create_ipmi_session](#create_ipmi_session) - Generate IPMI credentials
-* [server_start_rescue_mode](#server_start_rescue_mode) - Puts a Server in rescue mode
-* [server_exit_rescue_mode](#server_exit_rescue_mode) - Exits rescue mode for a Server
-* [server_schedule_deletion](#server_schedule_deletion) - Schedule the server deletion
-* [server_unschedule_deletion](#server_unschedule_deletion) - Unschedule the server deletion
-* [create_server_reinstall](#create_server_reinstall) - Run Server Reinstall
+* [start_rescue_mode](#start_rescue_mode) - Puts a Server in rescue mode
+* [exit_rescue_mode](#exit_rescue_mode) - Exits rescue mode for a Server
+* [schedule_deletion](#schedule_deletion) - Schedule the server deletion
+* [unschedule_deletion](#unschedule_deletion) - Unschedule the server deletion
+* [reinstall](#reinstall) - Run Server Reinstall
 
-## get_servers
+## list
 
 Returns a list of all servers belonging to the team.
 
@@ -35,11 +35,12 @@ Returns a list of all servers belonging to the team.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get_servers(filter_project="proj_W6Q2D9lGqKLpr", filter_region="SAO", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_EVZVklJKJpUXr3eZ46ylUoEJXZP")
+    res = latitudesh.servers.list(filter_project="proj_W6Q2D9lGqKLpr", filter_region="SAO", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_EVZVklJKJpUXr3eZ46ylUoEJXZP")
 
     # Handle response
     print(res)
@@ -77,7 +78,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## create_server
+## create
 
 Deploy Server
 
@@ -88,11 +89,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create_server(request={
+    res = latitudesh.servers.create(request={
         "data": {
             "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
             "attributes": {
@@ -128,7 +130,7 @@ with Latitudesh(
 | models.ErrorObject       | 400, 402, 422            | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## get_server
+## get
 
 Returns a server that belongs to the team.
 
@@ -139,11 +141,12 @@ Returns a server that belongs to the team.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get_server(server_id="sv_RMLydp70OQKr1")
+    res = latitudesh.servers.get(server_id="sv_RMLydp70OQKr1")
 
     # Handle response
     print(res)
@@ -168,7 +171,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## update_server
+## update
 
 Update Server
 
@@ -178,11 +181,12 @@ Update Server
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.update_server(server_id="sv_Gr47qleMDAg0m")
+    latitudesh.servers.update(server_id="sv_Gr47qleMDAg0m")
 
     # Use the SDK ...
 
@@ -206,7 +210,7 @@ with Latitudesh(
 | models.ErrorObject       | 402, 422, 423            | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## destroy_server
+## delete
 
 Remove Server
 
@@ -216,11 +220,12 @@ Remove Server
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.destroy_server(server_id="sv_GMy1Db3NON50m")
+    latitudesh.servers.delete(server_id="sv_GMy1Db3NON50m")
 
     # Use the SDK ...
 
@@ -241,7 +246,7 @@ with Latitudesh(
 | models.ErrorObject       | 403, 406, 422            | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## get_server_deploy_config
+## get_deploy_config
 
 Retrieve Deploy Config
 
@@ -251,11 +256,12 @@ Retrieve Deploy Config
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get_server_deploy_config(server_id="sv_xkjQwdENqYNVP")
+    res = latitudesh.servers.get_deploy_config(server_id="sv_xkjQwdENqYNVP")
 
     # Handle response
     print(res)
@@ -279,7 +285,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## update_server_deploy_config
+## update_deploy_config
 
 Update Deploy Config
 
@@ -290,11 +296,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.update_server_deploy_config(server_id="sv_Z8rodmnGq1jLB", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
+    res = latitudesh.servers.update_deploy_config(server_id="sv_Z8rodmnGq1jLB", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
 
     # Handle response
     print(res)
@@ -322,7 +329,7 @@ with Latitudesh(
 | models.DeployConfigError | 422                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## server_lock
+## lock
 
 Locks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
 
@@ -332,11 +339,12 @@ Locks the server. A locked server cannot be deleted or modified and no actions c
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.server_lock(server_id="sv_w49QDBmQqagKb")
+    res = latitudesh.servers.lock(server_id="sv_w49QDBmQqagKb")
 
     # Handle response
     print(res)
@@ -360,7 +368,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## server_unlock
+## unlock
 
 Unlocks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
 
@@ -370,11 +378,12 @@ Unlocks the server. A locked server cannot be deleted or modified and no actions
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.server_unlock(server_id="sv_LMmAD8E4Owop2")
+    res = latitudesh.servers.unlock(server_id="sv_LMmAD8E4Owop2")
 
     # Handle response
     print(res)
@@ -398,7 +407,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## create_server_out_of_band
+## create_out_of_band_connection
 
 Start Out of Band Connection
 
@@ -409,11 +418,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create_server_out_of_band(server_id="sv_RMLydpoXOQKr1", data={
+    res = latitudesh.servers.create_out_of_band_connection(server_id="sv_RMLydpoXOQKr1", data={
         "type": latitudesh_python_sdk.CreateServerOutOfBandServersType.OUT_OF_BAND,
         "attributes": {
             "ssh_key_id": "ssh_NGnzRD5ADM5yw",
@@ -444,7 +454,7 @@ with Latitudesh(
 | models.ErrorObject       | 403, 404                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## get_server_out_of_band
+## list_out_of_band_connections
 
 List Out of Band Connections
 
@@ -454,11 +464,12 @@ List Out of Band Connections
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get_server_out_of_band(server_id="sv_059EqYX2dQj8p")
+    res = latitudesh.servers.list_out_of_band_connections(server_id="sv_059EqYX2dQj8p")
 
     # Handle response
     print(res)
@@ -483,7 +494,7 @@ with Latitudesh(
 | models.ErrorObject       | 404                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## create_server_action
+## actions
 
 Performs an action on a given server:
 - `power_on`
@@ -498,11 +509,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create_server_action(server_id="sv_z2A3DVpQdnawP", data={
+    res = latitudesh.servers.actions(server_id="sv_z2A3DVpQdnawP", data={
         "type": latitudesh_python_sdk.CreateServerActionServersType.ACTIONS,
         "attributes": {
             "action": latitudesh_python_sdk.CreateServerActionAction.REBOOT,
@@ -547,6 +559,7 @@ Related guide: https://docs.latitude.sh/docs/ipmi
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
@@ -576,7 +589,7 @@ with Latitudesh(
 | models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## server_start_rescue_mode
+## start_rescue_mode
 
 Starts rescue mode on a given server.
 
@@ -586,11 +599,12 @@ Starts rescue mode on a given server.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.server_start_rescue_mode(server_id="sv_pbV0DgjKq4AWz")
+    res = latitudesh.servers.start_rescue_mode(server_id="sv_pbV0DgjKq4AWz")
 
     # Handle response
     print(res)
@@ -615,7 +629,7 @@ with Latitudesh(
 | models.ErrorObject       | 403, 406                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## server_exit_rescue_mode
+## exit_rescue_mode
 
 Exits rescue mode on a given server.
 
@@ -625,11 +639,12 @@ Exits rescue mode on a given server.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.server_exit_rescue_mode(server_id="sv_QraYDP15OpjwW")
+    res = latitudesh.servers.exit_rescue_mode(server_id="sv_QraYDP15OpjwW")
 
     # Handle response
     print(res)
@@ -654,7 +669,7 @@ with Latitudesh(
 | models.ErrorObject       | 403, 406                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## server_schedule_deletion
+## schedule_deletion
 
 Schedules the server to be removed at the end of the billing cycle.
 
@@ -664,11 +679,12 @@ Schedules the server to be removed at the end of the billing cycle.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.server_schedule_deletion(server_id="sv_yQrJdNMGO30gv")
+    res = latitudesh.servers.schedule_deletion(server_id="sv_yQrJdNMGO30gv")
 
     # Handle response
     print(res)
@@ -693,7 +709,7 @@ with Latitudesh(
 | models.ErrorObject       | 403, 406, 423            | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## server_unschedule_deletion
+## unschedule_deletion
 
 Unschedules the server removal at the end of the billing cycle.
 
@@ -703,11 +719,12 @@ Unschedules the server removal at the end of the billing cycle.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.server_unschedule_deletion(server_id="sv_1R3zq2JxqWxyn")
+    latitudesh.servers.unschedule_deletion(server_id="sv_1R3zq2JxqWxyn")
 
     # Use the SDK ...
 
@@ -727,7 +744,7 @@ with Latitudesh(
 | models.ErrorObject       | 403                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## create_server_reinstall
+## reinstall
 
 Run Server Reinstall
 
@@ -738,11 +755,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.create_server_reinstall(server_id="sv_GMy1Db2NDN50m", data={
+    latitudesh.servers.reinstall(server_id="sv_GMy1Db2NDN50m", data={
         "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
         "attributes": {
             "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.UBUNTU_22_04_X64_LTS,

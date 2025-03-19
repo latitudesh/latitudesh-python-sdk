@@ -5,12 +5,12 @@
 
 ### Available Operations
 
-* [post_storage_filesystems](#post_storage_filesystems) - Create a filesystem for a project
-* [get_storage_filesystems](#get_storage_filesystems) - List filesystems
-* [delete_storage_filesystems](#delete_storage_filesystems) - Delete a filesystem for a project
-* [patch_storage_filesystems](#patch_storage_filesystems) - Update a filesystem for a project
+* [create_filesystem](#create_filesystem) - Create a filesystem for a project
+* [list_filesystems](#list_filesystems) - List filesystems
+* [delete_filesystem](#delete_filesystem) - Delete a filesystem for a project
+* [update_filesystem](#update_filesystem) - Update a filesystem for a project
 
-## post_storage_filesystems
+## create_filesystem
 
 Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
 
@@ -21,11 +21,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.storage.post_storage_filesystems(request={
+    res = latitudesh.storage.create_filesystem(request={
         "data": {
             "type": latitudesh_python_sdk.PostStorageFilesystemsStorageType.FILESYSTEMS,
             "attributes": {
@@ -57,7 +58,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## get_storage_filesystems
+## list_filesystems
 
 Lists all the filesystems from a team.
 
@@ -67,11 +68,12 @@ Lists all the filesystems from a team.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.storage.get_storage_filesystems(filter_project="intelligent-cotton-bench")
+    latitudesh.storage.list_filesystems(filter_project="intelligent-cotton-bench")
 
     # Use the SDK ...
 
@@ -90,7 +92,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## delete_storage_filesystems
+## delete_filesystem
 
 Allows you to remove persistent storage from a project.
 
@@ -100,11 +102,12 @@ Allows you to remove persistent storage from a project.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.storage.delete_storage_filesystems(filesystem_id="fs_123")
+    latitudesh.storage.delete_filesystem(filesystem_id="fs_123")
 
     # Use the SDK ...
 
@@ -123,7 +126,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## patch_storage_filesystems
+## update_filesystem
 
 Allow you to upgrade the size of a filesystem.
 
@@ -134,11 +137,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.storage.patch_storage_filesystems(filesystem_id="fs_7vYAZqGBdMQ94", data={
+    res = latitudesh.storage.update_filesystem(filesystem_id="fs_7vYAZqGBdMQ94", data={
         "id": "fs_7vYAZqGBdMQ94",
         "type": latitudesh_python_sdk.PatchStorageFilesystemsStorageType.FILESYSTEMS,
         "attributes": {},

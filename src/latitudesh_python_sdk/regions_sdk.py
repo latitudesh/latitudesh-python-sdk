@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional
 
 
 class RegionsSDK(BaseSDK):
-    def get_regions(
+    def list(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -35,6 +35,8 @@ class RegionsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
             path="/regions",
@@ -61,6 +63,7 @@ class RegionsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-regions",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -94,7 +97,7 @@ class RegionsSDK(BaseSDK):
             http_res,
         )
 
-    async def get_regions_async(
+    async def list_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -120,6 +123,8 @@ class RegionsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
             path="/regions",
@@ -146,6 +151,7 @@ class RegionsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-regions",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -179,7 +185,7 @@ class RegionsSDK(BaseSDK):
             http_res,
         )
 
-    def get_region(
+    def get(
         self,
         *,
         region_id: str,
@@ -203,6 +209,8 @@ class RegionsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetRegionRequest(
             region_id=region_id,
@@ -234,6 +242,7 @@ class RegionsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-region",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -271,7 +280,7 @@ class RegionsSDK(BaseSDK):
             http_res,
         )
 
-    async def get_region_async(
+    async def get_async(
         self,
         *,
         region_id: str,
@@ -295,6 +304,8 @@ class RegionsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetRegionRequest(
             region_id=region_id,
@@ -326,6 +337,7 @@ class RegionsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-region",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

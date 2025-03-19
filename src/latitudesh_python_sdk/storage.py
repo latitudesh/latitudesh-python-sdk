@@ -9,7 +9,7 @@ from typing import Mapping, Optional, Union, cast
 
 
 class Storage(BaseSDK):
-    def post_storage_filesystems(
+    def create_filesystem(
         self,
         *,
         request: Optional[
@@ -40,6 +40,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -82,6 +84,7 @@ class Storage(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="post-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -117,7 +120,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    async def post_storage_filesystems_async(
+    async def create_filesystem_async(
         self,
         *,
         request: Optional[
@@ -148,6 +151,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -190,6 +195,7 @@ class Storage(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="post-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -225,7 +231,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    def get_storage_filesystems(
+    def list_filesystems(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -251,6 +257,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetStorageFilesystemsRequest(
             filter_project=filter_project,
@@ -282,6 +290,7 @@ class Storage(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -315,7 +324,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    async def get_storage_filesystems_async(
+    async def list_filesystems_async(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -341,6 +350,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetStorageFilesystemsRequest(
             filter_project=filter_project,
@@ -372,6 +383,7 @@ class Storage(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -405,7 +417,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    def delete_storage_filesystems(
+    def delete_filesystem(
         self,
         *,
         filesystem_id: str,
@@ -431,6 +443,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteStorageFilesystemsRequest(
             filesystem_id=filesystem_id,
@@ -462,6 +476,7 @@ class Storage(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -495,7 +510,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    async def delete_storage_filesystems_async(
+    async def delete_filesystem_async(
         self,
         *,
         filesystem_id: str,
@@ -521,6 +536,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteStorageFilesystemsRequest(
             filesystem_id=filesystem_id,
@@ -552,6 +569,7 @@ class Storage(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -585,7 +603,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    def patch_storage_filesystems(
+    def update_filesystem(
         self,
         *,
         filesystem_id: str,
@@ -616,6 +634,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PatchStorageFilesystemsRequest(
             filesystem_id=filesystem_id,
@@ -659,6 +679,7 @@ class Storage(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="patch-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -694,7 +715,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    async def patch_storage_filesystems_async(
+    async def update_filesystem_async(
         self,
         *,
         filesystem_id: str,
@@ -725,6 +746,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PatchStorageFilesystemsRequest(
             filesystem_id=filesystem_id,
@@ -768,6 +791,7 @@ class Storage(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="patch-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

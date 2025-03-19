@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [get_team](#get_team) - Retrieve the team
-* [post_team](#post_team) - Create a team
-* [patch_current_team](#patch_current_team) - Update a team
+* [get](#get) - Retrieve the team
+* [create](#create) - Create a team
+* [update](#update) - Update a team
 
-## get_team
+## get
 
 Retrieve the team
 
@@ -19,11 +19,12 @@ Retrieve the team
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.teams.get_team()
+    res = latitudesh.teams.get()
 
     # Handle response
     print(res)
@@ -46,7 +47,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## post_team
+## create
 
 Create a team
 
@@ -57,11 +58,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.teams.post_team(request={
+    res = latitudesh.teams.create(request={
         "data": {
             "type": latitudesh_python_sdk.PostTeamTeamsType.TEAMS,
             "attributes": {
@@ -95,7 +97,7 @@ with Latitudesh(
 | models.ErrorObject       | 406, 422                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## patch_current_team
+## update
 
 Update a team
 
@@ -106,11 +108,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.teams.patch_current_team(team_id="7d6111de-ae7e-41af-9a8c-c5808e6d9807", data={
+    res = latitudesh.teams.update(team_id="7d6111de-ae7e-41af-9a8c-c5808e6d9807", data={
         "id": "team_pEmgv7yvm7cl6KmKa5GPF3eRYvj",
         "type": latitudesh_python_sdk.PatchCurrentTeamTeamsType.TEAMS,
         "attributes": {

@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional, Union, cast
 
 
 class Plans(BaseSDK):
-    def get_plans(
+    def list(
         self,
         *,
         filter_name: Optional[str] = None,
@@ -50,6 +50,8 @@ class Plans(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetPlansRequest(
             filter_name=filter_name,
@@ -88,6 +90,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-plans",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -121,7 +124,7 @@ class Plans(BaseSDK):
             http_res,
         )
 
-    async def get_plans_async(
+    async def list_async(
         self,
         *,
         filter_name: Optional[str] = None,
@@ -162,6 +165,8 @@ class Plans(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetPlansRequest(
             filter_name=filter_name,
@@ -200,6 +205,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-plans",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -233,7 +239,7 @@ class Plans(BaseSDK):
             http_res,
         )
 
-    def get_plan(
+    def get(
         self,
         *,
         plan_id: str,
@@ -257,6 +263,8 @@ class Plans(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetPlanRequest(
             plan_id=plan_id,
@@ -288,6 +296,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-plan",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -325,7 +334,7 @@ class Plans(BaseSDK):
             http_res,
         )
 
-    async def get_plan_async(
+    async def get_async(
         self,
         *,
         plan_id: str,
@@ -349,6 +358,8 @@ class Plans(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetPlanRequest(
             plan_id=plan_id,
@@ -380,6 +391,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-plan",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -417,7 +429,7 @@ class Plans(BaseSDK):
             http_res,
         )
 
-    def get_bandwidth_plans(
+    def list_bandwidth(
         self,
         *,
         api_version: Optional[str] = "2023-06-01",
@@ -445,6 +457,8 @@ class Plans(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetBandwidthPlansRequest(
             api_version=api_version,
@@ -477,6 +491,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-bandwidth-plans",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -510,7 +525,7 @@ class Plans(BaseSDK):
             http_res,
         )
 
-    async def get_bandwidth_plans_async(
+    async def list_bandwidth_async(
         self,
         *,
         api_version: Optional[str] = "2023-06-01",
@@ -538,6 +553,8 @@ class Plans(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetBandwidthPlansRequest(
             api_version=api_version,
@@ -570,6 +587,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-bandwidth-plans",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -603,7 +621,7 @@ class Plans(BaseSDK):
             http_res,
         )
 
-    def update_plans_bandwidth(
+    def update_bandwidth(
         self,
         *,
         request: Optional[
@@ -635,6 +653,8 @@ class Plans(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -675,6 +695,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-plans-bandwidth",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -712,7 +733,7 @@ class Plans(BaseSDK):
             http_res,
         )
 
-    async def update_plans_bandwidth_async(
+    async def update_bandwidth_async(
         self,
         *,
         request: Optional[
@@ -744,6 +765,8 @@ class Plans(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -784,6 +807,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-plans-bandwidth",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -821,7 +845,7 @@ class Plans(BaseSDK):
             http_res,
         )
 
-    def get_storage_plans(
+    def list_storage(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -843,6 +867,8 @@ class Plans(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
             path="/plans/storage",
@@ -869,6 +895,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-storage-plans",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -902,7 +929,7 @@ class Plans(BaseSDK):
             http_res,
         )
 
-    async def get_storage_plans_async(
+    async def list_storage_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -924,6 +951,8 @@ class Plans(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
             path="/plans/storage",
@@ -950,6 +979,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-storage-plans",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -963,6 +993,174 @@ class Plans(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return utils.unmarshal_json(http_res.text, models.StoragePlans)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise models.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    def list_vm_plans(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VirtualMachinePlans:
+        r"""List all Virtual Machines Plans
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request(
+            method="GET",
+            path="/plans/virtual_machines",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="get-vm-plans",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return utils.unmarshal_json(http_res.text, models.VirtualMachinePlans)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise models.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def list_vm_plans_async(
+        self,
+        *,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VirtualMachinePlans:
+        r"""List all Virtual Machines Plans
+
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+        req = self._build_request_async(
+            method="GET",
+            path="/plans/virtual_machines",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=None,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="get-vm-plans",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return utils.unmarshal_json(http_res.text, models.VirtualMachinePlans)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

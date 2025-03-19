@@ -5,13 +5,13 @@
 
 ### Available Operations
 
-* [get_project_users_data](#get_project_users_data) - List all Project User Data
-* [post_project_user_data](#post_project_user_data) - Create a Project User Data
+* [list_project_user_data](#list_project_user_data) - List all Project User Data
+* [create](#create) - Create a Project User Data
 * [get_project_user_data](#get_project_user_data) - Retrieve a Project User Data
-* [put_project_user_data](#put_project_user_data) - Update a Project User Data
-* [delete_project_user_data](#delete_project_user_data) - Delete a Project User Data
+* [update](#update) - Update a Project User Data
+* [delete](#delete) - Delete a Project User Data
 
-## get_project_users_data
+## list_project_user_data
 
 List all Users Data in the project. These scripts can be used to configure servers with user data.
 
@@ -22,11 +22,12 @@ List all Users Data in the project. These scripts can be used to configure serve
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.get_project_users_data(project_id="proj_kjQwdEa7dYNVP")
+    res = latitudesh.user_data.list_project_user_data(project_id="proj_kjQwdEa7dYNVP")
 
     # Handle response
     print(res)
@@ -51,7 +52,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## post_project_user_data
+## create
 
 Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
 
@@ -63,11 +64,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.post_project_user_data(project_id="proj_A05EdQW5DvKYQ", data={
+    res = latitudesh.user_data.create(project_id="proj_A05EdQW5DvKYQ", data={
         "type": latitudesh_python_sdk.PostProjectUserDataUserDataType.USER_DATA,
         "attributes": {
             "description": "User Data description",
@@ -109,6 +111,7 @@ Get User Data in the project. These scripts can be used to configure servers wit
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
@@ -139,7 +142,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## put_project_user_data
+## update
 
 Allow you update User Data in a project.
 
@@ -151,11 +154,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.put_project_user_data(project_id="proj_1ZJrdxvyDg4LV", user_data_id="ud_GlxWpD6KOm6rk", data={
+    res = latitudesh.user_data.update(project_id="proj_1ZJrdxvyDg4LV", user_data_id="ud_GlxWpD6KOm6rk", data={
         "id": "ud_GlxWpD6KOm6rk",
         "type": latitudesh_python_sdk.PutProjectUserDataUserDataType.USER_DATA,
         "attributes": {
@@ -187,7 +191,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## delete_project_user_data
+## delete
 
 Allow you remove User Data in a project.
 
@@ -198,11 +202,12 @@ Allow you remove User Data in a project.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.user_data.delete_project_user_data(project_id="proj_lxWpD62zDm6rk", user_data_id="123")
+    latitudesh.user_data.delete(project_id="proj_lxWpD62zDm6rk", user_data_id="123")
 
     # Use the SDK ...
 

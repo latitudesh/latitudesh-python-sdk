@@ -5,12 +5,12 @@
 
 ### Available Operations
 
-* [get_tags](#get_tags) - List all Tags
-* [create_tag](#create_tag) - Create a Tag
-* [update_tag](#update_tag) - Update Tag
-* [destroy_tag](#destroy_tag) - Delete Tag
+* [list](#list) - List all Tags
+* [create](#create) - Create a Tag
+* [update](#update) - Update Tag
+* [delete](#delete) - Delete Tag
 
-## get_tags
+## list
 
 List all Tags in the team.
 
@@ -21,11 +21,12 @@ List all Tags in the team.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.tags.get_tags()
+    res = latitudesh.tags.list()
 
     # Handle response
     print(res)
@@ -48,7 +49,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## create_tag
+## create
 
 Create a Tag in the team.
 
@@ -60,11 +61,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.tags.create_tag(request={
+    res = latitudesh.tags.create(request={
         "data": {
             "type": latitudesh_python_sdk.CreateTagTagsType.TAGS,
             "attributes": {
@@ -96,7 +98,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## update_tag
+## update
 
 Update a Tag in the team.
 
@@ -108,11 +110,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.tags.update_tag(tag_id="tag_G2KoaVpQ1MC2mxGN1wjyhZgpYmE", data={
+    res = latitudesh.tags.update(tag_id="tag_G2KoaVpQ1MC2mxGN1wjyhZgpYmE", data={
         "id": "tag_G2KoaVpQ1MC2mxGN1wjyhZgpYmE",
         "type": latitudesh_python_sdk.UpdateTagTagsType.TAGS,
         "attributes": {
@@ -143,7 +146,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## destroy_tag
+## delete
 
 Update a Tag in the team.
 
@@ -154,11 +157,12 @@ Update a Tag in the team.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.tags.destroy_tag(tag_id="invalid-id")
+    latitudesh.tags.delete(tag_id="invalid-id")
 
     # Use the SDK ...
 

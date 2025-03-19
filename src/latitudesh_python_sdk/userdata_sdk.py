@@ -9,7 +9,7 @@ from typing import Mapping, Optional, Union
 
 
 class UserDataSDK(BaseSDK):
-    def get_project_users_data(
+    def list_project_user_data(
         self,
         *,
         project_id: str,
@@ -38,6 +38,8 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetProjectUsersDataRequest(
             project_id=project_id,
@@ -70,6 +72,7 @@ class UserDataSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-project-users-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -105,7 +108,7 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    async def get_project_users_data_async(
+    async def list_project_user_data_async(
         self,
         *,
         project_id: str,
@@ -134,6 +137,8 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetProjectUsersDataRequest(
             project_id=project_id,
@@ -166,6 +171,7 @@ class UserDataSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-project-users-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -201,7 +207,7 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    def post_project_user_data(
+    def create(
         self,
         *,
         project_id: str,
@@ -233,6 +239,8 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PostProjectUserDataRequest(
             project_id=project_id,
@@ -276,6 +284,7 @@ class UserDataSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="post-project-user-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -309,7 +318,7 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    async def post_project_user_data_async(
+    async def create_async(
         self,
         *,
         project_id: str,
@@ -341,6 +350,8 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PostProjectUserDataRequest(
             project_id=project_id,
@@ -384,6 +395,7 @@ class UserDataSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="post-project-user-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -448,6 +460,8 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetProjectUserDataRequest(
             project_id=project_id,
@@ -481,6 +495,7 @@ class UserDataSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-project-user-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -545,6 +560,8 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetProjectUserDataRequest(
             project_id=project_id,
@@ -578,6 +595,7 @@ class UserDataSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-project-user-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -611,7 +629,7 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    def put_project_user_data(
+    def update(
         self,
         *,
         project_id: str,
@@ -645,6 +663,8 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PutProjectUserDataRequest(
             project_id=project_id,
@@ -689,6 +709,7 @@ class UserDataSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="put-project-user-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -722,7 +743,7 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    async def put_project_user_data_async(
+    async def update_async(
         self,
         *,
         project_id: str,
@@ -756,6 +777,8 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PutProjectUserDataRequest(
             project_id=project_id,
@@ -800,6 +823,7 @@ class UserDataSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="put-project-user-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -833,7 +857,7 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    def delete_project_user_data(
+    def delete(
         self,
         *,
         project_id: str,
@@ -862,6 +886,8 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteProjectUserDataRequest(
             project_id=project_id,
@@ -894,6 +920,7 @@ class UserDataSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-project-user-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -927,7 +954,7 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    async def delete_project_user_data_async(
+    async def delete_async(
         self,
         *,
         project_id: str,
@@ -956,6 +983,8 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteProjectUserDataRequest(
             project_id=project_id,
@@ -988,6 +1017,7 @@ class UserDataSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-project-user-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

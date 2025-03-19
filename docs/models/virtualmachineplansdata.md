@@ -1,0 +1,10 @@
+# VirtualMachinePlansData
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `id`                                                                                         | *Optional[str]*                                                                              | :heavy_minus_sign:                                                                           | The ID of the plan                                                                           |
+| `type`                                                                                       | [Optional[models.VirtualMachinePlansType]](../models/virtualmachineplanstype.md)             | :heavy_minus_sign:                                                                           | The type of the resource                                                                     |
+| `attributes`                                                                                 | [Optional[models.VirtualMachinePlansAttributes]](../models/virtualmachineplansattributes.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |

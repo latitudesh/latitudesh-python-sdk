@@ -5,13 +5,14 @@
 
 ### Available Operations
 
-* [get_plans](#get_plans) - List all Plans
-* [get_plan](#get_plan) - Retrieve a Plan
-* [get_bandwidth_plans](#get_bandwidth_plans) - List all bandwidth plans
-* [update_plans_bandwidth](#update_plans_bandwidth) - Buy or remove bandwidth packages
-* [get_storage_plans](#get_storage_plans) - List all Storage Plans
+* [list](#list) - List all Plans
+* [get](#get) - Retrieve a Plan
+* [list_bandwidth](#list_bandwidth) - List all bandwidth plans
+* [update_bandwidth](#update_bandwidth) - Buy or remove bandwidth packages
+* [list_storage](#list_storage) - List all Storage Plans
+* [list_vm_plans](#list_vm_plans) - List all Virtual Machines Plans
 
-## get_plans
+## list
 
 Lists all plans. Availability by region is included in `attributes.regions.locations.available[*]` node for a given plan.
 
@@ -22,11 +23,12 @@ Lists all plans. Availability by region is included in `attributes.regions.locat
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.plans.get_plans()
+    res = latitudesh.plans.list()
 
     # Handle response
     print(res)
@@ -57,7 +59,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## get_plan
+## get
 
 Retrieve a Plan
 
@@ -67,11 +69,12 @@ Retrieve a Plan
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.plans.get_plan(plan_id="plan_w49QDB55qagKb")
+    res = latitudesh.plans.get(plan_id="plan_w49QDB55qagKb")
 
     # Handle response
     print(res)
@@ -96,7 +99,7 @@ with Latitudesh(
 | models.ErrorObject       | 404                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## get_bandwidth_plans
+## list_bandwidth
 
 Lists all bandwidth plans.
 
@@ -106,11 +109,12 @@ Lists all bandwidth plans.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.plans.get_bandwidth_plans()
+    res = latitudesh.plans.list_bandwidth()
 
     # Handle response
     print(res)
@@ -135,7 +139,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## update_plans_bandwidth
+## update_bandwidth
 
 Allow to increase or decrease bandwidth packages. Only admins and owners can request.
 
@@ -147,11 +151,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.plans.update_plans_bandwidth(request={
+    res = latitudesh.plans.update_bandwidth(request={
         "data": {
             "type": latitudesh_python_sdk.UpdatePlansBandwidthPlansType.BANDWIDTH_PACKAGES,
             "attributes": {
@@ -185,7 +190,7 @@ with Latitudesh(
 | models.ErrorObject       | 403                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## get_storage_plans
+## list_storage
 
 List all Storage Plans
 
@@ -195,11 +200,12 @@ List all Storage Plans
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.plans.get_storage_plans()
+    res = latitudesh.plans.list_storage()
 
     # Handle response
     print(res)
@@ -215,6 +221,44 @@ with Latitudesh(
 ### Response
 
 **[models.StoragePlans](../../models/storageplans.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## list_vm_plans
+
+List all Virtual Machines Plans
+
+### Example Usage
+
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.plans.list_vm_plans()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.VirtualMachinePlans](../../models/virtualmachineplans.md)**
 
 ### Errors
 

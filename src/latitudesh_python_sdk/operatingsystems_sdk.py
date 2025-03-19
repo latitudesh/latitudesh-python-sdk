@@ -9,7 +9,7 @@ from typing import Mapping, Optional
 
 
 class OperatingSystemsSDK(BaseSDK):
-    def get_plans_operating_system(
+    def list(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -34,6 +34,8 @@ class OperatingSystemsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
             path="/plans/operating_systems",
@@ -60,6 +62,7 @@ class OperatingSystemsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-plans-operating-system",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -95,7 +98,7 @@ class OperatingSystemsSDK(BaseSDK):
             http_res,
         )
 
-    async def get_plans_operating_system_async(
+    async def list_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -120,6 +123,8 @@ class OperatingSystemsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
             path="/plans/operating_systems",
@@ -146,6 +151,7 @@ class OperatingSystemsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-plans-operating-system",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

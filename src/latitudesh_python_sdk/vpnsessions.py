@@ -8,8 +8,8 @@ from latitudesh_python_sdk.utils import get_security_from_env
 from typing import Any, Mapping, Optional, Union, cast
 
 
-class VPNSessions(BaseSDK):
-    def get_vpn_sessions(
+class VpnSessions(BaseSDK):
+    def list(
         self,
         *,
         filter_location: Optional[models.FilterLocation] = None,
@@ -33,6 +33,8 @@ class VPNSessions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetVpnSessionsRequest(
             filter_location=filter_location,
@@ -64,6 +66,7 @@ class VPNSessions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-vpn-sessions",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -103,7 +106,7 @@ class VPNSessions(BaseSDK):
             http_res,
         )
 
-    async def get_vpn_sessions_async(
+    async def list_async(
         self,
         *,
         filter_location: Optional[models.FilterLocation] = None,
@@ -127,6 +130,8 @@ class VPNSessions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetVpnSessionsRequest(
             filter_location=filter_location,
@@ -158,6 +163,7 @@ class VPNSessions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-vpn-sessions",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -197,13 +203,13 @@ class VPNSessions(BaseSDK):
             http_res,
         )
 
-    def post_vpn_session(
+    def create(
         self,
         *,
         request: Optional[
             Union[
-                models.PostVPNSessionVPNSessionsRequestBody,
-                models.PostVPNSessionVPNSessionsRequestBodyTypedDict,
+                models.PostVpnSessionVpnSessionsRequestBody,
+                models.PostVpnSessionVpnSessionsRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -230,12 +236,14 @@ class VPNSessions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.PostVPNSessionVPNSessionsRequestBody]
+                request, Optional[models.PostVpnSessionVpnSessionsRequestBody]
             )
-        request = cast(Optional[models.PostVPNSessionVPNSessionsRequestBody], request)
+        request = cast(Optional[models.PostVpnSessionVpnSessionsRequestBody], request)
 
         req = self._build_request(
             method="POST",
@@ -255,7 +263,7 @@ class VPNSessions(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PostVPNSessionVPNSessionsRequestBody],
+                Optional[models.PostVpnSessionVpnSessionsRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -270,6 +278,7 @@ class VPNSessions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="post-vpn-session",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -307,13 +316,13 @@ class VPNSessions(BaseSDK):
             http_res,
         )
 
-    async def post_vpn_session_async(
+    async def create_async(
         self,
         *,
         request: Optional[
             Union[
-                models.PostVPNSessionVPNSessionsRequestBody,
-                models.PostVPNSessionVPNSessionsRequestBodyTypedDict,
+                models.PostVpnSessionVpnSessionsRequestBody,
+                models.PostVpnSessionVpnSessionsRequestBodyTypedDict,
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -340,12 +349,14 @@ class VPNSessions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.PostVPNSessionVPNSessionsRequestBody]
+                request, Optional[models.PostVpnSessionVpnSessionsRequestBody]
             )
-        request = cast(Optional[models.PostVPNSessionVPNSessionsRequestBody], request)
+        request = cast(Optional[models.PostVpnSessionVpnSessionsRequestBody], request)
 
         req = self._build_request_async(
             method="POST",
@@ -365,7 +376,7 @@ class VPNSessions(BaseSDK):
                 False,
                 True,
                 "json",
-                Optional[models.PostVPNSessionVPNSessionsRequestBody],
+                Optional[models.PostVpnSessionVpnSessionsRequestBody],
             ),
             timeout_ms=timeout_ms,
         )
@@ -380,6 +391,7 @@ class VPNSessions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="post-vpn-session",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -417,7 +429,7 @@ class VPNSessions(BaseSDK):
             http_res,
         )
 
-    def put_vpn_session(
+    def refresh_password(
         self,
         *,
         vpn_session_id: str,
@@ -444,6 +456,8 @@ class VPNSessions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PutVpnSessionRequest(
             vpn_session_id=vpn_session_id,
@@ -475,6 +489,7 @@ class VPNSessions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="put-vpn-session",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -512,7 +527,7 @@ class VPNSessions(BaseSDK):
             http_res,
         )
 
-    async def put_vpn_session_async(
+    async def refresh_password_async(
         self,
         *,
         vpn_session_id: str,
@@ -539,6 +554,8 @@ class VPNSessions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PutVpnSessionRequest(
             vpn_session_id=vpn_session_id,
@@ -570,6 +587,7 @@ class VPNSessions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="put-vpn-session",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -607,7 +625,7 @@ class VPNSessions(BaseSDK):
             http_res,
         )
 
-    def delete_vpn_session(
+    def delete(
         self,
         *,
         vpn_session_id: str,
@@ -634,6 +652,8 @@ class VPNSessions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteVpnSessionRequest(
             vpn_session_id=vpn_session_id,
@@ -665,6 +685,7 @@ class VPNSessions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-vpn-session",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -702,7 +723,7 @@ class VPNSessions(BaseSDK):
             http_res,
         )
 
-    async def delete_vpn_session_async(
+    async def delete_async(
         self,
         *,
         vpn_session_id: str,
@@ -729,6 +750,8 @@ class VPNSessions(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteVpnSessionRequest(
             vpn_session_id=vpn_session_id,
@@ -760,6 +783,7 @@ class VPNSessions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-vpn-session",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

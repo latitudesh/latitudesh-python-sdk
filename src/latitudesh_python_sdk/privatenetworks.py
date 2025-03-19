@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional, Union, cast
 
 
 class PrivateNetworks(BaseSDK):
-    def get_virtual_networks(
+    def list(
         self,
         *,
         filter_location: Optional[str] = None,
@@ -40,6 +40,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetVirtualNetworksRequest(
             filter_location=filter_location,
@@ -73,6 +75,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-virtual-networks",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -106,7 +109,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    async def get_virtual_networks_async(
+    async def list_async(
         self,
         *,
         filter_location: Optional[str] = None,
@@ -137,6 +140,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetVirtualNetworksRequest(
             filter_location=filter_location,
@@ -170,6 +175,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-virtual-networks",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -203,7 +209,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    def create_virtual_network(
+    def create(
         self,
         *,
         request: Optional[
@@ -235,6 +241,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -277,6 +285,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-virtual-network",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -314,7 +323,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    async def create_virtual_network_async(
+    async def create_async(
         self,
         *,
         request: Optional[
@@ -346,6 +355,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -388,6 +399,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-virtual-network",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -425,7 +437,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    def update_virtual_network(
+    def update(
         self,
         *,
         vlan_id: str,
@@ -459,6 +471,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateVirtualNetworkRequest(
             vlan_id=vlan_id,
@@ -503,6 +517,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-virtual-network",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -542,7 +557,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    async def update_virtual_network_async(
+    async def update_async(
         self,
         *,
         vlan_id: str,
@@ -576,6 +591,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateVirtualNetworkRequest(
             vlan_id=vlan_id,
@@ -620,6 +637,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-virtual-network",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -659,7 +677,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    def destroy_virtual_network(
+    def delete_virtual_network(
         self,
         *,
         vlan_id: int,
@@ -686,6 +704,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DestroyVirtualNetworkRequest(
             vlan_id=vlan_id,
@@ -717,6 +737,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="destroy-virtual-network",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -754,7 +775,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    async def destroy_virtual_network_async(
+    async def delete_virtual_network_async(
         self,
         *,
         vlan_id: int,
@@ -781,6 +802,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DestroyVirtualNetworkRequest(
             vlan_id=vlan_id,
@@ -812,6 +835,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="destroy-virtual-network",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -849,7 +873,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    def get_virtual_network(
+    def get(
         self,
         *,
         vlan_id: str,
@@ -876,6 +900,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetVirtualNetworkRequest(
             vlan_id=vlan_id,
@@ -907,6 +933,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-virtual-network",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -942,7 +969,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    async def get_virtual_network_async(
+    async def get_async(
         self,
         *,
         vlan_id: str,
@@ -969,6 +996,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetVirtualNetworkRequest(
             vlan_id=vlan_id,
@@ -1000,6 +1029,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-virtual-network",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1035,7 +1065,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    def get_virtual_networks_assignments(
+    def list_assignments(
         self,
         *,
         filter_server: Optional[str] = None,
@@ -1066,6 +1096,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetVirtualNetworksAssignmentsRequest(
             filter_server=filter_server,
@@ -1099,6 +1131,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-virtual-networks-assignments",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1132,7 +1165,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    async def get_virtual_networks_assignments_async(
+    async def list_assignments_async(
         self,
         *,
         filter_server: Optional[str] = None,
@@ -1163,6 +1196,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetVirtualNetworksAssignmentsRequest(
             filter_server=filter_server,
@@ -1196,6 +1231,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-virtual-networks-assignments",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1229,7 +1265,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    def assign_server_virtual_network(
+    def assign(
         self,
         *,
         request: Optional[
@@ -1258,6 +1294,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -1302,6 +1340,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="assign-server-virtual-network",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1339,7 +1378,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    async def assign_server_virtual_network_async(
+    async def assign_async(
         self,
         *,
         request: Optional[
@@ -1368,6 +1407,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -1412,6 +1453,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="assign-server-virtual-network",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1449,7 +1491,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    def delete_virtual_networks_assignments(
+    def remove_assignment(
         self,
         *,
         assignment_id: str,
@@ -1476,6 +1518,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteVirtualNetworksAssignmentsRequest(
             assignment_id=assignment_id,
@@ -1507,6 +1551,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-virtual-networks-assignments",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1544,7 +1589,7 @@ class PrivateNetworks(BaseSDK):
             http_res,
         )
 
-    async def delete_virtual_networks_assignments_async(
+    async def remove_assignment_async(
         self,
         *,
         assignment_id: str,
@@ -1571,6 +1616,8 @@ class PrivateNetworks(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteVirtualNetworksAssignmentsRequest(
             assignment_id=assignment_id,
@@ -1602,6 +1649,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-virtual-networks-assignments",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

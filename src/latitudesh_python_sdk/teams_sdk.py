@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional, Union, cast
 
 
 class TeamsSDK(BaseSDK):
-    def get_team(
+    def get(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -31,6 +31,8 @@ class TeamsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
             path="/team",
@@ -57,6 +59,7 @@ class TeamsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-team",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -90,7 +93,7 @@ class TeamsSDK(BaseSDK):
             http_res,
         )
 
-    async def get_team_async(
+    async def get_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -112,6 +115,8 @@ class TeamsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
             path="/team",
@@ -138,6 +143,7 @@ class TeamsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-team",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -171,7 +177,7 @@ class TeamsSDK(BaseSDK):
             http_res,
         )
 
-    def post_team(
+    def create(
         self,
         *,
         request: Optional[
@@ -200,6 +206,8 @@ class TeamsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -236,6 +244,7 @@ class TeamsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="post-team",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -273,7 +282,7 @@ class TeamsSDK(BaseSDK):
             http_res,
         )
 
-    async def post_team_async(
+    async def create_async(
         self,
         *,
         request: Optional[
@@ -302,6 +311,8 @@ class TeamsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -338,6 +349,7 @@ class TeamsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="post-team",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -375,7 +387,7 @@ class TeamsSDK(BaseSDK):
             http_res,
         )
 
-    def patch_current_team(
+    def update(
         self,
         *,
         team_id: str,
@@ -403,6 +415,8 @@ class TeamsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PatchCurrentTeamRequest(
             team_id=team_id,
@@ -444,6 +458,7 @@ class TeamsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="patch-current-team",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -483,7 +498,7 @@ class TeamsSDK(BaseSDK):
             http_res,
         )
 
-    async def patch_current_team_async(
+    async def update_async(
         self,
         *,
         team_id: str,
@@ -511,6 +526,8 @@ class TeamsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PatchCurrentTeamRequest(
             team_id=team_id,
@@ -552,6 +569,7 @@ class TeamsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="patch-current-team",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

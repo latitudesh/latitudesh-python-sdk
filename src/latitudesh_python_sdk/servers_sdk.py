@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional, Union, cast
 
 
 class ServersSDK(BaseSDK):
-    def get_servers(
+    def list(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -64,6 +64,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetServersRequest(
             filter_project=filter_project,
@@ -109,6 +111,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-servers",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -142,7 +145,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def get_servers_async(
+    async def list_async(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -197,6 +200,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetServersRequest(
             filter_project=filter_project,
@@ -242,6 +247,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-servers",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -275,7 +281,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def create_server(
+    def create(
         self,
         *,
         request: Optional[
@@ -304,6 +310,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -344,6 +352,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-server",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -383,7 +392,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def create_server_async(
+    async def create_async(
         self,
         *,
         request: Optional[
@@ -412,6 +421,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -452,6 +463,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-server",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -491,7 +503,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def get_server(
+    def get(
         self,
         *,
         server_id: str,
@@ -520,6 +532,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetServerRequest(
             server_id=server_id,
@@ -552,6 +566,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-server",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -585,7 +600,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def get_server_async(
+    async def get_async(
         self,
         *,
         server_id: str,
@@ -614,6 +629,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetServerRequest(
             server_id=server_id,
@@ -646,6 +663,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-server",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -679,7 +697,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def update_server(
+    def update(
         self,
         *,
         server_id: str,
@@ -714,6 +732,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateServerRequest(
             server_id=server_id,
@@ -759,6 +779,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-server",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -801,7 +822,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def update_server_async(
+    async def update_async(
         self,
         *,
         server_id: str,
@@ -836,6 +857,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateServerRequest(
             server_id=server_id,
@@ -881,6 +904,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-server",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -923,7 +947,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def destroy_server(
+    def delete(
         self,
         *,
         server_id: str,
@@ -949,6 +973,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DestroyServerRequest(
             server_id=server_id,
@@ -981,6 +1007,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="destroy-server",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1020,7 +1047,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def destroy_server_async(
+    async def delete_async(
         self,
         *,
         server_id: str,
@@ -1046,6 +1073,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DestroyServerRequest(
             server_id=server_id,
@@ -1078,6 +1107,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="destroy-server",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1117,7 +1147,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def get_server_deploy_config(
+    def get_deploy_config(
         self,
         *,
         server_id: str,
@@ -1141,6 +1171,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetServerDeployConfigRequest(
             server_id=server_id,
@@ -1172,6 +1204,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-server-deploy-config",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1205,7 +1238,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def get_server_deploy_config_async(
+    async def get_deploy_config_async(
         self,
         *,
         server_id: str,
@@ -1229,6 +1262,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetServerDeployConfigRequest(
             server_id=server_id,
@@ -1260,6 +1295,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-server-deploy-config",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1293,7 +1329,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def update_server_deploy_config(
+    def update_deploy_config(
         self,
         *,
         server_id: str,
@@ -1326,6 +1362,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateServerDeployConfigRequest(
             server_id=server_id,
@@ -1371,6 +1409,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-server-deploy-config",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1413,7 +1452,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def update_server_deploy_config_async(
+    async def update_deploy_config_async(
         self,
         *,
         server_id: str,
@@ -1446,6 +1485,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateServerDeployConfigRequest(
             server_id=server_id,
@@ -1491,6 +1532,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-server-deploy-config",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1533,7 +1575,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def server_lock(
+    def lock(
         self,
         *,
         server_id: str,
@@ -1559,6 +1601,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ServerLockRequest(
             server_id=server_id,
@@ -1590,6 +1634,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="server-lock",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1623,7 +1668,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def server_lock_async(
+    async def lock_async(
         self,
         *,
         server_id: str,
@@ -1649,6 +1694,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ServerLockRequest(
             server_id=server_id,
@@ -1680,6 +1727,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="server-lock",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1713,7 +1761,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def server_unlock(
+    def unlock(
         self,
         *,
         server_id: str,
@@ -1739,6 +1787,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ServerUnlockRequest(
             server_id=server_id,
@@ -1770,6 +1820,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="server-unlock",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1803,7 +1854,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def server_unlock_async(
+    async def unlock_async(
         self,
         *,
         server_id: str,
@@ -1829,6 +1880,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ServerUnlockRequest(
             server_id=server_id,
@@ -1860,6 +1913,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="server-unlock",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1893,7 +1947,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def create_server_out_of_band(
+    def create_out_of_band_connection(
         self,
         *,
         server_id: str,
@@ -1922,6 +1976,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateServerOutOfBandRequest(
             server_id=server_id,
@@ -1965,6 +2021,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-server-out-of-band",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2002,7 +2059,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def create_server_out_of_band_async(
+    async def create_out_of_band_connection_async(
         self,
         *,
         server_id: str,
@@ -2031,6 +2088,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateServerOutOfBandRequest(
             server_id=server_id,
@@ -2074,6 +2133,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-server-out-of-band",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2111,7 +2171,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def get_server_out_of_band(
+    def list_out_of_band_connections(
         self,
         *,
         server_id: str,
@@ -2135,6 +2195,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetServerOutOfBandRequest(
             server_id=server_id,
@@ -2166,6 +2228,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-server-out-of-band",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2203,7 +2266,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def get_server_out_of_band_async(
+    async def list_out_of_band_connections_async(
         self,
         *,
         server_id: str,
@@ -2227,6 +2290,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetServerOutOfBandRequest(
             server_id=server_id,
@@ -2258,6 +2323,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-server-out-of-band",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2295,7 +2361,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def create_server_action(
+    def actions(
         self,
         *,
         server_id: str,
@@ -2330,6 +2396,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateServerActionRequest(
             server_id=server_id,
@@ -2373,6 +2441,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-server-action",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2410,7 +2479,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def create_server_action_async(
+    async def actions_async(
         self,
         *,
         server_id: str,
@@ -2445,6 +2514,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateServerActionRequest(
             server_id=server_id,
@@ -2488,6 +2559,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-server-action",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2555,6 +2627,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateIpmiSessionRequest(
             server_id=server_id,
@@ -2586,6 +2660,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-ipmi-session",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2655,6 +2730,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateIpmiSessionRequest(
             server_id=server_id,
@@ -2686,6 +2763,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-ipmi-session",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2725,7 +2803,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def server_start_rescue_mode(
+    def start_rescue_mode(
         self,
         *,
         server_id: str,
@@ -2751,6 +2829,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ServerStartRescueModeRequest(
             server_id=server_id,
@@ -2782,6 +2862,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="server-start-rescue-mode",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2819,7 +2900,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def server_start_rescue_mode_async(
+    async def start_rescue_mode_async(
         self,
         *,
         server_id: str,
@@ -2845,6 +2926,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ServerStartRescueModeRequest(
             server_id=server_id,
@@ -2876,6 +2959,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="server-start-rescue-mode",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -2913,7 +2997,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def server_exit_rescue_mode(
+    def exit_rescue_mode(
         self,
         *,
         server_id: str,
@@ -2939,6 +3023,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ServerExitRescueModeRequest(
             server_id=server_id,
@@ -2970,6 +3056,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="server-exit-rescue-mode",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -3007,7 +3094,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def server_exit_rescue_mode_async(
+    async def exit_rescue_mode_async(
         self,
         *,
         server_id: str,
@@ -3033,6 +3120,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ServerExitRescueModeRequest(
             server_id=server_id,
@@ -3064,6 +3153,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="server-exit-rescue-mode",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -3101,7 +3191,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def server_schedule_deletion(
+    def schedule_deletion(
         self,
         *,
         server_id: str,
@@ -3127,6 +3217,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ServerScheduleDeletionRequest(
             server_id=server_id,
@@ -3158,6 +3250,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="server-schedule-deletion",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -3197,7 +3290,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def server_schedule_deletion_async(
+    async def schedule_deletion_async(
         self,
         *,
         server_id: str,
@@ -3223,6 +3316,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ServerScheduleDeletionRequest(
             server_id=server_id,
@@ -3254,6 +3349,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="server-schedule-deletion",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -3293,7 +3389,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def server_unschedule_deletion(
+    def unschedule_deletion(
         self,
         *,
         server_id: str,
@@ -3319,6 +3415,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ServerUnscheduleDeletionRequest(
             server_id=server_id,
@@ -3350,6 +3448,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="server-unschedule-deletion",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -3387,7 +3486,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def server_unschedule_deletion_async(
+    async def unschedule_deletion_async(
         self,
         *,
         server_id: str,
@@ -3413,6 +3512,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ServerUnscheduleDeletionRequest(
             server_id=server_id,
@@ -3444,6 +3545,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="server-unschedule-deletion",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -3481,7 +3583,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    def create_server_reinstall(
+    def reinstall(
         self,
         *,
         server_id: str,
@@ -3510,6 +3612,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateServerReinstallRequest(
             server_id=server_id,
@@ -3553,6 +3657,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-server-reinstall",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -3595,7 +3700,7 @@ class ServersSDK(BaseSDK):
             http_res,
         )
 
-    async def create_server_reinstall_async(
+    async def reinstall_async(
         self,
         *,
         server_id: str,
@@ -3624,6 +3729,8 @@ class ServersSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateServerReinstallRequest(
             server_id=server_id,
@@ -3667,6 +3774,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-server-reinstall",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

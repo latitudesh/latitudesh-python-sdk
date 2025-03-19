@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [get_plans_operating_system](#get_plans_operating_system) - List all operating systems available
+* [list](#list) - List all operating systems available
 
-## get_plans_operating_system
+## list
 
 Lists all operating systems available to deploy and reinstall.
 
@@ -18,11 +18,12 @@ Lists all operating systems available to deploy and reinstall.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.operating_systems.get_plans_operating_system()
+    res = latitudesh.operating_systems.list()
 
     # Handle response
     print(res)

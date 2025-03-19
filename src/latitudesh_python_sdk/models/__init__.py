@@ -234,6 +234,10 @@ from .destroy_team_memberop import (
     DestroyTeamMemberRequest,
     DestroyTeamMemberRequestTypedDict,
 )
+from .destroy_virtual_machineop import (
+    DestroyVirtualMachineRequest,
+    DestroyVirtualMachineRequestTypedDict,
+)
 from .destroy_virtual_networkop import (
     DestroyVirtualNetworkRequest,
     DestroyVirtualNetworkRequestTypedDict,
@@ -389,6 +393,10 @@ from .get_vpn_sessionsop import (
     GetVpnSessionsRequestTypedDict,
     GetVpnSessionsResponseBody,
     GetVpnSessionsResponseBodyTypedDict,
+)
+from .index_virtual_machineop import (
+    IndexVirtualMachineRequest,
+    IndexVirtualMachineRequestTypedDict,
 )
 from .ip_address import (
     Assignment,
@@ -578,14 +586,14 @@ from .post_teamop import (
     PostTeamTeamsType,
 )
 from .post_vpn_sessionop import (
-    PostVPNSessionVPNSessionsAttributes,
-    PostVPNSessionVPNSessionsAttributesTypedDict,
-    PostVPNSessionVPNSessionsData,
-    PostVPNSessionVPNSessionsDataTypedDict,
-    PostVPNSessionVPNSessionsRequestBody,
-    PostVPNSessionVPNSessionsRequestBodyTypedDict,
-    PostVPNSessionVPNSessionsSite,
-    PostVPNSessionVPNSessionsType,
+    PostVpnSessionVpnSessionsAttributes,
+    PostVpnSessionVpnSessionsAttributesTypedDict,
+    PostVpnSessionVpnSessionsData,
+    PostVpnSessionVpnSessionsDataTypedDict,
+    PostVpnSessionVpnSessionsRequestBody,
+    PostVpnSessionVpnSessionsRequestBodyTypedDict,
+    PostVpnSessionVpnSessionsSite,
+    PostVpnSessionVpnSessionsType,
 )
 from .project import (
     BillingMethod,
@@ -742,6 +750,10 @@ from .server_unschedule_deletionop import (
     ServerUnscheduleDeletionRequestTypedDict,
 )
 from .servers import Servers, ServersMeta, ServersMetaTypedDict, ServersTypedDict
+from .show_virtual_machineop import (
+    ShowVirtualMachineRequest,
+    ShowVirtualMachineRequestTypedDict,
+)
 from .ssh_key import SSHKey, SSHKeyTypedDict
 from .ssh_key_data import (
     SSHKeyData,
@@ -945,6 +957,39 @@ from .user_update import (
     UserUpdateAttributes,
     UserUpdateAttributesTypedDict,
     UserUpdateTypedDict,
+)
+from .virtual_machine import (
+    VirtualMachine,
+    VirtualMachineMeta,
+    VirtualMachineMetaTypedDict,
+    VirtualMachineTypedDict,
+)
+from .virtual_machine_payload import (
+    VirtualMachinePayload,
+    VirtualMachinePayloadAttributes,
+    VirtualMachinePayloadAttributesTypedDict,
+    VirtualMachinePayloadData,
+    VirtualMachinePayloadDataTypedDict,
+    VirtualMachinePayloadType,
+    VirtualMachinePayloadTypedDict,
+)
+from .virtual_machine_plans import (
+    Disk,
+    DiskTypedDict,
+    Size,
+    SizeTypedDict,
+    VirtualMachinePlans,
+    VirtualMachinePlansAttributes,
+    VirtualMachinePlansAttributesTypedDict,
+    VirtualMachinePlansData,
+    VirtualMachinePlansDataType,
+    VirtualMachinePlansDataTypedDict,
+    VirtualMachinePlansSpecs,
+    VirtualMachinePlansSpecsTypedDict,
+    VirtualMachinePlansStockLevel,
+    VirtualMachinePlansType,
+    VirtualMachinePlansTypedDict,
+    VirtualMachinePlansUnit,
 )
 from .virtual_network import (
     VirtualNetwork,
@@ -1194,8 +1239,12 @@ __all__ = [
     "DestroyTagRequestTypedDict",
     "DestroyTeamMemberRequest",
     "DestroyTeamMemberRequestTypedDict",
+    "DestroyVirtualMachineRequest",
+    "DestroyVirtualMachineRequestTypedDict",
     "DestroyVirtualNetworkRequest",
     "DestroyVirtualNetworkRequestTypedDict",
+    "Disk",
+    "DiskTypedDict",
     "Distro",
     "DistroTypedDict",
     "Drives",
@@ -1332,6 +1381,8 @@ __all__ = [
     "IPAddressTypedDict",
     "IPAddresses",
     "IPAddressesTypedDict",
+    "IndexVirtualMachineRequest",
+    "IndexVirtualMachineRequestTypedDict",
     "IpmiSession",
     "IpmiSessionAttributes",
     "IpmiSessionAttributesTypedDict",
@@ -1479,14 +1530,14 @@ __all__ = [
     "PostTeamTeamsRequestBody",
     "PostTeamTeamsRequestBodyTypedDict",
     "PostTeamTeamsType",
-    "PostVPNSessionVPNSessionsAttributes",
-    "PostVPNSessionVPNSessionsAttributesTypedDict",
-    "PostVPNSessionVPNSessionsData",
-    "PostVPNSessionVPNSessionsDataTypedDict",
-    "PostVPNSessionVPNSessionsRequestBody",
-    "PostVPNSessionVPNSessionsRequestBodyTypedDict",
-    "PostVPNSessionVPNSessionsSite",
-    "PostVPNSessionVPNSessionsType",
+    "PostVpnSessionVpnSessionsAttributes",
+    "PostVpnSessionVpnSessionsAttributesTypedDict",
+    "PostVpnSessionVpnSessionsData",
+    "PostVpnSessionVpnSessionsDataTypedDict",
+    "PostVpnSessionVpnSessionsRequestBody",
+    "PostVpnSessionVpnSessionsRequestBodyTypedDict",
+    "PostVpnSessionVpnSessionsSite",
+    "PostVpnSessionVpnSessionsType",
     "Pricing",
     "PricingTypedDict",
     "Products",
@@ -1621,8 +1672,12 @@ __all__ = [
     "ServersMeta",
     "ServersMetaTypedDict",
     "ServersTypedDict",
+    "ShowVirtualMachineRequest",
+    "ShowVirtualMachineRequestTypedDict",
     "Site",
     "SiteTypedDict",
+    "Size",
+    "SizeTypedDict",
     "Specs",
     "SpecsTypedDict",
     "Stats",
@@ -1790,6 +1845,29 @@ __all__ = [
     "UserUpdateAttributes",
     "UserUpdateAttributesTypedDict",
     "UserUpdateTypedDict",
+    "VirtualMachine",
+    "VirtualMachineMeta",
+    "VirtualMachineMetaTypedDict",
+    "VirtualMachinePayload",
+    "VirtualMachinePayloadAttributes",
+    "VirtualMachinePayloadAttributesTypedDict",
+    "VirtualMachinePayloadData",
+    "VirtualMachinePayloadDataTypedDict",
+    "VirtualMachinePayloadType",
+    "VirtualMachinePayloadTypedDict",
+    "VirtualMachinePlans",
+    "VirtualMachinePlansAttributes",
+    "VirtualMachinePlansAttributesTypedDict",
+    "VirtualMachinePlansData",
+    "VirtualMachinePlansDataType",
+    "VirtualMachinePlansDataTypedDict",
+    "VirtualMachinePlansSpecs",
+    "VirtualMachinePlansSpecsTypedDict",
+    "VirtualMachinePlansStockLevel",
+    "VirtualMachinePlansType",
+    "VirtualMachinePlansTypedDict",
+    "VirtualMachinePlansUnit",
+    "VirtualMachineTypedDict",
     "VirtualNetwork",
     "VirtualNetwork1",
     "VirtualNetwork1TypedDict",

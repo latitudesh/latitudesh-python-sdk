@@ -3,29 +3,25 @@
 from .basesdk import BaseSDK
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import OptionalNullable, UNSET
+from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Mapping, Optional, Union
+from typing import Any, Mapping, Optional, Union, cast
 
 
-class SSHKeys(BaseSDK):
-    def get_project_ssh_keys(
+class APIKeys(BaseSDK):
+    def list(
         self,
         *,
-        project_id: str,
-        filter_tags: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SSHKey:
-        r"""List all Project SSH Keys
+    ) -> models.APIKey:
+        r"""List API Keys
 
-        List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
+        Returns a list of all API keys from the team members
 
 
-        :param project_id: Project ID or Slug
-        :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -38,20 +34,16 @@ class SSHKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-
-        request = models.GetProjectSSHKeysRequest(
-            project_id=project_id,
-            filter_tags=filter_tags,
-        )
-
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
-            path="/projects/{project_id}/ssh_keys",
+            path="/auth/api_keys",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/vnd.api+json",
@@ -70,7 +62,8 @@ class SSHKeys(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get-project-ssh-keys",
+                base_url=base_url or "",
+                operation_id="get-api-keys",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -82,7 +75,7 @@ class SSHKeys(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.SSHKey)
+            return utils.unmarshal_json(http_res.text, models.APIKey)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -103,23 +96,19 @@ class SSHKeys(BaseSDK):
             http_res,
         )
 
-    async def get_project_ssh_keys_async(
+    async def list_async(
         self,
         *,
-        project_id: str,
-        filter_tags: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.SSHKey:
-        r"""List all Project SSH Keys
+    ) -> models.APIKey:
+        r"""List API Keys
 
-        List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
+        Returns a list of all API keys from the team members
 
 
-        :param project_id: Project ID or Slug
-        :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -132,20 +121,16 @@ class SSHKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
-
-        request = models.GetProjectSSHKeysRequest(
-            project_id=project_id,
-            filter_tags=filter_tags,
-        )
-
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
-            path="/projects/{project_id}/ssh_keys",
+            path="/auth/api_keys",
             base_url=base_url,
             url_variables=url_variables,
-            request=request,
+            request=None,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/vnd.api+json",
@@ -164,7 +149,8 @@ class SSHKeys(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get-project-ssh-keys",
+                base_url=base_url or "",
+                operation_id="get-api-keys",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -176,7 +162,7 @@ class SSHKeys(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.SSHKey)
+            return utils.unmarshal_json(http_res.text, models.APIKey)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -197,26 +183,23 @@ class SSHKeys(BaseSDK):
             http_res,
         )
 
-    def post_project_ssh_key(
+    def create(
         self,
         *,
-        project_id: str,
-        data: Union[
-            models.PostProjectSSHKeySSHKeysData,
-            models.PostProjectSSHKeySSHKeysDataTypedDict,
-        ],
+        request: Optional[
+            Union[models.CreateAPIKey, models.CreateAPIKeyTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PostProjectSSHKeyResponseBody:
-        r"""Create a Project SSH Key
+    ) -> models.PostAPIKeyResponseBody:
+        r"""Create API Key
 
-        Allow you create SSH Keys in a project. These keys can be used to access servers after deploy and reinstall actions.
+        Create a new API Key that is tied to the current user account. The created API key is only listed ONCE upon creation. It can however be regenerated or deleted.
 
 
-        :param project_id: Project ID or Slug
-        :param data:
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -229,35 +212,28 @@ class SSHKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostProjectSSHKeyRequest(
-            project_id=project_id,
-            request_body=models.PostProjectSSHKeySSHKeysRequestBody(
-                data=utils.get_pydantic_model(
-                    data, models.PostProjectSSHKeySSHKeysData
-                ),
-            ),
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, Optional[models.CreateAPIKey])
+        request = cast(Optional[models.CreateAPIKey], request)
 
         req = self._build_request(
             method="POST",
-            path="/projects/{project_id}/ssh_keys",
+            path="/auth/api_keys",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
-                False,
-                True,
-                "json",
-                Optional[models.PostProjectSSHKeySSHKeysRequestBody],
+                request, False, True, "json", Optional[models.CreateAPIKey]
             ),
             timeout_ms=timeout_ms,
         )
@@ -272,7 +248,8 @@ class SSHKeys(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="post-project-ssh-key",
+                base_url=base_url or "",
+                operation_id="post-api-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -283,11 +260,13 @@ class SSHKeys(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return utils.unmarshal_json(
-                http_res.text, models.PostProjectSSHKeyResponseBody
-            )
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+            return utils.unmarshal_json(http_res.text, models.PostAPIKeyResponseBody)
+        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -307,26 +286,23 @@ class SSHKeys(BaseSDK):
             http_res,
         )
 
-    async def post_project_ssh_key_async(
+    async def create_async(
         self,
         *,
-        project_id: str,
-        data: Union[
-            models.PostProjectSSHKeySSHKeysData,
-            models.PostProjectSSHKeySSHKeysDataTypedDict,
-        ],
+        request: Optional[
+            Union[models.CreateAPIKey, models.CreateAPIKeyTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PostProjectSSHKeyResponseBody:
-        r"""Create a Project SSH Key
+    ) -> models.PostAPIKeyResponseBody:
+        r"""Create API Key
 
-        Allow you create SSH Keys in a project. These keys can be used to access servers after deploy and reinstall actions.
+        Create a new API Key that is tied to the current user account. The created API key is only listed ONCE upon creation. It can however be regenerated or deleted.
 
 
-        :param project_id: Project ID or Slug
-        :param data:
+        :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -339,35 +315,28 @@ class SSHKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostProjectSSHKeyRequest(
-            project_id=project_id,
-            request_body=models.PostProjectSSHKeySSHKeysRequestBody(
-                data=utils.get_pydantic_model(
-                    data, models.PostProjectSSHKeySSHKeysData
-                ),
-            ),
-        )
+        if not isinstance(request, BaseModel):
+            request = utils.unmarshal(request, Optional[models.CreateAPIKey])
+        request = cast(Optional[models.CreateAPIKey], request)
 
         req = self._build_request_async(
             method="POST",
-            path="/projects/{project_id}/ssh_keys",
+            path="/auth/api_keys",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
             request_body_required=False,
-            request_has_path_params=True,
+            request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
-                False,
-                True,
-                "json",
-                Optional[models.PostProjectSSHKeySSHKeysRequestBody],
+                request, False, True, "json", Optional[models.CreateAPIKey]
             ),
             timeout_ms=timeout_ms,
         )
@@ -382,7 +351,8 @@ class SSHKeys(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="post-project-ssh-key",
+                base_url=base_url or "",
+                operation_id="post-api-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -393,202 +363,12 @@ class SSHKeys(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return utils.unmarshal_json(
-                http_res.text, models.PostProjectSSHKeyResponseBody
-            )
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def get_project_ssh_key(
-        self,
-        *,
-        project_id: str,
-        ssh_key_id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetProjectSSHKeyResponseBody:
-        r"""Retrieve a Project SSH Key
-
-        List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
-
-
-        :param project_id: Project ID or Slug
-        :param ssh_key_id:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.GetProjectSSHKeyRequest(
-            project_id=project_id,
-            ssh_key_id=ssh_key_id,
-        )
-
-        req = self._build_request(
-            method="GET",
-            path="/projects/{project_id}/ssh_keys/{ssh_key_id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="get-project-ssh-key",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(
-                http_res.text, models.GetProjectSSHKeyResponseBody
-            )
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def get_project_ssh_key_async(
-        self,
-        *,
-        project_id: str,
-        ssh_key_id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetProjectSSHKeyResponseBody:
-        r"""Retrieve a Project SSH Key
-
-        List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
-
-
-        :param project_id: Project ID or Slug
-        :param ssh_key_id:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.GetProjectSSHKeyRequest(
-            project_id=project_id,
-            ssh_key_id=ssh_key_id,
-        )
-
-        req = self._build_request_async(
-            method="GET",
-            path="/projects/{project_id}/ssh_keys/{ssh_key_id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="get-project-ssh-key",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(
-                http_res.text, models.GetProjectSSHKeyResponseBody
-            )
+            return utils.unmarshal_json(http_res.text, models.PostAPIKeyResponseBody)
+        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -609,27 +389,24 @@ class SSHKeys(BaseSDK):
             http_res,
         )
 
-    def put_project_ssh_key(
+    def regenerate(
         self,
         *,
-        project_id: str,
-        ssh_key_id: str,
-        data: Union[
-            models.PutProjectSSHKeySSHKeysData,
-            models.PutProjectSSHKeySSHKeysDataTypedDict,
-        ],
+        api_key_id: str,
+        data: Optional[
+            Union[models.UpdateAPIKeyData, models.UpdateAPIKeyDataTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PutProjectSSHKeyResponseBody:
-        r"""Update a Project SSH Key
+    ) -> models.UpdateAPIKeyResponseBody:
+        r"""Regenerate API Key
 
-        Allow you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
+        Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
 
 
-        :param project_id: Project ID or Slug
-        :param ssh_key_id:
+        :param api_key_id:
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -643,18 +420,19 @@ class SSHKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.PutProjectSSHKeyRequest(
-            project_id=project_id,
-            ssh_key_id=ssh_key_id,
-            request_body=models.PutProjectSSHKeySSHKeysRequestBody(
-                data=utils.get_pydantic_model(data, models.PutProjectSSHKeySSHKeysData),
+        request = models.UpdateAPIKeyRequest(
+            api_key_id=api_key_id,
+            update_api_key=models.UpdateAPIKey(
+                data=utils.get_pydantic_model(data, Optional[models.UpdateAPIKeyData]),
             ),
         )
 
         req = self._build_request(
-            method="PATCH",
-            path="/projects/{project_id}/ssh_keys/{ssh_key_id}",
+            method="PUT",
+            path="/auth/api_keys/{api_key_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -666,11 +444,11 @@ class SSHKeys(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.update_api_key,
                 False,
                 True,
                 "json",
-                Optional[models.PutProjectSSHKeySSHKeysRequestBody],
+                Optional[models.UpdateAPIKey],
             ),
             timeout_ms=timeout_ms,
         )
@@ -685,22 +463,25 @@ class SSHKeys(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="put-project-ssh-key",
+                base_url=base_url or "",
+                operation_id="update-api-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            error_status_codes=["400", "404", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(
-                http_res.text, models.PutProjectSSHKeyResponseBody
-            )
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+            return utils.unmarshal_json(http_res.text, models.UpdateAPIKeyResponseBody)
+        if utils.match_response(http_res, ["400", "404"], "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -720,27 +501,24 @@ class SSHKeys(BaseSDK):
             http_res,
         )
 
-    async def put_project_ssh_key_async(
+    async def regenerate_async(
         self,
         *,
-        project_id: str,
-        ssh_key_id: str,
-        data: Union[
-            models.PutProjectSSHKeySSHKeysData,
-            models.PutProjectSSHKeySSHKeysDataTypedDict,
-        ],
+        api_key_id: str,
+        data: Optional[
+            Union[models.UpdateAPIKeyData, models.UpdateAPIKeyDataTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PutProjectSSHKeyResponseBody:
-        r"""Update a Project SSH Key
+    ) -> models.UpdateAPIKeyResponseBody:
+        r"""Regenerate API Key
 
-        Allow you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
+        Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
 
 
-        :param project_id: Project ID or Slug
-        :param ssh_key_id:
+        :param api_key_id:
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -754,18 +532,19 @@ class SSHKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.PutProjectSSHKeyRequest(
-            project_id=project_id,
-            ssh_key_id=ssh_key_id,
-            request_body=models.PutProjectSSHKeySSHKeysRequestBody(
-                data=utils.get_pydantic_model(data, models.PutProjectSSHKeySSHKeysData),
+        request = models.UpdateAPIKeyRequest(
+            api_key_id=api_key_id,
+            update_api_key=models.UpdateAPIKey(
+                data=utils.get_pydantic_model(data, Optional[models.UpdateAPIKeyData]),
             ),
         )
 
         req = self._build_request_async(
-            method="PATCH",
-            path="/projects/{project_id}/ssh_keys/{ssh_key_id}",
+            method="PUT",
+            path="/auth/api_keys/{api_key_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -777,11 +556,11 @@ class SSHKeys(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.update_api_key,
                 False,
                 True,
                 "json",
-                Optional[models.PutProjectSSHKeySSHKeysRequestBody],
+                Optional[models.UpdateAPIKey],
             ),
             timeout_ms=timeout_ms,
         )
@@ -796,22 +575,25 @@ class SSHKeys(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="put-project-ssh-key",
+                base_url=base_url or "",
+                operation_id="update-api-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            error_status_codes=["400", "404", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(
-                http_res.text, models.PutProjectSSHKeyResponseBody
-            )
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+            return utils.unmarshal_json(http_res.text, models.UpdateAPIKeyResponseBody)
+        if utils.match_response(http_res, ["400", "404"], "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -831,23 +613,21 @@ class SSHKeys(BaseSDK):
             http_res,
         )
 
-    def delete_project_ssh_key(
+    def delete(
         self,
         *,
-        project_id: str,
-        ssh_key_id: str,
+        api_key_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project SSH Key
+        r"""Delete API Key
 
-        Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
+        Delete an existing API Key. Once deleted, the API Key can no longer be used to access the API.
 
 
-        :param project_id: Project ID or Slug
-        :param ssh_key_id:
+        :param api_key_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -860,15 +640,16 @@ class SSHKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteProjectSSHKeyRequest(
-            project_id=project_id,
-            ssh_key_id=ssh_key_id,
+        request = models.DeleteAPIKeyRequest(
+            api_key_id=api_key_id,
         )
 
         req = self._build_request(
             method="DELETE",
-            path="/projects/{project_id}/ssh_keys/{ssh_key_id}",
+            path="/auth/api_keys/{api_key_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -876,7 +657,7 @@ class SSHKeys(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="*/*",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -892,7 +673,8 @@ class SSHKeys(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="delete-project-ssh-key",
+                base_url=base_url or "",
+                operation_id="delete-api-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -903,9 +685,13 @@ class SSHKeys(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, ["404", "4XX"], "*"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -925,23 +711,21 @@ class SSHKeys(BaseSDK):
             http_res,
         )
 
-    async def delete_project_ssh_key_async(
+    async def delete_async(
         self,
         *,
-        project_id: str,
-        ssh_key_id: str,
+        api_key_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project SSH Key
+        r"""Delete API Key
 
-        Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
+        Delete an existing API Key. Once deleted, the API Key can no longer be used to access the API.
 
 
-        :param project_id: Project ID or Slug
-        :param ssh_key_id:
+        :param api_key_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -954,15 +738,16 @@ class SSHKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteProjectSSHKeyRequest(
-            project_id=project_id,
-            ssh_key_id=ssh_key_id,
+        request = models.DeleteAPIKeyRequest(
+            api_key_id=api_key_id,
         )
 
         req = self._build_request_async(
             method="DELETE",
-            path="/projects/{project_id}/ssh_keys/{ssh_key_id}",
+            path="/auth/api_keys/{api_key_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -970,7 +755,7 @@ class SSHKeys(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="*/*",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -986,7 +771,8 @@ class SSHKeys(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="delete-project-ssh-key",
+                base_url=base_url or "",
+                operation_id="delete-api-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -997,9 +783,13 @@ class SSHKeys(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, ["404", "4XX"], "*"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

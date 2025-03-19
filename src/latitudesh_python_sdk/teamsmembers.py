@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional, Union, cast
 
 
 class TeamsMembers(BaseSDK):
-    def get_team_members(
+    def list(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -31,6 +31,8 @@ class TeamsMembers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
             path="/team/members",
@@ -57,6 +59,7 @@ class TeamsMembers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-team-members",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -90,7 +93,7 @@ class TeamsMembers(BaseSDK):
             http_res,
         )
 
-    async def get_team_members_async(
+    async def list_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -112,6 +115,8 @@ class TeamsMembers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
             path="/team/members",
@@ -138,6 +143,7 @@ class TeamsMembers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-team-members",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -171,7 +177,7 @@ class TeamsMembers(BaseSDK):
             http_res,
         )
 
-    def post_team_members(
+    def add(
         self,
         *,
         request: Optional[
@@ -200,6 +206,8 @@ class TeamsMembers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -240,6 +248,7 @@ class TeamsMembers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="post-team-members",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -277,7 +286,7 @@ class TeamsMembers(BaseSDK):
             http_res,
         )
 
-    async def post_team_members_async(
+    async def add_async(
         self,
         *,
         request: Optional[
@@ -306,6 +315,8 @@ class TeamsMembers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
@@ -346,6 +357,7 @@ class TeamsMembers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="post-team-members",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -383,7 +395,7 @@ class TeamsMembers(BaseSDK):
             http_res,
         )
 
-    def destroy_team_member(
+    def remove_member(
         self,
         *,
         user_id: str,
@@ -407,6 +419,8 @@ class TeamsMembers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DestroyTeamMemberRequest(
             user_id=user_id,
@@ -438,6 +452,7 @@ class TeamsMembers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="destroy-team-member",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -475,7 +490,7 @@ class TeamsMembers(BaseSDK):
             http_res,
         )
 
-    async def destroy_team_member_async(
+    async def remove_member_async(
         self,
         *,
         user_id: str,
@@ -499,6 +514,8 @@ class TeamsMembers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DestroyTeamMemberRequest(
             user_id=user_id,
@@ -530,6 +547,7 @@ class TeamsMembers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="destroy-team-member",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
