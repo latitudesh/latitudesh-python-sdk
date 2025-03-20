@@ -37,13 +37,6 @@ Latitude.sh API: The Latitude.sh API is a RESTful API to manage your Latitude.sh
 
 <!-- End Table of Contents [toc] -->
 
-<!-- Start SDK Installation [installation] -->
-## SDK Installation
-
-> [!TIP]
-> To finish publishing your SDK to PyPI you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 > [!NOTE]
 > **Python version upgrade policy**
 >
