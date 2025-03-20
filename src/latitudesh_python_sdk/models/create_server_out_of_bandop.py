@@ -47,7 +47,7 @@ class CreateServerOutOfBandServersRequestBody(BaseModel):
 
 class CreateServerOutOfBandRequestTypedDict(TypedDict):
     server_id: str
-    request_body: NotRequired[CreateServerOutOfBandServersRequestBodyTypedDict]
+    request_body: CreateServerOutOfBandServersRequestBodyTypedDict
 
 
 class CreateServerOutOfBandRequest(BaseModel):
@@ -56,6 +56,6 @@ class CreateServerOutOfBandRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[CreateServerOutOfBandServersRequestBody],
+        CreateServerOutOfBandServersRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]

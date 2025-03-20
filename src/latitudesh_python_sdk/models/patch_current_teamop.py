@@ -65,7 +65,7 @@ class PatchCurrentTeamTeamsRequestBody(BaseModel):
 
 class PatchCurrentTeamRequestTypedDict(TypedDict):
     team_id: str
-    request_body: NotRequired[PatchCurrentTeamTeamsRequestBodyTypedDict]
+    request_body: PatchCurrentTeamTeamsRequestBodyTypedDict
 
 
 class PatchCurrentTeamRequest(BaseModel):
@@ -74,9 +74,9 @@ class PatchCurrentTeamRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[PatchCurrentTeamTeamsRequestBody],
+        PatchCurrentTeamTeamsRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]
 
 
 class PatchCurrentTeamResponseBodyTypedDict(TypedDict):

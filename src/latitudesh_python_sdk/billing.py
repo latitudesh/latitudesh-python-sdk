@@ -9,7 +9,7 @@ from typing import List, Mapping, Optional
 
 
 class Billing(BaseSDK):
-    def get_billing_usage(
+    def list_usage(
         self,
         *,
         filter_project: str,
@@ -40,6 +40,8 @@ class Billing(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetBillingUsageRequest(
             filter_products=filter_products,
@@ -73,6 +75,7 @@ class Billing(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-billing-usage",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -106,7 +109,7 @@ class Billing(BaseSDK):
             http_res,
         )
 
-    async def get_billing_usage_async(
+    async def list_usage_async(
         self,
         *,
         filter_project: str,
@@ -137,6 +140,8 @@ class Billing(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetBillingUsageRequest(
             filter_products=filter_products,
@@ -170,6 +175,7 @@ class Billing(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-billing-usage",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

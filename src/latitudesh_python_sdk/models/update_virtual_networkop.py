@@ -52,7 +52,7 @@ class UpdateVirtualNetworkPrivateNetworksRequestBody(BaseModel):
 class UpdateVirtualNetworkRequestTypedDict(TypedDict):
     vlan_id: str
     r"""The Virtual Network ID"""
-    request_body: NotRequired[UpdateVirtualNetworkPrivateNetworksRequestBodyTypedDict]
+    request_body: UpdateVirtualNetworkPrivateNetworksRequestBodyTypedDict
 
 
 class UpdateVirtualNetworkRequest(BaseModel):
@@ -62,6 +62,6 @@ class UpdateVirtualNetworkRequest(BaseModel):
     r"""The Virtual Network ID"""
 
     request_body: Annotated[
-        Optional[UpdateVirtualNetworkPrivateNetworksRequestBody],
+        UpdateVirtualNetworkPrivateNetworksRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]

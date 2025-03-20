@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [get_team_members](#get_team_members) - List all Team Members
-* [post_team_members](#post_team_members) - Add a Team Member
-* [destroy_team_member](#destroy_team_member) - Remove a Team Member
+* [list](#list) - List all Team Members
+* [add](#add) - Add a Team Member
+* [remove_member](#remove_member) - Remove a Team Member
 
-## get_team_members
+## list
 
 List all Team Members
 
@@ -19,11 +19,12 @@ List all Team Members
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.teams_members.get_team_members()
+    res = latitudesh.teams_members.list()
 
     # Handle response
     print(res)
@@ -46,7 +47,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## post_team_members
+## add
 
 Add a Team Member
 
@@ -57,19 +58,18 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.teams_members.post_team_members(request={
-        "data": {
-            "type": latitudesh_python_sdk.PostTeamMembersTeamsMembersType.MEMBERSHIPS,
-            "attributes": {
-                "email": "theron_keeling@balistreri.test",
-                "role": latitudesh_python_sdk.PostTeamMembersTeamsMembersRole.COLLABORATOR,
-                "first_name": "Dianne",
-                "last_name": "Bahringer",
-            },
+    res = latitudesh.teams_members.add(data={
+        "type": latitudesh_python_sdk.PostTeamMembersTeamsMembersType.MEMBERSHIPS,
+        "attributes": {
+            "email": "theron_keeling@balistreri.test",
+            "role": latitudesh_python_sdk.PostTeamMembersTeamsMembersRole.COLLABORATOR,
+            "first_name": "Dianne",
+            "last_name": "Bahringer",
         },
     })
 
@@ -80,10 +80,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                               | [models.PostTeamMembersTeamsMembersRequestBody](../../models/postteammembersteamsmembersrequestbody.md) | :heavy_check_mark:                                                                                      | The request object to use for the request.                                                              |
-| `retries`                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                        | :heavy_minus_sign:                                                                                      | Configuration to override the default retry behavior of the client.                                     |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `data`                                                                                    | [models.PostTeamMembersTeamsMembersData](../../models/postteammembersteamsmembersdata.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |
 
 ### Response
 
@@ -96,7 +96,7 @@ with Latitudesh(
 | models.ErrorObject       | 403, 422                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## destroy_team_member
+## remove_member
 
 Remove a Team Member
 
@@ -106,11 +106,12 @@ Remove a Team Member
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.teams_members.destroy_team_member(user_id="user_GMy1DbMLqN50m")
+    latitudesh.teams_members.remove_member(user_id="user_GMy1DbMLqN50m")
 
     # Use the SDK ...
 

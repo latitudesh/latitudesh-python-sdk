@@ -4,11 +4,12 @@
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.api_keys.get_api_keys()
+    res = latitudesh.api_keys.list()
 
     # Handle response
     print(res)
@@ -24,11 +25,12 @@ from latitudesh_python_sdk import Latitudesh
 import os
 
 async def main():
+
     async with Latitudesh(
         bearer=os.getenv("LATITUDESH_BEARER", ""),
     ) as latitudesh:
 
-        res = await latitudesh.api_keys.get_api_keys_async()
+        res = await latitudesh.api_keys.list_async()
 
         # Handle response
         print(res)

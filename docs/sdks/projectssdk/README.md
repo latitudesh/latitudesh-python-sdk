@@ -5,12 +5,12 @@
 
 ### Available Operations
 
-* [get_projects](#get_projects) - List all Projects
-* [create_project](#create_project) - Create a Project
-* [update_project](#update_project) - Update a Project
-* [delete_project](#delete_project) - Delete a Project
+* [list](#list) - List all Projects
+* [create](#create) - Create a Project
+* [update](#update) - Update a Project
+* [delete](#delete) - Delete a Project
 
-## get_projects
+## list
 
 Returns a list of all projects for the current team
 
@@ -21,11 +21,12 @@ Returns a list of all projects for the current team
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.get_projects(filter_tags="tag_ezo5vGxZXVU3ozExYeXaCMJzvp0")
+    res = latitudesh.projects.list(filter_tags="tag_ezo5vGxZXVU3ozExYeXaCMJzvp0")
 
     # Handle response
     print(res)
@@ -55,7 +56,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## create_project
+## create
 
 Create a Project
 
@@ -66,11 +67,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.create_project(request={
+    res = latitudesh.projects.create(request={
         "data": {
             "type": latitudesh_python_sdk.CreateProjectProjectsType.PROJECTS,
             "attributes": {
@@ -105,7 +107,7 @@ with Latitudesh(
 | models.ErrorObject       | 400, 403, 422            | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## update_project
+## update
 
 Update a Project
 
@@ -116,11 +118,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.update_project(project_id="proj_Z8rodm2Yq1jLB", data={
+    res = latitudesh.projects.update(project_id="proj_Z8rodm2Yq1jLB", data={
         "type": latitudesh_python_sdk.UpdateProjectProjectsType.PROJECTS,
         "attributes": {
             "tags": [
@@ -154,7 +157,7 @@ with Latitudesh(
 | models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## delete_project
+## delete
 
 Delete a Project
 
@@ -164,11 +167,12 @@ Delete a Project
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.projects.delete_project(project_id="invalid")
+    latitudesh.projects.delete(project_id="invalid")
 
     # Use the SDK ...
 

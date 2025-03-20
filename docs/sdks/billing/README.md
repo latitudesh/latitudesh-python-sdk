@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [get_billing_usage](#get_billing_usage) - List Billing Usage
+* [list_usage](#list_usage) - List Billing Usage
 
-## get_billing_usage
+## list_usage
 
 Returns the billing usage of a project
 
@@ -18,11 +18,12 @@ Returns the billing usage of a project
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.billing.get_billing_usage(filter_project="proj_6059EqYkOQj8p", filter_products=[
+    res = latitudesh.billing.list_usage(filter_project="proj_6059EqYkOQj8p", filter_products=[
         "si_fhvti2pa",
         "si_h3r2mheb",
     ], filter_plan="plan.name")

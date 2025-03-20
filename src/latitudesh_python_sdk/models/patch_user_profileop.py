@@ -62,7 +62,7 @@ class PatchUserProfileUserProfileRequestBody(BaseModel):
 
 class PatchUserProfileRequestTypedDict(TypedDict):
     id: str
-    request_body: NotRequired[PatchUserProfileUserProfileRequestBodyTypedDict]
+    request_body: PatchUserProfileUserProfileRequestBodyTypedDict
 
 
 class PatchUserProfileRequest(BaseModel):
@@ -71,9 +71,9 @@ class PatchUserProfileRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[PatchUserProfileUserProfileRequestBody],
+        PatchUserProfileUserProfileRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]
 
 
 class PatchUserProfileResponseBodyTypedDict(TypedDict):

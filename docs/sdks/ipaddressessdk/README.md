@@ -5,10 +5,10 @@
 
 ### Available Operations
 
-* [get_ips](#get_ips) - List IPs
-* [get_ip](#get_ip) - Retrieve an IP
+* [list](#list) - List IPs
+* [get](#get) - Retrieve an IP
 
-## get_ips
+## list
 
 List all Management and Additional IP Addresses.
  • Management IPs are IPs that are used for the management IP of a device.
@@ -22,11 +22,12 @@ List all Management and Additional IP Addresses.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ip_addresses.get_ips(filter_server="46", filter_project="59")
+    res = latitudesh.ip_addresses.list(filter_server="46", filter_project="59")
 
     # Handle response
     print(res)
@@ -57,7 +58,7 @@ with Latitudesh(
 | models.ErrorObject       | 422                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## get_ip
+## get
 
 Retrieve an IP Address
 
@@ -67,11 +68,12 @@ Retrieve an IP Address
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ip_addresses.get_ip(ip_id="ip_059EqY7kOQj8p")
+    res = latitudesh.ip_addresses.get(ip_id="ip_059EqY7kOQj8p")
 
     # Handle response
     print(res)

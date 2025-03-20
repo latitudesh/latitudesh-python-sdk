@@ -4,6 +4,8 @@ sources:
     Latitude.sh API:
         inputs:
             - location: https://api.latitude.sh/api-docs/v3/swagger.json
+        overlays:
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
         registry:
             location: registry.speakeasyapi.dev/latitude/latitude/latitude-sh-api
 targets:

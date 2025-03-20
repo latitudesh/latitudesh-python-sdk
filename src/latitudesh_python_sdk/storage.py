@@ -3,21 +3,19 @@
 from .basesdk import BaseSDK
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
+from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Mapping, Optional, Union, cast
+from typing import Mapping, Optional, Union
 
 
 class Storage(BaseSDK):
-    def post_storage_filesystems(
+    def create_filesystem(
         self,
         *,
-        request: Optional[
-            Union[
-                models.PostStorageFilesystemsStorageRequestBody,
-                models.PostStorageFilesystemsStorageRequestBodyTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.PostStorageFilesystemsStorageData,
+            models.PostStorageFilesystemsStorageDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -27,7 +25,7 @@ class Storage(BaseSDK):
 
         Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -40,13 +38,13 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.PostStorageFilesystemsStorageRequestBody]
-            )
-        request = cast(
-            Optional[models.PostStorageFilesystemsStorageRequestBody], request
+        request = models.PostStorageFilesystemsStorageRequestBody(
+            data=utils.get_pydantic_model(
+                data, models.PostStorageFilesystemsStorageData
+            ),
         )
 
         req = self._build_request(
@@ -55,7 +53,7 @@ class Storage(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -65,9 +63,9 @@ class Storage(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PostStorageFilesystemsStorageRequestBody],
+                models.PostStorageFilesystemsStorageRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -82,6 +80,7 @@ class Storage(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="post-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -117,15 +116,13 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    async def post_storage_filesystems_async(
+    async def create_filesystem_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.PostStorageFilesystemsStorageRequestBody,
-                models.PostStorageFilesystemsStorageRequestBodyTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.PostStorageFilesystemsStorageData,
+            models.PostStorageFilesystemsStorageDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -135,7 +132,7 @@ class Storage(BaseSDK):
 
         Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -148,13 +145,13 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.PostStorageFilesystemsStorageRequestBody]
-            )
-        request = cast(
-            Optional[models.PostStorageFilesystemsStorageRequestBody], request
+        request = models.PostStorageFilesystemsStorageRequestBody(
+            data=utils.get_pydantic_model(
+                data, models.PostStorageFilesystemsStorageData
+            ),
         )
 
         req = self._build_request_async(
@@ -163,7 +160,7 @@ class Storage(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -173,9 +170,9 @@ class Storage(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PostStorageFilesystemsStorageRequestBody],
+                models.PostStorageFilesystemsStorageRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -190,6 +187,7 @@ class Storage(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="post-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -225,7 +223,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    def get_storage_filesystems(
+    def list_filesystems(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -251,6 +249,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetStorageFilesystemsRequest(
             filter_project=filter_project,
@@ -282,6 +282,7 @@ class Storage(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -315,7 +316,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    async def get_storage_filesystems_async(
+    async def list_filesystems_async(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -341,6 +342,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetStorageFilesystemsRequest(
             filter_project=filter_project,
@@ -372,6 +375,7 @@ class Storage(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -405,7 +409,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    def delete_storage_filesystems(
+    def delete_filesystem(
         self,
         *,
         filesystem_id: str,
@@ -431,6 +435,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteStorageFilesystemsRequest(
             filesystem_id=filesystem_id,
@@ -462,6 +468,7 @@ class Storage(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -495,7 +502,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    async def delete_storage_filesystems_async(
+    async def delete_filesystem_async(
         self,
         *,
         filesystem_id: str,
@@ -521,6 +528,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteStorageFilesystemsRequest(
             filesystem_id=filesystem_id,
@@ -552,6 +561,7 @@ class Storage(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -585,7 +595,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    def patch_storage_filesystems(
+    def update_filesystem(
         self,
         *,
         filesystem_id: str,
@@ -616,6 +626,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PatchStorageFilesystemsRequest(
             filesystem_id=filesystem_id,
@@ -632,7 +644,7 @@ class Storage(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -642,9 +654,9 @@ class Storage(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PatchStorageFilesystemsStorageRequestBody],
+                models.PatchStorageFilesystemsStorageRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -659,6 +671,7 @@ class Storage(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="patch-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -694,7 +707,7 @@ class Storage(BaseSDK):
             http_res,
         )
 
-    async def patch_storage_filesystems_async(
+    async def update_filesystem_async(
         self,
         *,
         filesystem_id: str,
@@ -725,6 +738,8 @@ class Storage(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.PatchStorageFilesystemsRequest(
             filesystem_id=filesystem_id,
@@ -741,7 +756,7 @@ class Storage(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -751,9 +766,9 @@ class Storage(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PatchStorageFilesystemsStorageRequestBody],
+                models.PatchStorageFilesystemsStorageRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -768,6 +783,7 @@ class Storage(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="patch-storage-filesystems",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

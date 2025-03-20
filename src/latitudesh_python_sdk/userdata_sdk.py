@@ -3,25 +3,29 @@
 from .basesdk import BaseSDK
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
+from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Any, Mapping, Optional, Union, cast
+from typing import Mapping, Optional, Union
 
 
-class APIKeys(BaseSDK):
-    def get_api_keys(
+class UserDataSDK(BaseSDK):
+    def list_project_user_data(
         self,
         *,
+        project_id: str,
+        extra_fields_user_data: Optional[str] = "decoded_content",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.APIKey:
-        r"""List API Keys
+    ) -> models.GetProjectUsersDataResponseBody:
+        r"""List all Project User Data
 
-        Returns a list of all API keys from the team members
+        List all Users Data in the project. These scripts can be used to configure servers with user data.
 
 
+        :param project_id: Project ID or Slug
+        :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -34,14 +38,22 @@ class APIKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetProjectUsersDataRequest(
+            project_id=project_id,
+            extra_fields_user_data=extra_fields_user_data,
+        )
+
         req = self._build_request(
             method="GET",
-            path="/auth/api_keys",
+            path="/projects/{project_id}/user_data",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/vnd.api+json",
@@ -60,20 +72,23 @@ class APIKeys(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get-api-keys",
+                base_url=base_url or "",
+                operation_id="get-project-users-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["404", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.APIKey)
-        if utils.match_response(http_res, "4XX", "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.GetProjectUsersDataResponseBody
+            )
+        if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -93,19 +108,23 @@ class APIKeys(BaseSDK):
             http_res,
         )
 
-    async def get_api_keys_async(
+    async def list_project_user_data_async(
         self,
         *,
+        project_id: str,
+        extra_fields_user_data: Optional[str] = "decoded_content",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.APIKey:
-        r"""List API Keys
+    ) -> models.GetProjectUsersDataResponseBody:
+        r"""List all Project User Data
 
-        Returns a list of all API keys from the team members
+        List all Users Data in the project. These scripts can be used to configure servers with user data.
 
 
+        :param project_id: Project ID or Slug
+        :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -118,14 +137,22 @@ class APIKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetProjectUsersDataRequest(
+            project_id=project_id,
+            extra_fields_user_data=extra_fields_user_data,
+        )
+
         req = self._build_request_async(
             method="GET",
-            path="/auth/api_keys",
+            path="/projects/{project_id}/user_data",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/vnd.api+json",
@@ -144,20 +171,23 @@ class APIKeys(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get-api-keys",
+                base_url=base_url or "",
+                operation_id="get-project-users-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["404", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.APIKey)
-        if utils.match_response(http_res, "4XX", "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.GetProjectUsersDataResponseBody
+            )
+        if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -177,224 +207,25 @@ class APIKeys(BaseSDK):
             http_res,
         )
 
-    def post_api_key(
+    def create(
         self,
         *,
-        request: Optional[
-            Union[models.CreateAPIKey, models.CreateAPIKeyTypedDict]
-        ] = None,
+        project_id: str,
+        data: Union[
+            models.PostProjectUserDataUserDataData,
+            models.PostProjectUserDataUserDataDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PostAPIKeyResponseBody:
-        r"""Create API Key
+    ) -> models.UserData:
+        r"""Create a Project User Data
 
-        Create a new API Key that is tied to the current user account. The created API key is only listed ONCE upon creation. It can however be regenerated or deleted.
-
-
-        :param request: The request object to send.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, Optional[models.CreateAPIKey])
-        request = cast(Optional[models.CreateAPIKey], request)
-
-        req = self._build_request(
-            method="POST",
-            path="/auth/api_keys",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.CreateAPIKey]
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="post-api-key",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.PostAPIKeyResponseBody)
-        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def post_api_key_async(
-        self,
-        *,
-        request: Optional[
-            Union[models.CreateAPIKey, models.CreateAPIKeyTypedDict]
-        ] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PostAPIKeyResponseBody:
-        r"""Create API Key
-
-        Create a new API Key that is tied to the current user account. The created API key is only listed ONCE upon creation. It can however be regenerated or deleted.
+        Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
 
 
-        :param request: The request object to send.
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, Optional[models.CreateAPIKey])
-        request = cast(Optional[models.CreateAPIKey], request)
-
-        req = self._build_request_async(
-            method="POST",
-            path="/auth/api_keys",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=False,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.CreateAPIKey]
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="post-api-key",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.PostAPIKeyResponseBody)
-        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def update_api_key(
-        self,
-        *,
-        api_key_id: str,
-        data: Optional[
-            Union[models.UpdateAPIKeyData, models.UpdateAPIKeyDataTypedDict]
-        ] = None,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UpdateAPIKeyResponseBody:
-        r"""Regenerate API Key
-
-        Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
-
-
-        :param api_key_id:
+        :param project_id: Project ID or Slug
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -408,21 +239,25 @@ class APIKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateAPIKeyRequest(
-            api_key_id=api_key_id,
-            update_api_key=models.UpdateAPIKey(
-                data=utils.get_pydantic_model(data, Optional[models.UpdateAPIKeyData]),
+        request = models.PostProjectUserDataRequest(
+            project_id=project_id,
+            request_body=models.PostProjectUserDataUserDataRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PostProjectUserDataUserDataData
+                ),
             ),
         )
 
         req = self._build_request(
-            method="PUT",
-            path="/auth/api_keys/{api_key_id}",
+            method="POST",
+            path="/projects/{project_id}/user_data",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -430,11 +265,11 @@ class APIKeys(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.update_api_key,
+                request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateAPIKey],
+                models.PostProjectUserDataUserDataRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -449,24 +284,21 @@ class APIKeys(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="update-api-key",
+                base_url=base_url or "",
+                operation_id="post-project-user-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "5XX"],
+            error_status_codes=["400", "404", "422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.UpdateAPIKeyResponseBody)
-        if utils.match_response(http_res, ["400", "404"], "application/vnd.api+json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, "4XX", "*"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
+            return utils.unmarshal_json(http_res.text, models.UserData)
+        if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -486,24 +318,25 @@ class APIKeys(BaseSDK):
             http_res,
         )
 
-    async def update_api_key_async(
+    async def create_async(
         self,
         *,
-        api_key_id: str,
-        data: Optional[
-            Union[models.UpdateAPIKeyData, models.UpdateAPIKeyDataTypedDict]
-        ] = None,
+        project_id: str,
+        data: Union[
+            models.PostProjectUserDataUserDataData,
+            models.PostProjectUserDataUserDataDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UpdateAPIKeyResponseBody:
-        r"""Regenerate API Key
+    ) -> models.UserData:
+        r"""Create a Project User Data
 
-        Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
+        Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
 
 
-        :param api_key_id:
+        :param project_id: Project ID or Slug
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -517,21 +350,25 @@ class APIKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.UpdateAPIKeyRequest(
-            api_key_id=api_key_id,
-            update_api_key=models.UpdateAPIKey(
-                data=utils.get_pydantic_model(data, Optional[models.UpdateAPIKeyData]),
+        request = models.PostProjectUserDataRequest(
+            project_id=project_id,
+            request_body=models.PostProjectUserDataUserDataRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PostProjectUserDataUserDataData
+                ),
             ),
         )
 
         req = self._build_request_async(
-            method="PUT",
-            path="/auth/api_keys/{api_key_id}",
+            method="POST",
+            path="/projects/{project_id}/user_data",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -539,11 +376,11 @@ class APIKeys(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.update_api_key,
+                request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateAPIKey],
+                models.PostProjectUserDataUserDataRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -558,24 +395,21 @@ class APIKeys(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="update-api-key",
+                base_url=base_url or "",
+                operation_id="post-project-user-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "4XX", "5XX"],
+            error_status_codes=["400", "404", "422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.UpdateAPIKeyResponseBody)
-        if utils.match_response(http_res, ["400", "404"], "application/vnd.api+json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, "4XX", "*"):
+        if utils.match_response(http_res, "201", "application/vnd.api+json"):
+            return utils.unmarshal_json(http_res.text, models.UserData)
+        if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -595,21 +429,25 @@ class APIKeys(BaseSDK):
             http_res,
         )
 
-    def delete_api_key(
+    def get_project_user_data(
         self,
         *,
-        api_key_id: str,
+        project_id: str,
+        user_data_id: str,
+        extra_fields_user_data: Optional[str] = "decoded_content",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Delete API Key
+    ) -> models.UserData:
+        r"""Retrieve a Project User Data
 
-        Delete an existing API Key. Once deleted, the API Key can no longer be used to access the API.
+        Get User Data in the project. These scripts can be used to configure servers with user data.
 
 
-        :param api_key_id:
+        :param project_id: Project ID or Slug
+        :param user_data_id:
+        :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -622,14 +460,18 @@ class APIKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteAPIKeyRequest(
-            api_key_id=api_key_id,
+        request = models.GetProjectUserDataRequest(
+            project_id=project_id,
+            user_data_id=user_data_id,
+            extra_fields_user_data=extra_fields_user_data,
         )
 
         req = self._build_request(
-            method="DELETE",
-            path="/auth/api_keys/{api_key_id}",
+            method="GET",
+            path="/projects/{project_id}/user_data/{user_data_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -653,7 +495,8 @@ class APIKeys(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="delete-api-key",
+                base_url=base_url or "",
+                operation_id="get-project-user-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -664,13 +507,9 @@ class APIKeys(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "*"):
-            return
-        if utils.match_response(http_res, "404", "application/vnd.api+json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, "4XX", "*"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return utils.unmarshal_json(http_res.text, models.UserData)
+        if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -690,21 +529,25 @@ class APIKeys(BaseSDK):
             http_res,
         )
 
-    async def delete_api_key_async(
+    async def get_project_user_data_async(
         self,
         *,
-        api_key_id: str,
+        project_id: str,
+        user_data_id: str,
+        extra_fields_user_data: Optional[str] = "decoded_content",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Delete API Key
+    ) -> models.UserData:
+        r"""Retrieve a Project User Data
 
-        Delete an existing API Key. Once deleted, the API Key can no longer be used to access the API.
+        Get User Data in the project. These scripts can be used to configure servers with user data.
 
 
-        :param api_key_id:
+        :param project_id: Project ID or Slug
+        :param user_data_id:
+        :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -717,14 +560,18 @@ class APIKeys(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteAPIKeyRequest(
-            api_key_id=api_key_id,
+        request = models.GetProjectUserDataRequest(
+            project_id=project_id,
+            user_data_id=user_data_id,
+            extra_fields_user_data=extra_fields_user_data,
         )
 
         req = self._build_request_async(
-            method="DELETE",
-            path="/auth/api_keys/{api_key_id}",
+            method="GET",
+            path="/projects/{project_id}/user_data/{user_data_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -748,7 +595,8 @@ class APIKeys(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="delete-api-key",
+                base_url=base_url or "",
+                operation_id="get-project-user-data",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -759,13 +607,431 @@ class APIKeys(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "*"):
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return utils.unmarshal_json(http_res.text, models.UserData)
+        if utils.match_response(http_res, ["404", "4XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise models.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    def update(
+        self,
+        *,
+        project_id: str,
+        user_data_id: str,
+        data: Union[
+            models.PutProjectUserDataUserDataData,
+            models.PutProjectUserDataUserDataDataTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UserData:
+        r"""Update a Project User Data
+
+        Allow you update User Data in a project.
+
+
+        :param project_id: Project ID or Slug
+        :param user_data_id:
+        :param data:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.PutProjectUserDataRequest(
+            project_id=project_id,
+            user_data_id=user_data_id,
+            request_body=models.PutProjectUserDataUserDataRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PutProjectUserDataUserDataData
+                ),
+            ),
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/projects/{project_id}/user_data/{user_data_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                True,
+                "json",
+                Optional[models.PutProjectUserDataUserDataRequestBody],
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="put-project-user-data",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return utils.unmarshal_json(http_res.text, models.UserData)
+        if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise models.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def update_async(
+        self,
+        *,
+        project_id: str,
+        user_data_id: str,
+        data: Union[
+            models.PutProjectUserDataUserDataData,
+            models.PutProjectUserDataUserDataDataTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UserData:
+        r"""Update a Project User Data
+
+        Allow you update User Data in a project.
+
+
+        :param project_id: Project ID or Slug
+        :param user_data_id:
+        :param data:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.PutProjectUserDataRequest(
+            project_id=project_id,
+            user_data_id=user_data_id,
+            request_body=models.PutProjectUserDataUserDataRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PutProjectUserDataUserDataData
+                ),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/projects/{project_id}/user_data/{user_data_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                True,
+                "json",
+                Optional[models.PutProjectUserDataUserDataRequestBody],
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="put-project-user-data",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return utils.unmarshal_json(http_res.text, models.UserData)
+        if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise models.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    def delete(
+        self,
+        *,
+        project_id: str,
+        user_data_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ):
+        r"""Delete a Project User Data
+
+        Allow you remove User Data in a project.
+
+
+        :param project_id: Project ID or Slug
+        :param user_data_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DeleteProjectUserDataRequest(
+            project_id=project_id,
+            user_data_id=user_data_id,
+        )
+
+        req = self._build_request(
+            method="DELETE",
+            path="/projects/{project_id}/user_data/{user_data_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="*/*",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="delete-project-user-data",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["404", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "404", "application/vnd.api+json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, "4XX", "*"):
+        if utils.match_response(http_res, ["404", "4XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise models.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def delete_async(
+        self,
+        *,
+        project_id: str,
+        user_data_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ):
+        r"""Delete a Project User Data
+
+        Allow you remove User Data in a project.
+
+
+        :param project_id: Project ID or Slug
+        :param user_data_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DeleteProjectUserDataRequest(
+            project_id=project_id,
+            user_data_id=user_data_id,
+        )
+
+        req = self._build_request_async(
+            method="DELETE",
+            path="/projects/{project_id}/user_data/{user_data_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="*/*",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="delete-project-user-data",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["404", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "204", "*"):
+            return
+        if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

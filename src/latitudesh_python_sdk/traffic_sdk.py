@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional
 
 
 class TrafficSDK(BaseSDK):
-    def get_traffic_consumption(
+    def get(
         self,
         *,
         filter_date_gte: str,
@@ -39,6 +39,8 @@ class TrafficSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetTrafficConsumptionRequest(
             filter_server=filter_server,
@@ -73,6 +75,7 @@ class TrafficSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-traffic-consumption",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -106,7 +109,7 @@ class TrafficSDK(BaseSDK):
             http_res,
         )
 
-    async def get_traffic_consumption_async(
+    async def get_async(
         self,
         *,
         filter_date_gte: str,
@@ -136,6 +139,8 @@ class TrafficSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetTrafficConsumptionRequest(
             filter_server=filter_server,
@@ -170,6 +175,7 @@ class TrafficSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-traffic-consumption",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -203,7 +209,7 @@ class TrafficSDK(BaseSDK):
             http_res,
         )
 
-    def get_traffic_quota(
+    def get_quota(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -227,6 +233,8 @@ class TrafficSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetTrafficQuotaRequest(
             filter_project=filter_project,
@@ -258,6 +266,7 @@ class TrafficSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-traffic-quota",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -295,7 +304,7 @@ class TrafficSDK(BaseSDK):
             http_res,
         )
 
-    async def get_traffic_quota_async(
+    async def get_quota_async(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -319,6 +328,8 @@ class TrafficSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetTrafficQuotaRequest(
             filter_project=filter_project,
@@ -350,6 +361,7 @@ class TrafficSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-traffic-quota",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

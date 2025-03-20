@@ -5,16 +5,16 @@
 
 ### Available Operations
 
-* [get_virtual_networks](#get_virtual_networks) - List all Virtual Networks
-* [create_virtual_network](#create_virtual_network) - Create a Virtual Network
-* [update_virtual_network](#update_virtual_network) - Update a Virtual Network
-* [destroy_virtual_network](#destroy_virtual_network) - Delete a Virtual Network
-* [get_virtual_network](#get_virtual_network) - Retrieve a Virtual Network
-* [get_virtual_networks_assignments](#get_virtual_networks_assignments) - List all servers assigned to virtual networks
-* [assign_server_virtual_network](#assign_server_virtual_network) - Assign Virtual network
-* [delete_virtual_networks_assignments](#delete_virtual_networks_assignments) - Delete Virtual Network Assignment
+* [list](#list) - List all Virtual Networks
+* [create](#create) - Create a Virtual Network
+* [update](#update) - Update a Virtual Network
+* [delete_virtual_network](#delete_virtual_network) - Delete a Virtual Network
+* [get](#get) - Retrieve a Virtual Network
+* [list_assignments](#list_assignments) - List all servers assigned to virtual networks
+* [assign](#assign) - Assign Virtual network
+* [remove_assignment](#remove_assignment) - Delete Virtual Network Assignment
 
-## get_virtual_networks
+## list
 
 Lists virtual networks assigned to a project
 
@@ -25,11 +25,12 @@ Lists virtual networks assigned to a project
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.get_virtual_networks(filter_location="SAO", filter_project="lightweight-iron-keyboard", filter_tags="tag_jVnnao8eYWSQW5EKKR4QH5bQllx")
+    res = latitudesh.private_networks.list(filter_location="SAO", filter_project="lightweight-iron-keyboard", filter_tags="tag_jVnnao8eYWSQW5EKKR4QH5bQllx")
 
     # Handle response
     print(res)
@@ -55,7 +56,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## create_virtual_network
+## create
 
 Creates a new Virtual Network.
 
@@ -67,18 +68,17 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.create_virtual_network(request={
-        "data": {
-            "type": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK,
-            "attributes": {
-                "description": "São Paulo VLAN",
-                "project": "aerodynamic-marble-bench",
-                "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
-            },
+    res = latitudesh.private_networks.create(data={
+        "type": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK,
+        "attributes": {
+            "description": "São Paulo VLAN",
+            "project": "aerodynamic-marble-bench",
+            "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
         },
     })
 
@@ -89,10 +89,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                               | [models.CreateVirtualNetworkPrivateNetworksRequestBody](../../models/createvirtualnetworkprivatenetworksrequestbody.md) | :heavy_check_mark:                                                                                                      | The request object to use for the request.                                                                              |
-| `retries`                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                        | :heavy_minus_sign:                                                                                                      | Configuration to override the default retry behavior of the client.                                                     |
+| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `data`                                                                                                    | [models.CreateVirtualNetworkPrivateNetworksData](../../models/createvirtualnetworkprivatenetworksdata.md) | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `retries`                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                          | :heavy_minus_sign:                                                                                        | Configuration to override the default retry behavior of the client.                                       |
 
 ### Response
 
@@ -105,7 +105,7 @@ with Latitudesh(
 | models.ErrorObject       | 422                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## update_virtual_network
+## update
 
 Update a Virtual Network.
 
@@ -117,11 +117,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.update_virtual_network(vlan_id="vlan_pRMLydp0dQKr1", data={
+    res = latitudesh.private_networks.update(vlan_id="vlan_pRMLydp0dQKr1", data={
         "type": latitudesh_python_sdk.UpdateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORKS,
         "attributes": {},
     })
@@ -151,7 +152,7 @@ with Latitudesh(
 | models.VirtualNetworkError | 403                        | application/vnd.api+json   |
 | models.APIError            | 4XX, 5XX                   | \*/\*                      |
 
-## destroy_virtual_network
+## delete_virtual_network
 
 Delete virtual network
 
@@ -162,11 +163,12 @@ Delete virtual network
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.private_networks.destroy_virtual_network(vlan_id=invalid-id)
+    latitudesh.private_networks.delete_virtual_network(vlan_id=invalid-id)
 
     # Use the SDK ...
 
@@ -186,7 +188,7 @@ with Latitudesh(
 | models.ErrorObject       | 406                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## get_virtual_network
+## get
 
 Retrieve a Virtual Network.
 
@@ -197,11 +199,12 @@ Retrieve a Virtual Network.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.get_virtual_network(vlan_id="vlan_W6Q2D9ordKLpr")
+    res = latitudesh.private_networks.get(vlan_id="vlan_W6Q2D9ordKLpr")
 
     # Handle response
     print(res)
@@ -225,7 +228,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## get_virtual_networks_assignments
+## list_assignments
 
 Returns a list of all servers assigned to virtual networks.
 
@@ -236,11 +239,12 @@ Returns a list of all servers assigned to virtual networks.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.get_virtual_networks_assignments(filter_server="208", filter_vid="4")
+    res = latitudesh.private_networks.list_assignments(filter_server="208", filter_vid="4")
 
     # Handle response
     print(res)
@@ -266,7 +270,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## assign_server_virtual_network
+## assign
 
 Assign Virtual network
 
@@ -277,11 +281,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.assign_server_virtual_network(request={
+    res = latitudesh.private_networks.assign(request={
         "data": {
             "type": latitudesh_python_sdk.AssignServerVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK_ASSIGNMENT,
             "attributes": {
@@ -314,7 +319,7 @@ with Latitudesh(
 | models.ErrorObject       | 403, 422                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## delete_virtual_networks_assignments
+## remove_assignment
 
 Allow you to remove a Virtual Network assignment.
 
@@ -325,11 +330,12 @@ Allow you to remove a Virtual Network assignment.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.private_networks.delete_virtual_networks_assignments(assignment_id="vnasg_695BdKagDevVo")
+    latitudesh.private_networks.remove_assignment(assignment_id="vnasg_695BdKagDevVo")
 
     # Use the SDK ...
 

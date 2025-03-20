@@ -74,7 +74,7 @@ class UpdateFirewallFirewallsRequestBody(BaseModel):
 class UpdateFirewallRequestTypedDict(TypedDict):
     firewall_id: str
     r"""The Firewall ID"""
-    request_body: NotRequired[UpdateFirewallFirewallsRequestBodyTypedDict]
+    request_body: UpdateFirewallFirewallsRequestBodyTypedDict
 
 
 class UpdateFirewallRequest(BaseModel):
@@ -84,6 +84,6 @@ class UpdateFirewallRequest(BaseModel):
     r"""The Firewall ID"""
 
     request_body: Annotated[
-        Optional[UpdateFirewallFirewallsRequestBody],
+        UpdateFirewallFirewallsRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]

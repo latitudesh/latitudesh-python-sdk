@@ -5,10 +5,10 @@
 
 ### Available Operations
 
-* [get_traffic_consumption](#get_traffic_consumption) - Retrieve Traffic consumption
-* [get_traffic_quota](#get_traffic_quota) - Retrieve Traffic Quota
+* [get](#get) - Retrieve Traffic consumption
+* [get_quota](#get_quota) - Retrieve Traffic Quota
 
-## get_traffic_consumption
+## get
 
 Retrieve Traffic consumption
 
@@ -18,11 +18,12 @@ Retrieve Traffic consumption
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.traffic.get_traffic_consumption(filter_date_gte="2025-01-05T21:14:55Z", filter_date_lte="2025-02-05T21:14:55Z", filter_server=187, filter_project=301)
+    res = latitudesh.traffic.get(filter_date_gte="2025-01-05T21:14:55Z", filter_date_lte="2025-02-05T21:14:55Z", filter_server=187, filter_project=301)
 
     # Handle response
     print(res)
@@ -49,7 +50,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## get_traffic_quota
+## get_quota
 
 Retrieve Traffic Quota
 
@@ -59,11 +60,12 @@ Retrieve Traffic Quota
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.traffic.get_traffic_quota()
+    res = latitudesh.traffic.get_quota()
 
     # Handle response
     print(res)

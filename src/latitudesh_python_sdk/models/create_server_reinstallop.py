@@ -126,7 +126,7 @@ class CreateServerReinstallServersRequestBody(BaseModel):
 
 class CreateServerReinstallRequestTypedDict(TypedDict):
     server_id: str
-    request_body: NotRequired[CreateServerReinstallServersRequestBodyTypedDict]
+    request_body: CreateServerReinstallServersRequestBodyTypedDict
 
 
 class CreateServerReinstallRequest(BaseModel):
@@ -135,6 +135,6 @@ class CreateServerReinstallRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[CreateServerReinstallServersRequestBody],
+        CreateServerReinstallServersRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]

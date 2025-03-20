@@ -53,7 +53,7 @@ class PostProjectUserDataUserDataRequestBody(BaseModel):
 class PostProjectUserDataRequestTypedDict(TypedDict):
     project_id: str
     r"""Project ID or Slug"""
-    request_body: NotRequired[PostProjectUserDataUserDataRequestBodyTypedDict]
+    request_body: PostProjectUserDataUserDataRequestBodyTypedDict
 
 
 class PostProjectUserDataRequest(BaseModel):
@@ -63,6 +63,6 @@ class PostProjectUserDataRequest(BaseModel):
     r"""Project ID or Slug"""
 
     request_body: Annotated[
-        Optional[PostProjectUserDataUserDataRequestBody],
+        PostProjectUserDataUserDataRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]

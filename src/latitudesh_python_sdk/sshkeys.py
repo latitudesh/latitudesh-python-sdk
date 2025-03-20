@@ -8,24 +8,24 @@ from latitudesh_python_sdk.utils import get_security_from_env
 from typing import Mapping, Optional, Union
 
 
-class UserDataSDK(BaseSDK):
-    def get_project_users_data(
+class SSHKeys(BaseSDK):
+    def list_for_project(
         self,
         *,
         project_id: str,
-        extra_fields_user_data: Optional[str] = "decoded_content",
+        filter_tags: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetProjectUsersDataResponseBody:
-        r"""List all Project User Data
+    ) -> models.SSHKey:
+        r"""List all Project SSH Keys
 
-        List all Users Data in the project. These scripts can be used to configure servers with user data.
+        List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
 
         :param project_id: Project ID or Slug
-        :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
+        :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -38,15 +38,17 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetProjectUsersDataRequest(
+        request = models.GetProjectSSHKeysRequest(
             project_id=project_id,
-            extra_fields_user_data=extra_fields_user_data,
+            filter_tags=filter_tags,
         )
 
         req = self._build_request(
             method="GET",
-            path="/projects/{project_id}/user_data",
+            path="/projects/{project_id}/ssh_keys",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -70,22 +72,21 @@ class UserDataSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get-project-users-data",
+                base_url=base_url or "",
+                operation_id="get-project-ssh-keys",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(
-                http_res.text, models.GetProjectUsersDataResponseBody
-            )
-        if utils.match_response(http_res, ["404", "4XX"], "*"):
+            return utils.unmarshal_json(http_res.text, models.SSHKey)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -105,23 +106,23 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    async def get_project_users_data_async(
+    async def list_for_project_async(
         self,
         *,
         project_id: str,
-        extra_fields_user_data: Optional[str] = "decoded_content",
+        filter_tags: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetProjectUsersDataResponseBody:
-        r"""List all Project User Data
+    ) -> models.SSHKey:
+        r"""List all Project SSH Keys
 
-        List all Users Data in the project. These scripts can be used to configure servers with user data.
+        List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
 
         :param project_id: Project ID or Slug
-        :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
+        :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -134,15 +135,17 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetProjectUsersDataRequest(
+        request = models.GetProjectSSHKeysRequest(
             project_id=project_id,
-            extra_fields_user_data=extra_fields_user_data,
+            filter_tags=filter_tags,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/projects/{project_id}/user_data",
+            path="/projects/{project_id}/ssh_keys",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -166,22 +169,21 @@ class UserDataSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get-project-users-data",
+                base_url=base_url or "",
+                operation_id="get-project-ssh-keys",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(
-                http_res.text, models.GetProjectUsersDataResponseBody
-            )
-        if utils.match_response(http_res, ["404", "4XX"], "*"):
+            return utils.unmarshal_json(http_res.text, models.SSHKey)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -201,22 +203,22 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    def post_project_user_data(
+    def create(
         self,
         *,
         project_id: str,
         data: Union[
-            models.PostProjectUserDataUserDataData,
-            models.PostProjectUserDataUserDataDataTypedDict,
+            models.PostProjectSSHKeySSHKeysData,
+            models.PostProjectSSHKeySSHKeysDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
-        r"""Create a Project User Data
+    ) -> models.PostProjectSSHKeyResponseBody:
+        r"""Create a Project SSH Key
 
-        Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
+        Allow you create SSH Keys in a project. These keys can be used to access servers after deploy and reinstall actions.
 
 
         :param project_id: Project ID or Slug
@@ -233,23 +235,25 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostProjectUserDataRequest(
+        request = models.PostProjectSSHKeyRequest(
             project_id=project_id,
-            request_body=models.PostProjectUserDataUserDataRequestBody(
+            request_body=models.PostProjectSSHKeySSHKeysRequestBody(
                 data=utils.get_pydantic_model(
-                    data, models.PostProjectUserDataUserDataData
+                    data, models.PostProjectSSHKeySSHKeysData
                 ),
             ),
         )
 
         req = self._build_request(
             method="POST",
-            path="/projects/{project_id}/user_data",
+            path="/projects/{project_id}/ssh_keys",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -259,9 +263,9 @@ class UserDataSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PostProjectUserDataUserDataRequestBody],
+                models.PostProjectSSHKeySSHKeysRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -276,20 +280,23 @@ class UserDataSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="post-project-user-data",
+                base_url=base_url or "",
+                operation_id="post-project-ssh-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            error_status_codes=["400", "422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.UserData)
-        if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.PostProjectSSHKeyResponseBody
+            )
+        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -309,22 +316,22 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    async def post_project_user_data_async(
+    async def create_async(
         self,
         *,
         project_id: str,
         data: Union[
-            models.PostProjectUserDataUserDataData,
-            models.PostProjectUserDataUserDataDataTypedDict,
+            models.PostProjectSSHKeySSHKeysData,
+            models.PostProjectSSHKeySSHKeysDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
-        r"""Create a Project User Data
+    ) -> models.PostProjectSSHKeyResponseBody:
+        r"""Create a Project SSH Key
 
-        Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
+        Allow you create SSH Keys in a project. These keys can be used to access servers after deploy and reinstall actions.
 
 
         :param project_id: Project ID or Slug
@@ -341,23 +348,25 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostProjectUserDataRequest(
+        request = models.PostProjectSSHKeyRequest(
             project_id=project_id,
-            request_body=models.PostProjectUserDataUserDataRequestBody(
+            request_body=models.PostProjectSSHKeySSHKeysRequestBody(
                 data=utils.get_pydantic_model(
-                    data, models.PostProjectUserDataUserDataData
+                    data, models.PostProjectSSHKeySSHKeysData
                 ),
             ),
         )
 
         req = self._build_request_async(
             method="POST",
-            path="/projects/{project_id}/user_data",
+            path="/projects/{project_id}/ssh_keys",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -367,9 +376,9 @@ class UserDataSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PostProjectUserDataUserDataRequestBody],
+                models.PostProjectSSHKeySSHKeysRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -384,20 +393,23 @@ class UserDataSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="post-project-user-data",
+                base_url=base_url or "",
+                operation_id="post-project-ssh-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            error_status_codes=["400", "422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.UserData)
-        if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.PostProjectSSHKeyResponseBody
+            )
+        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -417,25 +429,23 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    def get_project_user_data(
+    def get(
         self,
         *,
         project_id: str,
-        user_data_id: str,
-        extra_fields_user_data: Optional[str] = "decoded_content",
+        ssh_key_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
-        r"""Retrieve a Project User Data
+    ) -> models.GetProjectSSHKeyResponseBody:
+        r"""Retrieve a Project SSH Key
 
-        Get User Data in the project. These scripts can be used to configure servers with user data.
+        List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
 
         :param project_id: Project ID or Slug
-        :param user_data_id:
-        :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
+        :param ssh_key_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -448,16 +458,17 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetProjectUserDataRequest(
+        request = models.GetProjectSSHKeyRequest(
             project_id=project_id,
-            user_data_id=user_data_id,
-            extra_fields_user_data=extra_fields_user_data,
+            ssh_key_id=ssh_key_id,
         )
 
         req = self._build_request(
             method="GET",
-            path="/projects/{project_id}/user_data/{user_data_id}",
+            path="/projects/{project_id}/ssh_keys/{ssh_key_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -481,20 +492,23 @@ class UserDataSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get-project-user-data",
+                base_url=base_url or "",
+                operation_id="get-project-ssh-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.UserData)
-        if utils.match_response(http_res, ["404", "4XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.GetProjectSSHKeyResponseBody
+            )
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -514,25 +528,23 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    async def get_project_user_data_async(
+    async def get_async(
         self,
         *,
         project_id: str,
-        user_data_id: str,
-        extra_fields_user_data: Optional[str] = "decoded_content",
+        ssh_key_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
-        r"""Retrieve a Project User Data
+    ) -> models.GetProjectSSHKeyResponseBody:
+        r"""Retrieve a Project SSH Key
 
-        Get User Data in the project. These scripts can be used to configure servers with user data.
+        List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
 
         :param project_id: Project ID or Slug
-        :param user_data_id:
-        :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
+        :param ssh_key_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -545,16 +557,17 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetProjectUserDataRequest(
+        request = models.GetProjectSSHKeyRequest(
             project_id=project_id,
-            user_data_id=user_data_id,
-            extra_fields_user_data=extra_fields_user_data,
+            ssh_key_id=ssh_key_id,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/projects/{project_id}/user_data/{user_data_id}",
+            path="/projects/{project_id}/ssh_keys/{ssh_key_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -578,20 +591,23 @@ class UserDataSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get-project-user-data",
+                base_url=base_url or "",
+                operation_id="get-project-ssh-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.UserData)
-        if utils.match_response(http_res, ["404", "4XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.GetProjectSSHKeyResponseBody
+            )
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -611,27 +627,27 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    def put_project_user_data(
+    def update(
         self,
         *,
         project_id: str,
-        user_data_id: str,
+        ssh_key_id: str,
         data: Union[
-            models.PutProjectUserDataUserDataData,
-            models.PutProjectUserDataUserDataDataTypedDict,
+            models.PutProjectSSHKeySSHKeysData,
+            models.PutProjectSSHKeySSHKeysDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
-        r"""Update a Project User Data
+    ) -> models.PutProjectSSHKeyResponseBody:
+        r"""Update a Project SSH Key
 
-        Allow you update User Data in a project.
+        Allow you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
 
 
         :param project_id: Project ID or Slug
-        :param user_data_id:
+        :param ssh_key_id:
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -645,24 +661,24 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.PutProjectUserDataRequest(
+        request = models.PutProjectSSHKeyRequest(
             project_id=project_id,
-            user_data_id=user_data_id,
-            request_body=models.PutProjectUserDataUserDataRequestBody(
-                data=utils.get_pydantic_model(
-                    data, models.PutProjectUserDataUserDataData
-                ),
+            ssh_key_id=ssh_key_id,
+            request_body=models.PutProjectSSHKeySSHKeysRequestBody(
+                data=utils.get_pydantic_model(data, models.PutProjectSSHKeySSHKeysData),
             ),
         )
 
         req = self._build_request(
             method="PATCH",
-            path="/projects/{project_id}/user_data/{user_data_id}",
+            path="/projects/{project_id}/ssh_keys/{ssh_key_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -672,9 +688,9 @@ class UserDataSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PutProjectUserDataUserDataRequestBody],
+                models.PutProjectSSHKeySSHKeysRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -689,20 +705,23 @@ class UserDataSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="put-project-user-data",
+                base_url=base_url or "",
+                operation_id="put-project-ssh-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            error_status_codes=["400", "422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.UserData)
-        if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.PutProjectSSHKeyResponseBody
+            )
+        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -722,27 +741,27 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    async def put_project_user_data_async(
+    async def update_async(
         self,
         *,
         project_id: str,
-        user_data_id: str,
+        ssh_key_id: str,
         data: Union[
-            models.PutProjectUserDataUserDataData,
-            models.PutProjectUserDataUserDataDataTypedDict,
+            models.PutProjectSSHKeySSHKeysData,
+            models.PutProjectSSHKeySSHKeysDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
-        r"""Update a Project User Data
+    ) -> models.PutProjectSSHKeyResponseBody:
+        r"""Update a Project SSH Key
 
-        Allow you update User Data in a project.
+        Allow you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
 
 
         :param project_id: Project ID or Slug
-        :param user_data_id:
+        :param ssh_key_id:
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -756,24 +775,24 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.PutProjectUserDataRequest(
+        request = models.PutProjectSSHKeyRequest(
             project_id=project_id,
-            user_data_id=user_data_id,
-            request_body=models.PutProjectUserDataUserDataRequestBody(
-                data=utils.get_pydantic_model(
-                    data, models.PutProjectUserDataUserDataData
-                ),
+            ssh_key_id=ssh_key_id,
+            request_body=models.PutProjectSSHKeySSHKeysRequestBody(
+                data=utils.get_pydantic_model(data, models.PutProjectSSHKeySSHKeysData),
             ),
         )
 
         req = self._build_request_async(
             method="PATCH",
-            path="/projects/{project_id}/user_data/{user_data_id}",
+            path="/projects/{project_id}/ssh_keys/{ssh_key_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -783,9 +802,9 @@ class UserDataSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PutProjectUserDataUserDataRequestBody],
+                models.PutProjectSSHKeySSHKeysRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -800,20 +819,23 @@ class UserDataSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="put-project-user-data",
+                base_url=base_url or "",
+                operation_id="put-project-ssh-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["400", "404", "422", "4XX", "5XX"],
+            error_status_codes=["400", "422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.UserData)
-        if utils.match_response(http_res, ["400", "404", "422", "4XX"], "*"):
+            return utils.unmarshal_json(
+                http_res.text, models.PutProjectSSHKeyResponseBody
+            )
+        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -833,23 +855,23 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    def delete_project_user_data(
+    def delete(
         self,
         *,
         project_id: str,
-        user_data_id: str,
+        ssh_key_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project User Data
+        r"""Delete a Project SSH Key
 
-        Allow you remove User Data in a project.
+        Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
 
 
         :param project_id: Project ID or Slug
-        :param user_data_id:
+        :param ssh_key_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -862,15 +884,17 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteProjectUserDataRequest(
+        request = models.DeleteProjectSSHKeyRequest(
             project_id=project_id,
-            user_data_id=user_data_id,
+            ssh_key_id=ssh_key_id,
         )
 
         req = self._build_request(
             method="DELETE",
-            path="/projects/{project_id}/user_data/{user_data_id}",
+            path="/projects/{project_id}/ssh_keys/{ssh_key_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -894,7 +918,8 @@ class UserDataSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="delete-project-user-data",
+                base_url=base_url or "",
+                operation_id="delete-project-ssh-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -905,7 +930,7 @@ class UserDataSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "204", "*"):
+        if utils.match_response(http_res, "200", "*"):
             return
         if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -927,23 +952,23 @@ class UserDataSDK(BaseSDK):
             http_res,
         )
 
-    async def delete_project_user_data_async(
+    async def delete_async(
         self,
         *,
         project_id: str,
-        user_data_id: str,
+        ssh_key_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project User Data
+        r"""Delete a Project SSH Key
 
-        Allow you remove User Data in a project.
+        Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
 
 
         :param project_id: Project ID or Slug
-        :param user_data_id:
+        :param ssh_key_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -956,15 +981,17 @@ class UserDataSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteProjectUserDataRequest(
+        request = models.DeleteProjectSSHKeyRequest(
             project_id=project_id,
-            user_data_id=user_data_id,
+            ssh_key_id=ssh_key_id,
         )
 
         req = self._build_request_async(
             method="DELETE",
-            path="/projects/{project_id}/user_data/{user_data_id}",
+            path="/projects/{project_id}/ssh_keys/{ssh_key_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -988,7 +1015,8 @@ class UserDataSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="delete-project-user-data",
+                base_url=base_url or "",
+                operation_id="delete-project-ssh-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -999,7 +1027,7 @@ class UserDataSDK(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "204", "*"):
+        if utils.match_response(http_res, "200", "*"):
             return
         if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

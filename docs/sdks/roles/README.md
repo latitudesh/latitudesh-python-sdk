@@ -5,10 +5,10 @@
 
 ### Available Operations
 
-* [get_roles](#get_roles) - List all Roles
-* [get_role_id](#get_role_id) - Retrieve Role
+* [list](#list) - List all Roles
+* [get](#get) - Retrieve Role
 
-## get_roles
+## list
 
 Returns a list of all roles that can be assigned to users
 
@@ -19,11 +19,12 @@ Returns a list of all roles that can be assigned to users
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.roles.get_roles()
+    res = latitudesh.roles.list()
 
     # Handle response
     print(res)
@@ -46,7 +47,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## get_role_id
+## get
 
 Retrieve Role
 
@@ -56,11 +57,12 @@ Retrieve Role
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.roles.get_role_id(role_id="role_5AEmq7WRqBkWX")
+    res = latitudesh.roles.get(role_id="role_5AEmq7WRqBkWX")
 
     # Handle response
     print(res)

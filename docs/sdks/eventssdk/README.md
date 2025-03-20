@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [get_events](#get_events) - List all Events
+* [list](#list) - List all Events
 
-## get_events
+## list
 
 Lists all events.
 
@@ -18,11 +18,12 @@ Lists all events.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.events.get_events()
+    res = latitudesh.events.list()
 
     # Handle response
     print(res)

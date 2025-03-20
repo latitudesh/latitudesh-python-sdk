@@ -8,16 +8,19 @@ from latitudesh_python_sdk.utils import get_security_from_env
 from typing import Any, Mapping, Optional, Union, cast
 
 
-class TeamsMembers(BaseSDK):
-    def get_team_members(
+class APIKeys(BaseSDK):
+    def list(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TeamMembers:
-        r"""List all Team Members
+    ) -> models.APIKey:
+        r"""List API Keys
+
+        Returns a list of all API keys from the team members
+
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -31,9 +34,11 @@ class TeamsMembers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request(
             method="GET",
-            path="/team/members",
+            path="/auth/api_keys",
             base_url=base_url,
             url_variables=url_variables,
             request=None,
@@ -57,7 +62,8 @@ class TeamsMembers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get-team-members",
+                base_url=base_url or "",
+                operation_id="get-api-keys",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -69,7 +75,7 @@ class TeamsMembers(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.TeamMembers)
+            return utils.unmarshal_json(http_res.text, models.APIKey)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -90,15 +96,18 @@ class TeamsMembers(BaseSDK):
             http_res,
         )
 
-    async def get_team_members_async(
+    async def list_async(
         self,
         *,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.TeamMembers:
-        r"""List all Team Members
+    ) -> models.APIKey:
+        r"""List API Keys
+
+        Returns a list of all API keys from the team members
+
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -112,9 +121,11 @@ class TeamsMembers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
         req = self._build_request_async(
             method="GET",
-            path="/team/members",
+            path="/auth/api_keys",
             base_url=base_url,
             url_variables=url_variables,
             request=None,
@@ -138,7 +149,8 @@ class TeamsMembers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get-team-members",
+                base_url=base_url or "",
+                operation_id="get-api-keys",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -150,7 +162,7 @@ class TeamsMembers(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.TeamMembers)
+            return utils.unmarshal_json(http_res.text, models.APIKey)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -171,21 +183,21 @@ class TeamsMembers(BaseSDK):
             http_res,
         )
 
-    def post_team_members(
+    def create(
         self,
         *,
-        request: Optional[
-            Union[
-                models.PostTeamMembersTeamsMembersRequestBody,
-                models.PostTeamMembersTeamsMembersRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.CreateAPIKey, models.CreateAPIKeyTypedDict
+        ] = models.CreateAPIKey(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.Membership:
-        r"""Add a Team Member
+    ) -> models.PostAPIKeyResponseBody:
+        r"""Create API Key
+
+        Create a new API Key that is tied to the current user account. The created API key is only listed ONCE upon creation. It can however be regenerated or deleted.
+
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -200,20 +212,20 @@ class TeamsMembers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.PostTeamMembersTeamsMembersRequestBody]
-            )
-        request = cast(Optional[models.PostTeamMembersTeamsMembersRequestBody], request)
+            request = utils.unmarshal(request, models.CreateAPIKey)
+        request = cast(models.CreateAPIKey, request)
 
         req = self._build_request(
             method="POST",
-            path="/team/members",
+            path="/auth/api_keys",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -221,11 +233,7 @@ class TeamsMembers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                True,
-                "json",
-                Optional[models.PostTeamMembersTeamsMembersRequestBody],
+                request, False, True, "json", Optional[models.CreateAPIKey]
             ),
             timeout_ms=timeout_ms,
         )
@@ -240,21 +248,22 @@ class TeamsMembers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="post-team-members",
+                base_url=base_url or "",
+                operation_id="post-api-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["403", "422", "4XX", "5XX"],
+            error_status_codes=["400", "422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.Membership)
-        if utils.match_response(http_res, ["403", "422"], "application/vnd.api+json"):
+            return utils.unmarshal_json(http_res.text, models.PostAPIKeyResponseBody)
+        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -277,21 +286,21 @@ class TeamsMembers(BaseSDK):
             http_res,
         )
 
-    async def post_team_members_async(
+    async def create_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.PostTeamMembersTeamsMembersRequestBody,
-                models.PostTeamMembersTeamsMembersRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.CreateAPIKey, models.CreateAPIKeyTypedDict
+        ] = models.CreateAPIKey(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.Membership:
-        r"""Add a Team Member
+    ) -> models.PostAPIKeyResponseBody:
+        r"""Create API Key
+
+        Create a new API Key that is tied to the current user account. The created API key is only listed ONCE upon creation. It can however be regenerated or deleted.
+
 
         :param request: The request object to send.
         :param retries: Override the default retry configuration for this method
@@ -306,20 +315,20 @@ class TeamsMembers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.PostTeamMembersTeamsMembersRequestBody]
-            )
-        request = cast(Optional[models.PostTeamMembersTeamsMembersRequestBody], request)
+            request = utils.unmarshal(request, models.CreateAPIKey)
+        request = cast(models.CreateAPIKey, request)
 
         req = self._build_request_async(
             method="POST",
-            path="/team/members",
+            path="/auth/api_keys",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -327,11 +336,7 @@ class TeamsMembers(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                True,
-                "json",
-                Optional[models.PostTeamMembersTeamsMembersRequestBody],
+                request, False, True, "json", Optional[models.CreateAPIKey]
             ),
             timeout_ms=timeout_ms,
         )
@@ -346,21 +351,22 @@ class TeamsMembers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="post-team-members",
+                base_url=base_url or "",
+                operation_id="post-api-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["403", "422", "4XX", "5XX"],
+            error_status_codes=["400", "422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.Membership)
-        if utils.match_response(http_res, ["403", "422"], "application/vnd.api+json"):
+            return utils.unmarshal_json(http_res.text, models.PostAPIKeyResponseBody)
+        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -383,18 +389,25 @@ class TeamsMembers(BaseSDK):
             http_res,
         )
 
-    def destroy_team_member(
+    def regenerate(
         self,
         *,
-        user_id: str,
+        api_key_id: str,
+        data: Optional[
+            Union[models.UpdateAPIKeyData, models.UpdateAPIKeyDataTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Remove a Team Member
+    ) -> models.UpdateAPIKeyResponseBody:
+        r"""Regenerate API Key
 
-        :param user_id: The user ID
+        Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
+
+
+        :param api_key_id:
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -407,14 +420,228 @@ class TeamsMembers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DestroyTeamMemberRequest(
-            user_id=user_id,
+        request = models.UpdateAPIKeyRequest(
+            api_key_id=api_key_id,
+            update_api_key=models.UpdateAPIKey(
+                data=utils.get_pydantic_model(data, Optional[models.UpdateAPIKeyData]),
+            ),
+        )
+
+        req = self._build_request(
+            method="PUT",
+            path="/auth/api_keys/{api_key_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.update_api_key, False, False, "json", models.UpdateAPIKey
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="update-api-key",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "404", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return utils.unmarshal_json(http_res.text, models.UpdateAPIKeyResponseBody)
+        if utils.match_response(http_res, ["400", "404"], "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = utils.stream_to_text(http_res)
+        raise models.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    async def regenerate_async(
+        self,
+        *,
+        api_key_id: str,
+        data: Optional[
+            Union[models.UpdateAPIKeyData, models.UpdateAPIKeyDataTypedDict]
+        ] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UpdateAPIKeyResponseBody:
+        r"""Regenerate API Key
+
+        Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
+
+
+        :param api_key_id:
+        :param data:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UpdateAPIKeyRequest(
+            api_key_id=api_key_id,
+            update_api_key=models.UpdateAPIKey(
+                data=utils.get_pydantic_model(data, Optional[models.UpdateAPIKeyData]),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PUT",
+            path="/auth/api_keys/{api_key_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.update_api_key, False, False, "json", models.UpdateAPIKey
+            ),
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                base_url=base_url or "",
+                operation_id="update-api-key",
+                oauth2_scopes=[],
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["400", "404", "4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return utils.unmarshal_json(http_res.text, models.UpdateAPIKeyResponseBody)
+        if utils.match_response(http_res, ["400", "404"], "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError(
+                "API error occurred", http_res.status_code, http_res_text, http_res
+            )
+
+        content_type = http_res.headers.get("Content-Type")
+        http_res_text = await utils.stream_to_text_async(http_res)
+        raise models.APIError(
+            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
+            http_res.status_code,
+            http_res_text,
+            http_res,
+        )
+
+    def delete(
+        self,
+        *,
+        api_key_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ):
+        r"""Delete API Key
+
+        Delete an existing API Key. Once deleted, the API Key can no longer be used to access the API.
+
+
+        :param api_key_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DeleteAPIKeyRequest(
+            api_key_id=api_key_id,
         )
 
         req = self._build_request(
             method="DELETE",
-            path="/team/members/{user_id}",
+            path="/auth/api_keys/{api_key_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -438,14 +665,15 @@ class TeamsMembers(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="destroy-team-member",
+                base_url=base_url or "",
+                operation_id="delete-api-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            error_status_codes=["404", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -455,7 +683,7 @@ class TeamsMembers(BaseSDK):
         if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, ["403", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res
@@ -475,18 +703,21 @@ class TeamsMembers(BaseSDK):
             http_res,
         )
 
-    async def destroy_team_member_async(
+    async def delete_async(
         self,
         *,
-        user_id: str,
+        api_key_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Remove a Team Member
+        r"""Delete API Key
 
-        :param user_id: The user ID
+        Delete an existing API Key. Once deleted, the API Key can no longer be used to access the API.
+
+
+        :param api_key_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -499,14 +730,16 @@ class TeamsMembers(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.DestroyTeamMemberRequest(
-            user_id=user_id,
+        request = models.DeleteAPIKeyRequest(
+            api_key_id=api_key_id,
         )
 
         req = self._build_request_async(
             method="DELETE",
-            path="/team/members/{user_id}",
+            path="/auth/api_keys/{api_key_id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -530,14 +763,15 @@ class TeamsMembers(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="destroy-team-member",
+                base_url=base_url or "",
+                operation_id="delete-api-key",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            error_status_codes=["404", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -547,7 +781,7 @@ class TeamsMembers(BaseSDK):
         if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, ["403", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
                 "API error occurred", http_res.status_code, http_res_text, http_res

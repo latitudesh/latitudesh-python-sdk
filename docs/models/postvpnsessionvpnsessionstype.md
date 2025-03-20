@@ -1,4 +1,4 @@
-# PostVPNSessionVPNSessionsType
+# PostVpnSessionVpnSessionsType
 
 
 ## Values

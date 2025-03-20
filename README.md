@@ -37,6 +37,61 @@ Latitude.sh API: The Latitude.sh API is a RESTful API to manage your Latitude.sh
 
 <!-- End Table of Contents [toc] -->
 
+> [!NOTE]
+> **Python version upgrade policy**
+>
+> Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
+
+The SDK can be installed with either *pip* or *poetry* package managers.
+
+### PIP
+
+*PIP* is the default package installer for Python, enabling easy installation and management of packages from PyPI via the command line.
+
+```bash
+pip install git+https://github.com/latitudesh/latitudesh-python-sdk.git
+```
+
+### Poetry
+
+*Poetry* is a modern tool that simplifies dependency management and package publishing by using a single `pyproject.toml` file to handle project metadata and dependencies.
+
+```bash
+poetry add git+https://github.com/latitudesh/latitudesh-python-sdk.git
+```
+
+### Shell and script usage with `uv`
+
+You can use this SDK in a Python shell with [uv](https://docs.astral.sh/uv/) and the `uvx` command that comes with it like so:
+
+```shell
+uvx --from latitudesh-python-sdk python
+```
+
+It's also possible to write a standalone Python script without needing to set up a whole project like so:
+
+```python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#     "latitudesh-python-sdk",
+# ]
+# ///
+
+from latitudesh_python_sdk import Latitudesh
+
+sdk = Latitudesh(
+  # SDK arguments
+)
+
+# Rest of script here...
+```
+
+Once that is saved to a file, you can run it with `uv run script.py` where
+`script.py` can be replaced with the actual file name.
+<!-- End SDK Installation [installation] -->
+
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
@@ -119,11 +174,12 @@ Generally, the SDK will work well with most IDEs out of the box. However, when u
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.api_keys.get_api_keys()
+    res = latitudesh.api_keys.list()
 
     # Handle response
     print(res)
@@ -139,11 +195,12 @@ from latitudesh_python_sdk import Latitudesh
 import os
 
 async def main():
+
     async with Latitudesh(
         bearer=os.getenv("LATITUDESH_BEARER", ""),
     ) as latitudesh:
 
-        res = await latitudesh.api_keys.get_api_keys_async()
+        res = await latitudesh.api_keys.list_async()
 
         # Handle response
         print(res)
@@ -168,11 +225,12 @@ To authenticate with the API the `bearer` parameter must be set when initializin
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.api_keys.get_api_keys()
+    res = latitudesh.api_keys.list()
 
     # Handle response
     print(res)
@@ -188,156 +246,164 @@ with Latitudesh(
 
 ### [api_keys](docs/sdks/apikeys/README.md)
 
-* [get_api_keys](docs/sdks/apikeys/README.md#get_api_keys) - List API Keys
-* [post_api_key](docs/sdks/apikeys/README.md#post_api_key) - Create API Key
-* [update_api_key](docs/sdks/apikeys/README.md#update_api_key) - Regenerate API Key
-* [delete_api_key](docs/sdks/apikeys/README.md#delete_api_key) - Delete API Key
+* [list](docs/sdks/apikeys/README.md#list) - List API Keys
+* [create](docs/sdks/apikeys/README.md#create) - Create API Key
+* [regenerate](docs/sdks/apikeys/README.md#regenerate) - Regenerate API Key
+* [delete](docs/sdks/apikeys/README.md#delete) - Delete API Key
 
 ### [billing](docs/sdks/billing/README.md)
 
-* [get_billing_usage](docs/sdks/billing/README.md#get_billing_usage) - List Billing Usage
+* [list_usage](docs/sdks/billing/README.md#list_usage) - List Billing Usage
 
 ### [events](docs/sdks/eventssdk/README.md)
 
-* [get_events](docs/sdks/eventssdk/README.md#get_events) - List all Events
+* [list](docs/sdks/eventssdk/README.md#list) - List all Events
 
 ### [firewalls](docs/sdks/firewallssdk/README.md)
 
-* [create_firewall](docs/sdks/firewallssdk/README.md#create_firewall) - Create a firewall
-* [list_firewalls](docs/sdks/firewallssdk/README.md#list_firewalls) - List firewalls
-* [get_firewall](docs/sdks/firewallssdk/README.md#get_firewall) - Retrieve Firewall
-* [update_firewall](docs/sdks/firewallssdk/README.md#update_firewall) - Update Firewall
-* [delete_firewall](docs/sdks/firewallssdk/README.md#delete_firewall) - Delete Firewall
-* [create_firewall_assignment](docs/sdks/firewallssdk/README.md#create_firewall_assignment) - Firewall Assignment
-* [get_firewall_assignments](docs/sdks/firewallssdk/README.md#get_firewall_assignments) - Firewall Assignments
-* [delete_firewall_assignment](docs/sdks/firewallssdk/README.md#delete_firewall_assignment) - Delete Firewall Assignment
+* [create](docs/sdks/firewallssdk/README.md#create) - Create a firewall
+* [list](docs/sdks/firewallssdk/README.md#list) - List firewalls
+* [get](docs/sdks/firewallssdk/README.md#get) - Retrieve Firewall
+* [update](docs/sdks/firewallssdk/README.md#update) - Update Firewall
+* [delete](docs/sdks/firewallssdk/README.md#delete) - Delete Firewall
+* [assign](docs/sdks/firewallssdk/README.md#assign) - Firewall Assignment
+* [list_assignments](docs/sdks/firewallssdk/README.md#list_assignments) - Firewall Assignments
+* [delete_assignment](docs/sdks/firewallssdk/README.md#delete_assignment) - Delete Firewall Assignment
 
 ### [ip_addresses](docs/sdks/ipaddressessdk/README.md)
 
-* [get_ips](docs/sdks/ipaddressessdk/README.md#get_ips) - List IPs
-* [get_ip](docs/sdks/ipaddressessdk/README.md#get_ip) - Retrieve an IP
+* [list](docs/sdks/ipaddressessdk/README.md#list) - List IPs
+* [get](docs/sdks/ipaddressessdk/README.md#get) - Retrieve an IP
 
 
 ### [operating_systems](docs/sdks/operatingsystemssdk/README.md)
 
-* [get_plans_operating_system](docs/sdks/operatingsystemssdk/README.md#get_plans_operating_system) - List all operating systems available
+* [list](docs/sdks/operatingsystemssdk/README.md#list) - List all operating systems available
 
 ### [plans](docs/sdks/plans/README.md)
 
-* [get_plans](docs/sdks/plans/README.md#get_plans) - List all Plans
-* [get_plan](docs/sdks/plans/README.md#get_plan) - Retrieve a Plan
-* [get_bandwidth_plans](docs/sdks/plans/README.md#get_bandwidth_plans) - List all bandwidth plans
-* [update_plans_bandwidth](docs/sdks/plans/README.md#update_plans_bandwidth) - Buy or remove bandwidth packages
-* [get_storage_plans](docs/sdks/plans/README.md#get_storage_plans) - List all Storage Plans
+* [list](docs/sdks/plans/README.md#list) - List all Plans
+* [get](docs/sdks/plans/README.md#get) - Retrieve a Plan
+* [list_bandwidth](docs/sdks/plans/README.md#list_bandwidth) - List all bandwidth plans
+* [update_bandwidth](docs/sdks/plans/README.md#update_bandwidth) - Buy or remove bandwidth packages
+* [list_storage](docs/sdks/plans/README.md#list_storage) - List all Storage Plans
+* [list_vm_plans](docs/sdks/plans/README.md#list_vm_plans) - List all Virtual Machines Plans
 
 ### [private_networks](docs/sdks/privatenetworks/README.md)
 
-* [get_virtual_networks](docs/sdks/privatenetworks/README.md#get_virtual_networks) - List all Virtual Networks
-* [create_virtual_network](docs/sdks/privatenetworks/README.md#create_virtual_network) - Create a Virtual Network
-* [update_virtual_network](docs/sdks/privatenetworks/README.md#update_virtual_network) - Update a Virtual Network
-* [destroy_virtual_network](docs/sdks/privatenetworks/README.md#destroy_virtual_network) - Delete a Virtual Network
-* [get_virtual_network](docs/sdks/privatenetworks/README.md#get_virtual_network) - Retrieve a Virtual Network
-* [get_virtual_networks_assignments](docs/sdks/privatenetworks/README.md#get_virtual_networks_assignments) - List all servers assigned to virtual networks
-* [assign_server_virtual_network](docs/sdks/privatenetworks/README.md#assign_server_virtual_network) - Assign Virtual network
-* [delete_virtual_networks_assignments](docs/sdks/privatenetworks/README.md#delete_virtual_networks_assignments) - Delete Virtual Network Assignment
+* [list](docs/sdks/privatenetworks/README.md#list) - List all Virtual Networks
+* [create](docs/sdks/privatenetworks/README.md#create) - Create a Virtual Network
+* [update](docs/sdks/privatenetworks/README.md#update) - Update a Virtual Network
+* [delete_virtual_network](docs/sdks/privatenetworks/README.md#delete_virtual_network) - Delete a Virtual Network
+* [get](docs/sdks/privatenetworks/README.md#get) - Retrieve a Virtual Network
+* [list_assignments](docs/sdks/privatenetworks/README.md#list_assignments) - List all servers assigned to virtual networks
+* [assign](docs/sdks/privatenetworks/README.md#assign) - Assign Virtual network
+* [remove_assignment](docs/sdks/privatenetworks/README.md#remove_assignment) - Delete Virtual Network Assignment
 
 ### [projects](docs/sdks/projectssdk/README.md)
 
-* [get_projects](docs/sdks/projectssdk/README.md#get_projects) - List all Projects
-* [create_project](docs/sdks/projectssdk/README.md#create_project) - Create a Project
-* [update_project](docs/sdks/projectssdk/README.md#update_project) - Update a Project
-* [delete_project](docs/sdks/projectssdk/README.md#delete_project) - Delete a Project
+* [list](docs/sdks/projectssdk/README.md#list) - List all Projects
+* [create](docs/sdks/projectssdk/README.md#create) - Create a Project
+* [update](docs/sdks/projectssdk/README.md#update) - Update a Project
+* [delete](docs/sdks/projectssdk/README.md#delete) - Delete a Project
 
 ### [regions](docs/sdks/regionssdk/README.md)
 
-* [get_regions](docs/sdks/regionssdk/README.md#get_regions) - List all Regions
-* [get_region](docs/sdks/regionssdk/README.md#get_region) - Retrieve a Region
+* [list](docs/sdks/regionssdk/README.md#list) - List all Regions
+* [get](docs/sdks/regionssdk/README.md#get) - Retrieve a Region
 
 ### [roles](docs/sdks/roles/README.md)
 
-* [get_roles](docs/sdks/roles/README.md#get_roles) - List all Roles
-* [get_role_id](docs/sdks/roles/README.md#get_role_id) - Retrieve Role
+* [list](docs/sdks/roles/README.md#list) - List all Roles
+* [get](docs/sdks/roles/README.md#get) - Retrieve Role
 
 ### [servers](docs/sdks/serverssdk/README.md)
 
-* [get_servers](docs/sdks/serverssdk/README.md#get_servers) - List all Servers
-* [create_server](docs/sdks/serverssdk/README.md#create_server) - Deploy Server
-* [get_server](docs/sdks/serverssdk/README.md#get_server) - Retrieve a Server
-* [update_server](docs/sdks/serverssdk/README.md#update_server) - Update Server
-* [destroy_server](docs/sdks/serverssdk/README.md#destroy_server) - Remove Server
-* [get_server_deploy_config](docs/sdks/serverssdk/README.md#get_server_deploy_config) - Retrieve Deploy Config
-* [update_server_deploy_config](docs/sdks/serverssdk/README.md#update_server_deploy_config) - Update Deploy Config
-* [server_lock](docs/sdks/serverssdk/README.md#server_lock) - Lock the server
-* [server_unlock](docs/sdks/serverssdk/README.md#server_unlock) - Unlock the server
-* [create_server_out_of_band](docs/sdks/serverssdk/README.md#create_server_out_of_band) - Start Out of Band Connection
-* [get_server_out_of_band](docs/sdks/serverssdk/README.md#get_server_out_of_band) - List Out of Band Connections
-* [create_server_action](docs/sdks/serverssdk/README.md#create_server_action) - Run Server Action
+* [list](docs/sdks/serverssdk/README.md#list) - List all Servers
+* [create](docs/sdks/serverssdk/README.md#create) - Deploy Server
+* [get](docs/sdks/serverssdk/README.md#get) - Retrieve a Server
+* [update](docs/sdks/serverssdk/README.md#update) - Update Server
+* [delete](docs/sdks/serverssdk/README.md#delete) - Remove Server
+* [get_deploy_config](docs/sdks/serverssdk/README.md#get_deploy_config) - Retrieve Deploy Config
+* [update_deploy_config](docs/sdks/serverssdk/README.md#update_deploy_config) - Update Deploy Config
+* [lock](docs/sdks/serverssdk/README.md#lock) - Lock the server
+* [unlock](docs/sdks/serverssdk/README.md#unlock) - Unlock the server
+* [create_out_of_band_connection](docs/sdks/serverssdk/README.md#create_out_of_band_connection) - Start Out of Band Connection
+* [list_out_of_band_connections](docs/sdks/serverssdk/README.md#list_out_of_band_connections) - List Out of Band Connections
+* [actions](docs/sdks/serverssdk/README.md#actions) - Run Server Action
 * [create_ipmi_session](docs/sdks/serverssdk/README.md#create_ipmi_session) - Generate IPMI credentials
-* [server_start_rescue_mode](docs/sdks/serverssdk/README.md#server_start_rescue_mode) - Puts a Server in rescue mode
-* [server_exit_rescue_mode](docs/sdks/serverssdk/README.md#server_exit_rescue_mode) - Exits rescue mode for a Server
-* [server_schedule_deletion](docs/sdks/serverssdk/README.md#server_schedule_deletion) - Schedule the server deletion
-* [server_unschedule_deletion](docs/sdks/serverssdk/README.md#server_unschedule_deletion) - Unschedule the server deletion
-* [create_server_reinstall](docs/sdks/serverssdk/README.md#create_server_reinstall) - Run Server Reinstall
+* [start_rescue_mode](docs/sdks/serverssdk/README.md#start_rescue_mode) - Puts a Server in rescue mode
+* [exit_rescue_mode](docs/sdks/serverssdk/README.md#exit_rescue_mode) - Exits rescue mode for a Server
+* [schedule_deletion](docs/sdks/serverssdk/README.md#schedule_deletion) - Schedule the server deletion
+* [unschedule_deletion](docs/sdks/serverssdk/README.md#unschedule_deletion) - Unschedule the server deletion
+* [reinstall](docs/sdks/serverssdk/README.md#reinstall) - Run Server Reinstall
 
 ### [ssh_keys](docs/sdks/sshkeys/README.md)
 
-* [get_project_ssh_keys](docs/sdks/sshkeys/README.md#get_project_ssh_keys) - List all Project SSH Keys
-* [post_project_ssh_key](docs/sdks/sshkeys/README.md#post_project_ssh_key) - Create a Project SSH Key
-* [get_project_ssh_key](docs/sdks/sshkeys/README.md#get_project_ssh_key) - Retrieve a Project SSH Key
-* [put_project_ssh_key](docs/sdks/sshkeys/README.md#put_project_ssh_key) - Update a Project SSH Key
-* [delete_project_ssh_key](docs/sdks/sshkeys/README.md#delete_project_ssh_key) - Delete a Project SSH Key
+* [list_for_project](docs/sdks/sshkeys/README.md#list_for_project) - List all Project SSH Keys
+* [create](docs/sdks/sshkeys/README.md#create) - Create a Project SSH Key
+* [get](docs/sdks/sshkeys/README.md#get) - Retrieve a Project SSH Key
+* [update](docs/sdks/sshkeys/README.md#update) - Update a Project SSH Key
+* [delete](docs/sdks/sshkeys/README.md#delete) - Delete a Project SSH Key
 
 ### [storage](docs/sdks/storage/README.md)
 
-* [post_storage_filesystems](docs/sdks/storage/README.md#post_storage_filesystems) - Create a filesystem for a project
-* [get_storage_filesystems](docs/sdks/storage/README.md#get_storage_filesystems) - List filesystems
-* [delete_storage_filesystems](docs/sdks/storage/README.md#delete_storage_filesystems) - Delete a filesystem for a project
-* [patch_storage_filesystems](docs/sdks/storage/README.md#patch_storage_filesystems) - Update a filesystem for a project
+* [create_filesystem](docs/sdks/storage/README.md#create_filesystem) - Create a filesystem for a project
+* [list_filesystems](docs/sdks/storage/README.md#list_filesystems) - List filesystems
+* [delete_filesystem](docs/sdks/storage/README.md#delete_filesystem) - Delete a filesystem for a project
+* [update_filesystem](docs/sdks/storage/README.md#update_filesystem) - Update a filesystem for a project
 
 ### [tags](docs/sdks/tags/README.md)
 
-* [get_tags](docs/sdks/tags/README.md#get_tags) - List all Tags
-* [create_tag](docs/sdks/tags/README.md#create_tag) - Create a Tag
-* [update_tag](docs/sdks/tags/README.md#update_tag) - Update Tag
-* [destroy_tag](docs/sdks/tags/README.md#destroy_tag) - Delete Tag
+* [list](docs/sdks/tags/README.md#list) - List all Tags
+* [create](docs/sdks/tags/README.md#create) - Create a Tag
+* [update](docs/sdks/tags/README.md#update) - Update Tag
+* [delete](docs/sdks/tags/README.md#delete) - Delete Tag
 
 ### [teams](docs/sdks/teamssdk/README.md)
 
-* [get_team](docs/sdks/teamssdk/README.md#get_team) - Retrieve the team
-* [post_team](docs/sdks/teamssdk/README.md#post_team) - Create a team
-* [patch_current_team](docs/sdks/teamssdk/README.md#patch_current_team) - Update a team
+* [get](docs/sdks/teamssdk/README.md#get) - Retrieve the team
+* [create](docs/sdks/teamssdk/README.md#create) - Create a team
+* [update](docs/sdks/teamssdk/README.md#update) - Update a team
 
 ### [teams_members](docs/sdks/teamsmembers/README.md)
 
-* [get_team_members](docs/sdks/teamsmembers/README.md#get_team_members) - List all Team Members
-* [post_team_members](docs/sdks/teamsmembers/README.md#post_team_members) - Add a Team Member
-* [destroy_team_member](docs/sdks/teamsmembers/README.md#destroy_team_member) - Remove a Team Member
+* [list](docs/sdks/teamsmembers/README.md#list) - List all Team Members
+* [add](docs/sdks/teamsmembers/README.md#add) - Add a Team Member
+* [remove_member](docs/sdks/teamsmembers/README.md#remove_member) - Remove a Team Member
 
 ### [traffic](docs/sdks/trafficsdk/README.md)
 
-* [get_traffic_consumption](docs/sdks/trafficsdk/README.md#get_traffic_consumption) - Retrieve Traffic consumption
-* [get_traffic_quota](docs/sdks/trafficsdk/README.md#get_traffic_quota) - Retrieve Traffic Quota
+* [get](docs/sdks/trafficsdk/README.md#get) - Retrieve Traffic consumption
+* [get_quota](docs/sdks/trafficsdk/README.md#get_quota) - Retrieve Traffic Quota
 
 ### [user_data](docs/sdks/userdatasdk/README.md)
 
-* [get_project_users_data](docs/sdks/userdatasdk/README.md#get_project_users_data) - List all Project User Data
-* [post_project_user_data](docs/sdks/userdatasdk/README.md#post_project_user_data) - Create a Project User Data
+* [list_project_user_data](docs/sdks/userdatasdk/README.md#list_project_user_data) - List all Project User Data
+* [create](docs/sdks/userdatasdk/README.md#create) - Create a Project User Data
 * [get_project_user_data](docs/sdks/userdatasdk/README.md#get_project_user_data) - Retrieve a Project User Data
-* [put_project_user_data](docs/sdks/userdatasdk/README.md#put_project_user_data) - Update a Project User Data
-* [delete_project_user_data](docs/sdks/userdatasdk/README.md#delete_project_user_data) - Delete a Project User Data
+* [update](docs/sdks/userdatasdk/README.md#update) - Update a Project User Data
+* [delete](docs/sdks/userdatasdk/README.md#delete) - Delete a Project User Data
 
 ### [user_profile](docs/sdks/userprofile/README.md)
 
-* [get_user_profile](docs/sdks/userprofile/README.md#get_user_profile) - Get user profile
-* [patch_user_profile](docs/sdks/userprofile/README.md#patch_user_profile) - Update User Profile
-* [get_user_teams](docs/sdks/userprofile/README.md#get_user_teams) - List User Teams
+* [get](docs/sdks/userprofile/README.md#get) - Get user profile
+* [update](docs/sdks/userprofile/README.md#update) - Update User Profile
+* [list_teams](docs/sdks/userprofile/README.md#list_teams) - List User Teams
+
+### [virtual_machines](docs/sdks/virtualmachines/README.md)
+
+* [create](docs/sdks/virtualmachines/README.md#create) - Create a Virtual Machine
+* [list](docs/sdks/virtualmachines/README.md#list) - Get Teams Virtual Machines
+* [get](docs/sdks/virtualmachines/README.md#get) - Get a Virtual Machine
+* [delete](docs/sdks/virtualmachines/README.md#delete) - Destroy a Virtual Machine
 
 ### [vpn_sessions](docs/sdks/vpnsessions/README.md)
 
-* [get_vpn_sessions](docs/sdks/vpnsessions/README.md#get_vpn_sessions) - List all Active VPN Sessions
-* [post_vpn_session](docs/sdks/vpnsessions/README.md#post_vpn_session) - Create a VPN Session
-* [put_vpn_session](docs/sdks/vpnsessions/README.md#put_vpn_session) - Refresh a VPN Session
-* [delete_vpn_session](docs/sdks/vpnsessions/README.md#delete_vpn_session) - Delete a VPN Session
+* [list](docs/sdks/vpnsessions/README.md#list) - List all Active VPN Sessions
+* [create](docs/sdks/vpnsessions/README.md#create) - Create a VPN Session
+* [refresh_password](docs/sdks/vpnsessions/README.md#refresh_password) - Refresh a VPN Session
+* [delete](docs/sdks/vpnsessions/README.md#delete) - Delete a VPN Session
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -353,11 +419,12 @@ from latitudesh_python_sdk import Latitudesh
 from latitudesh_python_sdk.utils import BackoffStrategy, RetryConfig
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.api_keys.get_api_keys(,
+    res = latitudesh.api_keys.list(,
         RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False))
 
     # Handle response
@@ -371,12 +438,13 @@ from latitudesh_python_sdk import Latitudesh
 from latitudesh_python_sdk.utils import BackoffStrategy, RetryConfig
 import os
 
+
 with Latitudesh(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.api_keys.get_api_keys()
+    res = latitudesh.api_keys.list()
 
     # Handle response
     print(res)
@@ -398,7 +466,7 @@ By default, an API error will raise a models.APIError exception, which has the f
 | `.raw_response` | *httpx.Response* | The raw HTTP response |
 | `.body`         | *str*            | The response content  |
 
-When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `post_api_key_async` method may raise the following exceptions:
+When custom error responses are specified for an operation, the SDK may also raise their associated exceptions. You can refer to respective *Errors* tables in SDK docs for more details on possible exception types for each operation. For example, the `create_async` method may raise the following exceptions:
 
 | Error Type         | Status Code | Content Type             |
 | ------------------ | ----------- | ------------------------ |
@@ -412,13 +480,14 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh, models
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
     res = None
     try:
 
-        res = latitudesh.api_keys.post_api_key(request={
+        res = latitudesh.api_keys.create(request={
             "data": {
                 "type": latitudesh_python_sdk.CreateAPIKeyType.API_KEYS,
                 "attributes": {},
@@ -444,12 +513,16 @@ with Latitudesh(
 
 You can override the default server globally by passing a server index to the `server_idx: int` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| #   | Server                    | Variables               | Default values                 |
-| --- | ------------------------- | ----------------------- | ------------------------------ |
-| 0   | `https://api.latitude.sh` | `latitude_api_key: str` | `"<insert your api key here>"` |
-| 1   | `http://api.latitude.sh`  | `latitude_api_key: str` | `"<insert your api key here>"` |
+| #   | Server                    | Variables          | Description |
+| --- | ------------------------- | ------------------ | ----------- |
+| 0   | `https://api.latitude.sh` | `latitude_api_key` |             |
+| 1   | `http://api.latitude.sh`  | `latitude_api_key` |             |
 
-If the selected server has variables, you may override their default values through the additional parameters made available in the SDK constructor.
+If the selected server has variables, you may override its default values through the additional parameters made available in the SDK constructor:
+
+| Variable           | Parameter               | Default                        | Description |
+| ------------------ | ----------------------- | ------------------------------ | ----------- |
+| `latitude_api_key` | `latitude_api_key: str` | `"<insert your api key here>"` |             |
 
 #### Example
 
@@ -457,12 +530,14 @@ If the selected server has variables, you may override their default values thro
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     server_idx=1,
+    latitude_api_key="<value>"
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.api_keys.get_api_keys()
+    res = latitudesh.api_keys.list()
 
     # Handle response
     print(res)
@@ -476,12 +551,13 @@ The default server can also be overridden globally by passing a URL to the `serv
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     server_url="https://api.latitude.sh",
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.api_keys.get_api_keys()
+    res = latitudesh.api_keys.list()
 
     # Handle response
     print(res)
@@ -581,6 +657,7 @@ The `Latitudesh` class implements the context manager protocol and registers a f
 from latitudesh_python_sdk import Latitudesh
 import os
 def main():
+
     with Latitudesh(
         bearer=os.getenv("LATITUDESH_BEARER", ""),
     ) as latitudesh:
@@ -589,6 +666,7 @@ def main():
 
 # Or when using async:
 async def amain():
+
     async with Latitudesh(
         bearer=os.getenv("LATITUDESH_BEARER", ""),
     ) as latitudesh:

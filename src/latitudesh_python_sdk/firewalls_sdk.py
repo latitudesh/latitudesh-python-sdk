@@ -3,21 +3,19 @@
 from .basesdk import BaseSDK
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
+from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Any, Mapping, Optional, Union, cast
+from typing import Any, Mapping, Optional, Union
 
 
 class FirewallsSDK(BaseSDK):
-    def create_firewall(
+    def create(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateFirewallFirewallsRequestBody,
-                models.CreateFirewallFirewallsRequestBodyTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.CreateFirewallFirewallsData,
+            models.CreateFirewallFirewallsDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -27,7 +25,7 @@ class FirewallsSDK(BaseSDK):
 
         Create a firewall
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -40,12 +38,12 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateFirewallFirewallsRequestBody]
-            )
-        request = cast(Optional[models.CreateFirewallFirewallsRequestBody], request)
+        request = models.CreateFirewallFirewallsRequestBody(
+            data=utils.get_pydantic_model(data, models.CreateFirewallFirewallsData),
+        )
 
         req = self._build_request(
             method="POST",
@@ -53,7 +51,7 @@ class FirewallsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -61,11 +59,7 @@ class FirewallsSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                True,
-                "json",
-                Optional[models.CreateFirewallFirewallsRequestBody],
+                request, False, False, "json", models.CreateFirewallFirewallsRequestBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -80,6 +74,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-firewall",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -117,15 +112,13 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    async def create_firewall_async(
+    async def create_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateFirewallFirewallsRequestBody,
-                models.CreateFirewallFirewallsRequestBodyTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.CreateFirewallFirewallsData,
+            models.CreateFirewallFirewallsDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -135,7 +128,7 @@ class FirewallsSDK(BaseSDK):
 
         Create a firewall
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -148,12 +141,12 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateFirewallFirewallsRequestBody]
-            )
-        request = cast(Optional[models.CreateFirewallFirewallsRequestBody], request)
+        request = models.CreateFirewallFirewallsRequestBody(
+            data=utils.get_pydantic_model(data, models.CreateFirewallFirewallsData),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -161,7 +154,7 @@ class FirewallsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -169,11 +162,7 @@ class FirewallsSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                True,
-                "json",
-                Optional[models.CreateFirewallFirewallsRequestBody],
+                request, False, False, "json", models.CreateFirewallFirewallsRequestBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -188,6 +177,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-firewall",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -225,7 +215,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    def list_firewalls(
+    def list(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -251,6 +241,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListFirewallsRequest(
             filter_project=filter_project,
@@ -282,6 +274,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list-firewalls",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -315,7 +308,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    async def list_firewalls_async(
+    async def list_async(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -341,6 +334,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.ListFirewallsRequest(
             filter_project=filter_project,
@@ -372,6 +367,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="list-firewalls",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -405,7 +401,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    def get_firewall(
+    def get(
         self,
         *,
         firewall_id: str,
@@ -431,6 +427,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetFirewallRequest(
             firewall_id=firewall_id,
@@ -462,6 +460,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-firewall",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -499,7 +498,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    async def get_firewall_async(
+    async def get_async(
         self,
         *,
         firewall_id: str,
@@ -525,6 +524,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetFirewallRequest(
             firewall_id=firewall_id,
@@ -556,6 +557,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-firewall",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -593,7 +595,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    def update_firewall(
+    def update(
         self,
         *,
         firewall_id: str,
@@ -624,6 +626,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateFirewallRequest(
             firewall_id=firewall_id,
@@ -638,7 +642,7 @@ class FirewallsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -648,9 +652,9 @@ class FirewallsSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateFirewallFirewallsRequestBody],
+                models.UpdateFirewallFirewallsRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -665,6 +669,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-firewall",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -702,7 +707,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    async def update_firewall_async(
+    async def update_async(
         self,
         *,
         firewall_id: str,
@@ -733,6 +738,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateFirewallRequest(
             firewall_id=firewall_id,
@@ -747,7 +754,7 @@ class FirewallsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -757,9 +764,9 @@ class FirewallsSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateFirewallFirewallsRequestBody],
+                models.UpdateFirewallFirewallsRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -774,6 +781,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-firewall",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -811,7 +819,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    def delete_firewall(
+    def delete(
         self,
         *,
         firewall_id: str,
@@ -837,6 +845,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteFirewallRequest(
             firewall_id=firewall_id,
@@ -868,6 +878,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-firewall",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -905,7 +916,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    async def delete_firewall_async(
+    async def delete_async(
         self,
         *,
         firewall_id: str,
@@ -931,6 +942,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteFirewallRequest(
             firewall_id=firewall_id,
@@ -962,6 +975,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-firewall",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -999,7 +1013,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    def create_firewall_assignment(
+    def assign(
         self,
         *,
         firewall_id: str,
@@ -1030,6 +1044,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateFirewallAssignmentRequest(
             firewall_id=firewall_id,
@@ -1046,7 +1062,7 @@ class FirewallsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -1056,9 +1072,9 @@ class FirewallsSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.CreateFirewallAssignmentFirewallsRequestBody],
+                models.CreateFirewallAssignmentFirewallsRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1073,6 +1089,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-firewall-assignment",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1112,7 +1129,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    async def create_firewall_assignment_async(
+    async def assign_async(
         self,
         *,
         firewall_id: str,
@@ -1143,6 +1160,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.CreateFirewallAssignmentRequest(
             firewall_id=firewall_id,
@@ -1159,7 +1178,7 @@ class FirewallsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -1169,9 +1188,9 @@ class FirewallsSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.CreateFirewallAssignmentFirewallsRequestBody],
+                models.CreateFirewallAssignmentFirewallsRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1186,6 +1205,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-firewall-assignment",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1225,7 +1245,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    def get_firewall_assignments(
+    def list_assignments(
         self,
         *,
         firewall_id: str,
@@ -1251,6 +1271,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetFirewallAssignmentsRequest(
             firewall_id=firewall_id,
@@ -1282,6 +1304,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-firewall-assignments",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1319,7 +1342,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    async def get_firewall_assignments_async(
+    async def list_assignments_async(
         self,
         *,
         firewall_id: str,
@@ -1345,6 +1368,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetFirewallAssignmentsRequest(
             firewall_id=firewall_id,
@@ -1376,6 +1401,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-firewall-assignments",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1413,7 +1439,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    def delete_firewall_assignment(
+    def delete_assignment(
         self,
         *,
         firewall_id: str,
@@ -1441,6 +1467,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteFirewallAssignmentRequest(
             firewall_id=firewall_id,
@@ -1473,6 +1501,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-firewall-assignment",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -1510,7 +1539,7 @@ class FirewallsSDK(BaseSDK):
             http_res,
         )
 
-    async def delete_firewall_assignment_async(
+    async def delete_assignment_async(
         self,
         *,
         firewall_id: str,
@@ -1538,6 +1567,8 @@ class FirewallsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteFirewallAssignmentRequest(
             firewall_id=firewall_id,
@@ -1570,6 +1601,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-firewall-assignment",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

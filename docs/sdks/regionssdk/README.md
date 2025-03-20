@@ -5,10 +5,10 @@
 
 ### Available Operations
 
-* [get_regions](#get_regions) - List all Regions
-* [get_region](#get_region) - Retrieve a Region
+* [list](#list) - List all Regions
+* [get](#get) - Retrieve a Region
 
-## get_regions
+## list
 
 Lists all [available locations](https://latitude.sh/locations). For server availability by location, please see the [Plans API](/reference/get-plans).
 
@@ -20,11 +20,12 @@ Lists all [available locations](https://latitude.sh/locations). For server avail
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.regions.get_regions()
+    res = latitudesh.regions.list()
 
     # Handle response
     print(res)
@@ -47,7 +48,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## get_region
+## get
 
 Retrieve a Region
 
@@ -57,11 +58,12 @@ Retrieve a Region
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.regions.get_region(region_id="reg_Qkm7dXPed8nZV")
+    res = latitudesh.regions.get(region_id="reg_Qkm7dXPed8nZV")
 
     # Handle response
     print(res)

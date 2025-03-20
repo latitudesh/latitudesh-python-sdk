@@ -8,28 +8,29 @@ from .utils.retries import RetryConfig
 import httpx
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import SDKHooks
-from latitudesh_python_sdk.api_keys import APIKeys
+from latitudesh_python_sdk.apikeys import APIKeys
 from latitudesh_python_sdk.billing import Billing
 from latitudesh_python_sdk.events_sdk import EventsSDK
 from latitudesh_python_sdk.firewalls_sdk import FirewallsSDK
-from latitudesh_python_sdk.ip_addresses_sdk import IPAddressesSDK
-from latitudesh_python_sdk.operating_systems_sdk import OperatingSystemsSDK
+from latitudesh_python_sdk.ipaddresses_sdk import IPAddressesSDK
+from latitudesh_python_sdk.operatingsystems_sdk import OperatingSystemsSDK
 from latitudesh_python_sdk.plans import Plans
-from latitudesh_python_sdk.private_networks import PrivateNetworks
+from latitudesh_python_sdk.privatenetworks import PrivateNetworks
 from latitudesh_python_sdk.projects_sdk import ProjectsSDK
 from latitudesh_python_sdk.regions_sdk import RegionsSDK
 from latitudesh_python_sdk.roles import Roles
 from latitudesh_python_sdk.servers_sdk import ServersSDK
-from latitudesh_python_sdk.ssh_keys import SSHKeys
+from latitudesh_python_sdk.sshkeys import SSHKeys
 from latitudesh_python_sdk.storage import Storage
 from latitudesh_python_sdk.tags import Tags
-from latitudesh_python_sdk.teams_members import TeamsMembers
 from latitudesh_python_sdk.teams_sdk import TeamsSDK
+from latitudesh_python_sdk.teamsmembers import TeamsMembers
 from latitudesh_python_sdk.traffic_sdk import TrafficSDK
 from latitudesh_python_sdk.types import OptionalNullable, UNSET
-from latitudesh_python_sdk.user_data_sdk import UserDataSDK
-from latitudesh_python_sdk.user_profile import UserProfile
-from latitudesh_python_sdk.vpn_sessions import VPNSessions
+from latitudesh_python_sdk.userdata_sdk import UserDataSDK
+from latitudesh_python_sdk.userprofile import UserProfile
+from latitudesh_python_sdk.virtualmachines import VirtualMachines
+from latitudesh_python_sdk.vpnsessions import VpnSessions
 from typing import Any, Callable, Dict, List, Optional, Union, cast
 import weakref
 
@@ -56,8 +57,9 @@ class Latitudesh(BaseSDK):
     traffic: TrafficSDK
     user_data: UserDataSDK
     user_profile: UserProfile
+    virtual_machines: VirtualMachines
     private_networks: PrivateNetworks
-    vpn_sessions: VPNSessions
+    vpn_sessions: VpnSessions
 
     def __init__(
         self,
@@ -84,15 +86,19 @@ class Latitudesh(BaseSDK):
         :param retry_config: The retry configuration to use for all supported methods
         :param timeout_ms: Optional request timeout applied to each operation in milliseconds
         """
+        client_supplied = True
         if client is None:
             client = httpx.Client()
+            client_supplied = False
 
         assert issubclass(
             type(client), HttpClient
         ), "The provided client must implement the HttpClient protocol."
 
+        async_client_supplied = True
         if async_client is None:
             async_client = httpx.AsyncClient()
+            async_client_supplied = False
 
         if debug_logger is None:
             debug_logger = get_default_logger()
@@ -124,7 +130,9 @@ class Latitudesh(BaseSDK):
             self,
             SDKConfiguration(
                 client=client,
+                client_supplied=client_supplied,
                 async_client=async_client,
+                async_client_supplied=async_client_supplied,
                 security=security,
                 server_url=server_url,
                 server_idx=server_idx,
@@ -139,7 +147,7 @@ class Latitudesh(BaseSDK):
 
         current_server_url, *_ = self.sdk_configuration.get_server_details()
         server_url, self.sdk_configuration.client = hooks.sdk_init(
-            current_server_url, self.sdk_configuration.client
+            current_server_url, client
         )
         if current_server_url != server_url:
             self.sdk_configuration.server_url = server_url
@@ -152,7 +160,9 @@ class Latitudesh(BaseSDK):
             close_clients,
             cast(ClientOwner, self.sdk_configuration),
             self.sdk_configuration.client,
+            self.sdk_configuration.client_supplied,
             self.sdk_configuration.async_client,
+            self.sdk_configuration.async_client_supplied,
         )
 
         self._init_sdks()
@@ -177,8 +187,9 @@ class Latitudesh(BaseSDK):
         self.traffic = TrafficSDK(self.sdk_configuration)
         self.user_data = UserDataSDK(self.sdk_configuration)
         self.user_profile = UserProfile(self.sdk_configuration)
+        self.virtual_machines = VirtualMachines(self.sdk_configuration)
         self.private_networks = PrivateNetworks(self.sdk_configuration)
-        self.vpn_sessions = VPNSessions(self.sdk_configuration)
+        self.vpn_sessions = VpnSessions(self.sdk_configuration)
 
     def __enter__(self):
         return self
@@ -187,9 +198,17 @@ class Latitudesh(BaseSDK):
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        if self.sdk_configuration.client is not None:
+        if (
+            self.sdk_configuration.client is not None
+            and not self.sdk_configuration.client_supplied
+        ):
             self.sdk_configuration.client.close()
+        self.sdk_configuration.client = None
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
-        if self.sdk_configuration.async_client is not None:
+        if (
+            self.sdk_configuration.async_client is not None
+            and not self.sdk_configuration.async_client_supplied
+        ):
             await self.sdk_configuration.async_client.aclose()
+        self.sdk_configuration.async_client = None

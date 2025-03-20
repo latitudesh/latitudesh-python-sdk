@@ -60,7 +60,7 @@ class UpdateTagTagsRequestBody(BaseModel):
 
 class UpdateTagRequestTypedDict(TypedDict):
     tag_id: str
-    request_body: NotRequired[UpdateTagTagsRequestBodyTypedDict]
+    request_body: UpdateTagTagsRequestBodyTypedDict
 
 
 class UpdateTagRequest(BaseModel):
@@ -69,6 +69,6 @@ class UpdateTagRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[UpdateTagTagsRequestBody],
+        UpdateTagTagsRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]

@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [get_user_profile](#get_user_profile) - Get user profile
-* [patch_user_profile](#patch_user_profile) - Update User Profile
-* [get_user_teams](#get_user_teams) - List User Teams
+* [get](#get) - Get user profile
+* [update](#update) - Update User Profile
+* [list_teams](#list_teams) - List User Teams
 
-## get_user_profile
+## get
 
 Retrieve the current user profile
 
@@ -20,11 +20,12 @@ Retrieve the current user profile
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_profile.get_user_profile()
+    res = latitudesh.user_profile.get()
 
     # Handle response
     print(res)
@@ -47,7 +48,7 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## patch_user_profile
+## update
 
 Update the current user profile
 
@@ -59,11 +60,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_profile.patch_user_profile(id="user_QJPQJNXX62cWNMr9BZ0kcXGgKzpW", data={
+    res = latitudesh.user_profile.update(id="user_QJPQJNXX62cWNMr9BZ0kcXGgKzpW", data={
         "id": "user_QJPQJNXX62cWNMr9BZ0kcXGgKzpW",
         "type": latitudesh_python_sdk.PatchUserProfileUserProfileType.USERS,
         "attributes": {
@@ -95,7 +97,7 @@ with Latitudesh(
 | models.ErrorObject       | 403                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## get_user_teams
+## list_teams
 
 Returns a list of all teams the user belongs to
 
@@ -106,11 +108,12 @@ Returns a list of all teams the user belongs to
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_profile.get_user_teams()
+    res = latitudesh.user_profile.list_teams()
 
     # Handle response
     print(res)

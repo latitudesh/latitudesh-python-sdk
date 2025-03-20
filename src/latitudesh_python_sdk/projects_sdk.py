@@ -9,7 +9,7 @@ from typing import Any, Mapping, Optional, Union, cast
 
 
 class ProjectsSDK(BaseSDK):
-    def get_projects(
+    def list(
         self,
         *,
         filter_name: Optional[str] = None,
@@ -48,6 +48,8 @@ class ProjectsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetProjectsRequest(
             filter_name=filter_name,
@@ -85,6 +87,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-projects",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -118,7 +121,7 @@ class ProjectsSDK(BaseSDK):
             http_res,
         )
 
-    async def get_projects_async(
+    async def list_async(
         self,
         *,
         filter_name: Optional[str] = None,
@@ -157,6 +160,8 @@ class ProjectsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.GetProjectsRequest(
             filter_name=filter_name,
@@ -194,6 +199,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="get-projects",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -227,15 +233,13 @@ class ProjectsSDK(BaseSDK):
             http_res,
         )
 
-    def create_project(
+    def create(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateProjectProjectsRequestBody,
-                models.CreateProjectProjectsRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.CreateProjectProjectsRequestBody,
+            models.CreateProjectProjectsRequestBodyTypedDict,
+        ] = models.CreateProjectProjectsRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -256,12 +260,12 @@ class ProjectsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateProjectProjectsRequestBody]
-            )
-        request = cast(Optional[models.CreateProjectProjectsRequestBody], request)
+            request = utils.unmarshal(request, models.CreateProjectProjectsRequestBody)
+        request = cast(models.CreateProjectProjectsRequestBody, request)
 
         req = self._build_request(
             method="POST",
@@ -269,7 +273,7 @@ class ProjectsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -296,6 +300,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-project",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -335,15 +340,13 @@ class ProjectsSDK(BaseSDK):
             http_res,
         )
 
-    async def create_project_async(
+    async def create_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateProjectProjectsRequestBody,
-                models.CreateProjectProjectsRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.CreateProjectProjectsRequestBody,
+            models.CreateProjectProjectsRequestBodyTypedDict,
+        ] = models.CreateProjectProjectsRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -364,12 +367,12 @@ class ProjectsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateProjectProjectsRequestBody]
-            )
-        request = cast(Optional[models.CreateProjectProjectsRequestBody], request)
+            request = utils.unmarshal(request, models.CreateProjectProjectsRequestBody)
+        request = cast(models.CreateProjectProjectsRequestBody, request)
 
         req = self._build_request_async(
             method="POST",
@@ -377,7 +380,7 @@ class ProjectsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -404,6 +407,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="create-project",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -443,7 +447,7 @@ class ProjectsSDK(BaseSDK):
             http_res,
         )
 
-    def update_project(
+    def update(
         self,
         *,
         project_id: str,
@@ -471,6 +475,8 @@ class ProjectsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateProjectRequest(
             project_id=project_id,
@@ -512,6 +518,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-project",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -551,7 +558,7 @@ class ProjectsSDK(BaseSDK):
             http_res,
         )
 
-    async def update_project_async(
+    async def update_async(
         self,
         *,
         project_id: str,
@@ -579,6 +586,8 @@ class ProjectsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.UpdateProjectRequest(
             project_id=project_id,
@@ -620,6 +629,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="update-project",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -659,7 +669,7 @@ class ProjectsSDK(BaseSDK):
             http_res,
         )
 
-    def delete_project(
+    def delete(
         self,
         *,
         project_id: str,
@@ -683,6 +693,8 @@ class ProjectsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteProjectRequest(
             project_id=project_id,
@@ -714,6 +726,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-project",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
@@ -753,7 +766,7 @@ class ProjectsSDK(BaseSDK):
             http_res,
         )
 
-    async def delete_project_async(
+    async def delete_async(
         self,
         *,
         project_id: str,
@@ -777,6 +790,8 @@ class ProjectsSDK(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
         request = models.DeleteProjectRequest(
             project_id=project_id,
@@ -808,6 +823,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                base_url=base_url or "",
                 operation_id="delete-project",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(

@@ -7,11 +7,11 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class PostVPNSessionVPNSessionsType(str, Enum):
+class PostVpnSessionVpnSessionsType(str, Enum):
     VPN_SESSIONS = "vpn_sessions"
 
 
-class PostVPNSessionVPNSessionsSite(str, Enum):
+class PostVpnSessionVpnSessionsSite(str, Enum):
     ASH = "ASH"
     BGT = "BGT"
     BUE = "BUE"
@@ -33,31 +33,31 @@ class PostVPNSessionVPNSessionsSite(str, Enum):
     TYO2 = "TYO2"
 
 
-class PostVPNSessionVPNSessionsAttributesTypedDict(TypedDict):
-    site: NotRequired[PostVPNSessionVPNSessionsSite]
+class PostVpnSessionVpnSessionsAttributesTypedDict(TypedDict):
+    site: NotRequired[PostVpnSessionVpnSessionsSite]
     server_id: NotRequired[str]
 
 
-class PostVPNSessionVPNSessionsAttributes(BaseModel):
-    site: Optional[PostVPNSessionVPNSessionsSite] = None
+class PostVpnSessionVpnSessionsAttributes(BaseModel):
+    site: Optional[PostVpnSessionVpnSessionsSite] = None
 
     server_id: Optional[str] = None
 
 
-class PostVPNSessionVPNSessionsDataTypedDict(TypedDict):
-    type: NotRequired[PostVPNSessionVPNSessionsType]
-    attributes: NotRequired[PostVPNSessionVPNSessionsAttributesTypedDict]
+class PostVpnSessionVpnSessionsDataTypedDict(TypedDict):
+    type: NotRequired[PostVpnSessionVpnSessionsType]
+    attributes: NotRequired[PostVpnSessionVpnSessionsAttributesTypedDict]
 
 
-class PostVPNSessionVPNSessionsData(BaseModel):
-    type: Optional[PostVPNSessionVPNSessionsType] = None
+class PostVpnSessionVpnSessionsData(BaseModel):
+    type: Optional[PostVpnSessionVpnSessionsType] = None
 
-    attributes: Optional[PostVPNSessionVPNSessionsAttributes] = None
-
-
-class PostVPNSessionVPNSessionsRequestBodyTypedDict(TypedDict):
-    data: NotRequired[PostVPNSessionVPNSessionsDataTypedDict]
+    attributes: Optional[PostVpnSessionVpnSessionsAttributes] = None
 
 
-class PostVPNSessionVPNSessionsRequestBody(BaseModel):
-    data: Optional[PostVPNSessionVPNSessionsData] = None
+class PostVpnSessionVpnSessionsRequestBodyTypedDict(TypedDict):
+    data: NotRequired[PostVpnSessionVpnSessionsDataTypedDict]
+
+
+class PostVpnSessionVpnSessionsRequestBody(BaseModel):
+    data: Optional[PostVpnSessionVpnSessionsData] = None

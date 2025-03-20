@@ -1,0 +1,11 @@
+# VirtualMachinePlansAttributes
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `name`                                                                                       | *Optional[str]*                                                                              | :heavy_minus_sign:                                                                           | The name of the plan                                                                         |
+| `specs`                                                                                      | [Optional[models.VirtualMachinePlansSpecs]](../models/virtualmachineplansspecs.md)           | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `regions`                                                                                    | List[[models.VirtualMachinePlansRegions](../models/virtualmachineplansregions.md)]           | :heavy_minus_sign:                                                                           | The regions where the plan is available                                                      |
+| `stock_level`                                                                                | [Optional[models.VirtualMachinePlansStockLevel]](../models/virtualmachineplansstocklevel.md) | :heavy_minus_sign:                                                                           | The stock level of the plan                                                                  |

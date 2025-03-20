@@ -5,23 +5,40 @@ from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
 from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Mapping, Optional
 
 
-class UserProfile(BaseSDK):
-    def get_user_profile(
+class IPAddressesSDK(BaseSDK):
+    def list(
         self,
         *,
+        filter_server: Optional[str] = None,
+        filter_project: Optional[str] = None,
+        filter_family: Optional[models.FilterFamily] = None,
+        filter_type: Optional[models.FilterType] = None,
+        filter_location: Optional[str] = None,
+        filter_address: Optional[str] = None,
+        extra_fields_ip_addresses: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetUserProfileResponseBody:
-        r"""Get user profile
+    ) -> models.IPAddresses:
+        r"""List IPs
 
-        Retrieve the current user profile
+        List all Management and Additional IP Addresses.
+        • Management IPs are IPs that are used for the management IP of a device.
+        This is a public IP address that a device is born and dies with. It never changes during the lifecycle of the device.
+        • Additional IPs are individual IPs that can be added to a device as an additional IP that can be used.
 
 
+        :param filter_server: The server ID to filter by
+        :param filter_project: The project ID or Slug to filter by
+        :param filter_family: The protocol family to filter by
+        :param filter_type: The protocol type to filter by
+        :param filter_location: The site slug to filter by
+        :param filter_address: The address of IP to filter by starts_with
+        :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -34,12 +51,25 @@ class UserProfile(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetIpsRequest(
+            filter_server=filter_server,
+            filter_project=filter_project,
+            filter_family=filter_family,
+            filter_type=filter_type,
+            filter_location=filter_location,
+            filter_address=filter_address,
+            extra_fields_ip_addresses=extra_fields_ip_addresses,
+        )
+
         req = self._build_request(
             method="GET",
-            path="/user/profile",
+            path="/ips",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -60,21 +90,24 @@ class UserProfile(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get-user-profile",
+                base_url=base_url or "",
+                operation_id="get-ips",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(
-                http_res.text, models.GetUserProfileResponseBody
-            )
+            return utils.unmarshal_json(http_res.text, models.IPAddresses)
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -95,19 +128,36 @@ class UserProfile(BaseSDK):
             http_res,
         )
 
-    async def get_user_profile_async(
+    async def list_async(
         self,
         *,
+        filter_server: Optional[str] = None,
+        filter_project: Optional[str] = None,
+        filter_family: Optional[models.FilterFamily] = None,
+        filter_type: Optional[models.FilterType] = None,
+        filter_location: Optional[str] = None,
+        filter_address: Optional[str] = None,
+        extra_fields_ip_addresses: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetUserProfileResponseBody:
-        r"""Get user profile
+    ) -> models.IPAddresses:
+        r"""List IPs
 
-        Retrieve the current user profile
+        List all Management and Additional IP Addresses.
+        • Management IPs are IPs that are used for the management IP of a device.
+        This is a public IP address that a device is born and dies with. It never changes during the lifecycle of the device.
+        • Additional IPs are individual IPs that can be added to a device as an additional IP that can be used.
 
 
+        :param filter_server: The server ID to filter by
+        :param filter_project: The project ID or Slug to filter by
+        :param filter_family: The protocol family to filter by
+        :param filter_type: The protocol type to filter by
+        :param filter_location: The site slug to filter by
+        :param filter_address: The address of IP to filter by starts_with
+        :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -120,12 +170,25 @@ class UserProfile(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetIpsRequest(
+            filter_server=filter_server,
+            filter_project=filter_project,
+            filter_family=filter_family,
+            filter_type=filter_type,
+            filter_location=filter_location,
+            filter_address=filter_address,
+            extra_fields_ip_addresses=extra_fields_ip_addresses,
+        )
+
         req = self._build_request_async(
             method="GET",
-            path="/user/profile",
+            path="/ips",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -146,21 +209,24 @@ class UserProfile(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get-user-profile",
+                base_url=base_url or "",
+                operation_id="get-ips",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(
-                http_res.text, models.GetUserProfileResponseBody
-            )
+            return utils.unmarshal_json(http_res.text, models.IPAddresses)
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -181,26 +247,22 @@ class UserProfile(BaseSDK):
             http_res,
         )
 
-    def patch_user_profile(
+    def get(
         self,
         *,
-        id: str,
-        data: Union[
-            models.PatchUserProfileUserProfileData,
-            models.PatchUserProfileUserProfileDataTypedDict,
-        ],
+        ip_id: str,
+        extra_fields_ip_addresses: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PatchUserProfileResponseBody:
-        r"""Update User Profile
+    ) -> models.IPAddress:
+        r"""Retrieve an IP
 
-        Update the current user profile
+        Retrieve an IP Address
 
-
-        :param id:
-        :param data:
+        :param ip_id: The IP Address ID
+        :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -213,235 +275,22 @@ class UserProfile(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
 
-        request = models.PatchUserProfileRequest(
-            id=id,
-            request_body=models.PatchUserProfileUserProfileRequestBody(
-                data=utils.get_pydantic_model(
-                    data, models.PatchUserProfileUserProfileData
-                ),
-            ),
+        request = models.GetIPRequest(
+            ip_id=ip_id,
+            extra_fields_ip_addresses=extra_fields_ip_addresses,
         )
 
-        req = self._build_request(
-            method="PATCH",
-            path="/user/profile/{id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
-                False,
-                True,
-                "json",
-                Optional[models.PatchUserProfileUserProfileRequestBody],
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                operation_id="patch-user-profile",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["403", "422", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(
-                http_res.text, models.PatchUserProfileResponseBody
-            )
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, ["422", "4XX"], "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = utils.stream_to_text(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    async def patch_user_profile_async(
-        self,
-        *,
-        id: str,
-        data: Union[
-            models.PatchUserProfileUserProfileData,
-            models.PatchUserProfileUserProfileDataTypedDict,
-        ],
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PatchUserProfileResponseBody:
-        r"""Update User Profile
-
-        Update the current user profile
-
-
-        :param id:
-        :param data:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-
-        request = models.PatchUserProfileRequest(
-            id=id,
-            request_body=models.PatchUserProfileUserProfileRequestBody(
-                data=utils.get_pydantic_model(
-                    data, models.PatchUserProfileUserProfileData
-                ),
-            ),
-        )
-
-        req = self._build_request_async(
-            method="PATCH",
-            path="/user/profile/{id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
-                False,
-                True,
-                "json",
-                Optional[models.PatchUserProfileUserProfileRequestBody],
-            ),
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                operation_id="patch-user-profile",
-                oauth2_scopes=[],
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["403", "422", "4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(
-                http_res.text, models.PatchUserProfileResponseBody
-            )
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
-            raise models.ErrorObject(data=response_data)
-        if utils.match_response(http_res, ["422", "4XX"], "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError(
-                "API error occurred", http_res.status_code, http_res_text, http_res
-            )
-
-        content_type = http_res.headers.get("Content-Type")
-        http_res_text = await utils.stream_to_text_async(http_res)
-        raise models.APIError(
-            f"Unexpected response received (code: {http_res.status_code}, type: {content_type})",
-            http_res.status_code,
-            http_res_text,
-            http_res,
-        )
-
-    def get_user_teams(
-        self,
-        *,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserTeams:
-        r"""List User Teams
-
-        Returns a list of all teams the user belongs to
-
-
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
         req = self._build_request(
             method="GET",
-            path="/user/teams",
+            path="/ips/{ip_id}",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/vnd.api+json",
@@ -460,19 +309,24 @@ class UserProfile(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
-                operation_id="get-user-teams",
+                base_url=base_url or "",
+                operation_id="get-ip",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["404", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.UserTeams)
+            return utils.unmarshal_json(http_res.text, models.IPAddress)
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -493,19 +347,22 @@ class UserProfile(BaseSDK):
             http_res,
         )
 
-    async def get_user_teams_async(
+    async def get_async(
         self,
         *,
+        ip_id: str,
+        extra_fields_ip_addresses: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserTeams:
-        r"""List User Teams
+    ) -> models.IPAddress:
+        r"""Retrieve an IP
 
-        Returns a list of all teams the user belongs to
+        Retrieve an IP Address
 
-
+        :param ip_id: The IP Address ID
+        :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -518,14 +375,22 @@ class UserProfile(BaseSDK):
 
         if server_url is not None:
             base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetIPRequest(
+            ip_id=ip_id,
+            extra_fields_ip_addresses=extra_fields_ip_addresses,
+        )
+
         req = self._build_request_async(
             method="GET",
-            path="/user/teams",
+            path="/ips/{ip_id}",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
-            request_has_path_params=False,
+            request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
             accept_header_value="application/vnd.api+json",
@@ -544,19 +409,24 @@ class UserProfile(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
-                operation_id="get-user-teams",
+                base_url=base_url or "",
+                operation_id="get-ip",
                 oauth2_scopes=[],
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["404", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.UserTeams)
+            return utils.unmarshal_json(http_res.text, models.IPAddress)
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(

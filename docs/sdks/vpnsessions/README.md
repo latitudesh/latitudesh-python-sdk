@@ -1,16 +1,16 @@
-# VPNSessions
+# VpnSessions
 (*vpn_sessions*)
 
 ## Overview
 
 ### Available Operations
 
-* [get_vpn_sessions](#get_vpn_sessions) - List all Active VPN Sessions
-* [post_vpn_session](#post_vpn_session) - Create a VPN Session
-* [put_vpn_session](#put_vpn_session) - Refresh a VPN Session
-* [delete_vpn_session](#delete_vpn_session) - Delete a VPN Session
+* [list](#list) - List all Active VPN Sessions
+* [create](#create) - Create a VPN Session
+* [refresh_password](#refresh_password) - Refresh a VPN Session
+* [delete](#delete) - Delete a VPN Session
 
-## get_vpn_sessions
+## list
 
 List all Active VPN Sessions
 
@@ -21,11 +21,12 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.vpn_sessions.get_vpn_sessions(filter_location=latitudesh_python_sdk.FilterLocation.SAO)
+    res = latitudesh.vpn_sessions.list(filter_location=latitudesh_python_sdk.FilterLocation.SAO)
 
     # Handle response
     print(res)
@@ -50,7 +51,7 @@ with Latitudesh(
 | models.ErrorObject       | 422                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## post_vpn_session
+## create
 
 Creates a new VPN Session.
 `NOTE:` The VPN credentials are only listed ONCE upon creation. They can however be refreshed or deleted.
@@ -63,14 +64,15 @@ import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.vpn_sessions.post_vpn_session(request={
+    res = latitudesh.vpn_sessions.create(request={
         "data": {
             "attributes": {
-                "site": latitudesh_python_sdk.PostVPNSessionVPNSessionsSite.SAO,
+                "site": latitudesh_python_sdk.PostVpnSessionVpnSessionsSite.SAO,
                 "server_id": "sv_pbV0DgQGd4AWz",
             },
         },
@@ -85,7 +87,7 @@ with Latitudesh(
 
 | Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
 | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `request`                                                                                           | [models.PostVPNSessionVPNSessionsRequestBody](../../models/postvpnsessionvpnsessionsrequestbody.md) | :heavy_check_mark:                                                                                  | The request object to use for the request.                                                          |
+| `request`                                                                                           | [models.PostVpnSessionVpnSessionsRequestBody](../../models/postvpnsessionvpnsessionsrequestbody.md) | :heavy_check_mark:                                                                                  | The request object to use for the request.                                                          |
 | `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |
 
 ### Response
@@ -99,7 +101,7 @@ with Latitudesh(
 | models.ErrorObject       | 422                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## put_vpn_session
+## refresh_password
 
 Refreshing an existing VPN Session will create new credentials for that session
 
@@ -110,11 +112,12 @@ Refreshing an existing VPN Session will create new credentials for that session
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.vpn_sessions.put_vpn_session(vpn_session_id="vpn_6VE1Wd37dXnZJ")
+    res = latitudesh.vpn_sessions.refresh_password(vpn_session_id="vpn_6VE1Wd37dXnZJ")
 
     # Handle response
     print(res)
@@ -139,7 +142,7 @@ with Latitudesh(
 | models.ErrorObject       | 404                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## delete_vpn_session
+## delete
 
 Deletes an existing VPN Session.
 
@@ -150,11 +153,12 @@ Deletes an existing VPN Session.
 from latitudesh_python_sdk import Latitudesh
 import os
 
+
 with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.vpn_sessions.delete_vpn_session(vpn_session_id="invalid")
+    latitudesh.vpn_sessions.delete(vpn_session_id="invalid")
 
     # Use the SDK ...
 
