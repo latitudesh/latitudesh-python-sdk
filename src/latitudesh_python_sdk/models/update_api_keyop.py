@@ -15,7 +15,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class UpdateAPIKeyRequestTypedDict(TypedDict):
     api_key_id: str
-    update_api_key: NotRequired[UpdateAPIKeyTypedDict]
+    update_api_key: UpdateAPIKeyTypedDict
 
 
 class UpdateAPIKeyRequest(BaseModel):
@@ -24,9 +24,9 @@ class UpdateAPIKeyRequest(BaseModel):
     ]
 
     update_api_key: Annotated[
-        Optional[UpdateAPIKey],
+        UpdateAPIKey,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]
 
 
 class UpdateAPIKeyResponseBodyTypedDict(TypedDict):

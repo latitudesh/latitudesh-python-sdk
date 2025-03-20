@@ -107,7 +107,7 @@ class UpdateServerDeployConfigServersRequestBody(BaseModel):
 class UpdateServerDeployConfigRequestTypedDict(TypedDict):
     server_id: str
     r"""The Server ID"""
-    request_body: NotRequired[UpdateServerDeployConfigServersRequestBodyTypedDict]
+    request_body: UpdateServerDeployConfigServersRequestBodyTypedDict
 
 
 class UpdateServerDeployConfigRequest(BaseModel):
@@ -117,6 +117,6 @@ class UpdateServerDeployConfigRequest(BaseModel):
     r"""The Server ID"""
 
     request_body: Annotated[
-        Optional[UpdateServerDeployConfigServersRequestBody],
+        UpdateServerDeployConfigServersRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]

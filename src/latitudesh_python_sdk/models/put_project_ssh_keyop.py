@@ -56,7 +56,7 @@ class PutProjectSSHKeyRequestTypedDict(TypedDict):
     project_id: str
     r"""Project ID or Slug"""
     ssh_key_id: str
-    request_body: NotRequired[PutProjectSSHKeySSHKeysRequestBodyTypedDict]
+    request_body: PutProjectSSHKeySSHKeysRequestBodyTypedDict
 
 
 class PutProjectSSHKeyRequest(BaseModel):
@@ -70,9 +70,9 @@ class PutProjectSSHKeyRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[PutProjectSSHKeySSHKeysRequestBody],
+        PutProjectSSHKeySSHKeysRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]
 
 
 class PutProjectSSHKeyResponseBodyTypedDict(TypedDict):

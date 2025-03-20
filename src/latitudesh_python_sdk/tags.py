@@ -186,12 +186,9 @@ class Tags(BaseSDK):
     def create(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateTagTagsRequestBody,
-                models.CreateTagTagsRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.CreateTagTagsRequestBody, models.CreateTagTagsRequestBodyTypedDict
+        ] = models.CreateTagTagsRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -219,10 +216,8 @@ class Tags(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateTagTagsRequestBody]
-            )
-        request = cast(Optional[models.CreateTagTagsRequestBody], request)
+            request = utils.unmarshal(request, models.CreateTagTagsRequestBody)
+        request = cast(models.CreateTagTagsRequestBody, request)
 
         req = self._build_request(
             method="POST",
@@ -230,7 +225,7 @@ class Tags(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -290,12 +285,9 @@ class Tags(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateTagTagsRequestBody,
-                models.CreateTagTagsRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.CreateTagTagsRequestBody, models.CreateTagTagsRequestBodyTypedDict
+        ] = models.CreateTagTagsRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -323,10 +315,8 @@ class Tags(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateTagTagsRequestBody]
-            )
-        request = cast(Optional[models.CreateTagTagsRequestBody], request)
+            request = utils.unmarshal(request, models.CreateTagTagsRequestBody)
+        request = cast(models.CreateTagTagsRequestBody, request)
 
         req = self._build_request_async(
             method="POST",
@@ -334,7 +324,7 @@ class Tags(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -438,7 +428,7 @@ class Tags(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -448,9 +438,9 @@ class Tags(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateTagTagsRequestBody],
+                models.UpdateTagTagsRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -546,7 +536,7 @@ class Tags(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -556,9 +546,9 @@ class Tags(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateTagTagsRequestBody],
+                models.UpdateTagTagsRequestBody,
             ),
             timeout_ms=timeout_ms,
         )

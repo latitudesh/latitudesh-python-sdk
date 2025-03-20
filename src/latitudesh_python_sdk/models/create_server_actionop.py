@@ -55,7 +55,7 @@ class CreateServerActionServersRequestBody(BaseModel):
 
 class CreateServerActionRequestTypedDict(TypedDict):
     server_id: str
-    request_body: NotRequired[CreateServerActionServersRequestBodyTypedDict]
+    request_body: CreateServerActionServersRequestBodyTypedDict
 
 
 class CreateServerActionRequest(BaseModel):
@@ -64,6 +64,6 @@ class CreateServerActionRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[CreateServerActionServersRequestBody],
+        CreateServerActionServersRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]

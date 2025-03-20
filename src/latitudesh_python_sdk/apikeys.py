@@ -186,9 +186,9 @@ class APIKeys(BaseSDK):
     def create(
         self,
         *,
-        request: Optional[
-            Union[models.CreateAPIKey, models.CreateAPIKeyTypedDict]
-        ] = None,
+        request: Union[
+            models.CreateAPIKey, models.CreateAPIKeyTypedDict
+        ] = models.CreateAPIKey(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -216,8 +216,8 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, Optional[models.CreateAPIKey])
-        request = cast(Optional[models.CreateAPIKey], request)
+            request = utils.unmarshal(request, models.CreateAPIKey)
+        request = cast(models.CreateAPIKey, request)
 
         req = self._build_request(
             method="POST",
@@ -225,7 +225,7 @@ class APIKeys(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -289,9 +289,9 @@ class APIKeys(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Optional[
-            Union[models.CreateAPIKey, models.CreateAPIKeyTypedDict]
-        ] = None,
+        request: Union[
+            models.CreateAPIKey, models.CreateAPIKeyTypedDict
+        ] = models.CreateAPIKey(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -319,8 +319,8 @@ class APIKeys(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, Optional[models.CreateAPIKey])
-        request = cast(Optional[models.CreateAPIKey], request)
+            request = utils.unmarshal(request, models.CreateAPIKey)
+        request = cast(models.CreateAPIKey, request)
 
         req = self._build_request_async(
             method="POST",
@@ -328,7 +328,7 @@ class APIKeys(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -436,7 +436,7 @@ class APIKeys(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -444,11 +444,7 @@ class APIKeys(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.update_api_key,
-                False,
-                True,
-                "json",
-                Optional[models.UpdateAPIKey],
+                request.update_api_key, False, False, "json", models.UpdateAPIKey
             ),
             timeout_ms=timeout_ms,
         )
@@ -548,7 +544,7 @@ class APIKeys(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -556,11 +552,7 @@ class APIKeys(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.update_api_key,
-                False,
-                True,
-                "json",
-                Optional[models.UpdateAPIKey],
+                request.update_api_key, False, False, "json", models.UpdateAPIKey
             ),
             timeout_ms=timeout_ms,
         )

@@ -1,0 +1,10 @@
+# VirtualMachinePlansRegions
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `name`                                                                                 | *Optional[str]*                                                                        | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `available`                                                                            | List[*str*]                                                                            | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `pricing`                                                                              | [Optional[models.VirtualMachinePlansPricing]](../models/virtualmachineplanspricing.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |

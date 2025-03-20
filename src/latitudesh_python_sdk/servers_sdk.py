@@ -284,12 +284,10 @@ class ServersSDK(BaseSDK):
     def create(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateServerServersRequestBody,
-                models.CreateServerServersRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.CreateServerServersRequestBody,
+            models.CreateServerServersRequestBodyTypedDict,
+        ] = models.CreateServerServersRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -314,10 +312,8 @@ class ServersSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateServerServersRequestBody]
-            )
-        request = cast(Optional[models.CreateServerServersRequestBody], request)
+            request = utils.unmarshal(request, models.CreateServerServersRequestBody)
+        request = cast(models.CreateServerServersRequestBody, request)
 
         req = self._build_request(
             method="POST",
@@ -325,7 +321,7 @@ class ServersSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -395,12 +391,10 @@ class ServersSDK(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateServerServersRequestBody,
-                models.CreateServerServersRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.CreateServerServersRequestBody,
+            models.CreateServerServersRequestBodyTypedDict,
+        ] = models.CreateServerServersRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -425,10 +419,8 @@ class ServersSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateServerServersRequestBody]
-            )
-        request = cast(Optional[models.CreateServerServersRequestBody], request)
+            request = utils.unmarshal(request, models.CreateServerServersRequestBody)
+        request = cast(models.CreateServerServersRequestBody, request)
 
         req = self._build_request_async(
             method="POST",
@@ -436,7 +428,7 @@ class ServersSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -752,7 +744,7 @@ class ServersSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -762,9 +754,9 @@ class ServersSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateServerServersRequestBody],
+                models.UpdateServerServersRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -877,7 +869,7 @@ class ServersSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -887,9 +879,9 @@ class ServersSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateServerServersRequestBody],
+                models.UpdateServerServersRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1382,7 +1374,7 @@ class ServersSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -1392,9 +1384,9 @@ class ServersSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateServerDeployConfigServersRequestBody],
+                models.UpdateServerDeployConfigServersRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1505,7 +1497,7 @@ class ServersSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -1515,9 +1507,9 @@ class ServersSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateServerDeployConfigServersRequestBody],
+                models.UpdateServerDeployConfigServersRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1994,7 +1986,7 @@ class ServersSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -2004,9 +1996,9 @@ class ServersSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.CreateServerOutOfBandServersRequestBody],
+                models.CreateServerOutOfBandServersRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -2106,7 +2098,7 @@ class ServersSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -2116,9 +2108,9 @@ class ServersSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.CreateServerOutOfBandServersRequestBody],
+                models.CreateServerOutOfBandServersRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -2414,7 +2406,7 @@ class ServersSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -2424,9 +2416,9 @@ class ServersSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.CreateServerActionServersRequestBody],
+                models.CreateServerActionServersRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -2532,7 +2524,7 @@ class ServersSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -2542,9 +2534,9 @@ class ServersSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.CreateServerActionServersRequestBody],
+                models.CreateServerActionServersRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -3630,7 +3622,7 @@ class ServersSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -3640,9 +3632,9 @@ class ServersSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.CreateServerReinstallServersRequestBody],
+                models.CreateServerReinstallServersRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -3747,7 +3739,7 @@ class ServersSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -3757,9 +3749,9 @@ class ServersSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.CreateServerReinstallServersRequestBody],
+                models.CreateServerReinstallServersRequestBody,
             ),
             timeout_ms=timeout_ms,
         )

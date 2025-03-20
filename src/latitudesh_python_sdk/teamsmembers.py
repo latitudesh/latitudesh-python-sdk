@@ -3,9 +3,9 @@
 from .basesdk import BaseSDK
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
+from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Any, Mapping, Optional, Union, cast
+from typing import Any, Mapping, Optional, Union
 
 
 class TeamsMembers(BaseSDK):
@@ -180,12 +180,10 @@ class TeamsMembers(BaseSDK):
     def add(
         self,
         *,
-        request: Optional[
-            Union[
-                models.PostTeamMembersTeamsMembersRequestBody,
-                models.PostTeamMembersTeamsMembersRequestBodyTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.PostTeamMembersTeamsMembersData,
+            models.PostTeamMembersTeamsMembersDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -193,7 +191,7 @@ class TeamsMembers(BaseSDK):
     ) -> models.Membership:
         r"""Add a Team Member
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -209,11 +207,9 @@ class TeamsMembers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.PostTeamMembersTeamsMembersRequestBody]
-            )
-        request = cast(Optional[models.PostTeamMembersTeamsMembersRequestBody], request)
+        request = models.PostTeamMembersTeamsMembersRequestBody(
+            data=utils.get_pydantic_model(data, models.PostTeamMembersTeamsMembersData),
+        )
 
         req = self._build_request(
             method="POST",
@@ -221,7 +217,7 @@ class TeamsMembers(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -231,9 +227,9 @@ class TeamsMembers(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PostTeamMembersTeamsMembersRequestBody],
+                models.PostTeamMembersTeamsMembersRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -289,12 +285,10 @@ class TeamsMembers(BaseSDK):
     async def add_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.PostTeamMembersTeamsMembersRequestBody,
-                models.PostTeamMembersTeamsMembersRequestBodyTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.PostTeamMembersTeamsMembersData,
+            models.PostTeamMembersTeamsMembersDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -302,7 +296,7 @@ class TeamsMembers(BaseSDK):
     ) -> models.Membership:
         r"""Add a Team Member
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -318,11 +312,9 @@ class TeamsMembers(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.PostTeamMembersTeamsMembersRequestBody]
-            )
-        request = cast(Optional[models.PostTeamMembersTeamsMembersRequestBody], request)
+        request = models.PostTeamMembersTeamsMembersRequestBody(
+            data=utils.get_pydantic_model(data, models.PostTeamMembersTeamsMembersData),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -330,7 +322,7 @@ class TeamsMembers(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -340,9 +332,9 @@ class TeamsMembers(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PostTeamMembersTeamsMembersRequestBody],
+                models.PostTeamMembersTeamsMembersRequestBody,
             ),
             timeout_ms=timeout_ms,
         )

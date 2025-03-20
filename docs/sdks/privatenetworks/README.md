@@ -73,14 +73,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.create(request={
-        "data": {
-            "type": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK,
-            "attributes": {
-                "description": "São Paulo VLAN",
-                "project": "aerodynamic-marble-bench",
-                "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
-            },
+    res = latitudesh.private_networks.create(data={
+        "type": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK,
+        "attributes": {
+            "description": "São Paulo VLAN",
+            "project": "aerodynamic-marble-bench",
+            "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
         },
     })
 
@@ -91,10 +89,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                                               | Type                                                                                                                    | Required                                                                                                                | Description                                                                                                             |
-| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                               | [models.CreateVirtualNetworkPrivateNetworksRequestBody](../../models/createvirtualnetworkprivatenetworksrequestbody.md) | :heavy_check_mark:                                                                                                      | The request object to use for the request.                                                                              |
-| `retries`                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                        | :heavy_minus_sign:                                                                                                      | Configuration to override the default retry behavior of the client.                                                     |
+| Parameter                                                                                                 | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `data`                                                                                                    | [models.CreateVirtualNetworkPrivateNetworksData](../../models/createvirtualnetworkprivatenetworksdata.md) | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
+| `retries`                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                          | :heavy_minus_sign:                                                                                        | Configuration to override the default retry behavior of the client.                                       |
 
 ### Response
 

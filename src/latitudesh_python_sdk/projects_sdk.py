@@ -236,12 +236,10 @@ class ProjectsSDK(BaseSDK):
     def create(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateProjectProjectsRequestBody,
-                models.CreateProjectProjectsRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.CreateProjectProjectsRequestBody,
+            models.CreateProjectProjectsRequestBodyTypedDict,
+        ] = models.CreateProjectProjectsRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -266,10 +264,8 @@ class ProjectsSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateProjectProjectsRequestBody]
-            )
-        request = cast(Optional[models.CreateProjectProjectsRequestBody], request)
+            request = utils.unmarshal(request, models.CreateProjectProjectsRequestBody)
+        request = cast(models.CreateProjectProjectsRequestBody, request)
 
         req = self._build_request(
             method="POST",
@@ -277,7 +273,7 @@ class ProjectsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -347,12 +343,10 @@ class ProjectsSDK(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateProjectProjectsRequestBody,
-                models.CreateProjectProjectsRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.CreateProjectProjectsRequestBody,
+            models.CreateProjectProjectsRequestBodyTypedDict,
+        ] = models.CreateProjectProjectsRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -377,10 +371,8 @@ class ProjectsSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateProjectProjectsRequestBody]
-            )
-        request = cast(Optional[models.CreateProjectProjectsRequestBody], request)
+            request = utils.unmarshal(request, models.CreateProjectProjectsRequestBody)
+        request = cast(models.CreateProjectProjectsRequestBody, request)
 
         req = self._build_request_async(
             method="POST",
@@ -388,7 +380,7 @@ class ProjectsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",

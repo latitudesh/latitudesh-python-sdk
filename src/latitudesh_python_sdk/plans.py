@@ -624,12 +624,10 @@ class Plans(BaseSDK):
     def update_bandwidth(
         self,
         *,
-        request: Optional[
-            Union[
-                models.UpdatePlansBandwidthPlansRequestBody,
-                models.UpdatePlansBandwidthPlansRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.UpdatePlansBandwidthPlansRequestBody,
+            models.UpdatePlansBandwidthPlansRequestBodyTypedDict,
+        ] = models.UpdatePlansBandwidthPlansRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -658,9 +656,9 @@ class Plans(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.UpdatePlansBandwidthPlansRequestBody]
+                request, models.UpdatePlansBandwidthPlansRequestBody
             )
-        request = cast(Optional[models.UpdatePlansBandwidthPlansRequestBody], request)
+        request = cast(models.UpdatePlansBandwidthPlansRequestBody, request)
 
         req = self._build_request(
             method="POST",
@@ -668,7 +666,7 @@ class Plans(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -736,12 +734,10 @@ class Plans(BaseSDK):
     async def update_bandwidth_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.UpdatePlansBandwidthPlansRequestBody,
-                models.UpdatePlansBandwidthPlansRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.UpdatePlansBandwidthPlansRequestBody,
+            models.UpdatePlansBandwidthPlansRequestBodyTypedDict,
+        ] = models.UpdatePlansBandwidthPlansRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -770,9 +766,9 @@ class Plans(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.UpdatePlansBandwidthPlansRequestBody]
+                request, models.UpdatePlansBandwidthPlansRequestBody
             )
-        request = cast(Optional[models.UpdatePlansBandwidthPlansRequestBody], request)
+        request = cast(models.UpdatePlansBandwidthPlansRequestBody, request)
 
         req = self._build_request_async(
             method="POST",
@@ -780,7 +776,7 @@ class Plans(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",

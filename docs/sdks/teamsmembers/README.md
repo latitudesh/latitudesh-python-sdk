@@ -63,15 +63,13 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.teams_members.add(request={
-        "data": {
-            "type": latitudesh_python_sdk.PostTeamMembersTeamsMembersType.MEMBERSHIPS,
-            "attributes": {
-                "email": "theron_keeling@balistreri.test",
-                "role": latitudesh_python_sdk.PostTeamMembersTeamsMembersRole.COLLABORATOR,
-                "first_name": "Dianne",
-                "last_name": "Bahringer",
-            },
+    res = latitudesh.teams_members.add(data={
+        "type": latitudesh_python_sdk.PostTeamMembersTeamsMembersType.MEMBERSHIPS,
+        "attributes": {
+            "email": "theron_keeling@balistreri.test",
+            "role": latitudesh_python_sdk.PostTeamMembersTeamsMembersRole.COLLABORATOR,
+            "first_name": "Dianne",
+            "last_name": "Bahringer",
         },
     })
 
@@ -82,10 +80,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
-| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                               | [models.PostTeamMembersTeamsMembersRequestBody](../../models/postteammembersteamsmembersrequestbody.md) | :heavy_check_mark:                                                                                      | The request object to use for the request.                                                              |
-| `retries`                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                        | :heavy_minus_sign:                                                                                      | Configuration to override the default retry behavior of the client.                                     |
+| Parameter                                                                                 | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `data`                                                                                    | [models.PostTeamMembersTeamsMembersData](../../models/postteammembersteamsmembersdata.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |
 
 ### Response
 

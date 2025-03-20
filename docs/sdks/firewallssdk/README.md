@@ -30,33 +30,31 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.create(request={
-        "data": {
-            "type": latitudesh_python_sdk.CreateFirewallFirewallsType.FIREWALLS,
-            "attributes": {
-                "name": "my-firewall",
-                "project": "small-rubber-lamp",
-                "rules": [
-                    {
-                        "from_": "192.168.42.72",
-                        "to": "192.168.43.51",
-                        "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
-                        "port": "80",
-                    },
-                    {
-                        "from_": "192.168.1.16",
-                        "to": "192.168.1.30",
-                        "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
-                        "port": "80",
-                    },
-                    {
-                        "from_": "192.168.1.10",
-                        "to": "192.168.1.20",
-                        "protocol": latitudesh_python_sdk.CreateFirewallProtocol.UDP,
-                        "port": "3000-4000",
-                    },
-                ],
-            },
+    res = latitudesh.firewalls.create(data={
+        "type": latitudesh_python_sdk.CreateFirewallFirewallsType.FIREWALLS,
+        "attributes": {
+            "name": "my-firewall",
+            "project": "small-rubber-lamp",
+            "rules": [
+                {
+                    "from_": "192.168.42.72",
+                    "to": "192.168.43.51",
+                    "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
+                    "port": "80",
+                },
+                {
+                    "from_": "192.168.1.16",
+                    "to": "192.168.1.30",
+                    "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
+                    "port": "80",
+                },
+                {
+                    "from_": "192.168.1.10",
+                    "to": "192.168.1.20",
+                    "protocol": latitudesh_python_sdk.CreateFirewallProtocol.UDP,
+                    "port": "3000-4000",
+                },
+            ],
         },
     })
 
@@ -67,10 +65,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
-| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `request`                                                                                       | [models.CreateFirewallFirewallsRequestBody](../../models/createfirewallfirewallsrequestbody.md) | :heavy_check_mark:                                                                              | The request object to use for the request.                                                      |
-| `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `data`                                                                            | [models.CreateFirewallFirewallsData](../../models/createfirewallfirewallsdata.md) | :heavy_check_mark:                                                                | N/A                                                                               |
+| `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
 
 ### Response
 

@@ -55,7 +55,7 @@ class UpdateServerServersRequestBody(BaseModel):
 
 class UpdateServerRequestTypedDict(TypedDict):
     server_id: str
-    request_body: NotRequired[UpdateServerServersRequestBodyTypedDict]
+    request_body: UpdateServerServersRequestBodyTypedDict
 
 
 class UpdateServerRequest(BaseModel):
@@ -64,6 +64,6 @@ class UpdateServerRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[UpdateServerServersRequestBody],
+        UpdateServerServersRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]

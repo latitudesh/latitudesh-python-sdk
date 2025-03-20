@@ -206,12 +206,10 @@ class VpnSessions(BaseSDK):
     def create(
         self,
         *,
-        request: Optional[
-            Union[
-                models.PostVpnSessionVpnSessionsRequestBody,
-                models.PostVpnSessionVpnSessionsRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.PostVpnSessionVpnSessionsRequestBody,
+            models.PostVpnSessionVpnSessionsRequestBodyTypedDict,
+        ] = models.PostVpnSessionVpnSessionsRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -241,9 +239,9 @@ class VpnSessions(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.PostVpnSessionVpnSessionsRequestBody]
+                request, models.PostVpnSessionVpnSessionsRequestBody
             )
-        request = cast(Optional[models.PostVpnSessionVpnSessionsRequestBody], request)
+        request = cast(models.PostVpnSessionVpnSessionsRequestBody, request)
 
         req = self._build_request(
             method="POST",
@@ -251,7 +249,7 @@ class VpnSessions(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -319,12 +317,10 @@ class VpnSessions(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.PostVpnSessionVpnSessionsRequestBody,
-                models.PostVpnSessionVpnSessionsRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.PostVpnSessionVpnSessionsRequestBody,
+            models.PostVpnSessionVpnSessionsRequestBodyTypedDict,
+        ] = models.PostVpnSessionVpnSessionsRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -354,9 +350,9 @@ class VpnSessions(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request, Optional[models.PostVpnSessionVpnSessionsRequestBody]
+                request, models.PostVpnSessionVpnSessionsRequestBody
             )
-        request = cast(Optional[models.PostVpnSessionVpnSessionsRequestBody], request)
+        request = cast(models.PostVpnSessionVpnSessionsRequestBody, request)
 
         req = self._build_request_async(
             method="POST",
@@ -364,7 +360,7 @@ class VpnSessions(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",

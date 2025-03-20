@@ -63,14 +63,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.teams.create(request={
-        "data": {
-            "type": latitudesh_python_sdk.PostTeamTeamsType.TEAMS,
-            "attributes": {
-                "name": "Name",
-                "currency": latitudesh_python_sdk.PostTeamTeamsCurrency.USD,
-                "address": "Address",
-            },
+    res = latitudesh.teams.create(data={
+        "type": latitudesh_python_sdk.PostTeamTeamsType.TEAMS,
+        "attributes": {
+            "name": "Name",
+            "currency": latitudesh_python_sdk.PostTeamTeamsCurrency.USD,
+            "address": "Address",
         },
     })
 
@@ -81,10 +79,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `request`                                                                   | [models.PostTeamTeamsRequestBody](../../models/postteamteamsrequestbody.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
-| `retries`                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)            | :heavy_minus_sign:                                                          | Configuration to override the default retry behavior of the client.         |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `data`                                                              | [models.PostTeamTeamsData](../../models/postteamteamsdata.md)       | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 

@@ -53,7 +53,7 @@ class PatchStorageFilesystemsStorageRequestBody(BaseModel):
 
 class PatchStorageFilesystemsRequestTypedDict(TypedDict):
     filesystem_id: str
-    request_body: NotRequired[PatchStorageFilesystemsStorageRequestBodyTypedDict]
+    request_body: PatchStorageFilesystemsStorageRequestBodyTypedDict
 
 
 class PatchStorageFilesystemsRequest(BaseModel):
@@ -62,9 +62,9 @@ class PatchStorageFilesystemsRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        Optional[PatchStorageFilesystemsStorageRequestBody],
+        PatchStorageFilesystemsStorageRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]
 
 
 class PatchStorageFilesystemsResponseBodyTypedDict(TypedDict):

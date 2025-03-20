@@ -3,21 +3,19 @@
 from .basesdk import BaseSDK
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
+from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Mapping, Optional, Union, cast
+from typing import Mapping, Optional, Union
 
 
 class Storage(BaseSDK):
     def create_filesystem(
         self,
         *,
-        request: Optional[
-            Union[
-                models.PostStorageFilesystemsStorageRequestBody,
-                models.PostStorageFilesystemsStorageRequestBodyTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.PostStorageFilesystemsStorageData,
+            models.PostStorageFilesystemsStorageDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -27,7 +25,7 @@ class Storage(BaseSDK):
 
         Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -43,12 +41,10 @@ class Storage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.PostStorageFilesystemsStorageRequestBody]
-            )
-        request = cast(
-            Optional[models.PostStorageFilesystemsStorageRequestBody], request
+        request = models.PostStorageFilesystemsStorageRequestBody(
+            data=utils.get_pydantic_model(
+                data, models.PostStorageFilesystemsStorageData
+            ),
         )
 
         req = self._build_request(
@@ -57,7 +53,7 @@ class Storage(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -67,9 +63,9 @@ class Storage(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PostStorageFilesystemsStorageRequestBody],
+                models.PostStorageFilesystemsStorageRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -123,12 +119,10 @@ class Storage(BaseSDK):
     async def create_filesystem_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.PostStorageFilesystemsStorageRequestBody,
-                models.PostStorageFilesystemsStorageRequestBodyTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.PostStorageFilesystemsStorageData,
+            models.PostStorageFilesystemsStorageDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -138,7 +132,7 @@ class Storage(BaseSDK):
 
         Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -154,12 +148,10 @@ class Storage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.PostStorageFilesystemsStorageRequestBody]
-            )
-        request = cast(
-            Optional[models.PostStorageFilesystemsStorageRequestBody], request
+        request = models.PostStorageFilesystemsStorageRequestBody(
+            data=utils.get_pydantic_model(
+                data, models.PostStorageFilesystemsStorageData
+            ),
         )
 
         req = self._build_request_async(
@@ -168,7 +160,7 @@ class Storage(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -178,9 +170,9 @@ class Storage(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PostStorageFilesystemsStorageRequestBody],
+                models.PostStorageFilesystemsStorageRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -652,7 +644,7 @@ class Storage(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -662,9 +654,9 @@ class Storage(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PatchStorageFilesystemsStorageRequestBody],
+                models.PatchStorageFilesystemsStorageRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -764,7 +756,7 @@ class Storage(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -774,9 +766,9 @@ class Storage(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PatchStorageFilesystemsStorageRequestBody],
+                models.PatchStorageFilesystemsStorageRequestBody,
             ),
             timeout_ms=timeout_ms,
         )

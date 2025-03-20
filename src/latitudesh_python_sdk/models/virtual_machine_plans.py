@@ -3,8 +3,9 @@
 from __future__ import annotations
 from enum import Enum
 from latitudesh_python_sdk.types import BaseModel
+import pydantic
 from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class VirtualMachinePlansType(str, Enum):
@@ -71,6 +72,59 @@ class VirtualMachinePlansSpecs(BaseModel):
     disk: Optional[Disk] = None
 
 
+class VirtualMachinePlansUSDTypedDict(TypedDict):
+    hour: NotRequired[float]
+    month: NotRequired[float]
+    year: NotRequired[float]
+
+
+class VirtualMachinePlansUSD(BaseModel):
+    hour: Optional[float] = None
+
+    month: Optional[float] = None
+
+    year: Optional[float] = None
+
+
+class VirtualMachinePlansBRLTypedDict(TypedDict):
+    hour: NotRequired[float]
+    month: NotRequired[float]
+    year: NotRequired[float]
+
+
+class VirtualMachinePlansBRL(BaseModel):
+    hour: Optional[float] = None
+
+    month: Optional[float] = None
+
+    year: Optional[float] = None
+
+
+class VirtualMachinePlansPricingTypedDict(TypedDict):
+    usd: NotRequired[VirtualMachinePlansUSDTypedDict]
+    brl: NotRequired[VirtualMachinePlansBRLTypedDict]
+
+
+class VirtualMachinePlansPricing(BaseModel):
+    usd: Annotated[Optional[VirtualMachinePlansUSD], pydantic.Field(alias="USD")] = None
+
+    brl: Annotated[Optional[VirtualMachinePlansBRL], pydantic.Field(alias="BRL")] = None
+
+
+class VirtualMachinePlansRegionsTypedDict(TypedDict):
+    name: NotRequired[str]
+    available: NotRequired[List[str]]
+    pricing: NotRequired[VirtualMachinePlansPricingTypedDict]
+
+
+class VirtualMachinePlansRegions(BaseModel):
+    name: Optional[str] = None
+
+    available: Optional[List[str]] = None
+
+    pricing: Optional[VirtualMachinePlansPricing] = None
+
+
 class VirtualMachinePlansStockLevel(str, Enum):
     r"""The stock level of the plan"""
 
@@ -81,7 +135,7 @@ class VirtualMachinePlansAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The name of the plan"""
     specs: NotRequired[VirtualMachinePlansSpecsTypedDict]
-    regions: NotRequired[List[str]]
+    regions: NotRequired[List[VirtualMachinePlansRegionsTypedDict]]
     r"""The regions where the plan is available"""
     stock_level: NotRequired[VirtualMachinePlansStockLevel]
     r"""The stock level of the plan"""
@@ -93,7 +147,7 @@ class VirtualMachinePlansAttributes(BaseModel):
 
     specs: Optional[VirtualMachinePlansSpecs] = None
 
-    regions: Optional[List[str]] = None
+    regions: Optional[List[VirtualMachinePlansRegions]] = None
     r"""The regions where the plan is available"""
 
     stock_level: Optional[VirtualMachinePlansStockLevel] = None

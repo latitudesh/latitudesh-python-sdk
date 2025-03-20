@@ -26,13 +26,11 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.storage.create_filesystem(request={
-        "data": {
-            "type": latitudesh_python_sdk.PostStorageFilesystemsStorageType.FILESYSTEMS,
-            "attributes": {
-                "project": "proj_0MoLqJZ0q57pY",
-                "name": "my-data",
-            },
+    res = latitudesh.storage.create_filesystem(data={
+        "type": latitudesh_python_sdk.PostStorageFilesystemsStorageType.FILESYSTEMS,
+        "attributes": {
+            "project": "proj_0MoLqJZ0q57pY",
+            "name": "my-data",
         },
     })
 
@@ -43,10 +41,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                                   | Type                                                                                                        | Required                                                                                                    | Description                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| `request`                                                                                                   | [models.PostStorageFilesystemsStorageRequestBody](../../models/poststoragefilesystemsstoragerequestbody.md) | :heavy_check_mark:                                                                                          | The request object to use for the request.                                                                  |
-| `retries`                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                            | :heavy_minus_sign:                                                                                          | Configuration to override the default retry behavior of the client.                                         |
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `data`                                                                                        | [models.PostStorageFilesystemsStorageData](../../models/poststoragefilesystemsstoragedata.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `retries`                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                              | :heavy_minus_sign:                                                                            | Configuration to override the default retry behavior of the client.                           |
 
 ### Response
 

@@ -54,7 +54,7 @@ class PostProjectSSHKeySSHKeysRequestBody(BaseModel):
 class PostProjectSSHKeyRequestTypedDict(TypedDict):
     project_id: str
     r"""Project ID or Slug"""
-    request_body: NotRequired[PostProjectSSHKeySSHKeysRequestBodyTypedDict]
+    request_body: PostProjectSSHKeySSHKeysRequestBodyTypedDict
 
 
 class PostProjectSSHKeyRequest(BaseModel):
@@ -64,9 +64,9 @@ class PostProjectSSHKeyRequest(BaseModel):
     r"""Project ID or Slug"""
 
     request_body: Annotated[
-        Optional[PostProjectSSHKeySSHKeysRequestBody],
+        PostProjectSSHKeySSHKeysRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
-    ] = None
+    ]
 
 
 class PostProjectSSHKeyResponseBodyTypedDict(TypedDict):

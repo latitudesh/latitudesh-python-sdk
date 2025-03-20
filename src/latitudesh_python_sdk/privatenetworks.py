@@ -212,12 +212,10 @@ class PrivateNetworks(BaseSDK):
     def create(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateVirtualNetworkPrivateNetworksRequestBody,
-                models.CreateVirtualNetworkPrivateNetworksRequestBodyTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.CreateVirtualNetworkPrivateNetworksData,
+            models.CreateVirtualNetworkPrivateNetworksDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -228,7 +226,7 @@ class PrivateNetworks(BaseSDK):
         Creates a new Virtual Network.
 
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -244,12 +242,10 @@ class PrivateNetworks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateVirtualNetworkPrivateNetworksRequestBody]
-            )
-        request = cast(
-            Optional[models.CreateVirtualNetworkPrivateNetworksRequestBody], request
+        request = models.CreateVirtualNetworkPrivateNetworksRequestBody(
+            data=utils.get_pydantic_model(
+                data, models.CreateVirtualNetworkPrivateNetworksData
+            ),
         )
 
         req = self._build_request(
@@ -258,7 +254,7 @@ class PrivateNetworks(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -268,9 +264,9 @@ class PrivateNetworks(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.CreateVirtualNetworkPrivateNetworksRequestBody],
+                models.CreateVirtualNetworkPrivateNetworksRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -326,12 +322,10 @@ class PrivateNetworks(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateVirtualNetworkPrivateNetworksRequestBody,
-                models.CreateVirtualNetworkPrivateNetworksRequestBodyTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.CreateVirtualNetworkPrivateNetworksData,
+            models.CreateVirtualNetworkPrivateNetworksDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -342,7 +336,7 @@ class PrivateNetworks(BaseSDK):
         Creates a new Virtual Network.
 
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -358,12 +352,10 @@ class PrivateNetworks(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateVirtualNetworkPrivateNetworksRequestBody]
-            )
-        request = cast(
-            Optional[models.CreateVirtualNetworkPrivateNetworksRequestBody], request
+        request = models.CreateVirtualNetworkPrivateNetworksRequestBody(
+            data=utils.get_pydantic_model(
+                data, models.CreateVirtualNetworkPrivateNetworksData
+            ),
         )
 
         req = self._build_request_async(
@@ -372,7 +364,7 @@ class PrivateNetworks(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -382,9 +374,9 @@ class PrivateNetworks(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.CreateVirtualNetworkPrivateNetworksRequestBody],
+                models.CreateVirtualNetworkPrivateNetworksRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -490,7 +482,7 @@ class PrivateNetworks(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -500,9 +492,9 @@ class PrivateNetworks(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateVirtualNetworkPrivateNetworksRequestBody],
+                models.UpdateVirtualNetworkPrivateNetworksRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -610,7 +602,7 @@ class PrivateNetworks(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -620,9 +612,9 @@ class PrivateNetworks(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateVirtualNetworkPrivateNetworksRequestBody],
+                models.UpdateVirtualNetworkPrivateNetworksRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1268,12 +1260,10 @@ class PrivateNetworks(BaseSDK):
     def assign(
         self,
         *,
-        request: Optional[
-            Union[
-                models.AssignServerVirtualNetworkPrivateNetworksRequestBody,
-                models.AssignServerVirtualNetworkPrivateNetworksRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.AssignServerVirtualNetworkPrivateNetworksRequestBody,
+            models.AssignServerVirtualNetworkPrivateNetworksRequestBodyTypedDict,
+        ] = models.AssignServerVirtualNetworkPrivateNetworksRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1299,12 +1289,10 @@ class PrivateNetworks(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request,
-                Optional[models.AssignServerVirtualNetworkPrivateNetworksRequestBody],
+                request, models.AssignServerVirtualNetworkPrivateNetworksRequestBody
             )
         request = cast(
-            Optional[models.AssignServerVirtualNetworkPrivateNetworksRequestBody],
-            request,
+            models.AssignServerVirtualNetworkPrivateNetworksRequestBody, request
         )
 
         req = self._build_request(
@@ -1313,7 +1301,7 @@ class PrivateNetworks(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -1381,12 +1369,10 @@ class PrivateNetworks(BaseSDK):
     async def assign_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.AssignServerVirtualNetworkPrivateNetworksRequestBody,
-                models.AssignServerVirtualNetworkPrivateNetworksRequestBodyTypedDict,
-            ]
-        ] = None,
+        request: Union[
+            models.AssignServerVirtualNetworkPrivateNetworksRequestBody,
+            models.AssignServerVirtualNetworkPrivateNetworksRequestBodyTypedDict,
+        ] = models.AssignServerVirtualNetworkPrivateNetworksRequestBody(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1412,12 +1398,10 @@ class PrivateNetworks(BaseSDK):
 
         if not isinstance(request, BaseModel):
             request = utils.unmarshal(
-                request,
-                Optional[models.AssignServerVirtualNetworkPrivateNetworksRequestBody],
+                request, models.AssignServerVirtualNetworkPrivateNetworksRequestBody
             )
         request = cast(
-            Optional[models.AssignServerVirtualNetworkPrivateNetworksRequestBody],
-            request,
+            models.AssignServerVirtualNetworkPrivateNetworksRequestBody, request
         )
 
         req = self._build_request_async(
@@ -1426,7 +1410,7 @@ class PrivateNetworks(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",

@@ -3,21 +3,19 @@
 from .basesdk import BaseSDK
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
+from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Any, Mapping, Optional, Union, cast
+from typing import Any, Mapping, Optional, Union
 
 
 class FirewallsSDK(BaseSDK):
     def create(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateFirewallFirewallsRequestBody,
-                models.CreateFirewallFirewallsRequestBodyTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.CreateFirewallFirewallsData,
+            models.CreateFirewallFirewallsDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -27,7 +25,7 @@ class FirewallsSDK(BaseSDK):
 
         Create a firewall
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -43,11 +41,9 @@ class FirewallsSDK(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateFirewallFirewallsRequestBody]
-            )
-        request = cast(Optional[models.CreateFirewallFirewallsRequestBody], request)
+        request = models.CreateFirewallFirewallsRequestBody(
+            data=utils.get_pydantic_model(data, models.CreateFirewallFirewallsData),
+        )
 
         req = self._build_request(
             method="POST",
@@ -55,7 +51,7 @@ class FirewallsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -63,11 +59,7 @@ class FirewallsSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                True,
-                "json",
-                Optional[models.CreateFirewallFirewallsRequestBody],
+                request, False, False, "json", models.CreateFirewallFirewallsRequestBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -123,12 +115,10 @@ class FirewallsSDK(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Optional[
-            Union[
-                models.CreateFirewallFirewallsRequestBody,
-                models.CreateFirewallFirewallsRequestBodyTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.CreateFirewallFirewallsData,
+            models.CreateFirewallFirewallsDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -138,7 +128,7 @@ class FirewallsSDK(BaseSDK):
 
         Create a firewall
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -154,11 +144,9 @@ class FirewallsSDK(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, Optional[models.CreateFirewallFirewallsRequestBody]
-            )
-        request = cast(Optional[models.CreateFirewallFirewallsRequestBody], request)
+        request = models.CreateFirewallFirewallsRequestBody(
+            data=utils.get_pydantic_model(data, models.CreateFirewallFirewallsData),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -166,7 +154,7 @@ class FirewallsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -174,11 +162,7 @@ class FirewallsSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                True,
-                "json",
-                Optional[models.CreateFirewallFirewallsRequestBody],
+                request, False, False, "json", models.CreateFirewallFirewallsRequestBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -658,7 +642,7 @@ class FirewallsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -668,9 +652,9 @@ class FirewallsSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateFirewallFirewallsRequestBody],
+                models.UpdateFirewallFirewallsRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -770,7 +754,7 @@ class FirewallsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -780,9 +764,9 @@ class FirewallsSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdateFirewallFirewallsRequestBody],
+                models.UpdateFirewallFirewallsRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1078,7 +1062,7 @@ class FirewallsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -1088,9 +1072,9 @@ class FirewallsSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.CreateFirewallAssignmentFirewallsRequestBody],
+                models.CreateFirewallAssignmentFirewallsRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -1194,7 +1178,7 @@ class FirewallsSDK(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -1204,9 +1188,9 @@ class FirewallsSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request.request_body,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.CreateFirewallAssignmentFirewallsRequestBody],
+                models.CreateFirewallAssignmentFirewallsRequestBody,
             ),
             timeout_ms=timeout_ms,
         )

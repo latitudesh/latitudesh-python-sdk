@@ -12,9 +12,9 @@ class VirtualMachines(BaseSDK):
     def create(
         self,
         *,
-        request: Optional[
-            Union[models.VirtualMachinePayload, models.VirtualMachinePayloadTypedDict]
-        ] = None,
+        request: Union[
+            models.VirtualMachinePayload, models.VirtualMachinePayloadTypedDict
+        ] = models.VirtualMachinePayload(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -42,8 +42,8 @@ class VirtualMachines(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, Optional[models.VirtualMachinePayload])
-        request = cast(Optional[models.VirtualMachinePayload], request)
+            request = utils.unmarshal(request, models.VirtualMachinePayload)
+        request = cast(models.VirtualMachinePayload, request)
 
         req = self._build_request(
             method="POST",
@@ -51,7 +51,7 @@ class VirtualMachines(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
@@ -111,9 +111,9 @@ class VirtualMachines(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Optional[
-            Union[models.VirtualMachinePayload, models.VirtualMachinePayloadTypedDict]
-        ] = None,
+        request: Union[
+            models.VirtualMachinePayload, models.VirtualMachinePayloadTypedDict
+        ] = models.VirtualMachinePayload(),
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -141,8 +141,8 @@ class VirtualMachines(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, Optional[models.VirtualMachinePayload])
-        request = cast(Optional[models.VirtualMachinePayload], request)
+            request = utils.unmarshal(request, models.VirtualMachinePayload)
+        request = cast(models.VirtualMachinePayload, request)
 
         req = self._build_request_async(
             method="POST",
@@ -150,7 +150,7 @@ class VirtualMachines(BaseSDK):
             base_url=base_url,
             url_variables=url_variables,
             request=request,
-            request_body_required=False,
+            request_body_required=True,
             request_has_path_params=False,
             request_has_query_params=True,
             user_agent_header="user-agent",
