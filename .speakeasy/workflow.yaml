@@ -12,6 +12,9 @@ targets:
     latitudesh:
         target: python
         source: Latitude.sh API
+        publish:
+            pypi:
+                token: $pypi_token
         codeSamples:
             registry:
                 location: registry.speakeasyapi.dev/latitude/latitude/latitude-sh-api-python-code-samples
