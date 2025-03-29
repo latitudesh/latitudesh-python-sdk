@@ -136,7 +136,6 @@ class VirtualMachinePlansAttributesTypedDict(TypedDict):
     r"""The name of the plan"""
     specs: NotRequired[VirtualMachinePlansSpecsTypedDict]
     regions: NotRequired[List[VirtualMachinePlansRegionsTypedDict]]
-    r"""The regions where the plan is available"""
     stock_level: NotRequired[VirtualMachinePlansStockLevel]
     r"""The stock level of the plan"""
 
@@ -148,7 +147,6 @@ class VirtualMachinePlansAttributes(BaseModel):
     specs: Optional[VirtualMachinePlansSpecs] = None
 
     regions: Optional[List[VirtualMachinePlansRegions]] = None
-    r"""The regions where the plan is available"""
 
     stock_level: Optional[VirtualMachinePlansStockLevel] = None
     r"""The stock level of the plan"""
