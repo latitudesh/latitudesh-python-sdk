@@ -66,10 +66,10 @@ with Latitudesh(
     res = latitudesh.teams_members.add(data={
         "type": latitudesh_python_sdk.PostTeamMembersTeamsMembersType.MEMBERSHIPS,
         "attributes": {
-            "email": "theron_keeling@balistreri.test",
-            "role": latitudesh_python_sdk.PostTeamMembersTeamsMembersRole.COLLABORATOR,
             "first_name": "Dianne",
             "last_name": "Bahringer",
+            "email": "theron_keeling@balistreri.test",
+            "role": latitudesh_python_sdk.PostTeamMembersTeamsMembersRole.COLLABORATOR,
         },
     })
 
