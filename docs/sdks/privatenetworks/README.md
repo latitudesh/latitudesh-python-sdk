@@ -77,8 +77,8 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK,
         "attributes": {
             "description": "São Paulo VLAN",
-            "project": "aerodynamic-marble-bench",
             "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
+            "project": "aerodynamic-marble-bench",
         },
     })
 

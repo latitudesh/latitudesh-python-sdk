@@ -786,12 +786,10 @@ class ServersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, "400", "application/vnd.api+json"):
+        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
             raise models.ServerError(data=response_data)
-        if utils.match_response(
-            http_res, ["402", "422", "423"], "application/vnd.api+json"
-        ):
+        if utils.match_response(http_res, ["402", "423"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -911,12 +909,10 @@ class ServersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, "400", "application/vnd.api+json"):
+        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
             raise models.ServerError(data=response_data)
-        if utils.match_response(
-            http_res, ["402", "422", "423"], "application/vnd.api+json"
-        ):
+        if utils.match_response(http_res, ["402", "423"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
