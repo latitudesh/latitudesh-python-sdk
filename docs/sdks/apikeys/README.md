@@ -114,8 +114,8 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.api_keys.regenerate(api_key_id="tok_pRMLydp0dQKr1", data={
-        "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
         "id": "tok_pRMLydp0dQKr1",
+        "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
         "attributes": {},
     })
 

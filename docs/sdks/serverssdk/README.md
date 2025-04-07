@@ -206,8 +206,8 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ServerError       | 400                      | application/vnd.api+json |
-| models.ErrorObject       | 402, 422, 423            | application/vnd.api+json |
+| models.ServerError       | 400, 422                 | application/vnd.api+json |
+| models.ErrorObject       | 402, 423                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## delete
