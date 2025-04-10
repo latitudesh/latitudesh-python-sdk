@@ -52,14 +52,6 @@ class DeployConfigData(BaseModel):
     attributes: Optional[DeployConfigAttributes] = None
 
 
-class DeployConfigTypedDict(TypedDict):
-    data: NotRequired[DeployConfigDataTypedDict]
-
-
-class DeployConfig(BaseModel):
-    data: Optional[DeployConfigData] = None
-
-
 class DeployConfigErrorData(BaseModel):
     data: Optional[DeployConfigData] = None
 
@@ -72,3 +64,11 @@ class DeployConfigError(Exception):
 
     def __str__(self) -> str:
         return utils.marshal_json(self.data, DeployConfigErrorData)
+
+
+class DeployConfigTypedDict(TypedDict):
+    data: NotRequired[DeployConfigDataTypedDict]
+
+
+class DeployConfig(BaseModel):
+    data: Optional[DeployConfigData] = None

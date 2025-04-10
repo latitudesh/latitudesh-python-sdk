@@ -27,6 +27,17 @@ class Server(BaseModel):
     meta: Optional[ServerMeta] = None
 
 
+class Server1TypedDict(TypedDict):
+    data: NotRequired[ServerDataTypedDict]
+    meta: NotRequired[ServerMetaTypedDict]
+
+
+class Server1(BaseModel):
+    data: Optional[ServerData] = None
+
+    meta: Optional[ServerMeta] = None
+
+
 class ServerErrorData(BaseModel):
     data: Optional[ServerData] = None
 
@@ -41,14 +52,3 @@ class ServerError(Exception):
 
     def __str__(self) -> str:
         return utils.marshal_json(self.data, ServerErrorData)
-
-
-class Server1TypedDict(TypedDict):
-    data: NotRequired[ServerDataTypedDict]
-    meta: NotRequired[ServerMetaTypedDict]
-
-
-class Server1(BaseModel):
-    data: Optional[ServerData] = None
-
-    meta: Optional[ServerMeta] = None
