@@ -41,6 +41,33 @@ class Period(BaseModel):
     end: Optional[datetime] = None
 
 
+class BillingUsageType(str, Enum):
+    r"""Type of discount (percentage or fixed amount)"""
+
+    PERCENT = "percent"
+    AMOUNT = "amount"
+
+
+class DiscountsTypedDict(TypedDict):
+    description: str
+    r"""Description of the discount"""
+    type: BillingUsageType
+    r"""Type of discount (percentage or fixed amount)"""
+    value: float
+    r"""Value of the discount (percentage or amount)"""
+
+
+class Discounts(BaseModel):
+    description: str
+    r"""Description of the discount"""
+
+    type: BillingUsageType
+    r"""Type of discount (percentage or fixed amount)"""
+
+    value: float
+    r"""Value of the discount (percentage or amount)"""
+
+
 class Unit(str, Enum):
     QUANTITY = "quantity"
     HOUR = "hour"
@@ -73,6 +100,10 @@ class ProductsTypedDict(TypedDict):
     id: NotRequired[str]
     resource: NotRequired[str]
     name: NotRequired[str]
+    discounts: NotRequired[List[DiscountsTypedDict]]
+    discountable: NotRequired[bool]
+    description: NotRequired[str]
+    amount_without_discount: NotRequired[int]
     start: NotRequired[datetime]
     end: NotRequired[datetime]
     unit: NotRequired[Unit]
@@ -91,6 +122,14 @@ class Products(BaseModel):
     resource: Optional[str] = None
 
     name: Optional[str] = None
+
+    discounts: Optional[List[Discounts]] = None
+
+    discountable: Optional[bool] = None
+
+    description: Optional[str] = None
+
+    amount_without_discount: Optional[int] = None
 
     start: Optional[datetime] = None
 

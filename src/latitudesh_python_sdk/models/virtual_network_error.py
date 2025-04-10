@@ -71,20 +71,6 @@ class VirtualNetworkAttributes1(BaseModel):
     r"""Amount of devices assigned to the virtual network"""
 
 
-class VirtualNetworkTypedDict(TypedDict):
-    id: NotRequired[str]
-    type: NotRequired[VirtualNetworkType1]
-    attributes: NotRequired[VirtualNetworkAttributes1TypedDict]
-
-
-class VirtualNetwork(BaseModel):
-    id: Optional[str] = None
-
-    type: Optional[VirtualNetworkType1] = None
-
-    attributes: Optional[VirtualNetworkAttributes1] = None
-
-
 class VirtualNetworkErrorData(BaseModel):
     id: Optional[str] = None
 
@@ -101,3 +87,17 @@ class VirtualNetworkError(Exception):
 
     def __str__(self) -> str:
         return utils.marshal_json(self.data, VirtualNetworkErrorData)
+
+
+class VirtualNetworkTypedDict(TypedDict):
+    id: NotRequired[str]
+    type: NotRequired[VirtualNetworkType1]
+    attributes: NotRequired[VirtualNetworkAttributes1TypedDict]
+
+
+class VirtualNetwork(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[VirtualNetworkType1] = None
+
+    attributes: Optional[VirtualNetworkAttributes1] = None
