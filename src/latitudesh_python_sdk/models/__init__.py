@@ -219,7 +219,7 @@ from .delete_vpn_sessionop import (
     DeleteVpnSessionRequest,
     DeleteVpnSessionRequestTypedDict,
 )
-from .deploy_config_error import (
+from .deploy_config import (
     DeployConfig,
     DeployConfigAttributes,
     DeployConfigAttributesTypedDict,
@@ -1002,19 +1002,7 @@ from .virtual_machine_plans import (
     VirtualMachinePlansUSDTypedDict,
     VirtualMachinePlansUnit,
 )
-from .virtual_network_assignment import (
-    VirtualNetworkAssignment,
-    VirtualNetworkAssignmentAttributes,
-    VirtualNetworkAssignmentAttributesTypedDict,
-    VirtualNetworkAssignmentTypedDict,
-)
-from .virtual_network_assignments import (
-    VirtualNetworkAssignments,
-    VirtualNetworkAssignmentsMeta,
-    VirtualNetworkAssignmentsMetaTypedDict,
-    VirtualNetworkAssignmentsTypedDict,
-)
-from .virtual_network_error import (
+from .virtual_network import (
     VirtualNetwork,
     VirtualNetworkAttributes1,
     VirtualNetworkAttributes1TypedDict,
@@ -1026,6 +1014,18 @@ from .virtual_network_error import (
     VirtualNetworkErrorData,
     VirtualNetworkType1,
     VirtualNetworkTypedDict,
+)
+from .virtual_network_assignment import (
+    VirtualNetworkAssignment,
+    VirtualNetworkAssignmentAttributes,
+    VirtualNetworkAssignmentAttributesTypedDict,
+    VirtualNetworkAssignmentTypedDict,
+)
+from .virtual_network_assignments import (
+    VirtualNetworkAssignments,
+    VirtualNetworkAssignmentsMeta,
+    VirtualNetworkAssignmentsMetaTypedDict,
+    VirtualNetworkAssignmentsTypedDict,
 )
 from .virtual_network1 import (
     VirtualNetwork1,
