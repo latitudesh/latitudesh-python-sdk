@@ -114,6 +114,7 @@ class ProductsTypedDict(TypedDict):
     price: NotRequired[float]
     r"""The total usage price of the product in cents"""
     metadata: NotRequired[MetadataTypedDict]
+    proration: NotRequired[bool]
 
 
 class Products(BaseModel):
@@ -148,6 +149,8 @@ class Products(BaseModel):
     r"""The total usage price of the product in cents"""
 
     metadata: Optional[Metadata] = None
+
+    proration: Optional[bool] = None
 
 
 class BillingUsageAttributesTypedDict(TypedDict):

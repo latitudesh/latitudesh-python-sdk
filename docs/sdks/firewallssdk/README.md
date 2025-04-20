@@ -179,9 +179,7 @@ with Latitudesh(
     res = latitudesh.firewalls.update(firewall_id="fw_VaNmodjeObE8W", data={
         "type": latitudesh_python_sdk.UpdateFirewallFirewallsType.FIREWALLS,
         "attributes": {
-            "rules": [
-
-            ],
+            "rules": [],
         },
     })
 
