@@ -1,20 +1,21 @@
-speakeasyVersion: 1.532.0
+speakeasyVersion: 1.540.1
 sources:
     Latitude.sh API:
         sourceNamespace: latitude-sh-api
-        sourceRevisionDigest: sha256:3cd06a2f51ac665758dafdfa91e5ba0945a6e3500b6bd35bc76e60f07e8505c4
-        sourceBlobDigest: sha256:f2502afc58f11cb98456d2f284bffc26c18ed9872a4727453efd439d646e15c1
+        sourceRevisionDigest: sha256:4cb5ede47e6360b9d98616a1bc50a3890890de6e695d6ac15b86652b54355297
+        sourceBlobDigest: sha256:f96a02e7085077944115e89ef56d7adfa075465aa88d1eab5e02566c86280579
         tags:
             - latest
+            - speakeasy-sdk-regen-1745938325
             - v3
 targets:
     latitudesh:
         source: Latitude.sh API
         sourceNamespace: latitude-sh-api
-        sourceRevisionDigest: sha256:3cd06a2f51ac665758dafdfa91e5ba0945a6e3500b6bd35bc76e60f07e8505c4
-        sourceBlobDigest: sha256:f2502afc58f11cb98456d2f284bffc26c18ed9872a4727453efd439d646e15c1
+        sourceRevisionDigest: sha256:4cb5ede47e6360b9d98616a1bc50a3890890de6e695d6ac15b86652b54355297
+        sourceBlobDigest: sha256:f96a02e7085077944115e89ef56d7adfa075465aa88d1eab5e02566c86280579
         codeSamplesNamespace: latitude-sh-api-python-code-samples
-        codeSamplesRevisionDigest: sha256:4d1174f39cbe95dda4ebf08bc53954498318b06f41fdb70c2762e9413842f65c
+        codeSamplesRevisionDigest: sha256:5e1c077d33a57b215f19dfb5a990baa77497f10ffd90117c2b56656bd7977278
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

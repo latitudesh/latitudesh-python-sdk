@@ -25,8 +25,10 @@ with Latitudesh(
 
     res = latitudesh.operating_systems.list()
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -34,11 +36,13 @@ with Latitudesh(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `page_size`                                                         | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Number of items to return per page                                  |
+| `page_number`                                                       | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Page number to return (starts at 1)                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[models.GetPlansOperatingSystemResponseBody](../../models/getplansoperatingsystemresponsebody.md)**
+**[models.GetPlansOperatingSystemResponse](../../models/getplansoperatingsystemresponse.md)**
 
 ### Errors
 

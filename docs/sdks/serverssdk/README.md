@@ -40,10 +40,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.list(filter_project="proj_W6Q2D9lGqKLpr", filter_region="SAO", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_EVZVklJKJpUXr3eZ46ylUoEJXZP")
+    res = latitudesh.servers.list(filter_project="proj_g1mbDwrZqLv5B", filter_region="SAO", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_0yrQNVQRLwHy0XwEGM6ESwLrW2PA")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -66,11 +68,13 @@ with Latitudesh(
 | `filter_disk`                                                                                                                                                                                                                                                                                                                                                            | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The disk size in Gigabytes to filter by, should be used with the following options:<br/>                              [eql] to filter for values equal to the provided value.<br/>                              [gte] to filter for values greater or equal to the provided value.<br/>                              [lte] to filter by values lower or equal to the provided value. |
 | `filter_tags`                                                                                                                                                                                                                                                                                                                                                            | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`                                                                                                                                                                                                                                               |
 | `extra_fields_servers`                                                                                                                                                                                                                                                                                                                                                   | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The `credentials` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.                                                                                                                                                                                                                 |
+| `page_size`                                                                                                                                                                                                                                                                                                                                                              | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | Number of items to return per page                                                                                                                                                                                                                                                                                                                                       |
+| `page_number`                                                                                                                                                                                                                                                                                                                                                            | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | Page number to return (starts at 1)                                                                                                                                                                                                                                                                                                                                      |
 | `retries`                                                                                                                                                                                                                                                                                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                                                                                      |
 
 ### Response
 
-**[models.Servers](../../models/servers.md)**
+**[models.GetServersResponse](../../models/getserversresponse.md)**
 
 ### Errors
 
@@ -98,7 +102,7 @@ with Latitudesh(
         "data": {
             "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
             "attributes": {
-                "project": "proj_LGXPdWK8dnNWk",
+                "project": "proj_W6Q2D93GdKLpr",
                 "plan": latitudesh_python_sdk.CreateServerServersPlan.C2_SMALL_X86,
                 "site": latitudesh_python_sdk.CreateServerServersSite.SAO,
                 "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_22_04_X64_LTS,
@@ -146,7 +150,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get(server_id="sv_RMLydp70OQKr1")
+    res = latitudesh.servers.get(server_id="sv_aNmodjGeqbE8W")
 
     # Handle response
     print(res)
@@ -186,7 +190,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.update(server_id="sv_Gr47qleMDAg0m")
+    latitudesh.servers.update(server_id="sv_3YjJOLLNOvZ87")
 
     # Use the SDK ...
 
@@ -225,7 +229,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.delete(server_id="sv_GMy1Db3NON50m")
+    latitudesh.servers.delete(server_id="sv_WeGoqAZNDP7nz")
 
     # Use the SDK ...
 
@@ -261,7 +265,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get_deploy_config(server_id="sv_xkjQwdENqYNVP")
+    res = latitudesh.servers.get_deploy_config(server_id="sv_pRMLydp0dQKr1")
 
     # Handle response
     print(res)
@@ -301,7 +305,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.update_deploy_config(server_id="sv_Z8rodmnGq1jLB", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
+    res = latitudesh.servers.update_deploy_config(server_id="sv_g1mbDweZdLv5B", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
 
     # Handle response
     print(res)
@@ -344,7 +348,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.lock(server_id="sv_w49QDBmQqagKb")
+    res = latitudesh.servers.lock(server_id="sv_059EqYX2dQj8p")
 
     # Handle response
     print(res)
@@ -383,7 +387,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.unlock(server_id="sv_LMmAD8E4Owop2")
+    res = latitudesh.servers.unlock(server_id="sv_aNmodjoyqbE8W")
 
     # Handle response
     print(res)
@@ -423,7 +427,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create_out_of_band_connection(server_id="sv_RMLydpoXOQKr1", data={
+    res = latitudesh.servers.create_out_of_band_connection(server_id="sv_z2A3DVpQdnawP", data={
         "type": latitudesh_python_sdk.CreateServerOutOfBandServersType.OUT_OF_BAND,
         "attributes": {
             "ssh_key_id": "ssh_NGnzRD5ADM5yw",
@@ -469,7 +473,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.list_out_of_band_connections(server_id="sv_059EqYX2dQj8p")
+    res = latitudesh.servers.list_out_of_band_connections(server_id="sv_1ZJrdx34Og4LV")
 
     # Handle response
     print(res)
@@ -514,7 +518,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.actions(server_id="sv_z2A3DVpQdnawP", data={
+    res = latitudesh.servers.actions(server_id="sv_LYV8DZAQq5QoE", data={
         "type": latitudesh_python_sdk.CreateServerActionServersType.ACTIONS,
         "attributes": {
             "action": latitudesh_python_sdk.CreateServerActionAction.REBOOT,
@@ -564,7 +568,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create_ipmi_session(server_id="sv_0MK4O44ROa95w")
+    res = latitudesh.servers.create_ipmi_session(server_id="sv_8NkvdyGKDeLpx")
 
     # Handle response
     print(res)
@@ -604,7 +608,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.start_rescue_mode(server_id="sv_pbV0DgjKq4AWz")
+    res = latitudesh.servers.start_rescue_mode(server_id="sv_k0Ryqv9adW36X")
 
     # Handle response
     print(res)
@@ -644,7 +648,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.exit_rescue_mode(server_id="sv_QraYDP15OpjwW")
+    res = latitudesh.servers.exit_rescue_mode(server_id="sv_KXgRdRRodv9k5")
 
     # Handle response
     print(res)
@@ -684,7 +688,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.schedule_deletion(server_id="sv_yQrJdNMGO30gv")
+    res = latitudesh.servers.schedule_deletion(server_id="sv_enPbqoBJdA2MQ")
 
     # Handle response
     print(res)
@@ -724,7 +728,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.unschedule_deletion(server_id="sv_1R3zq2JxqWxyn")
+    latitudesh.servers.unschedule_deletion(server_id="sv_Z8rodmJGq1jLB")
 
     # Use the SDK ...
 
@@ -760,7 +764,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.reinstall(server_id="sv_GMy1Db2NDN50m", data={
+    latitudesh.servers.reinstall(server_id="sv_WeGoqAWNOP7nz", data={
         "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
         "attributes": {
             "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.UBUNTU_22_04_X64_LTS,

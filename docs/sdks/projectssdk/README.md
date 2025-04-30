@@ -26,10 +26,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.list(filter_tags="tag_ezo5vGxZXVU3ozExYeXaCMJzvp0")
+    res = latitudesh.projects.list(filter_tags="tag_R3YGrW8m0NSAm0l5Wp6XTnnww9r")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -44,11 +46,13 @@ with Latitudesh(
 | `filter_environment`                                                                                                                                                                                                                          | *Optional[str]*                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                            | The environment to filter by                                                                                                                                                                                                                  |
 | `filter_tags`                                                                                                                                                                                                                                 | *Optional[str]*                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                            | The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return projects with `tag_1` AND `tag_2`                                                                                                                   |
 | `extra_fields_projects`                                                                                                                                                                                                                       | *Optional[str]*                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                            | The `last_renewal_date` and `next_renewal_date` are provided as extra attributes that show previous and future billing cycle dates. To request it, just set `extra_fields[projects]=last_renewal_date,next_renewal_date` in the query string. |
+| `page_size`                                                                                                                                                                                                                                   | *Optional[int]*                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                            | Number of items to return per page                                                                                                                                                                                                            |
+| `page_number`                                                                                                                                                                                                                                 | *Optional[int]*                                                                                                                                                                                                                               | :heavy_minus_sign:                                                                                                                                                                                                                            | Page number to return (starts at 1)                                                                                                                                                                                                           |
 | `retries`                                                                                                                                                                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                                                            | Configuration to override the default retry behavior of the client.                                                                                                                                                                           |
 
 ### Response
 
-**[models.Projects](../../models/projects.md)**
+**[models.GetProjectsResponse](../../models/getprojectsresponse.md)**
 
 ### Errors
 
@@ -76,9 +80,9 @@ with Latitudesh(
         "data": {
             "type": latitudesh_python_sdk.CreateProjectProjectsType.PROJECTS,
             "attributes": {
-                "name": "Mosciski Group",
+                "name": "Cormier-Corkery",
                 "provisioning_type": latitudesh_python_sdk.CreateProjectProvisioningType.ON_DEMAND,
-                "description": "Three egg whites with spinach, mushrooms, caramelized onions, tomatoes and low-fat feta cheese. With herbed quinoa, and your choice of rye or whole-grain toast.",
+                "description": "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",
                 "environment": latitudesh_python_sdk.CreateProjectProjectsEnvironment.DEVELOPMENT,
             },
         },
@@ -123,12 +127,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.update(project_id="proj_Z8rodm2Yq1jLB", data={
+    res = latitudesh.projects.update(project_id="proj_LGXPdWpgqnNWk", data={
         "type": latitudesh_python_sdk.UpdateProjectProjectsType.PROJECTS,
         "attributes": {
             "tags": [
-                "tag_zNzZ1bp9Nos8E1YzEzGGce8vkMp",
-                "tag_L8KGx7Rp46sLPgmGPeARFEMLyxw",
+                "tag_mELJ1g6Z31SG0xzYx9e5fV91K7W",
+                "tag_wR5nAvxpnJiRn8AppN0JilvWY0y",
             ],
         },
     })

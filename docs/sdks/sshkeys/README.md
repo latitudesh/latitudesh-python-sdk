@@ -27,7 +27,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ssh_keys.list_for_project(project_id="proj_pbV0Dg2Gq4AWz", filter_tags="tag_9KjPQYXN1RsEzzEJ7JJKfo7ykalQ")
+    res = latitudesh.ssh_keys.list_for_project(project_id="proj_lxWpD6a9qm6rk", filter_tags="tag_JzoXbwJ7KgFM2J4wALjXHbVrjX4")
 
     # Handle response
     print(res)
@@ -69,7 +69,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ssh_keys.create(project_id="proj_8Nkvdyj8qeLpx", data={
+    res = latitudesh.ssh_keys.create(project_id="proj_wg3ZDrMyq5QlP", data={
         "type": latitudesh_python_sdk.PostProjectSSHKeySSHKeysType.SSH_KEYS,
         "attributes": {
             "name": "SSH Key",
@@ -116,7 +116,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ssh_keys.get(project_id="proj_QraYDP41DpjwW", ssh_key_id="ssh_j0L6WO1QOPlXy")
+    res = latitudesh.ssh_keys.get(project_id="proj_k0RyqvrJqW36X", ssh_key_id="ssh_j0L6WO1QOPlXy")
 
     # Handle response
     print(res)
@@ -158,12 +158,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ssh_keys.update(project_id="proj_GMy1DbW0ON50m", ssh_key_id="ssh_5AEmq71XOBkWX", data={
+    res = latitudesh.ssh_keys.update(project_id="proj_5xyZOnMvDWM0l", ssh_key_id="ssh_5AEmq71XOBkWX", data={
         "type": latitudesh_python_sdk.PutProjectSSHKeySSHKeysType.SSH_KEYS,
         "attributes": {
             "tags": [
-                "tag_V8rnwNgREksbr9yA4RagcZMkWlP",
-                "tag_KJJ8erRzEbijlJkLjWVVIJ4Gm7A",
+                "tag_yle6pegwz1hlpaP3EPMkt7zgpX3",
+                "tag_z6Qarmr4r4c3lxAmbwkYSVpNv62",
             ],
         },
     })
@@ -208,7 +208,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.ssh_keys.delete(project_id="proj_WVQJDMAvDRbyE", ssh_key_id="ssh_kjQwdEGNDYNVP")
+    latitudesh.ssh_keys.delete(project_id="proj_KN4ydzeXOVob3", ssh_key_id="ssh_kjQwdEGNDYNVP")
 
     # Use the SDK ...
 

@@ -74,7 +74,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.plans.get(plan_id="plan_w49QDB55qagKb")
+    res = latitudesh.plans.get(plan_id="plan_W6Q2D9plqKLpr")
 
     # Handle response
     print(res)
@@ -116,8 +116,10 @@ with Latitudesh(
 
     res = latitudesh.plans.list_bandwidth()
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -127,11 +129,13 @@ with Latitudesh(
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `api_version`                                                       | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |
 | `filter_id`                                                         | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The plan ID to filter by                                            |
+| `page_size`                                                         | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Number of items to return per page                                  |
+| `page_number`                                                       | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Page number to return (starts at 1)                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[models.BandwidthPlans](../../models/bandwidthplans.md)**
+**[models.GetBandwidthPlansResponse](../../models/getbandwidthplansresponse.md)**
 
 ### Errors
 
@@ -160,7 +164,7 @@ with Latitudesh(
         "data": {
             "type": latitudesh_python_sdk.UpdatePlansBandwidthPlansType.BANDWIDTH_PACKAGES,
             "attributes": {
-                "project": "proj_1ZJrdxNnDg4LV",
+                "project": "proj_VE1Wd3EKDXnZJ",
                 "quantity": 5,
                 "region_slug": "brazil",
             },

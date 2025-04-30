@@ -29,8 +29,10 @@ with Latitudesh(
 
     res = latitudesh.ip_addresses.list(filter_server="46", filter_project="59")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -45,11 +47,13 @@ with Latitudesh(
 | `filter_location`                                                                                                                                                       | *Optional[str]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                      | The site slug to filter by                                                                                                                                              |
 | `filter_address`                                                                                                                                                        | *Optional[str]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                      | The address of IP to filter by starts_with                                                                                                                              |
 | `extra_fields_ip_addresses`                                                                                                                                             | *Optional[str]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                      | The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string. |
+| `page_size`                                                                                                                                                             | *Optional[int]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                      | Number of items to return per page                                                                                                                                      |
+| `page_number`                                                                                                                                                           | *Optional[int]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                      | Page number to return (starts at 1)                                                                                                                                     |
 | `retries`                                                                                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                        | :heavy_minus_sign:                                                                                                                                                      | Configuration to override the default retry behavior of the client.                                                                                                     |
 
 ### Response
 
-**[models.IPAddresses](../../models/ipaddresses.md)**
+**[models.GetIpsResponse](../../models/getipsresponse.md)**
 
 ### Errors
 

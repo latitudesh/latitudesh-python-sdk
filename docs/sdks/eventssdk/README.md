@@ -25,8 +25,10 @@ with Latitudesh(
 
     res = latitudesh.events.list()
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -42,11 +44,13 @@ with Latitudesh(
 | `filter_created_at_gte`                                                                                            | *Optional[str]*                                                                                                    | :heavy_minus_sign:                                                                                                 | The created at greater than equal date to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)                     |
 | `filter_created_at_lte`                                                                                            | *Optional[str]*                                                                                                    | :heavy_minus_sign:                                                                                                 | The created at less than equal date to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)                        |
 | `filter_created_at`                                                                                                | List[*str*]                                                                                                        | :heavy_minus_sign:                                                                                                 | The created at between date range date1, date2 (inclusive) to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss) |
+| `page_size`                                                                                                        | *Optional[int]*                                                                                                    | :heavy_minus_sign:                                                                                                 | Number of items to return per page                                                                                 |
+| `page_number`                                                                                                      | *Optional[int]*                                                                                                    | :heavy_minus_sign:                                                                                                 | Page number to return (starts at 1)                                                                                |
 | `retries`                                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                   | :heavy_minus_sign:                                                                                                 | Configuration to override the default retry behavior of the client.                                                |
 
 ### Response
 
-**[models.GetEventsResponseBody](../../models/geteventsresponsebody.md)**
+**[models.GetEventsResponse](../../models/geteventsresponse.md)**
 
 ### Errors
 

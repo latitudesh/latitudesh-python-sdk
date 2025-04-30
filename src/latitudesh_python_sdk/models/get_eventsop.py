@@ -5,7 +5,7 @@ from .events import Events, EventsTypedDict
 from latitudesh_python_sdk.types import BaseModel
 from latitudesh_python_sdk.utils import FieldMetadata, QueryParamMetadata
 import pydantic
-from typing import List, Optional
+from typing import Callable, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -26,6 +26,10 @@ class GetEventsRequestTypedDict(TypedDict):
     r"""The created at less than equal date to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)"""
     filter_created_at: NotRequired[List[str]]
     r"""The created at between date range date1, date2 (inclusive) to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)"""
+    page_size: NotRequired[int]
+    r"""Number of items to return per page"""
+    page_number: NotRequired[int]
+    r"""Page number to return (starts at 1)"""
 
 
 class GetEventsRequest(BaseModel):
@@ -85,6 +89,20 @@ class GetEventsRequest(BaseModel):
     ] = None
     r"""The created at between date range date1, date2 (inclusive) to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)"""
 
+    page_size: Annotated[
+        Optional[int],
+        pydantic.Field(alias="page[size]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 20
+    r"""Number of items to return per page"""
+
+    page_number: Annotated[
+        Optional[int],
+        pydantic.Field(alias="page[number]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 1
+    r"""Page number to return (starts at 1)"""
+
 
 class GetEventsResponseBodyTypedDict(TypedDict):
     r"""Success"""
@@ -96,3 +114,13 @@ class GetEventsResponseBody(BaseModel):
     r"""Success"""
 
     data: Optional[List[Events]] = None
+
+
+class GetEventsResponseTypedDict(TypedDict):
+    result: GetEventsResponseBodyTypedDict
+
+
+class GetEventsResponse(BaseModel):
+    next: Callable[[], Optional[GetEventsResponse]]
+
+    result: GetEventsResponseBody

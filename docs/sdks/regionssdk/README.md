@@ -27,8 +27,10 @@ with Latitudesh(
 
     res = latitudesh.regions.list()
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -36,11 +38,13 @@ with Latitudesh(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `page_size`                                                         | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Number of items to return per page                                  |
+| `page_number`                                                       | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Page number to return (starts at 1)                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[models.Regions](../../models/regions.md)**
+**[models.GetRegionsResponse](../../models/getregionsresponse.md)**
 
 ### Errors
 
@@ -63,7 +67,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.regions.get(region_id="reg_Qkm7dXPed8nZV")
+    res = latitudesh.regions.get(region_id="reg_GnzRD5W1dM5yw")
 
     # Handle response
     print(res)

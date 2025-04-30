@@ -24,8 +24,8 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.billing.list_usage(filter_project="proj_6059EqYkOQj8p", filter_products=[
-        "si_fhvti2pa",
-        "si_h3r2mheb",
+        "si_pttmsx3d",
+        "si_nmru52ev",
     ], filter_plan="plan.name")
 
     # Handle response

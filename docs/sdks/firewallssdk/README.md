@@ -34,7 +34,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateFirewallFirewallsType.FIREWALLS,
         "attributes": {
             "name": "my-firewall",
-            "project": "small-rubber-lamp",
+            "project": "sleek-steel-shirt",
             "rules": [
                 {
                     "from_": "192.168.42.72",
@@ -96,10 +96,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.list(filter_project="aerodynamic-silk-pants")
+    res = latitudesh.firewalls.list(filter_project="lightweight-silk-table")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -108,11 +110,13 @@ with Latitudesh(
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `filter_project`                                                    | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `page_size`                                                         | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Number of items to return per page                                  |
+| `page_number`                                                       | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Page number to return (starts at 1)                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[models.Firewalls](../../models/firewalls.md)**
+**[models.ListFirewallsResponse](../../models/listfirewallsresponse.md)**
 
 ### Errors
 
@@ -179,9 +183,7 @@ with Latitudesh(
     res = latitudesh.firewalls.update(firewall_id="fw_VaNmodjeObE8W", data={
         "type": latitudesh_python_sdk.UpdateFirewallFirewallsType.FIREWALLS,
         "attributes": {
-            "rules": [
-
-            ],
+            "rules": [],
         },
     })
 
@@ -308,8 +310,10 @@ with Latitudesh(
 
     res = latitudesh.firewalls.list_assignments(firewall_id="fw_93YjJOLydvZ87")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -318,11 +322,13 @@ with Latitudesh(
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `firewall_id`                                                       | *str*                                                               | :heavy_check_mark:                                                  | The Firewall ID                                                     |
+| `page_size`                                                         | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Number of items to return per page                                  |
+| `page_number`                                                       | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Page number to return (starts at 1)                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[models.FirewallServer](../../models/firewallserver.md)**
+**[models.GetFirewallAssignmentsResponse](../../models/getfirewallassignmentsresponse.md)**
 
 ### Errors
 
