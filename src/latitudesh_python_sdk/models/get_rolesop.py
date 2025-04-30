@@ -3,8 +3,33 @@
 from __future__ import annotations
 from .role_data import RoleData, RoleDataTypedDict
 from latitudesh_python_sdk.types import BaseModel
-from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from latitudesh_python_sdk.utils import FieldMetadata, QueryParamMetadata
+import pydantic
+from typing import Callable, List, Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
+
+
+class GetRolesRequestTypedDict(TypedDict):
+    page_size: NotRequired[int]
+    r"""Number of items to return per page"""
+    page_number: NotRequired[int]
+    r"""Page number to return (starts at 1)"""
+
+
+class GetRolesRequest(BaseModel):
+    page_size: Annotated[
+        Optional[int],
+        pydantic.Field(alias="page[size]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 20
+    r"""Number of items to return per page"""
+
+    page_number: Annotated[
+        Optional[int],
+        pydantic.Field(alias="page[number]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 1
+    r"""Page number to return (starts at 1)"""
 
 
 class GetRolesResponseBodyTypedDict(TypedDict):
@@ -17,3 +42,13 @@ class GetRolesResponseBody(BaseModel):
     r"""Success"""
 
     data: Optional[List[RoleData]] = None
+
+
+class GetRolesResponseTypedDict(TypedDict):
+    result: GetRolesResponseBodyTypedDict
+
+
+class GetRolesResponse(BaseModel):
+    next: Callable[[], Optional[GetRolesResponse]]
+
+    result: GetRolesResponseBody

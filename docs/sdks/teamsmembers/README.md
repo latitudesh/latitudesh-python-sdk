@@ -26,8 +26,10 @@ with Latitudesh(
 
     res = latitudesh.teams_members.list()
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -35,11 +37,13 @@ with Latitudesh(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `page_size`                                                         | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Number of items to return per page                                  |
+| `page_number`                                                       | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Page number to return (starts at 1)                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[models.TeamMembers](../../models/teammembers.md)**
+**[models.GetTeamMembersResponse](../../models/getteammembersresponse.md)**
 
 ### Errors
 
@@ -66,9 +70,9 @@ with Latitudesh(
     res = latitudesh.teams_members.add(data={
         "type": latitudesh_python_sdk.PostTeamMembersTeamsMembersType.MEMBERSHIPS,
         "attributes": {
-            "first_name": "Dianne",
-            "last_name": "Bahringer",
-            "email": "theron_keeling@balistreri.test",
+            "first_name": "Napoleon",
+            "last_name": "Rogahn",
+            "email": "teddy_champlin@glover-boyer.test",
             "role": latitudesh_python_sdk.PostTeamMembersTeamsMembersRole.COLLABORATOR,
         },
     })

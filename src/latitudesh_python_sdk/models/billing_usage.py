@@ -100,6 +100,7 @@ class ProductsTypedDict(TypedDict):
     id: NotRequired[str]
     resource: NotRequired[str]
     name: NotRequired[str]
+    proration: NotRequired[bool]
     discounts: NotRequired[List[DiscountsTypedDict]]
     discountable: NotRequired[bool]
     description: NotRequired[str]
@@ -122,6 +123,8 @@ class Products(BaseModel):
     resource: Optional[str] = None
 
     name: Optional[str] = None
+
+    proration: Optional[bool] = None
 
     discounts: Optional[List[Discounts]] = None
 

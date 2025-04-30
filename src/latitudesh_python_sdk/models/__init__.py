@@ -300,25 +300,42 @@ from .firewalls import Firewalls, FirewallsTypedDict, Meta, MetaTypedDict
 from .get_bandwidth_plansop import (
     GetBandwidthPlansRequest,
     GetBandwidthPlansRequestTypedDict,
+    GetBandwidthPlansResponse,
+    GetBandwidthPlansResponseTypedDict,
 )
 from .get_billing_usageop import GetBillingUsageRequest, GetBillingUsageRequestTypedDict
 from .get_eventsop import (
     GetEventsRequest,
     GetEventsRequestTypedDict,
+    GetEventsResponse,
     GetEventsResponseBody,
     GetEventsResponseBodyTypedDict,
+    GetEventsResponseTypedDict,
 )
 from .get_firewall_assignmentsop import (
     GetFirewallAssignmentsRequest,
     GetFirewallAssignmentsRequestTypedDict,
+    GetFirewallAssignmentsResponse,
+    GetFirewallAssignmentsResponseTypedDict,
 )
 from .get_firewallop import GetFirewallRequest, GetFirewallRequestTypedDict
 from .get_ipop import GetIPRequest, GetIPRequestTypedDict
-from .get_ipsop import FilterFamily, FilterType, GetIpsRequest, GetIpsRequestTypedDict
+from .get_ipsop import (
+    FilterFamily,
+    FilterType,
+    GetIpsRequest,
+    GetIpsRequestTypedDict,
+    GetIpsResponse,
+    GetIpsResponseTypedDict,
+)
 from .get_planop import GetPlanRequest, GetPlanRequestTypedDict
 from .get_plans_operating_systemop import (
+    GetPlansOperatingSystemRequest,
+    GetPlansOperatingSystemRequestTypedDict,
+    GetPlansOperatingSystemResponse,
     GetPlansOperatingSystemResponseBody,
     GetPlansOperatingSystemResponseBodyTypedDict,
+    GetPlansOperatingSystemResponseTypedDict,
 )
 from .get_plansop import (
     FilterStockLevel,
@@ -347,10 +364,28 @@ from .get_project_users_dataop import (
     GetProjectUsersDataResponseBody,
     GetProjectUsersDataResponseBodyTypedDict,
 )
-from .get_projectsop import GetProjectsRequest, GetProjectsRequestTypedDict
+from .get_projectsop import (
+    GetProjectsRequest,
+    GetProjectsRequestTypedDict,
+    GetProjectsResponse,
+    GetProjectsResponseTypedDict,
+)
 from .get_regionop import GetRegionRequest, GetRegionRequestTypedDict
+from .get_regionsop import (
+    GetRegionsRequest,
+    GetRegionsRequestTypedDict,
+    GetRegionsResponse,
+    GetRegionsResponseTypedDict,
+)
 from .get_role_idop import GetRoleIDRequest, GetRoleIDRequestTypedDict
-from .get_rolesop import GetRolesResponseBody, GetRolesResponseBodyTypedDict
+from .get_rolesop import (
+    GetRolesRequest,
+    GetRolesRequestTypedDict,
+    GetRolesResponse,
+    GetRolesResponseBody,
+    GetRolesResponseBodyTypedDict,
+    GetRolesResponseTypedDict,
+)
 from .get_server_deploy_configop import (
     GetServerDeployConfigRequest,
     GetServerDeployConfigRequestTypedDict,
@@ -360,10 +395,21 @@ from .get_server_out_of_bandop import (
     GetServerOutOfBandRequestTypedDict,
 )
 from .get_serverop import GetServerRequest, GetServerRequestTypedDict
-from .get_serversop import GetServersRequest, GetServersRequestTypedDict
+from .get_serversop import (
+    GetServersRequest,
+    GetServersRequestTypedDict,
+    GetServersResponse,
+    GetServersResponseTypedDict,
+)
 from .get_storage_filesystemsop import (
     GetStorageFilesystemsRequest,
     GetStorageFilesystemsRequestTypedDict,
+)
+from .get_team_membersop import (
+    GetTeamMembersRequest,
+    GetTeamMembersRequestTypedDict,
+    GetTeamMembersResponse,
+    GetTeamMembersResponseTypedDict,
 )
 from .get_traffic_consumptionop import (
     GetTrafficConsumptionRequest,
@@ -383,10 +429,14 @@ from .get_virtual_networkop import (
 from .get_virtual_networks_assignmentsop import (
     GetVirtualNetworksAssignmentsRequest,
     GetVirtualNetworksAssignmentsRequestTypedDict,
+    GetVirtualNetworksAssignmentsResponse,
+    GetVirtualNetworksAssignmentsResponseTypedDict,
 )
 from .get_virtual_networksop import (
     GetVirtualNetworksRequest,
     GetVirtualNetworksRequestTypedDict,
+    GetVirtualNetworksResponse,
+    GetVirtualNetworksResponseTypedDict,
 )
 from .get_vpn_sessionsop import (
     FilterLocation,
@@ -427,7 +477,12 @@ from .ipmi_session import (
     IpmiSessionType,
     IpmiSessionTypedDict,
 )
-from .list_firewallsop import ListFirewallsRequest, ListFirewallsRequestTypedDict
+from .list_firewallsop import (
+    ListFirewallsRequest,
+    ListFirewallsRequestTypedDict,
+    ListFirewallsResponse,
+    ListFirewallsResponseTypedDict,
+)
 from .membership import (
     Membership,
     MembershipAttributes,
@@ -1310,24 +1365,36 @@ __all__ = [
     "FirewallsTypedDict",
     "GetBandwidthPlansRequest",
     "GetBandwidthPlansRequestTypedDict",
+    "GetBandwidthPlansResponse",
+    "GetBandwidthPlansResponseTypedDict",
     "GetBillingUsageRequest",
     "GetBillingUsageRequestTypedDict",
     "GetEventsRequest",
     "GetEventsRequestTypedDict",
+    "GetEventsResponse",
     "GetEventsResponseBody",
     "GetEventsResponseBodyTypedDict",
+    "GetEventsResponseTypedDict",
     "GetFirewallAssignmentsRequest",
     "GetFirewallAssignmentsRequestTypedDict",
+    "GetFirewallAssignmentsResponse",
+    "GetFirewallAssignmentsResponseTypedDict",
     "GetFirewallRequest",
     "GetFirewallRequestTypedDict",
     "GetIPRequest",
     "GetIPRequestTypedDict",
     "GetIpsRequest",
     "GetIpsRequestTypedDict",
+    "GetIpsResponse",
+    "GetIpsResponseTypedDict",
     "GetPlanRequest",
     "GetPlanRequestTypedDict",
+    "GetPlansOperatingSystemRequest",
+    "GetPlansOperatingSystemRequestTypedDict",
+    "GetPlansOperatingSystemResponse",
     "GetPlansOperatingSystemResponseBody",
     "GetPlansOperatingSystemResponseBodyTypedDict",
+    "GetPlansOperatingSystemResponseTypedDict",
     "GetPlansRequest",
     "GetPlansRequestTypedDict",
     "GetPlansResponseBody",
@@ -1346,12 +1413,22 @@ __all__ = [
     "GetProjectUsersDataResponseBodyTypedDict",
     "GetProjectsRequest",
     "GetProjectsRequestTypedDict",
+    "GetProjectsResponse",
+    "GetProjectsResponseTypedDict",
     "GetRegionRequest",
     "GetRegionRequestTypedDict",
+    "GetRegionsRequest",
+    "GetRegionsRequestTypedDict",
+    "GetRegionsResponse",
+    "GetRegionsResponseTypedDict",
     "GetRoleIDRequest",
     "GetRoleIDRequestTypedDict",
+    "GetRolesRequest",
+    "GetRolesRequestTypedDict",
+    "GetRolesResponse",
     "GetRolesResponseBody",
     "GetRolesResponseBodyTypedDict",
+    "GetRolesResponseTypedDict",
     "GetServerDeployConfigRequest",
     "GetServerDeployConfigRequestTypedDict",
     "GetServerOutOfBandRequest",
@@ -1360,8 +1437,14 @@ __all__ = [
     "GetServerRequestTypedDict",
     "GetServersRequest",
     "GetServersRequestTypedDict",
+    "GetServersResponse",
+    "GetServersResponseTypedDict",
     "GetStorageFilesystemsRequest",
     "GetStorageFilesystemsRequestTypedDict",
+    "GetTeamMembersRequest",
+    "GetTeamMembersRequestTypedDict",
+    "GetTeamMembersResponse",
+    "GetTeamMembersResponseTypedDict",
     "GetTrafficConsumptionRequest",
     "GetTrafficConsumptionRequestTypedDict",
     "GetTrafficQuotaRequest",
@@ -1374,8 +1457,12 @@ __all__ = [
     "GetVirtualNetworkResponseBodyTypedDict",
     "GetVirtualNetworksAssignmentsRequest",
     "GetVirtualNetworksAssignmentsRequestTypedDict",
+    "GetVirtualNetworksAssignmentsResponse",
+    "GetVirtualNetworksAssignmentsResponseTypedDict",
     "GetVirtualNetworksRequest",
     "GetVirtualNetworksRequestTypedDict",
+    "GetVirtualNetworksResponse",
+    "GetVirtualNetworksResponseTypedDict",
     "GetVpnSessionsMeta",
     "GetVpnSessionsMetaTypedDict",
     "GetVpnSessionsRequest",
@@ -1407,6 +1494,8 @@ __all__ = [
     "IpmiStatus",
     "ListFirewallsRequest",
     "ListFirewallsRequestTypedDict",
+    "ListFirewallsResponse",
+    "ListFirewallsResponseTypedDict",
     "Location",
     "LocationTypedDict",
     "Locations",

@@ -23,7 +23,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.traffic.get(filter_date_gte="2025-01-05T21:14:55Z", filter_date_lte="2025-02-05T21:14:55Z", filter_server=187, filter_project=301)
+    res = latitudesh.traffic.get(filter_date_gte="2025-03-28T18:40:31Z", filter_date_lte="2025-04-28T18:40:31Z", filter_server=196, filter_project=306)
 
     # Handle response
     print(res)

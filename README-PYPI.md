@@ -25,6 +25,7 @@ Latitude.sh API: The Latitude.sh API is a RESTful API to manage your Latitude.sh
   * [SDK Example Usage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/#sdk-example-usage)
   * [Authentication](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/#authentication)
   * [Available Resources and Operations](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/#available-resources-and-operations)
+  * [Pagination](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/#pagination)
   * [Retries](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/#retries)
   * [Error Handling](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/#error-handling)
   * [Server Selection](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/#server-selection)
@@ -403,6 +404,33 @@ with Latitudesh(
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `None`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.events.list()
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+<!-- End Pagination [pagination] -->
 
 <!-- Start Retries [retries] -->
 ## Retries

@@ -30,10 +30,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.list(filter_location="SAO", filter_project="lightweight-iron-keyboard", filter_tags="tag_jVnnao8eYWSQW5EKKR4QH5bQllx")
+    res = latitudesh.private_networks.list(filter_location="SAO", filter_project="awesome-copper-clock", filter_tags="tag_KLmjvaEPE7uL9G9E42pxTrEK96Jn")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -44,11 +46,13 @@ with Latitudesh(
 | `filter_location`                                                                                                           | *Optional[str]*                                                                                                             | :heavy_minus_sign:                                                                                                          | The location slug to filter by                                                                                              |
 | `filter_project`                                                                                                            | *Optional[str]*                                                                                                             | :heavy_minus_sign:                                                                                                          | The project id or slug to filter by                                                                                         |
 | `filter_tags`                                                                                                               | *Optional[str]*                                                                                                             | :heavy_minus_sign:                                                                                                          | The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2` |
+| `page_size`                                                                                                                 | *Optional[int]*                                                                                                             | :heavy_minus_sign:                                                                                                          | Number of items to return per page                                                                                          |
+| `page_number`                                                                                                               | *Optional[int]*                                                                                                             | :heavy_minus_sign:                                                                                                          | Page number to return (starts at 1)                                                                                         |
 | `retries`                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                            | :heavy_minus_sign:                                                                                                          | Configuration to override the default retry behavior of the client.                                                         |
 
 ### Response
 
-**[models.VirtualNetworks](../../models/virtualnetworks.md)**
+**[models.GetVirtualNetworksResponse](../../models/getvirtualnetworksresponse.md)**
 
 ### Errors
 
@@ -78,7 +82,7 @@ with Latitudesh(
         "attributes": {
             "description": "São Paulo VLAN",
             "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
-            "project": "aerodynamic-marble-bench",
+            "project": "enormous-paper-clock",
         },
     })
 
@@ -122,7 +126,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.update(vlan_id="vlan_pRMLydp0dQKr1", data={
+    res = latitudesh.private_networks.update(vlan_id="vlan_zGr47qlMDAg0m", data={
         "type": latitudesh_python_sdk.UpdateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORKS,
         "attributes": {},
     })
@@ -244,10 +248,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.list_assignments(filter_server="208", filter_vid="4")
+    res = latitudesh.private_networks.list_assignments(filter_server="217", filter_vid="8")
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -258,11 +264,13 @@ with Latitudesh(
 | `filter_server`                                                     | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The server ID to filter by                                          |
 | `filter_vid`                                                        | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The vlan ID to filter by                                            |
 | `filter_virtual_network_id`                                         | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The virtual network ID to filter by                                 |
+| `page_size`                                                         | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Number of items to return per page                                  |
+| `page_number`                                                       | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Page number to return (starts at 1)                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
-**[models.VirtualNetworkAssignments](../../models/virtualnetworkassignments.md)**
+**[models.GetVirtualNetworksAssignmentsResponse](../../models/getvirtualnetworksassignmentsresponse.md)**
 
 ### Errors
 
@@ -290,8 +298,8 @@ with Latitudesh(
         "data": {
             "type": latitudesh_python_sdk.AssignServerVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK_ASSIGNMENT,
             "attributes": {
-                "server_id": "sv_aNmodj6ZdbE8W",
-                "virtual_network_id": vlan_g1mbDwG0DLv5B,
+                "server_id": "sv_pbV0DgQGd4AWz",
+                "virtual_network_id": vlan_059EqYe2qQj8p,
             },
         },
     })
@@ -335,7 +343,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.private_networks.remove_assignment(assignment_id="vnasg_695BdKagDevVo")
+    latitudesh.private_networks.remove_assignment(assignment_id="vnasg_LA73qk8WDaJ2o")
 
     # Use the SDK ...
 

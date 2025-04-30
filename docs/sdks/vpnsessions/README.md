@@ -73,7 +73,7 @@ with Latitudesh(
         "data": {
             "attributes": {
                 "site": latitudesh_python_sdk.PostVpnSessionVpnSessionsSite.SAO,
-                "server_id": "sv_pbV0DgQGd4AWz",
+                "server_id": "sv_wg3ZDrKyO5QlP",
             },
         },
     })
