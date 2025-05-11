@@ -577,7 +577,7 @@ import os
 
 
 with Latitudesh(
-    server_url="https://api.latitude.sh",
+    server_url="http://api.latitude.sh",
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
