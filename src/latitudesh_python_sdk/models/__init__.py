@@ -207,6 +207,7 @@ from .delete_project_user_dataop import (
     DeleteProjectUserDataRequestTypedDict,
 )
 from .delete_projectop import DeleteProjectRequest, DeleteProjectRequestTypedDict
+from .delete_ssh_keyop import DeleteSSHKeyRequest, DeleteSSHKeyRequestTypedDict
 from .delete_storage_filesystemsop import (
     DeleteStorageFilesystemsRequest,
     DeleteStorageFilesystemsRequestTypedDict,
@@ -401,6 +402,13 @@ from .get_serversop import (
     GetServersResponse,
     GetServersResponseTypedDict,
 )
+from .get_ssh_keyop import (
+    GetSSHKeyRequest,
+    GetSSHKeyRequestTypedDict,
+    GetSSHKeyResponseBody,
+    GetSSHKeyResponseBodyTypedDict,
+)
+from .get_ssh_keysop import GetSSHKeysRequest, GetSSHKeysRequestTypedDict
 from .get_storage_filesystemsop import (
     GetStorageFilesystemsRequest,
     GetStorageFilesystemsRequestTypedDict,
@@ -610,6 +618,17 @@ from .post_project_user_dataop import (
     PostProjectUserDataUserDataRequestBodyTypedDict,
     PostProjectUserDataUserDataType,
 )
+from .post_ssh_keyop import (
+    PostSSHKeyResponseBody,
+    PostSSHKeyResponseBodyTypedDict,
+    PostSSHKeySSHKeysAttributes,
+    PostSSHKeySSHKeysAttributesTypedDict,
+    PostSSHKeySSHKeysData,
+    PostSSHKeySSHKeysDataTypedDict,
+    PostSSHKeySSHKeysRequestBody,
+    PostSSHKeySSHKeysRequestBodyTypedDict,
+    PostSSHKeySSHKeysType,
+)
 from .post_storage_filesystemsop import (
     PostStorageFilesystemsResponseBody,
     PostStorageFilesystemsResponseBodyTypedDict,
@@ -698,6 +717,19 @@ from .put_project_user_dataop import (
     PutProjectUserDataUserDataRequestBody,
     PutProjectUserDataUserDataRequestBodyTypedDict,
     PutProjectUserDataUserDataType,
+)
+from .put_ssh_keyop import (
+    PutSSHKeyRequest,
+    PutSSHKeyRequestTypedDict,
+    PutSSHKeyResponseBody,
+    PutSSHKeyResponseBodyTypedDict,
+    PutSSHKeySSHKeysAttributes,
+    PutSSHKeySSHKeysAttributesTypedDict,
+    PutSSHKeySSHKeysData,
+    PutSSHKeySSHKeysDataTypedDict,
+    PutSSHKeySSHKeysRequestBody,
+    PutSSHKeySSHKeysRequestBodyTypedDict,
+    PutSSHKeySSHKeysType,
 )
 from .put_vpn_sessionop import PutVpnSessionRequest, PutVpnSessionRequestTypedDict
 from .region import (
@@ -1284,6 +1316,8 @@ __all__ = [
     "DeleteProjectSSHKeyRequestTypedDict",
     "DeleteProjectUserDataRequest",
     "DeleteProjectUserDataRequestTypedDict",
+    "DeleteSSHKeyRequest",
+    "DeleteSSHKeyRequestTypedDict",
     "DeleteStorageFilesystemsRequest",
     "DeleteStorageFilesystemsRequestTypedDict",
     "DeleteVirtualNetworksAssignmentsRequest",
@@ -1429,6 +1463,12 @@ __all__ = [
     "GetRolesResponseBody",
     "GetRolesResponseBodyTypedDict",
     "GetRolesResponseTypedDict",
+    "GetSSHKeyRequest",
+    "GetSSHKeyRequestTypedDict",
+    "GetSSHKeyResponseBody",
+    "GetSSHKeyResponseBodyTypedDict",
+    "GetSSHKeysRequest",
+    "GetSSHKeysRequestTypedDict",
     "GetServerDeployConfigRequest",
     "GetServerDeployConfigRequestTypedDict",
     "GetServerOutOfBandRequest",
@@ -1606,6 +1646,15 @@ __all__ = [
     "PostProjectUserDataUserDataRequestBody",
     "PostProjectUserDataUserDataRequestBodyTypedDict",
     "PostProjectUserDataUserDataType",
+    "PostSSHKeyResponseBody",
+    "PostSSHKeyResponseBodyTypedDict",
+    "PostSSHKeySSHKeysAttributes",
+    "PostSSHKeySSHKeysAttributesTypedDict",
+    "PostSSHKeySSHKeysData",
+    "PostSSHKeySSHKeysDataTypedDict",
+    "PostSSHKeySSHKeysRequestBody",
+    "PostSSHKeySSHKeysRequestBodyTypedDict",
+    "PostSSHKeySSHKeysType",
     "PostStorageFilesystemsResponseBody",
     "PostStorageFilesystemsResponseBodyTypedDict",
     "PostStorageFilesystemsStorageAttributes",
@@ -1677,6 +1726,17 @@ __all__ = [
     "PutProjectUserDataUserDataRequestBody",
     "PutProjectUserDataUserDataRequestBodyTypedDict",
     "PutProjectUserDataUserDataType",
+    "PutSSHKeyRequest",
+    "PutSSHKeyRequestTypedDict",
+    "PutSSHKeyResponseBody",
+    "PutSSHKeyResponseBodyTypedDict",
+    "PutSSHKeySSHKeysAttributes",
+    "PutSSHKeySSHKeysAttributesTypedDict",
+    "PutSSHKeySSHKeysData",
+    "PutSSHKeySSHKeysDataTypedDict",
+    "PutSSHKeySSHKeysRequestBody",
+    "PutSSHKeySSHKeysRequestBodyTypedDict",
+    "PutSSHKeySSHKeysType",
     "PutVpnSessionRequest",
     "PutVpnSessionRequestTypedDict",
     "QuotaInMbps",
