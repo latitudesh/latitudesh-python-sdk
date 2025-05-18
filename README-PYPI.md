@@ -342,6 +342,11 @@ with Latitudesh(
 * [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#get) - Retrieve a Project SSH Key
 * [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#update) - Update a Project SSH Key
 * [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#delete) - Delete a Project SSH Key
+* [get_ssh_keys](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#get_ssh_keys) - List all SSH Keys
+* [post_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#post_ssh_key) - Create a Project SSH Key
+* [get_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#get_ssh_key) - Retrieve a SSH Key
+* [put_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#put_ssh_key) - Update a SSH Key
+* [delete_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#delete_ssh_key) - Delete a SSH Key
 
 ### [storage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md)
 
@@ -577,7 +582,7 @@ import os
 
 
 with Latitudesh(
-    server_url="https://api.latitude.sh",
+    server_url="http://api.latitude.sh",
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 

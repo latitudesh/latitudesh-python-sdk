@@ -342,6 +342,11 @@ with Latitudesh(
 * [get](docs/sdks/sshkeys/README.md#get) - Retrieve a Project SSH Key
 * [update](docs/sdks/sshkeys/README.md#update) - Update a Project SSH Key
 * [delete](docs/sdks/sshkeys/README.md#delete) - Delete a Project SSH Key
+* [get_ssh_keys](docs/sdks/sshkeys/README.md#get_ssh_keys) - List all SSH Keys
+* [post_ssh_key](docs/sdks/sshkeys/README.md#post_ssh_key) - Create a Project SSH Key
+* [get_ssh_key](docs/sdks/sshkeys/README.md#get_ssh_key) - Retrieve a SSH Key
+* [put_ssh_key](docs/sdks/sshkeys/README.md#put_ssh_key) - Update a SSH Key
+* [delete_ssh_key](docs/sdks/sshkeys/README.md#delete_ssh_key) - Delete a SSH Key
 
 ### [storage](docs/sdks/storage/README.md)
 
@@ -577,7 +582,7 @@ import os
 
 
 with Latitudesh(
-    server_url="https://api.latitude.sh",
+    server_url="http://api.latitude.sh",
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
