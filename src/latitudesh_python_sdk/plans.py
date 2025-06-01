@@ -91,6 +91,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-plans",
                 oauth2_scopes=[],
@@ -206,6 +207,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-plans",
                 oauth2_scopes=[],
@@ -297,6 +299,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-plan",
                 oauth2_scopes=[],
@@ -392,6 +395,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-plan",
                 oauth2_scopes=[],
@@ -498,6 +502,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-bandwidth-plans",
                 oauth2_scopes=[],
@@ -625,6 +630,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-bandwidth-plans",
                 oauth2_scopes=[],
@@ -756,6 +762,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-plans-bandwidth",
                 oauth2_scopes=[],
@@ -866,6 +873,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-plans-bandwidth",
                 oauth2_scopes=[],
@@ -954,6 +962,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-storage-plans",
                 oauth2_scopes=[],
@@ -1038,6 +1047,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-storage-plans",
                 oauth2_scopes=[],
@@ -1122,6 +1132,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-vm-plans",
                 oauth2_scopes=[],
@@ -1206,6 +1217,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-vm-plans",
                 oauth2_scopes=[],

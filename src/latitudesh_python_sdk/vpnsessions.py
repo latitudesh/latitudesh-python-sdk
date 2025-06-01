@@ -66,6 +66,7 @@ class VpnSessions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-vpn-sessions",
                 oauth2_scopes=[],
@@ -163,6 +164,7 @@ class VpnSessions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-vpn-sessions",
                 oauth2_scopes=[],
@@ -276,6 +278,7 @@ class VpnSessions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="post-vpn-session",
                 oauth2_scopes=[],
@@ -387,6 +390,7 @@ class VpnSessions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="post-vpn-session",
                 oauth2_scopes=[],
@@ -485,6 +489,7 @@ class VpnSessions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="put-vpn-session",
                 oauth2_scopes=[],
@@ -583,6 +588,7 @@ class VpnSessions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="put-vpn-session",
                 oauth2_scopes=[],
@@ -681,6 +687,7 @@ class VpnSessions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete-vpn-session",
                 oauth2_scopes=[],
@@ -779,6 +786,7 @@ class VpnSessions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete-vpn-session",
                 oauth2_scopes=[],
