@@ -172,7 +172,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.private_networks.delete_virtual_network(vlan_id=invalid-id)
+    latitudesh.private_networks.delete_virtual_network(vlan_id=None)
 
     # Use the SDK ...
 
@@ -299,7 +299,7 @@ with Latitudesh(
             "type": latitudesh_python_sdk.AssignServerVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK_ASSIGNMENT,
             "attributes": {
                 "server_id": "sv_pbV0DgQGd4AWz",
-                "virtual_network_id": vlan_059EqYe2qQj8p,
+                "virtual_network_id": None,
             },
         },
     })

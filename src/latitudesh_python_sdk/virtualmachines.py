@@ -74,6 +74,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-virtual-machine",
                 oauth2_scopes=[],
@@ -173,6 +174,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-virtual-machine",
                 oauth2_scopes=[],
@@ -267,6 +269,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="index-virtual-machine",
                 oauth2_scopes=[],
@@ -361,6 +364,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="index-virtual-machine",
                 oauth2_scopes=[],
@@ -455,6 +459,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="show-virtual-machine",
                 oauth2_scopes=[],
@@ -549,6 +554,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="show-virtual-machine",
                 oauth2_scopes=[],
@@ -643,6 +649,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="destroy-virtual-machine",
                 oauth2_scopes=[],
@@ -737,6 +744,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="destroy-virtual-machine",
                 oauth2_scopes=[],

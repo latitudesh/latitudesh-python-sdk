@@ -118,6 +118,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-servers",
                 oauth2_scopes=[],
@@ -298,6 +299,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-servers",
                 oauth2_scopes=[],
@@ -437,6 +439,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server",
                 oauth2_scopes=[],
@@ -544,6 +547,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server",
                 oauth2_scopes=[],
@@ -647,6 +651,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-server",
                 oauth2_scopes=[],
@@ -744,6 +749,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-server",
                 oauth2_scopes=[],
@@ -860,6 +866,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-server",
                 oauth2_scopes=[],
@@ -985,6 +992,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-server",
                 oauth2_scopes=[],
@@ -1088,6 +1096,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="destroy-server",
                 oauth2_scopes=[],
@@ -1188,6 +1197,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="destroy-server",
                 oauth2_scopes=[],
@@ -1285,6 +1295,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-server-deploy-config",
                 oauth2_scopes=[],
@@ -1376,6 +1387,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-server-deploy-config",
                 oauth2_scopes=[],
@@ -1490,6 +1502,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-server-deploy-config",
                 oauth2_scopes=[],
@@ -1613,6 +1626,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-server-deploy-config",
                 oauth2_scopes=[],
@@ -1715,6 +1729,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-lock",
                 oauth2_scopes=[],
@@ -1808,6 +1823,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-lock",
                 oauth2_scopes=[],
@@ -1901,6 +1917,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-unlock",
                 oauth2_scopes=[],
@@ -1994,6 +2011,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-unlock",
                 oauth2_scopes=[],
@@ -2102,6 +2120,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server-out-of-band",
                 oauth2_scopes=[],
@@ -2214,6 +2233,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server-out-of-band",
                 oauth2_scopes=[],
@@ -2309,6 +2329,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-server-out-of-band",
                 oauth2_scopes=[],
@@ -2404,6 +2425,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-server-out-of-band",
                 oauth2_scopes=[],
@@ -2522,6 +2544,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server-action",
                 oauth2_scopes=[],
@@ -2640,6 +2663,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server-action",
                 oauth2_scopes=[],
@@ -2741,6 +2765,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-ipmi-session",
                 oauth2_scopes=[],
@@ -2844,6 +2869,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-ipmi-session",
                 oauth2_scopes=[],
@@ -2943,6 +2969,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-start-rescue-mode",
                 oauth2_scopes=[],
@@ -3040,6 +3067,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-start-rescue-mode",
                 oauth2_scopes=[],
@@ -3137,6 +3165,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-exit-rescue-mode",
                 oauth2_scopes=[],
@@ -3234,6 +3263,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-exit-rescue-mode",
                 oauth2_scopes=[],
@@ -3331,6 +3361,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-schedule-deletion",
                 oauth2_scopes=[],
@@ -3430,6 +3461,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-schedule-deletion",
                 oauth2_scopes=[],
@@ -3529,6 +3561,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-unschedule-deletion",
                 oauth2_scopes=[],
@@ -3626,6 +3659,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-unschedule-deletion",
                 oauth2_scopes=[],
@@ -3738,6 +3772,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server-reinstall",
                 oauth2_scopes=[],
@@ -3855,6 +3890,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server-reinstall",
                 oauth2_scopes=[],

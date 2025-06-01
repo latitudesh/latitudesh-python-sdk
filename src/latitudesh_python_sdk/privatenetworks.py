@@ -82,6 +82,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-virtual-networks",
                 oauth2_scopes=[],
@@ -214,6 +215,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-virtual-networks",
                 oauth2_scopes=[],
@@ -346,6 +348,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-virtual-network",
                 oauth2_scopes=[],
@@ -456,6 +459,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-virtual-network",
                 oauth2_scopes=[],
@@ -574,6 +578,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-virtual-network",
                 oauth2_scopes=[],
@@ -694,6 +699,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-virtual-network",
                 oauth2_scopes=[],
@@ -794,6 +800,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="destroy-virtual-network",
                 oauth2_scopes=[],
@@ -892,6 +899,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="destroy-virtual-network",
                 oauth2_scopes=[],
@@ -990,6 +998,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-virtual-network",
                 oauth2_scopes=[],
@@ -1086,6 +1095,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-virtual-network",
                 oauth2_scopes=[],
@@ -1194,6 +1204,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-virtual-networks-assignments",
                 oauth2_scopes=[],
@@ -1328,6 +1339,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-virtual-networks-assignments",
                 oauth2_scopes=[],
@@ -1461,6 +1473,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="assign-server-virtual-network",
                 oauth2_scopes=[],
@@ -1570,6 +1583,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="assign-server-virtual-network",
                 oauth2_scopes=[],
@@ -1668,6 +1682,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete-virtual-networks-assignments",
                 oauth2_scopes=[],
@@ -1766,6 +1781,7 @@ class PrivateNetworks(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete-virtual-networks-assignments",
                 oauth2_scopes=[],
