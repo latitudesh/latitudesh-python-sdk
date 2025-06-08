@@ -6,12 +6,33 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class VirtualNetworkAssignmentServerTypedDict(TypedDict):
+    id: NotRequired[str]
+    hostname: NotRequired[str]
+    label: NotRequired[str]
+    locked: NotRequired[bool]
+    status: NotRequired[str]
+
+
+class VirtualNetworkAssignmentServer(BaseModel):
+    id: Optional[str] = None
+
+    hostname: Optional[str] = None
+
+    label: Optional[str] = None
+
+    locked: Optional[bool] = None
+
+    status: Optional[str] = None
+
+
 class VirtualNetworkAssignmentAttributesTypedDict(TypedDict):
     virtual_network_id: NotRequired[str]
     vid: NotRequired[int]
     server_id: NotRequired[str]
     description: NotRequired[str]
     status: NotRequired[str]
+    server: NotRequired[VirtualNetworkAssignmentServerTypedDict]
 
 
 class VirtualNetworkAssignmentAttributes(BaseModel):
@@ -24,6 +45,8 @@ class VirtualNetworkAssignmentAttributes(BaseModel):
     description: Optional[str] = None
 
     status: Optional[str] = None
+
+    server: Optional[VirtualNetworkAssignmentServer] = None
 
 
 class VirtualNetworkAssignmentTypedDict(TypedDict):
