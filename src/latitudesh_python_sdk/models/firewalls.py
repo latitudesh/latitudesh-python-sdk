@@ -7,20 +7,20 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class MetaTypedDict(TypedDict):
+class FirewallsMetaTypedDict(TypedDict):
     pass
 
 
-class Meta(BaseModel):
+class FirewallsMeta(BaseModel):
     pass
 
 
 class FirewallsTypedDict(TypedDict):
     data: NotRequired[List[FirewallTypedDict]]
-    meta: NotRequired[MetaTypedDict]
+    meta: NotRequired[FirewallsMetaTypedDict]
 
 
 class Firewalls(BaseModel):
     data: Optional[List[Firewall]] = None
 
-    meta: Optional[Meta] = None
+    meta: Optional[FirewallsMeta] = None
