@@ -40,7 +40,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.list(filter_project="proj_g1mbDwrZqLv5B", filter_region="SAO", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_0yrQNVQRLwHy0XwEGM6ESwLrW2PA")
+    res = latitudesh.servers.list(filter_project="proj_g1mbDwrZqLv5B", filter_region="SAO", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_0yrQNVQRLwHy0XwEGM6ESwLrW2PA", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -78,9 +78,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 422                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## create
 
@@ -98,16 +99,14 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create(request={
-        "data": {
-            "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
-            "attributes": {
-                "project": "proj_W6Q2D93GdKLpr",
-                "plan": latitudesh_python_sdk.CreateServerServersPlan.C2_SMALL_X86,
-                "site": latitudesh_python_sdk.CreateServerServersSite.SAO,
-                "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_22_04_X64_LTS,
-                "hostname": "BRC1",
-            },
+    res = latitudesh.servers.create(data={
+        "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
+        "attributes": {
+            "project": "proj_W6Q2D93GdKLpr",
+            "plan": latitudesh_python_sdk.CreateServerServersPlan.C2_SMALL_X86,
+            "site": latitudesh_python_sdk.CreateServerServersSite.SAO,
+            "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_22_04_X64_LTS,
+            "hostname": "BRC1",
         },
     })
 
@@ -118,10 +117,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
-| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `request`                                                                               | [models.CreateServerServersRequestBody](../../models/createserverserversrequestbody.md) | :heavy_check_mark:                                                                      | The request object to use for the request.                                              |
-| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `data`                                                                              | [Optional[models.CreateServerServersData]](../../models/createserverserversdata.md) | :heavy_minus_sign:                                                                  | N/A                                                                                 |
+| `retries`                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                    | :heavy_minus_sign:                                                                  | Configuration to override the default retry behavior of the client.                 |
 
 ### Response
 
@@ -190,7 +189,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.update(server_id="sv_3YjJOLLNOvZ87")
+    latitudesh.servers.update(server_id="sv_3YjJOLLNOvZ87", id="sv_81EVOtR1N4J2Z")
 
     # Use the SDK ...
 

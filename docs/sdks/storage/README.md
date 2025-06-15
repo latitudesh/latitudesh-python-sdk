@@ -143,7 +143,9 @@ with Latitudesh(
     res = latitudesh.storage.update_filesystem(filesystem_id="fs_7vYAZqGBdMQ94", data={
         "id": "fs_7vYAZqGBdMQ94",
         "type": latitudesh_python_sdk.PatchStorageFilesystemsStorageType.FILESYSTEMS,
-        "attributes": {},
+        "attributes": {
+            "size_in_gb": 1501,
+        },
     })
 
     # Handle response

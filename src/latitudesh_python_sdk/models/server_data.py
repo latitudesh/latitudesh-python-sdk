@@ -45,6 +45,8 @@ class ServerDataPlanTypedDict(TypedDict):
     r"""The plan name"""
     billing: NotRequired[str]
     r"""hourly/monthly pricing. Defaults to `hourly`. Appliable for `on_demand` projects only."""
+    slug: NotRequired[str]
+    r"""The plan slug"""
 
 
 class ServerDataPlan(BaseModel):
@@ -56,6 +58,9 @@ class ServerDataPlan(BaseModel):
 
     billing: Optional[str] = None
     r"""hourly/monthly pricing. Defaults to `hourly`. Appliable for `on_demand` projects only."""
+
+    slug: Optional[str] = None
+    r"""The plan slug"""
 
 
 class ServerDataFeaturesTypedDict(TypedDict):
