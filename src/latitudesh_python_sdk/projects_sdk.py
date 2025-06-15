@@ -4,9 +4,9 @@ from .basesdk import BaseSDK
 from jsonpath import JSONPath
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
+from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Any, Dict, List, Mapping, Optional, Union, cast
+from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class ProjectsSDK(BaseSDK):
@@ -94,6 +94,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-projects",
                 oauth2_scopes=[],
@@ -242,6 +243,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-projects",
                 oauth2_scopes=[],
@@ -309,10 +311,12 @@ class ProjectsSDK(BaseSDK):
     def create(
         self,
         *,
-        request: Union[
-            models.CreateProjectProjectsRequestBody,
-            models.CreateProjectProjectsRequestBodyTypedDict,
-        ] = models.CreateProjectProjectsRequestBody(),
+        data: Optional[
+            Union[
+                models.CreateProjectProjectsData,
+                models.CreateProjectProjectsDataTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -320,7 +324,7 @@ class ProjectsSDK(BaseSDK):
     ) -> models.CreateProjectResponseBody:
         r"""Create a Project
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -336,9 +340,11 @@ class ProjectsSDK(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.CreateProjectProjectsRequestBody)
-        request = cast(models.CreateProjectProjectsRequestBody, request)
+        request = models.CreateProjectProjectsRequestBody(
+            data=utils.get_pydantic_model(
+                data, Optional[models.CreateProjectProjectsData]
+            ),
+        )
 
         req = self._build_request(
             method="POST",
@@ -354,11 +360,7 @@ class ProjectsSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                True,
-                "json",
-                Optional[models.CreateProjectProjectsRequestBody],
+                request, False, False, "json", models.CreateProjectProjectsRequestBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -373,6 +375,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-project",
                 oauth2_scopes=[],
@@ -416,10 +419,12 @@ class ProjectsSDK(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Union[
-            models.CreateProjectProjectsRequestBody,
-            models.CreateProjectProjectsRequestBodyTypedDict,
-        ] = models.CreateProjectProjectsRequestBody(),
+        data: Optional[
+            Union[
+                models.CreateProjectProjectsData,
+                models.CreateProjectProjectsDataTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -427,7 +432,7 @@ class ProjectsSDK(BaseSDK):
     ) -> models.CreateProjectResponseBody:
         r"""Create a Project
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -443,9 +448,11 @@ class ProjectsSDK(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.CreateProjectProjectsRequestBody)
-        request = cast(models.CreateProjectProjectsRequestBody, request)
+        request = models.CreateProjectProjectsRequestBody(
+            data=utils.get_pydantic_model(
+                data, Optional[models.CreateProjectProjectsData]
+            ),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -461,11 +468,7 @@ class ProjectsSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                True,
-                "json",
-                Optional[models.CreateProjectProjectsRequestBody],
+                request, False, False, "json", models.CreateProjectProjectsRequestBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -480,6 +483,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-project",
                 oauth2_scopes=[],
@@ -591,6 +595,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-project",
                 oauth2_scopes=[],
@@ -702,6 +707,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-project",
                 oauth2_scopes=[],
@@ -799,6 +805,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete-project",
                 oauth2_scopes=[],
@@ -896,6 +903,7 @@ class ProjectsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete-project",
                 oauth2_scopes=[],
