@@ -3,18 +3,21 @@
 from .basesdk import BaseSDK
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
+from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Mapping, Optional, Union, cast
+from typing import Mapping, Optional, Union
 
 
 class VirtualMachines(BaseSDK):
     def create(
         self,
         *,
-        request: Union[
-            models.VirtualMachinePayload, models.VirtualMachinePayloadTypedDict
-        ] = models.VirtualMachinePayload(),
+        data: Optional[
+            Union[
+                models.VirtualMachinePayloadData,
+                models.VirtualMachinePayloadDataTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -25,7 +28,7 @@ class VirtualMachines(BaseSDK):
         Creates a new Virtual Machine.
 
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -41,9 +44,11 @@ class VirtualMachines(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.VirtualMachinePayload)
-        request = cast(models.VirtualMachinePayload, request)
+        request = models.VirtualMachinePayload(
+            data=utils.get_pydantic_model(
+                data, Optional[models.VirtualMachinePayloadData]
+            ),
+        )
 
         req = self._build_request(
             method="POST",
@@ -59,7 +64,7 @@ class VirtualMachines(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.VirtualMachinePayload]
+                request, False, False, "json", models.VirtualMachinePayload
             ),
             timeout_ms=timeout_ms,
         )
@@ -74,6 +79,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-virtual-machine",
                 oauth2_scopes=[],
@@ -111,9 +117,12 @@ class VirtualMachines(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Union[
-            models.VirtualMachinePayload, models.VirtualMachinePayloadTypedDict
-        ] = models.VirtualMachinePayload(),
+        data: Optional[
+            Union[
+                models.VirtualMachinePayloadData,
+                models.VirtualMachinePayloadDataTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -124,7 +133,7 @@ class VirtualMachines(BaseSDK):
         Creates a new Virtual Machine.
 
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -140,9 +149,11 @@ class VirtualMachines(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.VirtualMachinePayload)
-        request = cast(models.VirtualMachinePayload, request)
+        request = models.VirtualMachinePayload(
+            data=utils.get_pydantic_model(
+                data, Optional[models.VirtualMachinePayloadData]
+            ),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -158,7 +169,7 @@ class VirtualMachines(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.VirtualMachinePayload]
+                request, False, False, "json", models.VirtualMachinePayload
             ),
             timeout_ms=timeout_ms,
         )
@@ -173,6 +184,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-virtual-machine",
                 oauth2_scopes=[],
@@ -267,6 +279,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="index-virtual-machine",
                 oauth2_scopes=[],
@@ -361,6 +374,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="index-virtual-machine",
                 oauth2_scopes=[],
@@ -455,6 +469,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="show-virtual-machine",
                 oauth2_scopes=[],
@@ -549,6 +564,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="show-virtual-machine",
                 oauth2_scopes=[],
@@ -643,6 +659,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="destroy-virtual-machine",
                 oauth2_scopes=[],
@@ -737,6 +754,7 @@ class VirtualMachines(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="destroy-virtual-machine",
                 oauth2_scopes=[],

@@ -6,13 +6,13 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class OutOfBandConnectionSSHKeyTypedDict(TypedDict):
+class SSHKeyTypedDict(TypedDict):
     id: NotRequired[str]
     description: NotRequired[str]
     fingerprint: NotRequired[str]
 
 
-class OutOfBandConnectionSSHKey(BaseModel):
+class SSHKey(BaseModel):
     id: Optional[str] = None
 
     description: Optional[str] = None
@@ -36,7 +36,7 @@ class Credentials(BaseModel):
 
 
 class OutOfBandConnectionAttributesTypedDict(TypedDict):
-    ssh_key: NotRequired[OutOfBandConnectionSSHKeyTypedDict]
+    ssh_key: NotRequired[SSHKeyTypedDict]
     created_at: NotRequired[str]
     username: NotRequired[str]
     credentials: NotRequired[CredentialsTypedDict]
@@ -48,7 +48,7 @@ class OutOfBandConnectionAttributesTypedDict(TypedDict):
 
 
 class OutOfBandConnectionAttributes(BaseModel):
-    ssh_key: Optional[OutOfBandConnectionSSHKey] = None
+    ssh_key: Optional[SSHKey] = None
 
     created_at: Optional[str] = None
 
