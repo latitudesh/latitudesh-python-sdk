@@ -13,13 +13,13 @@ class AssignServerVirtualNetworkPrivateNetworksType(str, Enum):
 
 class AssignServerVirtualNetworkPrivateNetworksAttributesTypedDict(TypedDict):
     server_id: str
-    virtual_network_id: int
+    virtual_network_id: str
 
 
 class AssignServerVirtualNetworkPrivateNetworksAttributes(BaseModel):
     server_id: str
 
-    virtual_network_id: int
+    virtual_network_id: str
 
 
 class AssignServerVirtualNetworkPrivateNetworksDataTypedDict(TypedDict):

@@ -26,7 +26,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.list(filter_tags="tag_R3YGrW8m0NSAm0l5Wp6XTnnww9r")
+    res = latitudesh.projects.list(filter_tags="tag_R3YGrW8m0NSAm0l5Wp6XTnnww9r", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -76,15 +76,13 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.create(request={
-        "data": {
-            "type": latitudesh_python_sdk.CreateProjectProjectsType.PROJECTS,
-            "attributes": {
-                "name": "Cormier-Corkery",
-                "provisioning_type": latitudesh_python_sdk.CreateProjectProvisioningType.ON_DEMAND,
-                "description": "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",
-                "environment": latitudesh_python_sdk.CreateProjectProjectsEnvironment.DEVELOPMENT,
-            },
+    res = latitudesh.projects.create(data={
+        "type": latitudesh_python_sdk.CreateProjectProjectsType.PROJECTS,
+        "attributes": {
+            "name": "Cormier-Corkery",
+            "provisioning_type": latitudesh_python_sdk.CreateProjectProvisioningType.ON_DEMAND,
+            "description": "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",
+            "environment": latitudesh_python_sdk.CreateProjectProjectsEnvironment.DEVELOPMENT,
         },
     })
 
@@ -95,10 +93,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `request`                                                                                   | [models.CreateProjectProjectsRequestBody](../../models/createprojectprojectsrequestbody.md) | :heavy_check_mark:                                                                          | The request object to use for the request.                                                  |
-| `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `data`                                                                                  | [Optional[models.CreateProjectProjectsData]](../../models/createprojectprojectsdata.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
 
 ### Response
 
@@ -128,6 +126,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.projects.update(project_id="proj_LGXPdWpgqnNWk", data={
+        "id": "proj_LGXPdWpgqnNWk",
         "type": latitudesh_python_sdk.UpdateProjectProjectsType.PROJECTS,
         "attributes": {
             "tags": [
