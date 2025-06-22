@@ -14,8 +14,8 @@ class TrafficSDK(BaseSDK):
         *,
         filter_date_gte: str,
         filter_date_lte: str,
-        filter_server: Optional[int] = None,
-        filter_project: Optional[int] = None,
+        filter_server: Optional[str] = None,
+        filter_project: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -25,8 +25,8 @@ class TrafficSDK(BaseSDK):
 
         :param filter_date_gte: The start timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-01T00:00:00Z
         :param filter_date_lte: The end timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-31T23:59:59Z
-        :param filter_server:
-        :param filter_project:
+        :param filter_server: The server id to filter by
+        :param filter_project: The project id to filter by
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -75,6 +75,7 @@ class TrafficSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-traffic-consumption",
                 oauth2_scopes=[],
@@ -114,8 +115,8 @@ class TrafficSDK(BaseSDK):
         *,
         filter_date_gte: str,
         filter_date_lte: str,
-        filter_server: Optional[int] = None,
-        filter_project: Optional[int] = None,
+        filter_server: Optional[str] = None,
+        filter_project: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -125,8 +126,8 @@ class TrafficSDK(BaseSDK):
 
         :param filter_date_gte: The start timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-01T00:00:00Z
         :param filter_date_lte: The end timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-31T23:59:59Z
-        :param filter_server:
-        :param filter_project:
+        :param filter_server: The server id to filter by
+        :param filter_project: The project id to filter by
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -175,6 +176,7 @@ class TrafficSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-traffic-consumption",
                 oauth2_scopes=[],
@@ -266,6 +268,7 @@ class TrafficSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-traffic-quota",
                 oauth2_scopes=[],
@@ -361,6 +364,7 @@ class TrafficSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-traffic-quota",
                 oauth2_scopes=[],

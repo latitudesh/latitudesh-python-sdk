@@ -7,9 +7,20 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class UserDataMetaTypedDict(TypedDict):
+    pass
+
+
+class UserDataMeta(BaseModel):
+    pass
+
+
 class UserDataTypedDict(TypedDict):
     data: NotRequired[UserDataPropertiesTypedDict]
+    meta: NotRequired[UserDataMetaTypedDict]
 
 
 class UserData(BaseModel):
     data: Optional[UserDataProperties] = None
+
+    meta: Optional[UserDataMeta] = None

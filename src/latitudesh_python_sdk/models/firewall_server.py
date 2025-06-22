@@ -8,7 +8,7 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class FirewallServerType(str, Enum):
-    FIREWALL_ASSIGNMENTS = "firewall_assignments"
+    FIREWALL_SERVERS = "firewall_servers"
 
 
 class FirewallServerServerTypedDict(TypedDict):
@@ -28,12 +28,15 @@ class FirewallServerServer(BaseModel):
 class FirewallServerAttributesTypedDict(TypedDict):
     server: NotRequired[FirewallServerServerTypedDict]
     firewall_id: NotRequired[str]
+    server_id: NotRequired[str]
 
 
 class FirewallServerAttributes(BaseModel):
     server: Optional[FirewallServerServer] = None
 
     firewall_id: Optional[str] = None
+
+    server_id: Optional[str] = None
 
 
 class FirewallServerTypedDict(TypedDict):

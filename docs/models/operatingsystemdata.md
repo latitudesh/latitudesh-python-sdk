@@ -1,0 +1,10 @@
+# OperatingSystemData
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `id`                                                                                         | *Optional[str]*                                                                              | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `type`                                                                                       | [Optional[models.OperatingSystemDataType]](../models/operatingsystemdatatype.md)             | :heavy_minus_sign:                                                                           | N/A                                                                                          |
+| `attributes`                                                                                 | [Optional[models.OperatingSystemDataAttributes]](../models/operatingsystemdataattributes.md) | :heavy_minus_sign:                                                                           | N/A                                                                                          |

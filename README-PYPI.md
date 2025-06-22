@@ -335,13 +335,18 @@ with Latitudesh(
 * [unschedule_deletion](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#unschedule_deletion) - Unschedule the server deletion
 * [reinstall](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#reinstall) - Run Server Reinstall
 
-### [ssh_keys](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md)
+### [ssh_keys](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md)
 
-* [list_for_project](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#list_for_project) - List all Project SSH Keys
-* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#create) - Create a Project SSH Key
-* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#get) - Retrieve a Project SSH Key
-* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#update) - Update a Project SSH Key
-* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeys/README.md#delete) - Delete a Project SSH Key
+* [~~list_for_project~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#list_for_project) - List all Project SSH Keys :warning: **Deprecated**
+* [~~create~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#create) - Create a Project SSH Key :warning: **Deprecated**
+* [~~get~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#get) - Retrieve a Project SSH Key :warning: **Deprecated**
+* [~~update~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#update) - Update a Project SSH Key :warning: **Deprecated**
+* [~~delete~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#delete) - Delete a Project SSH Key :warning: **Deprecated**
+* [get_ssh_keys](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#get_ssh_keys) - List all SSH Keys
+* [post_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#post_ssh_key) - Create a SSH Key
+* [get_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#get_ssh_key) - Retrieve a SSH Key
+* [put_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#put_ssh_key) - Update a SSH Key
+* [delete_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#delete_ssh_key) - Delete a SSH Key
 
 ### [storage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md)
 
@@ -376,11 +381,16 @@ with Latitudesh(
 
 ### [user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md)
 
-* [list_project_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#list_project_user_data) - List all Project User Data
-* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#create) - Create a Project User Data
-* [get_project_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#get_project_user_data) - Retrieve a Project User Data
-* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#update) - Update a Project User Data
-* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#delete) - Delete a Project User Data
+* [~~list_project_user_data~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#list_project_user_data) - List all Project User Data :warning: **Deprecated**
+* [~~create~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#create) - Create a Project User Data :warning: **Deprecated**
+* [~~get_project_user_data~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#get_project_user_data) - Retrieve a Project User Data :warning: **Deprecated**
+* [~~update~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#update) - Update a Project User Data :warning: **Deprecated**
+* [~~delete~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#delete) - Delete a Project User Data :warning: **Deprecated**
+* [get_users_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#get_users_data) - List all User Data
+* [post_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#post_user_data) - Create an User Data
+* [get_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#get_user_data) - Retrieve an User Data
+* [patch_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#patch_user_data) - Update an User Data
+* [delete_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#delete_user_data) - Delete an User Data
 
 ### [user_profile](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userprofile/README.md)
 
@@ -422,7 +432,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.events.list()
+    res = latitudesh.events.list(page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -511,10 +521,10 @@ with Latitudesh(
     res = None
     try:
 
-        res = latitudesh.api_keys.create(request={
-            "data": {
-                "type": latitudesh_python_sdk.CreateAPIKeyType.API_KEYS,
-                "attributes": {},
+        res = latitudesh.api_keys.create(data={
+            "type": latitudesh_python_sdk.CreateAPIKeyType.API_KEYS,
+            "attributes": {
+                "name": "App Token",
             },
         })
 
@@ -577,7 +587,7 @@ import os
 
 
 with Latitudesh(
-    server_url="https://api.latitude.sh",
+    server_url="http://api.latitude.sh",
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 

@@ -75,6 +75,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-firewall",
                 oauth2_scopes=[],
@@ -178,6 +179,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-firewall",
                 oauth2_scopes=[],
@@ -281,6 +283,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list-firewalls",
                 oauth2_scopes=[],
@@ -404,6 +407,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="list-firewalls",
                 oauth2_scopes=[],
@@ -521,6 +525,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-firewall",
                 oauth2_scopes=[],
@@ -618,6 +623,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-firewall",
                 oauth2_scopes=[],
@@ -730,6 +736,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-firewall",
                 oauth2_scopes=[],
@@ -842,6 +849,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-firewall",
                 oauth2_scopes=[],
@@ -939,6 +947,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete-firewall",
                 oauth2_scopes=[],
@@ -1036,6 +1045,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete-firewall",
                 oauth2_scopes=[],
@@ -1150,6 +1160,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-firewall-assignment",
                 oauth2_scopes=[],
@@ -1266,6 +1277,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-firewall-assignment",
                 oauth2_scopes=[],
@@ -1371,6 +1383,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-firewall-assignments",
                 oauth2_scopes=[],
@@ -1407,7 +1420,7 @@ class FirewallsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return models.GetFirewallAssignmentsResponse(
-                result=utils.unmarshal_json(http_res.text, models.FirewallServer),
+                result=utils.unmarshal_json(http_res.text, models.FirewallAssignments),
                 next=next_func,
             )
         if utils.match_response(http_res, "404", "application/vnd.api+json"):
@@ -1498,6 +1511,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-firewall-assignments",
                 oauth2_scopes=[],
@@ -1534,7 +1548,7 @@ class FirewallsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return models.GetFirewallAssignmentsResponse(
-                result=utils.unmarshal_json(http_res.text, models.FirewallServer),
+                result=utils.unmarshal_json(http_res.text, models.FirewallAssignments),
                 next=next_func,
             )
         if utils.match_response(http_res, "404", "application/vnd.api+json"):
@@ -1622,6 +1636,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete-firewall-assignment",
                 oauth2_scopes=[],
@@ -1722,6 +1737,7 @@ class FirewallsSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete-firewall-assignment",
                 oauth2_scopes=[],
