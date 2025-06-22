@@ -4,9 +4,9 @@ from .basesdk import BaseSDK
 from jsonpath import JSONPath
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
+from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Any, Dict, List, Mapping, Optional, Union, cast
+from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class ServersSDK(BaseSDK):
@@ -118,6 +118,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-servers",
                 oauth2_scopes=[],
@@ -126,7 +127,7 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -165,11 +166,15 @@ class ServersSDK(BaseSDK):
                 retries=retries,
             )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return models.GetServersResponse(
                 result=utils.unmarshal_json(http_res.text, models.Servers),
                 next=next_func,
             )
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -298,6 +303,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-servers",
                 oauth2_scopes=[],
@@ -306,7 +312,7 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            error_status_codes=["422", "4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -345,11 +351,15 @@ class ServersSDK(BaseSDK):
                 retries=retries,
             )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return models.GetServersResponse(
                 result=utils.unmarshal_json(http_res.text, models.Servers),
                 next=next_func,
             )
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
+            response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
+            raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -373,10 +383,11 @@ class ServersSDK(BaseSDK):
     def create(
         self,
         *,
-        request: Union[
-            models.CreateServerServersRequestBody,
-            models.CreateServerServersRequestBodyTypedDict,
-        ] = models.CreateServerServersRequestBody(),
+        data: Optional[
+            Union[
+                models.CreateServerServersData, models.CreateServerServersDataTypedDict
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -384,7 +395,7 @@ class ServersSDK(BaseSDK):
     ) -> models.Server:
         r"""Deploy Server
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -400,9 +411,11 @@ class ServersSDK(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.CreateServerServersRequestBody)
-        request = cast(models.CreateServerServersRequestBody, request)
+        request = models.CreateServerServersRequestBody(
+            data=utils.get_pydantic_model(
+                data, Optional[models.CreateServerServersData]
+            ),
+        )
 
         req = self._build_request(
             method="POST",
@@ -418,11 +431,7 @@ class ServersSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                True,
-                "json",
-                Optional[models.CreateServerServersRequestBody],
+                request, False, False, "json", models.CreateServerServersRequestBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -437,6 +446,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server",
                 oauth2_scopes=[],
@@ -480,10 +490,11 @@ class ServersSDK(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Union[
-            models.CreateServerServersRequestBody,
-            models.CreateServerServersRequestBodyTypedDict,
-        ] = models.CreateServerServersRequestBody(),
+        data: Optional[
+            Union[
+                models.CreateServerServersData, models.CreateServerServersDataTypedDict
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -491,7 +502,7 @@ class ServersSDK(BaseSDK):
     ) -> models.Server:
         r"""Deploy Server
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -507,9 +518,11 @@ class ServersSDK(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.CreateServerServersRequestBody)
-        request = cast(models.CreateServerServersRequestBody, request)
+        request = models.CreateServerServersRequestBody(
+            data=utils.get_pydantic_model(
+                data, Optional[models.CreateServerServersData]
+            ),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -525,11 +538,7 @@ class ServersSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request,
-                False,
-                True,
-                "json",
-                Optional[models.CreateServerServersRequestBody],
+                request, False, False, "json", models.CreateServerServersRequestBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -544,6 +553,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server",
                 oauth2_scopes=[],
@@ -647,6 +657,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-server",
                 oauth2_scopes=[],
@@ -744,6 +755,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-server",
                 oauth2_scopes=[],
@@ -783,11 +795,16 @@ class ServersSDK(BaseSDK):
         *,
         server_id: str,
         id: Optional[str] = "sv_81EVOtR1N4J2Z",
-        type_: Optional[models.UpdateServerServersType] = None,
+        type_: Optional[models.UpdateServerServersRequestType] = None,
         attributes: Optional[
             Union[
-                models.UpdateServerServersAttributes,
-                models.UpdateServerServersAttributesTypedDict,
+                models.UpdateServerServersRequestAttributes,
+                models.UpdateServerServersRequestAttributesTypedDict,
+            ]
+        ] = None,
+        data: Optional[
+            Union[
+                models.UpdateServerServersData, models.UpdateServerServersDataTypedDict
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -801,6 +818,7 @@ class ServersSDK(BaseSDK):
         :param id:
         :param type:
         :param attributes:
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -822,7 +840,10 @@ class ServersSDK(BaseSDK):
                 id=id,
                 type=type_,
                 attributes=utils.get_pydantic_model(
-                    attributes, Optional[models.UpdateServerServersAttributes]
+                    attributes, Optional[models.UpdateServerServersRequestAttributes]
+                ),
+                data=utils.get_pydantic_model(
+                    data, Optional[models.UpdateServerServersData]
                 ),
             ),
         )
@@ -860,6 +881,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-server",
                 oauth2_scopes=[],
@@ -875,12 +897,10 @@ class ServersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, "400", "application/vnd.api+json"):
+        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
             raise models.ServerError(data=response_data)
-        if utils.match_response(
-            http_res, ["402", "422", "423"], "application/vnd.api+json"
-        ):
+        if utils.match_response(http_res, ["402", "423"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -908,11 +928,16 @@ class ServersSDK(BaseSDK):
         *,
         server_id: str,
         id: Optional[str] = "sv_81EVOtR1N4J2Z",
-        type_: Optional[models.UpdateServerServersType] = None,
+        type_: Optional[models.UpdateServerServersRequestType] = None,
         attributes: Optional[
             Union[
-                models.UpdateServerServersAttributes,
-                models.UpdateServerServersAttributesTypedDict,
+                models.UpdateServerServersRequestAttributes,
+                models.UpdateServerServersRequestAttributesTypedDict,
+            ]
+        ] = None,
+        data: Optional[
+            Union[
+                models.UpdateServerServersData, models.UpdateServerServersDataTypedDict
             ]
         ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -926,6 +951,7 @@ class ServersSDK(BaseSDK):
         :param id:
         :param type:
         :param attributes:
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -947,7 +973,10 @@ class ServersSDK(BaseSDK):
                 id=id,
                 type=type_,
                 attributes=utils.get_pydantic_model(
-                    attributes, Optional[models.UpdateServerServersAttributes]
+                    attributes, Optional[models.UpdateServerServersRequestAttributes]
+                ),
+                data=utils.get_pydantic_model(
+                    data, Optional[models.UpdateServerServersData]
                 ),
             ),
         )
@@ -985,6 +1014,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-server",
                 oauth2_scopes=[],
@@ -1000,12 +1030,10 @@ class ServersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, "400", "application/vnd.api+json"):
+        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ServerErrorData)
             raise models.ServerError(data=response_data)
-        if utils.match_response(
-            http_res, ["402", "422", "423"], "application/vnd.api+json"
-        ):
+        if utils.match_response(http_res, ["402", "423"], "application/vnd.api+json"):
             response_data = utils.unmarshal_json(http_res.text, models.ErrorObjectData)
             raise models.ErrorObject(data=response_data)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1088,6 +1116,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="destroy-server",
                 oauth2_scopes=[],
@@ -1188,6 +1217,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="destroy-server",
                 oauth2_scopes=[],
@@ -1285,6 +1315,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-server-deploy-config",
                 oauth2_scopes=[],
@@ -1376,6 +1407,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-server-deploy-config",
                 oauth2_scopes=[],
@@ -1490,6 +1522,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-server-deploy-config",
                 oauth2_scopes=[],
@@ -1613,6 +1646,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-server-deploy-config",
                 oauth2_scopes=[],
@@ -1715,6 +1749,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-lock",
                 oauth2_scopes=[],
@@ -1808,6 +1843,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-lock",
                 oauth2_scopes=[],
@@ -1901,6 +1937,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-unlock",
                 oauth2_scopes=[],
@@ -1994,6 +2031,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-unlock",
                 oauth2_scopes=[],
@@ -2102,6 +2140,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server-out-of-band",
                 oauth2_scopes=[],
@@ -2214,6 +2253,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server-out-of-band",
                 oauth2_scopes=[],
@@ -2309,6 +2349,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-server-out-of-band",
                 oauth2_scopes=[],
@@ -2404,6 +2445,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-server-out-of-band",
                 oauth2_scopes=[],
@@ -2522,6 +2564,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server-action",
                 oauth2_scopes=[],
@@ -2640,6 +2683,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server-action",
                 oauth2_scopes=[],
@@ -2741,6 +2785,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-ipmi-session",
                 oauth2_scopes=[],
@@ -2844,6 +2889,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-ipmi-session",
                 oauth2_scopes=[],
@@ -2943,6 +2989,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-start-rescue-mode",
                 oauth2_scopes=[],
@@ -3040,6 +3087,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-start-rescue-mode",
                 oauth2_scopes=[],
@@ -3137,6 +3185,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-exit-rescue-mode",
                 oauth2_scopes=[],
@@ -3234,6 +3283,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-exit-rescue-mode",
                 oauth2_scopes=[],
@@ -3331,6 +3381,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-schedule-deletion",
                 oauth2_scopes=[],
@@ -3430,6 +3481,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-schedule-deletion",
                 oauth2_scopes=[],
@@ -3529,6 +3581,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-unschedule-deletion",
                 oauth2_scopes=[],
@@ -3626,6 +3679,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="server-unschedule-deletion",
                 oauth2_scopes=[],
@@ -3738,6 +3792,7 @@ class ServersSDK(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server-reinstall",
                 oauth2_scopes=[],
@@ -3855,6 +3910,7 @@ class ServersSDK(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-server-reinstall",
                 oauth2_scopes=[],
