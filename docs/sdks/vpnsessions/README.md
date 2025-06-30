@@ -69,12 +69,10 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.vpn_sessions.create(request={
-        "data": {
-            "attributes": {
-                "site": latitudesh_python_sdk.PostVpnSessionVpnSessionsSite.SAO,
-                "server_id": "sv_wg3ZDrKyO5QlP",
-            },
+    res = latitudesh.vpn_sessions.create(data={
+        "attributes": {
+            "site": latitudesh_python_sdk.PostVpnSessionVpnSessionsSite.SAO,
+            "server_id": "sv_wg3ZDrKyO5QlP",
         },
     })
 
@@ -85,10 +83,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `request`                                                                                           | [models.PostVpnSessionVpnSessionsRequestBody](../../models/postvpnsessionvpnsessionsrequestbody.md) | :heavy_check_mark:                                                                                  | The request object to use for the request.                                                          |
-| `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `data`                                                                                          | [Optional[models.PostVpnSessionVpnSessionsData]](../../models/postvpnsessionvpnsessionsdata.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
 
 ### Response
 

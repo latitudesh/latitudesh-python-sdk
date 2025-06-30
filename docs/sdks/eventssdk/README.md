@@ -23,7 +23,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.events.list()
+    res = latitudesh.events.list(page_size=20, page_number=1)
 
     while res is not None:
         # Handle items

@@ -3,9 +3,9 @@
 from .basesdk import BaseSDK
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
+from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Mapping, Optional, Union, cast
+from typing import Mapping, Optional, Union
 
 
 class Tags(BaseSDK):
@@ -16,7 +16,7 @@ class Tags(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CustomTag:
+    ) -> models.CustomTags:
         r"""List all Tags
 
         List all Tags in the team.
@@ -62,6 +62,7 @@ class Tags(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-tags",
                 oauth2_scopes=[],
@@ -75,7 +76,7 @@ class Tags(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.CustomTag)
+            return utils.unmarshal_json(http_res.text, models.CustomTags)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError(
@@ -103,7 +104,7 @@ class Tags(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.CustomTag:
+    ) -> models.CustomTags:
         r"""List all Tags
 
         List all Tags in the team.
@@ -149,6 +150,7 @@ class Tags(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-tags",
                 oauth2_scopes=[],
@@ -162,7 +164,7 @@ class Tags(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return utils.unmarshal_json(http_res.text, models.CustomTag)
+            return utils.unmarshal_json(http_res.text, models.CustomTags)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError(
@@ -186,9 +188,9 @@ class Tags(BaseSDK):
     def create(
         self,
         *,
-        request: Union[
-            models.CreateTagTagsRequestBody, models.CreateTagTagsRequestBodyTypedDict
-        ] = models.CreateTagTagsRequestBody(),
+        data: Optional[
+            Union[models.CreateTagTagsData, models.CreateTagTagsDataTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -199,7 +201,7 @@ class Tags(BaseSDK):
         Create a Tag in the team.
 
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -215,9 +217,9 @@ class Tags(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.CreateTagTagsRequestBody)
-        request = cast(models.CreateTagTagsRequestBody, request)
+        request = models.CreateTagTagsRequestBody(
+            data=utils.get_pydantic_model(data, Optional[models.CreateTagTagsData]),
+        )
 
         req = self._build_request(
             method="POST",
@@ -233,7 +235,7 @@ class Tags(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.CreateTagTagsRequestBody]
+                request, False, False, "json", models.CreateTagTagsRequestBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -248,6 +250,7 @@ class Tags(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-tag",
                 oauth2_scopes=[],
@@ -285,9 +288,9 @@ class Tags(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Union[
-            models.CreateTagTagsRequestBody, models.CreateTagTagsRequestBodyTypedDict
-        ] = models.CreateTagTagsRequestBody(),
+        data: Optional[
+            Union[models.CreateTagTagsData, models.CreateTagTagsDataTypedDict]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -298,7 +301,7 @@ class Tags(BaseSDK):
         Create a Tag in the team.
 
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -314,9 +317,9 @@ class Tags(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(request, models.CreateTagTagsRequestBody)
-        request = cast(models.CreateTagTagsRequestBody, request)
+        request = models.CreateTagTagsRequestBody(
+            data=utils.get_pydantic_model(data, Optional[models.CreateTagTagsData]),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -332,7 +335,7 @@ class Tags(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, True, "json", Optional[models.CreateTagTagsRequestBody]
+                request, False, False, "json", models.CreateTagTagsRequestBody
             ),
             timeout_ms=timeout_ms,
         )
@@ -347,6 +350,7 @@ class Tags(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="create-tag",
                 oauth2_scopes=[],
@@ -455,6 +459,7 @@ class Tags(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-tag",
                 oauth2_scopes=[],
@@ -563,6 +568,7 @@ class Tags(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-tag",
                 oauth2_scopes=[],
@@ -657,6 +663,7 @@ class Tags(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="destroy-tag",
                 oauth2_scopes=[],
@@ -751,6 +758,7 @@ class Tags(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="destroy-tag",
                 oauth2_scopes=[],

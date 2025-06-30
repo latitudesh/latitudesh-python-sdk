@@ -7,9 +7,20 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class RoleMetaTypedDict(TypedDict):
+    pass
+
+
+class RoleMeta(BaseModel):
+    pass
+
+
 class RoleTypedDict(TypedDict):
     data: NotRequired[RoleDataTypedDict]
+    meta: NotRequired[RoleMetaTypedDict]
 
 
 class Role(BaseModel):
     data: Optional[RoleData] = None
+
+    meta: Optional[RoleMeta] = None

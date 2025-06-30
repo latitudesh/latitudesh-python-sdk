@@ -48,6 +48,7 @@ class ProjectIncludeTypedDict(TypedDict):
     environment: NotRequired[str]
     billing: NotRequired[BillingModelTypedDict]
     stats: NotRequired[StatsTypedDict]
+    provisioning_type: NotRequired[str]
 
 
 class ProjectInclude(BaseModel):
@@ -70,3 +71,5 @@ class ProjectInclude(BaseModel):
     billing: Optional[BillingModel] = None
 
     stats: Optional[Stats] = None
+
+    provisioning_type: Optional[str] = None

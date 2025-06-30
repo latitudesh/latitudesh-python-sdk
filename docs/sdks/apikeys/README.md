@@ -66,10 +66,10 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.api_keys.create(request={
-        "data": {
-            "type": latitudesh_python_sdk.CreateAPIKeyType.API_KEYS,
-            "attributes": {},
+    res = latitudesh.api_keys.create(data={
+        "type": latitudesh_python_sdk.CreateAPIKeyType.API_KEYS,
+        "attributes": {
+            "name": "App Token",
         },
     })
 
@@ -82,7 +82,7 @@ with Latitudesh(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `request`                                                           | [models.CreateAPIKey](../../models/createapikey.md)                 | :heavy_check_mark:                                                  | The request object to use for the request.                          |
+| `data`                                                              | [Optional[models.Data]](../../models/data.md)                       | :heavy_minus_sign:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -116,7 +116,9 @@ with Latitudesh(
     res = latitudesh.api_keys.regenerate(api_key_id="tok_pRMLydp0dQKr1", data={
         "id": "tok_pRMLydp0dQKr1",
         "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
-        "attributes": {},
+        "attributes": {
+            "name": "App Token",
+        },
     })
 
     # Handle response

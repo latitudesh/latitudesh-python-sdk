@@ -6,60 +6,96 @@ from .sdkconfiguration import SDKConfiguration
 from .utils.logger import Logger, get_default_logger
 from .utils.retries import RetryConfig
 import httpx
+import importlib
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import SDKHooks
-from latitudesh_python_sdk.apikeys import APIKeys
-from latitudesh_python_sdk.billing import Billing
-from latitudesh_python_sdk.events_sdk import EventsSDK
-from latitudesh_python_sdk.firewalls_sdk import FirewallsSDK
-from latitudesh_python_sdk.ipaddresses_sdk import IPAddressesSDK
-from latitudesh_python_sdk.operatingsystems_sdk import OperatingSystemsSDK
-from latitudesh_python_sdk.plans import Plans
-from latitudesh_python_sdk.privatenetworks import PrivateNetworks
-from latitudesh_python_sdk.projects_sdk import ProjectsSDK
-from latitudesh_python_sdk.regions_sdk import RegionsSDK
-from latitudesh_python_sdk.roles import Roles
-from latitudesh_python_sdk.servers_sdk import ServersSDK
-from latitudesh_python_sdk.sshkeys import SSHKeys
-from latitudesh_python_sdk.storage import Storage
-from latitudesh_python_sdk.tags import Tags
-from latitudesh_python_sdk.teams_sdk import TeamsSDK
-from latitudesh_python_sdk.teamsmembers import TeamsMembers
-from latitudesh_python_sdk.traffic_sdk import TrafficSDK
 from latitudesh_python_sdk.types import OptionalNullable, UNSET
-from latitudesh_python_sdk.userdata_sdk import UserDataSDK
-from latitudesh_python_sdk.userprofile import UserProfile
-from latitudesh_python_sdk.virtualmachines import VirtualMachines
-from latitudesh_python_sdk.vpnsessions import VpnSessions
-from typing import Any, Callable, Dict, List, Optional, Union, cast
+from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union, cast
 import weakref
+
+if TYPE_CHECKING:
+    from latitudesh_python_sdk.apikeys import APIKeys
+    from latitudesh_python_sdk.billing import Billing
+    from latitudesh_python_sdk.events_sdk import EventsSDK
+    from latitudesh_python_sdk.firewalls_sdk import FirewallsSDK
+    from latitudesh_python_sdk.ipaddresses_sdk import IPAddressesSDK
+    from latitudesh_python_sdk.operatingsystems_sdk import OperatingSystemsSDK
+    from latitudesh_python_sdk.plans import Plans
+    from latitudesh_python_sdk.privatenetworks import PrivateNetworks
+    from latitudesh_python_sdk.projects_sdk import ProjectsSDK
+    from latitudesh_python_sdk.regions_sdk import RegionsSDK
+    from latitudesh_python_sdk.roles import Roles
+    from latitudesh_python_sdk.servers_sdk import ServersSDK
+    from latitudesh_python_sdk.sshkeys_sdk import SSHKeysSDK
+    from latitudesh_python_sdk.storage import Storage
+    from latitudesh_python_sdk.tags import Tags
+    from latitudesh_python_sdk.teams_sdk import TeamsSDK
+    from latitudesh_python_sdk.teamsmembers import TeamsMembers
+    from latitudesh_python_sdk.traffic_sdk import TrafficSDK
+    from latitudesh_python_sdk.userdata_sdk import UserDataSDK
+    from latitudesh_python_sdk.userprofile import UserProfile
+    from latitudesh_python_sdk.virtualmachines import VirtualMachines
+    from latitudesh_python_sdk.vpnsessions import VpnSessions
 
 
 class Latitudesh(BaseSDK):
     r"""Latitude.sh API: The Latitude.sh API is a RESTful API to manage your Latitude.sh account. It allows you to perform the same actions as the Latitude.sh dashboard."""
 
-    api_keys: APIKeys
-    billing: Billing
-    events: EventsSDK
-    firewalls: FirewallsSDK
-    ip_addresses: IPAddressesSDK
-    teams_members: TeamsMembers
-    operating_systems: OperatingSystemsSDK
-    plans: Plans
-    projects: ProjectsSDK
-    regions: RegionsSDK
-    roles: Roles
-    servers: ServersSDK
-    ssh_keys: SSHKeys
-    storage: Storage
-    tags: Tags
-    teams: TeamsSDK
-    traffic: TrafficSDK
-    user_data: UserDataSDK
-    user_profile: UserProfile
-    virtual_machines: VirtualMachines
-    private_networks: PrivateNetworks
-    vpn_sessions: VpnSessions
+    api_keys: "APIKeys"
+    billing: "Billing"
+    events: "EventsSDK"
+    firewalls: "FirewallsSDK"
+    ip_addresses: "IPAddressesSDK"
+    teams_members: "TeamsMembers"
+    operating_systems: "OperatingSystemsSDK"
+    plans: "Plans"
+    projects: "ProjectsSDK"
+    regions: "RegionsSDK"
+    roles: "Roles"
+    servers: "ServersSDK"
+    ssh_keys: "SSHKeysSDK"
+    storage: "Storage"
+    tags: "Tags"
+    teams: "TeamsSDK"
+    traffic: "TrafficSDK"
+    user_data: "UserDataSDK"
+    user_profile: "UserProfile"
+    virtual_machines: "VirtualMachines"
+    private_networks: "PrivateNetworks"
+    vpn_sessions: "VpnSessions"
+    _sub_sdk_map = {
+        "api_keys": ("latitudesh_python_sdk.apikeys", "APIKeys"),
+        "billing": ("latitudesh_python_sdk.billing", "Billing"),
+        "events": ("latitudesh_python_sdk.events_sdk", "EventsSDK"),
+        "firewalls": ("latitudesh_python_sdk.firewalls_sdk", "FirewallsSDK"),
+        "ip_addresses": ("latitudesh_python_sdk.ipaddresses_sdk", "IPAddressesSDK"),
+        "teams_members": ("latitudesh_python_sdk.teamsmembers", "TeamsMembers"),
+        "operating_systems": (
+            "latitudesh_python_sdk.operatingsystems_sdk",
+            "OperatingSystemsSDK",
+        ),
+        "plans": ("latitudesh_python_sdk.plans", "Plans"),
+        "projects": ("latitudesh_python_sdk.projects_sdk", "ProjectsSDK"),
+        "regions": ("latitudesh_python_sdk.regions_sdk", "RegionsSDK"),
+        "roles": ("latitudesh_python_sdk.roles", "Roles"),
+        "servers": ("latitudesh_python_sdk.servers_sdk", "ServersSDK"),
+        "ssh_keys": ("latitudesh_python_sdk.sshkeys_sdk", "SSHKeysSDK"),
+        "storage": ("latitudesh_python_sdk.storage", "Storage"),
+        "tags": ("latitudesh_python_sdk.tags", "Tags"),
+        "teams": ("latitudesh_python_sdk.teams_sdk", "TeamsSDK"),
+        "traffic": ("latitudesh_python_sdk.traffic_sdk", "TrafficSDK"),
+        "user_data": ("latitudesh_python_sdk.userdata_sdk", "UserDataSDK"),
+        "user_profile": ("latitudesh_python_sdk.userprofile", "UserProfile"),
+        "virtual_machines": (
+            "latitudesh_python_sdk.virtualmachines",
+            "VirtualMachines",
+        ),
+        "private_networks": (
+            "latitudesh_python_sdk.privatenetworks",
+            "PrivateNetworks",
+        ),
+        "vpn_sessions": ("latitudesh_python_sdk.vpnsessions", "VpnSessions"),
+    }
 
     def __init__(
         self,
@@ -145,15 +181,15 @@ class Latitudesh(BaseSDK):
 
         hooks = SDKHooks()
 
+        # pylint: disable=protected-access
+        self.sdk_configuration.__dict__["_hooks"] = hooks
+
         current_server_url, *_ = self.sdk_configuration.get_server_details()
         server_url, self.sdk_configuration.client = hooks.sdk_init(
             current_server_url, client
         )
         if current_server_url != server_url:
             self.sdk_configuration.server_url = server_url
-
-        # pylint: disable=protected-access
-        self.sdk_configuration.__dict__["_hooks"] = hooks
 
         weakref.finalize(
             self,
@@ -165,31 +201,32 @@ class Latitudesh(BaseSDK):
             self.sdk_configuration.async_client_supplied,
         )
 
-        self._init_sdks()
+    def __getattr__(self, name: str):
+        if name in self._sub_sdk_map:
+            module_path, class_name = self._sub_sdk_map[name]
+            try:
+                module = importlib.import_module(module_path)
+                klass = getattr(module, class_name)
+                instance = klass(self.sdk_configuration)
+                setattr(self, name, instance)
+                return instance
+            except ImportError as e:
+                raise AttributeError(
+                    f"Failed to import module {module_path} for attribute {name}: {e}"
+                ) from e
+            except AttributeError as e:
+                raise AttributeError(
+                    f"Failed to find class {class_name} in module {module_path} for attribute {name}: {e}"
+                ) from e
 
-    def _init_sdks(self):
-        self.api_keys = APIKeys(self.sdk_configuration)
-        self.billing = Billing(self.sdk_configuration)
-        self.events = EventsSDK(self.sdk_configuration)
-        self.firewalls = FirewallsSDK(self.sdk_configuration)
-        self.ip_addresses = IPAddressesSDK(self.sdk_configuration)
-        self.teams_members = TeamsMembers(self.sdk_configuration)
-        self.operating_systems = OperatingSystemsSDK(self.sdk_configuration)
-        self.plans = Plans(self.sdk_configuration)
-        self.projects = ProjectsSDK(self.sdk_configuration)
-        self.regions = RegionsSDK(self.sdk_configuration)
-        self.roles = Roles(self.sdk_configuration)
-        self.servers = ServersSDK(self.sdk_configuration)
-        self.ssh_keys = SSHKeys(self.sdk_configuration)
-        self.storage = Storage(self.sdk_configuration)
-        self.tags = Tags(self.sdk_configuration)
-        self.teams = TeamsSDK(self.sdk_configuration)
-        self.traffic = TrafficSDK(self.sdk_configuration)
-        self.user_data = UserDataSDK(self.sdk_configuration)
-        self.user_profile = UserProfile(self.sdk_configuration)
-        self.virtual_machines = VirtualMachines(self.sdk_configuration)
-        self.private_networks = PrivateNetworks(self.sdk_configuration)
-        self.vpn_sessions = VpnSessions(self.sdk_configuration)
+        raise AttributeError(
+            f"'{type(self).__name__}' object has no attribute '{name}'"
+        )
+
+    def __dir__(self):
+        default_attrs = list(super().__dir__())
+        lazy_attrs = list(self._sub_sdk_map.keys())
+        return sorted(list(set(default_attrs + lazy_attrs)))
 
     def __enter__(self):
         return self

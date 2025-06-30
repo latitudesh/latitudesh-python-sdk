@@ -27,7 +27,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ip_addresses.list(filter_server="46", filter_project="59")
+    res = latitudesh.ip_addresses.list(filter_server="46", filter_project="59", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items

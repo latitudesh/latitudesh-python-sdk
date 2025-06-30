@@ -12,45 +12,95 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class UpdateServerServersType(str, Enum):
+class UpdateServerServersRequestType(str, Enum):
     SERVERS = "servers"
 
 
-class UpdateServerServersBilling(str, Enum):
+class UpdateServerServersRequestBilling(str, Enum):
     HOURLY = "hourly"
     MONTHLY = "monthly"
     YEARLY = "yearly"
 
 
-class UpdateServerServersAttributesTypedDict(TypedDict):
+class UpdateServerServersRequestAttributesTypedDict(TypedDict):
     hostname: NotRequired[str]
-    billing: NotRequired[UpdateServerServersBilling]
+    billing: NotRequired[UpdateServerServersRequestBilling]
     tags: NotRequired[List[str]]
     project: NotRequired[str]
 
 
-class UpdateServerServersAttributes(BaseModel):
+class UpdateServerServersRequestAttributes(BaseModel):
     hostname: Optional[str] = "new-hostname"
 
-    billing: Optional[UpdateServerServersBilling] = UpdateServerServersBilling.MONTHLY
+    billing: Optional[UpdateServerServersRequestBilling] = (
+        UpdateServerServersRequestBilling.MONTHLY
+    )
 
     tags: Optional[List[str]] = None
 
     project: Optional[str] = None
 
 
+class UpdateServerServersRequestApplicationJSONType(str, Enum):
+    SERVERS = "servers"
+
+
+class UpdateServerServersRequestApplicationJSONBilling(str, Enum):
+    HOURLY = "hourly"
+    MONTHLY = "monthly"
+    YEARLY = "yearly"
+
+
+class UpdateServerServersRequestApplicationJSONAttributesTypedDict(TypedDict):
+    hostname: NotRequired[str]
+    billing: NotRequired[UpdateServerServersRequestApplicationJSONBilling]
+    tags: NotRequired[List[str]]
+    project: NotRequired[str]
+
+
+class UpdateServerServersRequestApplicationJSONAttributes(BaseModel):
+    hostname: Optional[str] = "new-hostname"
+
+    billing: Optional[UpdateServerServersRequestApplicationJSONBilling] = (
+        UpdateServerServersRequestApplicationJSONBilling.MONTHLY
+    )
+
+    tags: Optional[List[str]] = None
+
+    project: Optional[str] = None
+
+
+class UpdateServerServersDataTypedDict(TypedDict):
+    id: NotRequired[str]
+    type: NotRequired[UpdateServerServersRequestApplicationJSONType]
+    attributes: NotRequired[
+        UpdateServerServersRequestApplicationJSONAttributesTypedDict
+    ]
+
+
+class UpdateServerServersData(BaseModel):
+    id: Optional[str] = "sv_81EVOtR1N4J2Z"
+
+    type: Optional[UpdateServerServersRequestApplicationJSONType] = None
+
+    attributes: Optional[UpdateServerServersRequestApplicationJSONAttributes] = None
+
+
 class UpdateServerServersRequestBodyTypedDict(TypedDict):
     id: NotRequired[str]
-    type: NotRequired[UpdateServerServersType]
-    attributes: NotRequired[UpdateServerServersAttributesTypedDict]
+    type: NotRequired[UpdateServerServersRequestType]
+    attributes: NotRequired[UpdateServerServersRequestAttributesTypedDict]
+    data: NotRequired[UpdateServerServersDataTypedDict]
 
 
 class UpdateServerServersRequestBody(BaseModel):
     id: Optional[str] = "sv_81EVOtR1N4J2Z"
 
-    type: Optional[UpdateServerServersType] = None
+    type: Optional[UpdateServerServersRequestType] = None
 
-    attributes: Optional[UpdateServerServersAttributes] = None
+    attributes: Optional[UpdateServerServersRequestAttributes] = None
+
+    data: Optional[UpdateServerServersData] = None
 
 
 class UpdateServerRequestTypedDict(TypedDict):

@@ -1,0 +1,10 @@
+# BandwidthPlanData
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `id`                                                                                     | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `type`                                                                                   | [Optional[models.BandwidthPlanDataType]](../models/bandwidthplandatatype.md)             | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `attributes`                                                                             | [Optional[models.BandwidthPlanDataAttributes]](../models/bandwidthplandataattributes.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |
