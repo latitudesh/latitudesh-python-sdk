@@ -96,7 +96,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.list(filter_project="lightweight-silk-table")
+    res = latitudesh.firewalls.list(filter_project="lightweight-silk-table", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -308,7 +308,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.list_assignments(firewall_id="fw_93YjJOLydvZ87")
+    res = latitudesh.firewalls.list_assignments(firewall_id="fw_93YjJOLydvZ87", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
