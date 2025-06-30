@@ -24,7 +24,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.teams_members.list()
+    res = latitudesh.teams_members.list(page_size=20, page_number=1)
 
     while res is not None:
         # Handle items

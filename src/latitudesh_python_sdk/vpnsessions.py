@@ -3,9 +3,9 @@
 from .basesdk import BaseSDK
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
+from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Any, Mapping, Optional, Union, cast
+from typing import Any, Mapping, Optional, Union
 
 
 class VpnSessions(BaseSDK):
@@ -66,6 +66,7 @@ class VpnSessions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-vpn-sessions",
                 oauth2_scopes=[],
@@ -163,6 +164,7 @@ class VpnSessions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-vpn-sessions",
                 oauth2_scopes=[],
@@ -206,10 +208,12 @@ class VpnSessions(BaseSDK):
     def create(
         self,
         *,
-        request: Union[
-            models.PostVpnSessionVpnSessionsRequestBody,
-            models.PostVpnSessionVpnSessionsRequestBodyTypedDict,
-        ] = models.PostVpnSessionVpnSessionsRequestBody(),
+        data: Optional[
+            Union[
+                models.PostVpnSessionVpnSessionsData,
+                models.PostVpnSessionVpnSessionsDataTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -221,7 +225,7 @@ class VpnSessions(BaseSDK):
         `NOTE:` The VPN credentials are only listed ONCE upon creation. They can however be refreshed or deleted.
 
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -237,11 +241,11 @@ class VpnSessions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, models.PostVpnSessionVpnSessionsRequestBody
-            )
-        request = cast(models.PostVpnSessionVpnSessionsRequestBody, request)
+        request = models.PostVpnSessionVpnSessionsRequestBody(
+            data=utils.get_pydantic_model(
+                data, Optional[models.PostVpnSessionVpnSessionsData]
+            ),
+        )
 
         req = self._build_request(
             method="POST",
@@ -259,9 +263,9 @@ class VpnSessions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PostVpnSessionVpnSessionsRequestBody],
+                models.PostVpnSessionVpnSessionsRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -276,6 +280,7 @@ class VpnSessions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="post-vpn-session",
                 oauth2_scopes=[],
@@ -317,10 +322,12 @@ class VpnSessions(BaseSDK):
     async def create_async(
         self,
         *,
-        request: Union[
-            models.PostVpnSessionVpnSessionsRequestBody,
-            models.PostVpnSessionVpnSessionsRequestBodyTypedDict,
-        ] = models.PostVpnSessionVpnSessionsRequestBody(),
+        data: Optional[
+            Union[
+                models.PostVpnSessionVpnSessionsData,
+                models.PostVpnSessionVpnSessionsDataTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -332,7 +339,7 @@ class VpnSessions(BaseSDK):
         `NOTE:` The VPN credentials are only listed ONCE upon creation. They can however be refreshed or deleted.
 
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -348,11 +355,11 @@ class VpnSessions(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, models.PostVpnSessionVpnSessionsRequestBody
-            )
-        request = cast(models.PostVpnSessionVpnSessionsRequestBody, request)
+        request = models.PostVpnSessionVpnSessionsRequestBody(
+            data=utils.get_pydantic_model(
+                data, Optional[models.PostVpnSessionVpnSessionsData]
+            ),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -370,9 +377,9 @@ class VpnSessions(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.PostVpnSessionVpnSessionsRequestBody],
+                models.PostVpnSessionVpnSessionsRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -387,6 +394,7 @@ class VpnSessions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="post-vpn-session",
                 oauth2_scopes=[],
@@ -485,6 +493,7 @@ class VpnSessions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="put-vpn-session",
                 oauth2_scopes=[],
@@ -583,6 +592,7 @@ class VpnSessions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="put-vpn-session",
                 oauth2_scopes=[],
@@ -681,6 +691,7 @@ class VpnSessions(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete-vpn-session",
                 oauth2_scopes=[],
@@ -779,6 +790,7 @@ class VpnSessions(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="delete-vpn-session",
                 oauth2_scopes=[],

@@ -1,0 +1,10 @@
+# PatchUserDataUserDataData
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `id`                                                                                             | *str*                                                                                            | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `type`                                                                                           | [models.PatchUserDataUserDataType](../models/patchuserdatauserdatatype.md)                       | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `attributes`                                                                                     | [Optional[models.PatchUserDataUserDataAttributes]](../models/patchuserdatauserdataattributes.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |

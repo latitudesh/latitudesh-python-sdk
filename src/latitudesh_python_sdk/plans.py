@@ -4,9 +4,9 @@ from .basesdk import BaseSDK
 from jsonpath import JSONPath
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
-from latitudesh_python_sdk.types import BaseModel, OptionalNullable, UNSET
+from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
-from typing import Any, Dict, List, Mapping, Optional, Union, cast
+from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class Plans(BaseSDK):
@@ -91,6 +91,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-plans",
                 oauth2_scopes=[],
@@ -206,6 +207,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-plans",
                 oauth2_scopes=[],
@@ -297,6 +299,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-plan",
                 oauth2_scopes=[],
@@ -392,6 +395,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-plan",
                 oauth2_scopes=[],
@@ -498,6 +502,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-bandwidth-plans",
                 oauth2_scopes=[],
@@ -625,6 +630,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-bandwidth-plans",
                 oauth2_scopes=[],
@@ -687,10 +693,12 @@ class Plans(BaseSDK):
     def update_bandwidth(
         self,
         *,
-        request: Union[
-            models.UpdatePlansBandwidthPlansRequestBody,
-            models.UpdatePlansBandwidthPlansRequestBodyTypedDict,
-        ] = models.UpdatePlansBandwidthPlansRequestBody(),
+        data: Optional[
+            Union[
+                models.UpdatePlansBandwidthPlansData,
+                models.UpdatePlansBandwidthPlansDataTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -701,7 +709,7 @@ class Plans(BaseSDK):
         Allow to increase or decrease bandwidth packages. Only admins and owners can request.
 
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -717,11 +725,11 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, models.UpdatePlansBandwidthPlansRequestBody
-            )
-        request = cast(models.UpdatePlansBandwidthPlansRequestBody, request)
+        request = models.UpdatePlansBandwidthPlansRequestBody(
+            data=utils.get_pydantic_model(
+                data, Optional[models.UpdatePlansBandwidthPlansData]
+            ),
+        )
 
         req = self._build_request(
             method="POST",
@@ -739,9 +747,9 @@ class Plans(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdatePlansBandwidthPlansRequestBody],
+                models.UpdatePlansBandwidthPlansRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -756,6 +764,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-plans-bandwidth",
                 oauth2_scopes=[],
@@ -797,10 +806,12 @@ class Plans(BaseSDK):
     async def update_bandwidth_async(
         self,
         *,
-        request: Union[
-            models.UpdatePlansBandwidthPlansRequestBody,
-            models.UpdatePlansBandwidthPlansRequestBodyTypedDict,
-        ] = models.UpdatePlansBandwidthPlansRequestBody(),
+        data: Optional[
+            Union[
+                models.UpdatePlansBandwidthPlansData,
+                models.UpdatePlansBandwidthPlansDataTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -811,7 +822,7 @@ class Plans(BaseSDK):
         Allow to increase or decrease bandwidth packages. Only admins and owners can request.
 
 
-        :param request: The request object to send.
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -827,11 +838,11 @@ class Plans(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        if not isinstance(request, BaseModel):
-            request = utils.unmarshal(
-                request, models.UpdatePlansBandwidthPlansRequestBody
-            )
-        request = cast(models.UpdatePlansBandwidthPlansRequestBody, request)
+        request = models.UpdatePlansBandwidthPlansRequestBody(
+            data=utils.get_pydantic_model(
+                data, Optional[models.UpdatePlansBandwidthPlansData]
+            ),
+        )
 
         req = self._build_request_async(
             method="POST",
@@ -849,9 +860,9 @@ class Plans(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request,
                 False,
-                True,
+                False,
                 "json",
-                Optional[models.UpdatePlansBandwidthPlansRequestBody],
+                models.UpdatePlansBandwidthPlansRequestBody,
             ),
             timeout_ms=timeout_ms,
         )
@@ -866,6 +877,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="update-plans-bandwidth",
                 oauth2_scopes=[],
@@ -954,6 +966,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-storage-plans",
                 oauth2_scopes=[],
@@ -1038,6 +1051,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-storage-plans",
                 oauth2_scopes=[],
@@ -1122,6 +1136,7 @@ class Plans(BaseSDK):
 
         http_res = self.do_request(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-vm-plans",
                 oauth2_scopes=[],
@@ -1206,6 +1221,7 @@ class Plans(BaseSDK):
 
         http_res = await self.do_request_async(
             hook_ctx=HookContext(
+                config=self.sdk_configuration,
                 base_url=base_url or "",
                 operation_id="get-vm-plans",
                 oauth2_scopes=[],

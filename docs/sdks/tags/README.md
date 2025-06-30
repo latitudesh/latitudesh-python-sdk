@@ -41,7 +41,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.CustomTag](../../models/customtag.md)**
+**[models.CustomTags](../../models/customtags.md)**
 
 ### Errors
 
@@ -66,13 +66,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.tags.create(request={
-        "data": {
-            "type": latitudesh_python_sdk.CreateTagTagsType.TAGS,
-            "attributes": {
-                "name": "Tag Name",
-                "description": "Tag Description",
-            },
+    res = latitudesh.tags.create(data={
+        "type": latitudesh_python_sdk.CreateTagTagsType.TAGS,
+        "attributes": {
+            "name": "Tag Name",
+            "description": "Tag Description",
+            "color": "#bebebe",
         },
     })
 
@@ -83,10 +82,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                   | Type                                                                        | Required                                                                    | Description                                                                 |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `request`                                                                   | [models.CreateTagTagsRequestBody](../../models/createtagtagsrequestbody.md) | :heavy_check_mark:                                                          | The request object to use for the request.                                  |
-| `retries`                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)            | :heavy_minus_sign:                                                          | Configuration to override the default retry behavior of the client.         |
+| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `data`                                                                  | [Optional[models.CreateTagTagsData]](../../models/createtagtagsdata.md) | :heavy_minus_sign:                                                      | N/A                                                                     |
+| `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
 
 ### Response
 

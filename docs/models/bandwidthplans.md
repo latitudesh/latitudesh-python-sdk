@@ -3,6 +3,7 @@
 
 ## Fields
 
-| Field                                                    | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `data`                                                   | List[[models.BandwidthPlan](../models/bandwidthplan.md)] | :heavy_minus_sign:                                       | N/A                                                      |
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `data`                                                                 | List[[models.BandwidthPlanData](../models/bandwidthplandata.md)]       | :heavy_minus_sign:                                                     | N/A                                                                    |
+| `meta`                                                                 | [Optional[models.BandwidthPlansMeta]](../models/bandwidthplansmeta.md) | :heavy_minus_sign:                                                     | N/A                                                                    |

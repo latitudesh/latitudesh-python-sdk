@@ -27,10 +27,11 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.virtual_machines.create(request={
-        "data": {
-            "type": latitudesh_python_sdk.VirtualMachinePayloadType.VIRTUAL_MACHINES,
-            "attributes": {},
+    res = latitudesh.virtual_machines.create(data={
+        "type": latitudesh_python_sdk.VirtualMachinePayloadType.VIRTUAL_MACHINES,
+        "attributes": {
+            "name": "my-new-vm",
+            "project": "aerodynamic-granite-keyboard",
         },
     })
 
@@ -41,10 +42,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `request`                                                             | [models.VirtualMachinePayload](../../models/virtualmachinepayload.md) | :heavy_check_mark:                                                    | The request object to use for the request.                            |
-| `retries`                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)      | :heavy_minus_sign:                                                    | Configuration to override the default retry behavior of the client.   |
+| Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `data`                                                                                  | [Optional[models.VirtualMachinePayloadData]](../../models/virtualmachinepayloaddata.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |
+| `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
 
 ### Response
 

@@ -1,0 +1,10 @@
+# FirewallAssignmentData
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `id`                                                                                               | *Optional[str]*                                                                                    | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `type`                                                                                             | [Optional[models.FirewallAssignmentDataType]](../models/firewallassignmentdatatype.md)             | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `attributes`                                                                                       | [Optional[models.FirewallAssignmentDataAttributes]](../models/firewallassignmentdataattributes.md) | :heavy_minus_sign:                                                                                 | N/A                                                                                                |

@@ -114,7 +114,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.plans.list_bandwidth()
+    res = latitudesh.plans.list_bandwidth(api_version="2023-06-01", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -160,14 +160,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.plans.update_bandwidth(request={
-        "data": {
-            "type": latitudesh_python_sdk.UpdatePlansBandwidthPlansType.BANDWIDTH_PACKAGES,
-            "attributes": {
-                "project": "proj_VE1Wd3EKDXnZJ",
-                "quantity": 5,
-                "region_slug": "brazil",
-            },
+    res = latitudesh.plans.update_bandwidth(data={
+        "type": latitudesh_python_sdk.UpdatePlansBandwidthPlansType.BANDWIDTH_PACKAGES,
+        "attributes": {
+            "project": "proj_VE1Wd3EKDXnZJ",
+            "quantity": 5,
+            "region_slug": "brazil",
         },
     })
 
@@ -178,10 +176,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `request`                                                                                           | [models.UpdatePlansBandwidthPlansRequestBody](../../models/updateplansbandwidthplansrequestbody.md) | :heavy_check_mark:                                                                                  | The request object to use for the request.                                                          |
-| `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `data`                                                                                          | [Optional[models.UpdatePlansBandwidthPlansData]](../../models/updateplansbandwidthplansdata.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
 
 ### Response
 
