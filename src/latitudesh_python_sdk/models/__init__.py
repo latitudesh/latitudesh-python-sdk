@@ -576,6 +576,7 @@ if TYPE_CHECKING:
         IpmiSessionType,
         IpmiSessionTypedDict,
     )
+    from .latitudesherror import LatitudeshError
     from .list_firewallsop import (
         ListFirewallsRequest,
         ListFirewallsRequestTypedDict,
@@ -591,6 +592,7 @@ if TYPE_CHECKING:
         MembershipRole,
         MembershipTypedDict,
     )
+    from .no_response_error import NoResponseError
     from .operating_system_data import (
         OperatingSystemData,
         OperatingSystemDataAttributes,
@@ -880,6 +882,7 @@ if TYPE_CHECKING:
         RegionsDataTypedDict,
         RegionsTypedDict,
     )
+    from .responsevalidationerror import ResponseValidationError
     from .role import Role, RoleMeta, RoleMetaTypedDict, RoleTypedDict
     from .role_data import (
         RoleData,
@@ -1761,6 +1764,7 @@ __all__ = [
     "IpmiSessionType",
     "IpmiSessionTypedDict",
     "IpmiStatus",
+    "LatitudeshError",
     "ListFirewallsRequest",
     "ListFirewallsRequestTypedDict",
     "ListFirewallsResponse",
@@ -1784,6 +1788,7 @@ __all__ = [
     "MetadataTypedDict",
     "Nics",
     "NicsTypedDict",
+    "NoResponseError",
     "OperatingSystem",
     "OperatingSystemData",
     "OperatingSystemDataAttributes",
@@ -2015,6 +2020,7 @@ __all__ = [
     "RegionsData",
     "RegionsDataTypedDict",
     "RegionsTypedDict",
+    "ResponseValidationError",
     "Role",
     "RoleData",
     "RoleDataAttributes",
@@ -2818,6 +2824,7 @@ _dynamic_imports: dict[str, str] = {
     "IpmiSessionDataTypedDict": ".ipmi_session",
     "IpmiSessionType": ".ipmi_session",
     "IpmiSessionTypedDict": ".ipmi_session",
+    "LatitudeshError": ".latitudesherror",
     "ListFirewallsRequest": ".list_firewallsop",
     "ListFirewallsRequestTypedDict": ".list_firewallsop",
     "ListFirewallsResponse": ".list_firewallsop",
@@ -2829,6 +2836,7 @@ _dynamic_imports: dict[str, str] = {
     "MembershipDataTypedDict": ".membership",
     "MembershipRole": ".membership",
     "MembershipTypedDict": ".membership",
+    "NoResponseError": ".no_response_error",
     "OperatingSystemData": ".operating_system_data",
     "OperatingSystemDataAttributes": ".operating_system_data",
     "OperatingSystemDataAttributesTypedDict": ".operating_system_data",
@@ -3074,6 +3082,7 @@ _dynamic_imports: dict[str, str] = {
     "RegionsData": ".regions",
     "RegionsDataTypedDict": ".regions",
     "RegionsTypedDict": ".regions",
+    "ResponseValidationError": ".responsevalidationerror",
     "Role": ".role",
     "RoleMeta": ".role",
     "RoleMetaTypedDict": ".role",

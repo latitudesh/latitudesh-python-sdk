@@ -3,7 +3,8 @@
 from __future__ import annotations
 from .virtual_network_data import VirtualNetworkData, VirtualNetworkDataTypedDict
 from enum import Enum
-from latitudesh_python_sdk import utils
+import httpx
+from latitudesh_python_sdk.models import LatitudeshError
 from latitudesh_python_sdk.types import BaseModel
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
@@ -112,11 +113,15 @@ class VirtualNetworkErrorData(BaseModel):
     meta: Optional[VirtualNetworkMeta1] = None
 
 
-class VirtualNetworkError(Exception):
+class VirtualNetworkError(LatitudeshError):
     data: VirtualNetworkErrorData
 
-    def __init__(self, data: VirtualNetworkErrorData):
+    def __init__(
+        self,
+        data: VirtualNetworkErrorData,
+        raw_response: httpx.Response,
+        body: Optional[str] = None,
+    ):
+        message = body or raw_response.text
+        super().__init__(message, raw_response, body)
         self.data = data
-
-    def __str__(self) -> str:
-        return utils.marshal_json(self.data, VirtualNetworkErrorData)
