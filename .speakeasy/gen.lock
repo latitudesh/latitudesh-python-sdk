@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 97e9fd40-98a0-465e-9d1a-259beac76207
 management:
-  docChecksum: afb85c8616d4708646ed464ff33900a0
+  docChecksum: c6dbab2478458d0de23c79e42950f06c
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.571.2
-  generationVersion: 2.640.2
-  releaseVersion: 2.0.0
-  configChecksum: 04c6f6d779c4a463b99abf0c307722c9
+  speakeasyVersion: 1.575.5
+  generationVersion: 2.648.7
+  releaseVersion: 2.0.1
+  configChecksum: de19e6db7643777245f8d366bcebb1a9
   repoURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   published: true
@@ -14,7 +14,7 @@ features:
   python:
     additionalDependencies: 1.0.0
     constsAndDefaults: 1.0.5
-    core: 5.19.3
+    core: 5.19.4
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
@@ -753,8 +753,10 @@ generatedFiles:
   - src/latitudesh_python_sdk/models/ip_address.py
   - src/latitudesh_python_sdk/models/ip_addresses.py
   - src/latitudesh_python_sdk/models/ipmi_session.py
+  - src/latitudesh_python_sdk/models/latitudesherror.py
   - src/latitudesh_python_sdk/models/list_firewallsop.py
   - src/latitudesh_python_sdk/models/membership.py
+  - src/latitudesh_python_sdk/models/no_response_error.py
   - src/latitudesh_python_sdk/models/operating_system_data.py
   - src/latitudesh_python_sdk/models/operating_systems.py
   - src/latitudesh_python_sdk/models/out_of_band_connection.py
@@ -783,6 +785,7 @@ generatedFiles:
   - src/latitudesh_python_sdk/models/region.py
   - src/latitudesh_python_sdk/models/region_resource_data.py
   - src/latitudesh_python_sdk/models/regions.py
+  - src/latitudesh_python_sdk/models/responsevalidationerror.py
   - src/latitudesh_python_sdk/models/role.py
   - src/latitudesh_python_sdk/models/role_data.py
   - src/latitudesh_python_sdk/models/security.py

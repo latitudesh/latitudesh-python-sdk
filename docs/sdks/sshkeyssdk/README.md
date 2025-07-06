@@ -286,7 +286,7 @@ with Latitudesh(
 
 ## post_ssh_key
 
-Allow you create SSH Keys in a project. These keys can be used to access servers after deploy and reinstall actions.
+Allow you create SSH Keys. These keys can be used to access servers after deploy and reinstall actions.
 
 
 ### Example Usage
