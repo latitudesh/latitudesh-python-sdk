@@ -576,6 +576,7 @@ if TYPE_CHECKING:
         IpmiSessionType,
         IpmiSessionTypedDict,
     )
+    from .latitudesherror import LatitudeshError
     from .list_firewallsop import (
         ListFirewallsRequest,
         ListFirewallsRequestTypedDict,
@@ -591,6 +592,7 @@ if TYPE_CHECKING:
         MembershipRole,
         MembershipTypedDict,
     )
+    from .no_response_error import NoResponseError
     from .operating_system_data import (
         OperatingSystemData,
         OperatingSystemDataAttributes,
@@ -866,9 +868,9 @@ if TYPE_CHECKING:
     )
     from .region_resource_data import (
         RegionResourceData,
+        RegionResourceDataSite,
+        RegionResourceDataSiteTypedDict,
         RegionResourceDataTypedDict,
-        Site,
-        SiteTypedDict,
     )
     from .regions import (
         Country,
@@ -880,6 +882,7 @@ if TYPE_CHECKING:
         RegionsDataTypedDict,
         RegionsTypedDict,
     )
+    from .responsevalidationerror import ResponseValidationError
     from .role import Role, RoleMeta, RoleMetaTypedDict, RoleTypedDict
     from .role_data import (
         RoleData,
@@ -933,6 +936,12 @@ if TYPE_CHECKING:
         ServerExitRescueModeRequestTypedDict,
     )
     from .server_lockop import ServerLockRequest, ServerLockRequestTypedDict
+    from .server_region_resource_data import (
+        ServerRegionResourceData,
+        ServerRegionResourceDataTypedDict,
+        Site,
+        SiteTypedDict,
+    )
     from .server_rescue import (
         ServerRescue,
         ServerRescueMeta,
@@ -1761,6 +1770,7 @@ __all__ = [
     "IpmiSessionType",
     "IpmiSessionTypedDict",
     "IpmiStatus",
+    "LatitudeshError",
     "ListFirewallsRequest",
     "ListFirewallsRequestTypedDict",
     "ListFirewallsResponse",
@@ -1784,6 +1794,7 @@ __all__ = [
     "MetadataTypedDict",
     "Nics",
     "NicsTypedDict",
+    "NoResponseError",
     "OperatingSystem",
     "OperatingSystemData",
     "OperatingSystemDataAttributes",
@@ -2007,6 +2018,8 @@ __all__ = [
     "RegionData",
     "RegionDataTypedDict",
     "RegionResourceData",
+    "RegionResourceDataSite",
+    "RegionResourceDataSiteTypedDict",
     "RegionResourceDataTypedDict",
     "RegionTypedDict",
     "Regions",
@@ -2015,6 +2028,7 @@ __all__ = [
     "RegionsData",
     "RegionsDataTypedDict",
     "RegionsTypedDict",
+    "ResponseValidationError",
     "Role",
     "RoleData",
     "RoleDataAttributes",
@@ -2069,6 +2083,8 @@ __all__ = [
     "ServerLockRequestTypedDict",
     "ServerMeta",
     "ServerMetaTypedDict",
+    "ServerRegionResourceData",
+    "ServerRegionResourceDataTypedDict",
     "ServerRescue",
     "ServerRescueMeta",
     "ServerRescueMetaTypedDict",
@@ -2818,6 +2834,7 @@ _dynamic_imports: dict[str, str] = {
     "IpmiSessionDataTypedDict": ".ipmi_session",
     "IpmiSessionType": ".ipmi_session",
     "IpmiSessionTypedDict": ".ipmi_session",
+    "LatitudeshError": ".latitudesherror",
     "ListFirewallsRequest": ".list_firewallsop",
     "ListFirewallsRequestTypedDict": ".list_firewallsop",
     "ListFirewallsResponse": ".list_firewallsop",
@@ -2829,6 +2846,7 @@ _dynamic_imports: dict[str, str] = {
     "MembershipDataTypedDict": ".membership",
     "MembershipRole": ".membership",
     "MembershipTypedDict": ".membership",
+    "NoResponseError": ".no_response_error",
     "OperatingSystemData": ".operating_system_data",
     "OperatingSystemDataAttributes": ".operating_system_data",
     "OperatingSystemDataAttributesTypedDict": ".operating_system_data",
@@ -3063,9 +3081,9 @@ _dynamic_imports: dict[str, str] = {
     "RegionDataTypedDict": ".region",
     "RegionTypedDict": ".region",
     "RegionResourceData": ".region_resource_data",
+    "RegionResourceDataSite": ".region_resource_data",
+    "RegionResourceDataSiteTypedDict": ".region_resource_data",
     "RegionResourceDataTypedDict": ".region_resource_data",
-    "Site": ".region_resource_data",
-    "SiteTypedDict": ".region_resource_data",
     "Country": ".regions",
     "CountryTypedDict": ".regions",
     "Regions": ".regions",
@@ -3074,6 +3092,7 @@ _dynamic_imports: dict[str, str] = {
     "RegionsData": ".regions",
     "RegionsDataTypedDict": ".regions",
     "RegionsTypedDict": ".regions",
+    "ResponseValidationError": ".responsevalidationerror",
     "Role": ".role",
     "RoleMeta": ".role",
     "RoleMetaTypedDict": ".role",
@@ -3122,6 +3141,10 @@ _dynamic_imports: dict[str, str] = {
     "ServerExitRescueModeRequestTypedDict": ".server_exit_rescue_modeop",
     "ServerLockRequest": ".server_lockop",
     "ServerLockRequestTypedDict": ".server_lockop",
+    "ServerRegionResourceData": ".server_region_resource_data",
+    "ServerRegionResourceDataTypedDict": ".server_region_resource_data",
+    "Site": ".server_region_resource_data",
+    "SiteTypedDict": ".server_region_resource_data",
     "ServerRescue": ".server_rescue",
     "ServerRescueMeta": ".server_rescue",
     "ServerRescueMetaTypedDict": ".server_rescue",

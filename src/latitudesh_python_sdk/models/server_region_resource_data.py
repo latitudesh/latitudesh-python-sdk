@@ -6,14 +6,15 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class RegionResourceDataSiteTypedDict(TypedDict):
+class SiteTypedDict(TypedDict):
     id: NotRequired[str]
     name: NotRequired[str]
     slug: NotRequired[str]
     facility: NotRequired[str]
+    rack_id: NotRequired[str]
 
 
-class RegionResourceDataSite(BaseModel):
+class Site(BaseModel):
     id: Optional[str] = None
 
     name: Optional[str] = None
@@ -22,16 +23,18 @@ class RegionResourceDataSite(BaseModel):
 
     facility: Optional[str] = None
 
+    rack_id: Optional[str] = None
 
-class RegionResourceDataTypedDict(TypedDict):
+
+class ServerRegionResourceDataTypedDict(TypedDict):
     city: NotRequired[str]
     country: NotRequired[str]
-    site: NotRequired[RegionResourceDataSiteTypedDict]
+    site: NotRequired[SiteTypedDict]
 
 
-class RegionResourceData(BaseModel):
+class ServerRegionResourceData(BaseModel):
     city: Optional[str] = None
 
     country: Optional[str] = None
 
-    site: Optional[RegionResourceDataSite] = None
+    site: Optional[Site] = None

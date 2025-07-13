@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 from .project_include import ProjectInclude, ProjectIncludeTypedDict
-from .region_resource_data import RegionResourceData, RegionResourceDataTypedDict
+from .server_region_resource_data import (
+    ServerRegionResourceData,
+    ServerRegionResourceDataTypedDict,
+)
 from .team_include import TeamInclude, TeamIncludeTypedDict
 from enum import Enum
 from latitudesh_python_sdk.types import BaseModel
@@ -160,7 +163,7 @@ class ServerDataAttributesTypedDict(TypedDict):
     scheduled_deletion_at: NotRequired[str]
     plan: NotRequired[ServerDataPlanTypedDict]
     operating_system: NotRequired[OperatingSystemTypedDict]
-    region: NotRequired[RegionResourceDataTypedDict]
+    region: NotRequired[ServerRegionResourceDataTypedDict]
     specs: NotRequired[ServerDataSpecsTypedDict]
     project: NotRequired[ProjectIncludeTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
@@ -202,7 +205,7 @@ class ServerDataAttributes(BaseModel):
 
     operating_system: Optional[OperatingSystem] = None
 
-    region: Optional[RegionResourceData] = None
+    region: Optional[ServerRegionResourceData] = None
 
     specs: Optional[ServerDataSpecs] = None
 
