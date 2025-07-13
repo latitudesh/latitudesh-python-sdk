@@ -32,9 +32,7 @@ class UpdateServerServersRequestAttributesTypedDict(TypedDict):
 class UpdateServerServersRequestAttributes(BaseModel):
     hostname: Optional[str] = "new-hostname"
 
-    billing: Optional[UpdateServerServersRequestBilling] = (
-        UpdateServerServersRequestBilling.MONTHLY
-    )
+    billing: Optional[UpdateServerServersRequestBilling] = None
 
     tags: Optional[List[str]] = None
 
