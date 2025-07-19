@@ -70,9 +70,9 @@ with Latitudesh(
     res = latitudesh.teams_members.add(data={
         "type": latitudesh_python_sdk.PostTeamMembersTeamsMembersType.MEMBERSHIPS,
         "attributes": {
-            "first_name": "Napoleon",
-            "last_name": "Rogahn",
-            "email": "teddy_champlin@glover-boyer.test",
+            "first_name": "Bernard",
+            "last_name": "Cremin",
+            "email": "ernest@carter-lehner.example",
             "role": latitudesh_python_sdk.PostTeamMembersTeamsMembersRole.COLLABORATOR,
         },
     })
@@ -95,10 +95,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 422                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## remove_member
 
@@ -115,7 +114,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.teams_members.remove_member(user_id="user_GMy1DbMLqN50m")
+    latitudesh.teams_members.remove_member(user_id="user_0MoLqJEYd57pY")
 
     # Use the SDK ...
 
@@ -130,7 +129,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

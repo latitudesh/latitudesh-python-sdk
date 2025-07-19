@@ -31,7 +31,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.VirtualMachinePayloadType.VIRTUAL_MACHINES,
         "attributes": {
             "name": "my-new-vm",
-            "project": "aerodynamic-granite-keyboard",
+            "project": "enormous-wool-keyboard",
         },
     })
 

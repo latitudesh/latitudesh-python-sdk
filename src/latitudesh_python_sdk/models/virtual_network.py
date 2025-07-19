@@ -2,126 +2,25 @@
 
 from __future__ import annotations
 from .virtual_network_data import VirtualNetworkData, VirtualNetworkDataTypedDict
-from enum import Enum
-import httpx
-from latitudesh_python_sdk.models import LatitudeshError
 from latitudesh_python_sdk.types import BaseModel
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class VirtualNetworkType1(str, Enum):
-    VIRTUAL_NETWORKS = "virtual_networks"
-
-
-class VirtualNetworkAttributesSiteTypedDict(TypedDict):
-    id: NotRequired[str]
-    facility: NotRequired[str]
-    name: NotRequired[str]
-    slug: NotRequired[str]
-
-
-class VirtualNetworkAttributesSite(BaseModel):
-    id: Optional[str] = None
-
-    facility: Optional[str] = None
-
-    name: Optional[str] = None
-
-    slug: Optional[str] = None
-
-
-class VirtualNetworkAttributesRegionTypedDict(TypedDict):
-    city: NotRequired[str]
-    country: NotRequired[str]
-    site: NotRequired[VirtualNetworkAttributesSiteTypedDict]
-
-
-class VirtualNetworkAttributesRegion(BaseModel):
-    city: Optional[str] = None
-
-    country: Optional[str] = None
-
-    site: Optional[VirtualNetworkAttributesSite] = None
-
-
-class VirtualNetworkAttributes1TypedDict(TypedDict):
-    vid: NotRequired[int]
-    r"""vlan ID of the virtual network"""
-    name: NotRequired[str]
-    r"""Name of the virtual network"""
-    description: NotRequired[str]
-    r"""Description of the virtual network"""
-    region: NotRequired[VirtualNetworkAttributesRegionTypedDict]
-    assignments_count: NotRequired[int]
-    r"""Amount of devices assigned to the virtual network"""
-
-
-class VirtualNetworkAttributes1(BaseModel):
-    vid: Optional[int] = None
-    r"""vlan ID of the virtual network"""
-
-    name: Optional[str] = None
-    r"""Name of the virtual network"""
-
-    description: Optional[str] = None
-    r"""Description of the virtual network"""
-
-    region: Optional[VirtualNetworkAttributesRegion] = None
-
-    assignments_count: Optional[int] = None
-    r"""Amount of devices assigned to the virtual network"""
-
-
-class VirtualNetworkMeta1TypedDict(TypedDict):
+class VirtualNetworkMetaTypedDict(TypedDict):
     pass
 
 
-class VirtualNetworkMeta1(BaseModel):
+class VirtualNetworkMeta(BaseModel):
     pass
 
 
 class VirtualNetworkTypedDict(TypedDict):
-    id: NotRequired[str]
-    type: NotRequired[VirtualNetworkType1]
-    attributes: NotRequired[VirtualNetworkAttributes1TypedDict]
     data: NotRequired[VirtualNetworkDataTypedDict]
-    meta: NotRequired[VirtualNetworkMeta1TypedDict]
+    meta: NotRequired[VirtualNetworkMetaTypedDict]
 
 
 class VirtualNetwork(BaseModel):
-    id: Optional[str] = None
-
-    type: Optional[VirtualNetworkType1] = None
-
-    attributes: Optional[VirtualNetworkAttributes1] = None
-
     data: Optional[VirtualNetworkData] = None
 
-    meta: Optional[VirtualNetworkMeta1] = None
-
-
-class VirtualNetworkErrorData(BaseModel):
-    id: Optional[str] = None
-
-    type: Optional[VirtualNetworkType1] = None
-
-    attributes: Optional[VirtualNetworkAttributes1] = None
-
-    data: Optional[VirtualNetworkData] = None
-
-    meta: Optional[VirtualNetworkMeta1] = None
-
-
-class VirtualNetworkError(LatitudeshError):
-    data: VirtualNetworkErrorData
-
-    def __init__(
-        self,
-        data: VirtualNetworkErrorData,
-        raw_response: httpx.Response,
-        body: Optional[str] = None,
-    ):
-        message = body or raw_response.text
-        super().__init__(message, raw_response, body)
-        self.data = data
+    meta: Optional[VirtualNetworkMeta] = None

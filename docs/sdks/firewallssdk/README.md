@@ -34,10 +34,10 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateFirewallFirewallsType.FIREWALLS,
         "attributes": {
             "name": "my-firewall",
-            "project": "sleek-steel-shirt",
+            "project": "awesome-granite-chair",
             "rules": [
                 {
-                    "from_": "192.168.42.72",
+                    "from_": "192.168.42.73",
                     "to": "192.168.43.51",
                     "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
                     "port": "80",
@@ -76,10 +76,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 422                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## list
 
@@ -96,7 +95,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.list(filter_project="lightweight-silk-table", page_size=20, page_number=1)
+    res = latitudesh.firewalls.list(filter_project="incredible-bronze-car", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -159,10 +158,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## update
 
@@ -180,10 +178,18 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.update(firewall_id="fw_VaNmodjeObE8W", data={
+    res = latitudesh.firewalls.update(firewall_id="fw_6A05EdQ1dvKYQ", data={
         "type": latitudesh_python_sdk.UpdateFirewallFirewallsType.FIREWALLS,
         "attributes": {
-            "rules": [],
+            "name": "new-name",
+            "rules": [
+                {
+                    "from_": "192.168.42.72",
+                    "to": "192.168.43.51",
+                    "protocol": latitudesh_python_sdk.UpdateFirewallFirewallsProtocol.TCP,
+                    "port": "80",
+                },
+            ],
         },
     })
 
@@ -206,10 +212,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete
 
@@ -241,10 +246,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## assign
 
@@ -265,7 +269,7 @@ with Latitudesh(
     res = latitudesh.firewalls.assign(firewall_id="fw_Av9BVDavORm1W", data={
         "type": latitudesh_python_sdk.CreateFirewallAssignmentFirewallsType.FIREWALL_ASSIGNMENTS,
         "attributes": {
-            "server_id": "sv_2695BdKrOevVo",
+            "server_id": "sv_lpbV0DgRq4AWz",
         },
     })
 
@@ -288,10 +292,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404, 409, 422       | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## list_assignments
 
@@ -308,7 +311,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.list_assignments(firewall_id="fw_93YjJOLydvZ87", page_size=20, page_number=1)
+    res = latitudesh.firewalls.list_assignments(firewall_id="fw_z8Nkvdy1deLpx", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -332,10 +335,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete_assignment
 
@@ -368,7 +370,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

@@ -91,10 +91,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 400, 422                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## regenerate
 
@@ -113,8 +112,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.api_keys.regenerate(api_key_id="tok_pRMLydp0dQKr1", data={
-        "id": "tok_pRMLydp0dQKr1",
+    res = latitudesh.api_keys.regenerate(api_key_id="tok_zlkg1DegdvZE5", data={
+        "id": "tok_zlkg1DegdvZE5",
         "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
         "attributes": {
             "name": "App Token",
@@ -140,10 +139,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 400, 404                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete
 
@@ -161,7 +159,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.api_keys.delete(api_key_id="tok_xkjQwdENqYNVP")
+    latitudesh.api_keys.delete(api_key_id="tok_x1ZJrdx5qg4LV")
 
     # Use the SDK ...
 
@@ -176,7 +174,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

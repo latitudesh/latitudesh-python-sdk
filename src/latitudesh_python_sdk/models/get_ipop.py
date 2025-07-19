@@ -16,7 +16,7 @@ class GetIPRequestTypedDict(TypedDict):
     ip_id: str
     r"""The IP Address ID"""
     extra_fields_ip_addresses: NotRequired[str]
-    r"""The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string."""
+    r"""The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string."""
 
 
 class GetIPRequest(BaseModel):
@@ -30,4 +30,4 @@ class GetIPRequest(BaseModel):
         pydantic.Field(alias="extra_fields[ip_addresses]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string."""
+    r"""The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string."""

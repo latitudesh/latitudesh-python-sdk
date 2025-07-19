@@ -12,7 +12,7 @@ class CreateServerServersType(str, Enum):
 
 
 class CreateServerServersPlan(str, Enum):
-    r"""The plan to choose server from"""
+    r"""The plan slug to choose server from, defining the specs the server will have"""
 
     C2_LARGE_X86 = "c2-large-x86"
     C2_MEDIUM_X86 = "c2-medium-x86"
@@ -31,7 +31,7 @@ class CreateServerServersPlan(str, Enum):
 
 
 class CreateServerServersSite(str, Enum):
-    r"""The site to deploy the server"""
+    r"""The site slug to deploy the server"""
 
     ASH = "ASH"
     BGT = "BGT"
@@ -55,7 +55,7 @@ class CreateServerServersSite(str, Enum):
 
 
 class CreateServerServersOperatingSystem(str, Enum):
-    r"""The operating system for the new server"""
+    r"""The operating system slug for the new server"""
 
     IPXE = "ipxe"
     WINDOWS_SERVER_2019_STD_V1 = "windows_server_2019_std_v1"
@@ -103,17 +103,17 @@ class CreateServerServersAttributesTypedDict(TypedDict):
     project: NotRequired[str]
     r"""The project (ID or Slug) to deploy the server"""
     plan: NotRequired[CreateServerServersPlan]
-    r"""The plan to choose server from"""
+    r"""The plan slug to choose server from, defining the specs the server will have"""
     site: NotRequired[CreateServerServersSite]
-    r"""The site to deploy the server"""
+    r"""The site slug to deploy the server"""
     operating_system: NotRequired[CreateServerServersOperatingSystem]
-    r"""The operating system for the new server"""
+    r"""The operating system slug for the new server"""
     hostname: NotRequired[str]
     r"""The server hostname"""
     ssh_keys: NotRequired[List[str]]
     r"""SSH Keys to set on the server"""
     user_data: NotRequired[str]
-    r"""User data to set on the server"""
+    r"""User data ID to set on the server. This is a custom script that will run after the deploy"""
     raid: NotRequired[CreateServerRaid]
     r"""RAID mode for the server"""
     ipxe: NotRequired[str]
@@ -127,13 +127,13 @@ class CreateServerServersAttributes(BaseModel):
     r"""The project (ID or Slug) to deploy the server"""
 
     plan: Optional[CreateServerServersPlan] = None
-    r"""The plan to choose server from"""
+    r"""The plan slug to choose server from, defining the specs the server will have"""
 
     site: Optional[CreateServerServersSite] = None
-    r"""The site to deploy the server"""
+    r"""The site slug to deploy the server"""
 
     operating_system: Optional[CreateServerServersOperatingSystem] = None
-    r"""The operating system for the new server"""
+    r"""The operating system slug for the new server"""
 
     hostname: Optional[str] = None
     r"""The server hostname"""
@@ -142,7 +142,7 @@ class CreateServerServersAttributes(BaseModel):
     r"""SSH Keys to set on the server"""
 
     user_data: Optional[str] = None
-    r"""User data to set on the server"""
+    r"""User data ID to set on the server. This is a custom script that will run after the deploy"""
 
     raid: Optional[CreateServerRaid] = None
     r"""RAID mode for the server"""

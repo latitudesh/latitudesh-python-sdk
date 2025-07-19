@@ -10,49 +10,6 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class VirtualNetworkAssignmentServerTypedDict(TypedDict):
-    id: NotRequired[str]
-    hostname: NotRequired[str]
-    label: NotRequired[str]
-    locked: NotRequired[bool]
-    status: NotRequired[str]
-
-
-class VirtualNetworkAssignmentServer(BaseModel):
-    id: Optional[str] = None
-
-    hostname: Optional[str] = None
-
-    label: Optional[str] = None
-
-    locked: Optional[bool] = None
-
-    status: Optional[str] = None
-
-
-class VirtualNetworkAssignmentAttributesTypedDict(TypedDict):
-    virtual_network_id: NotRequired[str]
-    vid: NotRequired[int]
-    server_id: NotRequired[str]
-    description: NotRequired[str]
-    status: NotRequired[str]
-    server: NotRequired[VirtualNetworkAssignmentServerTypedDict]
-
-
-class VirtualNetworkAssignmentAttributes(BaseModel):
-    virtual_network_id: Optional[str] = None
-
-    vid: Optional[int] = None
-
-    server_id: Optional[str] = None
-
-    description: Optional[str] = None
-
-    status: Optional[str] = None
-
-    server: Optional[VirtualNetworkAssignmentServer] = None
-
-
 class VirtualNetworkAssignmentMetaTypedDict(TypedDict):
     pass
 
@@ -62,17 +19,11 @@ class VirtualNetworkAssignmentMeta(BaseModel):
 
 
 class VirtualNetworkAssignmentTypedDict(TypedDict):
-    id: NotRequired[str]
-    attributes: NotRequired[VirtualNetworkAssignmentAttributesTypedDict]
     data: NotRequired[VirtualNetworkAssignmentDataTypedDict]
     meta: NotRequired[VirtualNetworkAssignmentMetaTypedDict]
 
 
 class VirtualNetworkAssignment(BaseModel):
-    id: Optional[str] = None
-
-    attributes: Optional[VirtualNetworkAssignmentAttributes] = None
-
     data: Optional[VirtualNetworkAssignmentData] = None
 
     meta: Optional[VirtualNetworkAssignmentMeta] = None

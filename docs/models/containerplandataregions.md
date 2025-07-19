@@ -1,0 +1,11 @@
+# ContainerPlanDataRegions
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `name`                                                                                   | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `locations`                                                                              | [Optional[models.ContainerPlanDataLocations]](../models/containerplandatalocations.md)   | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `stock_level`                                                                            | [Optional[models.ContainerPlanDataStockLevel]](../models/containerplandatastocklevel.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `pricing`                                                                                | [Optional[models.ContainerPlanDataPricing]](../models/containerplandatapricing.md)       | :heavy_minus_sign:                                                                       | N/A                                                                                      |

@@ -13,11 +13,11 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class FilterStockLevel(str, Enum):
     r"""The stock level at the site to filter by"""
 
-    UNAVAILABLE = "Unavailable"
-    LOW = "Low"
-    MEDIUM = "Medium"
-    HIGH = "High"
-    UNIQUE = "Unique"
+    UNAVAILABLE = "unavailable"
+    LOW = "low"
+    MEDIUM = "medium"
+    HIGH = "high"
+    UNIQUE = "unique"
 
 
 class GetPlansRequestTypedDict(TypedDict):

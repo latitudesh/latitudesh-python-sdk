@@ -280,7 +280,7 @@ class SSHKeysSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -288,7 +288,7 @@ class SSHKeysSDK(BaseSDK):
             return unmarshal_json_response(
                 models.PostProjectSSHKeyResponseBody, http_res
             )
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -386,7 +386,7 @@ class SSHKeysSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -394,7 +394,7 @@ class SSHKeysSDK(BaseSDK):
             return unmarshal_json_response(
                 models.PostProjectSSHKeyResponseBody, http_res
             )
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -677,7 +677,7 @@ class SSHKeysSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -685,7 +685,7 @@ class SSHKeysSDK(BaseSDK):
             return unmarshal_json_response(
                 models.PutProjectSSHKeyResponseBody, http_res
             )
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -784,7 +784,7 @@ class SSHKeysSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -792,7 +792,7 @@ class SSHKeysSDK(BaseSDK):
             return unmarshal_json_response(
                 models.PutProjectSSHKeyResponseBody, http_res
             )
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -876,13 +876,13 @@ class SSHKeysSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, ["404", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -966,13 +966,13 @@ class SSHKeysSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, ["404", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1162,7 +1162,7 @@ class SSHKeysSDK(BaseSDK):
     ) -> models.PostSSHKeyResponseBody:
         r"""Create a SSH Key
 
-        Allow you create SSH Keys. These keys can be used to access servers after deploy and reinstall actions.
+        Allows you create SSH Keys. These keys can be used to access servers after deploy and reinstall actions.
 
 
         :param data:
@@ -1223,13 +1223,13 @@ class SSHKeysSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.PostSSHKeyResponseBody, http_res)
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1251,7 +1251,7 @@ class SSHKeysSDK(BaseSDK):
     ) -> models.PostSSHKeyResponseBody:
         r"""Create a SSH Key
 
-        Allow you create SSH Keys. These keys can be used to access servers after deploy and reinstall actions.
+        Allows you create SSH Keys. These keys can be used to access servers after deploy and reinstall actions.
 
 
         :param data:
@@ -1312,13 +1312,13 @@ class SSHKeysSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.PostSSHKeyResponseBody, http_res)
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1507,7 +1507,7 @@ class SSHKeysSDK(BaseSDK):
     ) -> models.PutSSHKeyResponseBody:
         r"""Update a SSH Key
 
-        Allow you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
+        Allows you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
 
 
         :param ssh_key_id:
@@ -1576,13 +1576,13 @@ class SSHKeysSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.PutSSHKeyResponseBody, http_res)
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1603,7 +1603,7 @@ class SSHKeysSDK(BaseSDK):
     ) -> models.PutSSHKeyResponseBody:
         r"""Update a SSH Key
 
-        Allow you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
+        Allows you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
 
 
         :param ssh_key_id:
@@ -1672,13 +1672,13 @@ class SSHKeysSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.PutSSHKeyResponseBody, http_res)
-        if utils.match_response(http_res, ["400", "422", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1698,7 +1698,7 @@ class SSHKeysSDK(BaseSDK):
     ):
         r"""Delete a SSH Key
 
-        Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
+        Allows you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
 
 
         :param ssh_key_id:
@@ -1756,13 +1756,13 @@ class SSHKeysSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, ["404", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1782,7 +1782,7 @@ class SSHKeysSDK(BaseSDK):
     ):
         r"""Delete a SSH Key
 
-        Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
+        Allows you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
 
 
         :param ssh_key_id:
@@ -1840,13 +1840,13 @@ class SSHKeysSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "*"):
             return
-        if utils.match_response(http_res, ["404", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):

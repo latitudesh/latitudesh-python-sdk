@@ -12,14 +12,14 @@ class FirewallDataType(str, Enum):
     FIREWALLS = "firewalls"
 
 
-class FirewallDataRulesTypedDict(TypedDict):
+class RulesTypedDict(TypedDict):
     from_: NotRequired[str]
     to: NotRequired[str]
     port: NotRequired[str]
     protocol: NotRequired[str]
 
 
-class FirewallDataRules(BaseModel):
+class Rules(BaseModel):
     from_: Annotated[Optional[str], pydantic.Field(alias="from")] = None
 
     to: Optional[str] = None
@@ -45,14 +45,14 @@ class FirewallDataProject(BaseModel):
 
 class FirewallDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
-    rules: NotRequired[List[FirewallDataRulesTypedDict]]
+    rules: NotRequired[List[RulesTypedDict]]
     project: NotRequired[FirewallDataProjectTypedDict]
 
 
 class FirewallDataAttributes(BaseModel):
     name: Optional[str] = None
 
-    rules: Optional[List[FirewallDataRules]] = None
+    rules: Optional[List[Rules]] = None
 
     project: Optional[FirewallDataProject] = None
 

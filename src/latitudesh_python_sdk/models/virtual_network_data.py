@@ -51,9 +51,9 @@ class VirtualNetworkDataAttributesTypedDict(TypedDict):
     description: NotRequired[str]
     r"""Description of the virtual network"""
     region: NotRequired[VirtualNetworkDataRegionTypedDict]
+    created_at: NotRequired[datetime]
     assignments_count: NotRequired[int]
     r"""Amount of devices assigned to the virtual network"""
-    created_at: NotRequired[datetime]
 
 
 class VirtualNetworkDataAttributes(BaseModel):
@@ -68,10 +68,10 @@ class VirtualNetworkDataAttributes(BaseModel):
 
     region: Optional[VirtualNetworkDataRegion] = None
 
+    created_at: Optional[datetime] = None
+
     assignments_count: Optional[int] = None
     r"""Amount of devices assigned to the virtual network"""
-
-    created_at: Optional[datetime] = None
 
 
 class VirtualNetworkDataTypedDict(TypedDict):

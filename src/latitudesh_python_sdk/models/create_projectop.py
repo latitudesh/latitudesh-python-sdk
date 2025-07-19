@@ -68,12 +68,12 @@ class CreateProjectProjectsRequestBody(BaseModel):
 
 
 class CreateProjectResponseBodyTypedDict(TypedDict):
-    r"""Success"""
+    r"""Created"""
 
     data: NotRequired[ProjectTypedDict]
 
 
 class CreateProjectResponseBody(BaseModel):
-    r"""Success"""
+    r"""Created"""
 
     data: Optional[Project] = None
