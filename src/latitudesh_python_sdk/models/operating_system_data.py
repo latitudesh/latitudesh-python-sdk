@@ -11,13 +11,13 @@ class OperatingSystemDataType(str, Enum):
     OPERATING_SYSTEMS = "operating_systems"
 
 
-class OperatingSystemDataFeaturesTypedDict(TypedDict):
+class FeaturesTypedDict(TypedDict):
     raid: NotRequired[bool]
     ssh_keys: NotRequired[bool]
     user_data: NotRequired[bool]
 
 
-class OperatingSystemDataFeatures(BaseModel):
+class Features(BaseModel):
     raid: Optional[bool] = None
 
     ssh_keys: Optional[bool] = None
@@ -26,7 +26,7 @@ class OperatingSystemDataFeatures(BaseModel):
 
 
 class OperatingSystemDataAttributesTypedDict(TypedDict):
-    features: NotRequired[OperatingSystemDataFeaturesTypedDict]
+    features: NotRequired[FeaturesTypedDict]
     name: NotRequired[str]
     slug: NotRequired[str]
     distro: NotRequired[str]
@@ -36,7 +36,7 @@ class OperatingSystemDataAttributesTypedDict(TypedDict):
 
 
 class OperatingSystemDataAttributes(BaseModel):
-    features: Optional[OperatingSystemDataFeatures] = None
+    features: Optional[Features] = None
 
     name: Optional[str] = None
 

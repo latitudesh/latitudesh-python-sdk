@@ -8,12 +8,12 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class PostAPIKeyResponseBodyTypedDict(TypedDict):
-    r"""API Key Created"""
+    r"""Created"""
 
     data: NotRequired[APIKeyTypedDict]
 
 
 class PostAPIKeyResponseBody(BaseModel):
-    r"""API Key Created"""
+    r"""Created"""
 
     data: Optional[APIKey] = None

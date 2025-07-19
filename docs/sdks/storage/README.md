@@ -29,7 +29,7 @@ with Latitudesh(
     res = latitudesh.storage.create_filesystem(data={
         "type": latitudesh_python_sdk.PostStorageFilesystemsStorageType.FILESYSTEMS,
         "attributes": {
-            "project": "proj_WeGoqAvYDP7nz",
+            "project": "proj_kjQwdE2bqYNVP",
             "name": "my-data",
         },
     })
@@ -71,7 +71,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.storage.list_filesystems(filter_project="small-bronze-gloves")
+    latitudesh.storage.list_filesystems(filter_project="sleek-silk-car")
 
     # Use the SDK ...
 

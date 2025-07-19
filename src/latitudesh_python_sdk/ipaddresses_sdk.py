@@ -42,7 +42,7 @@ class IPAddressesSDK(BaseSDK):
         :param filter_type: The protocol type to filter by
         :param filter_location: The site slug to filter by
         :param filter_address: The address of IP to filter by starts_with
-        :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
+        :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param retries: Override the default retry configuration for this method
@@ -107,7 +107,7 @@ class IPAddressesSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -138,15 +138,11 @@ class IPAddressesSDK(BaseSDK):
                 retries=retries,
             )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return models.GetIpsResponse(
                 result=unmarshal_json_response(models.IPAddresses, http_res),
                 next=next_func,
             )
-        if utils.match_response(http_res, "422", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -187,7 +183,7 @@ class IPAddressesSDK(BaseSDK):
         :param filter_type: The protocol type to filter by
         :param filter_location: The site slug to filter by
         :param filter_address: The address of IP to filter by starts_with
-        :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
+        :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param retries: Override the default retry configuration for this method
@@ -252,7 +248,7 @@ class IPAddressesSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -283,15 +279,11 @@ class IPAddressesSDK(BaseSDK):
                 retries=retries,
             )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return models.GetIpsResponse(
                 result=unmarshal_json_response(models.IPAddresses, http_res),
                 next=next_func,
             )
-        if utils.match_response(http_res, "422", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -316,7 +308,7 @@ class IPAddressesSDK(BaseSDK):
         Retrieve an IP Address
 
         :param ip_id: The IP Address ID
-        :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
+        :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -372,16 +364,12 @@ class IPAddressesSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.IPAddress, http_res)
-        if utils.match_response(http_res, "404", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -406,7 +394,7 @@ class IPAddressesSDK(BaseSDK):
         Retrieve an IP Address
 
         :param ip_id: The IP Address ID
-        :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
+        :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -462,16 +450,12 @@ class IPAddressesSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.IPAddress, http_res)
-        if utils.match_response(http_res, "404", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)

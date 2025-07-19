@@ -65,8 +65,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_profile.update(id="user_3pwPRamaN8FKz8EELKNmH0XMvvyR", data={
-        "id": "user_3pwPRamaN8FKz8EELKNmH0XMvvyR",
+    res = latitudesh.user_profile.update(id="user_lGJBgAxbgeUJ4yZj56wmfrK4vag", data={
+        "id": "user_lGJBgAxbgeUJ4yZj56wmfrK4vag",
         "type": latitudesh_python_sdk.PatchUserProfileUserProfileType.USERS,
         "attributes": {
             "role": latitudesh_python_sdk.PatchUserProfileUserProfileRole.COLLABORATOR,
@@ -92,10 +92,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## list_teams
 

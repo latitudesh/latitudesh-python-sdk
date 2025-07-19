@@ -38,7 +38,7 @@ class GetIpsRequestTypedDict(TypedDict):
     filter_address: NotRequired[str]
     r"""The address of IP to filter by starts_with"""
     extra_fields_ip_addresses: NotRequired[str]
-    r"""The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string."""
+    r"""The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string."""
     page_size: NotRequired[int]
     r"""Number of items to return per page"""
     page_number: NotRequired[int]
@@ -93,7 +93,7 @@ class GetIpsRequest(BaseModel):
         pydantic.Field(alias="extra_fields[ip_addresses]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The `region` and `server` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string."""
+    r"""The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string."""
 
     page_size: Annotated[
         Optional[int],

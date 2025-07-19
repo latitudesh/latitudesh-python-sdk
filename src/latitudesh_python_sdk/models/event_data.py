@@ -11,13 +11,13 @@ class EventDataType(str, Enum):
     EVENTS = "events"
 
 
-class EventDataAuthorTypedDict(TypedDict):
+class AuthorTypedDict(TypedDict):
     id: NotRequired[str]
     name: NotRequired[str]
     email: NotRequired[str]
 
 
-class EventDataAuthor(BaseModel):
+class Author(BaseModel):
     id: Optional[str] = None
 
     name: Optional[str] = None
@@ -50,12 +50,12 @@ class EventDataTeam(BaseModel):
     name: Optional[str] = None
 
 
-class EventDataTargetTypedDict(TypedDict):
+class TargetTypedDict(TypedDict):
     id: NotRequired[str]
     name: NotRequired[str]
 
 
-class EventDataTarget(BaseModel):
+class Target(BaseModel):
     id: Optional[str] = None
 
     name: Optional[str] = None
@@ -64,10 +64,10 @@ class EventDataTarget(BaseModel):
 class EventDataAttributesTypedDict(TypedDict):
     action: NotRequired[str]
     created_at: NotRequired[str]
-    author: NotRequired[EventDataAuthorTypedDict]
+    author: NotRequired[AuthorTypedDict]
     project: NotRequired[EventDataProjectTypedDict]
     team: NotRequired[EventDataTeamTypedDict]
-    target: NotRequired[EventDataTargetTypedDict]
+    target: NotRequired[TargetTypedDict]
 
 
 class EventDataAttributes(BaseModel):
@@ -75,13 +75,13 @@ class EventDataAttributes(BaseModel):
 
     created_at: Optional[str] = None
 
-    author: Optional[EventDataAuthor] = None
+    author: Optional[Author] = None
 
     project: Optional[EventDataProject] = None
 
     team: Optional[EventDataTeam] = None
 
-    target: Optional[EventDataTarget] = None
+    target: Optional[Target] = None
 
 
 class EventDataTypedDict(TypedDict):

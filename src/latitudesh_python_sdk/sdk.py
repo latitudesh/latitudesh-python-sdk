@@ -50,15 +50,15 @@ class Latitudesh(BaseSDK):
     operating_systems: "OperatingSystemsSDK"
     plans: "Plans"
     projects: "ProjectsSDK"
+    ssh_keys: "SSHKeysSDK"
+    user_data: "UserDataSDK"
     regions: "RegionsSDK"
     roles: "Roles"
     servers: "ServersSDK"
-    ssh_keys: "SSHKeysSDK"
     storage: "Storage"
     tags: "Tags"
     teams: "TeamsSDK"
     traffic: "TrafficSDK"
-    user_data: "UserDataSDK"
     user_profile: "UserProfile"
     virtual_machines: "VirtualMachines"
     private_networks: "PrivateNetworks"
@@ -76,15 +76,15 @@ class Latitudesh(BaseSDK):
         ),
         "plans": ("latitudesh_python_sdk.plans", "Plans"),
         "projects": ("latitudesh_python_sdk.projects_sdk", "ProjectsSDK"),
+        "ssh_keys": ("latitudesh_python_sdk.sshkeys_sdk", "SSHKeysSDK"),
+        "user_data": ("latitudesh_python_sdk.userdata_sdk", "UserDataSDK"),
         "regions": ("latitudesh_python_sdk.regions_sdk", "RegionsSDK"),
         "roles": ("latitudesh_python_sdk.roles", "Roles"),
         "servers": ("latitudesh_python_sdk.servers_sdk", "ServersSDK"),
-        "ssh_keys": ("latitudesh_python_sdk.sshkeys_sdk", "SSHKeysSDK"),
         "storage": ("latitudesh_python_sdk.storage", "Storage"),
         "tags": ("latitudesh_python_sdk.tags", "Tags"),
         "teams": ("latitudesh_python_sdk.teams_sdk", "TeamsSDK"),
         "traffic": ("latitudesh_python_sdk.traffic_sdk", "TrafficSDK"),
-        "user_data": ("latitudesh_python_sdk.userdata_sdk", "UserDataSDK"),
         "user_profile": ("latitudesh_python_sdk.userprofile", "UserProfile"),
         "virtual_machines": (
             "latitudesh_python_sdk.virtualmachines",

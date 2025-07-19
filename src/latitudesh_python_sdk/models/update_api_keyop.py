@@ -30,12 +30,12 @@ class UpdateAPIKeyRequest(BaseModel):
 
 
 class UpdateAPIKeyResponseBodyTypedDict(TypedDict):
-    r"""API Key Updated"""
+    r"""Success"""
 
     data: NotRequired[APIKeyTypedDict]
 
 
 class UpdateAPIKeyResponseBody(BaseModel):
-    r"""API Key Updated"""
+    r"""Success"""
 
     data: Optional[APIKey] = None

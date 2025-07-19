@@ -29,8 +29,8 @@ class FilesystemDataProject(BaseModel):
 class FilesystemDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     size_in_gb: NotRequired[int]
-    project: NotRequired[FilesystemDataProjectTypedDict]
     created_at: NotRequired[datetime]
+    project: NotRequired[FilesystemDataProjectTypedDict]
 
 
 class FilesystemDataAttributes(BaseModel):
@@ -38,9 +38,9 @@ class FilesystemDataAttributes(BaseModel):
 
     size_in_gb: Optional[int] = None
 
-    project: Optional[FilesystemDataProject] = None
-
     created_at: Optional[datetime] = None
+
+    project: Optional[FilesystemDataProject] = None
 
 
 class FilesystemDataTypedDict(TypedDict):

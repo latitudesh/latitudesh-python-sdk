@@ -34,7 +34,6 @@ class VirtualNetworkAssignmentDataServer(BaseModel):
 class VirtualNetworkAssignmentDataAttributesTypedDict(TypedDict):
     virtual_network_id: NotRequired[str]
     vid: NotRequired[int]
-    server_id: NotRequired[str]
     description: NotRequired[str]
     status: NotRequired[str]
     server: NotRequired[VirtualNetworkAssignmentDataServerTypedDict]
@@ -44,8 +43,6 @@ class VirtualNetworkAssignmentDataAttributes(BaseModel):
     virtual_network_id: Optional[str] = None
 
     vid: Optional[int] = None
-
-    server_id: Optional[str] = None
 
     description: Optional[str] = None
 

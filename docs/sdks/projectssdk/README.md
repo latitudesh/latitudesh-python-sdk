@@ -26,7 +26,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.list(filter_tags="tag_R3YGrW8m0NSAm0l5Wp6XTnnww9r", page_size=20, page_number=1)
+    res = latitudesh.projects.list(filter_tags="tag_GGXAB6PNQbU285ZYLP3wt3ZQyXW,tag_xR2B8J4W81TBL6YRGPJaCQRkVyn", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -79,7 +79,7 @@ with Latitudesh(
     res = latitudesh.projects.create(data={
         "type": latitudesh_python_sdk.CreateProjectProjectsType.PROJECTS,
         "attributes": {
-            "name": "Cormier-Corkery",
+            "name": "Kshlerin, Hand and Beer",
             "provisioning_type": latitudesh_python_sdk.CreateProjectProvisioningType.ON_DEMAND,
             "description": "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",
             "environment": latitudesh_python_sdk.CreateProjectProjectsEnvironment.DEVELOPMENT,
@@ -104,10 +104,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 400, 403, 422            | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## update
 
@@ -125,13 +124,13 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.update(project_id="proj_LGXPdWpgqnNWk", data={
-        "id": "proj_LGXPdWpgqnNWk",
+    res = latitudesh.projects.update(project_id="proj_WVQJDMMwDRbyE", data={
+        "id": "proj_WVQJDMMwDRbyE",
         "type": latitudesh_python_sdk.UpdateProjectProjectsType.PROJECTS,
         "attributes": {
             "tags": [
-                "tag_mELJ1g6Z31SG0xzYx9e5fV91K7W",
-                "tag_wR5nAvxpnJiRn8AppN0JilvWY0y",
+                "tag_xNrKWa1ZaMtBKwaZnYaMTBE2XQb",
+                "tag_Ge9E4oboPgILP5e9aKNAUB4Gaw5",
             ],
         },
     })
@@ -155,10 +154,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete
 
@@ -190,7 +188,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

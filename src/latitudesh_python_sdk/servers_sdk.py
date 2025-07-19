@@ -53,9 +53,9 @@ class ServersSDK(BaseSDK):
         :param filter_ram_eql: Filter servers with RAM size (in GB) equals the provided value.
         :param filter_ram_gte: Filter servers with RAM size (in GB) greater than or equal the provided value.
         :param filter_ram_lte: Filter servers with RAM size (in GB) less than or equal the provided value.
-        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:                               [eql] to filter for values equal to the provided value.                               [gte] to filter for values greater or equal to the provided value.                               [lte] to filter by values lower or equal to the provided value.
-        :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`
-        :param extra_fields_servers: The `credentials` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
+        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:                               [eql] to filter for values equal to the provided value.                               [gte] to filter for values greater than or equal to the provided value.                               [lte] to filter by values lower than or equal to the provided value.
+        :param filter_tags: The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`
+        :param extra_fields_servers: The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param retries: Override the default retry configuration for this method
@@ -128,7 +128,7 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -167,14 +167,10 @@ class ServersSDK(BaseSDK):
                 retries=retries,
             )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return models.GetServersResponse(
                 result=unmarshal_json_response(models.Servers, http_res), next=next_func
             )
-        if utils.match_response(http_res, "422", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -226,9 +222,9 @@ class ServersSDK(BaseSDK):
         :param filter_ram_eql: Filter servers with RAM size (in GB) equals the provided value.
         :param filter_ram_gte: Filter servers with RAM size (in GB) greater than or equal the provided value.
         :param filter_ram_lte: Filter servers with RAM size (in GB) less than or equal the provided value.
-        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:                               [eql] to filter for values equal to the provided value.                               [gte] to filter for values greater or equal to the provided value.                               [lte] to filter by values lower or equal to the provided value.
-        :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`
-        :param extra_fields_servers: The `credentials` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
+        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:                               [eql] to filter for values equal to the provided value.                               [gte] to filter for values greater than or equal to the provided value.                               [lte] to filter by values lower than or equal to the provided value.
+        :param filter_tags: The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`
+        :param extra_fields_servers: The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param retries: Override the default retry configuration for this method
@@ -301,7 +297,7 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -340,14 +336,10 @@ class ServersSDK(BaseSDK):
                 retries=retries,
             )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return models.GetServersResponse(
                 result=unmarshal_json_response(models.Servers, http_res), next=next_func
             )
-        if utils.match_response(http_res, "422", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -432,18 +424,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "402", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.Server, http_res)
-        if utils.match_response(
-            http_res, ["400", "402", "422"], "application/vnd.api+json"
-        ):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -528,18 +514,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "402", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.Server, http_res)
-        if utils.match_response(
-            http_res, ["400", "402", "422"], "application/vnd.api+json"
-        ):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -727,14 +707,6 @@ class ServersSDK(BaseSDK):
         self,
         *,
         server_id: str,
-        id: Optional[str] = "sv_81EVOtR1N4J2Z",
-        type_: Optional[models.UpdateServerServersRequestType] = None,
-        attributes: Optional[
-            Union[
-                models.UpdateServerServersRequestAttributes,
-                models.UpdateServerServersRequestAttributesTypedDict,
-            ]
-        ] = None,
         data: Optional[
             Union[
                 models.UpdateServerServersData, models.UpdateServerServersDataTypedDict
@@ -744,13 +716,10 @@ class ServersSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> models.Server:
         r"""Update Server
 
         :param server_id:
-        :param id:
-        :param type:
-        :param attributes:
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -770,11 +739,6 @@ class ServersSDK(BaseSDK):
         request = models.UpdateServerRequest(
             server_id=server_id,
             request_body=models.UpdateServerServersRequestBody(
-                id=id,
-                type=type_,
-                attributes=utils.get_pydantic_model(
-                    attributes, Optional[models.UpdateServerServersRequestAttributes]
-                ),
                 data=utils.get_pydantic_model(
                     data, Optional[models.UpdateServerServersData]
                 ),
@@ -823,19 +787,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "402", "422", "423", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "*"):
-            return
-        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ServerErrorData, http_res)
-            raise models.ServerError(response_data, http_res)
-        if utils.match_response(http_res, ["402", "423"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(models.Server, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -849,14 +806,6 @@ class ServersSDK(BaseSDK):
         self,
         *,
         server_id: str,
-        id: Optional[str] = "sv_81EVOtR1N4J2Z",
-        type_: Optional[models.UpdateServerServersRequestType] = None,
-        attributes: Optional[
-            Union[
-                models.UpdateServerServersRequestAttributes,
-                models.UpdateServerServersRequestAttributesTypedDict,
-            ]
-        ] = None,
         data: Optional[
             Union[
                 models.UpdateServerServersData, models.UpdateServerServersDataTypedDict
@@ -866,13 +815,10 @@ class ServersSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ):
+    ) -> models.Server:
         r"""Update Server
 
         :param server_id:
-        :param id:
-        :param type:
-        :param attributes:
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -892,11 +838,6 @@ class ServersSDK(BaseSDK):
         request = models.UpdateServerRequest(
             server_id=server_id,
             request_body=models.UpdateServerServersRequestBody(
-                id=id,
-                type=type_,
-                attributes=utils.get_pydantic_model(
-                    attributes, Optional[models.UpdateServerServersRequestAttributes]
-                ),
                 data=utils.get_pydantic_model(
                     data, Optional[models.UpdateServerServersData]
                 ),
@@ -945,19 +886,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["400", "402", "422", "423", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "*"):
-            return
-        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ServerErrorData, http_res)
-            raise models.ServerError(response_data, http_res)
-        if utils.match_response(http_res, ["402", "423"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(models.Server, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1011,7 +945,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
+            accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1036,19 +970,13 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "406", "422", "423", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(
-            http_res, ["403", "406", "422"], "application/vnd.api+json"
-        ):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
-        if utils.match_response(http_res, ["423", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1101,7 +1029,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
+            accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1126,19 +1054,13 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "406", "422", "423", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(
-            http_res, ["403", "406", "422"], "application/vnd.api+json"
-        ):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
-        if utils.match_response(http_res, ["423", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1398,21 +1320,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "406", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.DeployConfig, http_res)
-        if utils.match_response(http_res, ["403", "406"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
-        if utils.match_response(http_res, "422", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(
-                models.DeployConfigErrorData, http_res
-            )
-            raise models.DeployConfigError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1511,21 +1424,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "406", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.DeployConfig, http_res)
-        if utils.match_response(http_res, ["403", "406"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
-        if utils.match_response(http_res, "422", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(
-                models.DeployConfigErrorData, http_res
-            )
-            raise models.DeployConfigError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1543,7 +1447,7 @@ class ServersSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.Server1:
+    ) -> models.Server:
         r"""Lock the server
 
         Locks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
@@ -1603,13 +1507,13 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.Server1, http_res)
-        if utils.match_response(http_res, ["403", "404", "4XX"], "*"):
+            return unmarshal_json_response(models.Server, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1626,7 +1530,7 @@ class ServersSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.Server1:
+    ) -> models.Server:
         r"""Lock the server
 
         Locks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
@@ -1686,13 +1590,13 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.Server1, http_res)
-        if utils.match_response(http_res, ["403", "404", "4XX"], "*"):
+            return unmarshal_json_response(models.Server, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1709,7 +1613,7 @@ class ServersSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.Server1:
+    ) -> models.Server:
         r"""Unlock the server
 
         Unlocks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
@@ -1769,13 +1673,13 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.Server1, http_res)
-        if utils.match_response(http_res, ["403", "404", "4XX"], "*"):
+            return unmarshal_json_response(models.Server, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1792,7 +1696,7 @@ class ServersSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.Server1:
+    ) -> models.Server:
         r"""Unlock the server
 
         Unlocks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
@@ -1852,13 +1756,13 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.Server1, http_res)
-        if utils.match_response(http_res, ["403", "404", "4XX"], "*"):
+            return unmarshal_json_response(models.Server, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1950,17 +1854,13 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "406", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.OutOfBandConnection, http_res)
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
-        if utils.match_response(http_res, ["406", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -2052,17 +1952,13 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "406", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.OutOfBandConnection, http_res)
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
-        if utils.match_response(http_res, ["406", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -2137,16 +2033,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.OutOfBandConnection, http_res)
-        if utils.match_response(http_res, "404", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -2222,16 +2114,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.OutOfBandConnection, http_res)
-        if utils.match_response(http_res, "404", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -2330,16 +2218,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.ServerAction, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -2438,16 +2322,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.ServerAction, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -2529,18 +2409,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.IpmiSession, http_res)
-        if utils.match_response(
-            http_res, ["403", "404", "422"], "application/vnd.api+json"
-        ):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -2622,18 +2496,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.IpmiSession, http_res)
-        if utils.match_response(
-            http_res, ["403", "404", "422"], "application/vnd.api+json"
-        ):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -2711,16 +2579,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "406", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.ServerRescue, http_res)
-        if utils.match_response(http_res, ["403", "406"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -2798,16 +2662,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "406", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.ServerRescue, http_res)
-        if utils.match_response(http_res, ["403", "406"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -2885,16 +2745,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "406", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.ServerRescue, http_res)
-        if utils.match_response(http_res, ["403", "406"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -2972,16 +2828,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "406", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.ServerRescue, http_res)
-        if utils.match_response(http_res, ["403", "406"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -3059,18 +2911,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "406", "423", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.ServerScheduleDeletion, http_res)
-        if utils.match_response(
-            http_res, ["403", "406", "423"], "application/vnd.api+json"
-        ):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -3148,18 +2994,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "406", "423", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.ServerScheduleDeletion, http_res)
-        if utils.match_response(
-            http_res, ["403", "406", "423"], "application/vnd.api+json"
-        ):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -3212,7 +3052,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
+            accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -3237,16 +3077,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -3299,7 +3135,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
+            accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -3324,16 +3160,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -3394,7 +3226,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
+            accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -3426,21 +3258,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "422", "423", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "*"):
             return
-        if utils.match_response(
-            http_res, ["403", "404", "422"], "application/vnd.api+json"
-        ):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
-        if utils.match_response(http_res, "423", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ServerErrorData, http_res)
-            raise models.ServerError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -3501,7 +3324,7 @@ class ServersSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
+            accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -3533,21 +3356,12 @@ class ServersSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "422", "423", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "*"):
             return
-        if utils.match_response(
-            http_res, ["403", "404", "422"], "application/vnd.api+json"
-        ):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
-        if utils.match_response(http_res, "423", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ServerErrorData, http_res)
-            raise models.ServerError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
