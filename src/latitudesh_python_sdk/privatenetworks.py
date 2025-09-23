@@ -336,16 +336,12 @@ class PrivateNetworks(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualNetwork, http_res)
-        if utils.match_response(http_res, "422", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -436,16 +432,12 @@ class PrivateNetworks(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualNetwork, http_res)
-        if utils.match_response(http_res, "422", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -463,7 +455,6 @@ class PrivateNetworks(BaseSDK):
             models.UpdateVirtualNetworkPrivateNetworksData,
             models.UpdateVirtualNetworkPrivateNetworksDataTypedDict,
         ],
-        id: Optional[str] = "vlan_81EVOtR1N4J2Z",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -476,7 +467,6 @@ class PrivateNetworks(BaseSDK):
 
         :param vlan_id: The Virtual Network ID
         :param data:
-        :param id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -495,7 +485,6 @@ class PrivateNetworks(BaseSDK):
         request = models.UpdateVirtualNetworkRequest(
             vlan_id=vlan_id,
             request_body=models.UpdateVirtualNetworkPrivateNetworksRequestBody(
-                id=id,
                 data=utils.get_pydantic_model(
                     data, models.UpdateVirtualNetworkPrivateNetworksData
                 ),
@@ -544,18 +533,12 @@ class PrivateNetworks(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualNetwork, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(
-                models.VirtualNetworkErrorData, http_res
-            )
-            raise models.VirtualNetworkError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -573,7 +556,6 @@ class PrivateNetworks(BaseSDK):
             models.UpdateVirtualNetworkPrivateNetworksData,
             models.UpdateVirtualNetworkPrivateNetworksDataTypedDict,
         ],
-        id: Optional[str] = "vlan_81EVOtR1N4J2Z",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -586,7 +568,6 @@ class PrivateNetworks(BaseSDK):
 
         :param vlan_id: The Virtual Network ID
         :param data:
-        :param id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -605,7 +586,6 @@ class PrivateNetworks(BaseSDK):
         request = models.UpdateVirtualNetworkRequest(
             vlan_id=vlan_id,
             request_body=models.UpdateVirtualNetworkPrivateNetworksRequestBody(
-                id=id,
                 data=utils.get_pydantic_model(
                     data, models.UpdateVirtualNetworkPrivateNetworksData
                 ),
@@ -654,18 +634,12 @@ class PrivateNetworks(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualNetwork, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(
-                models.VirtualNetworkErrorData, http_res
-            )
-            raise models.VirtualNetworkError(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -678,7 +652,7 @@ class PrivateNetworks(BaseSDK):
     def delete_virtual_network(
         self,
         *,
-        vlan_id: int,
+        vlan_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -719,7 +693,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
+            accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -744,16 +718,12 @@ class PrivateNetworks(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["406", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "406", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -766,7 +736,7 @@ class PrivateNetworks(BaseSDK):
     async def delete_virtual_network_async(
         self,
         *,
-        vlan_id: int,
+        vlan_id: str,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -807,7 +777,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
+            accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -832,16 +802,12 @@ class PrivateNetworks(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["406", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, "406", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1351,16 +1317,12 @@ class PrivateNetworks(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualNetworkAssignment, http_res)
-        if utils.match_response(http_res, ["403", "422"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1450,16 +1412,12 @@ class PrivateNetworks(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualNetworkAssignment, http_res)
-        if utils.match_response(http_res, ["403", "422"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1513,7 +1471,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
+            accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1538,16 +1496,12 @@ class PrivateNetworks(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "423", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["403", "423"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1601,7 +1555,7 @@ class PrivateNetworks(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
+            accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             timeout_ms=timeout_ms,
@@ -1626,16 +1580,12 @@ class PrivateNetworks(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "423", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["403", "423"], "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)

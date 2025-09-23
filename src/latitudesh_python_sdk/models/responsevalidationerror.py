@@ -2,10 +2,12 @@
 
 import httpx
 from typing import Optional
+from dataclasses import dataclass
 
 from latitudesh_python_sdk.models import LatitudeshError
 
 
+@dataclass(frozen=True)
 class ResponseValidationError(LatitudeshError):
     """Error raised when there is a type mismatch between the response data and the expected Pydantic model."""
 

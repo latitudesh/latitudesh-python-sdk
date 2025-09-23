@@ -9,7 +9,7 @@ from .server_region_resource_data import (
 from .team_include import TeamInclude, TeamIncludeTypedDict
 from enum import Enum
 from latitudesh_python_sdk.types import BaseModel
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -21,7 +21,7 @@ class Status(str, Enum):
     `disk_erasing` - The server is in reinstalling state `disk_erasing`
     `failed_disk_erasing` - The server has failed disk erasing in reinstall
     `deploying` - The server is in the last reinstalling stage and is `deploying`
-    `failed_deployment` The server has failed deployment in reinstall
+    `failed_deployment` - The server has failed deployment in reinstall
 
     """
 
@@ -46,10 +46,10 @@ class ServerDataPlanTypedDict(TypedDict):
     r"""The plan ID"""
     name: NotRequired[str]
     r"""The plan name"""
-    billing: NotRequired[str]
-    r"""hourly/monthly pricing. Defaults to `hourly`. Appliable for `on_demand` projects only."""
     slug: NotRequired[str]
     r"""The plan slug"""
+    billing: NotRequired[str]
+    r"""hourly/monthly pricing. Defaults to `hourly`. Appliable for `on_demand` projects only."""
 
 
 class ServerDataPlan(BaseModel):
@@ -59,11 +59,11 @@ class ServerDataPlan(BaseModel):
     name: Optional[str] = None
     r"""The plan name"""
 
-    billing: Optional[str] = None
-    r"""hourly/monthly pricing. Defaults to `hourly`. Appliable for `on_demand` projects only."""
-
     slug: Optional[str] = None
     r"""The plan slug"""
+
+    billing: Optional[str] = None
+    r"""hourly/monthly pricing. Defaults to `hourly`. Appliable for `on_demand` projects only."""
 
 
 class ServerDataFeaturesTypedDict(TypedDict):
@@ -128,20 +128,62 @@ class OperatingSystem(BaseModel):
 
 class ServerDataSpecsTypedDict(TypedDict):
     cpu: NotRequired[str]
+    r"""CPU model"""
     disk: NotRequired[str]
+    r"""Disk quantity and size in GB (e.g. 2 x 500GB)"""
     ram: NotRequired[str]
+    r"""RAM size in GB"""
+    nic: NotRequired[str]
+    r"""NIC quantity and speed"""
+    gpu: NotRequired[str]
+    r"""GPU model and quantity, if present"""
 
 
 class ServerDataSpecs(BaseModel):
     cpu: Optional[str] = None
+    r"""CPU model"""
 
     disk: Optional[str] = None
+    r"""Disk quantity and size in GB (e.g. 2 x 500GB)"""
 
     ram: Optional[str] = None
+    r"""RAM size in GB"""
+
+    nic: Optional[str] = None
+    r"""NIC quantity and speed"""
+
+    gpu: Optional[str] = None
+    r"""GPU model and quantity, if present"""
+
+
+class ServerDataRole(str, Enum):
+    EXTERNAL = "external"
+    INTERNAL = "internal"
+    IPMI = "ipmi"
+    UNKNOWN = "unknown"
+
+
+class InterfacesTypedDict(TypedDict):
+    role: NotRequired[ServerDataRole]
+    name: NotRequired[str]
+    mac_address: NotRequired[str]
+    description: NotRequired[str]
+
+
+class Interfaces(BaseModel):
+    role: Optional[ServerDataRole] = None
+
+    name: Optional[str] = None
+
+    mac_address: Optional[str] = None
+
+    description: Optional[str] = None
 
 
 class ServerDataAttributesTypedDict(TypedDict):
     hostname: NotRequired[str]
+    label: NotRequired[str]
+    r"""The server label"""
     status: NotRequired[Status]
     r"""`on` - The server is powered ON
     `off` - The server is powered OFF
@@ -150,28 +192,33 @@ class ServerDataAttributesTypedDict(TypedDict):
     `disk_erasing` - The server is in reinstalling state `disk_erasing`
     `failed_disk_erasing` - The server has failed disk erasing in reinstall
     `deploying` - The server is in the last reinstalling stage and is `deploying`
-    `failed_deployment` The server has failed deployment in reinstall
+    `failed_deployment` - The server has failed deployment in reinstall
 
     """
     ipmi_status: NotRequired[IpmiStatus]
     role: NotRequired[str]
+    r"""The server role (e.g. Bare Metal)"""
     site: NotRequired[str]
     locked: NotRequired[bool]
     rescue: NotRequired[bool]
     primary_ipv4: NotRequired[str]
+    primary_ipv6: NotRequired[str]
     created_at: NotRequired[str]
     scheduled_deletion_at: NotRequired[str]
     plan: NotRequired[ServerDataPlanTypedDict]
     operating_system: NotRequired[OperatingSystemTypedDict]
     region: NotRequired[ServerRegionResourceDataTypedDict]
     specs: NotRequired[ServerDataSpecsTypedDict]
+    interfaces: NotRequired[List[InterfacesTypedDict]]
     project: NotRequired[ProjectIncludeTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
-    primary_ipv6: NotRequired[str]
 
 
 class ServerDataAttributes(BaseModel):
     hostname: Optional[str] = None
+
+    label: Optional[str] = None
+    r"""The server label"""
 
     status: Optional[Status] = None
     r"""`on` - The server is powered ON
@@ -181,13 +228,14 @@ class ServerDataAttributes(BaseModel):
     `disk_erasing` - The server is in reinstalling state `disk_erasing`
     `failed_disk_erasing` - The server has failed disk erasing in reinstall
     `deploying` - The server is in the last reinstalling stage and is `deploying`
-    `failed_deployment` The server has failed deployment in reinstall
+    `failed_deployment` - The server has failed deployment in reinstall
 
     """
 
     ipmi_status: Optional[IpmiStatus] = None
 
     role: Optional[str] = None
+    r"""The server role (e.g. Bare Metal)"""
 
     site: Optional[str] = None
 
@@ -196,6 +244,8 @@ class ServerDataAttributes(BaseModel):
     rescue: Optional[bool] = None
 
     primary_ipv4: Optional[str] = None
+
+    primary_ipv6: Optional[str] = None
 
     created_at: Optional[str] = None
 
@@ -209,11 +259,11 @@ class ServerDataAttributes(BaseModel):
 
     specs: Optional[ServerDataSpecs] = None
 
+    interfaces: Optional[List[Interfaces]] = None
+
     project: Optional[ProjectInclude] = None
 
     team: Optional[TeamInclude] = None
-
-    primary_ipv6: Optional[str] = None
 
 
 class ServerDataTypedDict(TypedDict):

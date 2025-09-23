@@ -11,6 +11,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class IndexVirtualMachineRequestTypedDict(TypedDict):
     filter_project: NotRequired[str]
     r"""The project ID or Slug to filter by"""
+    extra_fields_virtual_machines: NotRequired[str]
+    r"""The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[virtual_machines]=credentials` in the query string."""
 
 
 class IndexVirtualMachineRequest(BaseModel):
@@ -20,3 +22,10 @@ class IndexVirtualMachineRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The project ID or Slug to filter by"""
+
+    extra_fields_virtual_machines: Annotated[
+        Optional[str],
+        pydantic.Field(alias="extra_fields[virtual_machines]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[virtual_machines]=credentials` in the query string."""

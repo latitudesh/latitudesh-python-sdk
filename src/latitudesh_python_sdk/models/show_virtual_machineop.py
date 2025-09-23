@@ -2,15 +2,30 @@
 
 from __future__ import annotations
 from latitudesh_python_sdk.types import BaseModel
-from latitudesh_python_sdk.utils import FieldMetadata, PathParamMetadata
-from typing_extensions import Annotated, TypedDict
+from latitudesh_python_sdk.utils import (
+    FieldMetadata,
+    PathParamMetadata,
+    QueryParamMetadata,
+)
+import pydantic
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ShowVirtualMachineRequestTypedDict(TypedDict):
     virtual_machine_id: str
+    extra_fields_virtual_machines: NotRequired[str]
+    r"""The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[virtual_machines]=credentials` in the query string."""
 
 
 class ShowVirtualMachineRequest(BaseModel):
     virtual_machine_id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
+
+    extra_fields_virtual_machines: Annotated[
+        Optional[str],
+        pydantic.Field(alias="extra_fields[virtual_machines]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[virtual_machines]=credentials` in the query string."""

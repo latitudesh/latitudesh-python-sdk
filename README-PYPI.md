@@ -101,7 +101,15 @@ Once that is saved to a file, you can run it with `uv run script.py` where
 >
 > Once a Python version reaches its [official end of life date](https://devguide.python.org/versions/), a 3-month grace period is provided for users to upgrade. Following this grace period, the minimum python version supported in the SDK will be updated.
 
-The SDK can be installed with either *pip* or *poetry* package managers.
+The SDK can be installed with *uv*, *pip*, or *poetry* package managers.
+
+### uv
+
+*uv* is a fast Python package installer and resolver, designed as a drop-in replacement for pip and pip-tools. It's recommended for its speed and modern Python tooling capabilities.
+
+```bash
+uv add latitudesh-python-sdk
+```
 
 ### PIP
 
@@ -184,7 +192,7 @@ with Latitudesh(
 
 </br>
 
-The same SDK client can also be used to make asychronous requests by importing asyncio.
+The same SDK client can also be used to make asynchronous requests by importing asyncio.
 ```python
 # Asynchronous Example
 import asyncio
@@ -258,6 +266,7 @@ with Latitudesh(
 
 ### [firewalls](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md)
 
+* [get_all_firewall_assignments](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#get_all_firewall_assignments) - List All Firewall Assignments
 * [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#create) - Create a firewall
 * [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#list) - List firewalls
 * [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#get) - Retrieve Firewall
@@ -283,6 +292,8 @@ with Latitudesh(
 * [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#get) - Retrieve a Plan
 * [list_bandwidth](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_bandwidth) - List all bandwidth plans
 * [update_bandwidth](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#update_bandwidth) - Buy or remove bandwidth packages
+* [get_containers_plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#get_containers_plans) - List containers plans
+* [get_containers_plan](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#get_containers_plan) - Retrieve container plan
 * [list_storage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_storage) - List all Storage Plans
 * [list_vm_plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_vm_plans) - List all Virtual Machines Plans
 
@@ -404,6 +415,7 @@ with Latitudesh(
 * [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#list) - Get Teams Virtual Machines
 * [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#get) - Get a Virtual Machine
 * [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#delete) - Destroy a Virtual Machine
+* [create_virtual_machine_action](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#create_virtual_machine_action) - Run Virtual Machine Action
 
 ### [vpn_sessions](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md)
 
@@ -491,18 +503,16 @@ with Latitudesh(
 
 [`LatitudeshError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/latitudesherror.py) is the base class for all HTTP error responses. It has the following properties:
 
-| Property           | Type             | Description                                                                             |
-| ------------------ | ---------------- | --------------------------------------------------------------------------------------- |
-| `err.message`      | `str`            | Error message                                                                           |
-| `err.status_code`  | `int`            | HTTP response status code eg `404`                                                      |
-| `err.headers`      | `httpx.Headers`  | HTTP response headers                                                                   |
-| `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned.                                  |
-| `err.raw_response` | `httpx.Response` | Raw HTTP response                                                                       |
-| `err.data`         |                  | Optional. Some errors may contain structured data. [See Error Classes](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/#error-classes). |
+| Property           | Type             | Description                                            |
+| ------------------ | ---------------- | ------------------------------------------------------ |
+| `err.message`      | `str`            | Error message                                          |
+| `err.status_code`  | `int`            | HTTP response status code eg `404`                     |
+| `err.headers`      | `httpx.Headers`  | HTTP response headers                                  |
+| `err.body`         | `str`            | HTTP body. Can be empty string if no body is returned. |
+| `err.raw_response` | `httpx.Response` | Raw HTTP response                                      |
 
 ### Example
 ```python
-import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh, models
 import os
 
@@ -513,12 +523,7 @@ with Latitudesh(
     res = None
     try:
 
-        res = latitudesh.api_keys.create(data={
-            "type": latitudesh_python_sdk.CreateAPIKeyType.API_KEYS,
-            "attributes": {
-                "name": "App Token",
-            },
-        })
+        res = latitudesh.api_keys.list()
 
         # Handle response
         print(res)
@@ -532,16 +537,13 @@ with Latitudesh(
         print(e.headers)
         print(e.raw_response)
 
-        # Depending on the method different errors may be thrown
-        if isinstance(e, models.ErrorObject):
-            print(e.data.errors)  # Optional[List[latitudesh_python_sdk.Errors]]
 ```
 
 ### Error Classes
 **Primary error:**
 * [`LatitudeshError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/latitudesherror.py): The base class for HTTP error responses.
 
-<details><summary>Less common errors (9)</summary>
+<details><summary>Less common errors (5)</summary>
 
 <br />
 
@@ -552,15 +554,9 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 47 of 104 methods.*
-* [`ServerError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/servererror.py): Applicable to 2 of 104 methods.*
-* [`VirtualNetworkError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/virtualnetworkerror.py): Success. Status code `403`. Applicable to 1 of 104 methods.*
-* [`DeployConfigError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/deployconfigerror.py): Success. Status code `422`. Applicable to 1 of 104 methods.*
 * [`ResponseValidationError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
-
-\* Check [the method documentation](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/#available-resources-and-operations) to see if the error is applicable.
 <!-- End Error Handling [errors] -->
 
 <!-- Start Server Selection [server] -->

@@ -3,7 +3,7 @@
 from __future__ import annotations
 from enum import Enum
 from latitudesh_python_sdk.types import BaseModel
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -14,12 +14,18 @@ class VirtualMachinePayloadType(str, Enum):
 class VirtualMachinePayloadAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     project: NotRequired[str]
+    plan: NotRequired[str]
+    ssh_keys: NotRequired[List[str]]
 
 
 class VirtualMachinePayloadAttributes(BaseModel):
     name: Optional[str] = "my-vm"
 
     project: Optional[str] = "my-project"
+
+    plan: Optional[str] = None
+
+    ssh_keys: Optional[List[str]] = None
 
 
 class VirtualMachinePayloadDataTypedDict(TypedDict):

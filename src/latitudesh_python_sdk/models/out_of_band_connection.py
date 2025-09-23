@@ -20,14 +20,14 @@ class SSHKey(BaseModel):
     fingerprint: Optional[str] = None
 
 
-class CredentialsTypedDict(TypedDict):
+class OutOfBandConnectionCredentialsTypedDict(TypedDict):
     r"""credentials are valid only when the server is deployed with ssh keys"""
 
     user: NotRequired[str]
     password: NotRequired[str]
 
 
-class Credentials(BaseModel):
+class OutOfBandConnectionCredentials(BaseModel):
     r"""credentials are valid only when the server is deployed with ssh keys"""
 
     user: Optional[str] = None
@@ -39,7 +39,7 @@ class OutOfBandConnectionAttributesTypedDict(TypedDict):
     ssh_key: NotRequired[SSHKeyTypedDict]
     created_at: NotRequired[str]
     username: NotRequired[str]
-    credentials: NotRequired[CredentialsTypedDict]
+    credentials: NotRequired[OutOfBandConnectionCredentialsTypedDict]
     r"""credentials are valid only when the server is deployed with ssh keys"""
     port: NotRequired[str]
     access_ip: NotRequired[str]
@@ -54,7 +54,7 @@ class OutOfBandConnectionAttributes(BaseModel):
 
     username: Optional[str] = None
 
-    credentials: Optional[Credentials] = None
+    credentials: Optional[OutOfBandConnectionCredentials] = None
     r"""credentials are valid only when the server is deployed with ssh keys"""
 
     port: Optional[str] = None

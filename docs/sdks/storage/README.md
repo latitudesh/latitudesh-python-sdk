@@ -16,6 +16,7 @@ Allows you to add persistent storage to a project. These filesystems can be used
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -29,7 +30,7 @@ with Latitudesh(
     res = latitudesh.storage.create_filesystem(data={
         "type": latitudesh_python_sdk.PostStorageFilesystemsStorageType.FILESYSTEMS,
         "attributes": {
-            "project": "proj_WeGoqAvYDP7nz",
+            "project": "proj_kjQwdE2bqYNVP",
             "name": "my-data",
         },
     })
@@ -62,6 +63,7 @@ Lists all the filesystems from a team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-storage-filesystems" method="get" path="/storage/filesystems" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -71,7 +73,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.storage.list_filesystems(filter_project="small-bronze-gloves")
+    latitudesh.storage.list_filesystems(filter_project="sleek-silk-car")
 
     # Use the SDK ...
 
@@ -96,6 +98,7 @@ Allows you to remove persistent storage from a project.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete-storage-filesystems" method="delete" path="/storage/filesystems/{filesystem_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -130,6 +133,7 @@ Allow you to upgrade the size of a filesystem.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="patch-storage-filesystems" method="patch" path="/storage/filesystems/{filesystem_id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh

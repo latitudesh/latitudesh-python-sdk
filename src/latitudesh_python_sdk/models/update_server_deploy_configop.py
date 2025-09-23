@@ -49,13 +49,13 @@ class UpdateServerDeployConfigServersRaid(str, Enum):
     RAID_1 = "raid-1"
 
 
-class UpdateServerDeployConfigPartitionsTypedDict(TypedDict):
+class UpdateServerDeployConfigServersPartitionsTypedDict(TypedDict):
     size_in_gb: NotRequired[int]
     path: NotRequired[str]
     filesystem_type: NotRequired[str]
 
 
-class UpdateServerDeployConfigPartitions(BaseModel):
+class UpdateServerDeployConfigServersPartitions(BaseModel):
     size_in_gb: Optional[int] = None
 
     path: Optional[str] = None
@@ -67,10 +67,10 @@ class UpdateServerDeployConfigServersAttributesTypedDict(TypedDict):
     hostname: NotRequired[str]
     operating_system: NotRequired[UpdateServerDeployConfigServersOperatingSystem]
     raid: NotRequired[UpdateServerDeployConfigServersRaid]
-    user_data: NotRequired[int]
+    user_data: NotRequired[str]
     r"""User data to configure the server"""
-    ssh_keys: NotRequired[List[int]]
-    partitions: NotRequired[List[UpdateServerDeployConfigPartitionsTypedDict]]
+    ssh_keys: NotRequired[List[str]]
+    partitions: NotRequired[List[UpdateServerDeployConfigServersPartitionsTypedDict]]
     ipxe_url: NotRequired[str]
     r"""URL where iPXE script is stored on, necessary for custom image deployments. This attribute is required when operating system iPXE is selected."""
 
@@ -82,12 +82,12 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
 
     raid: Optional[UpdateServerDeployConfigServersRaid] = None
 
-    user_data: Optional[int] = None
+    user_data: Optional[str] = None
     r"""User data to configure the server"""
 
-    ssh_keys: Optional[List[int]] = None
+    ssh_keys: Optional[List[str]] = None
 
-    partitions: Optional[List[UpdateServerDeployConfigPartitions]] = None
+    partitions: Optional[List[UpdateServerDeployConfigServersPartitions]] = None
 
     ipxe_url: Optional[str] = None
     r"""URL where iPXE script is stored on, necessary for custom image deployments. This attribute is required when operating system iPXE is selected."""

@@ -17,6 +17,7 @@ Returns a list of all API keys from the team members
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-api-keys" method="get" path="/auth/api_keys" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -56,6 +57,7 @@ Create a new API Key that is tied to the current user account. The created API k
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="post-api-key" method="post" path="/auth/api_keys" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -91,10 +93,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 400, 422                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## regenerate
 
@@ -103,6 +104,7 @@ Regenerate an existing API Key that is tied to the current user. This overrides 
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="update-api-key" method="put" path="/auth/api_keys/{api_key_id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -113,8 +115,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.api_keys.regenerate(api_key_id="tok_pRMLydp0dQKr1", data={
-        "id": "tok_pRMLydp0dQKr1",
+    res = latitudesh.api_keys.regenerate(api_key_id="tok_zlkg1DegdvZE5", data={
+        "id": "tok_zlkg1DegdvZE5",
         "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
         "attributes": {
             "name": "App Token",
@@ -140,10 +142,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 400, 404                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete
 
@@ -152,6 +153,7 @@ Delete an existing API Key. Once deleted, the API Key can no longer be used to a
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete-api-key" method="delete" path="/auth/api_keys/{api_key_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -161,7 +163,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.api_keys.delete(api_key_id="tok_xkjQwdENqYNVP")
+    latitudesh.api_keys.delete(api_key_id="tok_x1ZJrdx5qg4LV")
 
     # Use the SDK ...
 
@@ -176,7 +178,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

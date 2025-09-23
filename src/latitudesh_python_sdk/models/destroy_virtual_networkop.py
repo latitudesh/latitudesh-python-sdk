@@ -7,12 +7,12 @@ from typing_extensions import Annotated, TypedDict
 
 
 class DestroyVirtualNetworkRequestTypedDict(TypedDict):
-    vlan_id: int
+    vlan_id: str
     r"""The virtual network ID"""
 
 
 class DestroyVirtualNetworkRequest(BaseModel):
     vlan_id: Annotated[
-        int, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
+        str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
     r"""The virtual network ID"""

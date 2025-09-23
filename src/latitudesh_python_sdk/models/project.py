@@ -13,6 +13,7 @@ class BillingType(str, Enum):
     MONTHLY = "Monthly"
     HOURLY = "Hourly"
     NORMAL = "Normal"
+    CUSTOM = "Custom"
 
 
 class BillingMethod(str, Enum):

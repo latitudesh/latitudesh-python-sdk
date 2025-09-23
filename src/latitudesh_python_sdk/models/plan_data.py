@@ -30,16 +30,17 @@ class CPU(BaseModel):
 
 
 class MemoryTypedDict(TypedDict):
-    total: NotRequired[str]
+    total: NotRequired[float]
 
 
 class Memory(BaseModel):
-    total: Optional[str] = None
+    total: Optional[float] = None
 
 
 class PlanDataAttributesType(str, Enum):
     SSD = "SSD"
     HDD = "HDD"
+    NVME = "NVME"
 
 
 class DrivesTypedDict(TypedDict):
@@ -180,6 +181,7 @@ class PlanDataAttributesTypedDict(TypedDict):
     features: NotRequired[List[str]]
     specs: NotRequired[SpecsTypedDict]
     regions: NotRequired[List[PlanDataRegionsTypedDict]]
+    name: NotRequired[str]
 
 
 class PlanDataAttributes(BaseModel):
@@ -190,6 +192,8 @@ class PlanDataAttributes(BaseModel):
     specs: Optional[Specs] = None
 
     regions: Optional[List[PlanDataRegions]] = None
+
+    name: Optional[str] = None
 
 
 class PlanDataTypedDict(TypedDict):

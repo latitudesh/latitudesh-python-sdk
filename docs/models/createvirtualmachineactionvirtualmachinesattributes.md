@@ -1,0 +1,8 @@
+# CreateVirtualMachineActionVirtualMachinesAttributes
+
+
+## Fields
+
+| Field                                                                                                                  | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `action`                                                                                                               | [models.CreateVirtualMachineActionVirtualMachinesAction](../models/createvirtualmachineactionvirtualmachinesaction.md) | :heavy_check_mark:                                                                                                     | The action to perform on the virtual machine                                                                           |

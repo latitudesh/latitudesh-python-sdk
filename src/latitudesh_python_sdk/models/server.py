@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 from .server_data import ServerData, ServerDataTypedDict
-import httpx
-from latitudesh_python_sdk.models import LatitudeshError
 from latitudesh_python_sdk.types import BaseModel
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
@@ -23,37 +21,6 @@ class ServerTypedDict(TypedDict):
 
 
 class Server(BaseModel):
-    data: Optional[ServerData] = None
-
-    meta: Optional[ServerMeta] = None
-
-
-class ServerErrorData(BaseModel):
-    data: Optional[ServerData] = None
-
-    meta: Optional[ServerMeta] = None
-
-
-class ServerError(LatitudeshError):
-    data: ServerErrorData
-
-    def __init__(
-        self,
-        data: ServerErrorData,
-        raw_response: httpx.Response,
-        body: Optional[str] = None,
-    ):
-        message = body or raw_response.text
-        super().__init__(message, raw_response, body)
-        self.data = data
-
-
-class Server1TypedDict(TypedDict):
-    data: NotRequired[ServerDataTypedDict]
-    meta: NotRequired[ServerMetaTypedDict]
-
-
-class Server1(BaseModel):
     data: Optional[ServerData] = None
 
     meta: Optional[ServerMeta] = None

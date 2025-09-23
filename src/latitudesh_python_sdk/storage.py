@@ -90,7 +90,7 @@ class Storage(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "409", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -98,7 +98,7 @@ class Storage(BaseSDK):
             return unmarshal_json_response(
                 models.PostStorageFilesystemsResponseBody, http_res
             )
-        if utils.match_response(http_res, ["403", "409", "422", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -187,7 +187,7 @@ class Storage(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "409", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -195,7 +195,7 @@ class Storage(BaseSDK):
             return unmarshal_json_response(
                 models.PostStorageFilesystemsResponseBody, http_res
             )
-        if utils.match_response(http_res, ["403", "409", "422", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -438,13 +438,13 @@ class Storage(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["403", "404", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -521,13 +521,13 @@ class Storage(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "404", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["403", "404", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -621,7 +621,7 @@ class Storage(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -629,7 +629,7 @@ class Storage(BaseSDK):
             return unmarshal_json_response(
                 models.PatchStorageFilesystemsResponseBody, http_res
             )
-        if utils.match_response(http_res, ["403", "422", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -723,7 +723,7 @@ class Storage(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["403", "422", "4XX", "5XX"],
+            error_status_codes=["4XX", "5XX"],
             retry_config=retry_config,
         )
 
@@ -731,7 +731,7 @@ class Storage(BaseSDK):
             return unmarshal_json_response(
                 models.PatchStorageFilesystemsResponseBody, http_res
             )
-        if utils.match_response(http_res, ["403", "422", "4XX"], "*"):
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):

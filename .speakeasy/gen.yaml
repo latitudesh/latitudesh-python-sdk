@@ -19,15 +19,19 @@ generation:
   auth:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
+    hoistGlobalSecurity: true
   tests:
     generateTests: true
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 2.0.1
+  version: 2.1.0
   additionalDependencies:
     dev: {}
     main: {}
+  allowedRedefinedBuiltins:
+    - id
+    - object
   authors:
     - Speakeasy
   baseErrorName: LatitudeshError
@@ -55,8 +59,10 @@ python:
   methodArguments: infer-optional-args
   moduleName: ""
   outputModelSuffix: output
+  packageManager: poetry
   packageName: latitudesh-python-sdk
   pytestFilterWarnings: []
   pytestTimeout: 0
   responseFormat: flat
+  sseFlatResponse: false
   templateVersion: v2
