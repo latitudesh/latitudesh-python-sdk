@@ -43,12 +43,12 @@ class ProjectIncludeTypedDict(TypedDict):
     slug: NotRequired[str]
     description: NotRequired[str]
     billing_type: NotRequired[str]
+    provisioning_type: NotRequired[str]
     billing_method: NotRequired[str]
     bandwidth_alert: NotRequired[bool]
     environment: NotRequired[str]
     billing: NotRequired[BillingModelTypedDict]
     stats: NotRequired[StatsTypedDict]
-    provisioning_type: NotRequired[str]
 
 
 class ProjectInclude(BaseModel):
@@ -62,6 +62,8 @@ class ProjectInclude(BaseModel):
 
     billing_type: Optional[str] = None
 
+    provisioning_type: Optional[str] = None
+
     billing_method: Optional[str] = None
 
     bandwidth_alert: Optional[bool] = None
@@ -71,5 +73,3 @@ class ProjectInclude(BaseModel):
     billing: Optional[BillingModel] = None
 
     stats: Optional[Stats] = None
-
-    provisioning_type: Optional[str] = None

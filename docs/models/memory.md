@@ -5,4 +5,4 @@
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `total`            | *Optional[str]*    | :heavy_minus_sign: | N/A                |
+| `total`            | *Optional[float]*  | :heavy_minus_sign: | N/A                |

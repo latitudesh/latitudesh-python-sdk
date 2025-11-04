@@ -25,6 +25,7 @@ List all Users Data in the project. These scripts can be used to configure serve
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-project-users-data" method="get" path="/projects/{project_id}/user_data" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -34,7 +35,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.list_project_user_data(project_id="proj_z2A3DV4wdnawP", extra_fields_user_data="decoded_content")
+    res = latitudesh.user_data.list_project_user_data(project_id="proj_RMLydp7XOQKr1", extra_fields_user_data="decoded_content")
 
     # Handle response
     print(res)
@@ -68,6 +69,7 @@ Allows you to create User Data in a project, which can be used to perform custom
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="post-project-user-data" method="post" path="/projects/{project_id}/user_data" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -78,7 +80,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.create(project_id="proj_1ZJrdxvyDg4LV", data={
+    res = latitudesh.user_data.create(project_id="proj_kjQwdE0XOYNVP", data={
         "type": latitudesh_python_sdk.PostProjectUserDataUserDataType.USER_DATA,
         "attributes": {
             "description": "User Data description",
@@ -118,6 +120,7 @@ Get User Data in the project. These scripts can be used to configure servers wit
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-project-user-data" method="get" path="/projects/{project_id}/user_data/{user_data_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -127,7 +130,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.get_project_user_data(project_id="proj_vYAZqG44DMQ94", user_data_id="ud_lQraYDPeOpjwW", extra_fields_user_data="decoded_content")
+    res = latitudesh.user_data.get_project_user_data(project_id="proj_Gr47qlevDAg0m", user_data_id="ud_VLMmAD8EOwop2", extra_fields_user_data="decoded_content")
 
     # Handle response
     print(res)
@@ -162,6 +165,7 @@ Allow you update User Data in a project.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="put-project-user-data" method="patch" path="/projects/{project_id}/user_data/{user_data_id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -213,6 +217,7 @@ Allow you remove User Data in a project.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete-project-user-data" method="delete" path="/projects/{project_id}/user_data/{user_data_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -249,6 +254,7 @@ List all Users Data in the project. These scripts can be used to configure serve
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-users-data" method="get" path="/user_data" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -289,6 +295,7 @@ Allows you to create User Data in a team, which can be used to perform custom se
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="post-user-data" method="post" path="/user_data" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -336,6 +343,7 @@ Get User Data in the project. These scripts can be used to configure servers wit
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-user-data" method="get" path="/user_data/{user_data_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -345,7 +353,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.get_user_data(user_data_id="ud_7vYAZqGBdMQ94", extra_fields_user_data="decoded_content")
+    res = latitudesh.user_data.get_user_data(user_data_id="ud_1Qkm7dXzD8nZV", extra_fields_user_data="decoded_content")
 
     # Handle response
     print(res)
@@ -377,6 +385,7 @@ Allow you update User Data in a team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="patch-user-data" method="patch" path="/user_data/{user_data_id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -424,6 +433,7 @@ Delete an User Data
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete-user-data" method="delete" path="/user_data/{user_data_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os

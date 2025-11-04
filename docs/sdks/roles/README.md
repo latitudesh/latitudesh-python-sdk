@@ -15,6 +15,7 @@ Returns a list of all roles that can be assigned to users
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-roles" method="get" path="/roles" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -57,6 +58,7 @@ Retrieve Role
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-role-id" method="get" path="/roles/{role_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -66,7 +68,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.roles.get(role_id="role_3YjJOLjbqvZ87")
+    res = latitudesh.roles.get(role_id="role_LMmAD8vldwop2")
 
     # Handle response
     print(res)
@@ -86,7 +88,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

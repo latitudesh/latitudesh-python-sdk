@@ -14,6 +14,7 @@ Retrieve Traffic consumption
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-traffic-consumption" method="get" path="/traffic" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -23,7 +24,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.traffic.get(filter_date_gte="2025-04-06T21:00:00Z", filter_date_lte="2025-05-06T21:00:00Z", filter_server="sv_mw49QDB5qagKb", filter_project="proj_AW6Q2D9lqKLpr")
+    res = latitudesh.traffic.get(filter_date_gte="2025-06-16T18:45:37Z", filter_date_lte="2025-07-16T18:45:37Z", filter_server="sv_kjQwdEMXdYNVP", filter_project="proj_AW6Q2D9lqKLpr")
 
     # Handle response
     print(res)
@@ -56,6 +57,7 @@ Retrieve Traffic Quota
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-traffic-quota" method="get" path="/traffic/quota" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -85,7 +87,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 503                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

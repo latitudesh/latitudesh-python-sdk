@@ -10,6 +10,7 @@ import importlib
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import SDKHooks
 from latitudesh_python_sdk.types import OptionalNullable, UNSET
+import sys
 from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union, cast
 import weakref
 
@@ -50,15 +51,15 @@ class Latitudesh(BaseSDK):
     operating_systems: "OperatingSystemsSDK"
     plans: "Plans"
     projects: "ProjectsSDK"
+    ssh_keys: "SSHKeysSDK"
+    user_data: "UserDataSDK"
     regions: "RegionsSDK"
     roles: "Roles"
     servers: "ServersSDK"
-    ssh_keys: "SSHKeysSDK"
     storage: "Storage"
     tags: "Tags"
     teams: "TeamsSDK"
     traffic: "TrafficSDK"
-    user_data: "UserDataSDK"
     user_profile: "UserProfile"
     virtual_machines: "VirtualMachines"
     private_networks: "PrivateNetworks"
@@ -76,15 +77,15 @@ class Latitudesh(BaseSDK):
         ),
         "plans": ("latitudesh_python_sdk.plans", "Plans"),
         "projects": ("latitudesh_python_sdk.projects_sdk", "ProjectsSDK"),
+        "ssh_keys": ("latitudesh_python_sdk.sshkeys_sdk", "SSHKeysSDK"),
+        "user_data": ("latitudesh_python_sdk.userdata_sdk", "UserDataSDK"),
         "regions": ("latitudesh_python_sdk.regions_sdk", "RegionsSDK"),
         "roles": ("latitudesh_python_sdk.roles", "Roles"),
         "servers": ("latitudesh_python_sdk.servers_sdk", "ServersSDK"),
-        "ssh_keys": ("latitudesh_python_sdk.sshkeys_sdk", "SSHKeysSDK"),
         "storage": ("latitudesh_python_sdk.storage", "Storage"),
         "tags": ("latitudesh_python_sdk.tags", "Tags"),
         "teams": ("latitudesh_python_sdk.teams_sdk", "TeamsSDK"),
         "traffic": ("latitudesh_python_sdk.traffic_sdk", "TrafficSDK"),
-        "user_data": ("latitudesh_python_sdk.userdata_sdk", "UserDataSDK"),
         "user_profile": ("latitudesh_python_sdk.userprofile", "UserProfile"),
         "virtual_machines": (
             "latitudesh_python_sdk.virtualmachines",
@@ -124,7 +125,7 @@ class Latitudesh(BaseSDK):
         """
         client_supplied = True
         if client is None:
-            client = httpx.Client()
+            client = httpx.Client(follow_redirects=True)
             client_supplied = False
 
         assert issubclass(
@@ -133,7 +134,7 @@ class Latitudesh(BaseSDK):
 
         async_client_supplied = True
         if async_client is None:
-            async_client = httpx.AsyncClient()
+            async_client = httpx.AsyncClient(follow_redirects=True)
             async_client_supplied = False
 
         if debug_logger is None:
@@ -177,6 +178,7 @@ class Latitudesh(BaseSDK):
                 timeout_ms=timeout_ms,
                 debug_logger=debug_logger,
             ),
+            parent_ref=self,
         )
 
         hooks = SDKHooks()
@@ -201,13 +203,24 @@ class Latitudesh(BaseSDK):
             self.sdk_configuration.async_client_supplied,
         )
 
+    def dynamic_import(self, modname, retries=3):
+        for attempt in range(retries):
+            try:
+                return importlib.import_module(modname)
+            except KeyError:
+                # Clear any half-initialized module and retry
+                sys.modules.pop(modname, None)
+                if attempt == retries - 1:
+                    break
+        raise KeyError(f"Failed to import module '{modname}' after {retries} attempts")
+
     def __getattr__(self, name: str):
         if name in self._sub_sdk_map:
             module_path, class_name = self._sub_sdk_map[name]
             try:
-                module = importlib.import_module(module_path)
+                module = self.dynamic_import(module_path)
                 klass = getattr(module, class_name)
-                instance = klass(self.sdk_configuration)
+                instance = klass(self.sdk_configuration, parent_ref=self)
                 setattr(self, name, instance)
                 return instance
             except ImportError as e:

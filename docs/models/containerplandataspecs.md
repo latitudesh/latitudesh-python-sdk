@@ -1,0 +1,11 @@
+# ContainerPlanDataSpecs
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `cpu`                                                                            | [Optional[models.ContainerPlanDataCPU]](../models/containerplandatacpu.md)       | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `memory`                                                                         | [Optional[models.ContainerPlanDataMemory]](../models/containerplandatamemory.md) | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `ephemeral_storage`                                                              | [Optional[models.EphemeralStorage]](../models/ephemeralstorage.md)               | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `gpu`                                                                            | [Optional[models.ContainerPlanDataGpu]](../models/containerplandatagpu.md)       | :heavy_minus_sign:                                                               | N/A                                                                              |

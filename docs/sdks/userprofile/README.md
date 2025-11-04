@@ -16,6 +16,7 @@ Retrieve the current user profile
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-user-profile" method="get" path="/user/profile" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -55,6 +56,7 @@ Update the current user profile
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="patch-user-profile" method="patch" path="/user/profile/{id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -65,8 +67,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_profile.update(id="user_3pwPRamaN8FKz8EELKNmH0XMvvyR", data={
-        "id": "user_3pwPRamaN8FKz8EELKNmH0XMvvyR",
+    res = latitudesh.user_profile.update(id="user_lGJBgAxbgeUJ4yZj56wmfrK4vag", data={
+        "id": "user_lGJBgAxbgeUJ4yZj56wmfrK4vag",
         "type": latitudesh_python_sdk.PatchUserProfileUserProfileType.USERS,
         "attributes": {
             "role": latitudesh_python_sdk.PatchUserProfileUserProfileRole.COLLABORATOR,
@@ -92,10 +94,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## list_teams
 
@@ -104,6 +105,7 @@ Returns a list of all teams the user belongs to
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-user-teams" method="get" path="/user/teams" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os

@@ -2,43 +2,9 @@
 
 from __future__ import annotations
 from .custom_tag_data import CustomTagData, CustomTagDataTypedDict
-from .team_include import TeamInclude, TeamIncludeTypedDict
-from enum import Enum
 from latitudesh_python_sdk.types import BaseModel
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
-
-
-class CustomTagType(str, Enum):
-    TAGS = "tags"
-
-
-class CustomTagAttributesTypedDict(TypedDict):
-    name: NotRequired[str]
-    r"""Name of the Tag"""
-    slug: NotRequired[str]
-    r"""Slug of the Tag"""
-    description: NotRequired[str]
-    r"""Description of the Tag"""
-    color: NotRequired[str]
-    r"""Color of the Tag"""
-    team: NotRequired[TeamIncludeTypedDict]
-
-
-class CustomTagAttributes(BaseModel):
-    name: Optional[str] = None
-    r"""Name of the Tag"""
-
-    slug: Optional[str] = None
-    r"""Slug of the Tag"""
-
-    description: Optional[str] = None
-    r"""Description of the Tag"""
-
-    color: Optional[str] = None
-    r"""Color of the Tag"""
-
-    team: Optional[TeamInclude] = None
 
 
 class CustomTagMetaTypedDict(TypedDict):
@@ -50,20 +16,11 @@ class CustomTagMeta(BaseModel):
 
 
 class CustomTagTypedDict(TypedDict):
-    id: NotRequired[str]
-    type: NotRequired[CustomTagType]
-    attributes: NotRequired[CustomTagAttributesTypedDict]
     data: NotRequired[CustomTagDataTypedDict]
     meta: NotRequired[CustomTagMetaTypedDict]
 
 
 class CustomTag(BaseModel):
-    id: Optional[str] = None
-
-    type: Optional[CustomTagType] = None
-
-    attributes: Optional[CustomTagAttributes] = None
-
     data: Optional[CustomTagData] = None
 
     meta: Optional[CustomTagMeta] = None

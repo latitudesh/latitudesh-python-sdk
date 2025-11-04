@@ -5,6 +5,7 @@
 
 ### Available Operations
 
+* [get_all_firewall_assignments](#get_all_firewall_assignments) - List All Firewall Assignments
 * [create](#create) - Create a firewall
 * [list](#list) - List firewalls
 * [get](#get) - Retrieve Firewall
@@ -14,12 +15,57 @@
 * [list_assignments](#list_assignments) - Firewall Assignments
 * [delete_assignment](#delete_assignment) - Delete Firewall Assignment
 
+## get_all_firewall_assignments
+
+List all firewall assignments
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get-all-firewall-assignments" method="get" path="/firewalls/assignments" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.firewalls.get_all_firewall_assignments(filter_server="sv_RLYV8DZ2D5QoE", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `filter_server`                                                     | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The server ID to filter by                                          |
+| `page_size`                                                         | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Number of items to return per page                                  |
+| `page_number`                                                       | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Page number to return (starts at 1)                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.GetAllFirewallAssignmentsResponse](../../models/getallfirewallassignmentsresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
 ## create
 
 Create a firewall
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create-firewall" method="post" path="/firewalls" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -34,17 +80,17 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateFirewallFirewallsType.FIREWALLS,
         "attributes": {
             "name": "my-firewall",
-            "project": "sleek-steel-shirt",
+            "project": "awesome-granite-chair",
             "rules": [
                 {
-                    "from_": "192.168.42.72",
+                    "from_": "192.168.42.73",
                     "to": "192.168.43.51",
                     "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
                     "port": "80",
                 },
                 {
-                    "from_": "192.168.1.16",
-                    "to": "192.168.1.30",
+                    "from_": "192.168.1.0/24",
+                    "to": "ANY",
                     "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
                     "port": "80",
                 },
@@ -76,10 +122,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 422                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## list
 
@@ -87,6 +132,7 @@ List firewalls
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="list-firewalls" method="get" path="/firewalls" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -96,7 +142,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.list(filter_project="lightweight-silk-table", page_size=20, page_number=1)
+    res = latitudesh.firewalls.list(filter_project="incredible-bronze-car", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -130,6 +176,7 @@ Retrieve a firewall
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-firewall" method="get" path="/firewalls/{firewall_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -159,10 +206,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## update
 
@@ -170,6 +216,7 @@ Update a firewall
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="update-firewall" method="patch" path="/firewalls/{firewall_id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -180,10 +227,18 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.update(firewall_id="fw_VaNmodjeObE8W", data={
+    res = latitudesh.firewalls.update(firewall_id="fw_6A05EdQ1dvKYQ", data={
         "type": latitudesh_python_sdk.UpdateFirewallFirewallsType.FIREWALLS,
         "attributes": {
-            "rules": [],
+            "name": "new-name",
+            "rules": [
+                {
+                    "from_": "192.168.1.0/24",
+                    "to": "ANY",
+                    "protocol": latitudesh_python_sdk.UpdateFirewallFirewallsProtocol.TCP,
+                    "port": "80",
+                },
+            ],
         },
     })
 
@@ -206,10 +261,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete
 
@@ -217,6 +271,7 @@ Delete a firewall
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete-firewall" method="delete" path="/firewalls/{firewall_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -241,10 +296,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## assign
 
@@ -252,6 +306,7 @@ Assign a server to a firewall
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create-firewall-assignment" method="post" path="/firewalls/{firewall_id}/assignments" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -265,7 +320,7 @@ with Latitudesh(
     res = latitudesh.firewalls.assign(firewall_id="fw_Av9BVDavORm1W", data={
         "type": latitudesh_python_sdk.CreateFirewallAssignmentFirewallsType.FIREWALL_ASSIGNMENTS,
         "attributes": {
-            "server_id": "sv_2695BdKrOevVo",
+            "server_id": "sv_lpbV0DgRq4AWz",
         },
     })
 
@@ -288,10 +343,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404, 409, 422       | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## list_assignments
 
@@ -299,6 +353,7 @@ List servers assigned to a firewall
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-firewall-assignments" method="get" path="/firewalls/{firewall_id}/assignments" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -308,7 +363,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.list_assignments(firewall_id="fw_93YjJOLydvZ87", page_size=20, page_number=1)
+    res = latitudesh.firewalls.list_assignments(firewall_id="fw_z8Nkvdy1deLpx", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -332,10 +387,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete_assignment
 
@@ -343,6 +397,7 @@ Remove a server from a firewall
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete-firewall-assignment" method="delete" path="/firewalls/{firewall_id}/assignments/{assignment_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -368,7 +423,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

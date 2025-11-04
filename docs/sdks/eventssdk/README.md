@@ -14,6 +14,7 @@ Lists all events.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-events" method="get" path="/events" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os

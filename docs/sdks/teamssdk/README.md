@@ -15,6 +15,7 @@ Retrieve the team
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-team" method="get" path="/team" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -53,6 +54,7 @@ Create a team
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="post-team" method="post" path="/team" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -90,10 +92,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 406, 422                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## update
 
@@ -101,6 +102,7 @@ Update a team
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="patch-current-team" method="patch" path="/team/{team_id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -111,8 +113,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.teams.update(team_id="7ee1a0d0-899d-42eb-99c9-4fb69ffab8f8", data={
-        "id": "team_ZGPB1lbQ01hmeJZX92RyFBgxPBl",
+    res = latitudesh.teams.update(team_id="team_VNoL4jAy7YTbvVV0005jI6vQylGZ", data={
+        "id": "team_z3Qna7E2QRc3455EQ34JfAWNQ42",
         "type": latitudesh_python_sdk.PatchCurrentTeamTeamsType.TEAMS,
         "attributes": {
             "address": "Address",
@@ -139,7 +141,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
