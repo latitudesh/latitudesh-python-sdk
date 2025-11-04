@@ -25,6 +25,7 @@ List all SSH Keys in the project. These keys can be used to access servers after
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-project-ssh-keys" method="get" path="/projects/{project_id}/ssh_keys" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -34,7 +35,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ssh_keys.list_for_project(project_id="proj_lxWpD6a9qm6rk", filter_tags="tag_JzoXbwJ7KgFM2J4wALjXHbVrjX4")
+    res = latitudesh.ssh_keys.list_for_project(project_id="proj_LMmAD8kEqwop2", filter_tags="tag_K9kzXA45BEsjobKPNVEQCrrKbw4o,tag_my9K5XGPYBIr1ve257anIW4KRX2e")
 
     # Handle response
     print(res)
@@ -68,6 +69,7 @@ Allow you create SSH Keys in a project. These keys can be used to access servers
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="post-project-ssh-key" method="post" path="/projects/{project_id}/ssh_keys" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -78,7 +80,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ssh_keys.create(project_id="proj_wg3ZDrMyq5QlP", data={
+    res = latitudesh.ssh_keys.create(project_id="proj_RMLydp70OQKr1", data={
         "type": latitudesh_python_sdk.PostProjectSSHKeySSHKeysType.SSH_KEYS,
         "attributes": {
             "name": "SSH Key",
@@ -118,6 +120,7 @@ List all SSH Keys in the project. These keys can be used to access servers after
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-project-ssh-key" method="get" path="/projects/{project_id}/ssh_keys/{ssh_key_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -127,7 +130,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ssh_keys.get(project_id="proj_k0RyqvrJqW36X", ssh_key_id="ssh_j0L6WO1QOPlXy")
+    res = latitudesh.ssh_keys.get(project_id="proj_g1mbDwrBqLv5B", ssh_key_id="ssh_zGr47qlMDAg0m")
 
     # Handle response
     print(res)
@@ -161,6 +164,7 @@ Allow you update SSH Key in a project. These keys can be used to access servers 
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="put-project-ssh-key" method="patch" path="/projects/{project_id}/ssh_keys/{ssh_key_id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -171,13 +175,13 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ssh_keys.update(project_id="proj_5xyZOnMvDWM0l", ssh_key_id="ssh_5AEmq71XOBkWX", data={
-        "id": "ssh_5AEmq71XOBkWX",
+    res = latitudesh.ssh_keys.update(project_id="proj_W6Q2D9lGqKLpr", ssh_key_id="ssh_zlkg1DegdvZE5", data={
+        "id": "ssh_zlkg1DegdvZE5",
         "type": latitudesh_python_sdk.PutProjectSSHKeySSHKeysType.SSH_KEYS,
         "attributes": {
             "tags": [
-                "tag_yle6pegwz1hlpaP3EPMkt7zgpX3",
-                "tag_z6Qarmr4r4c3lxAmbwkYSVpNv62",
+                "tag_7YpWMjKZ8vujwmEV7blQhG87aaB",
+                "tag_E8ZoPkZPXXsgN2L46WVvTeWog1rz",
             ],
         },
     })
@@ -215,6 +219,7 @@ Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't 
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete-project-ssh-key" method="delete" path="/projects/{project_id}/ssh_keys/{ssh_key_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -224,7 +229,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.ssh_keys.delete(project_id="proj_KN4ydzeXOVob3", ssh_key_id="ssh_kjQwdEGNDYNVP")
+    latitudesh.ssh_keys.delete(project_id="proj_LMmAD8k4qwop2", ssh_key_id="ssh_7vYAZqGBdMQ94")
 
     # Use the SDK ...
 
@@ -251,6 +256,7 @@ List all SSH Keys in the project. These keys can be used to access servers after
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-ssh-keys" method="get" path="/ssh_keys" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -260,7 +266,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ssh_keys.get_ssh_keys()
+    res = latitudesh.ssh_keys.get_ssh_keys(filter_tags="tag_lYXenaknWwsJ4rryVbNoUbn6p4V,tag_ARJPX1YRrgTKQ4xpvX5YuWNG2nwW")
 
     # Handle response
     print(res)
@@ -286,11 +292,12 @@ with Latitudesh(
 
 ## post_ssh_key
 
-Allow you create SSH Keys. These keys can be used to access servers after deploy and reinstall actions.
+Allows you create SSH Keys. These keys can be used to access servers after deploy and reinstall actions.
 
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="post-ssh-key" method="post" path="/ssh_keys" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -338,6 +345,7 @@ List all SSH Keys in the project. These keys can be used to access servers after
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-ssh-key" method="get" path="/ssh_keys/{ssh_key_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -347,7 +355,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ssh_keys.get_ssh_key(ssh_key_id="ssh_zGr47qlMDAg0m")
+    res = latitudesh.ssh_keys.get_ssh_key(ssh_key_id="ssh_0MK4O4Zkqa95w")
 
     # Handle response
     print(res)
@@ -373,11 +381,12 @@ with Latitudesh(
 
 ## put_ssh_key
 
-Allow you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
+Allows you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
 
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="put-ssh-key" method="patch" path="/ssh_keys/{ssh_key_id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -388,13 +397,13 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ssh_keys.put_ssh_key(ssh_key_id="ssh_ez2A3DVldnawP", data={
-        "id": "ssh_ez2A3DVldnawP",
+    res = latitudesh.ssh_keys.put_ssh_key(ssh_key_id="ssh_8Nkvdyn1qeLpx", data={
+        "id": "ssh_8Nkvdyn1qeLpx",
         "type": latitudesh_python_sdk.PutSSHKeySSHKeysType.SSH_KEYS,
         "attributes": {
             "tags": [
-                "tag_jj4Xpjj143f0Z5JM8Zp1TKpM6a9",
-                "tag_6P4w2joLYGSpxlGZ6zrkSe6WJoe",
+                "tag_BR6a9QPmXWCPVzLrmEYAslyroMK",
+                "tag_yxVkGz7rxMsl9M54lr71fp5XZg60",
             ],
         },
     })
@@ -424,11 +433,12 @@ with Latitudesh(
 
 ## delete_ssh_key
 
-Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
+Allows you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
 
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete-ssh-key" method="delete" path="/ssh_keys/{ssh_key_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -438,7 +448,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.ssh_keys.delete_ssh_key(ssh_key_id="ssh_zlkg1DegdvZE5")
+    latitudesh.ssh_keys.delete_ssh_key(ssh_key_id="ssh_lxWpD6xKdm6rk")
 
     # Use the SDK ...
 

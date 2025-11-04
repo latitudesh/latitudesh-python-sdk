@@ -14,6 +14,7 @@ Returns the billing usage of a project
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-billing-usage" method="get" path="/billing/usage" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -24,8 +25,8 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.billing.list_usage(filter_project="proj_6059EqYkOQj8p", filter_products=[
-        "si_pttmsx3d",
-        "si_nmru52ev",
+        "si_lvdub7r3",
+        "si_utp5nfrf",
     ], filter_plan="plan.name")
 
     # Handle response

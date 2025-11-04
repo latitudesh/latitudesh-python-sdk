@@ -11,32 +11,15 @@ class FirewallServerType(str, Enum):
     FIREWALL_SERVERS = "firewall_servers"
 
 
-class FirewallServerServerTypedDict(TypedDict):
-    id: NotRequired[str]
-    primary_ipv4: NotRequired[str]
-    hostname: NotRequired[str]
-
-
-class FirewallServerServer(BaseModel):
-    id: Optional[str] = None
-
-    primary_ipv4: Optional[str] = None
-
-    hostname: Optional[str] = None
-
-
 class FirewallServerAttributesTypedDict(TypedDict):
-    server: NotRequired[FirewallServerServerTypedDict]
-    firewall_id: NotRequired[str]
     server_id: NotRequired[str]
+    firewall_id: NotRequired[str]
 
 
 class FirewallServerAttributes(BaseModel):
-    server: Optional[FirewallServerServer] = None
+    server_id: Optional[str] = None
 
     firewall_id: Optional[str] = None
-
-    server_id: Optional[str] = None
 
 
 class FirewallServerTypedDict(TypedDict):

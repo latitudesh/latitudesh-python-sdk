@@ -17,6 +17,7 @@ List all Tags in the team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-tags" method="get" path="/tags" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -56,6 +57,7 @@ Create a Tag in the team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create-tag" method="post" path="/tags" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -104,6 +106,7 @@ Update a Tag in the team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="update-tag" method="patch" path="/tags/{tag_id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -114,8 +117,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.tags.update(tag_id="tag_4v3NK44wkpF4Ewa73bRgS0BpVW4G", data={
-        "id": "tag_4v3NK44wkpF4Ewa73bRgS0BpVW4G",
+    res = latitudesh.tags.update(tag_id="tag_k88kazkbPktNYRWa2l9ZsN6gVrrL", data={
+        "id": "tag_k88kazkbPktNYRWa2l9ZsN6gVrrL",
         "type": latitudesh_python_sdk.UpdateTagTagsType.TAGS,
         "attributes": {
             "name": "Tag Name",
@@ -152,6 +155,7 @@ Update a Tag in the team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="destroy-tag" method="delete" path="/tags/{tag_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os

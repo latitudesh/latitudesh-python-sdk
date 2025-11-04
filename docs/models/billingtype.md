@@ -9,3 +9,4 @@
 | `MONTHLY` | Monthly   |
 | `HOURLY`  | Hourly    |
 | `NORMAL`  | Normal    |
+| `CUSTOM`  | Custom    |

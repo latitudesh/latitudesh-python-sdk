@@ -3,9 +3,9 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `from_`            | *Optional[str]*    | :heavy_minus_sign: | N/A                |
-| `to`               | *Optional[str]*    | :heavy_minus_sign: | N/A                |
-| `port`             | *Optional[str]*    | :heavy_minus_sign: | N/A                |
-| `protocol`         | *Optional[str]*    | :heavy_minus_sign: | N/A                |
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `from_`                                                                                                    | *Optional[str]*                                                                                            | :heavy_minus_sign:                                                                                         | Source IP address, IP range in CIDR notation, or 'ANY' (e.g., "192.168.1.1", "192.168.1.0/24", "ANY")      |
+| `to`                                                                                                       | *Optional[str]*                                                                                            | :heavy_minus_sign:                                                                                         | Destination IP address, IP range in CIDR notation, or 'ANY' (e.g., "192.168.1.1", "192.168.1.0/24", "ANY") |
+| `port`                                                                                                     | *Optional[str]*                                                                                            | :heavy_minus_sign:                                                                                         | N/A                                                                                                        |
+| `protocol`                                                                                                 | *Optional[str]*                                                                                            | :heavy_minus_sign:                                                                                         | N/A                                                                                                        |

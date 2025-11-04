@@ -1,0 +1,10 @@
+# ContainerPlanData
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `id`                                                                                     | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `type`                                                                                   | [Optional[models.ContainerPlanDataType]](../models/containerplandatatype.md)             | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `attributes`                                                                             | [Optional[models.ContainerPlanDataAttributes]](../models/containerplandataattributes.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |

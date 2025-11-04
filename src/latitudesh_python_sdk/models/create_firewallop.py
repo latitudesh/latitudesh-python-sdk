@@ -19,7 +19,9 @@ class CreateFirewallProtocol(str, Enum):
 
 class CreateFirewallRulesTypedDict(TypedDict):
     from_: NotRequired[str]
+    r"""Source IP address, IP range in CIDR notation, or 'ANY' (e.g., \"192.168.1.1\", \"192.168.1.0/24\", \"ANY\")"""
     to: NotRequired[str]
+    r"""Destination IP address, IP range in CIDR notation, or 'ANY' (e.g., \"192.168.1.1\", \"192.168.1.0/24\", \"ANY\")"""
     protocol: NotRequired[CreateFirewallProtocol]
     port: NotRequired[str]
     r"""Port number or range (e.g., \"80\", \"80-443\")"""
@@ -27,8 +29,10 @@ class CreateFirewallRulesTypedDict(TypedDict):
 
 class CreateFirewallRules(BaseModel):
     from_: Annotated[Optional[str], pydantic.Field(alias="from")] = None
+    r"""Source IP address, IP range in CIDR notation, or 'ANY' (e.g., \"192.168.1.1\", \"192.168.1.0/24\", \"ANY\")"""
 
     to: Optional[str] = None
+    r"""Destination IP address, IP range in CIDR notation, or 'ANY' (e.g., \"192.168.1.1\", \"192.168.1.0/24\", \"ANY\")"""
 
     protocol: Optional[CreateFirewallProtocol] = None
 

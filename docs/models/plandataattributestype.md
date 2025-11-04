@@ -3,7 +3,8 @@
 
 ## Values
 
-| Name  | Value |
-| ----- | ----- |
-| `SSD` | SSD   |
-| `HDD` | HDD   |
+| Name   | Value  |
+| ------ | ------ |
+| `SSD`  | SSD    |
+| `HDD`  | HDD    |
+| `NVME` | NVME   |

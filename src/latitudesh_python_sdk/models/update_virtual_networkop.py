@@ -28,11 +28,14 @@ class UpdateVirtualNetworkPrivateNetworksAttributes(BaseModel):
 
 
 class UpdateVirtualNetworkPrivateNetworksDataTypedDict(TypedDict):
+    id: str
     type: UpdateVirtualNetworkPrivateNetworksType
     attributes: NotRequired[UpdateVirtualNetworkPrivateNetworksAttributesTypedDict]
 
 
 class UpdateVirtualNetworkPrivateNetworksData(BaseModel):
+    id: str
+
     type: UpdateVirtualNetworkPrivateNetworksType
 
     attributes: Optional[UpdateVirtualNetworkPrivateNetworksAttributes] = None
@@ -40,13 +43,10 @@ class UpdateVirtualNetworkPrivateNetworksData(BaseModel):
 
 class UpdateVirtualNetworkPrivateNetworksRequestBodyTypedDict(TypedDict):
     data: UpdateVirtualNetworkPrivateNetworksDataTypedDict
-    id: NotRequired[str]
 
 
 class UpdateVirtualNetworkPrivateNetworksRequestBody(BaseModel):
     data: UpdateVirtualNetworkPrivateNetworksData
-
-    id: Optional[str] = "vlan_81EVOtR1N4J2Z"
 
 
 class UpdateVirtualNetworkRequestTypedDict(TypedDict):

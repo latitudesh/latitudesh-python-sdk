@@ -2,60 +2,9 @@
 
 from __future__ import annotations
 from .firewall_data import FirewallData, FirewallDataTypedDict
-from enum import Enum
 from latitudesh_python_sdk.types import BaseModel
-import pydantic
-from typing import List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
-
-
-class FirewallType(str, Enum):
-    FIREWALLS = "firewalls"
-
-
-class RulesTypedDict(TypedDict):
-    from_: NotRequired[str]
-    to: NotRequired[str]
-    port: NotRequired[str]
-    protocol: NotRequired[str]
-
-
-class Rules(BaseModel):
-    from_: Annotated[Optional[str], pydantic.Field(alias="from")] = None
-
-    to: Optional[str] = None
-
-    port: Optional[str] = None
-
-    protocol: Optional[str] = None
-
-
-class FirewallProjectTypedDict(TypedDict):
-    id: NotRequired[str]
-    slug: NotRequired[str]
-    name: NotRequired[str]
-
-
-class FirewallProject(BaseModel):
-    id: Optional[str] = None
-
-    slug: Optional[str] = None
-
-    name: Optional[str] = None
-
-
-class FirewallAttributesTypedDict(TypedDict):
-    name: NotRequired[str]
-    rules: NotRequired[List[RulesTypedDict]]
-    project: NotRequired[FirewallProjectTypedDict]
-
-
-class FirewallAttributes(BaseModel):
-    name: Optional[str] = None
-
-    rules: Optional[List[Rules]] = None
-
-    project: Optional[FirewallProject] = None
+from typing import Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class FirewallMetaTypedDict(TypedDict):
@@ -67,20 +16,11 @@ class FirewallMeta(BaseModel):
 
 
 class FirewallTypedDict(TypedDict):
-    id: NotRequired[str]
-    type: NotRequired[FirewallType]
-    attributes: NotRequired[FirewallAttributesTypedDict]
     data: NotRequired[FirewallDataTypedDict]
     meta: NotRequired[FirewallMetaTypedDict]
 
 
 class Firewall(BaseModel):
-    id: Optional[str] = None
-
-    type: Optional[FirewallType] = None
-
-    attributes: Optional[FirewallAttributes] = None
-
     data: Optional[FirewallData] = None
 
     meta: Optional[FirewallMeta] = None

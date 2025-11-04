@@ -74,9 +74,9 @@ class CreateServerReinstallServersAttributesTypedDict(TypedDict):
     r"""The server hostname to set upon reinstall"""
     partitions: NotRequired[List[CreateServerReinstallServersPartitionsTypedDict]]
     ssh_keys: NotRequired[List[str]]
-    r"""SSH Keys to set upon reinstall"""
-    user_data: NotRequired[int]
-    r"""User data to set upon reinstall"""
+    r"""SSH Key IDs to set upon reinstall"""
+    user_data: NotRequired[str]
+    r"""User data ID to set upon reinstall"""
     raid: NotRequired[CreateServerReinstallServersRaid]
     r"""RAID mode for the server"""
     ipxe: NotRequired[str]
@@ -93,10 +93,10 @@ class CreateServerReinstallServersAttributes(BaseModel):
     partitions: Optional[List[CreateServerReinstallServersPartitions]] = None
 
     ssh_keys: Optional[List[str]] = None
-    r"""SSH Keys to set upon reinstall"""
+    r"""SSH Key IDs to set upon reinstall"""
 
-    user_data: Optional[int] = None
-    r"""User data to set upon reinstall"""
+    user_data: Optional[str] = None
+    r"""User data ID to set upon reinstall"""
 
     raid: Optional[CreateServerReinstallServersRaid] = None
     r"""RAID mode for the server"""

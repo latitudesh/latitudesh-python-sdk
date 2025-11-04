@@ -16,6 +16,7 @@ Lists all [available locations](https://latitude.sh/locations). For server avail
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-regions" method="get" path="/regions" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -58,6 +59,7 @@ Retrieve a Region
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-region" method="get" path="/regions/{region_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -67,7 +69,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.regions.get(region_id="reg_GnzRD5W1dM5yw")
+    res = latitudesh.regions.get(region_id="reg_GMy1DbYLqN50m")
 
     # Handle response
     print(res)
@@ -87,7 +89,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

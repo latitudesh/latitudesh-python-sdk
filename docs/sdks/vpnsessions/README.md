@@ -16,6 +16,7 @@ List all Active VPN Sessions
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-vpn-sessions" method="get" path="/vpn_sessions" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -46,10 +47,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 422                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## create
 
@@ -59,6 +59,7 @@ Creates a new VPN Session.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="post-vpn-session" method="post" path="/vpn_sessions" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -94,10 +95,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 422                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## refresh_password
 
@@ -106,6 +106,7 @@ Refreshing an existing VPN Session will create new credentials for that session
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="put-vpn-session" method="patch" path="/vpn_sessions/{vpn_session_id}/refresh_password" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -135,10 +136,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete
 
@@ -147,6 +147,7 @@ Deletes an existing VPN Session.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete-vpn-session" method="delete" path="/vpn_sessions/{vpn_session_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -171,7 +172,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

@@ -31,6 +31,7 @@ Returns a list of all servers belonging to the team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-servers" method="get" path="/servers" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -40,7 +41,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.list(filter_project="proj_g1mbDwrZqLv5B", filter_region="SAO", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_0yrQNVQRLwHy0XwEGM6ESwLrW2PA", page_size=20, page_number=1)
+    res = latitudesh.servers.list(filter_project="proj_g1mbDwrZqLv5B", filter_region="SAO", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_Az0EY3zglei3jVBY1LroSWNyanye,tag_GXK6NGol1jF2xre0JrB0fK6wg0p", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -51,26 +52,26 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `filter_project`                                                                                                                                                                                                                                                                                                                                                         | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The project ID or Slug to filter by                                                                                                                                                                                                                                                                                                                                      |
-| `filter_region`                                                                                                                                                                                                                                                                                                                                                          | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The region Slug to filter by                                                                                                                                                                                                                                                                                                                                             |
-| `filter_hostname`                                                                                                                                                                                                                                                                                                                                                        | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The hostname of server to filter by                                                                                                                                                                                                                                                                                                                                      |
-| `filter_created_at_gte`                                                                                                                                                                                                                                                                                                                                                  | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The created at greater than equal date to filter by                                                                                                                                                                                                                                                                                                                      |
-| `filter_created_at_lte`                                                                                                                                                                                                                                                                                                                                                  | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The created at less than equal date to filter by                                                                                                                                                                                                                                                                                                                         |
-| `filter_label`                                                                                                                                                                                                                                                                                                                                                           | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The label of server to filter by                                                                                                                                                                                                                                                                                                                                         |
-| `filter_status`                                                                                                                                                                                                                                                                                                                                                          | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The status of server to filter by                                                                                                                                                                                                                                                                                                                                        |
-| `filter_plan`                                                                                                                                                                                                                                                                                                                                                            | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The platform/plan name of the server to filter by                                                                                                                                                                                                                                                                                                                        |
-| `filter_gpu`                                                                                                                                                                                                                                                                                                                                                             | *Optional[bool]*                                                                                                                                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | Filter by the existence of an associated GPU                                                                                                                                                                                                                                                                                                                             |
-| `filter_ram_eql`                                                                                                                                                                                                                                                                                                                                                         | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | Filter servers with RAM size (in GB) equals the provided value.                                                                                                                                                                                                                                                                                                          |
-| `filter_ram_gte`                                                                                                                                                                                                                                                                                                                                                         | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | Filter servers with RAM size (in GB) greater than or equal the provided value.                                                                                                                                                                                                                                                                                           |
-| `filter_ram_lte`                                                                                                                                                                                                                                                                                                                                                         | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | Filter servers with RAM size (in GB) less than or equal the provided value.                                                                                                                                                                                                                                                                                              |
-| `filter_disk`                                                                                                                                                                                                                                                                                                                                                            | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The disk size in Gigabytes to filter by, should be used with the following options:<br/>                              [eql] to filter for values equal to the provided value.<br/>                              [gte] to filter for values greater or equal to the provided value.<br/>                              [lte] to filter by values lower or equal to the provided value. |
-| `filter_tags`                                                                                                                                                                                                                                                                                                                                                            | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`                                                                                                                                                                                                                                               |
-| `extra_fields_servers`                                                                                                                                                                                                                                                                                                                                                   | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The `credentials` are provided as extra attributes that is lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.                                                                                                                                                                                                                 |
-| `page_size`                                                                                                                                                                                                                                                                                                                                                              | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | Number of items to return per page                                                                                                                                                                                                                                                                                                                                       |
-| `page_number`                                                                                                                                                                                                                                                                                                                                                            | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | Page number to return (starts at 1)                                                                                                                                                                                                                                                                                                                                      |
-| `retries`                                                                                                                                                                                                                                                                                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                                                                                      |
+| Parameter                                                                                                                                                                                                                                                                                                                                                                          | Type                                                                                                                                                                                                                                                                                                                                                                               | Required                                                                                                                                                                                                                                                                                                                                                                           | Description                                                                                                                                                                                                                                                                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `filter_project`                                                                                                                                                                                                                                                                                                                                                                   | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | The project ID or Slug to filter by                                                                                                                                                                                                                                                                                                                                                |
+| `filter_region`                                                                                                                                                                                                                                                                                                                                                                    | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | The region Slug to filter by                                                                                                                                                                                                                                                                                                                                                       |
+| `filter_hostname`                                                                                                                                                                                                                                                                                                                                                                  | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | The hostname of server to filter by                                                                                                                                                                                                                                                                                                                                                |
+| `filter_created_at_gte`                                                                                                                                                                                                                                                                                                                                                            | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | The created at greater than equal date to filter by                                                                                                                                                                                                                                                                                                                                |
+| `filter_created_at_lte`                                                                                                                                                                                                                                                                                                                                                            | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | The created at less than equal date to filter by                                                                                                                                                                                                                                                                                                                                   |
+| `filter_label`                                                                                                                                                                                                                                                                                                                                                                     | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | The label of server to filter by                                                                                                                                                                                                                                                                                                                                                   |
+| `filter_status`                                                                                                                                                                                                                                                                                                                                                                    | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | The status of server to filter by                                                                                                                                                                                                                                                                                                                                                  |
+| `filter_plan`                                                                                                                                                                                                                                                                                                                                                                      | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | The platform/plan name of the server to filter by                                                                                                                                                                                                                                                                                                                                  |
+| `filter_gpu`                                                                                                                                                                                                                                                                                                                                                                       | *Optional[bool]*                                                                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | Filter by the existence of an associated GPU                                                                                                                                                                                                                                                                                                                                       |
+| `filter_ram_eql`                                                                                                                                                                                                                                                                                                                                                                   | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | Filter servers with RAM size (in GB) equals the provided value.                                                                                                                                                                                                                                                                                                                    |
+| `filter_ram_gte`                                                                                                                                                                                                                                                                                                                                                                   | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | Filter servers with RAM size (in GB) greater than or equal the provided value.                                                                                                                                                                                                                                                                                                     |
+| `filter_ram_lte`                                                                                                                                                                                                                                                                                                                                                                   | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | Filter servers with RAM size (in GB) less than or equal the provided value.                                                                                                                                                                                                                                                                                                        |
+| `filter_disk`                                                                                                                                                                                                                                                                                                                                                                      | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | The disk size in Gigabytes to filter by, should be used with the following options:<br/>                              [eql] to filter for values equal to the provided value.<br/>                              [gte] to filter for values greater than or equal to the provided value.<br/>                              [lte] to filter by values lower than or equal to the provided value. |
+| `filter_tags`                                                                                                                                                                                                                                                                                                                                                                      | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`                                                                                                                                                                                                                                                         |
+| `extra_fields_servers`                                                                                                                                                                                                                                                                                                                                                             | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.                                                                                                                                                                                                                          |
+| `page_size`                                                                                                                                                                                                                                                                                                                                                                        | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | Number of items to return per page                                                                                                                                                                                                                                                                                                                                                 |
+| `page_number`                                                                                                                                                                                                                                                                                                                                                                      | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | Page number to return (starts at 1)                                                                                                                                                                                                                                                                                                                                                |
+| `retries`                                                                                                                                                                                                                                                                                                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                 | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                                                                                                |
 
 ### Response
 
@@ -78,10 +79,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 422                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## create
 
@@ -89,6 +89,7 @@ Deploy Server
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create-server" method="post" path="/servers" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -102,9 +103,9 @@ with Latitudesh(
     res = latitudesh.servers.create(data={
         "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
         "attributes": {
-            "project": "proj_W6Q2D93GdKLpr",
+            "project": "proj_A05EdQ50dvKYQ",
             "plan": latitudesh_python_sdk.CreateServerServersPlan.C2_SMALL_X86,
-            "site": latitudesh_python_sdk.CreateServerServersSite.SAO,
+            "site": latitudesh_python_sdk.CreateServerServersSite.ASH,
             "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_22_04_X64_LTS,
             "hostname": "BRC1",
         },
@@ -128,10 +129,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 400, 402, 422            | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get
 
@@ -140,6 +140,7 @@ Returns a server that belongs to the team.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-server" method="get" path="/servers/{server_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -149,7 +150,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get(server_id="sv_aNmodjGeqbE8W")
+    res = latitudesh.servers.get(server_id="sv_Gr47qleMDAg0m")
 
     # Handle response
     print(res)
@@ -180,6 +181,7 @@ Update Server
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="update-server" method="patch" path="/servers/{server_id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -190,34 +192,36 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.update(server_id="sv_3YjJOLLNOvZ87", id="sv_81EVOtR1N4J2Z", data={
-        "id": "sv_3YjJOLLNOvZ87",
-        "type": latitudesh_python_sdk.UpdateServerServersRequestApplicationJSONType.SERVERS,
-        "attributes": {},
+    res = latitudesh.servers.update(server_id="sv_aNmodjGyqbE8W", data={
+        "id": "sv_aNmodjGyqbE8W",
+        "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
+        "attributes": {
+            "project": "proj_aNmodjoyqbE8W",
+        },
     })
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 
 ```
 
 ### Parameters
 
-| Parameter                                                                                                     | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `server_id`                                                                                                   | *str*                                                                                                         | :heavy_check_mark:                                                                                            | N/A                                                                                                           |
-| `id`                                                                                                          | *Optional[str]*                                                                                               | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
-| `type`                                                                                                        | [Optional[models.UpdateServerServersRequestType]](../../models/updateserverserversrequesttype.md)             | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
-| `attributes`                                                                                                  | [Optional[models.UpdateServerServersRequestAttributes]](../../models/updateserverserversrequestattributes.md) | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
-| `data`                                                                                                        | [Optional[models.UpdateServerServersData]](../../models/updateserverserversdata.md)                           | :heavy_minus_sign:                                                                                            | N/A                                                                                                           |
-| `retries`                                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                              | :heavy_minus_sign:                                                                                            | Configuration to override the default retry behavior of the client.                                           |
+| Parameter                                                                                                             | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           | Example                                                                                                               |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `server_id`                                                                                                           | *str*                                                                                                                 | :heavy_check_mark:                                                                                                    | N/A                                                                                                                   |                                                                                                                       |
+| `data`                                                                                                                | [Optional[models.UpdateServerServersData]](../../models/updateserverserversdata.md)                                   | :heavy_minus_sign:                                                                                                    | N/A                                                                                                                   | {<br/>"data": {<br/>"id": "sv_81EVOtR1N4J2Z",<br/>"type": "servers",<br/>"attributes": {<br/>"hostname": "new-hostname",<br/>"tags": []<br/>}<br/>}<br/>} |
+| `retries`                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                      | :heavy_minus_sign:                                                                                                    | Configuration to override the default retry behavior of the client.                                                   |                                                                                                                       |
+
+### Response
+
+**[models.Server](../../models/server.md)**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ServerError       | 400, 422                 | application/vnd.api+json |
-| models.ErrorObject       | 402, 423                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete
 
@@ -225,6 +229,7 @@ Remove Server
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="destroy-server" method="delete" path="/servers/{server_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -250,10 +255,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 406, 422            | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get_deploy_config
 
@@ -261,6 +265,7 @@ Retrieve Deploy Config
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-server-deploy-config" method="get" path="/servers/{server_id}/deploy_config" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -270,7 +275,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get_deploy_config(server_id="sv_pRMLydp0dQKr1")
+    res = latitudesh.servers.get_deploy_config(server_id="sv_VLMmAD8EOwop2")
 
     # Handle response
     print(res)
@@ -300,6 +305,7 @@ Update Deploy Config
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="update-server-deploy-config" method="patch" path="/servers/{server_id}/deploy_config" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -310,7 +316,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.update_deploy_config(server_id="sv_g1mbDweZdLv5B", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
+    res = latitudesh.servers.update_deploy_config(server_id="sv_0L6WO141DPlXy", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
 
     # Handle response
     print(res)
@@ -332,11 +338,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 406                 | application/vnd.api+json |
-| models.DeployConfigError | 422                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## lock
 
@@ -344,6 +348,7 @@ Locks the server. A locked server cannot be deleted or modified and no actions c
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="server-lock" method="post" path="/servers/{server_id}/lock" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -353,7 +358,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.lock(server_id="sv_059EqYX2dQj8p")
+    res = latitudesh.servers.lock(server_id="sv_RMLydpoXOQKr1")
 
     # Handle response
     print(res)
@@ -369,7 +374,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.Server1](../../models/server1.md)**
+**[models.Server](../../models/server.md)**
 
 ### Errors
 
@@ -383,6 +388,7 @@ Unlocks the server. A locked server cannot be deleted or modified and no actions
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="server-unlock" method="post" path="/servers/{server_id}/unlock" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -392,7 +398,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.unlock(server_id="sv_aNmodjoyqbE8W")
+    res = latitudesh.servers.unlock(server_id="sv_5AEmq7xMDBkWX")
 
     # Handle response
     print(res)
@@ -408,7 +414,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.Server1](../../models/server1.md)**
+**[models.Server](../../models/server.md)**
 
 ### Errors
 
@@ -422,6 +428,7 @@ Start Out of Band Connection
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create-server-out-of-band" method="post" path="/servers/{server_id}/out_of_band_connection" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -432,10 +439,10 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create_out_of_band_connection(server_id="sv_z2A3DVpQdnawP", data={
+    res = latitudesh.servers.create_out_of_band_connection(server_id="sv_059EqYX2dQj8p", data={
         "type": latitudesh_python_sdk.CreateServerOutOfBandServersType.OUT_OF_BAND,
         "attributes": {
-            "ssh_key_id": "ssh_NGnzRD5ADM5yw",
+            "ssh_key_id": "ssh_w49QDB55qagKb",
         },
     })
 
@@ -458,10 +465,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## list_out_of_band_connections
 
@@ -469,6 +475,7 @@ List Out of Band Connections
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-server-out-of-band" method="get" path="/servers/{server_id}/out_of_band_connection" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -478,7 +485,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.list_out_of_band_connections(server_id="sv_1ZJrdx34Og4LV")
+    res = latitudesh.servers.list_out_of_band_connections(server_id="sv_vYAZqGyJOMQ94")
 
     # Handle response
     print(res)
@@ -498,10 +505,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## actions
 
@@ -513,6 +519,7 @@ Performs an action on a given server:
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create-server-action" method="post" path="/servers/{server_id}/actions" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -523,7 +530,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.actions(server_id="sv_LYV8DZAQq5QoE", data={
+    res = latitudesh.servers.actions(server_id="sv_LA73qkJwdaJ2o", data={
         "type": latitudesh_python_sdk.CreateServerActionServersType.ACTIONS,
         "attributes": {
             "action": latitudesh_python_sdk.CreateServerActionAction.REBOOT,
@@ -549,10 +556,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## create_ipmi_session
 
@@ -564,6 +570,7 @@ Related guide: https://docs.latitude.sh/docs/ipmi
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create-ipmi-session" method="post" path="/servers/{server_id}/remote_access" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -573,7 +580,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create_ipmi_session(server_id="sv_8NkvdyGKDeLpx")
+    res = latitudesh.servers.create_ipmi_session(server_id="sv_e8pKq0xYqWAob")
 
     # Handle response
     print(res)
@@ -593,10 +600,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## start_rescue_mode
 
@@ -604,6 +610,7 @@ Starts rescue mode on a given server.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="server-start-rescue-mode" method="post" path="/servers/{server_id}/rescue_mode" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -613,7 +620,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.start_rescue_mode(server_id="sv_k0Ryqv9adW36X")
+    res = latitudesh.servers.start_rescue_mode(server_id="sv_695BdK25OevVo")
 
     # Handle response
     print(res)
@@ -633,10 +640,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 406                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## exit_rescue_mode
 
@@ -644,6 +650,7 @@ Exits rescue mode on a given server.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="server-exit-rescue-mode" method="post" path="/servers/{server_id}/exit_rescue_mode" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -653,7 +660,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.exit_rescue_mode(server_id="sv_KXgRdRRodv9k5")
+    res = latitudesh.servers.exit_rescue_mode(server_id="sv_wg3ZDr0Wd5QlP")
 
     # Handle response
     print(res)
@@ -673,10 +680,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 406                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## schedule_deletion
 
@@ -684,6 +690,7 @@ Schedules the server to be removed at the end of the billing cycle.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="server-schedule-deletion" method="post" path="/servers/{server_id}/schedule_deletion" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -693,7 +700,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.schedule_deletion(server_id="sv_enPbqoBJdA2MQ")
+    res = latitudesh.servers.schedule_deletion(server_id="sv_GMy1Db2NDN50m")
 
     # Handle response
     print(res)
@@ -713,10 +720,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 406, 423            | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## unschedule_deletion
 
@@ -724,6 +730,7 @@ Unschedules the server removal at the end of the billing cycle.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="server-unschedule-deletion" method="delete" path="/servers/{server_id}/schedule_deletion" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -748,10 +755,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## reinstall
 
@@ -759,6 +765,7 @@ Run Server Reinstall
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -769,23 +776,11 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.reinstall(server_id="sv_WeGoqAWNOP7nz", data={
+    latitudesh.servers.reinstall(server_id="sv_Z8rodmJGq1jLB", data={
         "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
         "attributes": {
-            "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.UBUNTU_22_04_X64_LTS,
+            "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.IPXE,
             "hostname": "BRC1",
-            "partitions": [
-                {
-                    "size_in_gb": 300,
-                    "path": "/",
-                    "filesystem_type": "ext4",
-                },
-            ],
-            "ssh_keys": [
-                "35",
-            ],
-            "user_data": 10,
-            "raid": latitudesh_python_sdk.CreateServerReinstallServersRaid.RAID_1,
             "ipxe": "https://some-host.com/image.ipxe",
         },
     })
@@ -804,8 +799,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
-| models.ServerError       | 423                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

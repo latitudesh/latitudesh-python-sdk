@@ -12,17 +12,21 @@ class FirewallDataType(str, Enum):
     FIREWALLS = "firewalls"
 
 
-class FirewallDataRulesTypedDict(TypedDict):
+class RulesTypedDict(TypedDict):
     from_: NotRequired[str]
+    r"""Source IP address, IP range in CIDR notation, or 'ANY' (e.g., \"192.168.1.1\", \"192.168.1.0/24\", \"ANY\")"""
     to: NotRequired[str]
+    r"""Destination IP address, IP range in CIDR notation, or 'ANY' (e.g., \"192.168.1.1\", \"192.168.1.0/24\", \"ANY\")"""
     port: NotRequired[str]
     protocol: NotRequired[str]
 
 
-class FirewallDataRules(BaseModel):
+class Rules(BaseModel):
     from_: Annotated[Optional[str], pydantic.Field(alias="from")] = None
+    r"""Source IP address, IP range in CIDR notation, or 'ANY' (e.g., \"192.168.1.1\", \"192.168.1.0/24\", \"ANY\")"""
 
     to: Optional[str] = None
+    r"""Destination IP address, IP range in CIDR notation, or 'ANY' (e.g., \"192.168.1.1\", \"192.168.1.0/24\", \"ANY\")"""
 
     port: Optional[str] = None
 
@@ -45,14 +49,14 @@ class FirewallDataProject(BaseModel):
 
 class FirewallDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
-    rules: NotRequired[List[FirewallDataRulesTypedDict]]
+    rules: NotRequired[List[RulesTypedDict]]
     project: NotRequired[FirewallDataProjectTypedDict]
 
 
 class FirewallDataAttributes(BaseModel):
     name: Optional[str] = None
 
-    rules: Optional[List[FirewallDataRules]] = None
+    rules: Optional[List[Rules]] = None
 
     project: Optional[FirewallDataProject] = None
 

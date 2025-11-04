@@ -12,92 +12,60 @@ from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class UpdateServerServersRequestType(str, Enum):
+class UpdateServerServersType(str, Enum):
     SERVERS = "servers"
 
 
-class UpdateServerServersRequestBilling(str, Enum):
+class UpdateServerServersBilling(str, Enum):
+    r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
+
     HOURLY = "hourly"
     MONTHLY = "monthly"
     YEARLY = "yearly"
 
 
-class UpdateServerServersRequestAttributesTypedDict(TypedDict):
+class UpdateServerServersAttributesTypedDict(TypedDict):
     hostname: NotRequired[str]
-    billing: NotRequired[UpdateServerServersRequestBilling]
+    billing: NotRequired[UpdateServerServersBilling]
+    r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
     tags: NotRequired[List[str]]
+    r"""List of Tag IDs"""
     project: NotRequired[str]
+    r"""Project ID or slug to move the server to"""
 
 
-class UpdateServerServersRequestAttributes(BaseModel):
+class UpdateServerServersAttributes(BaseModel):
     hostname: Optional[str] = "new-hostname"
 
-    billing: Optional[UpdateServerServersRequestBilling] = None
+    billing: Optional[UpdateServerServersBilling] = None
+    r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
 
     tags: Optional[List[str]] = None
+    r"""List of Tag IDs"""
 
     project: Optional[str] = None
-
-
-class UpdateServerServersRequestApplicationJSONType(str, Enum):
-    SERVERS = "servers"
-
-
-class UpdateServerServersRequestApplicationJSONBilling(str, Enum):
-    HOURLY = "hourly"
-    MONTHLY = "monthly"
-    YEARLY = "yearly"
-
-
-class UpdateServerServersRequestApplicationJSONAttributesTypedDict(TypedDict):
-    hostname: NotRequired[str]
-    billing: NotRequired[UpdateServerServersRequestApplicationJSONBilling]
-    tags: NotRequired[List[str]]
-    project: NotRequired[str]
-
-
-class UpdateServerServersRequestApplicationJSONAttributes(BaseModel):
-    hostname: Optional[str] = "new-hostname"
-
-    billing: Optional[UpdateServerServersRequestApplicationJSONBilling] = (
-        UpdateServerServersRequestApplicationJSONBilling.MONTHLY
-    )
-
-    tags: Optional[List[str]] = None
-
-    project: Optional[str] = None
+    r"""Project ID or slug to move the server to"""
 
 
 class UpdateServerServersDataTypedDict(TypedDict):
     id: NotRequired[str]
-    type: NotRequired[UpdateServerServersRequestApplicationJSONType]
-    attributes: NotRequired[
-        UpdateServerServersRequestApplicationJSONAttributesTypedDict
-    ]
+    type: NotRequired[UpdateServerServersType]
+    attributes: NotRequired[UpdateServerServersAttributesTypedDict]
 
 
 class UpdateServerServersData(BaseModel):
     id: Optional[str] = "sv_81EVOtR1N4J2Z"
 
-    type: Optional[UpdateServerServersRequestApplicationJSONType] = None
+    type: Optional[UpdateServerServersType] = None
 
-    attributes: Optional[UpdateServerServersRequestApplicationJSONAttributes] = None
+    attributes: Optional[UpdateServerServersAttributes] = None
 
 
 class UpdateServerServersRequestBodyTypedDict(TypedDict):
-    id: NotRequired[str]
-    type: NotRequired[UpdateServerServersRequestType]
-    attributes: NotRequired[UpdateServerServersRequestAttributesTypedDict]
     data: NotRequired[UpdateServerServersDataTypedDict]
 
 
 class UpdateServerServersRequestBody(BaseModel):
-    id: Optional[str] = "sv_81EVOtR1N4J2Z"
-
-    type: Optional[UpdateServerServersRequestType] = None
-
-    attributes: Optional[UpdateServerServersRequestAttributes] = None
-
     data: Optional[UpdateServerServersData] = None
 
 

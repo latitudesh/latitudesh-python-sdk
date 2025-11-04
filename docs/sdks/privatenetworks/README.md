@@ -21,6 +21,7 @@ Lists virtual networks assigned to a project
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-virtual-networks" method="get" path="/virtual_networks" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -30,7 +31,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.list(filter_location="SAO", filter_project="awesome-copper-clock", filter_tags="tag_KLmjvaEPE7uL9G9E42pxTrEK96Jn", page_size=20, page_number=1)
+    res = latitudesh.private_networks.list(filter_location="SAO", filter_project="awesome-copper-clock", filter_tags="tag_P284pBvBEoT492NeXgv7TPaR3k8,tag_nPpEv2AnR9u9RBrGLLJ3C89nZJN", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -67,6 +68,7 @@ Creates a new Virtual Network.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="create-virtual-network" method="post" path="/virtual_networks" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -82,7 +84,7 @@ with Latitudesh(
         "attributes": {
             "description": "São Paulo VLAN",
             "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
-            "project": "enormous-paper-clock",
+            "project": "incredible-granite-coat",
         },
     })
 
@@ -104,10 +106,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 422                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## update
 
@@ -116,6 +117,7 @@ Update a Virtual Network.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="update-virtual-network" method="patch" path="/virtual_networks/{vlan_id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -126,10 +128,16 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.update(vlan_id="vlan_zGr47qlMDAg0m", data={
+    res = latitudesh.private_networks.update(vlan_id="vlan_VaNmodjeObE8W", data={
+        "id": "vlan_VaNmodjeObE8W",
         "type": latitudesh_python_sdk.UpdateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORKS,
-        "attributes": {},
-    }, id="vlan_81EVOtR1N4J2Z")
+        "attributes": {
+            "tags": [
+                "tag_Mjb3aoBkXRi5nR0gBQ5EhV30voRx",
+                "tag_QnkPzo8Wj1iWWzg24P5bhXAzrxmm",
+            ],
+        },
+    })
 
     # Handle response
     print(res)
@@ -142,7 +150,6 @@ with Latitudesh(
 | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | `vlan_id`                                                                                                 | *str*                                                                                                     | :heavy_check_mark:                                                                                        | The Virtual Network ID                                                                                    |
 | `data`                                                                                                    | [models.UpdateVirtualNetworkPrivateNetworksData](../../models/updatevirtualnetworkprivatenetworksdata.md) | :heavy_check_mark:                                                                                        | N/A                                                                                                       |
-| `id`                                                                                                      | *Optional[str]*                                                                                           | :heavy_minus_sign:                                                                                        | N/A                                                                                                       |
 | `retries`                                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                          | :heavy_minus_sign:                                                                                        | Configuration to override the default retry behavior of the client.                                       |
 
 ### Response
@@ -151,10 +158,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type                 | Status Code                | Content Type               |
-| -------------------------- | -------------------------- | -------------------------- |
-| models.VirtualNetworkError | 403                        | application/vnd.api+json   |
-| models.APIError            | 4XX, 5XX                   | \*/\*                      |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## delete_virtual_network
 
@@ -163,6 +169,7 @@ Delete virtual network
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="destroy-virtual-network" method="delete" path="/virtual_networks/{vlan_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -172,7 +179,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.private_networks.delete_virtual_network(vlan_id=793185)
+    latitudesh.private_networks.delete_virtual_network(vlan_id="<id>")
 
     # Use the SDK ...
 
@@ -182,15 +189,14 @@ with Latitudesh(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `vlan_id`                                                           | *int*                                                               | :heavy_check_mark:                                                  | The virtual network ID                                              |
+| `vlan_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | The virtual network ID                                              |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 406                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## get
 
@@ -199,6 +205,7 @@ Retrieve a Virtual Network.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-virtual-network" method="get" path="/virtual_networks/{vlan_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -239,6 +246,7 @@ Returns a list of all servers assigned to virtual networks.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="get-virtual-networks-assignments" method="get" path="/virtual_networks/assignments" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -284,6 +292,7 @@ Assign Virtual network
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -298,7 +307,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.AssignServerVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK_ASSIGNMENT,
         "attributes": {
             "server_id": "sv_pbV0DgQGd4AWz",
-            "virtual_network_id": "vlan_059EqYe2qQj8p",
+            "virtual_network_id": "vlan_3YjJOLBjqvZ87",
         },
     })
 
@@ -320,10 +329,9 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 422                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## remove_assignment
 
@@ -332,6 +340,7 @@ Allow you to remove a Virtual Network assignment.
 
 ### Example Usage
 
+<!-- UsageSnippet language="python" operationID="delete-virtual-networks-assignments" method="delete" path="/virtual_networks/assignments/{assignment_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -356,7 +365,6 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 423                 | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
