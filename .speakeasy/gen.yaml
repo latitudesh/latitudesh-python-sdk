@@ -27,7 +27,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 2.1.0
+  version: 2.1.2
   additionalDependencies:
     dev: {}
     main: {}
@@ -59,6 +59,7 @@ python:
       webhooks: ""
   inputModelSuffix: input
   legacyPyright: true
+  license: ""
   maxMethodParams: 999
   methodArguments: infer-optional-args
   moduleName: ""
