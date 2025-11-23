@@ -31,7 +31,7 @@ class CreateServerServersPlan(str, Enum):
 
 
 class CreateServerServersSite(str, Enum):
-    r"""The site slug to deploy the server"""
+    r"""The site slug to deploy the server (case-insensitive)"""
 
     ASH = "ASH"
     BGT = "BGT"
@@ -105,7 +105,7 @@ class CreateServerServersAttributesTypedDict(TypedDict):
     plan: NotRequired[CreateServerServersPlan]
     r"""The plan slug to choose server from, defining the specs the server will have"""
     site: NotRequired[CreateServerServersSite]
-    r"""The site slug to deploy the server"""
+    r"""The site slug to deploy the server (case-insensitive)"""
     operating_system: NotRequired[CreateServerServersOperatingSystem]
     r"""The operating system slug for the new server"""
     hostname: NotRequired[str]
@@ -130,7 +130,7 @@ class CreateServerServersAttributes(BaseModel):
     r"""The plan slug to choose server from, defining the specs the server will have"""
 
     site: Optional[CreateServerServersSite] = None
-    r"""The site slug to deploy the server"""
+    r"""The site slug to deploy the server (case-insensitive)"""
 
     operating_system: Optional[CreateServerServersOperatingSystem] = None
     r"""The operating system slug for the new server"""
