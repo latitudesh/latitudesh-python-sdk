@@ -15,6 +15,8 @@ class PostSSHKeySSHKeysType(str, Enum):
 class PostSSHKeySSHKeysAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""Name of the SSH Key"""
+    project: NotRequired[str]
+    r"""Project ID or slug"""
     public_key: NotRequired[str]
     r"""SSH Public Key"""
 
@@ -22,6 +24,9 @@ class PostSSHKeySSHKeysAttributesTypedDict(TypedDict):
 class PostSSHKeySSHKeysAttributes(BaseModel):
     name: Optional[str] = None
     r"""Name of the SSH Key"""
+
+    project: Optional[str] = None
+    r"""Project ID or slug"""
 
     public_key: Optional[str] = None
     r"""SSH Public Key"""

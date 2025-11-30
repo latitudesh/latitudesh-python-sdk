@@ -1,6 +1,6 @@
 # CreateServerServersSite
 
-The site slug to deploy the server
+The site slug to deploy the server (case-insensitive)
 
 
 ## Values

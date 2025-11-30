@@ -10,11 +10,20 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class GetUsersDataRequestTypedDict(TypedDict):
+    filter_project: NotRequired[str]
+    r"""Project ID or slug"""
     extra_fields_user_data: NotRequired[str]
     r"""The `decoded_content` is provided as an extra attribute that shows content in decoded form."""
 
 
 class GetUsersDataRequest(BaseModel):
+    filter_project: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[project]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Project ID or slug"""
+
     extra_fields_user_data: Annotated[
         Optional[str],
         pydantic.Field(alias="extra_fields[user_data]"),

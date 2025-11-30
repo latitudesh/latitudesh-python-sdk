@@ -129,6 +129,9 @@ class VirtualMachinePlansStockLevel(str, Enum):
     r"""The stock level of the plan"""
 
     LOW = "low"
+    UNAVAILABLE = "unavailable"
+    MEDIUM = "medium"
+    HIGH = "high"
 
 
 class VirtualMachinePlansAttributesTypedDict(TypedDict):
