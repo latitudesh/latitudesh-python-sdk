@@ -16,6 +16,8 @@ class PostUserDataUserDataAttributesTypedDict(TypedDict):
     r"""description of the User Data"""
     content: str
     r"""base64 encoded content of the User Data"""
+    project: NotRequired[str]
+    r"""Project ID or slug"""
 
 
 class PostUserDataUserDataAttributes(BaseModel):
@@ -24,6 +26,9 @@ class PostUserDataUserDataAttributes(BaseModel):
 
     content: str
     r"""base64 encoded content of the User Data"""
+
+    project: Optional[str] = None
+    r"""Project ID or slug"""
 
 
 class PostUserDataUserDataDataTypedDict(TypedDict):

@@ -64,6 +64,7 @@ class SSHKeysSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -154,6 +155,7 @@ class SSHKeysSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -258,6 +260,7 @@ class SSHKeysSDK(BaseSDK):
                 "json",
                 models.PostProjectSSHKeySSHKeysRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -364,6 +367,7 @@ class SSHKeysSDK(BaseSDK):
                 "json",
                 models.PostProjectSSHKeySSHKeysRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -456,6 +460,7 @@ class SSHKeysSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -548,6 +553,7 @@ class SSHKeysSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -655,6 +661,7 @@ class SSHKeysSDK(BaseSDK):
                 "json",
                 models.PutProjectSSHKeySSHKeysRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -762,6 +769,7 @@ class SSHKeysSDK(BaseSDK):
                 "json",
                 models.PutProjectSSHKeySSHKeysRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -854,6 +862,7 @@ class SSHKeysSDK(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -944,6 +953,7 @@ class SSHKeysSDK(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -984,6 +994,7 @@ class SSHKeysSDK(BaseSDK):
     def get_ssh_keys(
         self,
         *,
+        filter_project: Optional[str] = None,
         filter_tags: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -995,6 +1006,7 @@ class SSHKeysSDK(BaseSDK):
         List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
 
+        :param filter_project: Project ID or slug
         :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1012,6 +1024,7 @@ class SSHKeysSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.GetSSHKeysRequest(
+            filter_project=filter_project,
             filter_tags=filter_tags,
         )
 
@@ -1028,6 +1041,7 @@ class SSHKeysSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1068,6 +1082,7 @@ class SSHKeysSDK(BaseSDK):
     async def get_ssh_keys_async(
         self,
         *,
+        filter_project: Optional[str] = None,
         filter_tags: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1079,6 +1094,7 @@ class SSHKeysSDK(BaseSDK):
         List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
 
+        :param filter_project: Project ID or slug
         :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1096,6 +1112,7 @@ class SSHKeysSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.GetSSHKeysRequest(
+            filter_project=filter_project,
             filter_tags=filter_tags,
         )
 
@@ -1112,6 +1129,7 @@ class SSHKeysSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1201,6 +1219,7 @@ class SSHKeysSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.PostSSHKeySSHKeysRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1290,6 +1309,7 @@ class SSHKeysSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.PostSSHKeySSHKeysRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1374,6 +1394,7 @@ class SSHKeysSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1458,6 +1479,7 @@ class SSHKeysSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1554,6 +1576,7 @@ class SSHKeysSDK(BaseSDK):
                 "json",
                 models.PutSSHKeySSHKeysRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1650,6 +1673,7 @@ class SSHKeysSDK(BaseSDK):
                 "json",
                 models.PutSSHKeySSHKeysRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1734,6 +1758,7 @@ class SSHKeysSDK(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1818,6 +1843,7 @@ class SSHKeysSDK(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

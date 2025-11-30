@@ -163,6 +163,8 @@ class BillingUsageAttributesTypedDict(TypedDict):
     threshold: NotRequired[float]
     r"""The threshold which we use to charge your usage, in cents"""
     products: NotRequired[List[ProductsTypedDict]]
+    available_credit_balance: NotRequired[int]
+    r"""The available credit balance in cents"""
 
 
 class BillingUsageAttributes(BaseModel):
@@ -179,6 +181,9 @@ class BillingUsageAttributes(BaseModel):
     r"""The threshold which we use to charge your usage, in cents"""
 
     products: Optional[List[Products]] = None
+
+    available_credit_balance: Optional[int] = None
+    r"""The available credit balance in cents"""
 
 
 class BillingUsageDataTypedDict(TypedDict):

@@ -67,6 +67,7 @@ class VirtualMachines(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.VirtualMachinePayload
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -161,6 +162,7 @@ class VirtualMachines(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.VirtualMachinePayload
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -248,6 +250,7 @@ class VirtualMachines(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -335,6 +338,7 @@ class VirtualMachines(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -419,6 +423,7 @@ class VirtualMachines(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -503,6 +508,7 @@ class VirtualMachines(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -587,6 +593,7 @@ class VirtualMachines(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -671,6 +678,7 @@ class VirtualMachines(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -782,6 +790,7 @@ class VirtualMachines(BaseSDK):
                 "json",
                 models.CreateVirtualMachineActionVirtualMachinesRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -893,6 +902,7 @@ class VirtualMachines(BaseSDK):
                 "json",
                 models.CreateVirtualMachineActionVirtualMachinesRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
