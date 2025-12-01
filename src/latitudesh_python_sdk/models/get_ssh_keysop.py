@@ -9,11 +9,20 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class GetSSHKeysRequestTypedDict(TypedDict):
+    filter_project: NotRequired[str]
+    r"""Project ID or slug"""
     filter_tags: NotRequired[str]
     r"""The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`"""
 
 
 class GetSSHKeysRequest(BaseModel):
+    filter_project: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[project]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Project ID or slug"""
+
     filter_tags: Annotated[
         Optional[str],
         pydantic.Field(alias="filter[tags]"),

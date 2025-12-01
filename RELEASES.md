@@ -67,3 +67,13 @@ Based on:
 - [python v2.1.0] .
 ### Releases
 - [PyPI v2.1.0] https://pypi.org/project/latitudesh-python-sdk/2.1.0 - .
+
+## 2025-12-01 00:21:25
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.665.0 (2.767.2) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v2.2.0] .
+### Releases
+- [PyPI v2.2.0] https://pypi.org/project/latitudesh-python-sdk/2.2.0 - .

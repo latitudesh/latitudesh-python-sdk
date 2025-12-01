@@ -42,7 +42,7 @@ class ServersSDK(BaseSDK):
 
 
         :param filter_project: The project ID or Slug to filter by
-        :param filter_region: The region Slug to filter by
+        :param filter_region: The region Slug to filter by (case-insensitive)
         :param filter_hostname: The hostname of server to filter by
         :param filter_created_at_gte: The created at greater than equal date to filter by
         :param filter_created_at_lte: The created at less than equal date to filter by
@@ -53,7 +53,10 @@ class ServersSDK(BaseSDK):
         :param filter_ram_eql: Filter servers with RAM size (in GB) equals the provided value.
         :param filter_ram_gte: Filter servers with RAM size (in GB) greater than or equal the provided value.
         :param filter_ram_lte: Filter servers with RAM size (in GB) less than or equal the provided value.
-        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:                               [eql] to filter for values equal to the provided value.                               [gte] to filter for values greater than or equal to the provided value.                               [lte] to filter by values lower than or equal to the provided value.
+        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:
+            [eql] to filter for values equal to the provided value.
+            [gte] to filter for values greater than or equal to the provided value.
+            [lte] to filter by values lower than or equal to the provided value.
         :param filter_tags: The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`
         :param extra_fields_servers: The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
         :param page_size: Number of items to return per page
@@ -106,6 +109,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -211,7 +215,7 @@ class ServersSDK(BaseSDK):
 
 
         :param filter_project: The project ID or Slug to filter by
-        :param filter_region: The region Slug to filter by
+        :param filter_region: The region Slug to filter by (case-insensitive)
         :param filter_hostname: The hostname of server to filter by
         :param filter_created_at_gte: The created at greater than equal date to filter by
         :param filter_created_at_lte: The created at less than equal date to filter by
@@ -222,7 +226,10 @@ class ServersSDK(BaseSDK):
         :param filter_ram_eql: Filter servers with RAM size (in GB) equals the provided value.
         :param filter_ram_gte: Filter servers with RAM size (in GB) greater than or equal the provided value.
         :param filter_ram_lte: Filter servers with RAM size (in GB) less than or equal the provided value.
-        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:                               [eql] to filter for values equal to the provided value.                               [gte] to filter for values greater than or equal to the provided value.                               [lte] to filter by values lower than or equal to the provided value.
+        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:
+            [eql] to filter for values equal to the provided value.
+            [gte] to filter for values greater than or equal to the provided value.
+            [lte] to filter by values lower than or equal to the provided value.
         :param filter_tags: The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`
         :param extra_fields_servers: The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
         :param page_size: Number of items to return per page
@@ -275,6 +282,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -402,6 +410,7 @@ class ServersSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.CreateServerServersRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -492,6 +501,7 @@ class ServersSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.CreateServerServersRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -579,6 +589,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -666,6 +677,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -765,6 +777,7 @@ class ServersSDK(BaseSDK):
                 "json",
                 models.UpdateServerServersRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -864,6 +877,7 @@ class ServersSDK(BaseSDK):
                 "json",
                 models.UpdateServerServersRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -948,6 +962,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1032,6 +1047,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1113,6 +1129,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1194,6 +1211,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1298,6 +1316,7 @@ class ServersSDK(BaseSDK):
                 "json",
                 models.UpdateServerDeployConfigServersRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1402,6 +1421,7 @@ class ServersSDK(BaseSDK):
                 "json",
                 models.UpdateServerDeployConfigServersRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1485,6 +1505,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1568,6 +1589,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1651,6 +1673,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1734,6 +1757,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1832,6 +1856,7 @@ class ServersSDK(BaseSDK):
                 "json",
                 models.CreateServerOutOfBandServersRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1930,6 +1955,7 @@ class ServersSDK(BaseSDK):
                 "json",
                 models.CreateServerOutOfBandServersRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2011,6 +2037,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2092,6 +2119,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2196,6 +2224,7 @@ class ServersSDK(BaseSDK):
                 "json",
                 models.CreateServerActionServersRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2300,6 +2329,7 @@ class ServersSDK(BaseSDK):
                 "json",
                 models.CreateServerActionServersRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2387,6 +2417,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2474,6 +2505,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2557,6 +2589,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2640,6 +2673,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2723,6 +2757,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2806,6 +2841,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2889,6 +2925,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -2972,6 +3009,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -3055,6 +3093,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -3138,6 +3177,7 @@ class ServersSDK(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -3236,6 +3276,7 @@ class ServersSDK(BaseSDK):
                 "json",
                 models.CreateServerReinstallServersRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -3334,6 +3375,7 @@ class ServersSDK(BaseSDK):
                 "json",
                 models.CreateServerReinstallServersRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

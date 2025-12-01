@@ -70,6 +70,7 @@ class PrivateNetworks(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -192,6 +193,7 @@ class PrivateNetworks(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -314,6 +316,7 @@ class PrivateNetworks(BaseSDK):
                 "json",
                 models.CreateVirtualNetworkPrivateNetworksRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -410,6 +413,7 @@ class PrivateNetworks(BaseSDK):
                 "json",
                 models.CreateVirtualNetworkPrivateNetworksRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -511,6 +515,7 @@ class PrivateNetworks(BaseSDK):
                 "json",
                 models.UpdateVirtualNetworkPrivateNetworksRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -612,6 +617,7 @@ class PrivateNetworks(BaseSDK):
                 "json",
                 models.UpdateVirtualNetworkPrivateNetworksRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -696,6 +702,7 @@ class PrivateNetworks(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -780,6 +787,7 @@ class PrivateNetworks(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -864,6 +872,7 @@ class PrivateNetworks(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -950,6 +959,7 @@ class PrivateNetworks(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1048,6 +1058,7 @@ class PrivateNetworks(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1172,6 +1183,7 @@ class PrivateNetworks(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1295,6 +1307,7 @@ class PrivateNetworks(BaseSDK):
                 "json",
                 models.AssignServerVirtualNetworkPrivateNetworksRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1390,6 +1403,7 @@ class PrivateNetworks(BaseSDK):
                 "json",
                 models.AssignServerVirtualNetworkPrivateNetworksRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1474,6 +1488,7 @@ class PrivateNetworks(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1558,6 +1573,7 @@ class PrivateNetworks(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 

@@ -64,6 +64,7 @@ class UserDataSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -156,6 +157,7 @@ class UserDataSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -262,6 +264,7 @@ class UserDataSDK(BaseSDK):
                 "json",
                 models.PostProjectUserDataUserDataRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -366,6 +369,7 @@ class UserDataSDK(BaseSDK):
                 "json",
                 models.PostProjectUserDataUserDataRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -459,6 +463,7 @@ class UserDataSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -552,6 +557,7 @@ class UserDataSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -659,6 +665,7 @@ class UserDataSDK(BaseSDK):
                 "json",
                 Optional[models.PutProjectUserDataUserDataRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -766,6 +773,7 @@ class UserDataSDK(BaseSDK):
                 "json",
                 Optional[models.PutProjectUserDataUserDataRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -856,6 +864,7 @@ class UserDataSDK(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -946,6 +955,7 @@ class UserDataSDK(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -986,6 +996,7 @@ class UserDataSDK(BaseSDK):
     def get_users_data(
         self,
         *,
+        filter_project: Optional[str] = None,
         extra_fields_user_data: Optional[str] = "decoded_content",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -997,6 +1008,7 @@ class UserDataSDK(BaseSDK):
         List all Users Data in the project. These scripts can be used to configure servers with user data.
 
 
+        :param filter_project: Project ID or slug
         :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1014,6 +1026,7 @@ class UserDataSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.GetUsersDataRequest(
+            filter_project=filter_project,
             extra_fields_user_data=extra_fields_user_data,
         )
 
@@ -1030,6 +1043,7 @@ class UserDataSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1070,6 +1084,7 @@ class UserDataSDK(BaseSDK):
     async def get_users_data_async(
         self,
         *,
+        filter_project: Optional[str] = None,
         extra_fields_user_data: Optional[str] = "decoded_content",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1081,6 +1096,7 @@ class UserDataSDK(BaseSDK):
         List all Users Data in the project. These scripts can be used to configure servers with user data.
 
 
+        :param filter_project: Project ID or slug
         :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1098,6 +1114,7 @@ class UserDataSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.GetUsersDataRequest(
+            filter_project=filter_project,
             extra_fields_user_data=extra_fields_user_data,
         )
 
@@ -1114,6 +1131,7 @@ class UserDataSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1203,6 +1221,7 @@ class UserDataSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.PostUserDataUserDataRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1292,6 +1311,7 @@ class UserDataSDK(BaseSDK):
             get_serialized_body=lambda: utils.serialize_request_body(
                 request, False, False, "json", models.PostUserDataUserDataRequestBody
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1379,6 +1399,7 @@ class UserDataSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1466,6 +1487,7 @@ class UserDataSDK(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1564,6 +1586,7 @@ class UserDataSDK(BaseSDK):
                 "json",
                 Optional[models.PatchUserDataUserDataRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1662,6 +1685,7 @@ class UserDataSDK(BaseSDK):
                 "json",
                 Optional[models.PatchUserDataUserDataRequestBody],
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1743,6 +1767,7 @@ class UserDataSDK(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1824,6 +1849,7 @@ class UserDataSDK(BaseSDK):
             accept_header_value="*/*",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
