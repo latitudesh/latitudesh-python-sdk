@@ -38,8 +38,14 @@ class Plans(BaseSDK):
         :param filter_stock_level: The stock level at the site to filter by
         :param filter_in_stock: The stock available at the site to filter by
         :param filter_gpu: Filter by the existence of an associated GPU
-        :param filter_ram: The ram size in Gigabytes to filter by, should be used with the following options:                               [eql] to filter for values equal to the provided value.                               [gte] to filter for values greater or equal to the provided value.                               [lte] to filter by values lower or equal to the provided value.
-        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:                               [eql] to filter for values equal to the provided value.                               [gte] to filter for values greater or equal to the provided value.                               [lte] to filter by values lower or equal to the provided value.
+        :param filter_ram: The ram size in Gigabytes to filter by, should be used with the following options:
+            [eql] to filter for values equal to the provided value.
+            [gte] to filter for values greater or equal to the provided value.
+            [lte] to filter by values lower or equal to the provided value.
+        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:
+            [eql] to filter for values equal to the provided value.
+            [gte] to filter for values greater or equal to the provided value.
+            [lte] to filter by values lower or equal to the provided value.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -79,6 +85,7 @@ class Plans(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -143,8 +150,14 @@ class Plans(BaseSDK):
         :param filter_stock_level: The stock level at the site to filter by
         :param filter_in_stock: The stock available at the site to filter by
         :param filter_gpu: Filter by the existence of an associated GPU
-        :param filter_ram: The ram size in Gigabytes to filter by, should be used with the following options:                               [eql] to filter for values equal to the provided value.                               [gte] to filter for values greater or equal to the provided value.                               [lte] to filter by values lower or equal to the provided value.
-        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:                               [eql] to filter for values equal to the provided value.                               [gte] to filter for values greater or equal to the provided value.                               [lte] to filter by values lower or equal to the provided value.
+        :param filter_ram: The ram size in Gigabytes to filter by, should be used with the following options:
+            [eql] to filter for values equal to the provided value.
+            [gte] to filter for values greater or equal to the provided value.
+            [lte] to filter by values lower or equal to the provided value.
+        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:
+            [eql] to filter for values equal to the provided value.
+            [gte] to filter for values greater or equal to the provided value.
+            [lte] to filter by values lower or equal to the provided value.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -184,6 +197,7 @@ class Plans(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -265,6 +279,7 @@ class Plans(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -346,6 +361,7 @@ class Plans(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -438,6 +454,7 @@ class Plans(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -555,6 +572,7 @@ class Plans(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -678,6 +696,7 @@ class Plans(BaseSDK):
                 "json",
                 models.UpdatePlansBandwidthPlansRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -776,6 +795,7 @@ class Plans(BaseSDK):
                 "json",
                 models.UpdatePlansBandwidthPlansRequestBody,
             ),
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -860,6 +880,7 @@ class Plans(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -944,6 +965,7 @@ class Plans(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1018,6 +1040,7 @@ class Plans(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1092,6 +1115,7 @@ class Plans(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1166,6 +1190,7 @@ class Plans(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
@@ -1240,6 +1265,7 @@ class Plans(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
 
