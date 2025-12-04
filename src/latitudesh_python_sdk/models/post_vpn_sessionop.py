@@ -12,8 +12,6 @@ class PostVpnSessionVpnSessionsType(str, Enum):
 
 
 class PostVpnSessionVpnSessionsSite(str, Enum):
-    r"""Site slug (case-insensitive)"""
-
     ASH = "ASH"
     BGT = "BGT"
     BUE = "BUE"
@@ -37,13 +35,11 @@ class PostVpnSessionVpnSessionsSite(str, Enum):
 
 class PostVpnSessionVpnSessionsAttributesTypedDict(TypedDict):
     site: NotRequired[PostVpnSessionVpnSessionsSite]
-    r"""Site slug (case-insensitive)"""
     server_id: NotRequired[str]
 
 
 class PostVpnSessionVpnSessionsAttributes(BaseModel):
     site: Optional[PostVpnSessionVpnSessionsSite] = None
-    r"""Site slug (case-insensitive)"""
 
     server_id: Optional[str] = None
 

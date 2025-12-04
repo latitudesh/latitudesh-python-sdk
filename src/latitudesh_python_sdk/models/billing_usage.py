@@ -3,7 +3,14 @@
 from __future__ import annotations
 from datetime import datetime
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -158,13 +165,13 @@ class BillingUsageAttributesTypedDict(TypedDict):
     r"""The project in which the returned usage belongs to"""
     period: NotRequired[PeriodTypedDict]
     r"""The period from the returned billing cycle"""
-    price: NotRequired[float]
-    r"""The total usage price in cents"""
-    threshold: NotRequired[float]
-    r"""The threshold which we use to charge your usage, in cents"""
-    products: NotRequired[List[ProductsTypedDict]]
     available_credit_balance: NotRequired[int]
     r"""The available credit balance in cents"""
+    price: NotRequired[float]
+    r"""The total usage price in cents"""
+    threshold: NotRequired[Nullable[float]]
+    r"""The threshold which we use to charge your usage, in cents"""
+    products: NotRequired[List[ProductsTypedDict]]
 
 
 class BillingUsageAttributes(BaseModel):
@@ -174,16 +181,53 @@ class BillingUsageAttributes(BaseModel):
     period: Optional[Period] = None
     r"""The period from the returned billing cycle"""
 
+    available_credit_balance: Optional[int] = None
+    r"""The available credit balance in cents"""
+
     price: Optional[float] = None
     r"""The total usage price in cents"""
 
-    threshold: Optional[float] = None
+    threshold: OptionalNullable[float] = UNSET
     r"""The threshold which we use to charge your usage, in cents"""
 
     products: Optional[List[Products]] = None
 
-    available_credit_balance: Optional[int] = None
-    r"""The available credit balance in cents"""
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "project",
+            "period",
+            "available_credit_balance",
+            "price",
+            "threshold",
+            "products",
+        ]
+        nullable_fields = ["threshold"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 class BillingUsageDataTypedDict(TypedDict):

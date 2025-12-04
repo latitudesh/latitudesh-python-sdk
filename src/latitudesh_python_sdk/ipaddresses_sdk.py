@@ -40,7 +40,7 @@ class IPAddressesSDK(BaseSDK):
         :param filter_project: The project ID or Slug to filter by
         :param filter_family: The protocol family to filter by
         :param filter_type: The protocol type to filter by
-        :param filter_location: The site slug to filter by (case-insensitive)
+        :param filter_location: The site slug to filter by
         :param filter_address: The address of IP to filter by starts_with
         :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param page_size: Number of items to return per page
@@ -182,7 +182,7 @@ class IPAddressesSDK(BaseSDK):
         :param filter_project: The project ID or Slug to filter by
         :param filter_family: The protocol family to filter by
         :param filter_type: The protocol type to filter by
-        :param filter_location: The site slug to filter by (case-insensitive)
+        :param filter_location: The site slug to filter by
         :param filter_address: The address of IP to filter by starts_with
         :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param page_size: Number of items to return per page

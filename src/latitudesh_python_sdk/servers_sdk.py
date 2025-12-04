@@ -42,7 +42,7 @@ class ServersSDK(BaseSDK):
 
 
         :param filter_project: The project ID or Slug to filter by
-        :param filter_region: The region Slug to filter by (case-insensitive)
+        :param filter_region: The region Slug to filter by
         :param filter_hostname: The hostname of server to filter by
         :param filter_created_at_gte: The created at greater than equal date to filter by
         :param filter_created_at_lte: The created at less than equal date to filter by
@@ -215,7 +215,7 @@ class ServersSDK(BaseSDK):
 
 
         :param filter_project: The project ID or Slug to filter by
-        :param filter_region: The region Slug to filter by (case-insensitive)
+        :param filter_region: The region Slug to filter by
         :param filter_hostname: The hostname of server to filter by
         :param filter_created_at_gte: The created at greater than equal date to filter by
         :param filter_created_at_lte: The created at less than equal date to filter by

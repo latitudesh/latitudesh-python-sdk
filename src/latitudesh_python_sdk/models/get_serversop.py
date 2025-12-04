@@ -13,7 +13,7 @@ class GetServersRequestTypedDict(TypedDict):
     filter_project: NotRequired[str]
     r"""The project ID or Slug to filter by"""
     filter_region: NotRequired[str]
-    r"""The region Slug to filter by (case-insensitive)"""
+    r"""The region Slug to filter by"""
     filter_hostname: NotRequired[str]
     r"""The hostname of server to filter by"""
     filter_created_at_gte: NotRequired[str]
@@ -63,7 +63,7 @@ class GetServersRequest(BaseModel):
         pydantic.Field(alias="filter[region]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The region Slug to filter by (case-insensitive)"""
+    r"""The region Slug to filter by"""
 
     filter_hostname: Annotated[
         Optional[str],
