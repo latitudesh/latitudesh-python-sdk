@@ -12,7 +12,7 @@ class CreateVirtualNetworkPrivateNetworksType(str, Enum):
 
 
 class CreateVirtualNetworkPrivateNetworksSite(str, Enum):
-    r"""Site ID or slug (case-insensitive)"""
+    r"""Site ID or slug"""
 
     ASH = "ASH"
     BGT = "BGT"
@@ -40,7 +40,7 @@ class CreateVirtualNetworkPrivateNetworksAttributesTypedDict(TypedDict):
     project: str
     r"""Project ID or slug"""
     site: NotRequired[CreateVirtualNetworkPrivateNetworksSite]
-    r"""Site ID or slug (case-insensitive)"""
+    r"""Site ID or slug"""
 
 
 class CreateVirtualNetworkPrivateNetworksAttributes(BaseModel):
@@ -50,7 +50,7 @@ class CreateVirtualNetworkPrivateNetworksAttributes(BaseModel):
     r"""Project ID or slug"""
 
     site: Optional[CreateVirtualNetworkPrivateNetworksSite] = None
-    r"""Site ID or slug (case-insensitive)"""
+    r"""Site ID or slug"""
 
 
 class CreateVirtualNetworkPrivateNetworksDataTypedDict(TypedDict):

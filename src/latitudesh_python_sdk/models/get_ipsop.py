@@ -34,7 +34,7 @@ class GetIpsRequestTypedDict(TypedDict):
     filter_type: NotRequired[FilterType]
     r"""The protocol type to filter by"""
     filter_location: NotRequired[str]
-    r"""The site slug to filter by (case-insensitive)"""
+    r"""The site slug to filter by"""
     filter_address: NotRequired[str]
     r"""The address of IP to filter by starts_with"""
     extra_fields_ip_addresses: NotRequired[str]
@@ -79,7 +79,7 @@ class GetIpsRequest(BaseModel):
         pydantic.Field(alias="filter[location]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The site slug to filter by (case-insensitive)"""
+    r"""The site slug to filter by"""
 
     filter_address: Annotated[
         Optional[str],

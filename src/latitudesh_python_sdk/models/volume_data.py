@@ -5,7 +5,14 @@ from .project_include import ProjectInclude, ProjectIncludeTypedDict
 from .team_include import TeamInclude, TeamIncludeTypedDict
 from datetime import datetime
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -26,7 +33,7 @@ class VolumeDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     size_in_gb: NotRequired[int]
     created_at: NotRequired[datetime]
-    namespace_id: NotRequired[int]
+    namespace_id: NotRequired[Nullable[str]]
     connector_id: NotRequired[str]
     initiators: NotRequired[List[InitiatorsTypedDict]]
     project: NotRequired[ProjectIncludeTypedDict]
@@ -40,7 +47,7 @@ class VolumeDataAttributes(BaseModel):
 
     created_at: Optional[datetime] = None
 
-    namespace_id: Optional[int] = None
+    namespace_id: OptionalNullable[str] = UNSET
 
     connector_id: Optional[str] = None
 
@@ -49,6 +56,45 @@ class VolumeDataAttributes(BaseModel):
     project: Optional[ProjectInclude] = None
 
     team: Optional[TeamInclude] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = [
+            "name",
+            "size_in_gb",
+            "created_at",
+            "namespace_id",
+            "connector_id",
+            "initiators",
+            "project",
+            "team",
+        ]
+        nullable_fields = ["namespace_id"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 class VolumeDataTypedDict(TypedDict):
