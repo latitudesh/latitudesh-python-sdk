@@ -1,5 +1,4 @@
-# SSHKeysSDK
-(*ssh_keys*)
+# SshKeys
 
 ## Overview
 

@@ -461,8 +461,6 @@ if TYPE_CHECKING:
     from .get_project_users_dataop import (
         GetProjectUsersDataRequest,
         GetProjectUsersDataRequestTypedDict,
-        GetProjectUsersDataResponseBody,
-        GetProjectUsersDataResponseBodyTypedDict,
     )
     from .get_projectsop import (
         GetProjectsRequest,
@@ -543,12 +541,7 @@ if TYPE_CHECKING:
         GetUserProfileResponseBody,
         GetUserProfileResponseBodyTypedDict,
     )
-    from .get_users_dataop import (
-        GetUsersDataRequest,
-        GetUsersDataRequestTypedDict,
-        GetUsersDataResponseBody,
-        GetUsersDataResponseBodyTypedDict,
-    )
+    from .get_users_dataop import GetUsersDataRequest, GetUsersDataRequestTypedDict
     from .get_virtual_networkop import (
         GetVirtualNetworkRequest,
         GetVirtualNetworkRequestTypedDict,
@@ -1205,6 +1198,12 @@ if TYPE_CHECKING:
         UserDataMetaTypedDict,
         UserDataTypedDict,
     )
+    from .user_data_object import (
+        UserDataObject,
+        UserDataObjectMeta,
+        UserDataObjectMetaTypedDict,
+        UserDataObjectTypedDict,
+    )
     from .user_data_properties import (
         UserDataProperties,
         UserDataPropertiesAttributes,
@@ -1721,8 +1720,6 @@ __all__ = [
     "GetProjectUserDataRequestTypedDict",
     "GetProjectUsersDataRequest",
     "GetProjectUsersDataRequestTypedDict",
-    "GetProjectUsersDataResponseBody",
-    "GetProjectUsersDataResponseBodyTypedDict",
     "GetProjectsRequest",
     "GetProjectsRequestTypedDict",
     "GetProjectsResponse",
@@ -1781,8 +1778,6 @@ __all__ = [
     "GetUserProfileResponseBodyTypedDict",
     "GetUsersDataRequest",
     "GetUsersDataRequestTypedDict",
-    "GetUsersDataResponseBody",
-    "GetUsersDataResponseBodyTypedDict",
     "GetVirtualNetworkRequest",
     "GetVirtualNetworkRequestTypedDict",
     "GetVirtualNetworkResponseBody",
@@ -2337,6 +2332,10 @@ __all__ = [
     "UserData",
     "UserDataMeta",
     "UserDataMetaTypedDict",
+    "UserDataObject",
+    "UserDataObjectMeta",
+    "UserDataObjectMetaTypedDict",
+    "UserDataObjectTypedDict",
     "UserDataProperties",
     "UserDataPropertiesAttributes",
     "UserDataPropertiesAttributesTypedDict",
@@ -2810,8 +2809,6 @@ _dynamic_imports: dict[str, str] = {
     "GetProjectUserDataRequestTypedDict": ".get_project_user_dataop",
     "GetProjectUsersDataRequest": ".get_project_users_dataop",
     "GetProjectUsersDataRequestTypedDict": ".get_project_users_dataop",
-    "GetProjectUsersDataResponseBody": ".get_project_users_dataop",
-    "GetProjectUsersDataResponseBodyTypedDict": ".get_project_users_dataop",
     "GetProjectsRequest": ".get_projectsop",
     "GetProjectsRequestTypedDict": ".get_projectsop",
     "GetProjectsResponse": ".get_projectsop",
@@ -2870,8 +2867,6 @@ _dynamic_imports: dict[str, str] = {
     "GetUserProfileResponseBodyTypedDict": ".get_user_profileop",
     "GetUsersDataRequest": ".get_users_dataop",
     "GetUsersDataRequestTypedDict": ".get_users_dataop",
-    "GetUsersDataResponseBody": ".get_users_dataop",
-    "GetUsersDataResponseBodyTypedDict": ".get_users_dataop",
     "GetVirtualNetworkRequest": ".get_virtual_networkop",
     "GetVirtualNetworkRequestTypedDict": ".get_virtual_networkop",
     "GetVirtualNetworkResponseBody": ".get_virtual_networkop",
@@ -3421,6 +3416,10 @@ _dynamic_imports: dict[str, str] = {
     "UserDataMeta": ".user_data",
     "UserDataMetaTypedDict": ".user_data",
     "UserDataTypedDict": ".user_data",
+    "UserDataObject": ".user_data_object",
+    "UserDataObjectMeta": ".user_data_object",
+    "UserDataObjectMetaTypedDict": ".user_data_object",
+    "UserDataObjectTypedDict": ".user_data_object",
     "UserDataProperties": ".user_data_properties",
     "UserDataPropertiesAttributes": ".user_data_properties",
     "UserDataPropertiesAttributesTypedDict": ".user_data_properties",

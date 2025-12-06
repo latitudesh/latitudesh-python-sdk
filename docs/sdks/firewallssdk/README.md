@@ -1,5 +1,4 @@
-# FirewallsSDK
-(*firewalls*)
+# Firewalls
 
 ## Overview
 

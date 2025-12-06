@@ -250,22 +250,22 @@ with Latitudesh(
 <details open>
 <summary>Available methods</summary>
 
-### [api_keys](docs/sdks/apikeys/README.md)
+### [ApiKeys](docs/sdks/apikeys/README.md)
 
 * [list](docs/sdks/apikeys/README.md#list) - List API Keys
 * [create](docs/sdks/apikeys/README.md#create) - Create API Key
 * [regenerate](docs/sdks/apikeys/README.md#regenerate) - Regenerate API Key
 * [delete](docs/sdks/apikeys/README.md#delete) - Delete API Key
 
-### [billing](docs/sdks/billing/README.md)
+### [Billing](docs/sdks/billing/README.md)
 
 * [list_usage](docs/sdks/billing/README.md#list_usage) - List Billing Usage
 
-### [events](docs/sdks/eventssdk/README.md)
+### [Events](docs/sdks/eventssdk/README.md)
 
 * [list](docs/sdks/eventssdk/README.md#list) - List all Events
 
-### [firewalls](docs/sdks/firewallssdk/README.md)
+### [Firewalls](docs/sdks/firewallssdk/README.md)
 
 * [get_all_firewall_assignments](docs/sdks/firewallssdk/README.md#get_all_firewall_assignments) - List All Firewall Assignments
 * [create](docs/sdks/firewallssdk/README.md#create) - Create a firewall
@@ -277,16 +277,16 @@ with Latitudesh(
 * [list_assignments](docs/sdks/firewallssdk/README.md#list_assignments) - Firewall Assignments
 * [delete_assignment](docs/sdks/firewallssdk/README.md#delete_assignment) - Delete Firewall Assignment
 
-### [ip_addresses](docs/sdks/ipaddressessdk/README.md)
+### [IpAddresses](docs/sdks/ipaddressessdk/README.md)
 
 * [list](docs/sdks/ipaddressessdk/README.md#list) - List IPs
 * [get](docs/sdks/ipaddressessdk/README.md#get) - Retrieve an IP
 
-### [operating_systems](docs/sdks/operatingsystemssdk/README.md)
+### [OperatingSystems](docs/sdks/operatingsystemssdk/README.md)
 
 * [list](docs/sdks/operatingsystemssdk/README.md#list) - List all operating systems available
 
-### [plans](docs/sdks/plans/README.md)
+### [Plans](docs/sdks/plans/README.md)
 
 * [list](docs/sdks/plans/README.md#list) - List all Plans
 * [get](docs/sdks/plans/README.md#get) - Retrieve a Plan
@@ -296,7 +296,7 @@ with Latitudesh(
 * [list_storage](docs/sdks/plans/README.md#list_storage) - List all Storage Plans
 * [list_vm_plans](docs/sdks/plans/README.md#list_vm_plans) - List all Virtual Machines Plans
 
-### [private_networks](docs/sdks/privatenetworks/README.md)
+### [PrivateNetworks](docs/sdks/privatenetworks/README.md)
 
 * [list](docs/sdks/privatenetworks/README.md#list) - List all Virtual Networks
 * [create](docs/sdks/privatenetworks/README.md#create) - Create a Virtual Network
@@ -307,24 +307,24 @@ with Latitudesh(
 * [assign](docs/sdks/privatenetworks/README.md#assign) - Assign Virtual network
 * [remove_assignment](docs/sdks/privatenetworks/README.md#remove_assignment) - Delete Virtual Network Assignment
 
-### [projects](docs/sdks/projectssdk/README.md)
+### [Projects](docs/sdks/projectssdk/README.md)
 
 * [list](docs/sdks/projectssdk/README.md#list) - List all Projects
 * [create](docs/sdks/projectssdk/README.md#create) - Create a Project
 * [update](docs/sdks/projectssdk/README.md#update) - Update a Project
 * [delete](docs/sdks/projectssdk/README.md#delete) - Delete a Project
 
-### [regions](docs/sdks/regionssdk/README.md)
+### [Regions](docs/sdks/regionssdk/README.md)
 
 * [list](docs/sdks/regionssdk/README.md#list) - List all Regions
 * [get](docs/sdks/regionssdk/README.md#get) - Retrieve a Region
 
-### [roles](docs/sdks/roles/README.md)
+### [Roles](docs/sdks/roles/README.md)
 
 * [list](docs/sdks/roles/README.md#list) - List all Roles
 * [get](docs/sdks/roles/README.md#get) - Retrieve Role
 
-### [servers](docs/sdks/serverssdk/README.md)
+### [Servers](docs/sdks/serverssdk/README.md)
 
 * [list](docs/sdks/serverssdk/README.md#list) - List all Servers
 * [create](docs/sdks/serverssdk/README.md#create) - Deploy Server
@@ -345,7 +345,7 @@ with Latitudesh(
 * [unschedule_deletion](docs/sdks/serverssdk/README.md#unschedule_deletion) - Unschedule the server deletion
 * [reinstall](docs/sdks/serverssdk/README.md#reinstall) - Run Server Reinstall
 
-### [ssh_keys](docs/sdks/sshkeyssdk/README.md)
+### [SshKeys](docs/sdks/sshkeyssdk/README.md)
 
 * [~~list_for_project~~](docs/sdks/sshkeyssdk/README.md#list_for_project) - List all Project SSH Keys :warning: **Deprecated**
 * [~~create~~](docs/sdks/sshkeyssdk/README.md#create) - Create a Project SSH Key :warning: **Deprecated**
@@ -358,7 +358,7 @@ with Latitudesh(
 * [put_ssh_key](docs/sdks/sshkeyssdk/README.md#put_ssh_key) - Update a SSH Key
 * [delete_ssh_key](docs/sdks/sshkeyssdk/README.md#delete_ssh_key) - Delete a SSH Key
 
-### [storage](docs/sdks/storage/README.md)
+### [Storage](docs/sdks/storage/README.md)
 
 * [create_filesystem](docs/sdks/storage/README.md#create_filesystem) - Create a filesystem for a project
 * [list_filesystems](docs/sdks/storage/README.md#list_filesystems) - List filesystems
@@ -370,31 +370,31 @@ with Latitudesh(
 * [get_storage_volume](docs/sdks/storage/README.md#get_storage_volume) - Get volume
 * [post_storage_volumes_mount](docs/sdks/storage/README.md#post_storage_volumes_mount) - Mount volume
 
-### [tags](docs/sdks/tags/README.md)
+### [Tags](docs/sdks/tags/README.md)
 
 * [list](docs/sdks/tags/README.md#list) - List all Tags
 * [create](docs/sdks/tags/README.md#create) - Create a Tag
 * [update](docs/sdks/tags/README.md#update) - Update Tag
 * [delete](docs/sdks/tags/README.md#delete) - Delete Tag
 
-### [teams](docs/sdks/teamssdk/README.md)
+### [Teams](docs/sdks/teamssdk/README.md)
 
 * [get](docs/sdks/teamssdk/README.md#get) - Retrieve the team
 * [create](docs/sdks/teamssdk/README.md#create) - Create a team
 * [update](docs/sdks/teamssdk/README.md#update) - Update a team
 
-### [teams_members](docs/sdks/teamsmembers/README.md)
+### [TeamsMembers](docs/sdks/teamsmembers/README.md)
 
 * [list](docs/sdks/teamsmembers/README.md#list) - List all Team Members
 * [add](docs/sdks/teamsmembers/README.md#add) - Add a Team Member
 * [remove_member](docs/sdks/teamsmembers/README.md#remove_member) - Remove a Team Member
 
-### [traffic](docs/sdks/trafficsdk/README.md)
+### [Traffic](docs/sdks/trafficsdk/README.md)
 
 * [get](docs/sdks/trafficsdk/README.md#get) - Retrieve Traffic consumption
 * [get_quota](docs/sdks/trafficsdk/README.md#get_quota) - Retrieve Traffic Quota
 
-### [user_data](docs/sdks/userdatasdk/README.md)
+### [UserData](docs/sdks/userdatasdk/README.md)
 
 * [~~list_project_user_data~~](docs/sdks/userdatasdk/README.md#list_project_user_data) - List all Project User Data :warning: **Deprecated**
 * [~~create~~](docs/sdks/userdatasdk/README.md#create) - Create a Project User Data :warning: **Deprecated**
@@ -407,13 +407,13 @@ with Latitudesh(
 * [patch_user_data](docs/sdks/userdatasdk/README.md#patch_user_data) - Update an User Data
 * [delete_user_data](docs/sdks/userdatasdk/README.md#delete_user_data) - Delete an User Data
 
-### [user_profile](docs/sdks/userprofile/README.md)
+### [UserProfile](docs/sdks/userprofile/README.md)
 
 * [get](docs/sdks/userprofile/README.md#get) - Get user profile
 * [update](docs/sdks/userprofile/README.md#update) - Update User Profile
 * [list_teams](docs/sdks/userprofile/README.md#list_teams) - List User Teams
 
-### [virtual_machines](docs/sdks/virtualmachines/README.md)
+### [VirtualMachines](docs/sdks/virtualmachines/README.md)
 
 * [create](docs/sdks/virtualmachines/README.md#create) - Create a Virtual Machine
 * [list](docs/sdks/virtualmachines/README.md#list) - Get Teams Virtual Machines
@@ -421,7 +421,7 @@ with Latitudesh(
 * [delete](docs/sdks/virtualmachines/README.md#delete) - Destroy a Virtual Machine
 * [create_virtual_machine_action](docs/sdks/virtualmachines/README.md#create_virtual_machine_action) - Run Virtual Machine Action
 
-### [vpn_sessions](docs/sdks/vpnsessions/README.md)
+### [VpnSessions](docs/sdks/vpnsessions/README.md)
 
 * [list](docs/sdks/vpnsessions/README.md#list) - List all Active VPN Sessions
 * [create](docs/sdks/vpnsessions/README.md#create) - Create a VPN Session
