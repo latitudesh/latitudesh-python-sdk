@@ -23,7 +23,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetProjectUsersDataResponseBody:
+    ) -> models.UserData:
         r"""List all Project User Data
 
         List all Users Data in the project. These scripts can be used to configure servers with user data.
@@ -92,9 +92,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(
-                models.GetProjectUsersDataResponseBody, http_res
-            )
+            return unmarshal_json_response(models.UserData, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -116,7 +114,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetProjectUsersDataResponseBody:
+    ) -> models.UserData:
         r"""List all Project User Data
 
         List all Users Data in the project. These scripts can be used to configure servers with user data.
@@ -185,9 +183,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(
-                models.GetProjectUsersDataResponseBody, http_res
-            )
+            return unmarshal_json_response(models.UserData, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -212,7 +208,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
+    ) -> models.UserDataObject:
         r"""Create a Project User Data
 
         Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
@@ -292,7 +288,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserData, http_res)
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -317,7 +313,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
+    ) -> models.UserDataObject:
         r"""Create a Project User Data
 
         Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
@@ -397,7 +393,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserData, http_res)
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -420,7 +416,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
+    ) -> models.UserDataObject:
         r"""Retrieve a Project User Data
 
         Get User Data in the project. These scripts can be used to configure servers with user data.
@@ -491,7 +487,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserData, http_res)
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -514,7 +510,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
+    ) -> models.UserDataObject:
         r"""Retrieve a Project User Data
 
         Get User Data in the project. These scripts can be used to configure servers with user data.
@@ -585,7 +581,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserData, http_res)
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -611,7 +607,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
+    ) -> models.UserDataObject:
         r"""Update a Project User Data
 
         Allow you update User Data in a project.
@@ -693,7 +689,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserData, http_res)
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -719,7 +715,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
+    ) -> models.UserDataObject:
         r"""Update a Project User Data
 
         Allow you update User Data in a project.
@@ -801,7 +797,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserData, http_res)
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1002,7 +998,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetUsersDataResponseBody:
+    ) -> models.UserData:
         r"""List all User Data
 
         List all Users Data in the project. These scripts can be used to configure servers with user data.
@@ -1071,7 +1067,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.GetUsersDataResponseBody, http_res)
+            return unmarshal_json_response(models.UserData, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1090,7 +1086,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetUsersDataResponseBody:
+    ) -> models.UserData:
         r"""List all User Data
 
         List all Users Data in the project. These scripts can be used to configure servers with user data.
@@ -1159,7 +1155,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.GetUsersDataResponseBody, http_res)
+            return unmarshal_json_response(models.UserData, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1179,7 +1175,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
+    ) -> models.UserDataObject:
         r"""Create an User Data
 
         Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
@@ -1249,7 +1245,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserData, http_res)
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1269,7 +1265,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
+    ) -> models.UserDataObject:
         r"""Create an User Data
 
         Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
@@ -1339,7 +1335,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserData, http_res)
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1358,7 +1354,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
+    ) -> models.UserDataObject:
         r"""Retrieve an User Data
 
         Get User Data in the project. These scripts can be used to configure servers with user data.
@@ -1427,7 +1423,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserData, http_res)
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1446,7 +1442,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
+    ) -> models.UserDataObject:
         r"""Retrieve an User Data
 
         Get User Data in the project. These scripts can be used to configure servers with user data.
@@ -1515,7 +1511,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserData, http_res)
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1536,7 +1532,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
+    ) -> models.UserDataObject:
         r"""Update an User Data
 
         Allow you update User Data in a team.
@@ -1614,7 +1610,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserData, http_res)
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1635,7 +1631,7 @@ class UserDataSDK(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserData:
+    ) -> models.UserDataObject:
         r"""Update an User Data
 
         Allow you update User Data in a team.
@@ -1713,7 +1709,7 @@ class UserDataSDK(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserData, http_res)
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)

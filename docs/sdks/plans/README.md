@@ -1,5 +1,4 @@
 # Plans
-(*plans*)
 
 ## Overview
 

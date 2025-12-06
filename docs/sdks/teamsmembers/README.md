@@ -1,5 +1,4 @@
 # TeamsMembers
-(*teams_members*)
 
 ## Overview
 

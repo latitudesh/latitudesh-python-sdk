@@ -1,5 +1,4 @@
-# ServersSDK
-(*servers*)
+# Servers
 
 ## Overview
 

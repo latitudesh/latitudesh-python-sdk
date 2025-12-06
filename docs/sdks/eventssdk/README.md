@@ -1,5 +1,4 @@
-# EventsSDK
-(*events*)
+# Events
 
 ## Overview
 
