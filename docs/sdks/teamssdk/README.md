@@ -1,5 +1,4 @@
-# TeamsSDK
-(*teams*)
+# Teams
 
 ## Overview
 

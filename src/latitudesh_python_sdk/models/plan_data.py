@@ -159,6 +159,7 @@ class PlanDataPricing(BaseModel):
 class PlanDataRegionsTypedDict(TypedDict):
     name: NotRequired[str]
     deploys_instantly: NotRequired[List[str]]
+    r"""Array of operating system slugs that support instant deployment at this location. Instant deployments are provisioned immediately without the typical deployment delay."""
     locations: NotRequired[LocationsTypedDict]
     stock_level: NotRequired[StockLevel]
     pricing: NotRequired[PlanDataPricingTypedDict]
@@ -168,6 +169,7 @@ class PlanDataRegions(BaseModel):
     name: Optional[str] = None
 
     deploys_instantly: Optional[List[str]] = None
+    r"""Array of operating system slugs that support instant deployment at this location. Instant deployments are provisioned immediately without the typical deployment delay."""
 
     locations: Optional[Locations] = None
 

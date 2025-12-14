@@ -14,6 +14,8 @@ class VirtualMachinePayloadType(str, Enum):
 class VirtualMachinePayloadAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     plan: NotRequired[str]
+    site: NotRequired[str]
+    r"""The site slug where the virtual machine will be deployed. Defaults to 'DAL' if not specified. To see which sites are available for a given plan, check the 'available' array in the plan's regions."""
     ssh_keys: NotRequired[List[str]]
     project: NotRequired[str]
 
@@ -22,6 +24,9 @@ class VirtualMachinePayloadAttributes(BaseModel):
     name: Optional[str] = "my-vm"
 
     plan: Optional[str] = None
+
+    site: Optional[str] = None
+    r"""The site slug where the virtual machine will be deployed. Defaults to 'DAL' if not specified. To see which sites are available for a given plan, check the 'available' array in the plan's regions."""
 
     ssh_keys: Optional[List[str]] = None
 

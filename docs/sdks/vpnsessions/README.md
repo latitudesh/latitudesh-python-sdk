@@ -1,5 +1,4 @@
 # VpnSessions
-(*vpn_sessions*)
 
 ## Overview
 
