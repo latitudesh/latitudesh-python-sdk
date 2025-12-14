@@ -1,5 +1,4 @@
-# ProjectsSDK
-(*projects*)
+# Projects
 
 ## Overview
 

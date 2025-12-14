@@ -1,5 +1,4 @@
 # Storage
-(*storage*)
 
 ## Overview
 

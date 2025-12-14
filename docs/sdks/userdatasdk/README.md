@@ -1,5 +1,4 @@
-# UserDataSDK
-(*user_data*)
+# UserData
 
 ## Overview
 
@@ -52,7 +51,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.GetProjectUsersDataResponseBody](../../models/getprojectusersdataresponsebody.md)**
+**[models.UserData](../../models/userdata.md)**
 
 ### Errors
 
@@ -103,7 +102,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.UserData](../../models/userdata.md)**
+**[models.UserDataObject](../../models/userdataobject.md)**
 
 ### Errors
 
@@ -148,7 +147,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.UserData](../../models/userdata.md)**
+**[models.UserDataObject](../../models/userdataobject.md)**
 
 ### Errors
 
@@ -200,7 +199,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.UserData](../../models/userdata.md)**
+**[models.UserDataObject](../../models/userdataobject.md)**
 
 ### Errors
 
@@ -281,7 +280,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.GetUsersDataResponseBody](../../models/getusersdataresponsebody.md)**
+**[models.UserData](../../models/userdata.md)**
 
 ### Errors
 
@@ -330,7 +329,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.UserData](../../models/userdata.md)**
+**[models.UserDataObject](../../models/userdataobject.md)**
 
 ### Errors
 
@@ -372,7 +371,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.UserData](../../models/userdata.md)**
+**[models.UserDataObject](../../models/userdataobject.md)**
 
 ### Errors
 
@@ -421,7 +420,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.UserData](../../models/userdata.md)**
+**[models.UserDataObject](../../models/userdataobject.md)**
 
 ### Errors
 
