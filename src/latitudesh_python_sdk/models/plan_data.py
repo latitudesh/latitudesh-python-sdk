@@ -2,14 +2,28 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class PlanDataType(str, Enum):
     PLANS = "plans"
+
+
+class PlanDataFeatures(str, Enum):
+    SSH = "ssh"
+    RAID = "raid"
+    USER_DATA = "user_data"
+    SEV = "sev"
 
 
 class CPUTypedDict(TypedDict):
@@ -71,12 +85,52 @@ class Nics(BaseModel):
 class GpuTypedDict(TypedDict):
     count: NotRequired[float]
     type: NotRequired[str]
+    vram_per_gpu: NotRequired[Nullable[float]]
+    r"""VRAM per GPU in GB"""
+    interconnect: NotRequired[Nullable[str]]
+    r"""GPU interconnection type (e.g., NVLink, PCIe)"""
 
 
 class Gpu(BaseModel):
     count: Optional[float] = None
 
     type: Optional[str] = None
+
+    vram_per_gpu: OptionalNullable[float] = UNSET
+    r"""VRAM per GPU in GB"""
+
+    interconnect: OptionalNullable[str] = UNSET
+    r"""GPU interconnection type (e.g., NVLink, PCIe)"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = ["count", "type", "vram_per_gpu", "interconnect"]
+        nullable_fields = ["vram_per_gpu", "interconnect"]
+        null_default_fields = []
+
+        serialized = handler(self)
+
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            serialized.pop(k, None)
+
+            optional_nullable = k in optional_fields and k in nullable_fields
+            is_set = (
+                self.__pydantic_fields_set__.intersection({n})
+                or k in null_default_fields
+            )  # pylint: disable=no-member
+
+            if val is not None and val != UNSET_SENTINEL:
+                m[k] = val
+            elif val != UNSET_SENTINEL and (
+                not k in optional_fields or (optional_nullable and is_set)
+            ):
+                m[k] = val
+
+        return m
 
 
 class SpecsTypedDict(TypedDict):
@@ -159,6 +213,7 @@ class PlanDataPricing(BaseModel):
 class PlanDataRegionsTypedDict(TypedDict):
     name: NotRequired[str]
     deploys_instantly: NotRequired[List[str]]
+    r"""Array of operating system slugs that support instant deployment at this location. Instant deployments are provisioned immediately without the typical deployment delay."""
     locations: NotRequired[LocationsTypedDict]
     stock_level: NotRequired[StockLevel]
     pricing: NotRequired[PlanDataPricingTypedDict]
@@ -168,6 +223,7 @@ class PlanDataRegions(BaseModel):
     name: Optional[str] = None
 
     deploys_instantly: Optional[List[str]] = None
+    r"""Array of operating system slugs that support instant deployment at this location. Instant deployments are provisioned immediately without the typical deployment delay."""
 
     locations: Optional[Locations] = None
 
@@ -179,7 +235,8 @@ class PlanDataRegions(BaseModel):
 class PlanDataAttributesTypedDict(TypedDict):
     slug: NotRequired[str]
     name: NotRequired[str]
-    features: NotRequired[List[str]]
+    features: NotRequired[List[PlanDataFeatures]]
+    r"""List of available features for the plan"""
     specs: NotRequired[SpecsTypedDict]
     regions: NotRequired[List[PlanDataRegionsTypedDict]]
 
@@ -189,7 +246,8 @@ class PlanDataAttributes(BaseModel):
 
     name: Optional[str] = None
 
-    features: Optional[List[str]] = None
+    features: Optional[List[PlanDataFeatures]] = None
+    r"""List of available features for the plan"""
 
     specs: Optional[Specs] = None
 

@@ -1,5 +1,4 @@
-# OperatingSystemsSDK
-(*operating_systems*)
+# OperatingSystems
 
 ## Overview
 

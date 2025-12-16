@@ -1,5 +1,4 @@
 # VirtualMachines
-(*virtual_machines*)
 
 ## Overview
 
@@ -33,7 +32,9 @@ with Latitudesh(
         "type": latitudesh_python_sdk.VirtualMachinePayloadType.VIRTUAL_MACHINES,
         "attributes": {
             "name": "my-new-vm",
+            "site": "ASH",
             "project": "enormous-wool-keyboard",
+            "billing": latitudesh_python_sdk.VirtualMachinePayloadBilling.MONTHLY,
         },
     })
 
