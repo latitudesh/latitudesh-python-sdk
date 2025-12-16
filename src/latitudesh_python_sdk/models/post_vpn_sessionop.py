@@ -30,7 +30,7 @@ class PostVpnSessionVpnSessionsSite(str, Enum):
     SAO2 = "SAO2"
     SYD = "SYD"
     TYO = "TYO"
-    TYO2 = "TYO2"
+    TYO4 = "TYO4"
 
 
 class PostVpnSessionVpnSessionsAttributesTypedDict(TypedDict):

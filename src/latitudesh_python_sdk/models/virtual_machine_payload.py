@@ -11,11 +11,23 @@ class VirtualMachinePayloadType(str, Enum):
     VIRTUAL_MACHINES = "virtual_machines"
 
 
+class VirtualMachinePayloadBilling(str, Enum):
+    r"""The billing type for the virtual machine. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects. Defaults to `monthly` for on demand projects and `yearly` for reserved projects."""
+
+    HOURLY = "hourly"
+    MONTHLY = "monthly"
+    YEARLY = "yearly"
+
+
 class VirtualMachinePayloadAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     plan: NotRequired[str]
+    site: NotRequired[str]
+    r"""The site slug where the virtual machine will be deployed. Defaults to 'DAL' if not specified. To see which sites are available for a given plan, check the 'available' array in the plan's regions."""
     ssh_keys: NotRequired[List[str]]
     project: NotRequired[str]
+    billing: NotRequired[VirtualMachinePayloadBilling]
+    r"""The billing type for the virtual machine. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects. Defaults to `monthly` for on demand projects and `yearly` for reserved projects."""
 
 
 class VirtualMachinePayloadAttributes(BaseModel):
@@ -23,9 +35,15 @@ class VirtualMachinePayloadAttributes(BaseModel):
 
     plan: Optional[str] = None
 
+    site: Optional[str] = None
+    r"""The site slug where the virtual machine will be deployed. Defaults to 'DAL' if not specified. To see which sites are available for a given plan, check the 'available' array in the plan's regions."""
+
     ssh_keys: Optional[List[str]] = None
 
     project: Optional[str] = "my-project"
+
+    billing: Optional[VirtualMachinePayloadBilling] = None
+    r"""The billing type for the virtual machine. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects. Defaults to `monthly` for on demand projects and `yearly` for reserved projects."""
 
 
 class VirtualMachinePayloadDataTypedDict(TypedDict):

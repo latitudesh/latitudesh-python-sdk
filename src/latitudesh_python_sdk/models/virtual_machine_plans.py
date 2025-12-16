@@ -101,11 +101,15 @@ class VirtualMachinePlansBRL(BaseModel):
 
 
 class VirtualMachinePlansPricingTypedDict(TypedDict):
+    r"""Pricing information for this plan in the region"""
+
     usd: NotRequired[VirtualMachinePlansUSDTypedDict]
     brl: NotRequired[VirtualMachinePlansBRLTypedDict]
 
 
 class VirtualMachinePlansPricing(BaseModel):
+    r"""Pricing information for this plan in the region"""
+
     usd: Annotated[Optional[VirtualMachinePlansUSD], pydantic.Field(alias="USD")] = None
 
     brl: Annotated[Optional[VirtualMachinePlansBRL], pydantic.Field(alias="BRL")] = None
@@ -113,16 +117,22 @@ class VirtualMachinePlansPricing(BaseModel):
 
 class VirtualMachinePlansRegionsTypedDict(TypedDict):
     name: NotRequired[str]
+    r"""The name of the region"""
     available: NotRequired[List[str]]
+    r"""List of site codes where this virtual machine plan can be deployed"""
     pricing: NotRequired[VirtualMachinePlansPricingTypedDict]
+    r"""Pricing information for this plan in the region"""
 
 
 class VirtualMachinePlansRegions(BaseModel):
     name: Optional[str] = None
+    r"""The name of the region"""
 
     available: Optional[List[str]] = None
+    r"""List of site codes where this virtual machine plan can be deployed"""
 
     pricing: Optional[VirtualMachinePlansPricing] = None
+    r"""Pricing information for this plan in the region"""
 
 
 class VirtualMachinePlansStockLevel(str, Enum):
@@ -139,6 +149,7 @@ class VirtualMachinePlansAttributesTypedDict(TypedDict):
     r"""The name of the plan"""
     specs: NotRequired[VirtualMachinePlansSpecsTypedDict]
     regions: NotRequired[List[VirtualMachinePlansRegionsTypedDict]]
+    r"""List of regions where infrastructure with available stock exists for this virtual machine plan"""
     stock_level: NotRequired[VirtualMachinePlansStockLevel]
     r"""The stock level of the plan"""
 
@@ -150,6 +161,7 @@ class VirtualMachinePlansAttributes(BaseModel):
     specs: Optional[VirtualMachinePlansSpecs] = None
 
     regions: Optional[List[VirtualMachinePlansRegions]] = None
+    r"""List of regions where infrastructure with available stock exists for this virtual machine plan"""
 
     stock_level: Optional[VirtualMachinePlansStockLevel] = None
     r"""The stock level of the plan"""

@@ -1,5 +1,4 @@
-# TrafficSDK
-(*traffic*)
+# Traffic
 
 ## Overview
 

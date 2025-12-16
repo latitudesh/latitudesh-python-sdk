@@ -1,5 +1,4 @@
-# IPAddressesSDK
-(*ip_addresses*)
+# IpAddresses
 
 ## Overview
 

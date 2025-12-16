@@ -69,6 +69,14 @@ class VirtualMachineAttributesSpecs(BaseModel):
     gpu: Optional[str] = None
 
 
+class VirtualMachineAttributesBilling(str, Enum):
+    r"""The billing type for the virtual machine."""
+
+    HOURLY = "hourly"
+    MONTHLY = "monthly"
+    YEARLY = "yearly"
+
+
 class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     created_at: NotRequired[str]
@@ -79,6 +87,8 @@ class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     specs: NotRequired[VirtualMachineAttributesSpecsTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
     project: NotRequired[ProjectIncludeTypedDict]
+    billing: NotRequired[VirtualMachineAttributesBilling]
+    r"""The billing type for the virtual machine."""
 
 
 class VirtualMachineAttributesAttributes(BaseModel):
@@ -99,6 +109,9 @@ class VirtualMachineAttributesAttributes(BaseModel):
     team: Optional[TeamInclude] = None
 
     project: Optional[ProjectInclude] = None
+
+    billing: Optional[VirtualMachineAttributesBilling] = None
+    r"""The billing type for the virtual machine."""
 
 
 class VirtualMachineAttributesTypedDict(TypedDict):

@@ -1,5 +1,4 @@
-# RegionsSDK
-(*regions*)
+# Regions
 
 ## Overview
 
