@@ -22,7 +22,7 @@ class Storage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PostStorageFilesystemsResponseBody:
-        r"""Create a filesystem for a project
+        r"""Create filesystem
 
         Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
 
@@ -120,7 +120,7 @@ class Storage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PostStorageFilesystemsResponseBody:
-        r"""Create a filesystem for a project
+        r"""Create filesystem
 
         Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
 
@@ -383,7 +383,7 @@ class Storage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a filesystem for a project
+        r"""Delete filesystem
 
         Allows you to remove persistent storage from a project.
 
@@ -467,7 +467,7 @@ class Storage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a filesystem for a project
+        r"""Delete filesystem
 
         Allows you to remove persistent storage from a project.
 
@@ -555,7 +555,7 @@ class Storage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PatchStorageFilesystemsResponseBody:
-        r"""Update a filesystem for a project
+        r"""Update filesystem
 
         Allow you to upgrade the size of a filesystem.
 
@@ -658,7 +658,7 @@ class Storage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PatchStorageFilesystemsResponseBody:
-        r"""Update a filesystem for a project
+        r"""Update filesystem
 
         Allow you to upgrade the size of a filesystem.
 
@@ -1289,7 +1289,7 @@ class Storage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetStorageVolumeResponseBody:
-        r"""Get volume
+        r"""Retrieve volume
 
         Shows details of a specific volume storage.
 
@@ -1375,7 +1375,7 @@ class Storage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetStorageVolumeResponseBody:
-        r"""Get volume
+        r"""Retrieve volume
 
         Shows details of a specific volume storage.
 

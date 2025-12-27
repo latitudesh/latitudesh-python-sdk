@@ -37,6 +37,8 @@ class GetIpsRequestTypedDict(TypedDict):
     r"""The site slug to filter by"""
     filter_address: NotRequired[str]
     r"""The address of IP to filter by starts_with"""
+    filter_additional: NotRequired[bool]
+    r"""Filter by additional IPs (true) or management IPs (false)"""
     extra_fields_ip_addresses: NotRequired[str]
     r"""The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string."""
     page_size: NotRequired[int]
@@ -87,6 +89,13 @@ class GetIpsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The address of IP to filter by starts_with"""
+
+    filter_additional: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="filter[additional]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter by additional IPs (true) or management IPs (false)"""
 
     extra_fields_ip_addresses: Annotated[
         Optional[str],

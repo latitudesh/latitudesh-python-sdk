@@ -4,14 +4,14 @@
 
 ### Available Operations
 
-* [create_filesystem](#create_filesystem) - Create a filesystem for a project
+* [create_filesystem](#create_filesystem) - Create filesystem
 * [list_filesystems](#list_filesystems) - List filesystems
-* [delete_filesystem](#delete_filesystem) - Delete a filesystem for a project
-* [update_filesystem](#update_filesystem) - Update a filesystem for a project
+* [delete_filesystem](#delete_filesystem) - Delete filesystem
+* [update_filesystem](#update_filesystem) - Update filesystem
 * [post_storage_volumes](#post_storage_volumes) - Create volume
 * [get_storage_volumes](#get_storage_volumes) - List volumes
 * [delete_storage_volumes](#delete_storage_volumes) - Delete volume
-* [get_storage_volume](#get_storage_volume) - Get volume
+* [get_storage_volume](#get_storage_volume) - Retrieve volume
 * [post_storage_volumes_mount](#post_storage_volumes_mount) - Mount volume
 
 ## create_filesystem

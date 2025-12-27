@@ -18,17 +18,17 @@ class PostProjectUserDataUserDataType(str, Enum):
 
 class PostProjectUserDataUserDataAttributesTypedDict(TypedDict):
     description: str
-    r"""description of the User Data"""
+    r"""description of the User data"""
     content: str
-    r"""base64 encoded content of the User Data"""
+    r"""base64 encoded content of the User data"""
 
 
 class PostProjectUserDataUserDataAttributes(BaseModel):
     description: str
-    r"""description of the User Data"""
+    r"""description of the User data"""
 
     content: str
-    r"""base64 encoded content of the User Data"""
+    r"""base64 encoded content of the User data"""
 
 
 class PostProjectUserDataUserDataDataTypedDict(TypedDict):

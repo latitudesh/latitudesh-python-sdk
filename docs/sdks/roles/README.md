@@ -4,8 +4,8 @@
 
 ### Available Operations
 
-* [list](#list) - List all Roles
-* [get](#get) - Retrieve Role
+* [list](#list) - List roles
+* [get](#get) - Retrieve role
 
 ## list
 
@@ -53,7 +53,7 @@ with Latitudesh(
 
 ## get
 
-Retrieve Role
+Retrieve role
 
 ### Example Usage
 

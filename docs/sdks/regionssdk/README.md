@@ -4,8 +4,8 @@
 
 ### Available Operations
 
-* [list](#list) - List all Regions
-* [get](#get) - Retrieve a Region
+* [list](#list) - List regions
+* [get](#get) - Retrieve region
 
 ## list
 
@@ -54,7 +54,7 @@ with Latitudesh(
 
 ## get
 
-Retrieve a Region
+Retrieve region
 
 ### Example Usage
 

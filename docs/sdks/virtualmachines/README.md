@@ -4,11 +4,11 @@
 
 ### Available Operations
 
-* [create](#create) - Create a Virtual Machine
-* [list](#list) - Get Teams Virtual Machines
-* [get](#get) - Get a Virtual Machine
-* [delete](#delete) - Destroy a Virtual Machine
-* [create_virtual_machine_action](#create_virtual_machine_action) - Run Virtual Machine Action
+* [create](#create) - Create VM
+* [list](#list) - List VMs
+* [get](#get) - Retrieve VM
+* [delete](#delete) - Destroy VM
+* [create_virtual_machine_action](#create_virtual_machine_action) - Run VM power action
 
 ## create
 
@@ -62,7 +62,7 @@ with Latitudesh(
 
 ## list
 
-Show all Team's Virtual Machines.
+Show all Team's Virtual machines.
 
 
 ### Example Usage
