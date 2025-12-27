@@ -20,7 +20,7 @@ class PatchUserDataUserDataAttributesTypedDict(TypedDict):
     description: NotRequired[str]
     r"""description dummy user data"""
     content: NotRequired[str]
-    r"""encoded content of the User Data"""
+    r"""encoded content of the User data"""
 
 
 class PatchUserDataUserDataAttributes(BaseModel):
@@ -28,7 +28,7 @@ class PatchUserDataUserDataAttributes(BaseModel):
     r"""description dummy user data"""
 
     content: Optional[str] = None
-    r"""encoded content of the User Data"""
+    r"""encoded content of the User data"""
 
 
 class PatchUserDataUserDataDataTypedDict(TypedDict):

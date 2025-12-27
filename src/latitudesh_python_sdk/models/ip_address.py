@@ -79,6 +79,7 @@ class IPAddressAttributesTypedDict(TypedDict):
     type: NotRequired[IPAddressType]
     public: NotRequired[bool]
     management: NotRequired[bool]
+    additional: NotRequired[bool]
     project: NotRequired[IPAddressProjectTypedDict]
     region: NotRequired[IPAddressRegionTypedDict]
     available: NotRequired[bool]
@@ -101,6 +102,8 @@ class IPAddressAttributes(BaseModel):
     public: Optional[bool] = None
 
     management: Optional[bool] = None
+
+    additional: Optional[bool] = None
 
     project: Optional[IPAddressProject] = None
 

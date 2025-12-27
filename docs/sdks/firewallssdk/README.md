@@ -4,19 +4,20 @@
 
 ### Available Operations
 
-* [get_all_firewall_assignments](#get_all_firewall_assignments) - List All Firewall Assignments
+* [get_all_firewall_assignments](#get_all_firewall_assignments) - Firewalls assignments
 * [create](#create) - Create a firewall
 * [list](#list) - List firewalls
-* [get](#get) - Retrieve Firewall
-* [update](#update) - Update Firewall
-* [delete](#delete) - Delete Firewall
-* [assign](#assign) - Firewall Assignment
-* [list_assignments](#list_assignments) - Firewall Assignments
-* [delete_assignment](#delete_assignment) - Delete Firewall Assignment
+* [get](#get) - Retrieve firewall
+* [update](#update) - Update firewall
+* [delete](#delete) - Delete firewall
+* [assign](#assign) - Assign server to firewall
+* [list_assignments](#list_assignments) - Firewall assignments
+* [delete_assignment](#delete_assignment) - Delete assignment
 
 ## get_all_firewall_assignments
 
-List all firewall assignments
+Returns a list of all servers assigned to one or more firewalls.
+
 
 ### Example Usage
 
@@ -171,7 +172,8 @@ with Latitudesh(
 
 ## get
 
-Retrieve a firewall
+Returns a single firewall by its ID.
+
 
 ### Example Usage
 
@@ -211,7 +213,8 @@ with Latitudesh(
 
 ## update
 
-Update a firewall
+Updates a firewall by its ID.
+
 
 ### Example Usage
 
@@ -266,7 +269,7 @@ with Latitudesh(
 
 ## delete
 
-Delete a firewall
+Delete firewall
 
 ### Example Usage
 
@@ -301,7 +304,8 @@ with Latitudesh(
 
 ## assign
 
-Assign a server to a firewall
+Assigns a server to a firewall by its ID.
+
 
 ### Example Usage
 
@@ -348,7 +352,8 @@ with Latitudesh(
 
 ## list_assignments
 
-List servers assigned to a firewall
+Returns a list of all servers assigned to a particular firewall.
+
 
 ### Example Usage
 
@@ -392,7 +397,8 @@ with Latitudesh(
 
 ## delete_assignment
 
-Remove a server from a firewall
+Removes a server from a firewall by its ID.
+
 
 ### Example Usage
 

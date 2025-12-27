@@ -18,7 +18,7 @@ class UserProfile(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetUserProfileResponseBody:
-        r"""Get user profile
+        r"""Retrieve profile
 
         Retrieve the current user profile
 
@@ -96,7 +96,7 @@ class UserProfile(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetUserProfileResponseBody:
-        r"""Get user profile
+        r"""Retrieve profile
 
         Retrieve the current user profile
 
@@ -179,7 +179,7 @@ class UserProfile(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PatchUserProfileResponseBody:
-        r"""Update User Profile
+        r"""Update profile
 
         Update the current user profile
 
@@ -283,7 +283,7 @@ class UserProfile(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PatchUserProfileResponseBody:
-        r"""Update User Profile
+        r"""Update profile
 
         Update the current user profile
 
@@ -382,7 +382,7 @@ class UserProfile(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserTeams:
-        r"""List User Teams
+        r"""List user teams
 
         Returns a list of all teams the user belongs to
 
@@ -460,7 +460,7 @@ class UserProfile(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserTeams:
-        r"""List User Teams
+        r"""List user teams
 
         Returns a list of all teams the user belongs to
 

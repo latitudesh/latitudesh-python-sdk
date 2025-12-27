@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [list_usage](#list_usage) - List Billing Usage
+* [list_usage](#list_usage) - Retrieve billing usage
 
 ## list_usage
 

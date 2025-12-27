@@ -4,13 +4,13 @@
 
 ### Available Operations
 
-* [list](#list) - List all Team Members
-* [add](#add) - Add a Team Member
-* [remove_member](#remove_member) - Remove a Team Member
+* [list](#list) - List members
+* [add](#add) - Create member
+* [remove_member](#remove_member) - Remove a member
 
 ## list
 
-List all Team Members
+List members
 
 ### Example Usage
 
@@ -53,7 +53,7 @@ with Latitudesh(
 
 ## add
 
-Add a Team Member
+Create member
 
 ### Example Usage
 
@@ -102,7 +102,7 @@ with Latitudesh(
 
 ## remove_member
 
-Remove a Team Member
+Remove a member
 
 ### Example Usage
 

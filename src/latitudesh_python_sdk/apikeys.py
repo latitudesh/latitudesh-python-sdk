@@ -18,9 +18,9 @@ class APIKeys(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.APIKey:
-        r"""List API Keys
+        r"""List API keys
 
-        Returns a list of all API keys from the team members
+        Returns a list of all API keys.
 
 
         :param retries: Override the default retry configuration for this method
@@ -96,9 +96,9 @@ class APIKeys(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.APIKey:
-        r"""List API Keys
+        r"""List API keys
 
-        Returns a list of all API keys from the team members
+        Returns a list of all API keys.
 
 
         :param retries: Override the default retry configuration for this method
@@ -175,7 +175,7 @@ class APIKeys(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PostAPIKeyResponseBody:
-        r"""Create API Key
+        r"""Create API key
 
         Create a new API Key that is tied to the current user account. The created API key is only listed ONCE upon creation. It can however be regenerated or deleted.
 
@@ -263,7 +263,7 @@ class APIKeys(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PostAPIKeyResponseBody:
-        r"""Create API Key
+        r"""Create API key
 
         Create a new API Key that is tied to the current user account. The created API key is only listed ONCE upon creation. It can however be regenerated or deleted.
 
@@ -354,7 +354,7 @@ class APIKeys(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UpdateAPIKeyResponseBody:
-        r"""Regenerate API Key
+        r"""Rotate API key
 
         Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
 
@@ -449,7 +449,7 @@ class APIKeys(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UpdateAPIKeyResponseBody:
-        r"""Regenerate API Key
+        r"""Rotate API key
 
         Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
 
@@ -541,7 +541,7 @@ class APIKeys(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete API Key
+        r"""Delete API key
 
         Delete an existing API Key. Once deleted, the API Key can no longer be used to access the API.
 
@@ -626,7 +626,7 @@ class APIKeys(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete API Key
+        r"""Delete API key
 
         Delete an existing API Key. Once deleted, the API Key can no longer be used to access the API.
 

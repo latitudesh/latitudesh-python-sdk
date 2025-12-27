@@ -28,7 +28,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetProjectsResponse]:
-        r"""List all Projects
+        r"""List projects
 
         Returns a list of all projects for the current team
 
@@ -167,7 +167,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetProjectsResponse]:
-        r"""List all Projects
+        r"""List projects
 
         Returns a list of all projects for the current team
 
@@ -303,7 +303,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateProjectResponseBody:
-        r"""Create a Project
+        r"""Create a project
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -395,7 +395,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateProjectResponseBody:
-        r"""Create a Project
+        r"""Create a project
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -485,7 +485,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UpdateProjectResponseBody:
-        r"""Update a Project
+        r"""Update a project
 
         :param project_id: The project ID or Slug
         :param data:
@@ -581,7 +581,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UpdateProjectResponseBody:
-        r"""Update a Project
+        r"""Update a project
 
         :param project_id: The project ID or Slug
         :param data:
@@ -674,7 +674,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project
+        r"""Delete a project
 
         :param project_id: The project ID or Slug
         :param retries: Override the default retry configuration for this method
@@ -756,7 +756,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project
+        r"""Delete a project
 
         :param project_id: The project ID or Slug
         :param retries: Override the default retry configuration for this method
