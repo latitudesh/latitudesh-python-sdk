@@ -4,16 +4,16 @@
 
 ### Available Operations
 
-* [~~list_project_user_data~~](#list_project_user_data) - List all Project User Data :warning: **Deprecated**
-* [~~create~~](#create) - Create a Project User Data :warning: **Deprecated**
-* [~~get_project_user_data~~](#get_project_user_data) - Retrieve a Project User Data :warning: **Deprecated**
-* [~~update~~](#update) - Update a Project User Data :warning: **Deprecated**
-* [~~delete~~](#delete) - Delete a Project User Data :warning: **Deprecated**
-* [get_users_data](#get_users_data) - List all User Data
-* [post_user_data](#post_user_data) - Create an User Data
-* [get_user_data](#get_user_data) - Retrieve an User Data
-* [patch_user_data](#patch_user_data) - Update an User Data
-* [delete_user_data](#delete_user_data) - Delete an User Data
+* [~~list_project_user_data~~](#list_project_user_data) - List all Project User data :warning: **Deprecated**
+* [~~create~~](#create) - Create a Project User data :warning: **Deprecated**
+* [~~get_project_user_data~~](#get_project_user_data) - Retrieve a Project User data :warning: **Deprecated**
+* [~~update~~](#update) - Update a Project User data :warning: **Deprecated**
+* [~~delete~~](#delete) - Delete a Project User data :warning: **Deprecated**
+* [get_users_data](#get_users_data) - List user data
+* [post_user_data](#post_user_data) - Create user data
+* [get_user_data](#get_user_data) - Retrieve user data
+* [patch_user_data](#patch_user_data) - Update user data
+* [delete_user_data](#delete_user_data) - Delete user data
 
 ## ~~list_project_user_data~~
 
@@ -61,7 +61,7 @@ with Latitudesh(
 
 ## ~~create~~
 
-Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
+Allows you to create User data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -82,7 +82,7 @@ with Latitudesh(
     res = latitudesh.user_data.create(project_id="proj_kjQwdE0XOYNVP", data={
         "type": latitudesh_python_sdk.PostProjectUserDataUserDataType.USER_DATA,
         "attributes": {
-            "description": "User Data description",
+            "description": "User data description",
             "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd",
         },
     })
@@ -112,7 +112,7 @@ with Latitudesh(
 
 ## ~~get_project_user_data~~
 
-Get User Data in the project. These scripts can be used to configure servers with user data.
+Get User data in the project. These scripts can be used to configure servers with user data.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -157,7 +157,7 @@ with Latitudesh(
 
 ## ~~update~~
 
-Allow you update User Data in a project.
+Allow you update User data in a project.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -209,7 +209,7 @@ with Latitudesh(
 
 ## ~~delete~~
 
-Allow you remove User Data in a project.
+Allow you remove User data in a project.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -275,6 +275,7 @@ with Latitudesh(
 | Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
 | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `filter_project`                                                                            | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | Project ID or slug                                                                          |
+| `filter_scope`                                                                              | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | Filter by scope: `project` (has project), `team` (no project), or empty (all)               |
 | `extra_fields_user_data`                                                                    | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | The `decoded_content` is provided as an extra attribute that shows content in decoded form. |
 | `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
 
@@ -290,7 +291,7 @@ with Latitudesh(
 
 ## post_user_data
 
-Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
+Allows you to create User data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
 
 
 ### Example Usage
@@ -309,7 +310,7 @@ with Latitudesh(
     res = latitudesh.user_data.post_user_data(data={
         "type": latitudesh_python_sdk.PostUserDataUserDataType.USER_DATA,
         "attributes": {
-            "description": "User Data description",
+            "description": "User data description",
             "project": "proj_AW6Q2D9lqKLpr",
             "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd",
         },
@@ -339,7 +340,7 @@ with Latitudesh(
 
 ## get_user_data
 
-Get User Data in the project. These scripts can be used to configure servers with user data.
+Get User data in the project. These scripts can be used to configure servers with user data.
 
 
 ### Example Usage
@@ -381,7 +382,7 @@ with Latitudesh(
 
 ## patch_user_data
 
-Allow you update User Data in a team.
+Allow you update User data in a team.
 
 
 ### Example Usage
@@ -430,7 +431,7 @@ with Latitudesh(
 
 ## delete_user_data
 
-Delete an User Data
+Delete user data
 
 ### Example Usage
 

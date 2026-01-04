@@ -21,7 +21,7 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.BillingUsage:
-        r"""List Billing Usage
+        r"""Retrieve billing usage
 
         Returns the billing usage of a project
 
@@ -114,7 +114,7 @@ class Billing(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.BillingUsage:
-        r"""List Billing Usage
+        r"""Retrieve billing usage
 
         Returns the billing usage of a project
 

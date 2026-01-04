@@ -22,7 +22,7 @@ class TrafficSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Traffic:
-        r"""Retrieve Traffic consumption
+        r"""Retrieve traffic
 
         :param filter_date_gte: The start timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-01T00:00:00Z
         :param filter_date_lte: The end timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-31T23:59:59Z
@@ -113,7 +113,7 @@ class TrafficSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Traffic:
-        r"""Retrieve Traffic consumption
+        r"""Retrieve traffic
 
         :param filter_date_gte: The start timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-01T00:00:00Z
         :param filter_date_lte: The end timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-31T23:59:59Z
@@ -201,7 +201,7 @@ class TrafficSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TrafficQuota:
-        r"""Retrieve Traffic Quota
+        r"""Retrieve traffic quota
 
         :param filter_project:
         :param retries: Override the default retry configuration for this method
@@ -283,7 +283,7 @@ class TrafficSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.TrafficQuota:
-        r"""Retrieve Traffic Quota
+        r"""Retrieve traffic quota
 
         :param filter_project:
         :param retries: Override the default retry configuration for this method

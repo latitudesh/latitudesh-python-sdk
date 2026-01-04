@@ -4,13 +4,12 @@
 
 ### Available Operations
 
-* [list](#list) - List all Plans
-* [get](#get) - Retrieve a Plan
-* [list_bandwidth](#list_bandwidth) - List all bandwidth plans
-* [update_bandwidth](#update_bandwidth) - Buy or remove bandwidth packages
-* [get_containers_plan](#get_containers_plan) - Retrieve container plan
-* [list_storage](#list_storage) - List all Storage Plans
-* [list_vm_plans](#list_vm_plans) - List all Virtual Machines Plans
+* [list](#list) - List plans
+* [get](#get) - Retrieve a plan
+* [list_bandwidth](#list_bandwidth) - List bandwidth plans
+* [update_bandwidth](#update_bandwidth) - Update bandwidth packages
+* [list_storage](#list_storage) - List storage plans
+* [list_vm_plans](#list_vm_plans) - List VM plans
 
 ## list
 
@@ -62,7 +61,7 @@ with Latitudesh(
 
 ## get
 
-Retrieve a Plan
+Retrieve a plan
 
 ### Example Usage
 
@@ -194,50 +193,9 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## get_containers_plan
-
-Retrieve a container plan.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="python" operationID="get-containers-plan" method="get" path="/plans/containers/{plan_id}" -->
-```python
-from latitudesh_python_sdk import Latitudesh
-import os
-
-
-with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
-) as latitudesh:
-
-    res = latitudesh.plans.get_containers_plan(plan_id="<id>")
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `plan_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | The Plan ID                                                         |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[models.ContainerPlanData](../../models/containerplandata.md)**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
-
 ## list_storage
 
-List all Storage Plans
+List storage plans
 
 ### Example Usage
 
@@ -276,7 +234,7 @@ with Latitudesh(
 
 ## list_vm_plans
 
-List all Virtual Machines Plans
+List VM plans
 
 ### Example Usage
 

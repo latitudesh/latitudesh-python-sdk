@@ -21,6 +21,7 @@ class CreateVirtualNetworkPrivateNetworksSite(str, Enum):
     DAL = "DAL"
     FRA = "FRA"
     LAX = "LAX"
+    LAX2 = "LAX2"
     LON = "LON"
     MEX = "MEX"
     MEX2 = "MEX2"

@@ -24,7 +24,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserData:
-        r"""List all Project User Data
+        r"""List all Project User data
 
         List all Users Data in the project. These scripts can be used to configure servers with user data.
 
@@ -115,7 +115,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserData:
-        r"""List all Project User Data
+        r"""List all Project User data
 
         List all Users Data in the project. These scripts can be used to configure servers with user data.
 
@@ -209,9 +209,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Create a Project User Data
+        r"""Create a Project User data
 
-        Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
+        Allows you to create User data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
 
 
         :param project_id: Project ID or Slug
@@ -314,9 +314,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Create a Project User Data
+        r"""Create a Project User data
 
-        Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
+        Allows you to create User data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
 
 
         :param project_id: Project ID or Slug
@@ -417,9 +417,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Retrieve a Project User Data
+        r"""Retrieve a Project User data
 
-        Get User Data in the project. These scripts can be used to configure servers with user data.
+        Get User data in the project. These scripts can be used to configure servers with user data.
 
 
         :param project_id: Project ID or Slug
@@ -511,9 +511,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Retrieve a Project User Data
+        r"""Retrieve a Project User data
 
-        Get User Data in the project. These scripts can be used to configure servers with user data.
+        Get User data in the project. These scripts can be used to configure servers with user data.
 
 
         :param project_id: Project ID or Slug
@@ -608,9 +608,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Update a Project User Data
+        r"""Update a Project User data
 
-        Allow you update User Data in a project.
+        Allow you update User data in a project.
 
 
         :param project_id: Project ID or Slug
@@ -716,9 +716,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Update a Project User Data
+        r"""Update a Project User data
 
-        Allow you update User Data in a project.
+        Allow you update User data in a project.
 
 
         :param project_id: Project ID or Slug
@@ -820,9 +820,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project User Data
+        r"""Delete a Project User data
 
-        Allow you remove User Data in a project.
+        Allow you remove User data in a project.
 
 
         :param project_id: Project ID or Slug
@@ -911,9 +911,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project User Data
+        r"""Delete a Project User data
 
-        Allow you remove User Data in a project.
+        Allow you remove User data in a project.
 
 
         :param project_id: Project ID or Slug
@@ -993,18 +993,20 @@ class UserDataSDK(BaseSDK):
         self,
         *,
         filter_project: Optional[str] = None,
+        filter_scope: Optional[str] = None,
         extra_fields_user_data: Optional[str] = "decoded_content",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserData:
-        r"""List all User Data
+        r"""List user data
 
         List all Users Data in the project. These scripts can be used to configure servers with user data.
 
 
         :param filter_project: Project ID or slug
+        :param filter_scope: Filter by scope: `project` (has project), `team` (no project), or empty (all)
         :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1023,6 +1025,7 @@ class UserDataSDK(BaseSDK):
 
         request = models.GetUsersDataRequest(
             filter_project=filter_project,
+            filter_scope=filter_scope,
             extra_fields_user_data=extra_fields_user_data,
         )
 
@@ -1081,18 +1084,20 @@ class UserDataSDK(BaseSDK):
         self,
         *,
         filter_project: Optional[str] = None,
+        filter_scope: Optional[str] = None,
         extra_fields_user_data: Optional[str] = "decoded_content",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserData:
-        r"""List all User Data
+        r"""List user data
 
         List all Users Data in the project. These scripts can be used to configure servers with user data.
 
 
         :param filter_project: Project ID or slug
+        :param filter_scope: Filter by scope: `project` (has project), `team` (no project), or empty (all)
         :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1111,6 +1116,7 @@ class UserDataSDK(BaseSDK):
 
         request = models.GetUsersDataRequest(
             filter_project=filter_project,
+            filter_scope=filter_scope,
             extra_fields_user_data=extra_fields_user_data,
         )
 
@@ -1176,9 +1182,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Create an User Data
+        r"""Create user data
 
-        Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
+        Allows you to create User data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
 
 
         :param data:
@@ -1266,9 +1272,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Create an User Data
+        r"""Create user data
 
-        Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
+        Allows you to create User data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
 
 
         :param data:
@@ -1355,9 +1361,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Retrieve an User Data
+        r"""Retrieve user data
 
-        Get User Data in the project. These scripts can be used to configure servers with user data.
+        Get User data in the project. These scripts can be used to configure servers with user data.
 
 
         :param user_data_id:
@@ -1443,9 +1449,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Retrieve an User Data
+        r"""Retrieve user data
 
-        Get User Data in the project. These scripts can be used to configure servers with user data.
+        Get User data in the project. These scripts can be used to configure servers with user data.
 
 
         :param user_data_id:
@@ -1533,9 +1539,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Update an User Data
+        r"""Update user data
 
-        Allow you update User Data in a team.
+        Allow you update User data in a team.
 
 
         :param user_data_id:
@@ -1632,9 +1638,9 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Update an User Data
+        r"""Update user data
 
-        Allow you update User Data in a team.
+        Allow you update User data in a team.
 
 
         :param user_data_id:
@@ -1728,7 +1734,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete an User Data
+        r"""Delete user data
 
         :param user_data_id:
         :param retries: Override the default retry configuration for this method
@@ -1810,7 +1816,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete an User Data
+        r"""Delete user data
 
         :param user_data_id:
         :param retries: Override the default retry configuration for this method

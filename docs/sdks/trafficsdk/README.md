@@ -4,12 +4,12 @@
 
 ### Available Operations
 
-* [get](#get) - Retrieve Traffic consumption
-* [get_quota](#get_quota) - Retrieve Traffic Quota
+* [get](#get) - Retrieve traffic
+* [get_quota](#get_quota) - Retrieve traffic quota
 
 ## get
 
-Retrieve Traffic consumption
+Retrieve traffic
 
 ### Example Usage
 
@@ -52,7 +52,7 @@ with Latitudesh(
 
 ## get_quota
 
-Retrieve Traffic Quota
+Retrieve traffic quota
 
 ### Example Usage
 

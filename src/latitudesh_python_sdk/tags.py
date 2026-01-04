@@ -18,7 +18,7 @@ class Tags(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CustomTags:
-        r"""List all Tags
+        r"""List tags
 
         List all Tags in the team.
 
@@ -96,7 +96,7 @@ class Tags(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CustomTags:
-        r"""List all Tags
+        r"""List tags
 
         List all Tags in the team.
 
@@ -177,7 +177,7 @@ class Tags(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CustomTag:
-        r"""Create a Tag
+        r"""Create tag
 
         Create a Tag in the team.
 
@@ -267,7 +267,7 @@ class Tags(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CustomTag:
-        r"""Create a Tag
+        r"""Create tag
 
         Create a Tag in the team.
 
@@ -358,7 +358,7 @@ class Tags(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CustomTag:
-        r"""Update Tag
+        r"""Update tag
 
         Update a Tag in the team.
 
@@ -457,7 +457,7 @@ class Tags(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CustomTag:
-        r"""Update Tag
+        r"""Update tag
 
         Update a Tag in the team.
 
@@ -553,7 +553,7 @@ class Tags(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Tag
+        r"""Delete tag
 
         Update a Tag in the team.
 
@@ -638,7 +638,7 @@ class Tags(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Tag
+        r"""Delete tag
 
         Update a Tag in the team.
 
