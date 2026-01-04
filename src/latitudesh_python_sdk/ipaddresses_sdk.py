@@ -20,6 +20,7 @@ class IPAddressesSDK(BaseSDK):
         filter_type: Optional[models.FilterType] = None,
         filter_location: Optional[str] = None,
         filter_address: Optional[str] = None,
+        filter_additional: Optional[bool] = None,
         extra_fields_ip_addresses: Optional[str] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
@@ -42,6 +43,7 @@ class IPAddressesSDK(BaseSDK):
         :param filter_type: The protocol type to filter by
         :param filter_location: The site slug to filter by
         :param filter_address: The address of IP to filter by starts_with
+        :param filter_additional: Filter by additional IPs (true) or management IPs (false)
         :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
@@ -67,6 +69,7 @@ class IPAddressesSDK(BaseSDK):
             filter_type=filter_type,
             filter_location=filter_location,
             filter_address=filter_address,
+            filter_additional=filter_additional,
             extra_fields_ip_addresses=extra_fields_ip_addresses,
             page_size=page_size,
             page_number=page_number,
@@ -133,6 +136,7 @@ class IPAddressesSDK(BaseSDK):
                 filter_type=filter_type,
                 filter_location=filter_location,
                 filter_address=filter_address,
+                filter_additional=filter_additional,
                 extra_fields_ip_addresses=extra_fields_ip_addresses,
                 page_size=page_size,
                 page_number=next_page,
@@ -162,6 +166,7 @@ class IPAddressesSDK(BaseSDK):
         filter_type: Optional[models.FilterType] = None,
         filter_location: Optional[str] = None,
         filter_address: Optional[str] = None,
+        filter_additional: Optional[bool] = None,
         extra_fields_ip_addresses: Optional[str] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
@@ -184,6 +189,7 @@ class IPAddressesSDK(BaseSDK):
         :param filter_type: The protocol type to filter by
         :param filter_location: The site slug to filter by
         :param filter_address: The address of IP to filter by starts_with
+        :param filter_additional: Filter by additional IPs (true) or management IPs (false)
         :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
@@ -209,6 +215,7 @@ class IPAddressesSDK(BaseSDK):
             filter_type=filter_type,
             filter_location=filter_location,
             filter_address=filter_address,
+            filter_additional=filter_additional,
             extra_fields_ip_addresses=extra_fields_ip_addresses,
             page_size=page_size,
             page_number=page_number,
@@ -275,6 +282,7 @@ class IPAddressesSDK(BaseSDK):
                 filter_type=filter_type,
                 filter_location=filter_location,
                 filter_address=filter_address,
+                filter_additional=filter_additional,
                 extra_fields_ip_addresses=extra_fields_ip_addresses,
                 page_size=page_size,
                 page_number=next_page,

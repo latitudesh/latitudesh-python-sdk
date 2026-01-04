@@ -4,9 +4,9 @@
 
 ### Available Operations
 
-* [get](#get) - Get user profile
-* [update](#update) - Update User Profile
-* [list_teams](#list_teams) - List User Teams
+* [get](#get) - Retrieve profile
+* [update](#update) - Update profile
+* [list_teams](#list_teams) - List user teams
 
 ## get
 

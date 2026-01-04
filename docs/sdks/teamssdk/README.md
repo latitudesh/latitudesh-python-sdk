@@ -4,13 +4,13 @@
 
 ### Available Operations
 
-* [get](#get) - Retrieve the team
-* [create](#create) - Create a team
-* [update](#update) - Update a team
+* [get](#get) - Retrieve team
+* [create](#create) - Create team
+* [update](#update) - Update team
 
 ## get
 
-Retrieve the team
+Retrieve team
 
 ### Example Usage
 
@@ -49,7 +49,7 @@ with Latitudesh(
 
 ## create
 
-Create a team
+Create team
 
 ### Example Usage
 
@@ -97,7 +97,7 @@ with Latitudesh(
 
 ## update
 
-Update a team
+Update team
 
 ### Example Usage
 

@@ -4,14 +4,14 @@
 
 ### Available Operations
 
-* [list](#list) - List all Virtual Networks
-* [create](#create) - Create a Virtual Network
-* [update](#update) - Update a Virtual Network
-* [delete_virtual_network](#delete_virtual_network) - Delete a Virtual Network
-* [get](#get) - Retrieve a Virtual Network
-* [list_assignments](#list_assignments) - List all servers assigned to virtual networks
-* [assign](#assign) - Assign Virtual network
-* [remove_assignment](#remove_assignment) - Delete Virtual Network Assignment
+* [list](#list) - List VLANs
+* [create](#create) - Create VLAN
+* [update](#update) - Update VLAN
+* [delete_virtual_network](#delete_virtual_network) - Delete VLAN
+* [get](#get) - Retrieve VLAN
+* [list_assignments](#list_assignments) - List VLAN assignments
+* [assign](#assign) - Assign VLAN
+* [remove_assignment](#remove_assignment) - Delete assignment
 
 ## list
 
@@ -287,7 +287,7 @@ with Latitudesh(
 
 ## assign
 
-Assign Virtual network
+Assign VLAN
 
 ### Example Usage
 

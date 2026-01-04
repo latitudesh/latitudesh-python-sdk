@@ -17,7 +17,6 @@ from typing import Callable, Dict, List, Optional, Tuple, Union
 
 SERVERS = [
     "https://api.latitude.sh",
-    "http://api.latitude.sh",
 ]
 """Contains the list of servers available to the SDK"""
 

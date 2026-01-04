@@ -4,24 +4,24 @@
 
 ### Available Operations
 
-* [list](#list) - List all Servers
-* [create](#create) - Deploy Server
-* [get](#get) - Retrieve a Server
-* [update](#update) - Update Server
-* [delete](#delete) - Remove Server
-* [get_deploy_config](#get_deploy_config) - Retrieve Deploy Config
-* [update_deploy_config](#update_deploy_config) - Update Deploy Config
-* [lock](#lock) - Lock the server
-* [unlock](#unlock) - Unlock the server
-* [create_out_of_band_connection](#create_out_of_band_connection) - Start Out of Band Connection
-* [list_out_of_band_connections](#list_out_of_band_connections) - List Out of Band Connections
-* [actions](#actions) - Run Server Action
-* [create_ipmi_session](#create_ipmi_session) - Generate IPMI credentials
-* [start_rescue_mode](#start_rescue_mode) - Puts a Server in rescue mode
-* [exit_rescue_mode](#exit_rescue_mode) - Exits rescue mode for a Server
-* [schedule_deletion](#schedule_deletion) - Schedule the server deletion
-* [unschedule_deletion](#unschedule_deletion) - Unschedule the server deletion
-* [reinstall](#reinstall) - Run Server Reinstall
+* [list](#list) - List servers
+* [create](#create) - Create server
+* [get](#get) - Retrieve server
+* [update](#update) - Update server
+* [delete](#delete) - Remove server
+* [get_deploy_config](#get_deploy_config) - Retrieve deploy config
+* [update_deploy_config](#update_deploy_config) - Update deploy config
+* [lock](#lock) - Lock server
+* [unlock](#unlock) - Unlock server
+* [create_out_of_band_connection](#create_out_of_band_connection) - Create out-of-band connection
+* [list_out_of_band_connections](#list_out_of_band_connections) - List out-of-band connections
+* [actions](#actions) - Run power action
+* [create_ipmi_session](#create_ipmi_session) - Create IPMI credentials
+* [start_rescue_mode](#start_rescue_mode) - Put server in rescue mode
+* [exit_rescue_mode](#exit_rescue_mode) - Exits rescue mode
+* [schedule_deletion](#schedule_deletion) - Schedule server deletion
+* [unschedule_deletion](#unschedule_deletion) - Unschedule server deletion
+* [reinstall](#reinstall) - Reinstall server
 
 ## list
 
@@ -84,7 +84,7 @@ with Latitudesh(
 
 ## create
 
-Deploy Server
+Create server
 
 ### Example Usage
 
@@ -176,7 +176,7 @@ with Latitudesh(
 
 ## update
 
-Update Server
+Update server
 
 ### Example Usage
 
@@ -224,7 +224,7 @@ with Latitudesh(
 
 ## delete
 
-Remove Server
+Remove server
 
 ### Example Usage
 
@@ -260,7 +260,7 @@ with Latitudesh(
 
 ## get_deploy_config
 
-Retrieve Deploy Config
+Retrieve deploy config
 
 ### Example Usage
 
@@ -300,7 +300,7 @@ with Latitudesh(
 
 ## update_deploy_config
 
-Update Deploy Config
+Update deploy config
 
 ### Example Usage
 
@@ -423,7 +423,7 @@ with Latitudesh(
 
 ## create_out_of_band_connection
 
-Start Out of Band Connection
+Create out-of-band connection
 
 ### Example Usage
 
@@ -470,7 +470,7 @@ with Latitudesh(
 
 ## list_out_of_band_connections
 
-List Out of Band Connections
+List out-of-band connections
 
 ### Example Usage
 
@@ -760,7 +760,8 @@ with Latitudesh(
 
 ## reinstall
 
-Run Server Reinstall
+Reinstalls the server with a new operating system. All data on the server will be wiped during this process.
+
 
 ### Example Usage
 

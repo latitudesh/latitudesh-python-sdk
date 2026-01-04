@@ -36,7 +36,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetServersResponse]:
-        r"""List all Servers
+        r"""List servers
 
         Returns a list of all servers belonging to the team.
 
@@ -209,7 +209,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetServersResponse]:
-        r"""List all Servers
+        r"""List servers
 
         Returns a list of all servers belonging to the team.
 
@@ -370,7 +370,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Server:
-        r"""Deploy Server
+        r"""Create server
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -461,7 +461,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Server:
-        r"""Deploy Server
+        r"""Create server
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -549,7 +549,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Server:
-        r"""Retrieve a Server
+        r"""Retrieve server
 
         Returns a server that belongs to the team.
 
@@ -637,7 +637,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Server:
-        r"""Retrieve a Server
+        r"""Retrieve server
 
         Returns a server that belongs to the team.
 
@@ -729,7 +729,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Server:
-        r"""Update Server
+        r"""Update server
 
         :param server_id:
         :param data:
@@ -829,7 +829,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Server:
-        r"""Update Server
+        r"""Update server
 
         :param server_id:
         :param data:
@@ -925,7 +925,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Remove Server
+        r"""Remove server
 
         :param server_id: The server ID
         :param reason: The reason for deleting the server
@@ -1010,7 +1010,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Remove Server
+        r"""Remove server
 
         :param server_id: The server ID
         :param reason: The reason for deleting the server
@@ -1094,7 +1094,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DeployConfig:
-        r"""Retrieve Deploy Config
+        r"""Retrieve deploy config
 
         :param server_id: The Server ID
         :param retries: Override the default retry configuration for this method
@@ -1176,7 +1176,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DeployConfig:
-        r"""Retrieve Deploy Config
+        r"""Retrieve deploy config
 
         :param server_id: The Server ID
         :param retries: Override the default retry configuration for this method
@@ -1265,7 +1265,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DeployConfig:
-        r"""Update Deploy Config
+        r"""Update deploy config
 
         :param server_id: The Server ID
         :param type:
@@ -1370,7 +1370,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.DeployConfig:
-        r"""Update Deploy Config
+        r"""Update deploy config
 
         :param server_id: The Server ID
         :param type:
@@ -1468,7 +1468,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Server:
-        r"""Lock the server
+        r"""Lock server
 
         Locks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
 
@@ -1552,7 +1552,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Server:
-        r"""Lock the server
+        r"""Lock server
 
         Locks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
 
@@ -1636,7 +1636,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Server:
-        r"""Unlock the server
+        r"""Unlock server
 
         Unlocks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
 
@@ -1720,7 +1720,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Server:
-        r"""Unlock the server
+        r"""Unlock server
 
         Unlocks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
 
@@ -1808,7 +1808,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.OutOfBandConnection:
-        r"""Start Out of Band Connection
+        r"""Create out-of-band connection
 
         :param server_id:
         :param data:
@@ -1907,7 +1907,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.OutOfBandConnection:
-        r"""Start Out of Band Connection
+        r"""Create out-of-band connection
 
         :param server_id:
         :param data:
@@ -2002,7 +2002,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.OutOfBandConnection:
-        r"""List Out of Band Connections
+        r"""List out-of-band connections
 
         :param server_id: The Server ID
         :param retries: Override the default retry configuration for this method
@@ -2084,7 +2084,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.OutOfBandConnection:
-        r"""List Out of Band Connections
+        r"""List out-of-band connections
 
         :param server_id: The Server ID
         :param retries: Override the default retry configuration for this method
@@ -2170,7 +2170,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerAction:
-        r"""Run Server Action
+        r"""Run power action
 
         Performs an action on a given server:
         - `power_on`
@@ -2275,7 +2275,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerAction:
-        r"""Run Server Action
+        r"""Run power action
 
         Performs an action on a given server:
         - `power_on`
@@ -2376,7 +2376,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.IpmiSession:
-        r"""Generate IPMI credentials
+        r"""Create IPMI credentials
 
         Generates IPMI credentials for a given server. Remote access creates a VPN connection to the internal network of your server so you can connect to its IPMI.
         You will have to use a VPN client such as https://openvpn.net to connect. See `VPN Sessions` API to create a VPN connection.
@@ -2464,7 +2464,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.IpmiSession:
-        r"""Generate IPMI credentials
+        r"""Create IPMI credentials
 
         Generates IPMI credentials for a given server. Remote access creates a VPN connection to the internal network of your server so you can connect to its IPMI.
         You will have to use a VPN client such as https://openvpn.net to connect. See `VPN Sessions` API to create a VPN connection.
@@ -2552,7 +2552,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerRescue:
-        r"""Puts a Server in rescue mode
+        r"""Put server in rescue mode
 
         Starts rescue mode on a given server.
 
@@ -2636,7 +2636,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerRescue:
-        r"""Puts a Server in rescue mode
+        r"""Put server in rescue mode
 
         Starts rescue mode on a given server.
 
@@ -2720,7 +2720,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerRescue:
-        r"""Exits rescue mode for a Server
+        r"""Exits rescue mode
 
         Exits rescue mode on a given server.
 
@@ -2804,7 +2804,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerRescue:
-        r"""Exits rescue mode for a Server
+        r"""Exits rescue mode
 
         Exits rescue mode on a given server.
 
@@ -2888,7 +2888,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerScheduleDeletion:
-        r"""Schedule the server deletion
+        r"""Schedule server deletion
 
         Schedules the server to be removed at the end of the billing cycle.
 
@@ -2972,7 +2972,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ServerScheduleDeletion:
-        r"""Schedule the server deletion
+        r"""Schedule server deletion
 
         Schedules the server to be removed at the end of the billing cycle.
 
@@ -3056,7 +3056,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Unschedule the server deletion
+        r"""Unschedule server deletion
 
         Unschedules the server removal at the end of the billing cycle.
 
@@ -3140,7 +3140,7 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Unschedule the server deletion
+        r"""Unschedule server deletion
 
         Unschedules the server removal at the end of the billing cycle.
 
@@ -3228,7 +3228,10 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Run Server Reinstall
+        r"""Reinstall server
+
+        Reinstalls the server with a new operating system. All data on the server will be wiped during this process.
+
 
         :param server_id:
         :param data:
@@ -3327,7 +3330,10 @@ class ServersSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Run Server Reinstall
+        r"""Reinstall server
+
+        Reinstalls the server with a new operating system. All data on the server will be wiped during this process.
+
 
         :param server_id:
         :param data:
