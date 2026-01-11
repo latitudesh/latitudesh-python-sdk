@@ -22,9 +22,10 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetAllFirewallAssignmentsResponse]:
-        r"""List All Firewall Assignments
+        r"""Firewalls assignments
 
-        List all firewall assignments
+        Returns a list of all servers assigned to one or more firewalls.
+
 
         :param filter_server: The server ID to filter by
         :param page_size: Number of items to return per page
@@ -136,9 +137,10 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetAllFirewallAssignmentsResponse]:
-        r"""List All Firewall Assignments
+        r"""Firewalls assignments
 
-        List all firewall assignments
+        Returns a list of all servers assigned to one or more firewalls.
+
 
         :param filter_server: The server ID to filter by
         :param page_size: Number of items to return per page
@@ -253,8 +255,6 @@ class FirewallsSDK(BaseSDK):
     ) -> models.Firewall:
         r"""Create a firewall
 
-        Create a firewall
-
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -343,8 +343,6 @@ class FirewallsSDK(BaseSDK):
     ) -> models.Firewall:
         r"""Create a firewall
 
-        Create a firewall
-
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -431,8 +429,6 @@ class FirewallsSDK(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.ListFirewallsResponse]:
         r"""List firewalls
-
-        List firewalls
 
         :param filter_project:
         :param page_size: Number of items to return per page
@@ -546,8 +542,6 @@ class FirewallsSDK(BaseSDK):
     ) -> Optional[models.ListFirewallsResponse]:
         r"""List firewalls
 
-        List firewalls
-
         :param filter_project:
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
@@ -656,9 +650,10 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Firewall:
-        r"""Retrieve Firewall
+        r"""Retrieve firewall
 
-        Retrieve a firewall
+        Returns a single firewall by its ID.
+
 
         :param firewall_id: The Firewall ID
         :param retries: Override the default retry configuration for this method
@@ -740,9 +735,10 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Firewall:
-        r"""Retrieve Firewall
+        r"""Retrieve firewall
 
-        Retrieve a firewall
+        Returns a single firewall by its ID.
+
 
         :param firewall_id: The Firewall ID
         :param retries: Override the default retry configuration for this method
@@ -828,9 +824,10 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Firewall:
-        r"""Update Firewall
+        r"""Update firewall
 
-        Update a firewall
+        Updates a firewall by its ID.
+
 
         :param firewall_id: The Firewall ID
         :param data:
@@ -927,9 +924,10 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Firewall:
-        r"""Update Firewall
+        r"""Update firewall
 
-        Update a firewall
+        Updates a firewall by its ID.
+
 
         :param firewall_id: The Firewall ID
         :param data:
@@ -1022,9 +1020,7 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Firewall
-
-        Delete a firewall
+        r"""Delete firewall
 
         :param firewall_id: The Firewall ID
         :param retries: Override the default retry configuration for this method
@@ -1106,9 +1102,7 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Firewall
-
-        Delete a firewall
+        r"""Delete firewall
 
         :param firewall_id: The Firewall ID
         :param retries: Override the default retry configuration for this method
@@ -1194,9 +1188,10 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FirewallServer:
-        r"""Firewall Assignment
+        r"""Assign server to firewall
 
-        Assign a server to a firewall
+        Assigns a server to a firewall by its ID.
+
 
         :param firewall_id: The Firewall ID
         :param data:
@@ -1295,9 +1290,10 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FirewallServer:
-        r"""Firewall Assignment
+        r"""Assign server to firewall
 
-        Assign a server to a firewall
+        Assigns a server to a firewall by its ID.
+
 
         :param firewall_id: The Firewall ID
         :param data:
@@ -1394,9 +1390,10 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetFirewallAssignmentsResponse]:
-        r"""Firewall Assignments
+        r"""Firewall assignments
 
-        List servers assigned to a firewall
+        Returns a list of all servers assigned to a particular firewall.
+
 
         :param firewall_id: The Firewall ID
         :param page_size: Number of items to return per page
@@ -1508,9 +1505,10 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetFirewallAssignmentsResponse]:
-        r"""Firewall Assignments
+        r"""Firewall assignments
 
-        List servers assigned to a firewall
+        Returns a list of all servers assigned to a particular firewall.
+
 
         :param firewall_id: The Firewall ID
         :param page_size: Number of items to return per page
@@ -1621,9 +1619,10 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Firewall Assignment
+        r"""Delete assignment
 
-        Remove a server from a firewall
+        Removes a server from a firewall by its ID.
+
 
         :param firewall_id: The Firewall ID
         :param assignment_id: The Assignment ID
@@ -1708,9 +1707,10 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Firewall Assignment
+        r"""Delete assignment
 
-        Remove a server from a firewall
+        Removes a server from a firewall by its ID.
+
 
         :param firewall_id: The Firewall ID
         :param assignment_id: The Assignment ID

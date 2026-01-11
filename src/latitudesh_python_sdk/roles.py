@@ -21,7 +21,7 @@ class Roles(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetRolesResponse]:
-        r"""List all Roles
+        r"""List roles
 
         Returns a list of all roles that can be assigned to users
 
@@ -132,7 +132,7 @@ class Roles(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetRolesResponse]:
-        r"""List all Roles
+        r"""List roles
 
         Returns a list of all roles that can be assigned to users
 
@@ -242,7 +242,7 @@ class Roles(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Role:
-        r"""Retrieve Role
+        r"""Retrieve role
 
         :param role_id:
         :param retries: Override the default retry configuration for this method
@@ -324,7 +324,7 @@ class Roles(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Role:
-        r"""Retrieve Role
+        r"""Retrieve role
 
         :param role_id:
         :param retries: Override the default retry configuration for this method

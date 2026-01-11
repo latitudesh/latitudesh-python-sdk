@@ -24,7 +24,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetVirtualNetworksResponse]:
-        r"""List all Virtual Networks
+        r"""List VLANs
 
         Lists virtual networks assigned to a project
 
@@ -147,7 +147,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetVirtualNetworksResponse]:
-        r"""List all Virtual Networks
+        r"""List VLANs
 
         Lists virtual networks assigned to a project
 
@@ -269,7 +269,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualNetwork:
-        r"""Create a Virtual Network
+        r"""Create VLAN
 
         Creates a new Virtual Network.
 
@@ -366,7 +366,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualNetwork:
-        r"""Create a Virtual Network
+        r"""Create VLAN
 
         Creates a new Virtual Network.
 
@@ -464,7 +464,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualNetwork:
-        r"""Update a Virtual Network
+        r"""Update VLAN
 
         Update a Virtual Network.
 
@@ -566,7 +566,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualNetwork:
-        r"""Update a Virtual Network
+        r"""Update VLAN
 
         Update a Virtual Network.
 
@@ -664,7 +664,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Virtual Network
+        r"""Delete VLAN
 
         Delete virtual network
 
@@ -749,7 +749,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Virtual Network
+        r"""Delete VLAN
 
         Delete virtual network
 
@@ -834,7 +834,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetVirtualNetworkResponseBody:
-        r"""Retrieve a Virtual Network
+        r"""Retrieve VLAN
 
         Retrieve a Virtual Network.
 
@@ -921,7 +921,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetVirtualNetworkResponseBody:
-        r"""Retrieve a Virtual Network
+        r"""Retrieve VLAN
 
         Retrieve a Virtual Network.
 
@@ -1012,7 +1012,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetVirtualNetworksAssignmentsResponse]:
-        r"""List all servers assigned to virtual networks
+        r"""List VLAN assignments
 
         Returns a list of all servers assigned to virtual networks.
 
@@ -1137,7 +1137,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetVirtualNetworksAssignmentsResponse]:
-        r"""List all servers assigned to virtual networks
+        r"""List VLAN assignments
 
         Returns a list of all servers assigned to virtual networks.
 
@@ -1263,7 +1263,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualNetworkAssignment:
-        r"""Assign Virtual network
+        r"""Assign VLAN
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -1359,7 +1359,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualNetworkAssignment:
-        r"""Assign Virtual network
+        r"""Assign VLAN
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -1450,7 +1450,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Virtual Network Assignment
+        r"""Delete assignment
 
         Allow you to remove a Virtual Network assignment.
 
@@ -1535,7 +1535,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Virtual Network Assignment
+        r"""Delete assignment
 
         Allow you to remove a Virtual Network assignment.
 

@@ -21,7 +21,7 @@ class TeamsMembers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetTeamMembersResponse]:
-        r"""List all Team Members
+        r"""List members
 
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
@@ -129,7 +129,7 @@ class TeamsMembers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetTeamMembersResponse]:
-        r"""List all Team Members
+        r"""List members
 
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
@@ -239,7 +239,7 @@ class TeamsMembers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Membership:
-        r"""Add a Team Member
+        r"""Create member
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -331,7 +331,7 @@ class TeamsMembers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Membership:
-        r"""Add a Team Member
+        r"""Create member
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -420,7 +420,7 @@ class TeamsMembers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Remove a Team Member
+        r"""Remove a member
 
         :param user_id: The user ID
         :param retries: Override the default retry configuration for this method
@@ -502,7 +502,7 @@ class TeamsMembers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Remove a Team Member
+        r"""Remove a member
 
         :param user_id: The user ID
         :param retries: Override the default retry configuration for this method

@@ -3,7 +3,7 @@
 from __future__ import annotations
 from enum import Enum
 from latitudesh_python_sdk.types import BaseModel
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -14,11 +14,21 @@ class CreateAPIKeyType(str, Enum):
 class CreateAPIKeyAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""Name of the API Key"""
+    read_only: NotRequired[bool]
+    r"""Whether the API Key is read-only. Read-only keys can only perform GET, HEAD, and OPTIONS requests."""
+    allowed_ips: NotRequired[List[str]]
+    r"""List of allowed IP addresses or CIDR ranges. If set, the API key can only be used from these IP addresses."""
 
 
 class CreateAPIKeyAttributes(BaseModel):
     name: Optional[str] = "Name of the API Key"
     r"""Name of the API Key"""
+
+    read_only: Optional[bool] = None
+    r"""Whether the API Key is read-only. Read-only keys can only perform GET, HEAD, and OPTIONS requests."""
+
+    allowed_ips: Optional[List[str]] = None
+    r"""List of allowed IP addresses or CIDR ranges. If set, the API key can only be used from these IP addresses."""
 
 
 class DataTypedDict(TypedDict):

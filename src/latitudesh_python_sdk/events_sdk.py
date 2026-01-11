@@ -29,9 +29,9 @@ class EventsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetEventsResponse]:
-        r"""List all Events
+        r"""List events
 
-        Lists all events.
+        Lists actions performed by users on your account.
 
 
         :param filter_author: The author ID or email to filter by
@@ -172,9 +172,9 @@ class EventsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetEventsResponse]:
-        r"""List all Events
+        r"""List events
 
-        Lists all events.
+        Lists actions performed by users on your account.
 
 
         :param filter_author: The author ID or email to filter by

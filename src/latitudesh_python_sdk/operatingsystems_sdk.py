@@ -21,7 +21,7 @@ class OperatingSystemsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetPlansOperatingSystemResponse]:
-        r"""List all operating systems available
+        r"""List operating systems
 
         Lists all operating systems available to deploy and reinstall.
 
@@ -134,7 +134,7 @@ class OperatingSystemsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetPlansOperatingSystemResponse]:
-        r"""List all operating systems available
+        r"""List operating systems
 
         Lists all operating systems available to deploy and reinstall.
 
