@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [list](#list) - List all operating systems available
+* [list](#list) - List operating systems
 
 ## list
 

@@ -11,6 +11,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class GetUsersDataRequestTypedDict(TypedDict):
     filter_project: NotRequired[str]
     r"""Project ID or slug"""
+    filter_scope: NotRequired[str]
+    r"""Filter by scope: `project` (has project), `team` (no project), or empty (all)"""
     extra_fields_user_data: NotRequired[str]
     r"""The `decoded_content` is provided as an extra attribute that shows content in decoded form."""
 
@@ -22,6 +24,13 @@ class GetUsersDataRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""Project ID or slug"""
+
+    filter_scope: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[scope]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter by scope: `project` (has project), `team` (no project), or empty (all)"""
 
     extra_fields_user_data: Annotated[
         Optional[str],

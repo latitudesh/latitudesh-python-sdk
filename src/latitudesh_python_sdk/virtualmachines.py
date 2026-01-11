@@ -24,7 +24,7 @@ class VirtualMachines(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualMachine:
-        r"""Create a Virtual Machine
+        r"""Create VM
 
         Creates a new Virtual Machine.
 
@@ -119,7 +119,7 @@ class VirtualMachines(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualMachine:
-        r"""Create a Virtual Machine
+        r"""Create VM
 
         Creates a new Virtual Machine.
 
@@ -210,9 +210,9 @@ class VirtualMachines(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Get Teams Virtual Machines
+        r"""List VMs
 
-        Show all Team's Virtual Machines.
+        Show all Team's Virtual machines.
 
 
         :param filter_project: The project ID or Slug to filter by
@@ -298,9 +298,9 @@ class VirtualMachines(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Get Teams Virtual Machines
+        r"""List VMs
 
-        Show all Team's Virtual Machines.
+        Show all Team's Virtual machines.
 
 
         :param filter_project: The project ID or Slug to filter by
@@ -385,7 +385,7 @@ class VirtualMachines(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Get a Virtual Machine
+        r"""Retrieve VM
 
         Show a Virtual Machine.
 
@@ -470,7 +470,7 @@ class VirtualMachines(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Get a Virtual Machine
+        r"""Retrieve VM
 
         Show a Virtual Machine.
 
@@ -555,7 +555,7 @@ class VirtualMachines(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Destroy a Virtual Machine
+        r"""Destroy VM
 
         Destroys a Virtual Machine.
 
@@ -640,7 +640,7 @@ class VirtualMachines(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Destroy a Virtual Machine
+        r"""Destroy VM
 
         Destroys a Virtual Machine.
 
@@ -731,7 +731,7 @@ class VirtualMachines(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Run Virtual Machine Action
+        r"""Run VM power action
 
         Performs a power action on a given virtual machine:
         - `power_on` - Starts the virtual machine
@@ -843,7 +843,7 @@ class VirtualMachines(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Run Virtual Machine Action
+        r"""Run VM power action
 
         Performs a power action on a given virtual machine:
         - `power_on` - Starts the virtual machine

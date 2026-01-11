@@ -21,7 +21,7 @@ class RegionsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetRegionsResponse]:
-        r"""List all Regions
+        r"""List regions
 
         Lists all [available locations](https://latitude.sh/locations). For server availability by location, please see the [Plans API](/reference/get-plans).
 
@@ -132,7 +132,7 @@ class RegionsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetRegionsResponse]:
-        r"""List all Regions
+        r"""List regions
 
         Lists all [available locations](https://latitude.sh/locations). For server availability by location, please see the [Plans API](/reference/get-plans).
 
@@ -242,7 +242,7 @@ class RegionsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Region:
-        r"""Retrieve a Region
+        r"""Retrieve region
 
         :param region_id: The region region_ID
         :param retries: Override the default retry configuration for this method
@@ -324,7 +324,7 @@ class RegionsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Region:
-        r"""Retrieve a Region
+        r"""Retrieve region
 
         :param region_id: The region region_ID
         :param retries: Override the default retry configuration for this method

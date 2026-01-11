@@ -13,19 +13,19 @@ class PostUserDataUserDataType(str, Enum):
 
 class PostUserDataUserDataAttributesTypedDict(TypedDict):
     description: str
-    r"""description of the User Data"""
+    r"""description of the User data"""
     content: str
-    r"""base64 encoded content of the User Data"""
+    r"""base64 encoded content of the User data"""
     project: NotRequired[str]
     r"""Project ID or slug"""
 
 
 class PostUserDataUserDataAttributes(BaseModel):
     description: str
-    r"""description of the User Data"""
+    r"""description of the User data"""
 
     content: str
-    r"""base64 encoded content of the User Data"""
+    r"""base64 encoded content of the User data"""
 
     project: Optional[str] = None
     r"""Project ID or slug"""

@@ -158,9 +158,6 @@ class Latitudesh(BaseSDK):
             {
                 "latitude_api_key": latitude_api_key or "<insert your api key here>",
             },
-            {
-                "latitude_api_key": latitude_api_key or "<insert your api key here>",
-            },
         ]
 
         BaseSDK.__init__(

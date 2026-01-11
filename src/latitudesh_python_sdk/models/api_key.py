@@ -4,7 +4,7 @@ from __future__ import annotations
 from datetime import datetime
 from enum import Enum
 from latitudesh_python_sdk.types import BaseModel
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -42,6 +42,10 @@ class AttributesTypedDict(TypedDict):
     r"""The time when the API Key was created"""
     updated_at: NotRequired[datetime]
     r"""The time when the API Key was updated"""
+    read_only: NotRequired[bool]
+    r"""Whether the API Key is read-only. Read-only keys can only perform GET, HEAD, and OPTIONS requests. Any POST, PUT, PATCH, or DELETE requests will return a 403 error."""
+    allowed_ips: NotRequired[List[str]]
+    r"""List of allowed IP addresses or CIDR ranges. If set, the API key can only be used from these IP addresses. Supports both IPv4 and IPv6 addresses."""
 
 
 class Attributes(BaseModel):
@@ -65,6 +69,12 @@ class Attributes(BaseModel):
 
     updated_at: Optional[datetime] = None
     r"""The time when the API Key was updated"""
+
+    read_only: Optional[bool] = None
+    r"""Whether the API Key is read-only. Read-only keys can only perform GET, HEAD, and OPTIONS requests. Any POST, PUT, PATCH, or DELETE requests will return a 403 error."""
+
+    allowed_ips: Optional[List[str]] = None
+    r"""List of allowed IP addresses or CIDR ranges. If set, the API key can only be used from these IP addresses. Supports both IPv4 and IPv6 addresses."""
 
 
 class APIKeyTypedDict(TypedDict):

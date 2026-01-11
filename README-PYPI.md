@@ -252,30 +252,31 @@ with Latitudesh(
 
 ### [ApiKeys](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#list) - List API Keys
-* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#create) - Create API Key
-* [regenerate](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#regenerate) - Regenerate API Key
-* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#delete) - Delete API Key
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#list) - List API keys
+* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#create) - Create API key
+* [regenerate](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#regenerate) - Rotate API key
+* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#delete) - Delete API key
+* [patch_api_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#patch_api_key) - Update API key settings
 
 ### [Billing](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/billing/README.md)
 
-* [list_usage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/billing/README.md#list_usage) - List Billing Usage
+* [list_usage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/billing/README.md#list_usage) - Retrieve billing usage
 
 ### [Events](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/eventssdk/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/eventssdk/README.md#list) - List all Events
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/eventssdk/README.md#list) - List events
 
 ### [Firewalls](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md)
 
-* [get_all_firewall_assignments](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#get_all_firewall_assignments) - List All Firewall Assignments
+* [get_all_firewall_assignments](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#get_all_firewall_assignments) - Firewalls assignments
 * [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#create) - Create a firewall
 * [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#list) - List firewalls
-* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#get) - Retrieve Firewall
-* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#update) - Update Firewall
-* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#delete) - Delete Firewall
-* [assign](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#assign) - Firewall Assignment
-* [list_assignments](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#list_assignments) - Firewall Assignments
-* [delete_assignment](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#delete_assignment) - Delete Firewall Assignment
+* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#get) - Retrieve firewall
+* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#update) - Update firewall
+* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#delete) - Delete firewall
+* [assign](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#assign) - Assign server to firewall
+* [list_assignments](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#list_assignments) - Firewall assignments
+* [delete_assignment](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md#delete_assignment) - Delete assignment
 
 ### [IpAddresses](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/ipaddressessdk/README.md)
 
@@ -284,75 +285,74 @@ with Latitudesh(
 
 ### [OperatingSystems](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/operatingsystemssdk/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/operatingsystemssdk/README.md#list) - List all operating systems available
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/operatingsystemssdk/README.md#list) - List operating systems
 
 ### [Plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list) - List all Plans
-* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#get) - Retrieve a Plan
-* [list_bandwidth](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_bandwidth) - List all bandwidth plans
-* [update_bandwidth](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#update_bandwidth) - Buy or remove bandwidth packages
-* [get_containers_plan](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#get_containers_plan) - Retrieve container plan
-* [list_storage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_storage) - List all Storage Plans
-* [list_vm_plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_vm_plans) - List all Virtual Machines Plans
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list) - List plans
+* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#get) - Retrieve a plan
+* [list_bandwidth](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_bandwidth) - List bandwidth plans
+* [update_bandwidth](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#update_bandwidth) - Update bandwidth packages
+* [list_storage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_storage) - List storage plans
+* [list_vm_plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_vm_plans) - List VM plans
 
 ### [PrivateNetworks](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#list) - List all Virtual Networks
-* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#create) - Create a Virtual Network
-* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#update) - Update a Virtual Network
-* [delete_virtual_network](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#delete_virtual_network) - Delete a Virtual Network
-* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#get) - Retrieve a Virtual Network
-* [list_assignments](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#list_assignments) - List all servers assigned to virtual networks
-* [assign](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#assign) - Assign Virtual network
-* [remove_assignment](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#remove_assignment) - Delete Virtual Network Assignment
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#list) - List VLANs
+* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#create) - Create VLAN
+* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#update) - Update VLAN
+* [delete_virtual_network](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#delete_virtual_network) - Delete VLAN
+* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#get) - Retrieve VLAN
+* [list_assignments](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#list_assignments) - List VLAN assignments
+* [assign](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#assign) - Assign VLAN
+* [remove_assignment](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md#remove_assignment) - Delete assignment
 
 ### [Projects](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/projectssdk/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/projectssdk/README.md#list) - List all Projects
-* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/projectssdk/README.md#create) - Create a Project
-* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/projectssdk/README.md#update) - Update a Project
-* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/projectssdk/README.md#delete) - Delete a Project
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/projectssdk/README.md#list) - List projects
+* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/projectssdk/README.md#create) - Create a project
+* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/projectssdk/README.md#update) - Update a project
+* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/projectssdk/README.md#delete) - Delete a project
 
 ### [Regions](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/regionssdk/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/regionssdk/README.md#list) - List all Regions
-* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/regionssdk/README.md#get) - Retrieve a Region
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/regionssdk/README.md#list) - List regions
+* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/regionssdk/README.md#get) - Retrieve region
 
 ### [Roles](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/roles/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/roles/README.md#list) - List all Roles
-* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/roles/README.md#get) - Retrieve Role
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/roles/README.md#list) - List roles
+* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/roles/README.md#get) - Retrieve role
 
 ### [Servers](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#list) - List all Servers
-* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#create) - Deploy Server
-* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#get) - Retrieve a Server
-* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#update) - Update Server
-* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#delete) - Remove Server
-* [get_deploy_config](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#get_deploy_config) - Retrieve Deploy Config
-* [update_deploy_config](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#update_deploy_config) - Update Deploy Config
-* [lock](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#lock) - Lock the server
-* [unlock](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#unlock) - Unlock the server
-* [create_out_of_band_connection](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#create_out_of_band_connection) - Start Out of Band Connection
-* [list_out_of_band_connections](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#list_out_of_band_connections) - List Out of Band Connections
-* [actions](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#actions) - Run Server Action
-* [create_ipmi_session](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#create_ipmi_session) - Generate IPMI credentials
-* [start_rescue_mode](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#start_rescue_mode) - Puts a Server in rescue mode
-* [exit_rescue_mode](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#exit_rescue_mode) - Exits rescue mode for a Server
-* [schedule_deletion](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#schedule_deletion) - Schedule the server deletion
-* [unschedule_deletion](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#unschedule_deletion) - Unschedule the server deletion
-* [reinstall](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#reinstall) - Run Server Reinstall
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#list) - List servers
+* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#create) - Create server
+* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#get) - Retrieve server
+* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#update) - Update server
+* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#delete) - Remove server
+* [get_deploy_config](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#get_deploy_config) - Retrieve deploy config
+* [update_deploy_config](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#update_deploy_config) - Update deploy config
+* [lock](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#lock) - Lock server
+* [unlock](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#unlock) - Unlock server
+* [create_out_of_band_connection](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#create_out_of_band_connection) - Create out-of-band connection
+* [list_out_of_band_connections](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#list_out_of_band_connections) - List out-of-band connections
+* [actions](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#actions) - Run power action
+* [create_ipmi_session](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#create_ipmi_session) - Create IPMI credentials
+* [start_rescue_mode](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#start_rescue_mode) - Put server in rescue mode
+* [exit_rescue_mode](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#exit_rescue_mode) - Exits rescue mode
+* [schedule_deletion](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#schedule_deletion) - Schedule server deletion
+* [unschedule_deletion](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#unschedule_deletion) - Unschedule server deletion
+* [reinstall](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/serverssdk/README.md#reinstall) - Reinstall server
 
 ### [SshKeys](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md)
 
-* [~~list_for_project~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#list_for_project) - List all Project SSH Keys :warning: **Deprecated**
-* [~~create~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#create) - Create a Project SSH Key :warning: **Deprecated**
+* [~~list_for_project~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#list_for_project) - List SSH keys :warning: **Deprecated**
+* [~~create~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#create) - Create a SSH key :warning: **Deprecated**
 * [~~get~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#get) - Retrieve a Project SSH Key :warning: **Deprecated**
 * [~~update~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#update) - Update a Project SSH Key :warning: **Deprecated**
 * [~~delete~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#delete) - Delete a Project SSH Key :warning: **Deprecated**
-* [get_ssh_keys](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#get_ssh_keys) - List all SSH Keys
+* [get_ssh_keys](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#get_ssh_keys) - List SSH Keys
 * [post_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#post_ssh_key) - Create a SSH Key
 * [get_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#get_ssh_key) - Retrieve a SSH Key
 * [put_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#put_ssh_key) - Update a SSH Key
@@ -360,73 +360,73 @@ with Latitudesh(
 
 ### [Storage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md)
 
-* [create_filesystem](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#create_filesystem) - Create a filesystem for a project
+* [create_filesystem](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#create_filesystem) - Create filesystem
 * [list_filesystems](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#list_filesystems) - List filesystems
-* [delete_filesystem](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#delete_filesystem) - Delete a filesystem for a project
-* [update_filesystem](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#update_filesystem) - Update a filesystem for a project
+* [delete_filesystem](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#delete_filesystem) - Delete filesystem
+* [update_filesystem](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#update_filesystem) - Update filesystem
 * [post_storage_volumes](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#post_storage_volumes) - Create volume
 * [get_storage_volumes](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#get_storage_volumes) - List volumes
 * [delete_storage_volumes](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#delete_storage_volumes) - Delete volume
-* [get_storage_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#get_storage_volume) - Get volume
+* [get_storage_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#get_storage_volume) - Retrieve volume
 * [post_storage_volumes_mount](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#post_storage_volumes_mount) - Mount volume
 
 ### [Tags](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/tags/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/tags/README.md#list) - List all Tags
-* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/tags/README.md#create) - Create a Tag
-* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/tags/README.md#update) - Update Tag
-* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/tags/README.md#delete) - Delete Tag
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/tags/README.md#list) - List tags
+* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/tags/README.md#create) - Create tag
+* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/tags/README.md#update) - Update tag
+* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/tags/README.md#delete) - Delete tag
 
 ### [Teams](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamssdk/README.md)
 
-* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamssdk/README.md#get) - Retrieve the team
-* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamssdk/README.md#create) - Create a team
-* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamssdk/README.md#update) - Update a team
+* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamssdk/README.md#get) - Retrieve team
+* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamssdk/README.md#create) - Create team
+* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamssdk/README.md#update) - Update team
 
 ### [TeamsMembers](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamsmembers/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamsmembers/README.md#list) - List all Team Members
-* [add](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamsmembers/README.md#add) - Add a Team Member
-* [remove_member](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamsmembers/README.md#remove_member) - Remove a Team Member
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamsmembers/README.md#list) - List members
+* [add](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamsmembers/README.md#add) - Create member
+* [remove_member](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/teamsmembers/README.md#remove_member) - Remove a member
 
 ### [Traffic](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/trafficsdk/README.md)
 
-* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/trafficsdk/README.md#get) - Retrieve Traffic consumption
-* [get_quota](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/trafficsdk/README.md#get_quota) - Retrieve Traffic Quota
+* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/trafficsdk/README.md#get) - Retrieve traffic
+* [get_quota](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/trafficsdk/README.md#get_quota) - Retrieve traffic quota
 
 ### [UserData](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md)
 
-* [~~list_project_user_data~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#list_project_user_data) - List all Project User Data :warning: **Deprecated**
-* [~~create~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#create) - Create a Project User Data :warning: **Deprecated**
-* [~~get_project_user_data~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#get_project_user_data) - Retrieve a Project User Data :warning: **Deprecated**
-* [~~update~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#update) - Update a Project User Data :warning: **Deprecated**
-* [~~delete~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#delete) - Delete a Project User Data :warning: **Deprecated**
-* [get_users_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#get_users_data) - List all User Data
-* [post_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#post_user_data) - Create an User Data
-* [get_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#get_user_data) - Retrieve an User Data
-* [patch_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#patch_user_data) - Update an User Data
-* [delete_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#delete_user_data) - Delete an User Data
+* [~~list_project_user_data~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#list_project_user_data) - List all Project User data :warning: **Deprecated**
+* [~~create~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#create) - Create a Project User data :warning: **Deprecated**
+* [~~get_project_user_data~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#get_project_user_data) - Retrieve a Project User data :warning: **Deprecated**
+* [~~update~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#update) - Update a Project User data :warning: **Deprecated**
+* [~~delete~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#delete) - Delete a Project User data :warning: **Deprecated**
+* [get_users_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#get_users_data) - List user data
+* [post_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#post_user_data) - Create user data
+* [get_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#get_user_data) - Retrieve user data
+* [patch_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#patch_user_data) - Update user data
+* [delete_user_data](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userdatasdk/README.md#delete_user_data) - Delete user data
 
 ### [UserProfile](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userprofile/README.md)
 
-* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userprofile/README.md#get) - Get user profile
-* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userprofile/README.md#update) - Update User Profile
-* [list_teams](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userprofile/README.md#list_teams) - List User Teams
+* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userprofile/README.md#get) - Retrieve profile
+* [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userprofile/README.md#update) - Update profile
+* [list_teams](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userprofile/README.md#list_teams) - List user teams
 
 ### [VirtualMachines](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md)
 
-* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#create) - Create a Virtual Machine
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#list) - Get Teams Virtual Machines
-* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#get) - Get a Virtual Machine
-* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#delete) - Destroy a Virtual Machine
-* [create_virtual_machine_action](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#create_virtual_machine_action) - Run Virtual Machine Action
+* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#create) - Create VM
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#list) - List VMs
+* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#get) - Retrieve VM
+* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#delete) - Destroy VM
+* [create_virtual_machine_action](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachines/README.md#create_virtual_machine_action) - Run VM power action
 
 ### [VpnSessions](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md#list) - List all Active VPN Sessions
-* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md#create) - Create a VPN Session
-* [refresh_password](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md#refresh_password) - Refresh a VPN Session
-* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md#delete) - Delete a VPN Session
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md#list) - List VPN sessions
+* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md#create) - Create VPN session
+* [refresh_password](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md#refresh_password) - Refresh VPN session
+* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md#delete) - Delete VPN session
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -566,16 +566,9 @@ with Latitudesh(
 <!-- Start Server Selection [server] -->
 ## Server Selection
 
-### Select Server by Index
+### Server Variables
 
-You can override the default server globally by passing a server index to the `server_idx: int` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
-
-| #   | Server                    | Variables          | Description |
-| --- | ------------------------- | ------------------ | ----------- |
-| 0   | `https://api.latitude.sh` | `latitude_api_key` |             |
-| 1   | `http://api.latitude.sh`  | `latitude_api_key` |             |
-
-If the selected server has variables, you may override its default values through the additional parameters made available in the SDK constructor:
+The default server `https://api.latitude.sh` contains variables and is set to `https://api.latitude.sh` by default. To override default values, the following parameters are available when initializing the SDK client instance:
 
 | Variable           | Parameter               | Default                        | Description |
 | ------------------ | ----------------------- | ------------------------------ | ----------- |
@@ -603,14 +596,14 @@ with Latitudesh(
 
 ### Override Server URL Per-Client
 
-The default server can also be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
+The default server can be overridden globally by passing a URL to the `server_url: str` optional parameter when initializing the SDK client instance. For example:
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
 
 
 with Latitudesh(
-    server_url="http://api.latitude.sh",
+    server_url="https://api.latitude.sh",
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 

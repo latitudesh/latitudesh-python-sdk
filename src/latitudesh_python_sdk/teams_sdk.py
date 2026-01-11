@@ -18,7 +18,7 @@ class TeamsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Teams:
-        r"""Retrieve the team
+        r"""Retrieve team
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -93,7 +93,7 @@ class TeamsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Teams:
-        r"""Retrieve the team
+        r"""Retrieve team
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -169,7 +169,7 @@ class TeamsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PostTeamResponseBody:
-        r"""Create a team
+        r"""Create team
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -254,7 +254,7 @@ class TeamsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PostTeamResponseBody:
-        r"""Create a team
+        r"""Create team
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -342,7 +342,7 @@ class TeamsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PatchCurrentTeamResponseBody:
-        r"""Update a team
+        r"""Update team
 
         :param team_id:
         :param data:
@@ -440,7 +440,7 @@ class TeamsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PatchCurrentTeamResponseBody:
-        r"""Update a team
+        r"""Update team
 
         :param team_id:
         :param data:

@@ -4,12 +4,12 @@
 
 ### Available Operations
 
-* [~~list_for_project~~](#list_for_project) - List all Project SSH Keys :warning: **Deprecated**
-* [~~create~~](#create) - Create a Project SSH Key :warning: **Deprecated**
+* [~~list_for_project~~](#list_for_project) - List SSH keys :warning: **Deprecated**
+* [~~create~~](#create) - Create a SSH key :warning: **Deprecated**
 * [~~get~~](#get) - Retrieve a Project SSH Key :warning: **Deprecated**
 * [~~update~~](#update) - Update a Project SSH Key :warning: **Deprecated**
 * [~~delete~~](#delete) - Delete a Project SSH Key :warning: **Deprecated**
-* [get_ssh_keys](#get_ssh_keys) - List all SSH Keys
+* [get_ssh_keys](#get_ssh_keys) - List SSH Keys
 * [post_ssh_key](#post_ssh_key) - Create a SSH Key
 * [get_ssh_key](#get_ssh_key) - Retrieve a SSH Key
 * [put_ssh_key](#put_ssh_key) - Update a SSH Key
@@ -17,7 +17,7 @@
 
 ## ~~list_for_project~~
 
-List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
+List SSH keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -61,7 +61,7 @@ with Latitudesh(
 
 ## ~~create~~
 
-Allow you create SSH Keys in a project. These keys can be used to access servers after deploy and reinstall actions.
+Allow you create SSH keys in a project. These keys can be used to access servers after deploy and reinstall actions.
 
 
 > :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
@@ -277,6 +277,7 @@ with Latitudesh(
 | Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
 | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `filter_project`                                                                                                            | *Optional[str]*                                                                                                             | :heavy_minus_sign:                                                                                                          | Project ID or slug                                                                                                          |
+| `filter_scope`                                                                                                              | *Optional[str]*                                                                                                             | :heavy_minus_sign:                                                                                                          | Filter by scope: `project` (has projects), `team` (no projects), or empty (all)                                             |
 | `filter_tags`                                                                                                               | *Optional[str]*                                                                                                             | :heavy_minus_sign:                                                                                                          | The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2` |
 | `retries`                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                            | :heavy_minus_sign:                                                                                                          | Configuration to override the default retry behavior of the client.                                                         |
 
