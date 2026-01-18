@@ -34,7 +34,7 @@ with Latitudesh(
     res = latitudesh.storage.create_filesystem(data={
         "type": latitudesh_python_sdk.PostStorageFilesystemsStorageType.FILESYSTEMS,
         "attributes": {
-            "project": "proj_kjQwdE2bqYNVP",
+            "project": "proj_lkg1De6ROvZE5",
             "name": "my-data",
         },
     })
@@ -77,7 +77,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.storage.list_filesystems(filter_project="sleek-silk-car")
+    latitudesh.storage.list_filesystems(filter_project="small-rubber-shirt")
 
     # Use the SDK ...
 
@@ -199,7 +199,7 @@ with Latitudesh(
     res = latitudesh.storage.post_storage_volumes(data={
         "type": latitudesh_python_sdk.PostStorageVolumesStorageType.VOLUMES,
         "attributes": {
-            "project": "proj_8NkvdyPXOeLpx",
+            "project": "proj_enPbqoZ6dA2MQ",
             "name": "my-data",
         },
     })
@@ -242,7 +242,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.storage.get_storage_volumes(filter_project="proj_GnzRD5X6qM5yw")
+    res = latitudesh.storage.get_storage_volumes(filter_project="proj_WeGoqA5AqP7nz")
 
     # Handle response
     print(res)

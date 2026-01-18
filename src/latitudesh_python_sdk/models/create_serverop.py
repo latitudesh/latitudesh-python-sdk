@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -21,11 +22,16 @@ class CreateServerServersPlan(str, Enum):
     C3_MEDIUM_X86 = "c3-medium-x86"
     C3_SMALL_X86 = "c3-small-x86"
     C3_XLARGE_X86 = "c3-xlarge-x86"
+    G3_GH200 = "g3-gh200"
     G3_LARGE_X86 = "g3-large-x86"
     G3_MEDIUM_X86 = "g3-medium-x86"
     G3_SMALL_X86 = "g3-small-x86"
     G3_XLARGE_X86 = "g3-xlarge-x86"
+    G4_RTX6KPRO_LARGE = "g4-rtx6kpro-large"
     M3_LARGE_X86 = "m3-large-x86"
+    M4_METAL_LARGE = "m4-metal-large"
+    M4_METAL_SMALL = "m4-metal-small"
+    RS4_METAL_XLARGE = "rs4-metal-xlarge"
     S2_SMALL_X86 = "s2-small-x86"
     S3_LARGE_X86 = "s3-large-x86"
 
@@ -34,7 +40,6 @@ class CreateServerServersSite(str, Enum):
     r"""The site slug to deploy the server"""
 
     ASH = "ASH"
-    BGT = "BGT"
     BUE = "BUE"
     CHI = "CHI"
     DAL = "DAL"
@@ -46,46 +51,36 @@ class CreateServerServersSite(str, Enum):
     MIA = "MIA"
     MIA2 = "MIA2"
     NYC = "NYC"
-    SAN = "SAN"
     SAO = "SAO"
     SAO2 = "SAO2"
+    SGP = "SGP"
     SYD = "SYD"
     TYO = "TYO"
-    TYO4 = "TYO4"
+    TYO2 = "TYO2"
 
 
 class CreateServerServersOperatingSystem(str, Enum):
     r"""The operating system slug for the new server"""
 
-    IPXE = "ipxe"
-    WINDOWS_SERVER_2019_STD_V1 = "windows_server_2019_std_v1"
-    UBUNTU_22_04_X64_LTS = "ubuntu_22_04_x64_lts"
-    DEBIAN_11 = "debian_11"
-    DEBIAN_10 = "debian_10"
-    RHEL8 = "rhel8"
-    WINDOWS_SERVER_2012_R2_STD_V28 = "windows_server_2012_r2_std_v28"
-    WINDOWS_SERVER_2012_R2_DC_V5 = "windows_server_2012_r2_dc_v5"
-    ESXI_6_7 = "esxi_6_7"
-    DEBIAN_9_4_X64 = "debian_9_4_x64"
     CENTOS_7_4_X64 = "centos_7_4_x64"
     CENTOS_8_X64 = "centos_8_x64"
-    UBUNTU_16_04_X64_LTS = "ubuntu_16_04_x64_lts"
-    UBUNTU_20_04_X64_LTS = "ubuntu_20_04_x64_lts"
-    WINDOWS_SERVER_2016_STD_V1 = "windows_server_2016_std_v1"
-    WINDOWS_SERVER_2016_DC_V1 = "windows_server_2016_dc_v1"
-    WINDOWS_SERVER_2019_DC_V1 = "windows_server_2019_dc_v1"
+    DEBIAN_10 = "debian_10"
+    DEBIAN_11 = "debian_11"
     DEBIAN_12 = "debian_12"
-    UBUNTU22_ML_IN_A_BOX = "ubuntu22_ml_in_a_box"
-    UBUNTU_18_04_X64_LTS = "ubuntu_18_04_x64_lts"
-    WINDOWS_SERVER_2019_STD_UEFI = "windows_server_2019_std_uefi"
-    WINDOWS_2022_STD_UEFI = "windows_2022_std_uefi"
-    WINDOWS_2022_STD = "windows_2022_std"
-    UBUNTU_24_04_X64_LTS = "ubuntu_24_04_x64_lts"
+    IPXE = "ipxe"
+    RHEL8 = "rhel8"
     ROCKYLINUX_8 = "rockylinux_8"
+    UBUNTU22_ML_IN_A_BOX = "ubuntu22_ml_in_a_box"
+    UBUNTU24_ML_IN_A_BOX = "ubuntu24_ml_in_a_box"
+    UBUNTU_20_04_X64_LTS = "ubuntu_20_04_x64_lts"
+    UBUNTU_22_04_X64_LTS = "ubuntu_22_04_x64_lts"
+    UBUNTU_24_04_X64_LTS = "ubuntu_24_04_x64_lts"
+    WINDOWS_2022_STD = "windows_2022_std"
+    WINDOWS_SERVER_2019_STD_V1 = "windows_server_2019_std_v1"
 
 
 class CreateServerRaid(str, Enum):
-    r"""RAID mode for the server"""
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
 
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
@@ -115,7 +110,7 @@ class CreateServerServersAttributesTypedDict(TypedDict):
     user_data: NotRequired[str]
     r"""User data ID to set on the server. This is a custom script that will run after the deploy"""
     raid: NotRequired[CreateServerRaid]
-    r"""RAID mode for the server"""
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
     ipxe: NotRequired[str]
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
     billing: NotRequired[CreateServerServersBilling]
@@ -145,13 +140,42 @@ class CreateServerServersAttributes(BaseModel):
     r"""User data ID to set on the server. This is a custom script that will run after the deploy"""
 
     raid: Optional[CreateServerRaid] = None
-    r"""RAID mode for the server"""
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
 
     ipxe: Optional[str] = None
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
 
     billing: Optional[CreateServerServersBilling] = None
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "project",
+                "plan",
+                "site",
+                "operating_system",
+                "hostname",
+                "ssh_keys",
+                "user_data",
+                "raid",
+                "ipxe",
+                "billing",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateServerServersDataTypedDict(TypedDict):
@@ -164,6 +188,22 @@ class CreateServerServersData(BaseModel):
 
     attributes: Optional[CreateServerServersAttributes] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class CreateServerServersRequestBodyTypedDict(TypedDict):
     data: NotRequired[CreateServerServersDataTypedDict]
@@ -171,3 +211,19 @@ class CreateServerServersRequestBodyTypedDict(TypedDict):
 
 class CreateServerServersRequestBody(BaseModel):
     data: Optional[CreateServerServersData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

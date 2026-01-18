@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from latitudesh_python_sdk.utils import (
     FieldMetadata,
     PathParamMetadata,
     RequestMetadata,
 )
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -30,6 +31,22 @@ class PatchUserDataUserDataAttributes(BaseModel):
     content: Optional[str] = None
     r"""encoded content of the User Data"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["description", "content"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class PatchUserDataUserDataDataTypedDict(TypedDict):
     id: str
@@ -43,6 +60,22 @@ class PatchUserDataUserDataData(BaseModel):
     type: PatchUserDataUserDataType
 
     attributes: Optional[PatchUserDataUserDataAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class PatchUserDataUserDataRequestBodyTypedDict(TypedDict):
@@ -67,3 +100,19 @@ class PatchUserDataRequest(BaseModel):
         Optional[PatchUserDataUserDataRequestBody],
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["RequestBody"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

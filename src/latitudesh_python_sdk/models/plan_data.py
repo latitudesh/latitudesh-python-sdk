@@ -42,6 +42,22 @@ class CPU(BaseModel):
 
     count: Optional[float] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["type", "clock", "cores", "count"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class MemoryTypedDict(TypedDict):
     total: NotRequired[float]
@@ -49,6 +65,22 @@ class MemoryTypedDict(TypedDict):
 
 class Memory(BaseModel):
     total: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["total"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class PlanDataAttributesType(str, Enum):
@@ -70,6 +102,22 @@ class Drives(BaseModel):
 
     type: Optional[PlanDataAttributesType] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["count", "size", "type"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class NicsTypedDict(TypedDict):
     count: NotRequired[float]
@@ -80,6 +128,22 @@ class Nics(BaseModel):
     count: Optional[float] = None
 
     type: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["count", "type"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class GpuTypedDict(TypedDict):
@@ -104,31 +168,26 @@ class Gpu(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = ["count", "type", "vram_per_gpu", "interconnect"]
-        nullable_fields = ["vram_per_gpu", "interconnect"]
-        null_default_fields = []
-
+        optional_fields = set(["count", "type", "vram_per_gpu", "interconnect"])
+        nullable_fields = set(["vram_per_gpu", "interconnect"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -152,6 +211,22 @@ class Specs(BaseModel):
 
     gpu: Optional[Gpu] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cpu", "memory", "drives", "nics", "gpu"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class LocationsTypedDict(TypedDict):
     available: NotRequired[List[str]]
@@ -162,6 +237,22 @@ class Locations(BaseModel):
     available: Optional[List[str]] = None
 
     in_stock: Optional[List[str]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["available", "in_stock"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class StockLevel(str, Enum):
@@ -184,6 +275,22 @@ class PlanDataUSD(BaseModel):
 
     year: Optional[float] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["hour", "month", "year"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class PlanDataBRLTypedDict(TypedDict):
     hour: NotRequired[float]
@@ -198,6 +305,22 @@ class PlanDataBRL(BaseModel):
 
     year: Optional[float] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["hour", "month", "year"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class PlanDataPricingTypedDict(TypedDict):
     usd: NotRequired[PlanDataUSDTypedDict]
@@ -209,11 +332,26 @@ class PlanDataPricing(BaseModel):
 
     brl: Annotated[Optional[PlanDataBRL], pydantic.Field(alias="BRL")] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["USD", "BRL"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class PlanDataRegionsTypedDict(TypedDict):
     name: NotRequired[str]
     deploys_instantly: NotRequired[List[str]]
-    r"""Array of operating system slugs that support instant deployment at this location. Instant deployments are provisioned immediately without the typical deployment delay."""
     locations: NotRequired[LocationsTypedDict]
     stock_level: NotRequired[StockLevel]
     pricing: NotRequired[PlanDataPricingTypedDict]
@@ -223,13 +361,30 @@ class PlanDataRegions(BaseModel):
     name: Optional[str] = None
 
     deploys_instantly: Optional[List[str]] = None
-    r"""Array of operating system slugs that support instant deployment at this location. Instant deployments are provisioned immediately without the typical deployment delay."""
 
     locations: Optional[Locations] = None
 
     stock_level: Optional[StockLevel] = None
 
     pricing: Optional[PlanDataPricing] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["name", "deploys_instantly", "locations", "stock_level", "pricing"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class PlanDataAttributesTypedDict(TypedDict):
@@ -253,6 +408,22 @@ class PlanDataAttributes(BaseModel):
 
     regions: Optional[List[PlanDataRegions]] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["slug", "name", "features", "specs", "regions"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class PlanDataTypedDict(TypedDict):
     id: NotRequired[str]
@@ -266,3 +437,19 @@ class PlanData(BaseModel):
     type: Optional[PlanDataType] = None
 
     attributes: Optional[PlanDataAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

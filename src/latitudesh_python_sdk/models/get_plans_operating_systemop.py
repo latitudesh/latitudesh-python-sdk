@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .operating_systems import OperatingSystems, OperatingSystemsTypedDict
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from latitudesh_python_sdk.utils import FieldMetadata, QueryParamMetadata
 import pydantic
+from pydantic import model_serializer
 from typing import Callable, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -31,6 +32,22 @@ class GetPlansOperatingSystemRequest(BaseModel):
     ] = 1
     r"""Page number to return (starts at 1)"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["page[size]", "page[number]"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class GetPlansOperatingSystemResponseBodyTypedDict(TypedDict):
     r"""Success"""
@@ -42,6 +59,22 @@ class GetPlansOperatingSystemResponseBody(BaseModel):
     r"""Success"""
 
     data: Optional[List[OperatingSystems]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class GetPlansOperatingSystemResponseTypedDict(TypedDict):

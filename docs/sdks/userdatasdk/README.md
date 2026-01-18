@@ -34,7 +34,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.list_project_user_data(project_id="proj_RMLydp7XOQKr1", extra_fields_user_data="decoded_content")
+    res = latitudesh.user_data.list_project_user_data(project_id="proj_LYV8DZYQq5QoE", extra_fields_user_data="decoded_content")
 
     # Handle response
     print(res)
@@ -79,7 +79,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.create(project_id="proj_kjQwdE0XOYNVP", data={
+    res = latitudesh.user_data.create(project_id="proj_8NkvdyMKdeLpx", data={
         "type": latitudesh_python_sdk.PostProjectUserDataUserDataType.USER_DATA,
         "attributes": {
             "description": "User Data description",
@@ -129,7 +129,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.get_project_user_data(project_id="proj_Gr47qlevDAg0m", user_data_id="ud_VLMmAD8EOwop2", extra_fields_user_data="decoded_content")
+    res = latitudesh.user_data.get_project_user_data(project_id="proj_e8pKq0GYdWAob", user_data_id="ud_VLMmAD8EOwop2", extra_fields_user_data="decoded_content")
 
     # Handle response
     print(res)
@@ -275,6 +275,7 @@ with Latitudesh(
 | Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
 | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `filter_project`                                                                            | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | Project ID or slug                                                                          |
+| `filter_scope`                                                                              | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | Filter by scope: `project` (has project), `team` (no project), or empty (all)               |
 | `extra_fields_user_data`                                                                    | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | The `decoded_content` is provided as an extra attribute that shows content in decoded form. |
 | `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
 
@@ -310,7 +311,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.PostUserDataUserDataType.USER_DATA,
         "attributes": {
             "description": "User Data description",
-            "project": "proj_AW6Q2D9lqKLpr",
+            "project": "proj_QraYDPW3qpjwW",
             "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd",
         },
     })
@@ -354,7 +355,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.get_user_data(user_data_id="ud_1Qkm7dXzD8nZV", extra_fields_user_data="decoded_content")
+    res = latitudesh.user_data.get_user_data(user_data_id="ud_MLGXPdWgdnNWk", extra_fields_user_data="decoded_content")
 
     # Handle response
     print(res)

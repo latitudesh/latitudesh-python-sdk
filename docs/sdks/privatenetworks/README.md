@@ -30,7 +30,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.list(filter_location="SAO", filter_project="awesome-copper-clock", filter_tags="tag_P284pBvBEoT492NeXgv7TPaR3k8,tag_nPpEv2AnR9u9RBrGLLJ3C89nZJN", page_size=20, page_number=1)
+    res = latitudesh.private_networks.list(filter_location="SAO", filter_project="awesome-copper-clock", filter_tags="tag_BZWAJKePr2Fx9kRyyaARImQlXmW,tag_X8yMgb8AZPFrX72lQgrwhBVnPN2", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -83,7 +83,7 @@ with Latitudesh(
         "attributes": {
             "description": "São Paulo VLAN",
             "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
-            "project": "incredible-granite-coat",
+            "project": "ergonomic-steel-bag",
         },
     })
 
@@ -132,8 +132,8 @@ with Latitudesh(
         "type": latitudesh_python_sdk.UpdateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORKS,
         "attributes": {
             "tags": [
-                "tag_Mjb3aoBkXRi5nR0gBQ5EhV30voRx",
-                "tag_QnkPzo8Wj1iWWzg24P5bhXAzrxmm",
+                "tag_RjLvG6oe84IAw7BxxEGaFAXK4l4",
+                "tag_lpPQ21kXEYfb9az3jRoVIVw4RBk",
             ],
         },
     })
@@ -305,8 +305,8 @@ with Latitudesh(
     res = latitudesh.private_networks.assign(data={
         "type": latitudesh_python_sdk.AssignServerVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK_ASSIGNMENT,
         "attributes": {
-            "server_id": "sv_pbV0DgQGd4AWz",
-            "virtual_network_id": "vlan_3YjJOLBjqvZ87",
+            "server_id": "sv_5xyZOn5vDWM0l",
+            "virtual_network_id": "vlan_Z8rodmpGO1jLB",
         },
     })
 

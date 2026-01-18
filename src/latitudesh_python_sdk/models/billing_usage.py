@@ -32,6 +32,22 @@ class BillingUsageProject(BaseModel):
 
     name: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "slug", "name"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class PeriodTypedDict(TypedDict):
     r"""The period from the returned billing cycle"""
@@ -46,6 +62,22 @@ class Period(BaseModel):
     start: Optional[datetime] = None
 
     end: Optional[datetime] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["start", "end"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class BillingUsageType(str, Enum):
@@ -101,6 +133,22 @@ class Metadata(BaseModel):
     plan: Optional[str] = None
 
     tags: Optional[List[str]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "hostname", "plan", "tags"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class ProductsTypedDict(TypedDict):
@@ -159,6 +207,41 @@ class Products(BaseModel):
 
     metadata: Optional[Metadata] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "id",
+                "resource",
+                "name",
+                "proration",
+                "discounts",
+                "discountable",
+                "description",
+                "amount_without_discount",
+                "start",
+                "end",
+                "unit",
+                "unit_price",
+                "usage_type",
+                "quantity",
+                "price",
+                "metadata",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class BillingUsageAttributesTypedDict(TypedDict):
     project: NotRequired[BillingUsageProjectTypedDict]
@@ -194,38 +277,35 @@ class BillingUsageAttributes(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "project",
-            "period",
-            "available_credit_balance",
-            "price",
-            "threshold",
-            "products",
-        ]
-        nullable_fields = ["threshold"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "project",
+                "period",
+                "available_credit_balance",
+                "price",
+                "threshold",
+                "products",
+            ]
+        )
+        nullable_fields = set(["threshold"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -240,6 +320,22 @@ class BillingUsageData(BaseModel):
 
     attributes: Optional[BillingUsageAttributes] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class BillingUsageTypedDict(TypedDict):
     data: NotRequired[BillingUsageDataTypedDict]
@@ -247,3 +343,19 @@ class BillingUsageTypedDict(TypedDict):
 
 class BillingUsage(BaseModel):
     data: Optional[BillingUsageData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

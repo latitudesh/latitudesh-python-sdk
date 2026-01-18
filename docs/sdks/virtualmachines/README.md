@@ -32,9 +32,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.VirtualMachinePayloadType.VIRTUAL_MACHINES,
         "attributes": {
             "name": "my-new-vm",
-            "site": "ASH",
-            "project": "enormous-wool-keyboard",
-            "billing": latitudesh_python_sdk.VirtualMachinePayloadBilling.MONTHLY,
+            "project": "lightweight-leather-lamp",
         },
     })
 
@@ -114,7 +112,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.virtual_machines.get(virtual_machine_id="vm_w5AEmq7XDBkWX")
+    latitudesh.virtual_machines.get(virtual_machine_id="vm_7vYAZqGBdMQ94")
 
     # Use the SDK ...
 
@@ -190,7 +188,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.virtual_machines.create_virtual_machine_action(virtual_machine_id="vm_VLMmAD8EOwop2", id="vm_VLMmAD8EOwop2", type_=latitudesh_python_sdk.CreateVirtualMachineActionVirtualMachinesType.VIRTUAL_MACHINES, attributes={
+    latitudesh.virtual_machines.create_virtual_machine_action(virtual_machine_id="vm_5LA73qkjdaJ2o", id="vm_5LA73qkjdaJ2o", type_=latitudesh_python_sdk.CreateVirtualMachineActionVirtualMachinesType.VIRTUAL_MACHINES, attributes={
         "action": latitudesh_python_sdk.CreateVirtualMachineActionVirtualMachinesAction.REBOOT,
     })
 

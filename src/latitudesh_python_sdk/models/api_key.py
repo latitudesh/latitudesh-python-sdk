@@ -3,8 +3,15 @@
 from __future__ import annotations
 from datetime import datetime
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
-from typing import Optional
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from pydantic import model_serializer
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -26,6 +33,22 @@ class APIKeyUser(BaseModel):
 
     email: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "email"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class AttributesTypedDict(TypedDict):
     name: NotRequired[str]
@@ -34,7 +57,11 @@ class AttributesTypedDict(TypedDict):
     r"""The API version associated with this API Key"""
     token_last_slice: NotRequired[str]
     r"""The last 5 characters of the token created for this API Key"""
-    last_used_at: NotRequired[datetime]
+    read_only: NotRequired[bool]
+    r"""Whether this API Key is read-only"""
+    allowed_ips: NotRequired[Nullable[List[str]]]
+    r"""List of allowed IP addresses for this API Key"""
+    last_used_at: NotRequired[Nullable[datetime]]
     r"""The last time a request was made to the API using this API Key"""
     user: NotRequired[APIKeyUserTypedDict]
     r"""The owner of the API Key"""
@@ -54,7 +81,13 @@ class Attributes(BaseModel):
     token_last_slice: Optional[str] = None
     r"""The last 5 characters of the token created for this API Key"""
 
-    last_used_at: Optional[datetime] = None
+    read_only: Optional[bool] = None
+    r"""Whether this API Key is read-only"""
+
+    allowed_ips: OptionalNullable[List[str]] = UNSET
+    r"""List of allowed IP addresses for this API Key"""
+
+    last_used_at: OptionalNullable[datetime] = UNSET
     r"""The last time a request was made to the API using this API Key"""
 
     user: Optional[APIKeyUser] = None
@@ -65,6 +98,43 @@ class Attributes(BaseModel):
 
     updated_at: Optional[datetime] = None
     r"""The time when the API Key was updated"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "name",
+                "api_version",
+                "token_last_slice",
+                "read_only",
+                "allowed_ips",
+                "last_used_at",
+                "user",
+                "created_at",
+                "updated_at",
+            ]
+        )
+        nullable_fields = set(["allowed_ips", "last_used_at"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class APIKeyTypedDict(TypedDict):
@@ -79,3 +149,19 @@ class APIKey(BaseModel):
     type: Optional[Type] = None
 
     attributes: Optional[Attributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

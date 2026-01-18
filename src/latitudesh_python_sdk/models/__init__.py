@@ -16,6 +16,7 @@ if TYPE_CHECKING:
         AttributesTypedDict,
         Type,
     )
+    from .api_keys import APIKeys, APIKeysTypedDict
     from .apierror import APIError
     from .assign_server_virtual_networkop import (
         AssignServerVirtualNetworkPrivateNetworksAttributes,
@@ -560,6 +561,7 @@ if TYPE_CHECKING:
         GetVirtualNetworksResponse,
         GetVirtualNetworksResponseTypedDict,
     )
+    from .get_vm_plansop import GetVMPlansRequest, GetVMPlansRequestTypedDict
     from .get_vpn_sessionsop import (
         FilterLocation,
         GetVpnSessionsMeta,
@@ -932,6 +934,12 @@ if TYPE_CHECKING:
         RoleDataType,
         RoleDataTypedDict,
     )
+    from .rotate_api_keyop import (
+        RotateAPIKeyRequest,
+        RotateAPIKeyRequestTypedDict,
+        RotateAPIKeyResponseBody,
+        RotateAPIKeyResponseBodyTypedDict,
+    )
     from .security import Security, SecurityTypedDict
     from .server import Server, ServerMeta, ServerMetaTypedDict, ServerTypedDict
     from .server_action import (
@@ -1252,7 +1260,6 @@ if TYPE_CHECKING:
         VirtualMachineAttributes,
         VirtualMachineAttributesAttributes,
         VirtualMachineAttributesAttributesTypedDict,
-        VirtualMachineAttributesBilling,
         VirtualMachineAttributesPlan,
         VirtualMachineAttributesPlanTypedDict,
         VirtualMachineAttributesSpecs,
@@ -1265,7 +1272,6 @@ if TYPE_CHECKING:
         VirtualMachinePayload,
         VirtualMachinePayloadAttributes,
         VirtualMachinePayloadAttributesTypedDict,
-        VirtualMachinePayloadBilling,
         VirtualMachinePayloadData,
         VirtualMachinePayloadDataTypedDict,
         VirtualMachinePayloadType,
@@ -1371,6 +1377,8 @@ __all__ = [
     "APIKeyTypedDict",
     "APIKeyUser",
     "APIKeyUserTypedDict",
+    "APIKeys",
+    "APIKeysTypedDict",
     "AssignServerVirtualNetworkPrivateNetworksAttributes",
     "AssignServerVirtualNetworkPrivateNetworksAttributesTypedDict",
     "AssignServerVirtualNetworkPrivateNetworksData",
@@ -1783,6 +1791,8 @@ __all__ = [
     "GetUserProfileResponseBodyTypedDict",
     "GetUsersDataRequest",
     "GetUsersDataRequestTypedDict",
+    "GetVMPlansRequest",
+    "GetVMPlansRequestTypedDict",
     "GetVirtualNetworkRequest",
     "GetVirtualNetworkRequestTypedDict",
     "GetVirtualNetworkResponseBody",
@@ -2115,6 +2125,10 @@ __all__ = [
     "RoleMeta",
     "RoleMetaTypedDict",
     "RoleTypedDict",
+    "RotateAPIKeyRequest",
+    "RotateAPIKeyRequestTypedDict",
+    "RotateAPIKeyResponseBody",
+    "RotateAPIKeyResponseBodyTypedDict",
     "Rules",
     "RulesTypedDict",
     "SSHKey",
@@ -2375,7 +2389,6 @@ __all__ = [
     "VirtualMachineAttributes",
     "VirtualMachineAttributesAttributes",
     "VirtualMachineAttributesAttributesTypedDict",
-    "VirtualMachineAttributesBilling",
     "VirtualMachineAttributesPlan",
     "VirtualMachineAttributesPlanTypedDict",
     "VirtualMachineAttributesSpecs",
@@ -2388,7 +2401,6 @@ __all__ = [
     "VirtualMachinePayload",
     "VirtualMachinePayloadAttributes",
     "VirtualMachinePayloadAttributesTypedDict",
-    "VirtualMachinePayloadBilling",
     "VirtualMachinePayloadData",
     "VirtualMachinePayloadDataTypedDict",
     "VirtualMachinePayloadType",
@@ -2469,6 +2481,8 @@ _dynamic_imports: dict[str, str] = {
     "Attributes": ".api_key",
     "AttributesTypedDict": ".api_key",
     "Type": ".api_key",
+    "APIKeys": ".api_keys",
+    "APIKeysTypedDict": ".api_keys",
     "APIError": ".apierror",
     "AssignServerVirtualNetworkPrivateNetworksAttributes": ".assign_server_virtual_networkop",
     "AssignServerVirtualNetworkPrivateNetworksAttributesTypedDict": ".assign_server_virtual_networkop",
@@ -2889,6 +2903,8 @@ _dynamic_imports: dict[str, str] = {
     "GetVirtualNetworksRequestTypedDict": ".get_virtual_networksop",
     "GetVirtualNetworksResponse": ".get_virtual_networksop",
     "GetVirtualNetworksResponseTypedDict": ".get_virtual_networksop",
+    "GetVMPlansRequest": ".get_vm_plansop",
+    "GetVMPlansRequestTypedDict": ".get_vm_plansop",
     "FilterLocation": ".get_vpn_sessionsop",
     "GetVpnSessionsMeta": ".get_vpn_sessionsop",
     "GetVpnSessionsMetaTypedDict": ".get_vpn_sessionsop",
@@ -3203,6 +3219,10 @@ _dynamic_imports: dict[str, str] = {
     "RoleDataAttributesTypedDict": ".role_data",
     "RoleDataType": ".role_data",
     "RoleDataTypedDict": ".role_data",
+    "RotateAPIKeyRequest": ".rotate_api_keyop",
+    "RotateAPIKeyRequestTypedDict": ".rotate_api_keyop",
+    "RotateAPIKeyResponseBody": ".rotate_api_keyop",
+    "RotateAPIKeyResponseBodyTypedDict": ".rotate_api_keyop",
     "Security": ".security",
     "SecurityTypedDict": ".security",
     "Server": ".server",
@@ -3465,7 +3485,6 @@ _dynamic_imports: dict[str, str] = {
     "VirtualMachineAttributes": ".virtual_machine_attributes",
     "VirtualMachineAttributesAttributes": ".virtual_machine_attributes",
     "VirtualMachineAttributesAttributesTypedDict": ".virtual_machine_attributes",
-    "VirtualMachineAttributesBilling": ".virtual_machine_attributes",
     "VirtualMachineAttributesPlan": ".virtual_machine_attributes",
     "VirtualMachineAttributesPlanTypedDict": ".virtual_machine_attributes",
     "VirtualMachineAttributesSpecs": ".virtual_machine_attributes",
@@ -3476,7 +3495,6 @@ _dynamic_imports: dict[str, str] = {
     "VirtualMachinePayload": ".virtual_machine_payload",
     "VirtualMachinePayloadAttributes": ".virtual_machine_payload",
     "VirtualMachinePayloadAttributesTypedDict": ".virtual_machine_payload",
-    "VirtualMachinePayloadBilling": ".virtual_machine_payload",
     "VirtualMachinePayloadData": ".virtual_machine_payload",
     "VirtualMachinePayloadDataTypedDict": ".virtual_machine_payload",
     "VirtualMachinePayloadType": ".virtual_machine_payload",

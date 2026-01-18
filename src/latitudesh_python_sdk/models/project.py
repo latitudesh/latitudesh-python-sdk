@@ -3,7 +3,14 @@
 from __future__ import annotations
 from .team_include import TeamInclude, TeamIncludeTypedDict
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -56,6 +63,24 @@ class ProjectStats(BaseModel):
     vlans: Optional[float] = None
     r"""The number of VLANs assigned to the project"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["ip_addresses", "prefixes", "servers", "containers", "vlans"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ProjectBillingTypedDict(TypedDict):
     subscription_id: NotRequired[str]
@@ -70,18 +95,34 @@ class ProjectBilling(BaseModel):
 
     method: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["subscription_id", "type", "method"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ProjectAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The project name"""
     slug: NotRequired[str]
     r"""A unique project identifier"""
-    description: NotRequired[str]
+    description: NotRequired[Nullable[str]]
     r"""The project description"""
     billing_type: NotRequired[BillingType]
     billing_method: NotRequired[BillingMethod]
     cost: NotRequired[str]
-    environment: NotRequired[Environment]
+    environment: NotRequired[Nullable[Environment]]
     stats: NotRequired[ProjectStatsTypedDict]
     billing: NotRequired[ProjectBillingTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
@@ -96,7 +137,7 @@ class ProjectAttributes(BaseModel):
     slug: Optional[str] = None
     r"""A unique project identifier"""
 
-    description: Optional[str] = None
+    description: OptionalNullable[str] = UNSET
     r"""The project description"""
 
     billing_type: Optional[BillingType] = None
@@ -105,7 +146,7 @@ class ProjectAttributes(BaseModel):
 
     cost: Optional[str] = None
 
-    environment: Optional[Environment] = None
+    environment: OptionalNullable[Environment] = UNSET
 
     stats: Optional[ProjectStats] = None
 
@@ -116,6 +157,46 @@ class ProjectAttributes(BaseModel):
     created_at: Optional[str] = None
 
     updated_at: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "name",
+                "slug",
+                "description",
+                "billing_type",
+                "billing_method",
+                "cost",
+                "environment",
+                "stats",
+                "billing",
+                "team",
+                "created_at",
+                "updated_at",
+            ]
+        )
+        nullable_fields = set(["description", "environment"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class ProjectTypedDict(TypedDict):
@@ -129,3 +210,19 @@ class Project(BaseModel):
     r"""The project ID"""
 
     attributes: Optional[ProjectAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

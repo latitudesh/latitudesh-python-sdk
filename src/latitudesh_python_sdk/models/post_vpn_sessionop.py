@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -13,7 +14,6 @@ class PostVpnSessionVpnSessionsType(str, Enum):
 
 class PostVpnSessionVpnSessionsSite(str, Enum):
     ASH = "ASH"
-    BGT = "BGT"
     BUE = "BUE"
     CHI = "CHI"
     DAL = "DAL"
@@ -25,12 +25,12 @@ class PostVpnSessionVpnSessionsSite(str, Enum):
     MIA = "MIA"
     MIA2 = "MIA2"
     NYC = "NYC"
-    SAN = "SAN"
     SAO = "SAO"
     SAO2 = "SAO2"
+    SGP = "SGP"
     SYD = "SYD"
     TYO = "TYO"
-    TYO4 = "TYO4"
+    TYO2 = "TYO2"
 
 
 class PostVpnSessionVpnSessionsAttributesTypedDict(TypedDict):
@@ -43,6 +43,22 @@ class PostVpnSessionVpnSessionsAttributes(BaseModel):
 
     server_id: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["site", "server_id"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class PostVpnSessionVpnSessionsDataTypedDict(TypedDict):
     type: NotRequired[PostVpnSessionVpnSessionsType]
@@ -54,6 +70,22 @@ class PostVpnSessionVpnSessionsData(BaseModel):
 
     attributes: Optional[PostVpnSessionVpnSessionsAttributes] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class PostVpnSessionVpnSessionsRequestBodyTypedDict(TypedDict):
     data: NotRequired[PostVpnSessionVpnSessionsDataTypedDict]
@@ -61,3 +93,19 @@ class PostVpnSessionVpnSessionsRequestBodyTypedDict(TypedDict):
 
 class PostVpnSessionVpnSessionsRequestBody(BaseModel):
     data: Optional[PostVpnSessionVpnSessionsData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .team_members import TeamMembers, TeamMembersTypedDict
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from latitudesh_python_sdk.utils import FieldMetadata, QueryParamMetadata
 import pydantic
+from pydantic import model_serializer
 from typing import Callable, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -30,6 +31,22 @@ class GetTeamMembersRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 1
     r"""Page number to return (starts at 1)"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["page[size]", "page[number]"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class GetTeamMembersResponseTypedDict(TypedDict):

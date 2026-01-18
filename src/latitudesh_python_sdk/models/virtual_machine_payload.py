@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -11,23 +12,11 @@ class VirtualMachinePayloadType(str, Enum):
     VIRTUAL_MACHINES = "virtual_machines"
 
 
-class VirtualMachinePayloadBilling(str, Enum):
-    r"""The billing type for the virtual machine. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects. Defaults to `monthly` for on demand projects and `yearly` for reserved projects."""
-
-    HOURLY = "hourly"
-    MONTHLY = "monthly"
-    YEARLY = "yearly"
-
-
 class VirtualMachinePayloadAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     plan: NotRequired[str]
-    site: NotRequired[str]
-    r"""The site slug where the virtual machine will be deployed. Defaults to 'DAL' if not specified. To see which sites are available for a given plan, check the 'available' array in the plan's regions."""
     ssh_keys: NotRequired[List[str]]
     project: NotRequired[str]
-    billing: NotRequired[VirtualMachinePayloadBilling]
-    r"""The billing type for the virtual machine. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects. Defaults to `monthly` for on demand projects and `yearly` for reserved projects."""
 
 
 class VirtualMachinePayloadAttributes(BaseModel):
@@ -35,15 +24,25 @@ class VirtualMachinePayloadAttributes(BaseModel):
 
     plan: Optional[str] = None
 
-    site: Optional[str] = None
-    r"""The site slug where the virtual machine will be deployed. Defaults to 'DAL' if not specified. To see which sites are available for a given plan, check the 'available' array in the plan's regions."""
-
     ssh_keys: Optional[List[str]] = None
 
     project: Optional[str] = "my-project"
 
-    billing: Optional[VirtualMachinePayloadBilling] = None
-    r"""The billing type for the virtual machine. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects. Defaults to `monthly` for on demand projects and `yearly` for reserved projects."""
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["name", "plan", "ssh_keys", "project"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class VirtualMachinePayloadDataTypedDict(TypedDict):
@@ -56,6 +55,22 @@ class VirtualMachinePayloadData(BaseModel):
 
     attributes: Optional[VirtualMachinePayloadAttributes] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class VirtualMachinePayloadTypedDict(TypedDict):
     data: NotRequired[VirtualMachinePayloadDataTypedDict]
@@ -63,3 +78,19 @@ class VirtualMachinePayloadTypedDict(TypedDict):
 
 class VirtualMachinePayload(BaseModel):
     data: Optional[VirtualMachinePayloadData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

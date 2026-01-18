@@ -6,8 +6,9 @@
 
 * [list](#list) - List API Keys
 * [create](#create) - Create API Key
-* [regenerate](#regenerate) - Regenerate API Key
+* [regenerate](#regenerate) - Rotate API Key
 * [delete](#delete) - Delete API Key
+* [update_api_key](#update_api_key) - Update API Key Settings
 
 ## list
 
@@ -41,7 +42,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.APIKey](../../models/apikey.md)**
+**[models.APIKeys](../../models/apikeys.md)**
 
 ### Errors
 
@@ -98,12 +99,13 @@ with Latitudesh(
 
 ## regenerate
 
-Regenerate an existing API Key that is tied to the current user. This overrides the previous key.
+Rotate an existing API Key, generating a new token. This invalidates the previous key.
+Use PATCH to update settings without rotating the token.
 
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="update-api-key" method="put" path="/auth/api_keys/{api_key_id}" -->
+<!-- UsageSnippet language="python" operationID="rotate-api-key" method="put" path="/auth/api_keys/{api_key_id}" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -114,8 +116,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.api_keys.regenerate(api_key_id="tok_zlkg1DegdvZE5", data={
-        "id": "tok_zlkg1DegdvZE5",
+    res = latitudesh.api_keys.regenerate(api_key_id="tok_x1ZJrdx5qg4LV", data={
+        "id": "tok_x1ZJrdx5qg4LV",
         "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
         "attributes": {
             "name": "App Token",
@@ -137,7 +139,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.UpdateAPIKeyResponseBody](../../models/updateapikeyresponsebody.md)**
+**[models.RotateAPIKeyResponseBody](../../models/rotateapikeyresponsebody.md)**
 
 ### Errors
 
@@ -162,7 +164,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.api_keys.delete(api_key_id="tok_x1ZJrdx5qg4LV")
+    latitudesh.api_keys.delete(api_key_id="tok_lQraYDPeOpjwW")
 
     # Use the SDK ...
 
@@ -174,6 +176,56 @@ with Latitudesh(
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `api_key_id`                                                        | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## update_api_key
+
+Update API Key settings (name, read_only, allowed_ips) without rotating the token.
+Use PUT to rotate the token.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="update-api-key" method="patch" path="/auth/api_keys/{api_key_id}" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.api_keys.update_api_key(api_key_id="tok_lpbV0DgRq4AWz", data={
+        "id": "tok_lpbV0DgRq4AWz",
+        "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
+        "attributes": {
+            "name": "Updated Name",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                             | Type                                                                  | Required                                                              | Description                                                           |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `api_key_id`                                                          | *str*                                                                 | :heavy_check_mark:                                                    | N/A                                                                   |
+| `data`                                                                | [Optional[models.UpdateAPIKeyData]](../../models/updateapikeydata.md) | :heavy_minus_sign:                                                    | N/A                                                                   |
+| `retries`                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)      | :heavy_minus_sign:                                                    | Configuration to override the default retry behavior of the client.   |
+
+### Response
+
+**[models.UpdateAPIKeyResponseBody](../../models/updateapikeyresponsebody.md)**
 
 ### Errors
 

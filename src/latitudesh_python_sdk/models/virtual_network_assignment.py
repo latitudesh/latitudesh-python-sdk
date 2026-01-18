@@ -5,7 +5,8 @@ from .virtual_network_assignment_data import (
     VirtualNetworkAssignmentData,
     VirtualNetworkAssignmentDataTypedDict,
 )
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -27,3 +28,19 @@ class VirtualNetworkAssignment(BaseModel):
     data: Optional[VirtualNetworkAssignmentData] = None
 
     meta: Optional[VirtualNetworkAssignmentMeta] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data", "meta"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

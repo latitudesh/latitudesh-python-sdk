@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -21,6 +22,22 @@ class ServerScheduleDeletionAttributes(BaseModel):
 
     scheduled_deletion_at: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["server_id", "scheduled_deletion_at"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ServerScheduleDeletionDataTypedDict(TypedDict):
     id: NotRequired[str]
@@ -35,6 +52,22 @@ class ServerScheduleDeletionData(BaseModel):
 
     attributes: Optional[ServerScheduleDeletionAttributes] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ServerScheduleDeletionTypedDict(TypedDict):
     data: NotRequired[ServerScheduleDeletionDataTypedDict]
@@ -42,3 +75,19 @@ class ServerScheduleDeletionTypedDict(TypedDict):
 
 class ServerScheduleDeletion(BaseModel):
     data: Optional[ServerScheduleDeletionData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

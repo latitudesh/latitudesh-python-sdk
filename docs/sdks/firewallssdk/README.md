@@ -30,7 +30,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.get_all_firewall_assignments(filter_server="sv_RLYV8DZ2D5QoE", page_size=20, page_number=1)
+    res = latitudesh.firewalls.get_all_firewall_assignments(filter_server="sv_Qk0Ryqv1dW36X", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -79,7 +79,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateFirewallFirewallsType.FIREWALLS,
         "attributes": {
             "name": "my-firewall",
-            "project": "awesome-granite-chair",
+            "project": "heavy-duty-copper-watch",
             "rules": [
                 {
                     "from_": "192.168.42.73",
@@ -88,8 +88,8 @@ with Latitudesh(
                     "port": "80",
                 },
                 {
-                    "from_": "192.168.1.0/24",
-                    "to": "ANY",
+                    "from_": "192.168.1.16",
+                    "to": "192.168.1.30",
                     "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
                     "port": "80",
                 },
@@ -141,7 +141,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.list(filter_project="incredible-bronze-car", page_size=20, page_number=1)
+    res = latitudesh.firewalls.list(filter_project="intelligent-marble-lamp", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -185,7 +185,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.get(firewall_id="fw_xkjQwdENqYNVP")
+    res = latitudesh.firewalls.get(firewall_id="fw_6A05EdQ1dvKYQ")
 
     # Handle response
     print(res)
@@ -226,14 +226,14 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.update(firewall_id="fw_6A05EdQ1dvKYQ", data={
+    res = latitudesh.firewalls.update(firewall_id="fw_r0MK4O4kDa95w", data={
         "type": latitudesh_python_sdk.UpdateFirewallFirewallsType.FIREWALLS,
         "attributes": {
             "name": "new-name",
             "rules": [
                 {
-                    "from_": "192.168.1.0/24",
-                    "to": "ANY",
+                    "from_": "192.168.42.72",
+                    "to": "192.168.43.51",
                     "protocol": latitudesh_python_sdk.UpdateFirewallFirewallsProtocol.TCP,
                     "port": "80",
                 },
@@ -316,10 +316,10 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.assign(firewall_id="fw_Av9BVDavORm1W", data={
+    res = latitudesh.firewalls.assign(firewall_id="fw_Ee8pKq05DWAob", data={
         "type": latitudesh_python_sdk.CreateFirewallAssignmentFirewallsType.FIREWALL_ASSIGNMENTS,
         "attributes": {
-            "server_id": "sv_lpbV0DgRq4AWz",
+            "server_id": "sv_aKXgRdR3qv9k5",
         },
     })
 
@@ -362,7 +362,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.firewalls.list_assignments(firewall_id="fw_z8Nkvdy1deLpx", page_size=20, page_number=1)
+    res = latitudesh.firewalls.list_assignments(firewall_id="fw_Qk0Ryqv1dW36X", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
