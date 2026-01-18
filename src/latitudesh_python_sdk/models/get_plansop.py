@@ -3,9 +3,10 @@
 from __future__ import annotations
 from .plan_data import PlanData, PlanDataTypedDict
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from latitudesh_python_sdk.utils import FieldMetadata, QueryParamMetadata
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -112,6 +113,33 @@ class GetPlansRequest(BaseModel):
     [lte] to filter by values lower or equal to the provided value.
     """
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "filter[name]",
+                "filter[slug]",
+                "filter[location]",
+                "filter[stock_level]",
+                "filter[in_stock]",
+                "filter[gpu]",
+                "filter[ram]",
+                "filter[disk]",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class GetPlansResponseBodyTypedDict(TypedDict):
     r"""Success"""
@@ -123,3 +151,19 @@ class GetPlansResponseBody(BaseModel):
     r"""Success"""
 
     data: Optional[List[PlanData]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

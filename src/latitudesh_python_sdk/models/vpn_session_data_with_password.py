@@ -3,7 +3,8 @@
 from __future__ import annotations
 from .region_resource_data import RegionResourceData, RegionResourceDataTypedDict
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -62,6 +63,34 @@ class VpnSessionDataWithPasswordAttributes(BaseModel):
 
     updated_at: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "user_name",
+                "password",
+                "port",
+                "host",
+                "region",
+                "status",
+                "expires_at",
+                "created_at",
+                "updated_at",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class VpnSessionDataWithPasswordTypedDict(TypedDict):
     id: NotRequired[str]
@@ -75,3 +104,19 @@ class VpnSessionDataWithPassword(BaseModel):
     type: Optional[VpnSessionDataWithPasswordType] = None
 
     attributes: Optional[VpnSessionDataWithPasswordAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

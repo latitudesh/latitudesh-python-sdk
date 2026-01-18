@@ -1,4 +1,4 @@
-# GetProjectUsersDataResponseBody
+# RotateAPIKeyResponseBody
 
 Success
 
@@ -7,4 +7,4 @@ Success
 
 | Field                                          | Type                                           | Required                                       | Description                                    |
 | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- | ---------------------------------------------- |
-| `data`                                         | List[[models.UserData](../models/userdata.md)] | :heavy_minus_sign:                             | N/A                                            |
+| `data`                                         | [Optional[models.APIKey]](../models/apikey.md) | :heavy_minus_sign:                             | N/A                                            |

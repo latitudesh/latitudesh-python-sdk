@@ -112,8 +112,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.teams.update(team_id="team_VNoL4jAy7YTbvVV0005jI6vQylGZ", data={
-        "id": "team_z3Qna7E2QRc3455EQ34JfAWNQ42",
+    res = latitudesh.teams.update(team_id="team_bVJM4y6m4VCyy101JzA3szlVGRb", data={
+        "id": "team_bVJM4y6m4VCyy101JzA3szlVGRb",
         "type": latitudesh_python_sdk.PatchCurrentTeamTeamsType.TEAMS,
         "attributes": {
             "address": "Address",

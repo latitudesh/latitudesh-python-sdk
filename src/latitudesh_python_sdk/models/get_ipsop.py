@@ -3,9 +3,10 @@
 from __future__ import annotations
 from .ip_addresses import IPAddresses, IPAddressesTypedDict
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from latitudesh_python_sdk.utils import FieldMetadata, QueryParamMetadata
 import pydantic
+from pydantic import model_serializer
 from typing import Callable, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -37,6 +38,8 @@ class GetIpsRequestTypedDict(TypedDict):
     r"""The site slug to filter by"""
     filter_address: NotRequired[str]
     r"""The address of IP to filter by starts_with"""
+    filter_additional: NotRequired[bool]
+    r"""Filter by additional IPs (true) or management IPs (false)"""
     extra_fields_ip_addresses: NotRequired[str]
     r"""The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string."""
     page_size: NotRequired[int]
@@ -88,6 +91,13 @@ class GetIpsRequest(BaseModel):
     ] = None
     r"""The address of IP to filter by starts_with"""
 
+    filter_additional: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="filter[additional]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter by additional IPs (true) or management IPs (false)"""
+
     extra_fields_ip_addresses: Annotated[
         Optional[str],
         pydantic.Field(alias="extra_fields[ip_addresses]"),
@@ -108,6 +118,35 @@ class GetIpsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = 1
     r"""Page number to return (starts at 1)"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "filter[server]",
+                "filter[project]",
+                "filter[family]",
+                "filter[type]",
+                "filter[location]",
+                "filter[address]",
+                "filter[additional]",
+                "extra_fields[ip_addresses]",
+                "page[size]",
+                "page[number]",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class GetIpsResponseTypedDict(TypedDict):

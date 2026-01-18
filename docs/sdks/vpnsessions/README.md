@@ -72,7 +72,7 @@ with Latitudesh(
     res = latitudesh.vpn_sessions.create(data={
         "attributes": {
             "site": latitudesh_python_sdk.PostVpnSessionVpnSessionsSite.SAO,
-            "server_id": "sv_wg3ZDrKyO5QlP",
+            "server_id": "sv_LMmAD8wyqwop2",
         },
     })
 
@@ -115,7 +115,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.vpn_sessions.refresh_password(vpn_session_id="vpn_6VE1Wd37dXnZJ")
+    res = latitudesh.vpn_sessions.refresh_password(vpn_session_id="vpn_pRMLydp0dQKr1")
 
     # Handle response
     print(res)

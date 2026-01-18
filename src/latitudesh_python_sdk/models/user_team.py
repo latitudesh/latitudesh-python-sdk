@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from .user_include import UserInclude, UserIncludeTypedDict
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -16,6 +17,22 @@ class UserTeamBilling(BaseModel):
     id: Optional[str] = None
 
     customer_billing_id: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "customer_billing_id"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class UserTeamAttributesTypedDict(TypedDict):
@@ -49,6 +66,34 @@ class UserTeamAttributes(BaseModel):
 
     billing: Optional[UserTeamBilling] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "name",
+                "slug",
+                "description",
+                "address",
+                "currency",
+                "created_at",
+                "updated_at",
+                "owner",
+                "billing",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class UserTeamTypedDict(TypedDict):
     id: NotRequired[str]
@@ -59,3 +104,19 @@ class UserTeam(BaseModel):
     id: Optional[str] = None
 
     attributes: Optional[UserTeamAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

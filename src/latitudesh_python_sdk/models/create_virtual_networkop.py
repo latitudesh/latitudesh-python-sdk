@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -15,7 +16,6 @@ class CreateVirtualNetworkPrivateNetworksSite(str, Enum):
     r"""Site ID or slug"""
 
     ASH = "ASH"
-    BGT = "BGT"
     BUE = "BUE"
     CHI = "CHI"
     DAL = "DAL"
@@ -27,12 +27,12 @@ class CreateVirtualNetworkPrivateNetworksSite(str, Enum):
     MIA = "MIA"
     MIA2 = "MIA2"
     NYC = "NYC"
-    SAN = "SAN"
     SAO = "SAO"
     SAO2 = "SAO2"
+    SGP = "SGP"
     SYD = "SYD"
     TYO = "TYO"
-    TYO4 = "TYO4"
+    TYO2 = "TYO2"
 
 
 class CreateVirtualNetworkPrivateNetworksAttributesTypedDict(TypedDict):
@@ -51,6 +51,22 @@ class CreateVirtualNetworkPrivateNetworksAttributes(BaseModel):
 
     site: Optional[CreateVirtualNetworkPrivateNetworksSite] = None
     r"""Site ID or slug"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["site"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateVirtualNetworkPrivateNetworksDataTypedDict(TypedDict):

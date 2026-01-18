@@ -3,7 +3,8 @@
 from __future__ import annotations
 from .project import Project, ProjectTypedDict
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -47,6 +48,22 @@ class CreateProjectProjectsAttributes(BaseModel):
 
     environment: Optional[CreateProjectProjectsEnvironment] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["description", "environment"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class CreateProjectProjectsDataTypedDict(TypedDict):
     type: CreateProjectProjectsType
@@ -58,6 +75,22 @@ class CreateProjectProjectsData(BaseModel):
 
     attributes: Optional[CreateProjectProjectsAttributes] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class CreateProjectProjectsRequestBodyTypedDict(TypedDict):
     data: NotRequired[CreateProjectProjectsDataTypedDict]
@@ -65,6 +98,22 @@ class CreateProjectProjectsRequestBodyTypedDict(TypedDict):
 
 class CreateProjectProjectsRequestBody(BaseModel):
     data: Optional[CreateProjectProjectsData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateProjectResponseBodyTypedDict(TypedDict):
@@ -77,3 +126,19 @@ class CreateProjectResponseBody(BaseModel):
     r"""Created"""
 
     data: Optional[Project] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

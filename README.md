@@ -250,12 +250,13 @@ with Latitudesh(
 <details open>
 <summary>Available methods</summary>
 
-### [ApiKeys](docs/sdks/apikeys/README.md)
+### [ApiKeys](docs/sdks/apikeyssdk/README.md)
 
-* [list](docs/sdks/apikeys/README.md#list) - List API Keys
-* [create](docs/sdks/apikeys/README.md#create) - Create API Key
-* [regenerate](docs/sdks/apikeys/README.md#regenerate) - Regenerate API Key
-* [delete](docs/sdks/apikeys/README.md#delete) - Delete API Key
+* [list](docs/sdks/apikeyssdk/README.md#list) - List API Keys
+* [create](docs/sdks/apikeyssdk/README.md#create) - Create API Key
+* [regenerate](docs/sdks/apikeyssdk/README.md#regenerate) - Rotate API Key
+* [delete](docs/sdks/apikeyssdk/README.md#delete) - Delete API Key
+* [update_api_key](docs/sdks/apikeyssdk/README.md#update_api_key) - Update API Key Settings
 
 ### [Billing](docs/sdks/billing/README.md)
 

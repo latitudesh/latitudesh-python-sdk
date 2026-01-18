@@ -250,12 +250,13 @@ with Latitudesh(
 <details open>
 <summary>Available methods</summary>
 
-### [ApiKeys](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md)
+### [ApiKeys](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeyssdk/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#list) - List API Keys
-* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#create) - Create API Key
-* [regenerate](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#regenerate) - Regenerate API Key
-* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeys/README.md#delete) - Delete API Key
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeyssdk/README.md#list) - List API Keys
+* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeyssdk/README.md#create) - Create API Key
+* [regenerate](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeyssdk/README.md#regenerate) - Rotate API Key
+* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeyssdk/README.md#delete) - Delete API Key
+* [update_api_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/apikeyssdk/README.md#update_api_key) - Update API Key Settings
 
 ### [Billing](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/billing/README.md)
 

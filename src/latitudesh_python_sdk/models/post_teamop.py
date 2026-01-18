@@ -3,7 +3,8 @@
 from __future__ import annotations
 from .team import Team, TeamTypedDict
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -35,6 +36,22 @@ class PostTeamTeamsAttributes(BaseModel):
     referred_code: Optional[str] = None
     r"""Supported only for first team creation"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["address", "referred_code"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class PostTeamTeamsDataTypedDict(TypedDict):
     type: PostTeamTeamsType
@@ -45,6 +62,22 @@ class PostTeamTeamsData(BaseModel):
     type: PostTeamTeamsType
 
     attributes: Optional[PostTeamTeamsAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class PostTeamTeamsRequestBodyTypedDict(TypedDict):
@@ -65,3 +98,19 @@ class PostTeamResponseBody(BaseModel):
     r"""Created"""
 
     data: Optional[Team] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
