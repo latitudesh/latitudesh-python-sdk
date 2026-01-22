@@ -28,14 +28,30 @@ class InitiatorsTypedDict(TypedDict):
 class Initiators(BaseModel):
     nqn: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["nqn"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class VolumeDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     size_in_gb: NotRequired[int]
-    created_at: NotRequired[datetime]
+    created_at: NotRequired[Nullable[datetime]]
     namespace_id: NotRequired[Nullable[str]]
-    connector_id: NotRequired[str]
-    initiators: NotRequired[List[InitiatorsTypedDict]]
+    connector_id: NotRequired[Nullable[str]]
+    initiators: NotRequired[Nullable[List[InitiatorsTypedDict]]]
     project: NotRequired[ProjectIncludeTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
 
@@ -45,13 +61,13 @@ class VolumeDataAttributes(BaseModel):
 
     size_in_gb: Optional[int] = None
 
-    created_at: Optional[datetime] = None
+    created_at: OptionalNullable[datetime] = UNSET
 
     namespace_id: OptionalNullable[str] = UNSET
 
-    connector_id: Optional[str] = None
+    connector_id: OptionalNullable[str] = UNSET
 
-    initiators: Optional[List[Initiators]] = None
+    initiators: OptionalNullable[List[Initiators]] = UNSET
 
     project: Optional[ProjectInclude] = None
 
@@ -59,40 +75,39 @@ class VolumeDataAttributes(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "name",
-            "size_in_gb",
-            "created_at",
-            "namespace_id",
-            "connector_id",
-            "initiators",
-            "project",
-            "team",
-        ]
-        nullable_fields = ["namespace_id"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "name",
+                "size_in_gb",
+                "created_at",
+                "namespace_id",
+                "connector_id",
+                "initiators",
+                "project",
+                "team",
+            ]
+        )
+        nullable_fields = set(
+            ["created_at", "namespace_id", "connector_id", "initiators"]
+        )
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -109,3 +124,19 @@ class VolumeData(BaseModel):
     type: Optional[VolumeDataType] = None
 
     attributes: Optional[VolumeDataAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

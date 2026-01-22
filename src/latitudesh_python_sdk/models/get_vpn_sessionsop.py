@@ -6,16 +6,16 @@ from .vpn_session_data_with_password import (
     VpnSessionDataWithPasswordTypedDict,
 )
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from latitudesh_python_sdk.utils import FieldMetadata, QueryParamMetadata
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class FilterLocation(str, Enum):
     ASH = "ASH"
-    BGT = "BGT"
     BUE = "BUE"
     CHI = "CHI"
     DAL = "DAL"
@@ -27,12 +27,12 @@ class FilterLocation(str, Enum):
     MIA = "MIA"
     MIA2 = "MIA2"
     NYC = "NYC"
-    SAN = "SAN"
     SAO = "SAO"
     SAO2 = "SAO2"
+    SGP = "SGP"
     SYD = "SYD"
     TYO = "TYO"
-    TYO4 = "TYO4"
+    TYO2 = "TYO2"
 
 
 class GetVpnSessionsRequestTypedDict(TypedDict):
@@ -45,6 +45,22 @@ class GetVpnSessionsRequest(BaseModel):
         pydantic.Field(alias="filter[location]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["filter[location]"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class GetVpnSessionsMetaTypedDict(TypedDict):
@@ -68,3 +84,19 @@ class GetVpnSessionsResponseBody(BaseModel):
     data: Optional[List[VpnSessionDataWithPassword]] = None
 
     meta: Optional[GetVpnSessionsMeta] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data", "meta"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

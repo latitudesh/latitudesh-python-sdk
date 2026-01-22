@@ -3,7 +3,14 @@
 from __future__ import annotations
 from .project_include import ProjectInclude, ProjectIncludeTypedDict
 from .user_include import UserInclude, UserIncludeTypedDict
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -18,12 +25,28 @@ class TeamBilling(BaseModel):
 
     customer_billing_id: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "customer_billing_id"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TeamAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     slug: NotRequired[str]
-    description: NotRequired[str]
-    address: NotRequired[str]
+    description: NotRequired[Nullable[str]]
+    address: NotRequired[Nullable[str]]
     currency: NotRequired[str]
     created_at: NotRequired[str]
     updated_at: NotRequired[str]
@@ -40,9 +63,9 @@ class TeamAttributes(BaseModel):
 
     slug: Optional[str] = None
 
-    description: Optional[str] = None
+    description: OptionalNullable[str] = UNSET
 
-    address: Optional[str] = None
+    address: OptionalNullable[str] = UNSET
 
     currency: Optional[str] = None
 
@@ -62,6 +85,47 @@ class TeamAttributes(BaseModel):
 
     feature_flags: Optional[List[str]] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "name",
+                "slug",
+                "description",
+                "address",
+                "currency",
+                "created_at",
+                "updated_at",
+                "enforce_mfa",
+                "users",
+                "projects",
+                "owner",
+                "billing",
+                "feature_flags",
+            ]
+        )
+        nullable_fields = set(["description", "address"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
 
 class TeamTypedDict(TypedDict):
     id: NotRequired[str]
@@ -72,3 +136,19 @@ class Team(BaseModel):
     id: Optional[str] = None
 
     attributes: Optional[TeamAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

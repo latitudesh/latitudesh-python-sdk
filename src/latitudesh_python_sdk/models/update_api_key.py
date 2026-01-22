@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
-from typing import Optional
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -14,16 +15,37 @@ class UpdateAPIKeyType(str, Enum):
 class UpdateAPIKeyAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""Name of the API Key"""
-    api_version: NotRequired[str]
-    r"""The API version to use"""
+    read_only: NotRequired[bool]
+    r"""Whether the API Key is read-only. Read-only keys can only perform GET requests."""
+    allowed_ips: NotRequired[List[str]]
+    r"""List of allowed IP addresses or CIDR ranges (e.g., \"192.168.1.100\", \"10.0.0.0/24\")"""
 
 
 class UpdateAPIKeyAttributes(BaseModel):
-    name: Optional[str] = "Name of the API Key"
+    name: Optional[str] = None
     r"""Name of the API Key"""
 
-    api_version: Optional[str] = "2023-06-01"
-    r"""The API version to use"""
+    read_only: Optional[bool] = None
+    r"""Whether the API Key is read-only. Read-only keys can only perform GET requests."""
+
+    allowed_ips: Optional[List[str]] = None
+    r"""List of allowed IP addresses or CIDR ranges (e.g., \"192.168.1.100\", \"10.0.0.0/24\")"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["name", "read_only", "allowed_ips"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class UpdateAPIKeyDataTypedDict(TypedDict):
@@ -39,6 +61,22 @@ class UpdateAPIKeyData(BaseModel):
 
     attributes: Optional[UpdateAPIKeyAttributes] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class UpdateAPIKeyTypedDict(TypedDict):
     data: NotRequired[UpdateAPIKeyDataTypedDict]
@@ -46,3 +84,19 @@ class UpdateAPIKeyTypedDict(TypedDict):
 
 class UpdateAPIKey(BaseModel):
     data: Optional[UpdateAPIKeyData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

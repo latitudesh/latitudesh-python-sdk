@@ -3,12 +3,13 @@
 from __future__ import annotations
 from .ssh_key_data import SSHKeyData, SSHKeyDataTypedDict
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from latitudesh_python_sdk.utils import (
     FieldMetadata,
     PathParamMetadata,
     RequestMetadata,
 )
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -31,6 +32,22 @@ class PostProjectSSHKeySSHKeysAttributes(BaseModel):
     public_key: Optional[str] = None
     r"""SSH Public Key"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["name", "public_key"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class PostProjectSSHKeySSHKeysDataTypedDict(TypedDict):
     type: PostProjectSSHKeySSHKeysType
@@ -41,6 +58,22 @@ class PostProjectSSHKeySSHKeysData(BaseModel):
     type: PostProjectSSHKeySSHKeysType
 
     attributes: Optional[PostProjectSSHKeySSHKeysAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class PostProjectSSHKeySSHKeysRequestBodyTypedDict(TypedDict):
@@ -79,3 +112,19 @@ class PostProjectSSHKeyResponseBody(BaseModel):
     r"""Created"""
 
     data: Optional[SSHKeyData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

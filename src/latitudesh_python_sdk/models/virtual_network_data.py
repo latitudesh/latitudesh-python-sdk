@@ -4,7 +4,14 @@ from __future__ import annotations
 from .project_include import ProjectInclude, ProjectIncludeTypedDict
 from datetime import datetime
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -29,6 +36,22 @@ class VirtualNetworkDataSite(BaseModel):
 
     slug: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "facility", "name", "slug"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class VirtualNetworkDataRegionTypedDict(TypedDict):
     city: NotRequired[str]
@@ -42,6 +65,22 @@ class VirtualNetworkDataRegion(BaseModel):
     country: Optional[str] = None
 
     site: Optional[VirtualNetworkDataSite] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["city", "country", "site"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class TagsModelTypedDict(TypedDict):
@@ -60,6 +99,22 @@ class TagsModel(BaseModel):
 
     color: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name", "description", "color"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class VirtualNetworkDataAttributesTypedDict(TypedDict):
     vid: NotRequired[int]
@@ -70,7 +125,7 @@ class VirtualNetworkDataAttributesTypedDict(TypedDict):
     r"""Description of the virtual network"""
     project: NotRequired[ProjectIncludeTypedDict]
     region: NotRequired[VirtualNetworkDataRegionTypedDict]
-    created_at: NotRequired[datetime]
+    created_at: NotRequired[Nullable[datetime]]
     assignments_count: NotRequired[int]
     r"""Amount of devices assigned to the virtual network"""
     tags: NotRequired[List[TagsModelTypedDict]]
@@ -91,13 +146,49 @@ class VirtualNetworkDataAttributes(BaseModel):
 
     region: Optional[VirtualNetworkDataRegion] = None
 
-    created_at: Optional[datetime] = None
+    created_at: OptionalNullable[datetime] = UNSET
 
     assignments_count: Optional[int] = None
     r"""Amount of devices assigned to the virtual network"""
 
     tags: Optional[List[TagsModel]] = None
     r"""Tags associated with the virtual network"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "vid",
+                "name",
+                "description",
+                "project",
+                "region",
+                "created_at",
+                "assignments_count",
+                "tags",
+            ]
+        )
+        nullable_fields = set(["created_at"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class VirtualNetworkDataTypedDict(TypedDict):
@@ -112,3 +203,19 @@ class VirtualNetworkData(BaseModel):
     type: Optional[VirtualNetworkDataType] = None
 
     attributes: Optional[VirtualNetworkDataAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

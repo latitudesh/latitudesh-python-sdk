@@ -2,7 +2,14 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -24,6 +31,22 @@ class QuotaInTb(BaseModel):
 
     total: Optional[int] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["granted", "additional", "total"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class QuotaInMbpsTypedDict(TypedDict):
     granted: NotRequired[int]
@@ -37,6 +60,22 @@ class QuotaInMbps(BaseModel):
     additional: Optional[int] = None
 
     total: Optional[int] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["granted", "additional", "total"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class QuotaPerRegionTypedDict(TypedDict):
@@ -55,11 +94,29 @@ class QuotaPerRegion(BaseModel):
 
     quota_in_mbps: Optional[QuotaInMbps] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["region_id", "region_slug", "quota_in_tb", "quota_in_mbps"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class QuotaPerProjectTypedDict(TypedDict):
     project_id: NotRequired[str]
     project_slug: NotRequired[str]
-    price: NotRequired[int]
+    price: NotRequired[Nullable[int]]
     billing_method: NotRequired[str]
     quota_per_region: NotRequired[List[QuotaPerRegionTypedDict]]
 
@@ -69,11 +126,44 @@ class QuotaPerProject(BaseModel):
 
     project_slug: Optional[str] = None
 
-    price: Optional[int] = None
+    price: OptionalNullable[int] = UNSET
 
     billing_method: Optional[str] = None
 
     quota_per_region: Optional[List[QuotaPerRegion]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "project_id",
+                "project_slug",
+                "price",
+                "billing_method",
+                "quota_per_region",
+            ]
+        )
+        nullable_fields = set(["price"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class TrafficQuotaAttributesTypedDict(TypedDict):
@@ -82,6 +172,22 @@ class TrafficQuotaAttributesTypedDict(TypedDict):
 
 class TrafficQuotaAttributes(BaseModel):
     quota_per_project: Optional[List[QuotaPerProject]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["quota_per_project"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class TrafficQuotaDataTypedDict(TypedDict):
@@ -97,6 +203,22 @@ class TrafficQuotaData(BaseModel):
 
     attributes: Optional[TrafficQuotaAttributes] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TrafficQuotaTypedDict(TypedDict):
     data: NotRequired[TrafficQuotaDataTypedDict]
@@ -104,3 +226,19 @@ class TrafficQuotaTypedDict(TypedDict):
 
 class TrafficQuota(BaseModel):
     data: Optional[TrafficQuotaData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

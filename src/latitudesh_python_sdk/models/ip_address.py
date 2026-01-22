@@ -2,7 +2,14 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -27,6 +34,22 @@ class IPAddressProject(BaseModel):
 
     name: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class LocationTypedDict(TypedDict):
     id: NotRequired[str]
@@ -40,6 +63,22 @@ class Location(BaseModel):
     name: Optional[str] = None
 
     slug: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name", "slug"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class IPAddressRegionTypedDict(TypedDict):
@@ -55,6 +94,22 @@ class IPAddressRegion(BaseModel):
 
     location: Optional[Location] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name", "location"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class AssignmentTypedDict(TypedDict):
     server_id: NotRequired[str]
@@ -69,16 +124,33 @@ class Assignment(BaseModel):
 
     assigned_at: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["server_id", "hostname", "assigned_at"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class IPAddressAttributesTypedDict(TypedDict):
     address: NotRequired[str]
-    cidr: NotRequired[str]
+    cidr: NotRequired[Nullable[str]]
     family: NotRequired[Family]
-    gateway: NotRequired[str]
+    gateway: NotRequired[Nullable[str]]
     netmask: NotRequired[str]
     type: NotRequired[IPAddressType]
     public: NotRequired[bool]
     management: NotRequired[bool]
+    additional: NotRequired[bool]
     project: NotRequired[IPAddressProjectTypedDict]
     region: NotRequired[IPAddressRegionTypedDict]
     available: NotRequired[bool]
@@ -88,11 +160,11 @@ class IPAddressAttributesTypedDict(TypedDict):
 class IPAddressAttributes(BaseModel):
     address: Optional[str] = None
 
-    cidr: Optional[str] = None
+    cidr: OptionalNullable[str] = UNSET
 
     family: Optional[Family] = None
 
-    gateway: Optional[str] = None
+    gateway: OptionalNullable[str] = UNSET
 
     netmask: Optional[str] = None
 
@@ -102,6 +174,8 @@ class IPAddressAttributes(BaseModel):
 
     management: Optional[bool] = None
 
+    additional: Optional[bool] = None
+
     project: Optional[IPAddressProject] = None
 
     region: Optional[IPAddressRegion] = None
@@ -109,6 +183,47 @@ class IPAddressAttributes(BaseModel):
     available: Optional[bool] = None
 
     assignment: Optional[Assignment] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "address",
+                "cidr",
+                "family",
+                "gateway",
+                "netmask",
+                "type",
+                "public",
+                "management",
+                "additional",
+                "project",
+                "region",
+                "available",
+                "assignment",
+            ]
+        )
+        nullable_fields = set(["cidr", "gateway"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class IPAddressTypedDict(TypedDict):
@@ -120,3 +235,19 @@ class IPAddress(BaseModel):
     id: Optional[str] = None
 
     attributes: Optional[IPAddressAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

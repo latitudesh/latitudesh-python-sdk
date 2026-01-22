@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -30,6 +31,22 @@ class VirtualNetworkAssignmentDataServer(BaseModel):
 
     status: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "hostname", "label", "locked", "status"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class VirtualNetworkAssignmentDataAttributesTypedDict(TypedDict):
     virtual_network_id: NotRequired[str]
@@ -50,6 +67,24 @@ class VirtualNetworkAssignmentDataAttributes(BaseModel):
 
     server: Optional[VirtualNetworkAssignmentDataServer] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["virtual_network_id", "vid", "description", "status", "server"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class VirtualNetworkAssignmentDataTypedDict(TypedDict):
     id: NotRequired[str]
@@ -63,3 +98,19 @@ class VirtualNetworkAssignmentData(BaseModel):
     type: Optional[VirtualNetworkAssignmentDataType] = None
 
     attributes: Optional[VirtualNetworkAssignmentDataAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -15,7 +15,7 @@ from typing import Any, Callable, Dict, List, Optional, TYPE_CHECKING, Union, ca
 import weakref
 
 if TYPE_CHECKING:
-    from latitudesh_python_sdk.apikeys import APIKeys
+    from latitudesh_python_sdk.apikeys_sdk import APIKeysSDK
     from latitudesh_python_sdk.billing import Billing
     from latitudesh_python_sdk.events_sdk import EventsSDK
     from latitudesh_python_sdk.firewalls_sdk import FirewallsSDK
@@ -42,7 +42,7 @@ if TYPE_CHECKING:
 class Latitudesh(BaseSDK):
     r"""Latitude.sh API: The Latitude.sh API is a RESTful API to manage your Latitude.sh account. It allows you to perform the same actions as the Latitude.sh dashboard."""
 
-    api_keys: "APIKeys"
+    api_keys: "APIKeysSDK"
     billing: "Billing"
     events: "EventsSDK"
     firewalls: "FirewallsSDK"
@@ -65,7 +65,7 @@ class Latitudesh(BaseSDK):
     private_networks: "PrivateNetworks"
     vpn_sessions: "VpnSessions"
     _sub_sdk_map = {
-        "api_keys": ("latitudesh_python_sdk.apikeys", "APIKeys"),
+        "api_keys": ("latitudesh_python_sdk.apikeys_sdk", "APIKeysSDK"),
         "billing": ("latitudesh_python_sdk.billing", "Billing"),
         "events": ("latitudesh_python_sdk.events_sdk", "EventsSDK"),
         "firewalls": ("latitudesh_python_sdk.firewalls_sdk", "FirewallsSDK"),

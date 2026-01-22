@@ -2,12 +2,19 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from latitudesh_python_sdk.utils import (
     FieldMetadata,
     PathParamMetadata,
     RequestMetadata,
 )
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -19,31 +26,21 @@ class CreateServerReinstallServersType(str, Enum):
 class CreateServerReinstallServersOperatingSystem(str, Enum):
     r"""The OS selected for the reinstall process"""
 
-    IPXE = "ipxe"
-    WINDOWS_SERVER_2019_STD_V1 = "windows_server_2019_std_v1"
-    UBUNTU_22_04_X64_LTS = "ubuntu_22_04_x64_lts"
-    DEBIAN_11 = "debian_11"
-    DEBIAN_10 = "debian_10"
-    RHEL8 = "rhel8"
-    WINDOWS_SERVER_2012_R2_STD_V28 = "windows_server_2012_r2_std_v28"
-    WINDOWS_SERVER_2012_R2_DC_V5 = "windows_server_2012_r2_dc_v5"
-    ESXI_6_7 = "esxi_6_7"
-    DEBIAN_9_4_X64 = "debian_9_4_x64"
     CENTOS_7_4_X64 = "centos_7_4_x64"
     CENTOS_8_X64 = "centos_8_x64"
-    UBUNTU_16_04_X64_LTS = "ubuntu_16_04_x64_lts"
-    UBUNTU_20_04_X64_LTS = "ubuntu_20_04_x64_lts"
-    WINDOWS_SERVER_2016_STD_V1 = "windows_server_2016_std_v1"
-    WINDOWS_SERVER_2016_DC_V1 = "windows_server_2016_dc_v1"
-    WINDOWS_SERVER_2019_DC_V1 = "windows_server_2019_dc_v1"
+    DEBIAN_10 = "debian_10"
+    DEBIAN_11 = "debian_11"
     DEBIAN_12 = "debian_12"
-    UBUNTU22_ML_IN_A_BOX = "ubuntu22_ml_in_a_box"
-    UBUNTU_18_04_X64_LTS = "ubuntu_18_04_x64_lts"
-    WINDOWS_SERVER_2019_STD_UEFI = "windows_server_2019_std_uefi"
-    WINDOWS_2022_STD_UEFI = "windows_2022_std_uefi"
-    WINDOWS_2022_STD = "windows_2022_std"
-    UBUNTU_24_04_X64_LTS = "ubuntu_24_04_x64_lts"
+    IPXE = "ipxe"
+    RHEL8 = "rhel8"
     ROCKYLINUX_8 = "rockylinux_8"
+    UBUNTU22_ML_IN_A_BOX = "ubuntu22_ml_in_a_box"
+    UBUNTU24_ML_IN_A_BOX = "ubuntu24_ml_in_a_box"
+    UBUNTU_20_04_X64_LTS = "ubuntu_20_04_x64_lts"
+    UBUNTU_22_04_X64_LTS = "ubuntu_22_04_x64_lts"
+    UBUNTU_24_04_X64_LTS = "ubuntu_24_04_x64_lts"
+    WINDOWS_2022_STD = "windows_2022_std"
+    WINDOWS_SERVER_2019_STD_V1 = "windows_server_2019_std_v1"
 
 
 class CreateServerReinstallServersPartitionsTypedDict(TypedDict):
@@ -59,9 +56,25 @@ class CreateServerReinstallServersPartitions(BaseModel):
 
     filesystem_type: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["size_in_gb", "path", "filesystem_type"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class CreateServerReinstallServersRaid(str, Enum):
-    r"""RAID mode for the server"""
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
 
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
@@ -72,14 +85,16 @@ class CreateServerReinstallServersAttributesTypedDict(TypedDict):
     r"""The OS selected for the reinstall process"""
     hostname: NotRequired[str]
     r"""The server hostname to set upon reinstall"""
-    partitions: NotRequired[List[CreateServerReinstallServersPartitionsTypedDict]]
-    ssh_keys: NotRequired[List[str]]
+    partitions: NotRequired[
+        Nullable[List[CreateServerReinstallServersPartitionsTypedDict]]
+    ]
+    ssh_keys: NotRequired[Nullable[List[str]]]
     r"""SSH Key IDs to set upon reinstall"""
-    user_data: NotRequired[str]
+    user_data: NotRequired[Nullable[str]]
     r"""User data ID to set upon reinstall"""
-    raid: NotRequired[CreateServerReinstallServersRaid]
-    r"""RAID mode for the server"""
-    ipxe: NotRequired[str]
+    raid: NotRequired[Nullable[CreateServerReinstallServersRaid]]
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+    ipxe: NotRequired[Nullable[str]]
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected."""
 
 
@@ -90,19 +105,54 @@ class CreateServerReinstallServersAttributes(BaseModel):
     hostname: Optional[str] = None
     r"""The server hostname to set upon reinstall"""
 
-    partitions: Optional[List[CreateServerReinstallServersPartitions]] = None
+    partitions: OptionalNullable[List[CreateServerReinstallServersPartitions]] = UNSET
 
-    ssh_keys: Optional[List[str]] = None
+    ssh_keys: OptionalNullable[List[str]] = UNSET
     r"""SSH Key IDs to set upon reinstall"""
 
-    user_data: Optional[str] = None
+    user_data: OptionalNullable[str] = UNSET
     r"""User data ID to set upon reinstall"""
 
-    raid: Optional[CreateServerReinstallServersRaid] = None
-    r"""RAID mode for the server"""
+    raid: OptionalNullable[CreateServerReinstallServersRaid] = UNSET
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
 
-    ipxe: Optional[str] = None
+    ipxe: OptionalNullable[str] = UNSET
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "operating_system",
+                "hostname",
+                "partitions",
+                "ssh_keys",
+                "user_data",
+                "raid",
+                "ipxe",
+            ]
+        )
+        nullable_fields = set(["partitions", "ssh_keys", "user_data", "raid", "ipxe"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class CreateServerReinstallServersDataTypedDict(TypedDict):
@@ -114,6 +164,22 @@ class CreateServerReinstallServersData(BaseModel):
     type: CreateServerReinstallServersType
 
     attributes: Optional[CreateServerReinstallServersAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateServerReinstallServersRequestBodyTypedDict(TypedDict):

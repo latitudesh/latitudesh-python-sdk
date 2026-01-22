@@ -3,7 +3,8 @@
 from __future__ import annotations
 from .volume_data import VolumeData, VolumeDataTypedDict
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -30,6 +31,22 @@ class PostStorageVolumesStorageAttributes(BaseModel):
 
     size_in_gb: Optional[int] = 1500
     r"""Size in GB (not required, default is 1500)"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["size_in_gb"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class PostStorageVolumesStorageDataTypedDict(TypedDict):
@@ -61,3 +78,19 @@ class PostStorageVolumesResponseBody(BaseModel):
     r"""Created"""
 
     data: Optional[VolumeData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

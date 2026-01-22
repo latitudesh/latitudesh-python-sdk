@@ -8,7 +8,14 @@ from .server_region_resource_data import (
 )
 from .team_include import TeamInclude, TeamIncludeTypedDict
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -48,7 +55,7 @@ class ServerDataPlanTypedDict(TypedDict):
     r"""The plan name"""
     slug: NotRequired[str]
     r"""The plan slug"""
-    billing: NotRequired[str]
+    billing: NotRequired[Nullable[str]]
     r"""hourly/monthly pricing. Defaults to `hourly`. Appliable for `on_demand` projects only."""
 
 
@@ -62,8 +69,33 @@ class ServerDataPlan(BaseModel):
     slug: Optional[str] = None
     r"""The plan slug"""
 
-    billing: Optional[str] = None
+    billing: OptionalNullable[str] = UNSET
     r"""hourly/monthly pricing. Defaults to `hourly`. Appliable for `on_demand` projects only."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name", "slug", "billing"])
+        nullable_fields = set(["billing"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class ServerDataFeaturesTypedDict(TypedDict):
@@ -78,6 +110,22 @@ class ServerDataFeatures(BaseModel):
     ssh_keys: Optional[bool] = None
 
     user_data: Optional[bool] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["raid", "ssh_keys", "user_data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class DistroTypedDict(TypedDict):
@@ -98,6 +146,22 @@ class Distro(BaseModel):
 
     series: Optional[str] = None
     r"""The OS Distro Series"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["name", "slug", "series"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class OperatingSystemTypedDict(TypedDict):
@@ -125,6 +189,22 @@ class OperatingSystem(BaseModel):
 
     distro: Optional[Distro] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["name", "slug", "version", "features", "distro"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ServerDataSpecsTypedDict(TypedDict):
     cpu: NotRequired[str]
@@ -135,7 +215,7 @@ class ServerDataSpecsTypedDict(TypedDict):
     r"""RAM size in GB"""
     nic: NotRequired[str]
     r"""NIC quantity and speed"""
-    gpu: NotRequired[str]
+    gpu: NotRequired[Nullable[str]]
     r"""GPU model and quantity, if present"""
 
 
@@ -152,8 +232,33 @@ class ServerDataSpecs(BaseModel):
     nic: Optional[str] = None
     r"""NIC quantity and speed"""
 
-    gpu: Optional[str] = None
+    gpu: OptionalNullable[str] = UNSET
     r"""GPU model and quantity, if present"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cpu", "disk", "ram", "nic", "gpu"])
+        nullable_fields = set(["gpu"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class ServerDataRole(str, Enum):
@@ -179,6 +284,22 @@ class Interfaces(BaseModel):
 
     description: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["role", "name", "mac_address", "description"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ServerDataAttributesTypedDict(TypedDict):
     hostname: NotRequired[str]
@@ -201,10 +322,10 @@ class ServerDataAttributesTypedDict(TypedDict):
     site: NotRequired[str]
     locked: NotRequired[bool]
     rescue: NotRequired[bool]
-    primary_ipv4: NotRequired[str]
-    primary_ipv6: NotRequired[str]
-    created_at: NotRequired[str]
-    scheduled_deletion_at: NotRequired[str]
+    primary_ipv4: NotRequired[Nullable[str]]
+    primary_ipv6: NotRequired[Nullable[str]]
+    created_at: NotRequired[Nullable[str]]
+    scheduled_deletion_at: NotRequired[Nullable[str]]
     plan: NotRequired[ServerDataPlanTypedDict]
     operating_system: NotRequired[OperatingSystemTypedDict]
     region: NotRequired[ServerRegionResourceDataTypedDict]
@@ -243,13 +364,13 @@ class ServerDataAttributes(BaseModel):
 
     rescue: Optional[bool] = None
 
-    primary_ipv4: Optional[str] = None
+    primary_ipv4: OptionalNullable[str] = UNSET
 
-    primary_ipv6: Optional[str] = None
+    primary_ipv6: OptionalNullable[str] = UNSET
 
-    created_at: Optional[str] = None
+    created_at: OptionalNullable[str] = UNSET
 
-    scheduled_deletion_at: Optional[str] = None
+    scheduled_deletion_at: OptionalNullable[str] = UNSET
 
     plan: Optional[ServerDataPlan] = None
 
@@ -265,6 +386,55 @@ class ServerDataAttributes(BaseModel):
 
     team: Optional[TeamInclude] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "hostname",
+                "label",
+                "status",
+                "ipmi_status",
+                "role",
+                "site",
+                "locked",
+                "rescue",
+                "primary_ipv4",
+                "primary_ipv6",
+                "created_at",
+                "scheduled_deletion_at",
+                "plan",
+                "operating_system",
+                "region",
+                "specs",
+                "interfaces",
+                "project",
+                "team",
+            ]
+        )
+        nullable_fields = set(
+            ["primary_ipv4", "primary_ipv6", "created_at", "scheduled_deletion_at"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
 
 class ServerDataTypedDict(TypedDict):
     id: NotRequired[str]
@@ -278,3 +448,19 @@ class ServerData(BaseModel):
     type: Optional[str] = None
 
     attributes: Optional[ServerDataAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
