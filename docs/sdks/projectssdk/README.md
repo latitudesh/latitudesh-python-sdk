@@ -26,7 +26,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.list(filter_tags="tag_GGXAB6PNQbU285ZYLP3wt3ZQyXW,tag_xR2B8J4W81TBL6YRGPJaCQRkVyn", page_size=20, page_number=1)
+    res = latitudesh.projects.list(filter_tags="tag_GXeww714mRF2gZ05lnKgU8emo5RE,tag_QQkaK9JnV6tWwPG3pmLviXveVK0Y", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -80,7 +80,7 @@ with Latitudesh(
     res = latitudesh.projects.create(data={
         "type": latitudesh_python_sdk.CreateProjectProjectsType.PROJECTS,
         "attributes": {
-            "name": "Kshlerin, Hand and Beer",
+            "name": "Bailey and Sons",
             "provisioning_type": latitudesh_python_sdk.CreateProjectProvisioningType.ON_DEMAND,
             "description": "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.",
             "environment": latitudesh_python_sdk.CreateProjectProjectsEnvironment.DEVELOPMENT,
@@ -126,13 +126,13 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.projects.update(project_id="proj_WVQJDMMwDRbyE", data={
-        "id": "proj_WVQJDMMwDRbyE",
+    res = latitudesh.projects.update(project_id="proj_Gr47qleMDAg0m", data={
+        "id": "proj_Gr47qleMDAg0m",
         "type": latitudesh_python_sdk.UpdateProjectProjectsType.PROJECTS,
         "attributes": {
             "tags": [
-                "tag_xNrKWa1ZaMtBKwaZnYaMTBE2XQb",
-                "tag_Ge9E4oboPgILP5e9aKNAUB4Gaw5",
+                "tag_VgrmvzlEGJhbGYv0z8YzHLa9PKV",
+                "tag_PEAMyKnQZEHpGAWKMpB6F7EVYyYj",
             ],
         },
     })

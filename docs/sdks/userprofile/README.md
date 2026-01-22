@@ -66,8 +66,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_profile.update(id="user_lGJBgAxbgeUJ4yZj56wmfrK4vag", data={
-        "id": "user_lGJBgAxbgeUJ4yZj56wmfrK4vag",
+    res = latitudesh.user_profile.update(id="user_8PMvy2GL72uKKyXyANEnsjMQYMP", data={
+        "id": "user_8PMvy2GL72uKKyXyANEnsjMQYMP",
         "type": latitudesh_python_sdk.PatchUserProfileUserProfileType.USERS,
         "attributes": {
             "role": latitudesh_python_sdk.PatchUserProfileUserProfileRole.COLLABORATOR,

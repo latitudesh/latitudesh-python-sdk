@@ -4,7 +4,14 @@ from __future__ import annotations
 from .project_include import ProjectInclude, ProjectIncludeTypedDict
 from .team_include import TeamInclude, TeamIncludeTypedDict
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -37,6 +44,22 @@ class Credentials(BaseModel):
 
     ssh_keys: Optional[List[str]] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["username", "host", "password", "ssh_keys"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class VirtualMachineAttributesPlanTypedDict(TypedDict):
     id: NotRequired[str]
@@ -48,47 +71,78 @@ class VirtualMachineAttributesPlan(BaseModel):
 
     name: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class VirtualMachineAttributesSpecsTypedDict(TypedDict):
-    vcpu: NotRequired[int]
-    ram: NotRequired[str]
-    storage: NotRequired[str]
-    nic: NotRequired[str]
-    gpu: NotRequired[str]
+    vcpu: NotRequired[Nullable[int]]
+    ram: NotRequired[Nullable[str]]
+    storage: NotRequired[Nullable[str]]
+    nic: NotRequired[Nullable[str]]
+    gpu: NotRequired[Nullable[str]]
 
 
 class VirtualMachineAttributesSpecs(BaseModel):
-    vcpu: Optional[int] = None
+    vcpu: OptionalNullable[int] = UNSET
 
-    ram: Optional[str] = None
+    ram: OptionalNullable[str] = UNSET
 
-    storage: Optional[str] = None
+    storage: OptionalNullable[str] = UNSET
 
-    nic: Optional[str] = None
+    nic: OptionalNullable[str] = UNSET
 
-    gpu: Optional[str] = None
+    gpu: OptionalNullable[str] = UNSET
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["vcpu", "ram", "storage", "nic", "gpu"])
+        nullable_fields = set(["vcpu", "ram", "storage", "nic", "gpu"])
+        serialized = handler(self)
+        m = {}
 
-class VirtualMachineAttributesBilling(str, Enum):
-    r"""The billing type for the virtual machine."""
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-    HOURLY = "hourly"
-    MONTHLY = "monthly"
-    YEARLY = "yearly"
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     created_at: NotRequired[str]
     status: NotRequired[VirtualMachineAttributesStatus]
-    operating_system: NotRequired[str]
-    credentials: NotRequired[CredentialsTypedDict]
+    operating_system: NotRequired[Nullable[str]]
+    credentials: NotRequired[Nullable[CredentialsTypedDict]]
     plan: NotRequired[VirtualMachineAttributesPlanTypedDict]
     specs: NotRequired[VirtualMachineAttributesSpecsTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
     project: NotRequired[ProjectIncludeTypedDict]
-    billing: NotRequired[VirtualMachineAttributesBilling]
-    r"""The billing type for the virtual machine."""
 
 
 class VirtualMachineAttributesAttributes(BaseModel):
@@ -98,9 +152,9 @@ class VirtualMachineAttributesAttributes(BaseModel):
 
     status: Optional[VirtualMachineAttributesStatus] = None
 
-    operating_system: Optional[str] = None
+    operating_system: OptionalNullable[str] = UNSET
 
-    credentials: Optional[Credentials] = None
+    credentials: OptionalNullable[Credentials] = UNSET
 
     plan: Optional[VirtualMachineAttributesPlan] = None
 
@@ -110,8 +164,42 @@ class VirtualMachineAttributesAttributes(BaseModel):
 
     project: Optional[ProjectInclude] = None
 
-    billing: Optional[VirtualMachineAttributesBilling] = None
-    r"""The billing type for the virtual machine."""
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "name",
+                "created_at",
+                "status",
+                "operating_system",
+                "credentials",
+                "plan",
+                "specs",
+                "team",
+                "project",
+            ]
+        )
+        nullable_fields = set(["operating_system", "credentials"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class VirtualMachineAttributesTypedDict(TypedDict):
@@ -126,3 +214,19 @@ class VirtualMachineAttributes(BaseModel):
     type: Optional[VirtualMachineAttributesType] = None
 
     attributes: Optional[VirtualMachineAttributesAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

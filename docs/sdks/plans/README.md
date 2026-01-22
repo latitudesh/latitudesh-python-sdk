@@ -76,7 +76,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.plans.get(plan_id="plan_m5xyZOnNOWM0l")
+    res = latitudesh.plans.get(plan_id="plan_RMLydp20DQKr1")
 
     # Handle response
     print(res)
@@ -301,6 +301,7 @@ with Latitudesh(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `filter_gpu`                                                        | *Optional[bool]*                                                    | :heavy_minus_sign:                                                  | Filter plans by GPU availability                                    |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response

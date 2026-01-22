@@ -3,12 +3,13 @@
 from __future__ import annotations
 from .project import Project, ProjectTypedDict
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from latitudesh_python_sdk.utils import (
     FieldMetadata,
     PathParamMetadata,
     RequestMetadata,
 )
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -42,6 +43,24 @@ class UpdateProjectProjectsAttributes(BaseModel):
 
     tags: Optional[List[str]] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["name", "description", "environment", "bandwidth_alert", "tags"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class UpdateProjectProjectsDataTypedDict(TypedDict):
     type: UpdateProjectProjectsType
@@ -55,6 +74,22 @@ class UpdateProjectProjectsData(BaseModel):
     id: Optional[str] = "proj_81EVOtR1N4J2Z"
 
     attributes: Optional[UpdateProjectProjectsAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class UpdateProjectProjectsRequestBodyTypedDict(TypedDict):
@@ -82,6 +117,22 @@ class UpdateProjectRequest(BaseModel):
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["RequestBody"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class UpdateProjectResponseBodyTypedDict(TypedDict):
     r"""Success"""
@@ -93,3 +144,19 @@ class UpdateProjectResponseBody(BaseModel):
     r"""Success"""
 
     data: Optional[Project] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -32,6 +32,22 @@ class BillingUsageProject(BaseModel):
 
     name: Optional[str] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "slug", "name"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class PeriodTypedDict(TypedDict):
     r"""The period from the returned billing cycle"""
@@ -46,6 +62,22 @@ class Period(BaseModel):
     start: Optional[datetime] = None
 
     end: Optional[datetime] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["start", "end"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class BillingUsageType(str, Enum):
@@ -87,20 +119,45 @@ class UsageType(str, Enum):
 
 
 class MetadataTypedDict(TypedDict):
-    id: NotRequired[str]
-    hostname: NotRequired[str]
-    plan: NotRequired[str]
+    id: NotRequired[Nullable[str]]
+    hostname: NotRequired[Nullable[str]]
+    plan: NotRequired[Nullable[str]]
     tags: NotRequired[List[str]]
 
 
 class Metadata(BaseModel):
-    id: Optional[str] = None
+    id: OptionalNullable[str] = UNSET
 
-    hostname: Optional[str] = None
+    hostname: OptionalNullable[str] = UNSET
 
-    plan: Optional[str] = None
+    plan: OptionalNullable[str] = UNSET
 
     tags: Optional[List[str]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "hostname", "plan", "tags"])
+        nullable_fields = set(["id", "hostname", "plan"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class ProductsTypedDict(TypedDict):
@@ -113,7 +170,7 @@ class ProductsTypedDict(TypedDict):
     description: NotRequired[str]
     amount_without_discount: NotRequired[int]
     start: NotRequired[datetime]
-    end: NotRequired[datetime]
+    end: NotRequired[Nullable[datetime]]
     unit: NotRequired[Unit]
     unit_price: NotRequired[float]
     r"""The unit price of the product in cents"""
@@ -143,7 +200,7 @@ class Products(BaseModel):
 
     start: Optional[datetime] = None
 
-    end: Optional[datetime] = None
+    end: OptionalNullable[datetime] = UNSET
 
     unit: Optional[Unit] = None
 
@@ -158,6 +215,50 @@ class Products(BaseModel):
     r"""The total usage price of the product in cents"""
 
     metadata: Optional[Metadata] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "id",
+                "resource",
+                "name",
+                "proration",
+                "discounts",
+                "discountable",
+                "description",
+                "amount_without_discount",
+                "start",
+                "end",
+                "unit",
+                "unit_price",
+                "usage_type",
+                "quantity",
+                "price",
+                "metadata",
+            ]
+        )
+        nullable_fields = set(["end"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class BillingUsageAttributesTypedDict(TypedDict):
@@ -194,38 +295,35 @@ class BillingUsageAttributes(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = [
-            "project",
-            "period",
-            "available_credit_balance",
-            "price",
-            "threshold",
-            "products",
-        ]
-        nullable_fields = ["threshold"]
-        null_default_fields = []
-
+        optional_fields = set(
+            [
+                "project",
+                "period",
+                "available_credit_balance",
+                "price",
+                "threshold",
+                "products",
+            ]
+        )
+        nullable_fields = set(["threshold"])
         serialized = handler(self)
-
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k)
-            serialized.pop(k, None)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
-            optional_nullable = k in optional_fields and k in nullable_fields
-            is_set = (
-                self.__pydantic_fields_set__.intersection({n})
-                or k in null_default_fields
-            )  # pylint: disable=no-member
-
-            if val is not None and val != UNSET_SENTINEL:
-                m[k] = val
-            elif val != UNSET_SENTINEL and (
-                not k in optional_fields or (optional_nullable and is_set)
-            ):
-                m[k] = val
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
 
         return m
 
@@ -240,6 +338,22 @@ class BillingUsageData(BaseModel):
 
     attributes: Optional[BillingUsageAttributes] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class BillingUsageTypedDict(TypedDict):
     data: NotRequired[BillingUsageDataTypedDict]
@@ -247,3 +361,19 @@ class BillingUsageTypedDict(TypedDict):
 
 class BillingUsage(BaseModel):
     data: Optional[BillingUsageData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

@@ -993,6 +993,7 @@ class UserDataSDK(BaseSDK):
         self,
         *,
         filter_project: Optional[str] = None,
+        filter_scope: Optional[str] = None,
         extra_fields_user_data: Optional[str] = "decoded_content",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1005,6 +1006,7 @@ class UserDataSDK(BaseSDK):
 
 
         :param filter_project: Project ID or slug
+        :param filter_scope: Filter by scope: `project` (has project), `team` (no project), or empty (all)
         :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1023,6 +1025,7 @@ class UserDataSDK(BaseSDK):
 
         request = models.GetUsersDataRequest(
             filter_project=filter_project,
+            filter_scope=filter_scope,
             extra_fields_user_data=extra_fields_user_data,
         )
 
@@ -1081,6 +1084,7 @@ class UserDataSDK(BaseSDK):
         self,
         *,
         filter_project: Optional[str] = None,
+        filter_scope: Optional[str] = None,
         extra_fields_user_data: Optional[str] = "decoded_content",
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1093,6 +1097,7 @@ class UserDataSDK(BaseSDK):
 
 
         :param filter_project: Project ID or slug
+        :param filter_scope: Filter by scope: `project` (has project), `team` (no project), or empty (all)
         :param extra_fields_user_data: The `decoded_content` is provided as an extra attribute that shows content in decoded form.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1111,6 +1116,7 @@ class UserDataSDK(BaseSDK):
 
         request = models.GetUsersDataRequest(
             filter_project=filter_project,
+            filter_scope=filter_scope,
             extra_fields_user_data=extra_fields_user_data,
         )
 

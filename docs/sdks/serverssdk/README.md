@@ -40,7 +40,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.list(filter_project="proj_g1mbDwrZqLv5B", filter_region="SAO", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_Az0EY3zglei3jVBY1LroSWNyanye,tag_GXK6NGol1jF2xre0JrB0fK6wg0p", page_size=20, page_number=1)
+    res = latitudesh.servers.list(filter_project="proj_g1mbDwrZqLv5B", filter_region="SAO", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_pjAkRjVzw0tlYBA2WX1eHzW7w79,tag_yARk1KLJAvslWY7k5wNBCaKEV7e", page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -102,7 +102,7 @@ with Latitudesh(
     res = latitudesh.servers.create(data={
         "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
         "attributes": {
-            "project": "proj_A05EdQ50dvKYQ",
+            "project": "proj_lxWpD699qm6rk",
             "plan": latitudesh_python_sdk.CreateServerServersPlan.C2_SMALL_X86,
             "site": latitudesh_python_sdk.CreateServerServersSite.ASH,
             "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_22_04_X64_LTS,
@@ -149,7 +149,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get(server_id="sv_Gr47qleMDAg0m")
+    res = latitudesh.servers.get(server_id="sv_VE1Wd3aXDXnZJ")
 
     # Handle response
     print(res)
@@ -191,11 +191,11 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.update(server_id="sv_aNmodjGyqbE8W", data={
-        "id": "sv_aNmodjGyqbE8W",
+    res = latitudesh.servers.update(server_id="sv_yQrJdNAGO30gv", data={
+        "id": "sv_yQrJdNAGO30gv",
         "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
         "attributes": {
-            "project": "proj_aNmodjoyqbE8W",
+            "project": "proj_yQrJdNMGO30gv",
         },
     })
 
@@ -274,7 +274,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.get_deploy_config(server_id="sv_VLMmAD8EOwop2")
+    res = latitudesh.servers.get_deploy_config(server_id="sv_pRMLydp0dQKr1")
 
     # Handle response
     print(res)
@@ -315,7 +315,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.update_deploy_config(server_id="sv_0L6WO141DPlXy", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
+    res = latitudesh.servers.update_deploy_config(server_id="sv_lkg1DeYLDvZE5", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
 
     # Handle response
     print(res)
@@ -357,7 +357,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.lock(server_id="sv_RMLydpoXOQKr1")
+    res = latitudesh.servers.lock(server_id="sv_pbV0DgjKq4AWz")
 
     # Handle response
     print(res)
@@ -397,7 +397,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.unlock(server_id="sv_5AEmq7xMDBkWX")
+    res = latitudesh.servers.unlock(server_id="sv_e8pKq0xYqWAob")
 
     # Handle response
     print(res)
@@ -438,10 +438,10 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create_out_of_band_connection(server_id="sv_059EqYX2dQj8p", data={
+    res = latitudesh.servers.create_out_of_band_connection(server_id="sv_8NkvdyGKDeLpx", data={
         "type": latitudesh_python_sdk.CreateServerOutOfBandServersType.OUT_OF_BAND,
         "attributes": {
-            "ssh_key_id": "ssh_w49QDB55qagKb",
+            "ssh_key_id": "ssh_3YjJOLMydvZ87",
         },
     })
 
@@ -484,7 +484,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.list_out_of_band_connections(server_id="sv_vYAZqGyJOMQ94")
+    res = latitudesh.servers.list_out_of_band_connections(server_id="sv_GnzRD5lvqM5yw")
 
     # Handle response
     print(res)
@@ -529,7 +529,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.actions(server_id="sv_LA73qkJwdaJ2o", data={
+    res = latitudesh.servers.actions(server_id="sv_WVQJDMVBORbyE", data={
         "type": latitudesh_python_sdk.CreateServerActionServersType.ACTIONS,
         "attributes": {
             "action": latitudesh_python_sdk.CreateServerActionAction.REBOOT,
@@ -579,7 +579,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.create_ipmi_session(server_id="sv_e8pKq0xYqWAob")
+    res = latitudesh.servers.create_ipmi_session(server_id="sv_Qkm7dXaRq8nZV")
 
     # Handle response
     print(res)
@@ -619,7 +619,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.start_rescue_mode(server_id="sv_695BdK25OevVo")
+    res = latitudesh.servers.start_rescue_mode(server_id="sv_WeGoqAWNOP7nz")
 
     # Handle response
     print(res)
@@ -659,7 +659,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.exit_rescue_mode(server_id="sv_wg3ZDr0Wd5QlP")
+    res = latitudesh.servers.exit_rescue_mode(server_id="sv_3YjJOLQNdvZ87")
 
     # Handle response
     print(res)
@@ -699,7 +699,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.schedule_deletion(server_id="sv_GMy1Db2NDN50m")
+    res = latitudesh.servers.schedule_deletion(server_id="sv_g1mbDwBZqLv5B")
 
     # Handle response
     print(res)
@@ -775,7 +775,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.servers.reinstall(server_id="sv_Z8rodmJGq1jLB", data={
+    latitudesh.servers.reinstall(server_id="sv_aNmodj6ydbE8W", data={
         "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
         "attributes": {
             "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.IPXE,

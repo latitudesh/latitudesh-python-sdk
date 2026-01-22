@@ -1,6 +1,6 @@
 # UpdateAPIKeyResponseBody
 
-Success
+Success - Update name without rotating token
 
 
 ## Fields

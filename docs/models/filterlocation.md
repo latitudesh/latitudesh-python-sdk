@@ -6,7 +6,6 @@
 | Name   | Value  |
 | ------ | ------ |
 | `ASH`  | ASH    |
-| `BGT`  | BGT    |
 | `BUE`  | BUE    |
 | `CHI`  | CHI    |
 | `DAL`  | DAL    |
@@ -18,9 +17,9 @@
 | `MIA`  | MIA    |
 | `MIA2` | MIA2   |
 | `NYC`  | NYC    |
-| `SAN`  | SAN    |
 | `SAO`  | SAO    |
 | `SAO2` | SAO2   |
+| `SGP`  | SGP    |
 | `SYD`  | SYD    |
 | `TYO`  | TYO    |
-| `TYO4` | TYO4   |
+| `TYO2` | TYO2   |

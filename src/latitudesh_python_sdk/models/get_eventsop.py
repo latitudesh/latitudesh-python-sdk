@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 from .events import Events, EventsTypedDict
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from latitudesh_python_sdk.utils import FieldMetadata, QueryParamMetadata
 import pydantic
+from pydantic import model_serializer
 from typing import Callable, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -103,6 +104,35 @@ class GetEventsRequest(BaseModel):
     ] = 1
     r"""Page number to return (starts at 1)"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "filter[author]",
+                "filter[project]",
+                "filter[target_name]",
+                "filter[target_id]",
+                "filter[action]",
+                "filter[created_at][gte]",
+                "filter[created_at][lte]",
+                "filter[created_at]",
+                "page[size]",
+                "page[number]",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class GetEventsResponseBodyTypedDict(TypedDict):
     r"""Success"""
@@ -114,6 +144,22 @@ class GetEventsResponseBody(BaseModel):
     r"""Success"""
 
     data: Optional[List[Events]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class GetEventsResponseTypedDict(TypedDict):

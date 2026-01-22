@@ -995,6 +995,7 @@ class SSHKeysSDK(BaseSDK):
         self,
         *,
         filter_project: Optional[str] = None,
+        filter_scope: Optional[str] = None,
         filter_tags: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1007,6 +1008,7 @@ class SSHKeysSDK(BaseSDK):
 
 
         :param filter_project: Project ID or slug
+        :param filter_scope: Filter by scope: `project` (has projects), `team` (no projects), or empty (all)
         :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1025,6 +1027,7 @@ class SSHKeysSDK(BaseSDK):
 
         request = models.GetSSHKeysRequest(
             filter_project=filter_project,
+            filter_scope=filter_scope,
             filter_tags=filter_tags,
         )
 
@@ -1083,6 +1086,7 @@ class SSHKeysSDK(BaseSDK):
         self,
         *,
         filter_project: Optional[str] = None,
+        filter_scope: Optional[str] = None,
         filter_tags: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1095,6 +1099,7 @@ class SSHKeysSDK(BaseSDK):
 
 
         :param filter_project: Project ID or slug
+        :param filter_scope: Filter by scope: `project` (has projects), `team` (no projects), or empty (all)
         :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1113,6 +1118,7 @@ class SSHKeysSDK(BaseSDK):
 
         request = models.GetSSHKeysRequest(
             filter_project=filter_project,
+            filter_scope=filter_scope,
             filter_tags=filter_tags,
         )
 

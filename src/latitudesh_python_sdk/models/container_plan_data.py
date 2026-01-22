@@ -2,8 +2,15 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -22,6 +29,22 @@ class ContainerPlanDataCPU(BaseModel):
 
     count: Optional[float] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cores", "count"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ContainerPlanDataMemoryTypedDict(TypedDict):
     total: NotRequired[float]
@@ -30,6 +53,22 @@ class ContainerPlanDataMemoryTypedDict(TypedDict):
 class ContainerPlanDataMemory(BaseModel):
     total: Optional[float] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["total"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class EphemeralStorageTypedDict(TypedDict):
     size: NotRequired[float]
@@ -37,6 +76,22 @@ class EphemeralStorageTypedDict(TypedDict):
 
 class EphemeralStorage(BaseModel):
     size: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["size"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class ContainerPlanDataGpuTypedDict(TypedDict):
@@ -48,6 +103,22 @@ class ContainerPlanDataGpu(BaseModel):
     count: Optional[float] = None
 
     type: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["count", "type"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class ContainerPlanDataSpecsTypedDict(TypedDict):
@@ -66,6 +137,22 @@ class ContainerPlanDataSpecs(BaseModel):
 
     gpu: Optional[ContainerPlanDataGpu] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["cpu", "memory", "ephemeral_storage", "gpu"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ContainerPlanDataLocationsTypedDict(TypedDict):
     available: NotRequired[List[str]]
@@ -77,6 +164,22 @@ class ContainerPlanDataLocations(BaseModel):
 
     in_stock: Optional[List[str]] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["available", "in_stock"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ContainerPlanDataStockLevel(str, Enum):
     UNAVAILABLE = "unavailable"
@@ -86,25 +189,75 @@ class ContainerPlanDataStockLevel(str, Enum):
 
 
 class ContainerPlanDataUSDTypedDict(TypedDict):
-    minute: NotRequired[float]
-    hour: NotRequired[float]
+    minute: NotRequired[Nullable[float]]
+    hour: NotRequired[Nullable[float]]
 
 
 class ContainerPlanDataUSD(BaseModel):
-    minute: Optional[float] = None
+    minute: OptionalNullable[float] = UNSET
 
-    hour: Optional[float] = None
+    hour: OptionalNullable[float] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["minute", "hour"])
+        nullable_fields = set(["minute", "hour"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class ContainerPlanDataBRLTypedDict(TypedDict):
-    minute: NotRequired[float]
-    hour: NotRequired[float]
+    minute: NotRequired[Nullable[float]]
+    hour: NotRequired[Nullable[float]]
 
 
 class ContainerPlanDataBRL(BaseModel):
-    minute: Optional[float] = None
+    minute: OptionalNullable[float] = UNSET
 
-    hour: Optional[float] = None
+    hour: OptionalNullable[float] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["minute", "hour"])
+        nullable_fields = set(["minute", "hour"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class ContainerPlanDataPricingTypedDict(TypedDict):
@@ -116,6 +269,22 @@ class ContainerPlanDataPricing(BaseModel):
     usd: Annotated[Optional[ContainerPlanDataUSD], pydantic.Field(alias="USD")] = None
 
     brl: Annotated[Optional[ContainerPlanDataBRL], pydantic.Field(alias="BRL")] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["USD", "BRL"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class ContainerPlanDataRegionsTypedDict(TypedDict):
@@ -134,6 +303,22 @@ class ContainerPlanDataRegions(BaseModel):
 
     pricing: Optional[ContainerPlanDataPricing] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["name", "locations", "stock_level", "pricing"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ContainerPlanDataAttributesTypedDict(TypedDict):
     slug: NotRequired[str]
@@ -148,6 +333,22 @@ class ContainerPlanDataAttributes(BaseModel):
 
     regions: Optional[List[ContainerPlanDataRegions]] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["slug", "specs", "regions"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class ContainerPlanDataTypedDict(TypedDict):
     id: NotRequired[str]
@@ -161,3 +362,19 @@ class ContainerPlanData(BaseModel):
     type: Optional[ContainerPlanDataType] = None
 
     attributes: Optional[ContainerPlanDataAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
