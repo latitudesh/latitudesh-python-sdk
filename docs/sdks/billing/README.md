@@ -23,9 +23,9 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.billing.list_usage(filter_project="proj_6059EqYkOQj8p", filter_products=[
-        "si_lvdub7r3",
-        "si_utp5nfrf",
+    res = latitudesh.billing.list_usage(filter_project="proj_r0MK4O4kDa95w", filter_products=[
+        "si_aslft06m",
+        "si_on0fybnq",
     ], filter_plan="plan.name")
 
     # Handle response

@@ -116,8 +116,8 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.tags.update(tag_id="tag_k88kazkbPktNYRWa2l9ZsN6gVrrL", data={
-        "id": "tag_k88kazkbPktNYRWa2l9ZsN6gVrrL",
+    res = latitudesh.tags.update(tag_id="tag_XBlke2r5RyiyVpG9LPK8tWjalLL", data={
+        "id": "tag_XBlke2r5RyiyVpG9LPK8tWjalLL",
         "type": latitudesh_python_sdk.UpdateTagTagsType.TAGS,
         "attributes": {
             "name": "Tag Name",

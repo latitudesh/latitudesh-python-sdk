@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 import pydantic
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -41,6 +42,30 @@ class TrafficDataData(BaseModel):
     avg_inbound_speed_mbps: Optional[float] = None
     r"""Value in MBps"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "date",
+                "inbound_gb",
+                "outbound_gb",
+                "avg_outbound_speed_mbps",
+                "avg_inbound_speed_mbps",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TrafficRegionsTypedDict(TypedDict):
     region_slug: NotRequired[str]
@@ -71,6 +96,31 @@ class TrafficRegions(BaseModel):
     r"""Value in MBps"""
 
     data: Optional[List[TrafficDataData]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "region_slug",
+                "total_inbound_gb",
+                "total_outbound_gb",
+                "total_inbound_95th_percentile_mbps",
+                "total_outbound_95th_percentile_mbps",
+                "data",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class TrafficAttributesTypedDict(TypedDict):
@@ -110,6 +160,32 @@ class TrafficAttributes(BaseModel):
     total_outbound_95th_percentile_mbps: Optional[float] = None
     r"""Value in MBps"""
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "from_date",
+                "to_date",
+                "regions",
+                "total_inbound_gb",
+                "total_outbound_gb",
+                "total_inbound_95th_percentile_mbps",
+                "total_outbound_95th_percentile_mbps",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TrafficDataTypedDict(TypedDict):
     id: NotRequired[str]
@@ -124,6 +200,22 @@ class TrafficData(BaseModel):
 
     attributes: Optional[TrafficAttributes] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class TrafficTypedDict(TypedDict):
     data: NotRequired[TrafficDataTypedDict]
@@ -131,3 +223,19 @@ class TrafficTypedDict(TypedDict):
 
 class Traffic(BaseModel):
     data: Optional[TrafficData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

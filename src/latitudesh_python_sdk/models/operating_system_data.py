@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -23,6 +24,22 @@ class Features(BaseModel):
     ssh_keys: Optional[bool] = None
 
     user_data: Optional[bool] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["raid", "ssh_keys", "user_data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class OperatingSystemDataAttributesTypedDict(TypedDict):
@@ -50,6 +67,32 @@ class OperatingSystemDataAttributes(BaseModel):
 
     provisionable_on: Optional[List[str]] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "features",
+                "name",
+                "slug",
+                "distro",
+                "user",
+                "version",
+                "provisionable_on",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class OperatingSystemDataTypedDict(TypedDict):
     id: NotRequired[str]
@@ -63,3 +106,19 @@ class OperatingSystemData(BaseModel):
     type: Optional[OperatingSystemDataType] = None
 
     attributes: Optional[OperatingSystemDataAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

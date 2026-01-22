@@ -2,12 +2,19 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from latitudesh_python_sdk.utils import (
     FieldMetadata,
     PathParamMetadata,
     RequestMetadata,
 )
+from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
@@ -26,9 +33,9 @@ class UpdateServerServersBilling(str, Enum):
 
 class UpdateServerServersAttributesTypedDict(TypedDict):
     hostname: NotRequired[str]
-    billing: NotRequired[UpdateServerServersBilling]
+    billing: NotRequired[Nullable[UpdateServerServersBilling]]
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
-    tags: NotRequired[List[str]]
+    tags: NotRequired[Nullable[List[str]]]
     r"""List of Tag IDs"""
     project: NotRequired[str]
     r"""Project ID or slug to move the server to"""
@@ -37,14 +44,39 @@ class UpdateServerServersAttributesTypedDict(TypedDict):
 class UpdateServerServersAttributes(BaseModel):
     hostname: Optional[str] = "new-hostname"
 
-    billing: Optional[UpdateServerServersBilling] = None
+    billing: OptionalNullable[UpdateServerServersBilling] = UNSET
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
 
-    tags: Optional[List[str]] = None
+    tags: OptionalNullable[List[str]] = UNSET
     r"""List of Tag IDs"""
 
     project: Optional[str] = None
     r"""Project ID or slug to move the server to"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["hostname", "billing", "tags", "project"])
+        nullable_fields = set(["billing", "tags"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class UpdateServerServersDataTypedDict(TypedDict):
@@ -60,6 +92,22 @@ class UpdateServerServersData(BaseModel):
 
     attributes: Optional[UpdateServerServersAttributes] = None
 
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
 
 class UpdateServerServersRequestBodyTypedDict(TypedDict):
     data: NotRequired[UpdateServerServersDataTypedDict]
@@ -67,6 +115,22 @@ class UpdateServerServersRequestBodyTypedDict(TypedDict):
 
 class UpdateServerServersRequestBody(BaseModel):
     data: Optional[UpdateServerServersData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k)
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class UpdateServerRequestTypedDict(TypedDict):
