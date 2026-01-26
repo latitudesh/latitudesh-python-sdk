@@ -31,8 +31,8 @@ This test suite is automatically executed via GitHub Actions on:
 - Manual workflow dispatch
 
 **Workflows:**
-- **Integration Tests** (`.github/workflows/integration-tests.yml`): Runs tests on Python 3.9, 3.10, 3.11, and 3.12
-- **Lint & Type Check** (`.github/workflows/lint.yml`): Runs pylint, mypy, and pyright
+- **Integration Tests** (`.github/workflows/sdk_integration_tests.yml`): Runs tests on Python 3.10, 3.11, and 3.12
+- **Lint & Type Check** (`.github/workflows/sdk_lint.yml`): Runs pylint, mypy, and pyright
 
 ## Installing Dependencies
 

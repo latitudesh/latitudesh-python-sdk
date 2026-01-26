@@ -14,7 +14,7 @@ Runs the complete integration test suite across multiple Python versions.
 - Manual workflow dispatch
 
 **Matrix Strategy:**
-- Python versions: 3.9, 3.10, 3.11, 3.12
+- Python versions: 3.10, 3.11, 3.12
 - OS: Ubuntu Latest
 
 **Steps:**
