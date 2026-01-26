@@ -23,13 +23,13 @@ include = ["py.typed", "src/latitudesh_python_sdk/py.typed"]
 [tool.setuptools.package-data]
 "*" = ["py.typed", "src/latitudesh_python_sdk/py.typed"]
 
-[virtualenvs]
-in-project = true
-
 [tool.poetry.group.dev.dependencies]
 mypy = "==1.15.0"
 pylint = "==3.2.3"
 pyright = "==1.1.398"
+pytest = "^8.3.4"
+pytest-asyncio = "^0.25.2"
+pytest-mock = "^3.14.0"
 
 [build-system]
 requires = ["poetry-core"]
