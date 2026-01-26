@@ -23,6 +23,17 @@ tests/
     └── test_userdata.py          # Integration tests for User Data
 ```
 
+## CI/CD Integration
+
+This test suite is automatically executed via GitHub Actions on:
+- Every push to `main`, `master`, or `develop` branches
+- Every pull request to these branches
+- Manual workflow dispatch
+
+**Workflows:**
+- **Integration Tests** (`.github/workflows/integration-tests.yml`): Runs tests on Python 3.9, 3.10, 3.11, and 3.12
+- **Lint & Type Check** (`.github/workflows/lint.yml`): Runs pylint, mypy, and pyright
+
 ## Installing Dependencies
 
 Install the required development dependencies:
@@ -32,7 +43,7 @@ Install the required development dependencies:
 poetry install --with dev
 
 # Or using pip
-pip install pytest pytest-asyncio pytest-mock
+pip install pytest pytest-asyncio pytest-mock pytest-cov
 ```
 
 ## Running Tests
