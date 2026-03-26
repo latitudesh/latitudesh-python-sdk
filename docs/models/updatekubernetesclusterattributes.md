@@ -1,0 +1,9 @@
+# UpdateKubernetesClusterAttributes
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `worker_count`                                                                                                 | *int*                                                                                                          | :heavy_check_mark:                                                                                             | Desired number of worker nodes. Must be between 0 and 10.                                                      |
+| `worker_plan`                                                                                                  | *OptionalNullable[str]*                                                                                        | :heavy_minus_sign:                                                                                             | Plan slug for worker nodes. Required when scaling from 0 workers. Ignored when scaling an existing deployment. |
