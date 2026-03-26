@@ -1,0 +1,9 @@
+# UpdateKubernetesClusterRequest
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `kubernetes_cluster_id`                                                                                   | *str*                                                                                                     | :heavy_check_mark:                                                                                        | The cluster ID (format: kc_<hash>) or cluster name. Both formats are accepted for backward compatibility. |
+| `update_kubernetes_cluster`                                                                               | [models.UpdateKubernetesCluster](../models/updatekubernetescluster.md)                                    | :heavy_check_mark:                                                                                        | N/A                                                                                                       |

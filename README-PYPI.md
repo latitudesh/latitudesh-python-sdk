@@ -297,6 +297,7 @@ with Latitudesh(
 * [create_kubernetes_cluster](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#create_kubernetes_cluster) - Create a Kubernetes Cluster
 * [get_kubernetes_cluster](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster) - Get a Kubernetes Cluster
 * [delete_kubernetes_cluster](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#delete_kubernetes_cluster) - Delete a Kubernetes Cluster
+* [update_kubernetes_cluster](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#update_kubernetes_cluster) - Scale Kubernetes Cluster Workers
 * [get_kubernetes_cluster_kubeconfig](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig
 
 ### [OperatingSystems](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/operatingsystemssdk/README.md)
@@ -590,7 +591,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 17 of 127 methods.*
+* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 18 of 128 methods.*
 * [`ResponseValidationError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

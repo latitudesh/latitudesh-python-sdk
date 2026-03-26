@@ -93,6 +93,15 @@ class Workers(BaseModel):
         return m
 
 
+class WorkerStatus(str, Enum):
+    r"""Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed."""
+
+    IDLE = "idle"
+    READY = "ready"
+    SCALING = "scaling"
+    ERROR = "error"
+
+
 class KubernetesClusterDataName(str, Enum):
     r"""Step identifier"""
 
@@ -316,6 +325,8 @@ class KubernetesClusterDataAttributesTypedDict(TypedDict):
     r"""Control plane status information"""
     workers: NotRequired[Nullable[WorkersTypedDict]]
     r"""Worker nodes status information"""
+    worker_status: NotRequired[Nullable[WorkerStatus]]
+    r"""Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed."""
     infrastructure_ready: NotRequired[bool]
     r"""Whether the underlying infrastructure is ready"""
     control_plane_ready: NotRequired[bool]
@@ -382,6 +393,9 @@ class KubernetesClusterDataAttributes(BaseModel):
     workers: OptionalNullable[Workers] = UNSET
     r"""Worker nodes status information"""
 
+    worker_status: OptionalNullable[WorkerStatus] = UNSET
+    r"""Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed."""
+
     infrastructure_ready: Optional[bool] = None
     r"""Whether the underlying infrastructure is ready"""
 
@@ -428,6 +442,7 @@ class KubernetesClusterDataAttributes(BaseModel):
                 "worker_count",
                 "control_plane",
                 "workers",
+                "worker_status",
                 "infrastructure_ready",
                 "control_plane_ready",
                 "message",
@@ -446,6 +461,7 @@ class KubernetesClusterDataAttributes(BaseModel):
                 "worker_plan",
                 "control_plane",
                 "workers",
+                "worker_status",
                 "last_status_change",
                 "failure_message",
                 "failure_reason",
