@@ -19,7 +19,7 @@ class VpnSessions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetVpnSessionsResponseBody:
-        r"""List all Active VPN Sessions
+        r"""List VPN sessions
 
         :param filter_location:
         :param retries: Override the default retry configuration for this method
@@ -101,7 +101,7 @@ class VpnSessions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetVpnSessionsResponseBody:
-        r"""List all Active VPN Sessions
+        r"""List VPN sessions
 
         :param filter_location:
         :param retries: Override the default retry configuration for this method
@@ -188,7 +188,7 @@ class VpnSessions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VpnSessionWithPassword:
-        r"""Create a VPN Session
+        r"""Create VPN session
 
         Creates a new VPN Session.
         `NOTE:` The VPN credentials are only listed ONCE upon creation. They can however be refreshed or deleted.
@@ -288,7 +288,7 @@ class VpnSessions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VpnSessionWithPassword:
-        r"""Create a VPN Session
+        r"""Create VPN session
 
         Creates a new VPN Session.
         `NOTE:` The VPN credentials are only listed ONCE upon creation. They can however be refreshed or deleted.
@@ -383,7 +383,7 @@ class VpnSessions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VpnSessionWithPassword:
-        r"""Refresh a VPN Session
+        r"""Refresh VPN session
 
         Refreshing an existing VPN Session will create new credentials for that session
 
@@ -468,7 +468,7 @@ class VpnSessions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VpnSessionWithPassword:
-        r"""Refresh a VPN Session
+        r"""Refresh VPN session
 
         Refreshing an existing VPN Session will create new credentials for that session
 
@@ -553,7 +553,7 @@ class VpnSessions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a VPN Session
+        r"""Delete VPN session
 
         Deletes an existing VPN Session.
 
@@ -638,7 +638,7 @@ class VpnSessions(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a VPN Session
+        r"""Delete VPN session
 
         Deletes an existing VPN Session.
 

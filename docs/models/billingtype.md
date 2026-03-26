@@ -1,5 +1,13 @@
 # BillingType
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import BillingType
+
+value = BillingType.YEARLY
+```
+
 
 ## Values
 

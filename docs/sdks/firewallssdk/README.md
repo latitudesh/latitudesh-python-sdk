@@ -4,23 +4,23 @@
 
 ### Available Operations
 
-* [get_all_firewall_assignments](#get_all_firewall_assignments) - List All Firewall Assignments
-* [create](#create) - Create a firewall
+* [get_all_firewall_assignments](#get_all_firewall_assignments) - List firewall assignments
+* [create](#create) - Create firewall
 * [list](#list) - List firewalls
-* [get](#get) - Retrieve Firewall
-* [update](#update) - Update Firewall
-* [delete](#delete) - Delete Firewall
-* [assign](#assign) - Firewall Assignment
-* [list_assignments](#list_assignments) - Firewall Assignments
-* [delete_assignment](#delete_assignment) - Delete Firewall Assignment
+* [get](#get) - Retrieve firewall
+* [update](#update) - Update firewall
+* [delete](#delete) - Delete firewall
+* [assign](#assign) - Assign server to firewall
+* [list_assignments](#list_assignments) - Firewall assignments
+* [delete_assignment](#delete_assignment) - Delete assignment
 
 ## get_all_firewall_assignments
 
-List all firewall assignments
+Returns a list of all servers assigned to one or more firewalls.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-all-firewall-assignments" method="get" path="/firewalls/assignments" -->
+<!-- UsageSnippet language="python" operationID="get-all-firewall-assignments" method="get" path="/firewalls/assignments" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -62,9 +62,9 @@ with Latitudesh(
 
 Create a firewall
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="create-firewall" method="post" path="/firewalls" -->
+<!-- UsageSnippet language="python" operationID="create-firewall" method="post" path="/firewalls" example="Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -83,6 +83,78 @@ with Latitudesh(
             "rules": [
                 {
                     "from_": "192.168.42.73",
+                    "to": "192.168.43.51",
+                    "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
+                    "port": "80",
+                    "description": "Allow HTTP traffic",
+                },
+                {
+                    "from_": "192.168.1.16",
+                    "to": "192.168.1.30",
+                    "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
+                    "port": "80",
+                },
+                {
+                    "from_": "192.168.1.10",
+                    "to": "192.168.1.20",
+                    "protocol": latitudesh_python_sdk.CreateFirewallProtocol.UDP,
+                    "port": "3000-4000",
+                    "description": "Application ports",
+                },
+            ],
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: with invalid parameters
+
+<!-- UsageSnippet language="python" operationID="create-firewall" method="post" path="/firewalls" example="with invalid parameters" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.firewalls.create(data={
+        "type": latitudesh_python_sdk.CreateFirewallFirewallsType.FIREWALLS,
+        "attributes": {
+            "name": "<value>",
+            "project": "<value>",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: with valid parameters
+
+<!-- UsageSnippet language="python" operationID="create-firewall" method="post" path="/firewalls" example="with valid parameters" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.firewalls.create(data={
+        "type": latitudesh_python_sdk.CreateFirewallFirewallsType.FIREWALLS,
+        "attributes": {
+            "name": "my-firewall",
+            "project": "sleek-steel-shirt",
+            "rules": [
+                {
+                    "from_": "192.168.42.72",
                     "to": "192.168.43.51",
                     "protocol": latitudesh_python_sdk.CreateFirewallProtocol.TCP,
                     "port": "80",
@@ -131,7 +203,7 @@ List firewalls
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="list-firewalls" method="get" path="/firewalls" -->
+<!-- UsageSnippet language="python" operationID="list-firewalls" method="get" path="/firewalls" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -171,11 +243,11 @@ with Latitudesh(
 
 ## get
 
-Retrieve a firewall
+Returns a single firewall by its ID.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-firewall" method="get" path="/firewalls/{firewall_id}" -->
+<!-- UsageSnippet language="python" operationID="get-firewall" method="get" path="/firewalls/{firewall_id}" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -211,11 +283,32 @@ with Latitudesh(
 
 ## update
 
-Update a firewall
+Updates a firewall by its ID.
 
-### Example Usage
+### Example Usage: Not Found
 
-<!-- UsageSnippet language="python" operationID="update-firewall" method="patch" path="/firewalls/{firewall_id}" -->
+<!-- UsageSnippet language="python" operationID="update-firewall" method="patch" path="/firewalls/{firewall_id}" example="Not Found" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.firewalls.update(firewall_id="fw_123", data={
+        "type": latitudesh_python_sdk.UpdateFirewallFirewallsType.FIREWALLS,
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="update-firewall" method="patch" path="/firewalls/{firewall_id}" example="Success" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -236,8 +329,33 @@ with Latitudesh(
                     "to": "192.168.43.51",
                     "protocol": latitudesh_python_sdk.UpdateFirewallFirewallsProtocol.TCP,
                     "port": "80",
+                    "description": "Allow HTTP",
                 },
             ],
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unprocessable Entity
+
+<!-- UsageSnippet language="python" operationID="update-firewall" method="patch" path="/firewalls/{firewall_id}" example="Unprocessable Entity" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.firewalls.update(firewall_id="fw_VaNmodjeObE8W", data={
+        "type": latitudesh_python_sdk.UpdateFirewallFirewallsType.FIREWALLS,
+        "attributes": {
+            "rules": [],
         },
     })
 
@@ -266,7 +384,7 @@ with Latitudesh(
 
 ## delete
 
-Delete a firewall
+Delete firewall
 
 ### Example Usage
 
@@ -301,11 +419,35 @@ with Latitudesh(
 
 ## assign
 
-Assign a server to a firewall
+Assigns a server to a firewall by its ID.
 
-### Example Usage
+### Example Usage: Conflict
 
-<!-- UsageSnippet language="python" operationID="create-firewall-assignment" method="post" path="/firewalls/{firewall_id}/assignments" -->
+<!-- UsageSnippet language="python" operationID="create-firewall-assignment" method="post" path="/firewalls/{firewall_id}/assignments" example="Conflict" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.firewalls.assign(firewall_id="fw_lQraYDPeOpjwW", data={
+        "type": latitudesh_python_sdk.CreateFirewallAssignmentFirewallsType.FIREWALL_ASSIGNMENTS,
+        "attributes": {
+            "server_id": "sv_aKXgRdR3qv9k5",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Created
+
+<!-- UsageSnippet language="python" operationID="create-firewall-assignment" method="post" path="/firewalls/{firewall_id}/assignments" example="Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -320,6 +462,78 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateFirewallAssignmentFirewallsType.FIREWALL_ASSIGNMENTS,
         "attributes": {
             "server_id": "sv_aKXgRdR3qv9k5",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Forbidden
+
+<!-- UsageSnippet language="python" operationID="create-firewall-assignment" method="post" path="/firewalls/{firewall_id}/assignments" example="Forbidden" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.firewalls.assign(firewall_id="fw_5LA73qkjdaJ2o", data={
+        "type": latitudesh_python_sdk.CreateFirewallAssignmentFirewallsType.FIREWALL_ASSIGNMENTS,
+        "attributes": {
+            "server_id": "sv_byQrJdNJd30gv",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Not Found
+
+<!-- UsageSnippet language="python" operationID="create-firewall-assignment" method="post" path="/firewalls/{firewall_id}/assignments" example="Not Found" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.firewalls.assign(firewall_id="fw_RLYV8DZ2D5QoE", data={
+        "type": latitudesh_python_sdk.CreateFirewallAssignmentFirewallsType.FIREWALL_ASSIGNMENTS,
+        "attributes": {
+            "server_id": "sv_93YjJOLydvZ87",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unprocessable Entity
+
+<!-- UsageSnippet language="python" operationID="create-firewall-assignment" method="post" path="/firewalls/{firewall_id}/assignments" example="Unprocessable Entity" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.firewalls.assign(firewall_id="fw_Ee8pKq05DWAob", data={
+        "type": latitudesh_python_sdk.CreateFirewallAssignmentFirewallsType.FIREWALL_ASSIGNMENTS,
+        "attributes": {
+            "server_id": "sv_NGnzRD5ADM5yw",
         },
     })
 
@@ -348,11 +562,31 @@ with Latitudesh(
 
 ## list_assignments
 
-List servers assigned to a firewall
+Returns a list of all servers assigned to a particular firewall.
 
-### Example Usage
+### Example Usage: Ok
 
-<!-- UsageSnippet language="python" operationID="get-firewall-assignments" method="get" path="/firewalls/{firewall_id}/assignments" -->
+<!-- UsageSnippet language="python" operationID="get-firewall-assignments" method="get" path="/firewalls/{firewall_id}/assignments" example="Ok" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.firewalls.list_assignments(firewall_id="fw_z8Nkvdy1deLpx", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="get-firewall-assignments" method="get" path="/firewalls/{firewall_id}/assignments" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -392,7 +626,7 @@ with Latitudesh(
 
 ## delete_assignment
 
-Remove a server from a firewall
+Removes a server from a firewall by its ID.
 
 ### Example Usage
 

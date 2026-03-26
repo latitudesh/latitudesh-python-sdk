@@ -1,5 +1,13 @@
 # PlanDataFeatures
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import PlanDataFeatures
+
+value = PlanDataFeatures.SSH
+```
+
 
 ## Values
 

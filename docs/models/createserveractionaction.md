@@ -2,6 +2,14 @@
 
 The action to perform on the server
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import CreateServerActionAction
+
+value = CreateServerActionAction.POWER_ON
+```
+
 
 ## Values
 

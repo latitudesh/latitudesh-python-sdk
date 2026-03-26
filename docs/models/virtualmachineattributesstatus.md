@@ -1,5 +1,13 @@
 # VirtualMachineAttributesStatus
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import VirtualMachineAttributesStatus
+
+value = VirtualMachineAttributesStatus.RUNNING
+```
+
 
 ## Values
 
@@ -10,3 +18,4 @@
 | `STARTING`            | Starting              |
 | `SCHEDULING`          | Scheduling            |
 | `SCHEDULED`           | Scheduled             |
+| `DESTROYING`          | Destroying            |

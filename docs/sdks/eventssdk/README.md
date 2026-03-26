@@ -4,16 +4,136 @@
 
 ### Available Operations
 
-* [list](#list) - List all Events
+* [list](#list) - List events
 
 ## list
 
-Lists all events.
+Lists actions performed by users on your account.
 
 
-### Example Usage
+### Example Usage: DeploymentFailed
 
-<!-- UsageSnippet language="python" operationID="get-events" method="get" path="/events" -->
+<!-- UsageSnippet language="python" operationID="get-events" method="get" path="/events" example="DeploymentFailed" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.events.list(page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: ReinstallFailed
+
+<!-- UsageSnippet language="python" operationID="get-events" method="get" path="/events" example="ReinstallFailed" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.events.list(page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: ScheduleDeletion
+
+<!-- UsageSnippet language="python" operationID="get-events" method="get" path="/events" example="ScheduleDeletion" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.events.list(page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: ServerDestroy
+
+<!-- UsageSnippet language="python" operationID="get-events" method="get" path="/events" example="ServerDestroy" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.events.list(page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: ServerLock
+
+<!-- UsageSnippet language="python" operationID="get-events" method="get" path="/events" example="ServerLock" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.events.list(page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: ServerUnlock
+
+<!-- UsageSnippet language="python" operationID="get-events" method="get" path="/events" example="ServerUnlock" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.events.list(page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="get-events" method="get" path="/events" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os

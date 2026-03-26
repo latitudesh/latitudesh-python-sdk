@@ -2,6 +2,14 @@
 
 The protocol family to filter by
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import FilterFamily
+
+value = FilterFamily.I_PV4
+```
+
 
 ## Values
 

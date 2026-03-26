@@ -14,7 +14,7 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class Family(str, Enum):
+class IPAddressFamily(str, Enum):
     I_PV4 = "IPv4"
     I_PV6 = "IPv6"
 
@@ -42,7 +42,7 @@ class IPAddressProject(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -51,13 +51,13 @@ class IPAddressProject(BaseModel):
         return m
 
 
-class LocationTypedDict(TypedDict):
+class IPAddressLocationTypedDict(TypedDict):
     id: NotRequired[str]
     name: NotRequired[str]
     slug: NotRequired[str]
 
 
-class Location(BaseModel):
+class IPAddressLocation(BaseModel):
     id: Optional[str] = None
 
     name: Optional[str] = None
@@ -72,7 +72,7 @@ class Location(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -84,7 +84,7 @@ class Location(BaseModel):
 class IPAddressRegionTypedDict(TypedDict):
     id: NotRequired[str]
     name: NotRequired[str]
-    location: NotRequired[LocationTypedDict]
+    location: NotRequired[IPAddressLocationTypedDict]
 
 
 class IPAddressRegion(BaseModel):
@@ -92,7 +92,7 @@ class IPAddressRegion(BaseModel):
 
     name: Optional[str] = None
 
-    location: Optional[Location] = None
+    location: Optional[IPAddressLocation] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -102,7 +102,7 @@ class IPAddressRegion(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -132,7 +132,7 @@ class Assignment(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -144,7 +144,7 @@ class Assignment(BaseModel):
 class IPAddressAttributesTypedDict(TypedDict):
     address: NotRequired[str]
     cidr: NotRequired[Nullable[str]]
-    family: NotRequired[Family]
+    family: NotRequired[IPAddressFamily]
     gateway: NotRequired[Nullable[str]]
     netmask: NotRequired[str]
     type: NotRequired[IPAddressType]
@@ -162,7 +162,7 @@ class IPAddressAttributes(BaseModel):
 
     cidr: OptionalNullable[str] = UNSET
 
-    family: Optional[Family] = None
+    family: Optional[IPAddressFamily] = None
 
     gateway: OptionalNullable[str] = UNSET
 
@@ -209,7 +209,7 @@ class IPAddressAttributes(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -244,7 +244,7 @@ class IPAddress(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

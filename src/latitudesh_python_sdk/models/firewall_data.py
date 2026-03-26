@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
@@ -20,6 +26,8 @@ class RulesTypedDict(TypedDict):
     r"""Destination IP address, IP range in CIDR notation, or 'ANY' (e.g., \"192.168.1.1\", \"192.168.1.0/24\", \"ANY\")"""
     port: NotRequired[str]
     protocol: NotRequired[str]
+    description: NotRequired[Nullable[str]]
+    r"""Optional description explaining the purpose of this rule"""
 
 
 class Rules(BaseModel):
@@ -33,18 +41,30 @@ class Rules(BaseModel):
 
     protocol: Optional[str] = None
 
+    description: OptionalNullable[str] = UNSET
+    r"""Optional description explaining the purpose of this rule"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["from", "to", "port", "protocol"])
+        optional_fields = set(["from", "to", "port", "protocol", "description"])
+        nullable_fields = set(["description"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -71,7 +91,7 @@ class FirewallDataProject(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -101,7 +121,7 @@ class FirewallDataAttributes(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -131,10 +151,16 @@ class FirewallData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+try:
+    Rules.model_rebuild()
+except NameError:
+    pass

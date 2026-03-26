@@ -26,6 +26,137 @@ class VirtualMachineAttributesStatus(str, Enum):
     STARTING = "Starting"
     SCHEDULING = "Scheduling"
     SCHEDULED = "Scheduled"
+    DESTROYING = "Destroying"
+
+
+class VirtualMachineAttributesFeaturesTypedDict(TypedDict):
+    r"""Features supported by this operating system"""
+
+    raid: NotRequired[bool]
+    r"""Whether RAID is supported"""
+    ssh_keys: NotRequired[bool]
+    r"""Whether SSH keys are supported"""
+    user_data: NotRequired[bool]
+    r"""Whether user data is supported"""
+
+
+class VirtualMachineAttributesFeatures(BaseModel):
+    r"""Features supported by this operating system"""
+
+    raid: Optional[bool] = None
+    r"""Whether RAID is supported"""
+
+    ssh_keys: Optional[bool] = None
+    r"""Whether SSH keys are supported"""
+
+    user_data: Optional[bool] = None
+    r"""Whether user data is supported"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["raid", "ssh_keys", "user_data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class VirtualMachineAttributesDistroTypedDict(TypedDict):
+    r"""Distribution information"""
+
+    name: NotRequired[str]
+    r"""The name of the Linux distribution"""
+    slug: NotRequired[str]
+    r"""The slug of the Linux distribution"""
+    series: NotRequired[str]
+    r"""The distribution series code name"""
+
+
+class VirtualMachineAttributesDistro(BaseModel):
+    r"""Distribution information"""
+
+    name: Optional[str] = None
+    r"""The name of the Linux distribution"""
+
+    slug: Optional[str] = None
+    r"""The slug of the Linux distribution"""
+
+    series: Optional[str] = None
+    r"""The distribution series code name"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["name", "slug", "series"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class VirtualMachineAttributesOperatingSystemTypedDict(TypedDict):
+    r"""The operating system installed on the virtual machine"""
+
+    name: NotRequired[str]
+    r"""The full name of the operating system"""
+    slug: NotRequired[str]
+    r"""The unique slug identifier for the operating system"""
+    version: NotRequired[str]
+    r"""The version of the operating system"""
+    features: NotRequired[VirtualMachineAttributesFeaturesTypedDict]
+    r"""Features supported by this operating system"""
+    distro: NotRequired[VirtualMachineAttributesDistroTypedDict]
+    r"""Distribution information"""
+
+
+class VirtualMachineAttributesOperatingSystem(BaseModel):
+    r"""The operating system installed on the virtual machine"""
+
+    name: Optional[str] = None
+    r"""The full name of the operating system"""
+
+    slug: Optional[str] = None
+    r"""The unique slug identifier for the operating system"""
+
+    version: Optional[str] = None
+    r"""The version of the operating system"""
+
+    features: Optional[VirtualMachineAttributesFeatures] = None
+    r"""Features supported by this operating system"""
+
+    distro: Optional[VirtualMachineAttributesDistro] = None
+    r"""Distribution information"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["name", "slug", "version", "features", "distro"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CredentialsTypedDict(TypedDict):
@@ -52,7 +183,7 @@ class Credentials(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -79,7 +210,7 @@ class VirtualMachineAttributesPlan(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -116,7 +247,7 @@ class VirtualMachineAttributesSpecs(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -137,7 +268,11 @@ class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     created_at: NotRequired[str]
     status: NotRequired[VirtualMachineAttributesStatus]
-    operating_system: NotRequired[Nullable[str]]
+    primary_ipv4: NotRequired[Nullable[str]]
+    operating_system: NotRequired[
+        Nullable[VirtualMachineAttributesOperatingSystemTypedDict]
+    ]
+    r"""The operating system installed on the virtual machine"""
     credentials: NotRequired[Nullable[CredentialsTypedDict]]
     plan: NotRequired[VirtualMachineAttributesPlanTypedDict]
     specs: NotRequired[VirtualMachineAttributesSpecsTypedDict]
@@ -152,7 +287,10 @@ class VirtualMachineAttributesAttributes(BaseModel):
 
     status: Optional[VirtualMachineAttributesStatus] = None
 
-    operating_system: OptionalNullable[str] = UNSET
+    primary_ipv4: OptionalNullable[str] = UNSET
+
+    operating_system: OptionalNullable[VirtualMachineAttributesOperatingSystem] = UNSET
+    r"""The operating system installed on the virtual machine"""
 
     credentials: OptionalNullable[Credentials] = UNSET
 
@@ -171,6 +309,7 @@ class VirtualMachineAttributesAttributes(BaseModel):
                 "name",
                 "created_at",
                 "status",
+                "primary_ipv4",
                 "operating_system",
                 "credentials",
                 "plan",
@@ -179,13 +318,13 @@ class VirtualMachineAttributesAttributes(BaseModel):
                 "project",
             ]
         )
-        nullable_fields = set(["operating_system", "credentials"])
+        nullable_fields = set(["primary_ipv4", "operating_system", "credentials"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -223,7 +362,7 @@ class VirtualMachineAttributes(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

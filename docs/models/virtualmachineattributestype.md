@@ -1,5 +1,13 @@
 # VirtualMachineAttributesType
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import VirtualMachineAttributesType
+
+value = VirtualMachineAttributesType.VIRTUAL_MACHINES
+```
+
 
 ## Values
 

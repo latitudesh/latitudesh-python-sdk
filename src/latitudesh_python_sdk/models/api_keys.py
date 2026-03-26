@@ -8,22 +8,33 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class MetaTypedDict(TypedDict):
+    pass
+
+
+class Meta(BaseModel):
+    pass
+
+
 class APIKeysTypedDict(TypedDict):
     data: NotRequired[List[APIKeyTypedDict]]
+    meta: NotRequired[MetaTypedDict]
 
 
 class APIKeys(BaseModel):
     data: Optional[List[APIKey]] = None
 
+    meta: Optional[Meta] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

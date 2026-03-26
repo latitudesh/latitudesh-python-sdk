@@ -4,17 +4,17 @@
 
 ### Available Operations
 
-* [list](#list) - List all Team Members
-* [add](#add) - Add a Team Member
-* [remove_member](#remove_member) - Remove a Team Member
+* [list](#list) - List members
+* [add](#add) - Create member
+* [remove_member](#remove_member) - Remove a member
 
 ## list
 
-List all Team Members
+List members
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-team-members" method="get" path="/team/members" -->
+<!-- UsageSnippet language="python" operationID="get-team-members" method="get" path="/team/members" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -53,11 +53,11 @@ with Latitudesh(
 
 ## add
 
-Add a Team Member
+Create member
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="post-team-members" method="post" path="/team/members" -->
+<!-- UsageSnippet language="python" operationID="post-team-members" method="post" path="/team/members" example="Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -74,6 +74,60 @@ with Latitudesh(
             "first_name": "Maricela",
             "last_name": "Torphy",
             "email": "maritza_schneider@mcglynn.test",
+            "role": latitudesh_python_sdk.PostTeamMembersTeamsMembersRole.COLLABORATOR,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Forbidden
+
+<!-- UsageSnippet language="python" operationID="post-team-members" method="post" path="/team/members" example="Forbidden" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.teams_members.add(data={
+        "type": latitudesh_python_sdk.PostTeamMembersTeamsMembersType.MEMBERSHIPS,
+        "attributes": {
+            "first_name": "Waltraud",
+            "last_name": "Feil",
+            "email": "denis_senger@paucek.test",
+            "role": latitudesh_python_sdk.PostTeamMembersTeamsMembersRole.COLLABORATOR,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unprocessable Entity
+
+<!-- UsageSnippet language="python" operationID="post-team-members" method="post" path="/team/members" example="Unprocessable Entity" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.teams_members.add(data={
+        "type": latitudesh_python_sdk.PostTeamMembersTeamsMembersType.MEMBERSHIPS,
+        "attributes": {
+            "first_name": "Gabriel",
+            "last_name": "Roob",
+            "email": "Jack.Schamberger-Kerluke@gmail.com",
             "role": latitudesh_python_sdk.PostTeamMembersTeamsMembersRole.COLLABORATOR,
         },
     })
@@ -102,7 +156,7 @@ with Latitudesh(
 
 ## remove_member
 
-Remove a Team Member
+Remove a member
 
 ### Example Usage
 

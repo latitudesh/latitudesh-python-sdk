@@ -24,7 +24,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserData:
-        r"""List all Project User Data
+        r"""List Project user data
 
         List all Users Data in the project. These scripts can be used to configure servers with user data.
 
@@ -115,7 +115,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserData:
-        r"""List all Project User Data
+        r"""List Project user data
 
         List all Users Data in the project. These scripts can be used to configure servers with user data.
 
@@ -209,7 +209,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Create a Project User Data
+        r"""Create Project user data
 
         Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
 
@@ -314,7 +314,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Create a Project User Data
+        r"""Create Project user data
 
         Allows you to create User Data in a project, which can be used to perform custom setup on your servers after deploy and reinstall.
 
@@ -417,7 +417,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Retrieve a Project User Data
+        r"""Retrieve Project user data
 
         Get User Data in the project. These scripts can be used to configure servers with user data.
 
@@ -511,7 +511,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Retrieve a Project User Data
+        r"""Retrieve Project user data
 
         Get User Data in the project. These scripts can be used to configure servers with user data.
 
@@ -608,7 +608,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Update a Project User Data
+        r"""Update Project user data
 
         Allow you update User Data in a project.
 
@@ -655,7 +655,7 @@ class UserDataSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.request_body if request is not None else None,
                 False,
                 True,
                 "json",
@@ -716,7 +716,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Update a Project User Data
+        r"""Update Project user data
 
         Allow you update User Data in a project.
 
@@ -763,7 +763,7 @@ class UserDataSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.request_body if request is not None else None,
                 False,
                 True,
                 "json",
@@ -820,7 +820,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project User Data
+        r"""Delete Project user data
 
         Allow you remove User Data in a project.
 
@@ -911,7 +911,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project User Data
+        r"""Delete Project user data
 
         Allow you remove User Data in a project.
 
@@ -1000,7 +1000,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserData:
-        r"""List all User Data
+        r"""List user data
 
         List all Users Data in the project. These scripts can be used to configure servers with user data.
 
@@ -1091,7 +1091,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserData:
-        r"""List all User Data
+        r"""List user data
 
         List all Users Data in the project. These scripts can be used to configure servers with user data.
 
@@ -1182,7 +1182,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Create an User Data
+        r"""Create user data
 
         Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
 
@@ -1272,7 +1272,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Create an User Data
+        r"""Create user data
 
         Allows you to create User Data in a team, which can be used to perform custom setup on your servers after deploy and reinstall.
 
@@ -1361,7 +1361,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Retrieve an User Data
+        r"""Retrieve user data
 
         Get User Data in the project. These scripts can be used to configure servers with user data.
 
@@ -1449,7 +1449,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UserDataObject:
-        r"""Retrieve an User Data
+        r"""Retrieve user data
 
         Get User Data in the project. These scripts can be used to configure servers with user data.
 
@@ -1527,204 +1527,6 @@ class UserDataSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    def patch_user_data(
-        self,
-        *,
-        user_data_id: str,
-        data: Union[
-            models.PatchUserDataUserDataData, models.PatchUserDataUserDataDataTypedDict
-        ],
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserDataObject:
-        r"""Update an User Data
-
-        Allow you update User Data in a team.
-
-
-        :param user_data_id:
-        :param data:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.PatchUserDataRequest(
-            user_data_id=user_data_id,
-            request_body=models.PatchUserDataUserDataRequestBody(
-                data=utils.get_pydantic_model(data, models.PatchUserDataUserDataData),
-            ),
-        )
-
-        req = self._build_request(
-            method="PATCH",
-            path="/user_data/{user_data_id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
-                False,
-                True,
-                "json",
-                Optional[models.PatchUserDataUserDataRequestBody],
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="patch-user-data",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserDataObject, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
-    async def patch_user_data_async(
-        self,
-        *,
-        user_data_id: str,
-        data: Union[
-            models.PatchUserDataUserDataData, models.PatchUserDataUserDataDataTypedDict
-        ],
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.UserDataObject:
-        r"""Update an User Data
-
-        Allow you update User Data in a team.
-
-
-        :param user_data_id:
-        :param data:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.PatchUserDataRequest(
-            user_data_id=user_data_id,
-            request_body=models.PatchUserDataUserDataRequestBody(
-                data=utils.get_pydantic_model(data, models.PatchUserDataUserDataData),
-            ),
-        )
-
-        req = self._build_request_async(
-            method="PATCH",
-            path="/user_data/{user_data_id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
-                False,
-                True,
-                "json",
-                Optional[models.PatchUserDataUserDataRequestBody],
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="patch-user-data",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.UserDataObject, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
     def delete_user_data(
         self,
         *,
@@ -1734,7 +1536,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete an User Data
+        r"""Delete user data
 
         :param user_data_id:
         :param retries: Override the default retry configuration for this method
@@ -1816,7 +1618,7 @@ class UserDataSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete an User Data
+        r"""Delete user data
 
         :param user_data_id:
         :param retries: Override the default retry configuration for this method
@@ -1880,6 +1682,204 @@ class UserDataSDK(BaseSDK):
 
         if utils.match_response(http_res, "204", "*"):
             return
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def patch_user_data(
+        self,
+        *,
+        user_data_id: str,
+        data: Union[
+            models.PatchUserDataUserDataData, models.PatchUserDataUserDataDataTypedDict
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UserDataObject:
+        r"""Update user data
+
+        Allow you update User Data in a team.
+
+
+        :param user_data_id:
+        :param data:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.PatchUserDataRequest(
+            user_data_id=user_data_id,
+            request_body=models.PatchUserDataUserDataRequestBody(
+                data=utils.get_pydantic_model(data, models.PatchUserDataUserDataData),
+            ),
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/user_data/{user_data_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body if request is not None else None,
+                False,
+                True,
+                "json",
+                Optional[models.PatchUserDataUserDataRequestBody],
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="patch-user-data",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(models.UserDataObject, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def patch_user_data_async(
+        self,
+        *,
+        user_data_id: str,
+        data: Union[
+            models.PatchUserDataUserDataData, models.PatchUserDataUserDataDataTypedDict
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UserDataObject:
+        r"""Update user data
+
+        Allow you update User Data in a team.
+
+
+        :param user_data_id:
+        :param data:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.PatchUserDataRequest(
+            user_data_id=user_data_id,
+            request_body=models.PatchUserDataUserDataRequestBody(
+                data=utils.get_pydantic_model(data, models.PatchUserDataUserDataData),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/user_data/{user_data_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body if request is not None else None,
+                False,
+                True,
+                "json",
+                Optional[models.PatchUserDataUserDataRequestBody],
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="patch-user-data",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(models.UserDataObject, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)

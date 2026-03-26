@@ -2,6 +2,14 @@
 
 The site slug to deploy the server
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import CreateServerServersSite
+
+value = CreateServerServersSite.ASH
+```
+
 
 ## Values
 

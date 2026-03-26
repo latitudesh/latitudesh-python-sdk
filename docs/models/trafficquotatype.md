@@ -1,5 +1,13 @@
 # TrafficQuotaType
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import TrafficQuotaType
+
+value = TrafficQuotaType.TRAFFIC_QUOTA
+```
+
 
 ## Values
 

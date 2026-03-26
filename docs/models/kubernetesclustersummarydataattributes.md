@@ -1,0 +1,16 @@
+# KubernetesClusterSummaryDataAttributes
+
+
+## Fields
+
+| Field                                                                   | Type                                                                    | Required                                                                | Description                                                             |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `name`                                                                  | *Optional[str]*                                                         | :heavy_minus_sign:                                                      | The cluster name                                                        |
+| `phase`                                                                 | [Optional[models.Phase]](../models/phase.md)                            | :heavy_minus_sign:                                                      | The current phase of the cluster lifecycle                              |
+| `ready`                                                                 | *Optional[bool]*                                                        | :heavy_minus_sign:                                                      | Whether the cluster is ready to accept workloads                        |
+| `infrastructure_ready`                                                  | *Optional[bool]*                                                        | :heavy_minus_sign:                                                      | Whether the underlying infrastructure is ready                          |
+| `control_plane_ready`                                                   | *Optional[bool]*                                                        | :heavy_minus_sign:                                                      | Whether the control plane is ready                                      |
+| `message`                                                               | *Optional[str]*                                                         | :heavy_minus_sign:                                                      | Human-readable status message describing the current provisioning state |
+| `steps`                                                                 | List[[models.Steps](../models/steps.md)]                                | :heavy_minus_sign:                                                      | Provisioning progress steps for dashboard display                       |
+| `last_status_change`                                                    | [date](https://docs.python.org/3/library/datetime.html#date-objects)    | :heavy_minus_sign:                                                      | Timestamp of the most recent status condition change                    |
+| `created_at`                                                            | [date](https://docs.python.org/3/library/datetime.html#date-objects)    | :heavy_minus_sign:                                                      | When the cluster was created                                            |

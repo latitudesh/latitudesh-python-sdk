@@ -1,5 +1,13 @@
 # BillingMethod
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import BillingMethod
+
+value = BillingMethod.NORMAL
+```
+
 
 ## Values
 

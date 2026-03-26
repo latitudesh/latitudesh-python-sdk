@@ -4,20 +4,20 @@
 
 ### Available Operations
 
-* [list](#list) - List API Keys
-* [create](#create) - Create API Key
-* [regenerate](#regenerate) - Rotate API Key
-* [delete](#delete) - Delete API Key
-* [update_api_key](#update_api_key) - Update API Key Settings
+* [list](#list) - List API keys
+* [create](#create) - Create API key
+* [regenerate](#regenerate) - Rotate API key
+* [delete](#delete) - Delete API key
+* [update_api_key](#update_api_key) - Update API key settings
 
 ## list
 
-Returns a list of all API keys from the team members
+Returns a list of all API keys.
 
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-api-keys" method="get" path="/auth/api_keys" -->
+<!-- UsageSnippet language="python" operationID="get-api-keys" method="get" path="/auth/api_keys" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -55,9 +55,9 @@ with Latitudesh(
 Create a new API Key that is tied to the current user account. The created API key is only listed ONCE upon creation. It can however be regenerated or deleted.
 
 
-### Example Usage
+### Example Usage: API Key Created
 
-<!-- UsageSnippet language="python" operationID="post-api-key" method="post" path="/auth/api_keys" -->
+<!-- UsageSnippet language="python" operationID="post-api-key" method="post" path="/auth/api_keys" example="API Key Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -73,6 +73,76 @@ with Latitudesh(
         "attributes": {
             "name": "App Token",
         },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Bad Request
+
+<!-- UsageSnippet language="python" operationID="post-api-key" method="post" path="/auth/api_keys" example="Bad Request" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.api_keys.create(data={
+        "type": latitudesh_python_sdk.CreateAPIKeyType.API_KEYS,
+        "attributes": {
+            "name": "foobar",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Created
+
+<!-- UsageSnippet language="python" operationID="post-api-key" method="post" path="/auth/api_keys" example="Created" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.api_keys.create(data={
+        "type": latitudesh_python_sdk.CreateAPIKeyType.API_KEYS,
+        "attributes": {
+            "name": "App Token",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unprocessable Entity
+
+<!-- UsageSnippet language="python" operationID="post-api-key" method="post" path="/auth/api_keys" example="Unprocessable Entity" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.api_keys.create(data={
+        "type": latitudesh_python_sdk.CreateAPIKeyType.API_KEYS,
+        "attributes": {},
     })
 
     # Handle response
@@ -105,7 +175,7 @@ Use PATCH to update settings without rotating the token.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="rotate-api-key" method="put" path="/auth/api_keys/{api_key_id}" -->
+<!-- UsageSnippet language="python" operationID="rotate-api-key" method="put" path="/auth/api_keys/{api_key_id}" example="Success" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -189,9 +259,109 @@ Update API Key settings (name, read_only, allowed_ips) without rotating the toke
 Use PUT to rotate the token.
 
 
-### Example Usage
+### Example Usage: API Key Not Found
 
-<!-- UsageSnippet language="python" operationID="update-api-key" method="patch" path="/auth/api_keys/{api_key_id}" -->
+<!-- UsageSnippet language="python" operationID="update-api-key" method="patch" path="/auth/api_keys/{api_key_id}" example="API Key Not Found" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.api_keys.update_api_key(api_key_id="invalid-api-key", data={
+        "id": "invalid-api-key",
+        "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
+        "attributes": {
+            "name": "App Token",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: API Key Updated
+
+<!-- UsageSnippet language="python" operationID="update-api-key" method="patch" path="/auth/api_keys/{api_key_id}" example="API Key Updated" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.api_keys.update_api_key(api_key_id="tok_pRMLydp0dQKr1", data={
+        "id": "tok_pRMLydp0dQKr1",
+        "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
+        "attributes": {
+            "name": "App Token",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Bad Request
+
+<!-- UsageSnippet language="python" operationID="update-api-key" method="patch" path="/auth/api_keys/{api_key_id}" example="Bad Request" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.api_keys.update_api_key(api_key_id="tok_w5AEmq7XDBkWX", data={
+        "id": "tok_w5AEmq7XDBkWX",
+        "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
+        "attributes": {
+            "name": "Name of the API Key",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="update-api-key" method="patch" path="/auth/api_keys/{api_key_id}" example="Success" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.api_keys.update_api_key(api_key_id="tok_zlkg1DegdvZE5", data={
+        "id": "tok_zlkg1DegdvZE5",
+        "type": latitudesh_python_sdk.UpdateAPIKeyType.API_KEYS,
+        "attributes": {
+            "name": "App Token",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success - Update name without rotating token
+
+<!-- UsageSnippet language="python" operationID="update-api-key" method="patch" path="/auth/api_keys/{api_key_id}" example="Success - Update name without rotating token" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh

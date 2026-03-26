@@ -21,7 +21,7 @@ class Roles(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetRolesResponse]:
-        r"""List all Roles
+        r"""List roles
 
         Returns a list of all roles that can be assigned to users
 
@@ -90,7 +90,7 @@ class Roles(BaseSDK):
 
         def next_func() -> Optional[models.GetRolesResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -98,7 +98,7 @@ class Roles(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -132,7 +132,7 @@ class Roles(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetRolesResponse]:
-        r"""List all Roles
+        r"""List roles
 
         Returns a list of all roles that can be assigned to users
 
@@ -201,7 +201,7 @@ class Roles(BaseSDK):
 
         def next_func() -> Optional[models.GetRolesResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -209,7 +209,7 @@ class Roles(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -242,7 +242,7 @@ class Roles(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Role:
-        r"""Retrieve Role
+        r"""Retrieve role
 
         :param role_id:
         :param retries: Override the default retry configuration for this method
@@ -324,7 +324,7 @@ class Roles(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Role:
-        r"""Retrieve Role
+        r"""Retrieve role
 
         :param role_id:
         :param retries: Override the default retry configuration for this method

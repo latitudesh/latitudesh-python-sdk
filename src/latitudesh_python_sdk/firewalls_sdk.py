@@ -22,9 +22,9 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetAllFirewallAssignmentsResponse]:
-        r"""List All Firewall Assignments
+        r"""List firewall assignments
 
-        List all firewall assignments
+        Returns a list of all servers assigned to one or more firewalls.
 
         :param filter_server: The server ID to filter by
         :param page_size: Number of items to return per page
@@ -92,7 +92,7 @@ class FirewallsSDK(BaseSDK):
 
         def next_func() -> Optional[models.GetAllFirewallAssignmentsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -100,7 +100,7 @@ class FirewallsSDK(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -136,9 +136,9 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetAllFirewallAssignmentsResponse]:
-        r"""List All Firewall Assignments
+        r"""List firewall assignments
 
-        List all firewall assignments
+        Returns a list of all servers assigned to one or more firewalls.
 
         :param filter_server: The server ID to filter by
         :param page_size: Number of items to return per page
@@ -206,7 +206,7 @@ class FirewallsSDK(BaseSDK):
 
         def next_func() -> Optional[models.GetAllFirewallAssignmentsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -214,7 +214,7 @@ class FirewallsSDK(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -251,7 +251,7 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Firewall:
-        r"""Create a firewall
+        r"""Create firewall
 
         Create a firewall
 
@@ -341,7 +341,7 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Firewall:
-        r"""Create a firewall
+        r"""Create firewall
 
         Create a firewall
 
@@ -500,7 +500,7 @@ class FirewallsSDK(BaseSDK):
 
         def next_func() -> Optional[models.ListFirewallsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -508,7 +508,7 @@ class FirewallsSDK(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -614,7 +614,7 @@ class FirewallsSDK(BaseSDK):
 
         def next_func() -> Optional[models.ListFirewallsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -622,7 +622,7 @@ class FirewallsSDK(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -656,9 +656,9 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Firewall:
-        r"""Retrieve Firewall
+        r"""Retrieve firewall
 
-        Retrieve a firewall
+        Returns a single firewall by its ID.
 
         :param firewall_id: The Firewall ID
         :param retries: Override the default retry configuration for this method
@@ -740,9 +740,9 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Firewall:
-        r"""Retrieve Firewall
+        r"""Retrieve firewall
 
-        Retrieve a firewall
+        Returns a single firewall by its ID.
 
         :param firewall_id: The Firewall ID
         :param retries: Override the default retry configuration for this method
@@ -828,9 +828,9 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Firewall:
-        r"""Update Firewall
+        r"""Update firewall
 
-        Update a firewall
+        Updates a firewall by its ID.
 
         :param firewall_id: The Firewall ID
         :param data:
@@ -927,9 +927,9 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Firewall:
-        r"""Update Firewall
+        r"""Update firewall
 
-        Update a firewall
+        Updates a firewall by its ID.
 
         :param firewall_id: The Firewall ID
         :param data:
@@ -1022,9 +1022,7 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Firewall
-
-        Delete a firewall
+        r"""Delete firewall
 
         :param firewall_id: The Firewall ID
         :param retries: Override the default retry configuration for this method
@@ -1106,9 +1104,7 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Firewall
-
-        Delete a firewall
+        r"""Delete firewall
 
         :param firewall_id: The Firewall ID
         :param retries: Override the default retry configuration for this method
@@ -1194,9 +1190,9 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FirewallServer:
-        r"""Firewall Assignment
+        r"""Assign server to firewall
 
-        Assign a server to a firewall
+        Assigns a server to a firewall by its ID.
 
         :param firewall_id: The Firewall ID
         :param data:
@@ -1295,9 +1291,9 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.FirewallServer:
-        r"""Firewall Assignment
+        r"""Assign server to firewall
 
-        Assign a server to a firewall
+        Assigns a server to a firewall by its ID.
 
         :param firewall_id: The Firewall ID
         :param data:
@@ -1394,9 +1390,9 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetFirewallAssignmentsResponse]:
-        r"""Firewall Assignments
+        r"""Firewall assignments
 
-        List servers assigned to a firewall
+        Returns a list of all servers assigned to a particular firewall.
 
         :param firewall_id: The Firewall ID
         :param page_size: Number of items to return per page
@@ -1464,7 +1460,7 @@ class FirewallsSDK(BaseSDK):
 
         def next_func() -> Optional[models.GetFirewallAssignmentsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -1472,7 +1468,7 @@ class FirewallsSDK(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -1508,9 +1504,9 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetFirewallAssignmentsResponse]:
-        r"""Firewall Assignments
+        r"""Firewall assignments
 
-        List servers assigned to a firewall
+        Returns a list of all servers assigned to a particular firewall.
 
         :param firewall_id: The Firewall ID
         :param page_size: Number of items to return per page
@@ -1578,7 +1574,7 @@ class FirewallsSDK(BaseSDK):
 
         def next_func() -> Optional[models.GetFirewallAssignmentsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -1586,7 +1582,7 @@ class FirewallsSDK(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -1621,9 +1617,9 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Firewall Assignment
+        r"""Delete assignment
 
-        Remove a server from a firewall
+        Removes a server from a firewall by its ID.
 
         :param firewall_id: The Firewall ID
         :param assignment_id: The Assignment ID
@@ -1708,9 +1704,9 @@ class FirewallsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Firewall Assignment
+        r"""Delete assignment
 
-        Remove a server from a firewall
+        Removes a server from a firewall by its ID.
 
         :param firewall_id: The Firewall ID
         :param assignment_id: The Assignment ID

@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [list_usage](#list_usage) - List Billing Usage
+* [list_usage](#list_usage) - Retrieve billing usage
 
 ## list_usage
 
@@ -13,7 +13,7 @@ Returns the billing usage of a project
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-billing-usage" method="get" path="/billing/usage" -->
+<!-- UsageSnippet language="python" operationID="get-billing-usage" method="get" path="/billing/usage" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os

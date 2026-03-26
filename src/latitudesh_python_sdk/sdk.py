@@ -17,9 +17,11 @@ import weakref
 if TYPE_CHECKING:
     from latitudesh_python_sdk.apikeys_sdk import APIKeysSDK
     from latitudesh_python_sdk.billing import Billing
+    from latitudesh_python_sdk.elastic_ips_sdk import ElasticIpsSDK
     from latitudesh_python_sdk.events_sdk import EventsSDK
     from latitudesh_python_sdk.firewalls_sdk import FirewallsSDK
     from latitudesh_python_sdk.ipaddresses_sdk import IPAddressesSDK
+    from latitudesh_python_sdk.kubernetes_clusters_sdk import KubernetesClustersSDK
     from latitudesh_python_sdk.operatingsystems_sdk import OperatingSystemsSDK
     from latitudesh_python_sdk.plans import Plans
     from latitudesh_python_sdk.privatenetworks import PrivateNetworks
@@ -35,7 +37,7 @@ if TYPE_CHECKING:
     from latitudesh_python_sdk.traffic_sdk import TrafficSDK
     from latitudesh_python_sdk.userdata_sdk import UserDataSDK
     from latitudesh_python_sdk.userprofile import UserProfile
-    from latitudesh_python_sdk.virtualmachines import VirtualMachines
+    from latitudesh_python_sdk.virtualmachines_sdk import VirtualMachinesSDK
     from latitudesh_python_sdk.vpnsessions import VpnSessions
 
 
@@ -46,9 +48,11 @@ class Latitudesh(BaseSDK):
     billing: "Billing"
     events: "EventsSDK"
     firewalls: "FirewallsSDK"
+    elastic_ips: "ElasticIpsSDK"
     ip_addresses: "IPAddressesSDK"
     teams_members: "TeamsMembers"
     operating_systems: "OperatingSystemsSDK"
+    kubernetes_clusters: "KubernetesClustersSDK"
     plans: "Plans"
     projects: "ProjectsSDK"
     ssh_keys: "SSHKeysSDK"
@@ -61,7 +65,7 @@ class Latitudesh(BaseSDK):
     teams: "TeamsSDK"
     traffic: "TrafficSDK"
     user_profile: "UserProfile"
-    virtual_machines: "VirtualMachines"
+    virtual_machines: "VirtualMachinesSDK"
     private_networks: "PrivateNetworks"
     vpn_sessions: "VpnSessions"
     _sub_sdk_map = {
@@ -69,11 +73,16 @@ class Latitudesh(BaseSDK):
         "billing": ("latitudesh_python_sdk.billing", "Billing"),
         "events": ("latitudesh_python_sdk.events_sdk", "EventsSDK"),
         "firewalls": ("latitudesh_python_sdk.firewalls_sdk", "FirewallsSDK"),
+        "elastic_ips": ("latitudesh_python_sdk.elastic_ips_sdk", "ElasticIpsSDK"),
         "ip_addresses": ("latitudesh_python_sdk.ipaddresses_sdk", "IPAddressesSDK"),
         "teams_members": ("latitudesh_python_sdk.teamsmembers", "TeamsMembers"),
         "operating_systems": (
             "latitudesh_python_sdk.operatingsystems_sdk",
             "OperatingSystemsSDK",
+        ),
+        "kubernetes_clusters": (
+            "latitudesh_python_sdk.kubernetes_clusters_sdk",
+            "KubernetesClustersSDK",
         ),
         "plans": ("latitudesh_python_sdk.plans", "Plans"),
         "projects": ("latitudesh_python_sdk.projects_sdk", "ProjectsSDK"),
@@ -88,8 +97,8 @@ class Latitudesh(BaseSDK):
         "traffic": ("latitudesh_python_sdk.traffic_sdk", "TrafficSDK"),
         "user_profile": ("latitudesh_python_sdk.userprofile", "UserProfile"),
         "virtual_machines": (
-            "latitudesh_python_sdk.virtualmachines",
-            "VirtualMachines",
+            "latitudesh_python_sdk.virtualmachines_sdk",
+            "VirtualMachinesSDK",
         ),
         "private_networks": (
             "latitudesh_python_sdk.privatenetworks",
@@ -103,8 +112,8 @@ class Latitudesh(BaseSDK):
         bearer: Optional[Union[Optional[str], Callable[[], Optional[str]]]] = None,
         latitude_api_key: Optional[str] = None,
         server_idx: Optional[int] = None,
-        server_url: Optional[str] = None,
         url_params: Optional[Dict[str, str]] = None,
+        server_url: Optional[str] = None,
         client: Optional[HttpClient] = None,
         async_client: Optional[AsyncHttpClient] = None,
         retry_config: OptionalNullable[RetryConfig] = UNSET,

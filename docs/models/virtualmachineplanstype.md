@@ -2,6 +2,14 @@
 
 The type of the resource
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import VirtualMachinePlansType
+
+value = VirtualMachinePlansType.VIRTUAL_MACHINE_PLANS
+```
+
 
 ## Values
 

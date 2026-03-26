@@ -1,5 +1,13 @@
 # StoragePlanDataType
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import StoragePlanDataType
+
+value = StoragePlanDataType.STORAGE_PLANS
+```
+
 
 ## Values
 

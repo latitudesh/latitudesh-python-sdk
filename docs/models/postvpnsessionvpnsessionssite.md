@@ -1,5 +1,13 @@
 # PostVpnSessionVpnSessionsSite
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import PostVpnSessionVpnSessionsSite
+
+value = PostVpnSessionVpnSessionsSite.ASH
+```
+
 
 ## Values
 

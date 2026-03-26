@@ -4,8 +4,8 @@
 
 ### Available Operations
 
-* [list](#list) - List all Roles
-* [get](#get) - Retrieve Role
+* [list](#list) - List roles
+* [get](#get) - Retrieve role
 
 ## list
 
@@ -14,7 +14,7 @@ Returns a list of all roles that can be assigned to users
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-roles" method="get" path="/roles" -->
+<!-- UsageSnippet language="python" operationID="get-roles" method="get" path="/roles" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -53,11 +53,11 @@ with Latitudesh(
 
 ## get
 
-Retrieve Role
+Retrieve role
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-role-id" method="get" path="/roles/{role_id}" -->
+<!-- UsageSnippet language="python" operationID="get-role-id" method="get" path="/roles/{role_id}" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os

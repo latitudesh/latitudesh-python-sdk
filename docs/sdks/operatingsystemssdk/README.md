@@ -4,7 +4,7 @@
 
 ### Available Operations
 
-* [list](#list) - List all operating systems available
+* [list](#list) - List operating systems
 
 ## list
 
@@ -13,7 +13,7 @@ Lists all operating systems available to deploy and reinstall.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-plans-operating-system" method="get" path="/plans/operating_systems" -->
+<!-- UsageSnippet language="python" operationID="get-plans-operating-system" method="get" path="/plans/operating_systems" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os

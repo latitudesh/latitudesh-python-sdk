@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
@@ -15,10 +21,84 @@ class VirtualMachinePlansType(str, Enum):
     VIRTUAL_MACHINE_PLANS = "virtual_machine_plans"
 
 
-class VirtualMachinePlansDataType(str, Enum):
-    r"""The type of the disk"""
+class VcpuTypedDict(TypedDict):
+    r"""Detailed vCPU specifications"""
 
-    LOCAL = "local"
+    count: NotRequired[Nullable[int]]
+    r"""The number of virtual CPUs"""
+    clock: NotRequired[Nullable[float]]
+    r"""The CPU clock speed in GHz"""
+    type: NotRequired[Nullable[str]]
+    r"""The CPU type/model"""
+
+
+class Vcpu(BaseModel):
+    r"""Detailed vCPU specifications"""
+
+    count: OptionalNullable[int] = UNSET
+    r"""The number of virtual CPUs"""
+
+    clock: OptionalNullable[float] = UNSET
+    r"""The CPU clock speed in GHz"""
+
+    type: OptionalNullable[str] = UNSET
+    r"""The CPU type/model"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["count", "clock", "type"])
+        nullable_fields = set(["count", "clock", "type"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
+class VirtualMachinePlansNicsTypedDict(TypedDict):
+    type: NotRequired[str]
+    r"""NIC speed/type"""
+    count: NotRequired[str]
+    r"""Number of NICs"""
+
+
+class VirtualMachinePlansNics(BaseModel):
+    type: Optional[str] = None
+    r"""NIC speed/type"""
+
+    count: Optional[str] = None
+    r"""Number of NICs"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["type", "count"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class VirtualMachinePlansUnit(str, Enum):
@@ -49,7 +129,7 @@ class Size(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -59,14 +139,14 @@ class Size(BaseModel):
 
 
 class DiskTypedDict(TypedDict):
-    type: NotRequired[VirtualMachinePlansDataType]
-    r"""The type of the disk"""
+    type: NotRequired[str]
+    r"""The type of the disk (e.g., local SSD, local NVMe)"""
     size: NotRequired[SizeTypedDict]
 
 
 class Disk(BaseModel):
-    type: Optional[VirtualMachinePlansDataType] = None
-    r"""The type of the disk"""
+    type: Optional[str] = None
+    r"""The type of the disk (e.g., local SSD, local NVMe)"""
 
     size: Optional[Size] = None
 
@@ -78,7 +158,7 @@ class Disk(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -90,8 +170,16 @@ class Disk(BaseModel):
 class VirtualMachinePlansSpecsTypedDict(TypedDict):
     memory: NotRequired[int]
     r"""The total memory"""
+    gpu: NotRequired[str]
+    r"""The GPU type"""
+    vram_per_gpu: NotRequired[Nullable[int]]
+    r"""VRAM per GPU in GB"""
     vcpus: NotRequired[int]
-    r"""The number of virtual CPUs"""
+    r"""The number of virtual CPUs (legacy field)"""
+    vcpu: NotRequired[VcpuTypedDict]
+    r"""Detailed vCPU specifications"""
+    nics: NotRequired[Nullable[List[VirtualMachinePlansNicsTypedDict]]]
+    r"""Network interface cards"""
     disk: NotRequired[DiskTypedDict]
 
 
@@ -99,23 +187,46 @@ class VirtualMachinePlansSpecs(BaseModel):
     memory: Optional[int] = None
     r"""The total memory"""
 
+    gpu: Optional[str] = None
+    r"""The GPU type"""
+
+    vram_per_gpu: OptionalNullable[int] = UNSET
+    r"""VRAM per GPU in GB"""
+
     vcpus: Optional[int] = None
-    r"""The number of virtual CPUs"""
+    r"""The number of virtual CPUs (legacy field)"""
+
+    vcpu: Optional[Vcpu] = None
+    r"""Detailed vCPU specifications"""
+
+    nics: OptionalNullable[List[VirtualMachinePlansNics]] = UNSET
+    r"""Network interface cards"""
 
     disk: Optional[Disk] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["memory", "vcpus", "disk"])
+        optional_fields = set(
+            ["memory", "gpu", "vram_per_gpu", "vcpus", "vcpu", "nics", "disk"]
+        )
+        nullable_fields = set(["vram_per_gpu", "nics"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -142,7 +253,7 @@ class VirtualMachinePlansUSD(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -172,7 +283,7 @@ class VirtualMachinePlansBRL(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -199,7 +310,7 @@ class VirtualMachinePlansPricing(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -208,10 +319,53 @@ class VirtualMachinePlansPricing(BaseModel):
         return m
 
 
+class VirtualMachinePlansLocationsTypedDict(TypedDict):
+    available: NotRequired[List[str]]
+    r"""Sites with clusters that support this plan"""
+    in_stock: NotRequired[List[str]]
+    r"""Sites with available capacity for this plan"""
+
+
+class VirtualMachinePlansLocations(BaseModel):
+    available: Optional[List[str]] = None
+    r"""Sites with clusters that support this plan"""
+
+    in_stock: Optional[List[str]] = None
+    r"""Sites with available capacity for this plan"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["available", "in_stock"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class VirtualMachinePlansDataStockLevel(str, Enum):
+    r"""The stock level in this region"""
+
+    LOW = "low"
+    UNAVAILABLE = "unavailable"
+    MEDIUM = "medium"
+    HIGH = "high"
+
+
 class VirtualMachinePlansRegionsTypedDict(TypedDict):
     name: NotRequired[str]
     available: NotRequired[List[str]]
     pricing: NotRequired[VirtualMachinePlansPricingTypedDict]
+    locations: NotRequired[VirtualMachinePlansLocationsTypedDict]
+    stock_level: NotRequired[VirtualMachinePlansDataStockLevel]
+    r"""The stock level in this region"""
 
 
 class VirtualMachinePlansRegions(BaseModel):
@@ -221,15 +375,22 @@ class VirtualMachinePlansRegions(BaseModel):
 
     pricing: Optional[VirtualMachinePlansPricing] = None
 
+    locations: Optional[VirtualMachinePlansLocations] = None
+
+    stock_level: Optional[VirtualMachinePlansDataStockLevel] = None
+    r"""The stock level in this region"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "available", "pricing"])
+        optional_fields = set(
+            ["name", "available", "pricing", "locations", "stock_level"]
+        )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -254,6 +415,8 @@ class VirtualMachinePlansAttributesTypedDict(TypedDict):
     regions: NotRequired[List[VirtualMachinePlansRegionsTypedDict]]
     stock_level: NotRequired[VirtualMachinePlansStockLevel]
     r"""The stock level of the plan"""
+    available_operating_systems: NotRequired[List[str]]
+    r"""List of operating system slugs that are compatible with this plan"""
 
 
 class VirtualMachinePlansAttributes(BaseModel):
@@ -267,15 +430,20 @@ class VirtualMachinePlansAttributes(BaseModel):
     stock_level: Optional[VirtualMachinePlansStockLevel] = None
     r"""The stock level of the plan"""
 
+    available_operating_systems: Optional[List[str]] = None
+    r"""List of operating system slugs that are compatible with this plan"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "specs", "regions", "stock_level"])
+        optional_fields = set(
+            ["name", "specs", "regions", "stock_level", "available_operating_systems"]
+        )
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -309,7 +477,7 @@ class VirtualMachinePlansData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -333,10 +501,16 @@ class VirtualMachinePlans(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+try:
+    VirtualMachinePlansPricing.model_rebuild()
+except NameError:
+    pass

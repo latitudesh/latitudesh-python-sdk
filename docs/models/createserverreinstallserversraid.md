@@ -2,6 +2,14 @@
 
 RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import CreateServerReinstallServersRaid
+
+value = CreateServerReinstallServersRaid.RAID_0
+```
+
 
 ## Values
 

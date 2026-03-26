@@ -4,13 +4,12 @@
 
 ### Available Operations
 
-* [list](#list) - List all Plans
-* [get](#get) - Retrieve a Plan
-* [list_bandwidth](#list_bandwidth) - List all bandwidth plans
-* [update_bandwidth](#update_bandwidth) - Buy or remove bandwidth packages
-* [get_containers_plan](#get_containers_plan) - Retrieve container plan
-* [list_storage](#list_storage) - List all Storage Plans
-* [list_vm_plans](#list_vm_plans) - List all Virtual Machines Plans
+* [list](#list) - List plans
+* [get](#get) - Retrieve plan
+* [list_bandwidth](#list_bandwidth) - List bandwidth plans
+* [update_bandwidth](#update_bandwidth) - Update bandwidth packages
+* [list_storage](#list_storage) - List storage plans
+* [list_vm_plans](#list_vm_plans) - List VM plans
 
 ## list
 
@@ -19,7 +18,7 @@ Lists all plans. Availability by region is included in `attributes.regions.locat
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-plans" method="get" path="/plans" -->
+<!-- UsageSnippet language="python" operationID="get-plans" method="get" path="/plans" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -62,11 +61,11 @@ with Latitudesh(
 
 ## get
 
-Retrieve a Plan
+Retrieve plan
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-plan" method="get" path="/plans/{plan_id}" -->
+<!-- UsageSnippet language="python" operationID="get-plan" method="get" path="/plans/{plan_id}" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -106,7 +105,7 @@ Lists all bandwidth plans.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-bandwidth-plans" method="get" path="/plans/bandwidth" -->
+<!-- UsageSnippet language="python" operationID="get-bandwidth-plans" method="get" path="/plans/bandwidth" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -150,9 +149,35 @@ with Latitudesh(
 Allows to increase or decrease bandwidth packages. Only admins and owners can request.
 
 
-### Example Usage
+### Example Usage: Forbidden
 
-<!-- UsageSnippet language="python" operationID="update-plans-bandwidth" method="post" path="/plans/bandwidth" -->
+<!-- UsageSnippet language="python" operationID="update-plans-bandwidth" method="post" path="/plans/bandwidth" example="Forbidden" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.plans.update_bandwidth(data={
+        "type": latitudesh_python_sdk.UpdatePlansBandwidthPlansType.BANDWIDTH_PACKAGES,
+        "attributes": {
+            "project": "proj_v9BVDaEYDRm1W",
+            "quantity": 5,
+            "region_slug": "brazil",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="update-plans-bandwidth" method="post" path="/plans/bandwidth" example="Success" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -194,54 +219,13 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## get_containers_plan
-
-Retrieve a container plan.
-
-
-### Example Usage
-
-<!-- UsageSnippet language="python" operationID="get-containers-plan" method="get" path="/plans/containers/{plan_id}" -->
-```python
-from latitudesh_python_sdk import Latitudesh
-import os
-
-
-with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
-) as latitudesh:
-
-    res = latitudesh.plans.get_containers_plan(plan_id="<id>")
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `plan_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | The Plan ID                                                         |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
-
-### Response
-
-**[models.ContainerPlanData](../../models/containerplandata.md)**
-
-### Errors
-
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
-
 ## list_storage
 
-List all Storage Plans
+List storage plans
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-storage-plans" method="get" path="/plans/storage" -->
+<!-- UsageSnippet language="python" operationID="get-storage-plans" method="get" path="/plans/storage" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -276,11 +260,11 @@ with Latitudesh(
 
 ## list_vm_plans
 
-List all Virtual Machines Plans
+List VM plans
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-vm-plans" method="get" path="/plans/virtual_machines" -->
+<!-- UsageSnippet language="python" operationID="get-vm-plans" method="get" path="/plans/virtual_machines" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
