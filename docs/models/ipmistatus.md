@@ -1,5 +1,13 @@
 # IpmiStatus
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import IpmiStatus
+
+value = IpmiStatus.UNAVAILABLE
+```
+
 
 ## Values
 

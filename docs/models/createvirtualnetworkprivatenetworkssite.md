@@ -2,6 +2,14 @@
 
 Site ID or slug
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import CreateVirtualNetworkPrivateNetworksSite
+
+value = CreateVirtualNetworkPrivateNetworksSite.ASH
+```
+
 
 ## Values
 

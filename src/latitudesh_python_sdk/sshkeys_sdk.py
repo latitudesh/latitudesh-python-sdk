@@ -24,7 +24,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SSHKeys:
-        r"""List all Project SSH Keys
+        r"""List SSH Keys
 
         List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -115,7 +115,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SSHKeys:
-        r"""List all Project SSH Keys
+        r"""List SSH Keys
 
         List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -209,7 +209,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PostProjectSSHKeyResponseBody:
-        r"""Create a Project SSH Key
+        r"""Create SSH Key
 
         Allow you create SSH Keys in a project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -316,7 +316,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PostProjectSSHKeyResponseBody:
-        r"""Create a Project SSH Key
+        r"""Create SSH Key
 
         Allow you create SSH Keys in a project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -420,7 +420,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetProjectSSHKeyResponseBody:
-        r"""Retrieve a Project SSH Key
+        r"""Retrieve Project SSH Key
 
         List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -513,7 +513,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetProjectSSHKeyResponseBody:
-        r"""Retrieve a Project SSH Key
+        r"""Retrieve Project SSH Key
 
         List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -610,7 +610,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PutProjectSSHKeyResponseBody:
-        r"""Update a Project SSH Key
+        r"""Update Project SSH Key
 
         Allow you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -718,7 +718,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PutProjectSSHKeyResponseBody:
-        r"""Update a Project SSH Key
+        r"""Update Project SSH Key
 
         Allow you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -822,7 +822,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project SSH Key
+        r"""Delete Project SSH Key
 
         Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
 
@@ -913,7 +913,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project SSH Key
+        r"""Delete Project SSH Key
 
         Allow you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
 
@@ -1002,7 +1002,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SSHKeys:
-        r"""List all SSH Keys
+        r"""List SSH Keys
 
         List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -1093,7 +1093,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.SSHKeys:
-        r"""List all SSH Keys
+        r"""List SSH Keys
 
         List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -1184,7 +1184,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PostSSHKeyResponseBody:
-        r"""Create a SSH Key
+        r"""Create SSH Key
 
         Allows you create SSH Keys. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -1274,7 +1274,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PostSSHKeyResponseBody:
-        r"""Create a SSH Key
+        r"""Create SSH Key
 
         Allows you create SSH Keys. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -1362,7 +1362,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetSSHKeyResponseBody:
-        r"""Retrieve a SSH Key
+        r"""Retrieve SSH Key
 
         List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -1447,7 +1447,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetSSHKeyResponseBody:
-        r"""Retrieve a SSH Key
+        r"""Retrieve SSH Key
 
         List all SSH Keys in the project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -1523,6 +1523,176 @@ class SSHKeysSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    def delete_ssh_key(
+        self,
+        *,
+        ssh_key_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ):
+        r"""Delete SSH Key
+
+        Allows you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
+
+
+        :param ssh_key_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DeleteSSHKeyRequest(
+            ssh_key_id=ssh_key_id,
+        )
+
+        req = self._build_request(
+            method="DELETE",
+            path="/ssh_keys/{ssh_key_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="*/*",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="delete-ssh-key",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "*"):
+            return
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def delete_ssh_key_async(
+        self,
+        *,
+        ssh_key_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ):
+        r"""Delete SSH Key
+
+        Allows you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
+
+
+        :param ssh_key_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.DeleteSSHKeyRequest(
+            ssh_key_id=ssh_key_id,
+        )
+
+        req = self._build_request_async(
+            method="DELETE",
+            path="/ssh_keys/{ssh_key_id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="*/*",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="delete-ssh-key",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+            ),
+            request=req,
+            error_status_codes=["4XX", "5XX"],
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "*"):
+            return
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
     def put_ssh_key(
         self,
         *,
@@ -1533,7 +1703,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PutSSHKeyResponseBody:
-        r"""Update a SSH Key
+        r"""Update SSH Key
 
         Allows you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -1630,7 +1800,7 @@ class SSHKeysSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PutSSHKeyResponseBody:
-        r"""Update a SSH Key
+        r"""Update SSH Key
 
         Allows you update SSH Key in a project. These keys can be used to access servers after deploy and reinstall actions.
 
@@ -1708,176 +1878,6 @@ class SSHKeysSDK(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.PutSSHKeyResponseBody, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
-    def delete_ssh_key(
-        self,
-        *,
-        ssh_key_id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Delete a SSH Key
-
-        Allows you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
-
-
-        :param ssh_key_id:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.DeleteSSHKeyRequest(
-            ssh_key_id=ssh_key_id,
-        )
-
-        req = self._build_request(
-            method="DELETE",
-            path="/ssh_keys/{ssh_key_id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="*/*",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="delete-ssh-key",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        if utils.match_response(http_res, "200", "*"):
-            return
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
-    async def delete_ssh_key_async(
-        self,
-        *,
-        ssh_key_id: str,
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ):
-        r"""Delete a SSH Key
-
-        Allows you remove SSH Keys in a project. Remove a SSH Key from the project won't revoke the SSH Keys access for previously deploy and reinstall actions.
-
-
-        :param ssh_key_id:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.DeleteSSHKeyRequest(
-            ssh_key_id=ssh_key_id,
-        )
-
-        req = self._build_request_async(
-            method="DELETE",
-            path="/ssh_keys/{ssh_key_id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=False,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="*/*",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="delete-ssh-key",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-            ),
-            request=req,
-            error_status_codes=["4XX", "5XX"],
-            retry_config=retry_config,
-        )
-
-        if utils.match_response(http_res, "200", "*"):
-            return
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)

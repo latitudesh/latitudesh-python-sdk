@@ -8,23 +8,23 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class MetaTypedDict(TypedDict):
+class EventsMetaTypedDict(TypedDict):
     pass
 
 
-class Meta(BaseModel):
+class EventsMeta(BaseModel):
     pass
 
 
 class EventsTypedDict(TypedDict):
     data: NotRequired[List[EventDataTypedDict]]
-    meta: NotRequired[MetaTypedDict]
+    meta: NotRequired[EventsMetaTypedDict]
 
 
 class Events(BaseModel):
     data: Optional[List[EventData]] = None
 
-    meta: Optional[Meta] = None
+    meta: Optional[EventsMeta] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -34,7 +34,7 @@ class Events(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

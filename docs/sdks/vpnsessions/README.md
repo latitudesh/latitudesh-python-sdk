@@ -4,18 +4,37 @@
 
 ### Available Operations
 
-* [list](#list) - List all Active VPN Sessions
-* [create](#create) - Create a VPN Session
-* [refresh_password](#refresh_password) - Refresh a VPN Session
-* [delete](#delete) - Delete a VPN Session
+* [list](#list) - List VPN sessions
+* [create](#create) - Create VPN session
+* [refresh_password](#refresh_password) - Refresh VPN session
+* [delete](#delete) - Delete VPN session
 
 ## list
 
-List all Active VPN Sessions
+List VPN sessions
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="python" operationID="get-vpn-sessions" method="get" path="/vpn_sessions" -->
+<!-- UsageSnippet language="python" operationID="get-vpn-sessions" method="get" path="/vpn_sessions" example="Success" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.vpn_sessions.list(filter_location=latitudesh_python_sdk.FilterLocation.SAO)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when there is a site filter
+
+<!-- UsageSnippet language="python" operationID="get-vpn-sessions" method="get" path="/vpn_sessions" example="when there is a site filter" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -56,9 +75,9 @@ Creates a new VPN Session.
 `NOTE:` The VPN credentials are only listed ONCE upon creation. They can however be refreshed or deleted.
 
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="post-vpn-session" method="post" path="/vpn_sessions" -->
+<!-- UsageSnippet language="python" operationID="post-vpn-session" method="post" path="/vpn_sessions" example="Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -73,6 +92,30 @@ with Latitudesh(
         "attributes": {
             "site": latitudesh_python_sdk.PostVpnSessionVpnSessionsSite.SAO,
             "server_id": "sv_LMmAD8wyqwop2",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unprocessable Entity
+
+<!-- UsageSnippet language="python" operationID="post-vpn-session" method="post" path="/vpn_sessions" example="Unprocessable Entity" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.vpn_sessions.create(data={
+        "attributes": {
+            "site": latitudesh_python_sdk.PostVpnSessionVpnSessionsSite.SYD,
+            "server_id": "sv_GnzRD5BYOM5yw",
         },
     })
 
@@ -103,9 +146,9 @@ with Latitudesh(
 Refreshing an existing VPN Session will create new credentials for that session
 
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="python" operationID="put-vpn-session" method="patch" path="/vpn_sessions/{vpn_session_id}/refresh_password" -->
+<!-- UsageSnippet language="python" operationID="put-vpn-session" method="patch" path="/vpn_sessions/{vpn_session_id}/refresh_password" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -116,6 +159,24 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.vpn_sessions.refresh_password(vpn_session_id="vpn_pRMLydp0dQKr1")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: VPN Session Password Reset
+
+<!-- UsageSnippet language="python" operationID="put-vpn-session" method="patch" path="/vpn_sessions/{vpn_session_id}/refresh_password" example="VPN Session Password Reset" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.vpn_sessions.refresh_password(vpn_session_id="vpn_6VE1Wd37dXnZJ")
 
     # Handle response
     print(res)

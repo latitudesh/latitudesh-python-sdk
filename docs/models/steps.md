@@ -1,0 +1,9 @@
+# Steps
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `name`                                                                                                 | [Optional[models.Name]](../models/name.md)                                                             | :heavy_minus_sign:                                                                                     | Step identifier                                                                                        |
+| `status`                                                                                               | [Optional[models.KubernetesClusterSummaryDataStatus]](../models/kubernetesclustersummarydatastatus.md) | :heavy_minus_sign:                                                                                     | Current status of this step                                                                            |

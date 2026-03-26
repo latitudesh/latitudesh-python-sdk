@@ -4,8 +4,8 @@
 
 ### Available Operations
 
-* [list](#list) - List all Regions
-* [get](#get) - Retrieve a Region
+* [list](#list) - List regions
+* [get](#get) - Retrieve region
 
 ## list
 
@@ -15,7 +15,7 @@ Lists all [available locations](https://latitude.sh/locations). For server avail
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-regions" method="get" path="/regions" -->
+<!-- UsageSnippet language="python" operationID="get-regions" method="get" path="/regions" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -54,11 +54,11 @@ with Latitudesh(
 
 ## get
 
-Retrieve a Region
+Retrieve region
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-region" method="get" path="/regions/{region_id}" -->
+<!-- UsageSnippet language="python" operationID="get-region" method="get" path="/regions/{region_id}" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os

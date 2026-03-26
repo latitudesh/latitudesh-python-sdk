@@ -1,5 +1,13 @@
 # VirtualNetworkDataType
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import VirtualNetworkDataType
+
+value = VirtualNetworkDataType.VIRTUAL_NETWORKS
+```
+
 
 ## Values
 

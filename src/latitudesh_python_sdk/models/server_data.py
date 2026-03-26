@@ -20,26 +20,24 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class Status(str, Enum):
+class ServerDataStatus(str, Enum):
     r"""`on` - The server is powered ON
     `off` - The server is powered OFF
     `unknown` - The server power status is unknown
-    `ready` - The server is in reinstalling state `ready` and should start `disk_erasing` shortly
     `disk_erasing` - The server is in reinstalling state `disk_erasing`
-    `failed_disk_erasing` - The server has failed disk erasing in reinstall
-    `deploying` - The server is in the last reinstalling stage and is `deploying`
-    `failed_deployment` - The server has failed deployment in reinstall
+    `deploying` - The server is deploying or reinstalling
+    `failed_deployment` - The server has failed deployment or reinstall
+    `rescue_mode` - The server is in rescue mode
 
     """
 
     ON = "on"
     OFF = "off"
     UNKNOWN = "unknown"
-    READY = "ready"
     DISK_ERASING = "disk_erasing"
-    FAILED_DISK_ERASING = "failed_disk_erasing"
     DEPLOYING = "deploying"
     FAILED_DEPLOYMENT = "failed_deployment"
+    RESCUE_MODE = "rescue_mode"
 
 
 class IpmiStatus(str, Enum):
@@ -81,7 +79,7 @@ class ServerDataPlan(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -119,7 +117,7 @@ class ServerDataFeatures(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -155,7 +153,7 @@ class Distro(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -197,7 +195,7 @@ class OperatingSystem(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -244,7 +242,7 @@ class ServerDataSpecs(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -292,7 +290,7 @@ class Interfaces(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -305,15 +303,14 @@ class ServerDataAttributesTypedDict(TypedDict):
     hostname: NotRequired[str]
     label: NotRequired[str]
     r"""The server label"""
-    status: NotRequired[Status]
+    status: NotRequired[ServerDataStatus]
     r"""`on` - The server is powered ON
     `off` - The server is powered OFF
     `unknown` - The server power status is unknown
-    `ready` - The server is in reinstalling state `ready` and should start `disk_erasing` shortly
     `disk_erasing` - The server is in reinstalling state `disk_erasing`
-    `failed_disk_erasing` - The server has failed disk erasing in reinstall
-    `deploying` - The server is in the last reinstalling stage and is `deploying`
-    `failed_deployment` - The server has failed deployment in reinstall
+    `deploying` - The server is deploying or reinstalling
+    `failed_deployment` - The server has failed deployment or reinstall
+    `rescue_mode` - The server is in rescue mode
 
     """
     ipmi_status: NotRequired[IpmiStatus]
@@ -321,7 +318,7 @@ class ServerDataAttributesTypedDict(TypedDict):
     r"""The server role (e.g. Bare Metal)"""
     site: NotRequired[str]
     locked: NotRequired[bool]
-    rescue: NotRequired[bool]
+    rescue_allowed: NotRequired[bool]
     primary_ipv4: NotRequired[Nullable[str]]
     primary_ipv6: NotRequired[Nullable[str]]
     created_at: NotRequired[Nullable[str]]
@@ -341,15 +338,14 @@ class ServerDataAttributes(BaseModel):
     label: Optional[str] = None
     r"""The server label"""
 
-    status: Optional[Status] = None
+    status: Optional[ServerDataStatus] = None
     r"""`on` - The server is powered ON
     `off` - The server is powered OFF
     `unknown` - The server power status is unknown
-    `ready` - The server is in reinstalling state `ready` and should start `disk_erasing` shortly
     `disk_erasing` - The server is in reinstalling state `disk_erasing`
-    `failed_disk_erasing` - The server has failed disk erasing in reinstall
-    `deploying` - The server is in the last reinstalling stage and is `deploying`
-    `failed_deployment` - The server has failed deployment in reinstall
+    `deploying` - The server is deploying or reinstalling
+    `failed_deployment` - The server has failed deployment or reinstall
+    `rescue_mode` - The server is in rescue mode
 
     """
 
@@ -362,7 +358,7 @@ class ServerDataAttributes(BaseModel):
 
     locked: Optional[bool] = None
 
-    rescue: Optional[bool] = None
+    rescue_allowed: Optional[bool] = None
 
     primary_ipv4: OptionalNullable[str] = UNSET
 
@@ -397,7 +393,7 @@ class ServerDataAttributes(BaseModel):
                 "role",
                 "site",
                 "locked",
-                "rescue",
+                "rescue_allowed",
                 "primary_ipv4",
                 "primary_ipv6",
                 "created_at",
@@ -419,7 +415,7 @@ class ServerDataAttributes(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -457,7 +453,7 @@ class ServerData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

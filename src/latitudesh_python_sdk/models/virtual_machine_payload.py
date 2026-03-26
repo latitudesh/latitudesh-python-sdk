@@ -24,6 +24,8 @@ class VirtualMachinePayloadAttributesTypedDict(TypedDict):
     r"""The plan ID or Slug for the Virtual Machine"""
     ssh_keys: NotRequired[Nullable[List[str]]]
     project: NotRequired[str]
+    operating_system: NotRequired[Nullable[str]]
+    r"""The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu-24-04 for CPU plans or ubuntu24_ml_in_a_box for GPU plans."""
 
 
 class VirtualMachinePayloadAttributes(BaseModel):
@@ -36,16 +38,21 @@ class VirtualMachinePayloadAttributes(BaseModel):
 
     project: Optional[str] = "my-project"
 
+    operating_system: OptionalNullable[str] = UNSET
+    r"""The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu-24-04 for CPU plans or ubuntu24_ml_in_a_box for GPU plans."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "plan", "ssh_keys", "project"])
-        nullable_fields = set(["plan", "ssh_keys"])
+        optional_fields = set(
+            ["name", "plan", "ssh_keys", "project", "operating_system"]
+        )
+        nullable_fields = set(["plan", "ssh_keys", "operating_system"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -80,7 +87,7 @@ class VirtualMachinePayloadData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -104,7 +111,7 @@ class VirtualMachinePayload(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

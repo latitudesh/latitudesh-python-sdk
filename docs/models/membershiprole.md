@@ -1,5 +1,13 @@
 # MembershipRole
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import MembershipRole
+
+value = MembershipRole.OWNER
+```
+
 
 ## Values
 

@@ -4,23 +4,23 @@
 
 ### Available Operations
 
-* [list](#list) - List all Virtual Networks
-* [create](#create) - Create a Virtual Network
-* [update](#update) - Update a Virtual Network
-* [delete_virtual_network](#delete_virtual_network) - Delete a Virtual Network
-* [get](#get) - Retrieve a Virtual Network
-* [list_assignments](#list_assignments) - List all servers assigned to virtual networks
-* [assign](#assign) - Assign Virtual network
-* [remove_assignment](#remove_assignment) - Delete Virtual Network Assignment
+* [list](#list) - List VLANs
+* [create](#create) - Create VLAN
+* [update](#update) - Update VLAN
+* [delete_virtual_network](#delete_virtual_network) - Delete VLAN
+* [get](#get) - Retrieve VLAN
+* [list_assignments](#list_assignments) - List VLAN assignments
+* [assign](#assign) - Assign VLAN
+* [remove_assignment](#remove_assignment) - Delete VLAN assignment
 
 ## list
 
 Lists virtual networks assigned to a project
 
 
-### Example Usage
+### Example Usage: Filtered by multiple tags
 
-<!-- UsageSnippet language="python" operationID="get-virtual-networks" method="get" path="/virtual_networks" -->
+<!-- UsageSnippet language="python" operationID="get-virtual-networks" method="get" path="/virtual_networks" example="Filtered by multiple tags" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -30,7 +30,107 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.list(filter_location="SAO", filter_project="awesome-copper-clock", filter_tags="tag_BZWAJKePr2Fx9kRyyaARImQlXmW,tag_X8yMgb8AZPFrX72lQgrwhBVnPN2", page_size=20, page_number=1)
+    res = latitudesh.private_networks.list(filter_tags="tag_5EJXPRJKB3h5XZJjwL42iEx4RWk,tag_Vx53BQnm94UbrgGlay5lFgEJZ8a", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: List virtual networks filtered by tag
+
+<!-- UsageSnippet language="python" operationID="get-virtual-networks" method="get" path="/virtual_networks" example="List virtual networks filtered by tag" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.list(filter_tags="tag_KLmjvaEPE7uL9G9E42pxTrEK96Jn", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="get-virtual-networks" method="get" path="/virtual_networks" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.list(filter_tags="tag_BZWAJKePr2Fx9kRyyaARImQlXmW,tag_X8yMgb8AZPFrX72lQgrwhBVnPN2", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: filtered by project
+
+<!-- UsageSnippet language="python" operationID="get-virtual-networks" method="get" path="/virtual_networks" example="filtered by project" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.list(filter_project="awesome-copper-clock", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: filtered by site
+
+<!-- UsageSnippet language="python" operationID="get-virtual-networks" method="get" path="/virtual_networks" example="filtered by site" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.list(filter_location="SAO", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: without filters
+
+<!-- UsageSnippet language="python" operationID="get-virtual-networks" method="get" path="/virtual_networks" example="without filters" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.list(page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -65,9 +165,9 @@ with Latitudesh(
 Creates a new Virtual Network.
 
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="create-virtual-network" method="post" path="/virtual_networks" -->
+<!-- UsageSnippet language="python" operationID="create-virtual-network" method="post" path="/virtual_networks" example="Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -84,6 +184,83 @@ with Latitudesh(
             "description": "São Paulo VLAN",
             "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
             "project": "ergonomic-steel-bag",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: validation error
+
+<!-- UsageSnippet language="python" operationID="create-virtual-network" method="post" path="/virtual_networks" example="validation error" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.create(data={
+        "type": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK,
+        "attributes": {
+            "description": "São Paulo VLAN",
+            "project": "<value>",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when the project has reached max_vlans
+
+<!-- UsageSnippet language="python" operationID="create-virtual-network" method="post" path="/virtual_networks" example="when the project has reached max_vlans" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.create(data={
+        "type": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK,
+        "attributes": {
+            "description": "São Paulo VLAN",
+            "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
+            "project": "lightweight-rubber-shirt",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when the user is allowed to create
+
+<!-- UsageSnippet language="python" operationID="create-virtual-network" method="post" path="/virtual_networks" example="when the user is allowed to create" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.create(data={
+        "type": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK,
+        "attributes": {
+            "description": "São Paulo VLAN",
+            "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
+            "project": "enormous-paper-clock",
         },
     })
 
@@ -114,9 +291,9 @@ with Latitudesh(
 Update a Virtual Network.
 
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="python" operationID="update-virtual-network" method="patch" path="/virtual_networks/{vlan_id}" -->
+<!-- UsageSnippet language="python" operationID="update-virtual-network" method="patch" path="/virtual_networks/{vlan_id}" example="Success" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -136,6 +313,79 @@ with Latitudesh(
                 "tag_lpPQ21kXEYfb9az3jRoVIVw4RBk",
             ],
         },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Tag not updated
+
+<!-- UsageSnippet language="python" operationID="update-virtual-network" method="patch" path="/virtual_networks/{vlan_id}" example="Tag not updated" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.update(vlan_id="vlan_6059EqYkOQj8p", data={
+        "id": "<id>",
+        "type": latitudesh_python_sdk.UpdateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORKS,
+        "attributes": {
+            "tags": [
+                "invalid-tag",
+            ],
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unpermited parameter
+
+<!-- UsageSnippet language="python" operationID="update-virtual-network" method="patch" path="/virtual_networks/{vlan_id}" example="Unpermited parameter" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.update(vlan_id="vlan_w5AEmq7XDBkWX", data={
+        "id": "<id>",
+        "type": latitudesh_python_sdk.UpdateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORKS,
+        "attributes": {},
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when the user is allowed to update virtual networks
+
+<!-- UsageSnippet language="python" operationID="update-virtual-network" method="patch" path="/virtual_networks/{vlan_id}" example="when the user is allowed to update virtual networks" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.update(vlan_id="vlan_zGr47qlMDAg0m", data={
+        "id": "<id>",
+        "type": latitudesh_python_sdk.UpdateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORKS,
+        "attributes": {},
     })
 
     # Handle response
@@ -202,9 +452,27 @@ with Latitudesh(
 Retrieve a Virtual Network.
 
 
-### Example Usage
+### Example Usage: List private networks
 
-<!-- UsageSnippet language="python" operationID="get-virtual-network" method="get" path="/virtual_networks/{vlan_id}" -->
+<!-- UsageSnippet language="python" operationID="get-virtual-network" method="get" path="/virtual_networks/{vlan_id}" example="List private networks" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.get(vlan_id="vlan_W6Q2D9ordKLpr")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="get-virtual-network" method="get" path="/virtual_networks/{vlan_id}" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -230,7 +498,7 @@ with Latitudesh(
 
 ### Response
 
-**[models.GetVirtualNetworkResponseBody](../../models/getvirtualnetworkresponsebody.md)**
+**[models.VirtualNetwork](../../models/virtualnetwork.md)**
 
 ### Errors
 
@@ -243,9 +511,9 @@ with Latitudesh(
 Returns a list of all servers assigned to virtual networks.
 
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="python" operationID="get-virtual-networks-assignments" method="get" path="/virtual_networks/assignments" -->
+<!-- UsageSnippet language="python" operationID="get-virtual-networks-assignments" method="get" path="/virtual_networks/assignments" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -255,7 +523,67 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.private_networks.list_assignments(filter_server="217", filter_vid="8", page_size=20, page_number=1)
+    res = latitudesh.private_networks.list_assignments(page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: when filtering by server_id
+
+<!-- UsageSnippet language="python" operationID="get-virtual-networks-assignments" method="get" path="/virtual_networks/assignments" example="when filtering by server_id" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.list_assignments(filter_server="217", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: when filtering by vid
+
+<!-- UsageSnippet language="python" operationID="get-virtual-networks-assignments" method="get" path="/virtual_networks/assignments" example="when filtering by vid" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.list_assignments(filter_vid="8", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: when no filters are applied
+
+<!-- UsageSnippet language="python" operationID="get-virtual-networks-assignments" method="get" path="/virtual_networks/assignments" example="when no filters are applied" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.list_assignments(page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -287,11 +615,11 @@ with Latitudesh(
 
 ## assign
 
-Assign Virtual network
+Assign VLAN
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" -->
+<!-- UsageSnippet language="python" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" example="Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -307,6 +635,56 @@ with Latitudesh(
         "attributes": {
             "server_id": "sv_5xyZOn5vDWM0l",
             "virtual_network_id": "vlan_Z8rodmpGO1jLB",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Forbidden
+
+<!-- UsageSnippet language="python" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" example="Forbidden" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.assign(data={
+        "type": latitudesh_python_sdk.AssignServerVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK_ASSIGNMENT,
+        "attributes": {
+            "server_id": "sv_LYV8DZ61D5QoE",
+            "virtual_network_id": "vlan_3YjJOLBjqvZ87",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: validation error
+
+<!-- UsageSnippet language="python" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" example="validation error" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.assign(data={
+        "type": latitudesh_python_sdk.AssignServerVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK_ASSIGNMENT,
+        "attributes": {
+            "server_id": "<id>",
+            "virtual_network_id": "<id>",
         },
     })
 

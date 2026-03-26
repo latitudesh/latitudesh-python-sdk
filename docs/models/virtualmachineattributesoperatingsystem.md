@@ -1,0 +1,14 @@
+# VirtualMachineAttributesOperatingSystem
+
+The operating system installed on the virtual machine
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `name`                                                                                             | *Optional[str]*                                                                                    | :heavy_minus_sign:                                                                                 | The full name of the operating system                                                              |
+| `slug`                                                                                             | *Optional[str]*                                                                                    | :heavy_minus_sign:                                                                                 | The unique slug identifier for the operating system                                                |
+| `version`                                                                                          | *Optional[str]*                                                                                    | :heavy_minus_sign:                                                                                 | The version of the operating system                                                                |
+| `features`                                                                                         | [Optional[models.VirtualMachineAttributesFeatures]](../models/virtualmachineattributesfeatures.md) | :heavy_minus_sign:                                                                                 | Features supported by this operating system                                                        |
+| `distro`                                                                                           | [Optional[models.VirtualMachineAttributesDistro]](../models/virtualmachineattributesdistro.md)     | :heavy_minus_sign:                                                                                 | Distribution information                                                                           |

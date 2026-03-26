@@ -4,9 +4,9 @@
 
 ### Available Operations
 
-* [get](#get) - Get user profile
-* [update](#update) - Update User Profile
-* [list_teams](#list_teams) - List User Teams
+* [get](#get) - Retrieve profile
+* [update](#update) - Update profile
+* [list_teams](#list_teams) - List user teams
 
 ## get
 
@@ -15,7 +15,7 @@ Retrieve the current user profile
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-user-profile" method="get" path="/user/profile" -->
+<!-- UsageSnippet language="python" operationID="get-user-profile" method="get" path="/user/profile" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -53,9 +53,34 @@ with Latitudesh(
 Update the current user profile
 
 
-### Example Usage
+### Example Usage: Forbidden
 
-<!-- UsageSnippet language="python" operationID="patch-user-profile" method="patch" path="/user/profile/{id}" -->
+<!-- UsageSnippet language="python" operationID="patch-user-profile" method="patch" path="/user/profile/{id}" example="Forbidden" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.user_profile.update(id="user_kLn528op4zIMZ61MzRapu7XnAkL", data={
+        "id": "user_kLn528op4zIMZ61MzRapu7XnAkL",
+        "type": latitudesh_python_sdk.PatchUserProfileUserProfileType.USERS,
+        "attributes": {
+            "role": latitudesh_python_sdk.PatchUserProfileUserProfileRole.COLLABORATOR,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="patch-user-profile" method="patch" path="/user/profile/{id}" example="Success" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -72,6 +97,29 @@ with Latitudesh(
         "attributes": {
             "role": latitudesh_python_sdk.PatchUserProfileUserProfileRole.COLLABORATOR,
         },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unprocessable Entity
+
+<!-- UsageSnippet language="python" operationID="patch-user-profile" method="patch" path="/user/profile/{id}" example="Unprocessable Entity" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.user_profile.update(id="user_WeGoqA4ndP7nz", data={
+        "id": "user_WeGoqA4ndP7nz",
+        "type": latitudesh_python_sdk.PatchUserProfileUserProfileType.USERS,
+        "attributes": {},
     })
 
     # Handle response
@@ -102,9 +150,45 @@ with Latitudesh(
 Returns a list of all teams the user belongs to
 
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="python" operationID="get-user-teams" method="get" path="/user/teams" -->
+<!-- UsageSnippet language="python" operationID="get-user-teams" method="get" path="/user/teams" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.user_profile.list_teams()
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when team is older than one month
+
+<!-- UsageSnippet language="python" operationID="get-user-teams" method="get" path="/user/teams" example="when team is older than one month" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.user_profile.list_teams()
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when team is recent (created within last month)
+
+<!-- UsageSnippet language="python" operationID="get-user-teams" method="get" path="/user/teams" example="when team is recent (created within last month)" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os

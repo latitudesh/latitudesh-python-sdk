@@ -1,0 +1,10 @@
+# ObjectStorageData
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `id`                                                                                     | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | Object storage ID with bucket_ prefix                                                    |
+| `type`                                                                                   | [Optional[models.ObjectStorageDataType]](../models/objectstoragedatatype.md)             | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `attributes`                                                                             | [Optional[models.ObjectStorageDataAttributes]](../models/objectstoragedataattributes.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |

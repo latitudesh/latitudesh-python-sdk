@@ -1,5 +1,13 @@
 # FilterLocation
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import FilterLocation
+
+value = FilterLocation.ASH
+```
+
 
 ## Values
 

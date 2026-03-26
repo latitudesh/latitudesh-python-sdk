@@ -21,9 +21,9 @@ class TrafficDataDataTypedDict(TypedDict):
     outbound_gb: NotRequired[int]
     r"""Value in GB"""
     avg_outbound_speed_mbps: NotRequired[float]
-    r"""Value in MBps"""
+    r"""Value in Mbps"""
     avg_inbound_speed_mbps: NotRequired[float]
-    r"""Value in MBps"""
+    r"""Value in Mbps"""
 
 
 class TrafficDataData(BaseModel):
@@ -37,10 +37,10 @@ class TrafficDataData(BaseModel):
     r"""Value in GB"""
 
     avg_outbound_speed_mbps: Optional[float] = None
-    r"""Value in MBps"""
+    r"""Value in Mbps"""
 
     avg_inbound_speed_mbps: Optional[float] = None
-    r"""Value in MBps"""
+    r"""Value in Mbps"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -58,7 +58,7 @@ class TrafficDataData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -74,9 +74,9 @@ class TrafficRegionsTypedDict(TypedDict):
     total_outbound_gb: NotRequired[int]
     r"""Value in GB"""
     total_inbound_95th_percentile_mbps: NotRequired[float]
-    r"""Value in MBps"""
+    r"""The 95th percentile of inbound bandwidth for this region, calculated from 30-minute intervals. Value in Mbps"""
     total_outbound_95th_percentile_mbps: NotRequired[float]
-    r"""Value in MBps"""
+    r"""The 95th percentile of outbound bandwidth for this region, calculated from 30-minute intervals. Value in Mbps"""
     data: NotRequired[List[TrafficDataDataTypedDict]]
 
 
@@ -90,10 +90,10 @@ class TrafficRegions(BaseModel):
     r"""Value in GB"""
 
     total_inbound_95th_percentile_mbps: Optional[float] = None
-    r"""Value in MBps"""
+    r"""The 95th percentile of inbound bandwidth for this region, calculated from 30-minute intervals. Value in Mbps"""
 
     total_outbound_95th_percentile_mbps: Optional[float] = None
-    r"""Value in MBps"""
+    r"""The 95th percentile of outbound bandwidth for this region, calculated from 30-minute intervals. Value in Mbps"""
 
     data: Optional[List[TrafficDataData]] = None
 
@@ -114,7 +114,7 @@ class TrafficRegions(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -134,9 +134,9 @@ class TrafficAttributesTypedDict(TypedDict):
     total_outbound_gb: NotRequired[int]
     r"""Value in GB"""
     total_inbound_95th_percentile_mbps: NotRequired[float]
-    r"""Value in MBps"""
+    r"""The 95th percentile of inbound bandwidth across all regions, calculated from all 30-minute intervals combined. This is a global percentile, not a sum of regional percentiles. Value in Mbps"""
     total_outbound_95th_percentile_mbps: NotRequired[float]
-    r"""Value in MBps"""
+    r"""The 95th percentile of outbound bandwidth across all regions, calculated from all 30-minute intervals combined. This is a global percentile, not a sum of regional percentiles. Value in Mbps"""
 
 
 class TrafficAttributes(BaseModel):
@@ -155,10 +155,10 @@ class TrafficAttributes(BaseModel):
     r"""Value in GB"""
 
     total_inbound_95th_percentile_mbps: Optional[float] = None
-    r"""Value in MBps"""
+    r"""The 95th percentile of inbound bandwidth across all regions, calculated from all 30-minute intervals combined. This is a global percentile, not a sum of regional percentiles. Value in Mbps"""
 
     total_outbound_95th_percentile_mbps: Optional[float] = None
-    r"""Value in MBps"""
+    r"""The 95th percentile of outbound bandwidth across all regions, calculated from all 30-minute intervals combined. This is a global percentile, not a sum of regional percentiles. Value in Mbps"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -178,7 +178,7 @@ class TrafficAttributes(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -208,7 +208,7 @@ class TrafficData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -232,10 +232,16 @@ class Traffic(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m
+
+
+try:
+    TrafficDataData.model_rebuild()
+except NameError:
+    pass

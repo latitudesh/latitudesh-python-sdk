@@ -29,9 +29,9 @@ class EventsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetEventsResponse]:
-        r"""List all Events
+        r"""List events
 
-        Lists all events.
+        Lists actions performed by users on your account.
 
 
         :param filter_author: The author ID or email to filter by
@@ -114,7 +114,7 @@ class EventsSDK(BaseSDK):
 
         def next_func() -> Optional[models.GetEventsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -122,7 +122,7 @@ class EventsSDK(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -172,9 +172,9 @@ class EventsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetEventsResponse]:
-        r"""List all Events
+        r"""List events
 
-        Lists all events.
+        Lists actions performed by users on your account.
 
 
         :param filter_author: The author ID or email to filter by
@@ -257,7 +257,7 @@ class EventsSDK(BaseSDK):
 
         def next_func() -> Optional[models.GetEventsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -265,7 +265,7 @@ class EventsSDK(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 

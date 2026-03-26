@@ -24,7 +24,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetVirtualNetworksResponse]:
-        r"""List all Virtual Networks
+        r"""List VLANs
 
         Lists virtual networks assigned to a project
 
@@ -99,7 +99,7 @@ class PrivateNetworks(BaseSDK):
 
         def next_func() -> Optional[models.GetVirtualNetworksResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -107,7 +107,7 @@ class PrivateNetworks(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -147,7 +147,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetVirtualNetworksResponse]:
-        r"""List all Virtual Networks
+        r"""List VLANs
 
         Lists virtual networks assigned to a project
 
@@ -222,7 +222,7 @@ class PrivateNetworks(BaseSDK):
 
         def next_func() -> Optional[models.GetVirtualNetworksResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -230,7 +230,7 @@ class PrivateNetworks(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -269,7 +269,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualNetwork:
-        r"""Create a Virtual Network
+        r"""Create VLAN
 
         Creates a new Virtual Network.
 
@@ -366,7 +366,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualNetwork:
-        r"""Create a Virtual Network
+        r"""Create VLAN
 
         Creates a new Virtual Network.
 
@@ -464,7 +464,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualNetwork:
-        r"""Update a Virtual Network
+        r"""Update VLAN
 
         Update a Virtual Network.
 
@@ -566,7 +566,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualNetwork:
-        r"""Update a Virtual Network
+        r"""Update VLAN
 
         Update a Virtual Network.
 
@@ -664,7 +664,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Virtual Network
+        r"""Delete VLAN
 
         Delete virtual network
 
@@ -749,7 +749,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Virtual Network
+        r"""Delete VLAN
 
         Delete virtual network
 
@@ -833,8 +833,8 @@ class PrivateNetworks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetVirtualNetworkResponseBody:
-        r"""Retrieve a Virtual Network
+    ) -> models.VirtualNetwork:
+        r"""Retrieve VLAN
 
         Retrieve a Virtual Network.
 
@@ -900,9 +900,7 @@ class PrivateNetworks(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(
-                models.GetVirtualNetworkResponseBody, http_res
-            )
+            return unmarshal_json_response(models.VirtualNetwork, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -920,8 +918,8 @@ class PrivateNetworks(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetVirtualNetworkResponseBody:
-        r"""Retrieve a Virtual Network
+    ) -> models.VirtualNetwork:
+        r"""Retrieve VLAN
 
         Retrieve a Virtual Network.
 
@@ -987,9 +985,7 @@ class PrivateNetworks(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(
-                models.GetVirtualNetworkResponseBody, http_res
-            )
+            return unmarshal_json_response(models.VirtualNetwork, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1012,7 +1008,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetVirtualNetworksAssignmentsResponse]:
-        r"""List all servers assigned to virtual networks
+        r"""List VLAN assignments
 
         Returns a list of all servers assigned to virtual networks.
 
@@ -1087,7 +1083,7 @@ class PrivateNetworks(BaseSDK):
 
         def next_func() -> Optional[models.GetVirtualNetworksAssignmentsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -1095,7 +1091,7 @@ class PrivateNetworks(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -1137,7 +1133,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetVirtualNetworksAssignmentsResponse]:
-        r"""List all servers assigned to virtual networks
+        r"""List VLAN assignments
 
         Returns a list of all servers assigned to virtual networks.
 
@@ -1212,7 +1208,7 @@ class PrivateNetworks(BaseSDK):
 
         def next_func() -> Optional[models.GetVirtualNetworksAssignmentsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -1220,7 +1216,7 @@ class PrivateNetworks(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -1263,7 +1259,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualNetworkAssignment:
-        r"""Assign Virtual network
+        r"""Assign VLAN
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -1359,7 +1355,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.VirtualNetworkAssignment:
-        r"""Assign Virtual network
+        r"""Assign VLAN
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -1450,7 +1446,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Virtual Network Assignment
+        r"""Delete VLAN assignment
 
         Allow you to remove a Virtual Network assignment.
 
@@ -1535,7 +1531,7 @@ class PrivateNetworks(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete Virtual Network Assignment
+        r"""Delete VLAN assignment
 
         Allow you to remove a Virtual Network assignment.
 

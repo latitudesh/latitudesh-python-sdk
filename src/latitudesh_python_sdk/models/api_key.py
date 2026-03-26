@@ -41,7 +41,7 @@ class APIKeyUser(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -55,6 +55,8 @@ class AttributesTypedDict(TypedDict):
     r"""Name of the API Key"""
     api_version: NotRequired[str]
     r"""The API version associated with this API Key"""
+    token: NotRequired[str]
+    r"""The full token (only returned on create or rotate)"""
     token_last_slice: NotRequired[str]
     r"""The last 5 characters of the token created for this API Key"""
     read_only: NotRequired[Nullable[bool]]
@@ -77,6 +79,9 @@ class Attributes(BaseModel):
 
     api_version: Optional[str] = None
     r"""The API version associated with this API Key"""
+
+    token: Optional[str] = None
+    r"""The full token (only returned on create or rotate)"""
 
     token_last_slice: Optional[str] = None
     r"""The last 5 characters of the token created for this API Key"""
@@ -105,6 +110,7 @@ class Attributes(BaseModel):
             [
                 "name",
                 "api_version",
+                "token",
                 "token_last_slice",
                 "read_only",
                 "allowed_ips",
@@ -120,7 +126,7 @@ class Attributes(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
                 and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
@@ -158,7 +164,7 @@ class APIKey(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:

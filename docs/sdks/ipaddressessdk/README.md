@@ -15,9 +15,9 @@ List all Management and Additional IP Addresses.
  • Additional IPs are individual IPs that can be added to a device as an additional IP that can be used.
 
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="python" operationID="get-ips" method="get" path="/ips" -->
+<!-- UsageSnippet language="python" operationID="get-ips" method="get" path="/ips" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -27,7 +27,107 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.ip_addresses.list(filter_server="46", filter_project="64", page_size=20, page_number=1)
+    res = latitudesh.ip_addresses.list(page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: when a project ID filter is provided 
+
+<!-- UsageSnippet language="python" operationID="get-ips" method="get" path="/ips" example="when a project ID filter is provided " -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.ip_addresses.list(filter_project="59", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: when filtering by a server that does not have assigned IPs
+
+<!-- UsageSnippet language="python" operationID="get-ips" method="get" path="/ips" example="when filtering by a server that does not have assigned IPs" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.ip_addresses.list(filter_server="sv_LMmAD8pEDwop2", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: when filtering by a server that has assigned IPs
+
+<!-- UsageSnippet language="python" operationID="get-ips" method="get" path="/ips" example="when filtering by a server that has assigned IPs" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.ip_addresses.list(filter_server="46", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: when there are no IPs matching the project filter
+
+<!-- UsageSnippet language="python" operationID="get-ips" method="get" path="/ips" example="when there are no IPs matching the project filter" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.ip_addresses.list(filter_project="63", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: without filters
+
+<!-- UsageSnippet language="python" operationID="get-ips" method="get" path="/ips" example="without filters" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.ip_addresses.list(page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -68,7 +168,7 @@ Retrieve an IP Address
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-ip" method="get" path="/ips/{ip_id}" -->
+<!-- UsageSnippet language="python" operationID="get-ip" method="get" path="/ips/{ip_id}" example="when basic GET" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os

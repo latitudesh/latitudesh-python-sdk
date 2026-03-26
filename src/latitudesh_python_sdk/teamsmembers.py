@@ -21,7 +21,7 @@ class TeamsMembers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetTeamMembersResponse]:
-        r"""List all Team Members
+        r"""List members
 
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
@@ -87,7 +87,7 @@ class TeamsMembers(BaseSDK):
 
         def next_func() -> Optional[models.GetTeamMembersResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -95,7 +95,7 @@ class TeamsMembers(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -129,7 +129,7 @@ class TeamsMembers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetTeamMembersResponse]:
-        r"""List all Team Members
+        r"""List members
 
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
@@ -195,7 +195,7 @@ class TeamsMembers(BaseSDK):
 
         def next_func() -> Optional[models.GetTeamMembersResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -203,7 +203,7 @@ class TeamsMembers(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -239,7 +239,7 @@ class TeamsMembers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Membership:
-        r"""Add a Team Member
+        r"""Create member
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -331,7 +331,7 @@ class TeamsMembers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.Membership:
-        r"""Add a Team Member
+        r"""Create member
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -420,7 +420,7 @@ class TeamsMembers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Remove a Team Member
+        r"""Remove a member
 
         :param user_id: The user ID
         :param retries: Override the default retry configuration for this method
@@ -502,7 +502,7 @@ class TeamsMembers(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Remove a Team Member
+        r"""Remove a member
 
         :param user_id: The user ID
         :param retries: Override the default retry configuration for this method

@@ -1,5 +1,13 @@
 # PutProjectSSHKeySSHKeysType
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import PutProjectSSHKeySSHKeysType
+
+value = PutProjectSSHKeySSHKeysType.SSH_KEYS
+```
+
 
 ## Values
 

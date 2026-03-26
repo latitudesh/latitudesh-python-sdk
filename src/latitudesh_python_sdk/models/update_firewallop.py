@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from latitudesh_python_sdk.utils import (
     FieldMetadata,
     PathParamMetadata,
@@ -29,6 +35,8 @@ class UpdateFirewallFirewallsRulesTypedDict(TypedDict):
     protocol: NotRequired[UpdateFirewallFirewallsProtocol]
     port: NotRequired[str]
     r"""Port number or range (e.g., \"80\", \"80-443\")"""
+    description: NotRequired[Nullable[str]]
+    r"""Optional description explaining the purpose of this rule"""
 
 
 class UpdateFirewallFirewallsRules(BaseModel):
@@ -41,18 +49,30 @@ class UpdateFirewallFirewallsRules(BaseModel):
     port: Optional[str] = None
     r"""Port number or range (e.g., \"80\", \"80-443\")"""
 
+    description: OptionalNullable[str] = UNSET
+    r"""Optional description explaining the purpose of this rule"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["from", "to", "protocol", "port"])
+        optional_fields = set(["from", "to", "protocol", "port", "description"])
+        nullable_fields = set(["description"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -76,7 +96,7 @@ class UpdateFirewallFirewallsAttributes(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -103,7 +123,7 @@ class UpdateFirewallFirewallsData(BaseModel):
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
-            val = serialized.get(k)
+            val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
@@ -136,3 +156,9 @@ class UpdateFirewallRequest(BaseModel):
         UpdateFirewallFirewallsRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
+
+
+try:
+    UpdateFirewallFirewallsRules.model_rebuild()
+except NameError:
+    pass

@@ -28,7 +28,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetProjectsResponse]:
-        r"""List all Projects
+        r"""List projects
 
         Returns a list of all projects for the current team
 
@@ -111,7 +111,7 @@ class ProjectsSDK(BaseSDK):
 
         def next_func() -> Optional[models.GetProjectsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -119,7 +119,7 @@ class ProjectsSDK(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -167,7 +167,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> Optional[models.GetProjectsResponse]:
-        r"""List all Projects
+        r"""List projects
 
         Returns a list of all projects for the current team
 
@@ -250,7 +250,7 @@ class ProjectsSDK(BaseSDK):
 
         def next_func() -> Optional[models.GetProjectsResponse]:
             body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
-            page = request.page_number if not request.page_number is None else 1
+            page = request.page_number if isinstance(request.page_number, int) else 1
             next_page = page + 1
 
             if not http_res.text:
@@ -258,7 +258,7 @@ class ProjectsSDK(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if not request.page_size is None else 20
+            limit = request.page_size if isinstance(request.page_size, int) else 20
             if len(results[0]) < limit:
                 return None
 
@@ -303,7 +303,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateProjectResponseBody:
-        r"""Create a Project
+        r"""Create project
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -395,7 +395,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.CreateProjectResponseBody:
-        r"""Create a Project
+        r"""Create project
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -485,7 +485,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UpdateProjectResponseBody:
-        r"""Update a Project
+        r"""Update project
 
         :param project_id: The project ID or Slug
         :param data:
@@ -525,7 +525,7 @@ class ProjectsSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.request_body if request is not None else None,
                 False,
                 True,
                 "json",
@@ -581,7 +581,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.UpdateProjectResponseBody:
-        r"""Update a Project
+        r"""Update project
 
         :param project_id: The project ID or Slug
         :param data:
@@ -621,7 +621,7 @@ class ProjectsSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
+                request.request_body if request is not None else None,
                 False,
                 True,
                 "json",
@@ -674,7 +674,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project
+        r"""Delete project
 
         :param project_id: The project ID or Slug
         :param retries: Override the default retry configuration for this method
@@ -756,7 +756,7 @@ class ProjectsSDK(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete a Project
+        r"""Delete project
 
         :param project_id: The project ID or Slug
         :param retries: Override the default retry configuration for this method

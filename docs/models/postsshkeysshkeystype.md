@@ -1,5 +1,13 @@
 # PostSSHKeySSHKeysType
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import PostSSHKeySSHKeysType
+
+value = PostSSHKeySSHKeysType.SSH_KEYS
+```
+
 
 ## Values
 

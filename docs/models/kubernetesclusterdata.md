@@ -1,0 +1,10 @@
+# KubernetesClusterData
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `id`                                                                                             | *Optional[str]*                                                                                  | :heavy_minus_sign:                                                                               | The cluster ID in hashed format (kc_<hash>)                                                      |
+| `type`                                                                                           | *Optional[str]*                                                                                  | :heavy_minus_sign:                                                                               | N/A                                                                                              |
+| `attributes`                                                                                     | [Optional[models.KubernetesClusterDataAttributes]](../models/kubernetesclusterdataattributes.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |

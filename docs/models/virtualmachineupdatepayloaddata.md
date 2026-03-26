@@ -1,0 +1,10 @@
+# VirtualMachineUpdatePayloadData
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `type`                                                                                             | [models.VirtualMachineUpdatePayloadType](../models/virtualmachineupdatepayloadtype.md)             | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `id`                                                                                               | *Optional[str]*                                                                                    | :heavy_minus_sign:                                                                                 | N/A                                                                                                |
+| `attributes`                                                                                       | [models.VirtualMachineUpdatePayloadAttributes](../models/virtualmachineupdatepayloadattributes.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |

@@ -4,16 +4,16 @@
 
 ### Available Operations
 
-* [get](#get) - Retrieve Traffic consumption
-* [get_quota](#get_quota) - Retrieve Traffic Quota
+* [get](#get) - Retrieve traffic
+* [get_quota](#get_quota) - Retrieve traffic quota
 
 ## get
 
-Retrieve Traffic consumption
+Retrieve traffic
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="python" operationID="get-traffic-consumption" method="get" path="/traffic" -->
+<!-- UsageSnippet language="python" operationID="get-traffic-consumption" method="get" path="/traffic" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -23,7 +23,97 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.traffic.get(filter_date_gte="2025-12-14T15:57:10Z", filter_date_lte="2026-01-14T15:57:10Z", filter_server="sv_A05EdQ50dvKYQ", filter_project="proj_AW6Q2D9lqKLpr")
+    res = latitudesh.traffic.get(filter_date_gte="2025-12-14T15:57:10Z", filter_date_lte="2026-01-14T15:57:10Z", filter_server="sv_A05EdQ50dvKYQ")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when the period filter is the deprecated format
+
+<!-- UsageSnippet language="python" operationID="get-traffic-consumption" method="get" path="/traffic" example="when the period filter is the deprecated format" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.traffic.get(filter_date_gte="2025-04-28T10:40:31Z", filter_date_lte="2025-04-28T18:40:31Z", filter_project="308")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when the period is less than 1 day
+
+<!-- UsageSnippet language="python" operationID="get-traffic-consumption" method="get" path="/traffic" example="when the period is less than 1 day" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.traffic.get(filter_date_gte="2025-04-28T10:40:31Z", filter_date_lte="2025-04-28T18:40:31Z", filter_server="198")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: with invalid filter
+
+<!-- UsageSnippet language="python" operationID="get-traffic-consumption" method="get" path="/traffic" example="with invalid filter" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.traffic.get(filter_date_gte="invalid", filter_date_lte="invalid")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: with project filter
+
+<!-- UsageSnippet language="python" operationID="get-traffic-consumption" method="get" path="/traffic" example="with project filter" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.traffic.get(filter_date_gte="2025-04-06T21:00:00Z", filter_date_lte="2025-05-06T21:00:00Z", filter_project="proj_AW6Q2D9lqKLpr")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: with server filter
+
+<!-- UsageSnippet language="python" operationID="get-traffic-consumption" method="get" path="/traffic" example="with server filter" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.traffic.get(filter_date_gte="2025-04-06T21:00:00Z", filter_date_lte="2025-05-06T21:00:00Z", filter_server="sv_mw49QDB5qagKb")
 
     # Handle response
     print(res)
@@ -52,11 +142,47 @@ with Latitudesh(
 
 ## get_quota
 
-Retrieve Traffic Quota
+Retrieve traffic quota
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="python" operationID="get-traffic-quota" method="get" path="/traffic/quota" -->
+<!-- UsageSnippet language="python" operationID="get-traffic-quota" method="get" path="/traffic/quota" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.traffic.get_quota()
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when `billing_method` is `95th percentile`
+
+<!-- UsageSnippet language="python" operationID="get-traffic-quota" method="get" path="/traffic/quota" example="when `billing_method` is `95th percentile`" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.traffic.get_quota()
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when `billing_method` is `Normal`
+
+<!-- UsageSnippet language="python" operationID="get-traffic-quota" method="get" path="/traffic/quota" example="when `billing_method` is `Normal`" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os

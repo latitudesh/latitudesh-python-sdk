@@ -4,17 +4,53 @@
 
 ### Available Operations
 
-* [get](#get) - Retrieve the team
-* [create](#create) - Create a team
-* [update](#update) - Update a team
+* [get](#get) - Retrieve team
+* [create](#create) - Create team
+* [update](#update) - Update team
 
 ## get
 
-Retrieve the team
+Retrieve team
 
-### Example Usage
+### Example Usage: Success
 
-<!-- UsageSnippet language="python" operationID="get-team" method="get" path="/team" -->
+<!-- UsageSnippet language="python" operationID="get-team" method="get" path="/team" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.teams.get()
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when team is older than one month
+
+<!-- UsageSnippet language="python" operationID="get-team" method="get" path="/team" example="when team is older than one month" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.teams.get()
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when team is recent (created within last month)
+
+<!-- UsageSnippet language="python" operationID="get-team" method="get" path="/team" example="when team is recent (created within last month)" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -49,11 +85,11 @@ with Latitudesh(
 
 ## create
 
-Create a team
+Create team
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="post-team" method="post" path="/team" -->
+<!-- UsageSnippet language="python" operationID="post-team" method="post" path="/team" example="Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -70,6 +106,58 @@ with Latitudesh(
             "name": "Name",
             "currency": latitudesh_python_sdk.PostTeamTeamsCurrency.USD,
             "address": "Address",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Not Acceptable
+
+<!-- UsageSnippet language="python" operationID="post-team" method="post" path="/team" example="Not Acceptable" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.teams.create(data={
+        "type": latitudesh_python_sdk.PostTeamTeamsType.TEAMS,
+        "attributes": {
+            "name": "Name",
+            "currency": latitudesh_python_sdk.PostTeamTeamsCurrency.USD,
+            "address": "Address",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unprocessable Entity
+
+<!-- UsageSnippet language="python" operationID="post-team" method="post" path="/team" example="Unprocessable Entity" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.teams.create(data={
+        "type": latitudesh_python_sdk.PostTeamTeamsType.TEAMS,
+        "attributes": {
+            "name": "",
+            "currency": latitudesh_python_sdk.PostTeamTeamsCurrency.BRL,
+            "address": "",
         },
     })
 
@@ -97,11 +185,63 @@ with Latitudesh(
 
 ## update
 
-Update a team
+Update team
 
-### Example Usage
+### Example Usage: Forbidden
 
-<!-- UsageSnippet language="python" operationID="patch-current-team" method="patch" path="/team/{team_id}" -->
+<!-- UsageSnippet language="python" operationID="patch-current-team" method="patch" path="/team/{team_id}" example="Forbidden" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.teams.update(team_id="7107c56e-31be-45e4-9376-a905f204d08a", data={
+        "id": "team_8Wj589lRWNCK1gAje2pAfXmag5jg",
+        "type": latitudesh_python_sdk.PatchCurrentTeamTeamsType.TEAMS,
+        "attributes": {
+            "address": "Address",
+            "name": "Name",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Not Found
+
+<!-- UsageSnippet language="python" operationID="patch-current-team" method="patch" path="/team/{team_id}" example="Not Found" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.teams.update(team_id="c7a799cc-bb1c-42e3-aaf9-a76b10f5c1ac", data={
+        "id": "c7a799cc-bb1c-42e3-aaf9-a76b10f5c1ac",
+        "type": latitudesh_python_sdk.PatchCurrentTeamTeamsType.TEAMS,
+        "attributes": {
+            "address": "Address",
+            "name": "Name",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="patch-current-team" method="patch" path="/team/{team_id}" example="Success" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh

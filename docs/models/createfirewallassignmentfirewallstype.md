@@ -1,5 +1,13 @@
 # CreateFirewallAssignmentFirewallsType
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import CreateFirewallAssignmentFirewallsType
+
+value = CreateFirewallAssignmentFirewallsType.FIREWALL_ASSIGNMENTS
+```
+
 
 ## Values
 

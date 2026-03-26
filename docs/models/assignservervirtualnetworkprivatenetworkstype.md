@@ -1,5 +1,13 @@
 # AssignServerVirtualNetworkPrivateNetworksType
 
+## Example Usage
+
+```python
+from latitudesh_python_sdk.models import AssignServerVirtualNetworkPrivateNetworksType
+
+value = AssignServerVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK_ASSIGNMENT
+```
+
 
 ## Values
 

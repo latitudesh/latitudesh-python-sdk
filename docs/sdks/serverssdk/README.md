@@ -4,23 +4,23 @@
 
 ### Available Operations
 
-* [list](#list) - List all Servers
-* [create](#create) - Deploy Server
-* [get](#get) - Retrieve a Server
-* [update](#update) - Update Server
-* [delete](#delete) - Remove Server
-* [get_deploy_config](#get_deploy_config) - Retrieve Deploy Config
-* [update_deploy_config](#update_deploy_config) - Update Deploy Config
-* [lock](#lock) - Lock the server
-* [unlock](#unlock) - Unlock the server
-* [create_out_of_band_connection](#create_out_of_band_connection) - Start Out of Band Connection
-* [list_out_of_band_connections](#list_out_of_band_connections) - List Out of Band Connections
-* [actions](#actions) - Run Server Action
-* [create_ipmi_session](#create_ipmi_session) - Generate IPMI credentials
-* [start_rescue_mode](#start_rescue_mode) - Puts a Server in rescue mode
-* [exit_rescue_mode](#exit_rescue_mode) - Exits rescue mode for a Server
-* [schedule_deletion](#schedule_deletion) - Schedule the server deletion
-* [unschedule_deletion](#unschedule_deletion) - Unschedule the server deletion
+* [list](#list) - List servers
+* [create](#create) - Create server
+* [get](#get) - Retrieve server
+* [update](#update) - Update server
+* [delete](#delete) - Remove server
+* [get_deploy_config](#get_deploy_config) - Retrieve deploy config
+* [update_deploy_config](#update_deploy_config) - Update deploy config
+* [lock](#lock) - Lock server
+* [unlock](#unlock) - Unlock server
+* [create_out_of_band_connection](#create_out_of_band_connection) - Create out-of-band connection
+* [list_out_of_band_connections](#list_out_of_band_connections) - List out-of-band connections
+* [actions](#actions) - Run power action
+* [create_ipmi_session](#create_ipmi_session) - Create IPMI credentials
+* [start_rescue_mode](#start_rescue_mode) - Put server in rescue mode
+* [exit_rescue_mode](#exit_rescue_mode) - Exits rescue mode
+* [schedule_deletion](#schedule_deletion) - Schedule server deletion
+* [unschedule_deletion](#unschedule_deletion) - Unschedule server deletion
 * [reinstall](#reinstall) - Run Server Reinstall
 
 ## list
@@ -28,9 +28,9 @@
 Returns a list of all servers belonging to the team.
 
 
-### Example Usage
+### Example Usage: Filtered by multiple tags
 
-<!-- UsageSnippet language="python" operationID="get-servers" method="get" path="/servers" -->
+<!-- UsageSnippet language="python" operationID="get-servers" method="get" path="/servers" example="Filtered by multiple tags" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -40,7 +40,167 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.servers.list(filter_project="proj_g1mbDwrZqLv5B", filter_region="SAO", filter_ram_eql=32, filter_ram_gte=40, filter_ram_lte=40, filter_tags="tag_pjAkRjVzw0tlYBA2WX1eHzW7w79,tag_yARk1KLJAvslWY7k5wNBCaKEV7e", page_size=20, page_number=1)
+    res = latitudesh.servers.list(filter_tags="tag_3lg8RjPJL7HK4jYBbLmxC0ZR0yVX,tag_5JgXW7Wyr6i5V85g2Y2MFWL8bXA", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="get-servers" method="get" path="/servers" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.list(filter_tags="tag_pjAkRjVzw0tlYBA2WX1eHzW7w79,tag_yARk1KLJAvslWY7k5wNBCaKEV7e", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: when no filters
+
+<!-- UsageSnippet language="python" operationID="get-servers" method="get" path="/servers" example="when no filters" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.list(page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: when project filter
+
+<!-- UsageSnippet language="python" operationID="get-servers" method="get" path="/servers" example="when project filter" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.list(filter_project="proj_g1mbDwrZqLv5B", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: when region filter
+
+<!-- UsageSnippet language="python" operationID="get-servers" method="get" path="/servers" example="when region filter" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.list(filter_region="SAO", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: when trying to filter by tag
+
+<!-- UsageSnippet language="python" operationID="get-servers" method="get" path="/servers" example="when trying to filter by tag" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.list(filter_tags="tag_0yrQNVQRLwHy0XwEGM6ESwLrW2PA", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: with a `eql` filter
+
+<!-- UsageSnippet language="python" operationID="get-servers" method="get" path="/servers" example="with a `eql` filter" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.list(filter_ram_eql=32, page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: with a `gte` filter
+
+<!-- UsageSnippet language="python" operationID="get-servers" method="get" path="/servers" example="with a `gte` filter" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.list(filter_ram_gte=40, page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+### Example Usage: with a `lte` filter
+
+<!-- UsageSnippet language="python" operationID="get-servers" method="get" path="/servers" example="with a `lte` filter" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.list(filter_ram_lte=40, page_size=20, page_number=1)
 
     while res is not None:
         # Handle items
@@ -84,11 +244,11 @@ with Latitudesh(
 
 ## create
 
-Deploy Server
+Create server
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="create-server" method="post" path="/servers" -->
+<!-- UsageSnippet language="python" operationID="create-server" method="post" path="/servers" example="Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -107,6 +267,88 @@ with Latitudesh(
             "site": latitudesh_python_sdk.CreateServerServersSite.ASH,
             "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_22_04_X64_LTS,
             "hostname": "BRC1",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Payment Required
+
+<!-- UsageSnippet language="python" operationID="create-server" method="post" path="/servers" example="Payment Required" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.create(data={
+        "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
+        "attributes": {
+            "project": "proj_kjQwdEMXdYNVP",
+            "plan": latitudesh_python_sdk.CreateServerServersPlan.C2_SMALL_X86,
+            "site": latitudesh_python_sdk.CreateServerServersSite.SAO,
+            "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_22_04_X64_LTS,
+            "hostname": "BRC1",
+            "billing": latitudesh_python_sdk.CreateServerServersBilling.MONTHLY,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unpermited parameter
+
+<!-- UsageSnippet language="python" operationID="create-server" method="post" path="/servers" example="Unpermited parameter" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.create(data={
+        "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
+        "attributes": {},
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unprocessable Entity
+
+<!-- UsageSnippet language="python" operationID="create-server" method="post" path="/servers" example="Unprocessable Entity" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.create(data={
+        "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
+        "attributes": {
+            "project": "proj_RMLydp9XqQKr1",
+            "plan": latitudesh_python_sdk.CreateServerServersPlan.C2_SMALL_X86,
+            "site": latitudesh_python_sdk.CreateServerServersSite.SAO,
+            "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_22_04_X64_LTS,
+            "hostname": "BRC1",
+            "ssh_keys": [
+                "ssh_93YjJOLydvZ87",
+            ],
         },
     })
 
@@ -139,7 +381,7 @@ Returns a server that belongs to the team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-server" method="get" path="/servers/{server_id}" -->
+<!-- UsageSnippet language="python" operationID="get-server" method="get" path="/servers/{server_id}" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -176,11 +418,86 @@ with Latitudesh(
 
 ## update
 
-Update Server
+Update server
 
-### Example Usage
+### Example Usage: Locked server
 
-<!-- UsageSnippet language="python" operationID="update-server" method="patch" path="/servers/{server_id}" -->
+<!-- UsageSnippet language="python" operationID="update-server" method="patch" path="/servers/{server_id}" example="Locked server" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.update(server_id="sv_g1mbDwrZqLv5B", data={
+        "id": "sv_g1mbDwrZqLv5B",
+        "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
+        "attributes": {
+            "billing": latitudesh_python_sdk.UpdateServerServersBilling.HOURLY,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Payment Required
+
+<!-- UsageSnippet language="python" operationID="update-server" method="patch" path="/servers/{server_id}" example="Payment Required" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.update(server_id="sv_1ZJrdxe4qg4LV", data={
+        "id": "sv_1ZJrdxe4qg4LV",
+        "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
+        "attributes": {
+            "billing": latitudesh_python_sdk.UpdateServerServersBilling.MONTHLY,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Reserved project
+
+<!-- UsageSnippet language="python" operationID="update-server" method="patch" path="/servers/{server_id}" example="Reserved project" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.update(server_id="sv_w49QDBaQqagKb", data={
+        "id": "sv_w49QDBaQqagKb",
+        "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
+        "attributes": {
+            "billing": latitudesh_python_sdk.UpdateServerServersBilling.HOURLY,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="update-server" method="patch" path="/servers/{server_id}" example="Success" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -196,6 +513,107 @@ with Latitudesh(
         "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
         "attributes": {
             "project": "proj_yQrJdNMGO30gv",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unpermitted parameter
+
+<!-- UsageSnippet language="python" operationID="update-server" method="patch" path="/servers/{server_id}" example="Unpermitted parameter" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.update(server_id="sv_3YjJOLLNOvZ87", data={
+        "id": "sv_3YjJOLLNOvZ87",
+        "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
+        "attributes": {
+            "billing": latitudesh_python_sdk.UpdateServerServersBilling.MONTHLY,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unprocessable Entity
+
+<!-- UsageSnippet language="python" operationID="update-server" method="patch" path="/servers/{server_id}" example="Unprocessable Entity" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.update(server_id="sv_vYAZqGNJdMQ94", data={
+        "id": "sv_vYAZqGNJdMQ94",
+        "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
+        "attributes": {
+            "billing": latitudesh_python_sdk.UpdateServerServersBilling.MONTHLY,
+            "project": "new-project",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when server has additional ips
+
+<!-- UsageSnippet language="python" operationID="update-server" method="patch" path="/servers/{server_id}" example="when server has additional ips" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.update(server_id="sv_W6Q2D9lGqKLpr", data={
+        "id": "sv_W6Q2D9lGqKLpr",
+        "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
+        "attributes": {
+            "billing": latitudesh_python_sdk.UpdateServerServersBilling.YEARLY,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when server has vlan assignments
+
+<!-- UsageSnippet language="python" operationID="update-server" method="patch" path="/servers/{server_id}" example="when server has vlan assignments" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.update(server_id="sv_LMmAD8k4qwop2", data={
+        "id": "sv_LMmAD8k4qwop2",
+        "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
+        "attributes": {
+            "billing": latitudesh_python_sdk.UpdateServerServersBilling.YEARLY,
         },
     })
 
@@ -224,7 +642,7 @@ with Latitudesh(
 
 ## delete
 
-Remove Server
+Remove server
 
 ### Example Usage
 
@@ -260,11 +678,11 @@ with Latitudesh(
 
 ## get_deploy_config
 
-Retrieve Deploy Config
+Retrieve deploy config
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-server-deploy-config" method="get" path="/servers/{server_id}/deploy_config" -->
+<!-- UsageSnippet language="python" operationID="get-server-deploy-config" method="get" path="/servers/{server_id}/deploy_config" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -300,11 +718,49 @@ with Latitudesh(
 
 ## update_deploy_config
 
-Update Deploy Config
+Update deploy config
 
-### Example Usage
+### Example Usage: Forbidden
 
-<!-- UsageSnippet language="python" operationID="update-server-deploy-config" method="patch" path="/servers/{server_id}/deploy_config" -->
+<!-- UsageSnippet language="python" operationID="update-server-deploy-config" method="patch" path="/servers/{server_id}/deploy_config" example="Forbidden" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.update_deploy_config(server_id="sv_kjQwdEmXdYNVP", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Not Acceptable
+
+<!-- UsageSnippet language="python" operationID="update-server-deploy-config" method="patch" path="/servers/{server_id}/deploy_config" example="Not Acceptable" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.update_deploy_config(server_id="sv_5AEmq7xMDBkWX", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="update-server-deploy-config" method="patch" path="/servers/{server_id}/deploy_config" example="Success" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -316,6 +772,25 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.servers.update_deploy_config(server_id="sv_lkg1DeYLDvZE5", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unprocessable Entity
+
+<!-- UsageSnippet language="python" operationID="update-server-deploy-config" method="patch" path="/servers/{server_id}/deploy_config" example="Unprocessable Entity" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.update_deploy_config(server_id="sv_Gr47ql4vqAg0m", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
 
     # Handle response
     print(res)
@@ -345,9 +820,63 @@ with Latitudesh(
 
 Locks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
 
-### Example Usage
+### Example Usage: Forbidden
 
-<!-- UsageSnippet language="python" operationID="server-lock" method="post" path="/servers/{server_id}/lock" -->
+<!-- UsageSnippet language="python" operationID="server-lock" method="post" path="/servers/{server_id}/lock" example="Forbidden" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.lock(server_id="sv_VE1Wd3rXOXnZJ")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Not Found
+
+<!-- UsageSnippet language="python" operationID="server-lock" method="post" path="/servers/{server_id}/lock" example="Not Found" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.lock(server_id="invalid")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Ok
+
+<!-- UsageSnippet language="python" operationID="server-lock" method="post" path="/servers/{server_id}/lock" example="Ok" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.lock(server_id="sv_059EqYX2dQj8p")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="server-lock" method="post" path="/servers/{server_id}/lock" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -385,9 +914,63 @@ with Latitudesh(
 
 Unlocks the server. A locked server cannot be deleted or modified and no actions can be performed on it.
 
-### Example Usage
+### Example Usage: Forbidden
 
-<!-- UsageSnippet language="python" operationID="server-unlock" method="post" path="/servers/{server_id}/unlock" -->
+<!-- UsageSnippet language="python" operationID="server-unlock" method="post" path="/servers/{server_id}/unlock" example="Forbidden" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.unlock(server_id="sv_A05EdQM4dvKYQ")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Not Found
+
+<!-- UsageSnippet language="python" operationID="server-unlock" method="post" path="/servers/{server_id}/unlock" example="Not Found" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.unlock(server_id="invalid")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Ok
+
+<!-- UsageSnippet language="python" operationID="server-unlock" method="post" path="/servers/{server_id}/unlock" example="Ok" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.unlock(server_id="sv_aNmodjoyqbE8W")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="server-unlock" method="post" path="/servers/{server_id}/unlock" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -423,11 +1006,11 @@ with Latitudesh(
 
 ## create_out_of_band_connection
 
-Start Out of Band Connection
+Create out-of-band connection
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="create-server-out-of-band" method="post" path="/servers/{server_id}/out_of_band_connection" -->
+<!-- UsageSnippet language="python" operationID="create-server-out-of-band" method="post" path="/servers/{server_id}/out_of_band_connection" example="Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -442,6 +1025,78 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateServerOutOfBandServersType.OUT_OF_BAND,
         "attributes": {
             "ssh_key_id": "ssh_3YjJOLMydvZ87",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Forbidden
+
+<!-- UsageSnippet language="python" operationID="create-server-out-of-band" method="post" path="/servers/{server_id}/out_of_band_connection" example="Forbidden" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.create_out_of_band_connection(server_id="sv_lkg1DeYLDvZE5", data={
+        "type": latitudesh_python_sdk.CreateServerOutOfBandServersType.OUT_OF_BAND,
+        "attributes": {
+            "ssh_key_id": "ssh_aKXgRdR3qv9k5",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Not found
+
+<!-- UsageSnippet language="python" operationID="create-server-out-of-band" method="post" path="/servers/{server_id}/out_of_band_connection" example="Not found" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.create_out_of_band_connection(server_id="invalid-server", data={
+        "type": latitudesh_python_sdk.CreateServerOutOfBandServersType.OUT_OF_BAND,
+        "attributes": {
+            "ssh_key_id": "ssh_m1R3zq2bqWxyn",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when the server is being provisioned
+
+<!-- UsageSnippet language="python" operationID="create-server-out-of-band" method="post" path="/servers/{server_id}/out_of_band_connection" example="when the server is being provisioned" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.create_out_of_band_connection(server_id="sv_0MK4O44ROa95w", data={
+        "type": latitudesh_python_sdk.CreateServerOutOfBandServersType.OUT_OF_BAND,
+        "attributes": {
+            "ssh_key_id": "ssh_vGMy1DbgON50m",
         },
     })
 
@@ -470,11 +1125,11 @@ with Latitudesh(
 
 ## list_out_of_band_connections
 
-List Out of Band Connections
+List out-of-band connections
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-server-out-of-band" method="get" path="/servers/{server_id}/out_of_band_connection" -->
+<!-- UsageSnippet language="python" operationID="get-server-out-of-band" method="get" path="/servers/{server_id}/out_of_band_connection" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -516,9 +1171,9 @@ Performs an action on a given server:
 - `reboot`
 
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="create-server-action" method="post" path="/servers/{server_id}/actions" -->
+<!-- UsageSnippet language="python" operationID="create-server-action" method="post" path="/servers/{server_id}/actions" example="Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -533,6 +1188,30 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateServerActionServersType.ACTIONS,
         "attributes": {
             "action": latitudesh_python_sdk.CreateServerActionAction.REBOOT,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Forbidden
+
+<!-- UsageSnippet language="python" operationID="create-server-action" method="post" path="/servers/{server_id}/actions" example="Forbidden" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.actions(server_id="sv_e8pKq0xYqWAob", data={
+        "type": latitudesh_python_sdk.CreateServerActionServersType.ACTIONS,
+        "attributes": {
+            "action": latitudesh_python_sdk.CreateServerActionAction.POWER_OFF,
         },
     })
 
@@ -567,9 +1246,9 @@ You will have to use a VPN client such as https://openvpn.net to connect. See `V
 Related guide: https://docs.latitude.sh/docs/ipmi
 
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="create-ipmi-session" method="post" path="/servers/{server_id}/remote_access" -->
+<!-- UsageSnippet language="python" operationID="create-ipmi-session" method="post" path="/servers/{server_id}/remote_access" example="Created" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -580,6 +1259,42 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.servers.create_ipmi_session(server_id="sv_Qkm7dXaRq8nZV")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Not found
+
+<!-- UsageSnippet language="python" operationID="create-ipmi-session" method="post" path="/servers/{server_id}/remote_access" example="Not found" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.create_ipmi_session(server_id="invalid")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Unprocessable entity
+
+<!-- UsageSnippet language="python" operationID="create-ipmi-session" method="post" path="/servers/{server_id}/remote_access" example="Unprocessable entity" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.create_ipmi_session(server_id="sv_yQrJdNMGO30gv")
 
     # Handle response
     print(res)
@@ -607,9 +1322,9 @@ with Latitudesh(
 
 Starts rescue mode on a given server.
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="server-start-rescue-mode" method="post" path="/servers/{server_id}/rescue_mode" -->
+<!-- UsageSnippet language="python" operationID="server-start-rescue-mode" method="post" path="/servers/{server_id}/rescue_mode" example="Created" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -620,6 +1335,24 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.servers.start_rescue_mode(server_id="sv_WeGoqAWNOP7nz")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Not Acceptable
+
+<!-- UsageSnippet language="python" operationID="server-start-rescue-mode" method="post" path="/servers/{server_id}/rescue_mode" example="Not Acceptable" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.start_rescue_mode(server_id="sv_GnzRD5lvqM5yw")
 
     # Handle response
     print(res)
@@ -647,9 +1380,27 @@ with Latitudesh(
 
 Exits rescue mode on a given server.
 
-### Example Usage
+### Example Usage: Not Acceptable
 
-<!-- UsageSnippet language="python" operationID="server-exit-rescue-mode" method="post" path="/servers/{server_id}/exit_rescue_mode" -->
+<!-- UsageSnippet language="python" operationID="server-exit-rescue-mode" method="post" path="/servers/{server_id}/exit_rescue_mode" example="Not Acceptable" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.exit_rescue_mode(server_id="sv_WVQJDMVBORbyE")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="server-exit-rescue-mode" method="post" path="/servers/{server_id}/exit_rescue_mode" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -660,6 +1411,24 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.servers.exit_rescue_mode(server_id="sv_3YjJOLQNdvZ87")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: if the server is entering rescue mode
+
+<!-- UsageSnippet language="python" operationID="server-exit-rescue-mode" method="post" path="/servers/{server_id}/exit_rescue_mode" example="if the server is entering rescue mode" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.exit_rescue_mode(server_id="sv_1R3zq2JxqWxyn")
 
     # Handle response
     print(res)
@@ -687,9 +1456,9 @@ with Latitudesh(
 
 Schedules the server to be removed at the end of the billing cycle.
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="server-schedule-deletion" method="post" path="/servers/{server_id}/schedule_deletion" -->
+<!-- UsageSnippet language="python" operationID="server-schedule-deletion" method="post" path="/servers/{server_id}/schedule_deletion" example="Created" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -700,6 +1469,42 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.servers.schedule_deletion(server_id="sv_g1mbDwBZqLv5B")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when request deletion time is invalid
+
+<!-- UsageSnippet language="python" operationID="server-schedule-deletion" method="post" path="/servers/{server_id}/schedule_deletion" example="when request deletion time is invalid" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.schedule_deletion(server_id="sv_Qkm7dXaRq8nZV")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when server is locked
+
+<!-- UsageSnippet language="python" operationID="server-schedule-deletion" method="post" path="/servers/{server_id}/schedule_deletion" example="when server is locked" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.schedule_deletion(server_id="sv_5xyZOnLMqWM0l")
 
     # Handle response
     print(res)
@@ -762,9 +1567,9 @@ with Latitudesh(
 
 Run Server Reinstall
 
-### Example Usage
+### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" -->
+<!-- UsageSnippet language="python" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" example="Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -781,6 +1586,113 @@ with Latitudesh(
             "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.IPXE,
             "hostname": "BRC1",
             "ipxe": "https://some-host.com/image.ipxe",
+        },
+    })
+
+    # Use the SDK ...
+
+```
+### Example Usage: Forbidden
+
+<!-- UsageSnippet language="python" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" example="Forbidden" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    latitudesh.servers.reinstall(server_id="sv_LGXPdWK8dnNWk", data={
+        "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
+        "attributes": {
+            "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.UBUNTU_22_04_X64_LTS,
+            "hostname": "BRC1",
+        },
+    })
+
+    # Use the SDK ...
+
+```
+### Example Usage: Locked server
+
+<!-- UsageSnippet language="python" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" example="Locked server" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    latitudesh.servers.reinstall(server_id="sv_Gr47qlKvdAg0m", data={
+        "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
+        "attributes": {
+            "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.UBUNTU_22_04_X64_LTS,
+            "hostname": "BRC1",
+            "ssh_keys": [
+                "37",
+            ],
+            "user_data": "19",
+            "raid": latitudesh_python_sdk.CreateServerReinstallServersRaid.RAID_1,
+        },
+    })
+
+    # Use the SDK ...
+
+```
+### Example Usage: Not Found
+
+<!-- UsageSnippet language="python" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" example="Not Found" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    latitudesh.servers.reinstall(server_id="sv_0L6WO1m1OPlXy", data={
+        "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
+        "attributes": {
+            "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.UBUNTU_22_04_X64_LTS,
+            "hostname": "BRC1",
+            "ssh_keys": [
+                "36",
+            ],
+            "user_data": "12",
+            "raid": latitudesh_python_sdk.CreateServerReinstallServersRaid.RAID_1,
+        },
+    })
+
+    # Use the SDK ...
+
+```
+### Example Usage: Unprocessable Entity
+
+<!-- UsageSnippet language="python" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" example="Unprocessable Entity" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    latitudesh.servers.reinstall(server_id="sv_RMLydp9XqQKr1", data={
+        "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
+        "attributes": {
+            "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.WINDOWS_SERVER_2019_STD_V1,
+            "hostname": "BRC1",
+            "raid": latitudesh_python_sdk.CreateServerReinstallServersRaid.RAID_0,
         },
     })
 
