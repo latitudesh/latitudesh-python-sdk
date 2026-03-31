@@ -297,7 +297,7 @@ with Latitudesh(
 * [create_kubernetes_cluster](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#create_kubernetes_cluster) - Create a Kubernetes Cluster
 * [get_kubernetes_cluster](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster) - Get a Kubernetes Cluster
 * [delete_kubernetes_cluster](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#delete_kubernetes_cluster) - Delete a Kubernetes Cluster
-* [update_kubernetes_cluster](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#update_kubernetes_cluster) - Scale Kubernetes Cluster Workers
+* [update_kubernetes_cluster](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#update_kubernetes_cluster) - Scale Kubernetes Cluster
 * [get_kubernetes_cluster_kubeconfig](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig
 
 ### [OperatingSystems](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/operatingsystemssdk/README.md)
