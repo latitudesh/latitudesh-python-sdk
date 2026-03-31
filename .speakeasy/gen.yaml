@@ -34,7 +34,9 @@ generation:
 python:
   version: 3.0.2
   additionalDependencies:
-    dev: {}
+    dev:
+      pytest: ">=8.0.0"
+      pytest-cov: ">=5.0.0"
     main: {}
   allowedRedefinedBuiltins:
     - id
