@@ -107,6 +107,9 @@ class RegionsSDK(BaseSDK):
                 page_size=page_size,
                 page_number=next_page,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
@@ -218,6 +221,9 @@ class RegionsSDK(BaseSDK):
                 page_size=page_size,
                 page_number=next_page,
                 retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
             )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):

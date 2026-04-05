@@ -102,6 +102,14 @@ class WorkerStatus(str, Enum):
     ERROR = "error"
 
 
+class ControlPlaneStatus(str, Enum):
+    r"""Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'error' when a control plane node has failed."""
+
+    READY = "ready"
+    SCALING = "scaling"
+    ERROR = "error"
+
+
 class KubernetesClusterDataName(str, Enum):
     r"""Step identifier"""
 
@@ -327,6 +335,8 @@ class KubernetesClusterDataAttributesTypedDict(TypedDict):
     r"""Worker nodes status information"""
     worker_status: NotRequired[Nullable[WorkerStatus]]
     r"""Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed."""
+    control_plane_status: NotRequired[ControlPlaneStatus]
+    r"""Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'error' when a control plane node has failed."""
     infrastructure_ready: NotRequired[bool]
     r"""Whether the underlying infrastructure is ready"""
     control_plane_ready: NotRequired[bool]
@@ -396,6 +406,9 @@ class KubernetesClusterDataAttributes(BaseModel):
     worker_status: OptionalNullable[WorkerStatus] = UNSET
     r"""Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed."""
 
+    control_plane_status: Optional[ControlPlaneStatus] = None
+    r"""Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'error' when a control plane node has failed."""
+
     infrastructure_ready: Optional[bool] = None
     r"""Whether the underlying infrastructure is ready"""
 
@@ -443,6 +456,7 @@ class KubernetesClusterDataAttributes(BaseModel):
                 "control_plane",
                 "workers",
                 "worker_status",
+                "control_plane_status",
                 "infrastructure_ready",
                 "control_plane_ready",
                 "message",
