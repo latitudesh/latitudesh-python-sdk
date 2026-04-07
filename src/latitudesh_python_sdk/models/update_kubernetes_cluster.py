@@ -10,6 +10,7 @@ from latitudesh_python_sdk.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
+from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -18,22 +19,31 @@ class UpdateKubernetesClusterType(str, Enum):
 
 
 class UpdateKubernetesClusterAttributesTypedDict(TypedDict):
-    worker_count: int
-    r"""Desired number of worker nodes. Must be between 0 and 10."""
+    r"""Exactly one of worker_count or control_plane_count must be provided. These parameters are mutually exclusive."""
+
+    worker_count: NotRequired[int]
+    r"""Desired number of worker nodes. Must be between 0 and 10. Mutually exclusive with control_plane_count."""
+    control_plane_count: NotRequired[int]
+    r"""Desired number of control plane nodes. Minimum 1. Mutually exclusive with worker_count."""
     worker_plan: NotRequired[Nullable[str]]
     r"""Plan slug for worker nodes. Required when scaling from 0 workers. Ignored when scaling an existing deployment."""
 
 
 class UpdateKubernetesClusterAttributes(BaseModel):
-    worker_count: int
-    r"""Desired number of worker nodes. Must be between 0 and 10."""
+    r"""Exactly one of worker_count or control_plane_count must be provided. These parameters are mutually exclusive."""
+
+    worker_count: Optional[int] = None
+    r"""Desired number of worker nodes. Must be between 0 and 10. Mutually exclusive with control_plane_count."""
+
+    control_plane_count: Optional[int] = None
+    r"""Desired number of control plane nodes. Minimum 1. Mutually exclusive with worker_count."""
 
     worker_plan: OptionalNullable[str] = UNSET
     r"""Plan slug for worker nodes. Required when scaling from 0 workers. Ignored when scaling an existing deployment."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["worker_plan"])
+        optional_fields = set(["worker_count", "control_plane_count", "worker_plan"])
         nullable_fields = set(["worker_plan"])
         serialized = handler(self)
         m = {}
@@ -60,12 +70,14 @@ class UpdateKubernetesClusterAttributes(BaseModel):
 class UpdateKubernetesClusterDataTypedDict(TypedDict):
     type: UpdateKubernetesClusterType
     attributes: UpdateKubernetesClusterAttributesTypedDict
+    r"""Exactly one of worker_count or control_plane_count must be provided. These parameters are mutually exclusive."""
 
 
 class UpdateKubernetesClusterData(BaseModel):
     type: UpdateKubernetesClusterType
 
     attributes: UpdateKubernetesClusterAttributes
+    r"""Exactly one of worker_count or control_plane_count must be provided. These parameters are mutually exclusive."""
 
 
 class UpdateKubernetesClusterTypedDict(TypedDict):

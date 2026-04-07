@@ -32,11 +32,11 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 python:
-  version: 3.0.1
+  version: 3.0.2
   additionalDependencies:
     dev:
-      pytest: ">=8.0.0"
-      pytest-cov: ">=5.0.0"
+      pytest: '>=8.0.0'
+      pytest-cov: '>=5.0.0'
     main: {}
   allowedRedefinedBuiltins:
     - id

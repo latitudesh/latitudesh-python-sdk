@@ -8,7 +8,7 @@
 * [create_kubernetes_cluster](#create_kubernetes_cluster) - Create a Kubernetes Cluster
 * [get_kubernetes_cluster](#get_kubernetes_cluster) - Get a Kubernetes Cluster
 * [delete_kubernetes_cluster](#delete_kubernetes_cluster) - Delete a Kubernetes Cluster
-* [update_kubernetes_cluster](#update_kubernetes_cluster) - Scale Kubernetes Cluster Workers
+* [update_kubernetes_cluster](#update_kubernetes_cluster) - Scale Kubernetes Cluster
 * [get_kubernetes_cluster_kubeconfig](#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig
 
 ## list_kubernetes_clusters
@@ -279,15 +279,63 @@ with Latitudesh(
 
 ## update_kubernetes_cluster
 
-Scales the worker nodes of a Kubernetes cluster. The cluster must be in `Provisioned` phase to accept updates.
+Scales the worker nodes or control plane nodes of a Kubernetes cluster. The cluster must be in `Provisioned` phase to accept updates.
+
+Exactly one of `worker_count` or `control_plane_count` must be provided per request. You cannot scale workers and control plane nodes in the same request.
 
 When scaling up, the API validates that sufficient server stock is available for the requested delta (e.g., scaling from 2 to 5 workers checks for 3 available servers).
 
 When scaling from 0 workers, you must provide a `worker_plan` since there is no existing configuration to inherit the plan from.
 
-Returns 202 Accepted when a scaling operation is triggered. Poll the GET endpoint to monitor progress. Returns 200 OK if the requested worker count matches the current count (no-op).
+Control plane scaling has a minimum of 1 node. You cannot scale control plane nodes to zero.
+
+Returns 202 Accepted when a scaling operation is triggered. Poll the GET endpoint to monitor progress. Returns 200 OK if the requested count matches the current count (no-op).
 
 
+### Example Usage: ControlPlaneUnchanged
+
+<!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="ControlPlaneUnchanged" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
+        "attributes": {},
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: InvalidControlPlaneCountType
+
+<!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="InvalidControlPlaneCountType" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
+        "attributes": {},
+    })
+
+    # Handle response
+    print(res)
+
+```
 ### Example Usage: InvalidWorkerCountType
 
 <!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="InvalidWorkerCountType" -->
@@ -303,9 +351,29 @@ with Latitudesh(
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
         "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
-        "attributes": {
-            "worker_count": 204185,
-        },
+        "attributes": {},
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: MissingScalingParameter
+
+<!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="MissingScalingParameter" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
+        "attributes": {},
     })
 
     # Handle response
@@ -329,6 +397,76 @@ with Latitudesh(
         "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
         "attributes": {
             "worker_count": 204185,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: MutualExclusionViolation
+
+<!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="MutualExclusionViolation" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
+        "attributes": {},
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ScaleControlPlaneDown
+
+<!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="ScaleControlPlaneDown" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
+        "attributes": {
+            "control_plane_count": 1,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ScaleControlPlaneUp
+
+<!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="ScaleControlPlaneUp" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
+        "attributes": {
+            "control_plane_count": 3,
         },
     })
 
@@ -433,6 +571,103 @@ with Latitudesh(
     print(res)
 
 ```
+### Example Usage: ScaleWorkersDown
+
+<!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="ScaleWorkersDown" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
+        "attributes": {
+            "worker_count": 2,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ScaleWorkersFromZero
+
+<!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="ScaleWorkersFromZero" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
+        "attributes": {
+            "worker_count": 3,
+            "worker_plan": "c3-small-x86",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ScaleWorkersToZero
+
+<!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="ScaleWorkersToZero" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
+        "attributes": {
+            "worker_count": 0,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ScaleWorkersUp
+
+<!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="ScaleWorkersUp" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
+        "attributes": {
+            "worker_count": 5,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
 ### Example Usage: Unchanged
 
 <!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="Unchanged" -->
@@ -451,6 +686,28 @@ with Latitudesh(
         "attributes": {
             "worker_count": 204185,
         },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: WorkersUnchanged
+
+<!-- UsageSnippet language="python" operationID="update-kubernetes-cluster" method="patch" path="/kubernetes_clusters/{kubernetes_cluster_id}" example="WorkersUnchanged" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateKubernetesClusterType.KUBERNETES_CLUSTERS,
+        "attributes": {},
     })
 
     # Handle response
