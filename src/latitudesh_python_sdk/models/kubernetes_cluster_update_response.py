@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
@@ -13,7 +19,7 @@ class KubernetesClusterUpdateResponseType(str, Enum):
 
 
 class KubernetesClusterUpdateResponseStatus(str, Enum):
-    r"""The update status. 'scaling' indicates worker nodes are being added or removed. 'unchanged' indicates the requested worker_count matches the current count."""
+    r"""The update status. 'scaling' indicates nodes are being added or removed. 'unchanged' indicates the requested count matches the current count."""
 
     SCALING = "scaling"
     UNCHANGED = "unchanged"
@@ -23,9 +29,11 @@ class KubernetesClusterUpdateResponseAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The cluster name"""
     status: NotRequired[KubernetesClusterUpdateResponseStatus]
-    r"""The update status. 'scaling' indicates worker nodes are being added or removed. 'unchanged' indicates the requested worker_count matches the current count."""
-    worker_count: NotRequired[int]
-    r"""The requested number of worker nodes"""
+    r"""The update status. 'scaling' indicates nodes are being added or removed. 'unchanged' indicates the requested count matches the current count."""
+    worker_count: NotRequired[Nullable[int]]
+    r"""The requested number of worker nodes. Present when scaling workers."""
+    control_plane_count: NotRequired[Nullable[int]]
+    r"""The requested number of control plane nodes. Present when scaling control plane."""
 
 
 class KubernetesClusterUpdateResponseAttributes(BaseModel):
@@ -33,23 +41,35 @@ class KubernetesClusterUpdateResponseAttributes(BaseModel):
     r"""The cluster name"""
 
     status: Optional[KubernetesClusterUpdateResponseStatus] = None
-    r"""The update status. 'scaling' indicates worker nodes are being added or removed. 'unchanged' indicates the requested worker_count matches the current count."""
+    r"""The update status. 'scaling' indicates nodes are being added or removed. 'unchanged' indicates the requested count matches the current count."""
 
-    worker_count: Optional[int] = None
-    r"""The requested number of worker nodes"""
+    worker_count: OptionalNullable[int] = UNSET
+    r"""The requested number of worker nodes. Present when scaling workers."""
+
+    control_plane_count: OptionalNullable[int] = UNSET
+    r"""The requested number of control plane nodes. Present when scaling control plane."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "status", "worker_count"])
+        optional_fields = set(["name", "status", "worker_count", "control_plane_count"])
+        nullable_fields = set(["worker_count", "control_plane_count"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

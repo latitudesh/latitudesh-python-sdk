@@ -668,6 +668,7 @@ if TYPE_CHECKING:
     )
     from .kubernetes_cluster_data import (
         ControlPlane,
+        ControlPlaneStatus,
         ControlPlaneTypedDict,
         KubernetesClusterData,
         KubernetesClusterDataAttributes,
@@ -1632,6 +1633,7 @@ __all__ = [
     "CPU",
     "CPUTypedDict",
     "ControlPlane",
+    "ControlPlaneStatus",
     "ControlPlaneTypedDict",
     "Country",
     "CountryTypedDict",
@@ -3349,6 +3351,7 @@ _dynamic_imports: dict[str, str] = {
     "KubernetesClusterCreateResponseDataTypedDict": ".kubernetes_cluster_create_response",
     "KubernetesClusterCreateResponseTypedDict": ".kubernetes_cluster_create_response",
     "ControlPlane": ".kubernetes_cluster_data",
+    "ControlPlaneStatus": ".kubernetes_cluster_data",
     "ControlPlaneTypedDict": ".kubernetes_cluster_data",
     "KubernetesClusterData": ".kubernetes_cluster_data",
     "KubernetesClusterDataAttributes": ".kubernetes_cluster_data",

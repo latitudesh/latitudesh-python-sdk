@@ -1674,6 +1674,26 @@ with Latitudesh(
     # Use the SDK ...
 
 ```
+### Example Usage: ServerNotFound
+
+<!-- UsageSnippet language="python" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" example="ServerNotFound" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    latitudesh.servers.reinstall(server_id="<id>", data={
+        "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
+    })
+
+    # Use the SDK ...
+
+```
 ### Example Usage: Unprocessable Entity
 
 <!-- UsageSnippet language="python" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" example="Unprocessable Entity" -->
@@ -1710,6 +1730,7 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
