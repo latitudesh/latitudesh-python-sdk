@@ -19,31 +19,38 @@ class UpdateKubernetesClusterType(str, Enum):
 
 
 class UpdateKubernetesClusterAttributesTypedDict(TypedDict):
-    r"""Exactly one of worker_count or control_plane_count must be provided. These parameters are mutually exclusive."""
+    r"""Provide one of: worker_count, control_plane_count (for scaling), or kubernetes_version (for upgrades). These are mutually exclusive operations."""
 
     worker_count: NotRequired[int]
-    r"""Desired number of worker nodes. Must be between 0 and 10. Mutually exclusive with control_plane_count."""
+    r"""Desired number of worker nodes. Must be between 0 and 10. Mutually exclusive with control_plane_count and kubernetes_version."""
     control_plane_count: NotRequired[int]
-    r"""Desired number of control plane nodes. Minimum 1. Mutually exclusive with worker_count."""
+    r"""Desired number of control plane nodes. Minimum 1. Mutually exclusive with worker_count and kubernetes_version."""
     worker_plan: NotRequired[Nullable[str]]
     r"""Plan slug for worker nodes. Required when scaling from 0 workers. Ignored when scaling an existing deployment."""
+    kubernetes_version: NotRequired[str]
+    r"""Target Kubernetes version for upgrade (e.g., v1.35.0+rke2r1). Mutually exclusive with scaling operations. Must be one minor version higher than current."""
 
 
 class UpdateKubernetesClusterAttributes(BaseModel):
-    r"""Exactly one of worker_count or control_plane_count must be provided. These parameters are mutually exclusive."""
+    r"""Provide one of: worker_count, control_plane_count (for scaling), or kubernetes_version (for upgrades). These are mutually exclusive operations."""
 
     worker_count: Optional[int] = None
-    r"""Desired number of worker nodes. Must be between 0 and 10. Mutually exclusive with control_plane_count."""
+    r"""Desired number of worker nodes. Must be between 0 and 10. Mutually exclusive with control_plane_count and kubernetes_version."""
 
     control_plane_count: Optional[int] = None
-    r"""Desired number of control plane nodes. Minimum 1. Mutually exclusive with worker_count."""
+    r"""Desired number of control plane nodes. Minimum 1. Mutually exclusive with worker_count and kubernetes_version."""
 
     worker_plan: OptionalNullable[str] = UNSET
     r"""Plan slug for worker nodes. Required when scaling from 0 workers. Ignored when scaling an existing deployment."""
 
+    kubernetes_version: Optional[str] = None
+    r"""Target Kubernetes version for upgrade (e.g., v1.35.0+rke2r1). Mutually exclusive with scaling operations. Must be one minor version higher than current."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["worker_count", "control_plane_count", "worker_plan"])
+        optional_fields = set(
+            ["worker_count", "control_plane_count", "worker_plan", "kubernetes_version"]
+        )
         nullable_fields = set(["worker_plan"])
         serialized = handler(self)
         m = {}
@@ -70,14 +77,14 @@ class UpdateKubernetesClusterAttributes(BaseModel):
 class UpdateKubernetesClusterDataTypedDict(TypedDict):
     type: UpdateKubernetesClusterType
     attributes: UpdateKubernetesClusterAttributesTypedDict
-    r"""Exactly one of worker_count or control_plane_count must be provided. These parameters are mutually exclusive."""
+    r"""Provide one of: worker_count, control_plane_count (for scaling), or kubernetes_version (for upgrades). These are mutually exclusive operations."""
 
 
 class UpdateKubernetesClusterData(BaseModel):
     type: UpdateKubernetesClusterType
 
     attributes: UpdateKubernetesClusterAttributes
-    r"""Exactly one of worker_count or control_plane_count must be provided. These parameters are mutually exclusive."""
+    r"""Provide one of: worker_count, control_plane_count (for scaling), or kubernetes_version (for upgrades). These are mutually exclusive operations."""
 
 
 class UpdateKubernetesClusterTypedDict(TypedDict):

@@ -25,6 +25,15 @@ class KubernetesClusterDataPhase(str, Enum):
     FAILED = "Failed"
 
 
+class VersionStatus(str, Enum):
+    r"""The cluster's version status relative to available upgrades"""
+
+    UP_TO_DATE = "up_to_date"
+    UPGRADE_AVAILABLE = "upgrade_available"
+    UNSUPPORTED = "unsupported"
+    UNKNOWN = "unknown"
+
+
 class ControlPlaneTypedDict(TypedDict):
     r"""Control plane status information"""
 
@@ -319,6 +328,10 @@ class KubernetesClusterDataAttributesTypedDict(TypedDict):
     r"""IP addresses assigned to the cluster's load balancer"""
     kubernetes_version: NotRequired[str]
     r"""The Kubernetes version running on the cluster"""
+    version_status: NotRequired[VersionStatus]
+    r"""The cluster's version status relative to available upgrades"""
+    available_upgrade: NotRequired[Nullable[str]]
+    r"""The next available Kubernetes version for upgrade. Null if the cluster is already on the latest version, or if version status is unknown or unsupported."""
     created_at: NotRequired[datetime]
     r"""When the cluster was created"""
     plan: NotRequired[str]
@@ -381,6 +394,12 @@ class KubernetesClusterDataAttributes(BaseModel):
 
     kubernetes_version: Optional[str] = None
     r"""The Kubernetes version running on the cluster"""
+
+    version_status: Optional[VersionStatus] = None
+    r"""The cluster's version status relative to available upgrades"""
+
+    available_upgrade: OptionalNullable[str] = UNSET
+    r"""The next available Kubernetes version for upgrade. Null if the cluster is already on the latest version, or if version status is unknown or unsupported."""
 
     created_at: Optional[datetime] = None
     r"""When the cluster was created"""
@@ -448,6 +467,8 @@ class KubernetesClusterDataAttributes(BaseModel):
                 "location",
                 "load_balancer_ips",
                 "kubernetes_version",
+                "version_status",
+                "available_upgrade",
                 "created_at",
                 "plan",
                 "worker_plan",
@@ -472,6 +493,7 @@ class KubernetesClusterDataAttributes(BaseModel):
             [
                 "control_plane_endpoint",
                 "kubeconfig_url",
+                "available_upgrade",
                 "worker_plan",
                 "control_plane",
                 "workers",

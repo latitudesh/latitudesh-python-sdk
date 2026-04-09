@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 97e9fd40-98a0-465e-9d1a-259beac76207
 management:
-  docChecksum: dc1c042d5e22b37ee009d8b46957340d
+  docChecksum: bdcfebaa99a560fdc2bbd2c30ae3f4ab
   docVersion: "2023-06-01"
   speakeasyVersion: 1.761.1
   generationVersion: 2.879.6
-  releaseVersion: 3.0.2
-  configChecksum: f414a3a20eae864d44f26e6656e7c288
+  releaseVersion: 3.0.3
+  configChecksum: 234b9353939b4bcd9d4dce6babb224b4
   repoURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 47646fb8-fb86-484f-80d7-069e3b4d8c00
-  pristine_commit_hash: c7b86b3ea46bfa0a489674578e68661ef8087bde
-  pristine_tree_hash: 4cd9f1168bfc44a766cf4ef5fb57c6ce8a8165cd
+  generation_id: 9ea8018a-0ac2-4dd6-b10a-fdb8e6ff3d77
+  pristine_commit_hash: 31d66d4e9f486879ed6d122519c4ece4ae67ba50
+  pristine_tree_hash: cf22a60ffd7a94fc4a224c90e64416c19d4694b8
 features:
   python:
     additionalDependencies: 1.0.0
@@ -1167,6 +1167,14 @@ trackedFiles:
     id: 29d117c25be9
     last_write_checksum: sha1:1d75bacedc6f85a92ebfee0dc4f7733f8cfad85f
     pristine_git_object: 8db5ef9b1daeec6cb32214dd4a9cff07e55afb05
+  docs/models/kubernetesavailableversions.md:
+    id: 8005c9b06703
+    last_write_checksum: sha1:f1587953666ad00d49b0dd5097cac1199f5e1be4
+    pristine_git_object: cb210265dfd1c1829bd5c0def1d6921b4145a7a9
+  docs/models/kubernetesavailableversionsdata.md:
+    id: d69ede582aab
+    last_write_checksum: sha1:e619cca6cbaf01b0a74f4918a74c31b0f353f9c6
+    pristine_git_object: 99b61ac7655aa074962e93af61742c7801c3e80c
   docs/models/kubernetescluster.md:
     id: 6e2147480019
     last_write_checksum: sha1:ebe95874bcdbee9ad51499f0694606949b9d5a79
@@ -1189,8 +1197,8 @@ trackedFiles:
     pristine_git_object: 32bb9e100a604e833c5e773c56bf031496fdd6b7
   docs/models/kubernetesclusterdataattributes.md:
     id: 476ffdb69ddc
-    last_write_checksum: sha1:7795f28e7f28eb50a3152b00b795f3e60cb7dcd2
-    pristine_git_object: 776e0c3ca16e3e87c44da96066a44438ede29b8d
+    last_write_checksum: sha1:77147196c52cc820473e12013ae449b09ff4231a
+    pristine_git_object: e4bba32fb896e6337366fef81f29d14382302a50
   docs/models/kubernetesclusterdataattributesstatus.md:
     id: 08b7319aa496
     last_write_checksum: sha1:047f12634039164316f3c7f9107dce0e5c7c99f3
@@ -1253,16 +1261,16 @@ trackedFiles:
     pristine_git_object: 8e0fc13d5223473a1c8722a2c1de0a7d697a514a
   docs/models/kubernetesclusterupdateresponseattributes.md:
     id: 42b7ca98ecf3
-    last_write_checksum: sha1:5c347768083172d017b4e8144145057e6053dd4f
-    pristine_git_object: a446fa1541627ae690fcc9de02b634d286e43095
+    last_write_checksum: sha1:c5b3a62abe3093e939eb6a10e2a711e36cc02d95
+    pristine_git_object: b34d9fd7d61c1d435d8b989814c34f9a7689427f
   docs/models/kubernetesclusterupdateresponsedata.md:
     id: 83d56ce8a5b2
     last_write_checksum: sha1:8ce043be80cf75e6a38de902cfda6d10c9734efb
     pristine_git_object: 7bd1cd15d21e86de77cf8c6becb2a6c89fcc9009
   docs/models/kubernetesclusterupdateresponsestatus.md:
     id: cbe0769dfde3
-    last_write_checksum: sha1:aed2d6933b59fc78d0af77faeec2964d2f60335b
-    pristine_git_object: bbcb5f521860a279515edfa6c56aa810f469532e
+    last_write_checksum: sha1:bb269cda6d44d821f675a5bf11b915808fc2e3fd
+    pristine_git_object: 4feae1433f9d4b460b5ed604ed98080e2bd41d77
   docs/models/kubernetesclusterupdateresponsetype.md:
     id: d7c29f0fae92
     last_write_checksum: sha1:bb1ebc7434f2a762eba5e548f686f458e8f0d884
@@ -2353,12 +2361,12 @@ trackedFiles:
     pristine_git_object: 195d71e2d3933fbb8f4c4bb0c388a16a907ae4d6
   docs/models/updatekubernetesclusterattributes.md:
     id: 0d64a8af979f
-    last_write_checksum: sha1:43463b971924874b094991020c96dca050a5bc52
-    pristine_git_object: f2952045bd33a569df8c68bf711d7aae12dee98e
+    last_write_checksum: sha1:93ad8f03b3fc786d75b96c22ece614a19f136128
+    pristine_git_object: e453e04d77a3d1285394a1974a2ba117dac6098a
   docs/models/updatekubernetesclusterdata.md:
     id: 9c0e4a598432
-    last_write_checksum: sha1:694c6cc4db3a463dce1f997425186e8032fd8ba5
-    pristine_git_object: f9374ada02faaad037cb4166a23fec28d8661852
+    last_write_checksum: sha1:fc4cabf83728c4211f00d7ee2675229ec5e642c4
+    pristine_git_object: fbc8f9b57b813d457150c8ed8815544e78b57b1d
   docs/models/updatekubernetesclusterrequest.md:
     id: b4e7cf18dfd5
     last_write_checksum: sha1:489637b2f7d89538d5d3f9c11dbb207c03496dfd
@@ -2599,6 +2607,10 @@ trackedFiles:
     id: 48c95f5c134a
     last_write_checksum: sha1:a315fa65389e5b46eab06d964e8ae13d0254ab44
     pristine_git_object: 70759e93742674bd25a114804533f19dcf0e032d
+  docs/models/versionstatus.md:
+    id: 8bc7b9c7ac09
+    last_write_checksum: sha1:cd01310403c200c4914e38a092a4c9e7adbc6202
+    pristine_git_object: bc230ef8cc6005cc5c96c9f602bc33e21065c06c
   docs/models/virtualmachine.md:
     id: d1eaf9b931a9
     last_write_checksum: sha1:f914937ff665be74402ed4e1429abcd4390df513
@@ -2873,8 +2885,8 @@ trackedFiles:
     pristine_git_object: 495af181eae515a187c909b4220d2e4acb64d71d
   docs/sdks/kubernetesclusterssdk/README.md:
     id: 146c991cc428
-    last_write_checksum: sha1:816814f1616b29f695119ee0df2745349e52bb5f
-    pristine_git_object: 40e05e56998bc6d4eddfb7c9d00f94ee10e4e055
+    last_write_checksum: sha1:83c66f748e8e6f26f7cb60cc923b9d1ebd5bfbc4
+    pristine_git_object: 1cf8144c0d336247dd9304ac252cf4c8bb3277ef
   docs/sdks/operatingsystemssdk/README.md:
     id: 7ec5e73ce22f
     last_write_checksum: sha1:4aba6b170e8ed0b43d13fe735ec6980ed367f05e
@@ -2957,8 +2969,8 @@ trackedFiles:
     pristine_git_object: 250e4a286482ffcc3629575515a40adcb44a2702
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:157e6c55373156ee4c9fb62a448fa087369a8c07
-    pristine_git_object: 7b533a8805e980f1336e411fdd6411f1cfbb2a7b
+    last_write_checksum: sha1:231a3803a9a25c5cbb3e4484f5c7f6f06ee3eff0
+    pristine_git_object: 504f83fe7bd67813d9975998dae7c4ab0196706f
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:5354f07fd2821a42340f1573b7f3e029b8a852e1
@@ -2985,8 +2997,8 @@ trackedFiles:
     pristine_git_object: 403c936eb3b6407be163aeedfcdce9c4d83072d7
   src/latitudesh_python_sdk/_version.py:
     id: 65dde1ef31c9
-    last_write_checksum: sha1:d06cb6cf6629bc9d109e5fcd84c9f7c38afe0aec
-    pristine_git_object: 5dc3574c59409e7b65fbb05d0066662d36382fad
+    last_write_checksum: sha1:08a0c99775fa757d42f6303f897ca7c73c0ed13f
+    pristine_git_object: fdabd901052049fa3951f6249329474dbd92c63d
   src/latitudesh_python_sdk/apikeys_sdk.py:
     id: 633cbc9c65bd
     last_write_checksum: sha1:fc62d31144c7c0aeeb5a1ea1d84b3f36b42b94ec
@@ -3021,12 +3033,12 @@ trackedFiles:
     pristine_git_object: 526c761606787f181331ba4a598b0ba26e3018a2
   src/latitudesh_python_sdk/kubernetes_clusters_sdk.py:
     id: 9ab3b75263fa
-    last_write_checksum: sha1:5cafca34d7a4462fd70f177610fae337b9fa7b24
-    pristine_git_object: 20ad7c5c4a08856da4bebac6caa7e548b8240fdd
+    last_write_checksum: sha1:88744e6783cc8f789b97697b7375c25da605bf08
+    pristine_git_object: 4c6ac7396196cc883a87fd76dd7eff2ee0534ffc
   src/latitudesh_python_sdk/models/__init__.py:
     id: 7f64ed71d43c
-    last_write_checksum: sha1:e61225316216397d41deb551e1924cbf46769331
-    pristine_git_object: b7ca35a3bc613f41d5c9d09307b2e1c661ab9d59
+    last_write_checksum: sha1:5fcab0540e98ad87093a873cb1365069c62c7109
+    pristine_git_object: e9318aee23e126cafe553e704bbbe9b19675480c
   src/latitudesh_python_sdk/models/api_key.py:
     id: c61bf1d38797
     last_write_checksum: sha1:7f2a209ff9e0d3a9a8d928690d7b302c03a4f069
@@ -3459,6 +3471,10 @@ trackedFiles:
     id: eeef9b6ecefb
     last_write_checksum: sha1:4e106484cab63bfd1f7afc4dfb281cbe19d9449b
     pristine_git_object: ce1f13e7ba0e42637ce54cc2e53531fe89a4b6f6
+  src/latitudesh_python_sdk/models/kubernetes_available_versions.py:
+    id: f7a0c127d8d6
+    last_write_checksum: sha1:cf5177892d9e3afd6bacadbf3f62e86efd6645de
+    pristine_git_object: ed508d1957519036d5c77da085b2b2e9cbbe8d12
   src/latitudesh_python_sdk/models/kubernetes_cluster.py:
     id: b01c79b42f58
     last_write_checksum: sha1:bcc3df8718dfb5c8f50cd0260f824a7370e6d2b1
@@ -3469,8 +3485,8 @@ trackedFiles:
     pristine_git_object: 32047e9fdf1e31d82d9bb43b885ba940e0e26ab1
   src/latitudesh_python_sdk/models/kubernetes_cluster_data.py:
     id: b946331359c8
-    last_write_checksum: sha1:8b8a153fc96922885a91d4f0a0f83667a73bbbbf
-    pristine_git_object: 93a3e62e16948cdfc7242c1cefe86aa0d920fed4
+    last_write_checksum: sha1:88f1f553a08954e647d3319d239c5c0dbb6b716d
+    pristine_git_object: fb989d4ba9f03cc3cafb7b3da2b1b8790db9cf12
   src/latitudesh_python_sdk/models/kubernetes_cluster_kubeconfig.py:
     id: 0570f1cedd22
     last_write_checksum: sha1:396a6626c2d79d1f51c2f264e99954145402b974
@@ -3481,8 +3497,8 @@ trackedFiles:
     pristine_git_object: 639a44c033e7467eaefd96164079adc72565bd4d
   src/latitudesh_python_sdk/models/kubernetes_cluster_update_response.py:
     id: 3331fb252cee
-    last_write_checksum: sha1:8efae05f17bd849f89becc0f049a0c16295d6867
-    pristine_git_object: 83bd667f940d5f52770b9f738fa2bc385e5e0273
+    last_write_checksum: sha1:06eaf9f161c126394a8b72eb6da84b390a78b8b2
+    pristine_git_object: 198758edd3ced875afb470e7007eb90a47a1cd76
   src/latitudesh_python_sdk/models/kubernetes_clusters.py:
     id: 41344adf0a95
     last_write_checksum: sha1:81aabd4b49e95c2405163627e0d83b9ed68208ca
@@ -3781,8 +3797,8 @@ trackedFiles:
     pristine_git_object: 25e9221cb21918da7303b7eba1e7575d11351b0e
   src/latitudesh_python_sdk/models/update_kubernetes_cluster.py:
     id: 5ed99f13faf7
-    last_write_checksum: sha1:284cd3043d4709fb427c0e13b68e21978d3ef299
-    pristine_git_object: 2f31a945015600e061aa50ec71cb3f9875a5a2aa
+    last_write_checksum: sha1:a18544e1364684308575f6d17eab5f73a87b5545
+    pristine_git_object: 0f357937cf05516648ec28663f298b661babd6e3
   src/latitudesh_python_sdk/models/update_kubernetes_clusterop.py:
     id: 800b1421f7dc
     last_write_checksum: sha1:a36c2477017f1f71408c2765cbeb6ba6aa1be7cd
@@ -7044,14 +7060,14 @@ examples:
           kubernetes_cluster_id: "<id>"
       responses:
         "200":
-          application/vnd.api+json: {"data": {"id": "kc_pRMLydp0dQKr1", "type": "kubernetes_clusters", "attributes": {"name": "my-cluster", "phase": "Provisioned", "ready": true, "control_plane_endpoint": "https://api.my-cluster.example.com:6443", "kubeconfig_url": "/kubernetes_clusters/kc_pRMLydp0dQKr1/kubeconfig", "location": "SAN3", "load_balancer_ips": ["10.0.0.1"], "kubernetes_version": "v1.34.3+rke2r1", "created_at": "2026-01-15T10:30:00Z", "plan": "c3-small-x86", "worker_plan": "c3-medium-x86", "control_plane_count": 1, "worker_count": 1, "control_plane": {"ready": true, "replicas": 1, "ready_replicas": 1}, "workers": {"replicas": 1, "ready_replicas": 1, "available_replicas": 1}, "worker_status": "ready", "control_plane_status": "ready", "infrastructure_ready": true, "control_plane_ready": true, "message": "Cluster is ready", "steps": [{"name": "infrastructure", "status": "completed"}, {"name": "control_plane", "status": "completed"}, {"name": "workers", "status": "completed"}], "last_status_change": "2026-01-15T10:35:00Z", "failure_message": null, "failure_reason": null, "nodes": [{"id": "my-cluster-control-plane-abc12", "name": "my-cluster-control-plane-abc12", "hostname": "my-cluster-control-plane-abc12", "server_id": "sv_RLYV8DZ2D5QoE", "type": "control_plane", "status": "ready", "ip": "203.0.113.10", "internal_ip": "10.0.0.10", "external_ip": "203.0.113.10"}, {"id": "my-cluster-md-0-def34", "name": "my-cluster-md-0-def34", "hostname": "my-cluster-md-0-def34", "server_id": "sv_7KP2Xm9nYwR3Q", "type": "worker", "status": "ready", "ip": "203.0.113.20", "internal_ip": "10.0.0.20", "external_ip": "203.0.113.20"}], "project": {"id": "proj_6059EqYkOQj8p", "name": "My Project", "slug": "my-project"}}}}
+          application/vnd.api+json: {"data": {"id": "kc_pRMLydp0dQKr1", "type": "kubernetes_clusters", "attributes": {"name": "my-cluster", "phase": "Provisioned", "ready": true, "control_plane_endpoint": "https://api.my-cluster.example.com:6443", "kubeconfig_url": "/kubernetes_clusters/kc_pRMLydp0dQKr1/kubeconfig", "location": "SAN3", "load_balancer_ips": ["10.0.0.1"], "kubernetes_version": "v1.34.3+rke2r1", "version_status": "upgrade_available", "available_upgrade": "v1.35.3+rke2r1", "created_at": "2026-01-15T10:30:00Z", "plan": "c3-small-x86", "worker_plan": "c3-medium-x86", "control_plane_count": 1, "worker_count": 1, "control_plane": {"ready": true, "replicas": 1, "ready_replicas": 1}, "workers": {"replicas": 1, "ready_replicas": 1, "available_replicas": 1}, "worker_status": "ready", "control_plane_status": "ready", "infrastructure_ready": true, "control_plane_ready": true, "message": "Cluster is ready", "steps": [{"name": "infrastructure", "status": "completed"}, {"name": "control_plane", "status": "completed"}, {"name": "workers", "status": "completed"}], "last_status_change": "2026-01-15T10:35:00Z", "failure_message": null, "failure_reason": null, "nodes": [{"id": "my-cluster-control-plane-abc12", "name": "my-cluster-control-plane-abc12", "hostname": "my-cluster-control-plane-abc12", "server_id": "sv_RLYV8DZ2D5QoE", "type": "control_plane", "status": "ready", "ip": "203.0.113.10", "internal_ip": "10.0.0.10", "external_ip": "203.0.113.10"}, {"id": "my-cluster-md-0-def34", "name": "my-cluster-md-0-def34", "hostname": "my-cluster-md-0-def34", "server_id": "sv_7KP2Xm9nYwR3Q", "type": "worker", "status": "ready", "ip": "203.0.113.20", "internal_ip": "10.0.0.20", "external_ip": "203.0.113.20"}], "project": {"id": "proj_6059EqYkOQj8p", "name": "My Project", "slug": "my-project"}}}}
     Provisioning:
       parameters:
         path:
           kubernetes_cluster_id: "<id>"
       responses:
         "200":
-          application/vnd.api+json: {"data": {"id": "kc_pRMLydp0dQKr1", "type": "kubernetes_clusters", "attributes": {"name": "my-cluster", "phase": "Provisioning", "ready": false, "control_plane_endpoint": null, "kubeconfig_url": null, "location": "SAN3", "load_balancer_ips": [], "kubernetes_version": "v1.34.3+rke2r1", "created_at": "2026-01-15T10:30:00Z", "plan": "c3-small-x86", "worker_plan": "c3-medium-x86", "control_plane_count": 1, "worker_count": 0, "control_plane": {"ready": false, "replicas": 1, "ready_replicas": 0}, "workers": null, "worker_status": null, "control_plane_status": "scaling", "infrastructure_ready": false, "control_plane_ready": false, "message": "Setting up cluster infrastructure", "steps": [{"name": "infrastructure", "status": "in_progress"}, {"name": "control_plane", "status": "pending"}, {"name": "workers", "status": "pending"}], "last_status_change": "2026-01-15T10:32:00Z", "failure_message": null, "failure_reason": null, "nodes": [{"id": "my-cluster-control-plane-xyz78", "name": "my-cluster-control-plane-xyz78", "hostname": null, "server_id": null, "type": "control_plane", "status": "pending", "ip": null, "internal_ip": null, "external_ip": null}], "project": {"id": "proj_6059EqYkOQj8p", "name": "My Project", "slug": "my-project"}}}}
+          application/vnd.api+json: {"data": {"id": "kc_pRMLydp0dQKr1", "type": "kubernetes_clusters", "attributes": {"name": "my-cluster", "phase": "Provisioning", "ready": false, "control_plane_endpoint": null, "kubeconfig_url": null, "location": "SAN3", "load_balancer_ips": [], "kubernetes_version": "v1.34.3+rke2r1", "version_status": "up_to_date", "available_upgrade": null, "created_at": "2026-01-15T10:30:00Z", "plan": "c3-small-x86", "worker_plan": "c3-medium-x86", "control_plane_count": 1, "worker_count": 0, "control_plane": {"ready": false, "replicas": 1, "ready_replicas": 0}, "workers": null, "worker_status": null, "control_plane_status": "scaling", "infrastructure_ready": false, "control_plane_ready": false, "message": "Setting up cluster infrastructure", "steps": [{"name": "infrastructure", "status": "in_progress"}, {"name": "control_plane", "status": "pending"}, {"name": "workers", "status": "pending"}], "last_status_change": "2026-01-15T10:32:00Z", "failure_message": null, "failure_reason": null, "nodes": [{"id": "my-cluster-control-plane-xyz78", "name": "my-cluster-control-plane-xyz78", "hostname": null, "server_id": null, "type": "control_plane", "status": "pending", "ip": null, "internal_ip": null, "external_ip": null}], "project": {"id": "proj_6059EqYkOQj8p", "name": "My Project", "slug": "my-project"}}}}
     InvalidToken:
       parameters:
         path:
@@ -7408,9 +7424,64 @@ examples:
           application/vnd.api+json: {"errors": [{"code": "VALIDATION_ERROR"}]}
         "503":
           application/vnd.api+json: {"errors": [{"code": "VALIDATION_ERROR"}]}
+    UpgradeVersion:
+      parameters:
+        path:
+          kubernetes_cluster_id: "<id>"
+      requestBody:
+        application/vnd.api+json: {"data": {"type": "kubernetes_clusters", "attributes": {"kubernetes_version": "v1.35.0+rke2r1"}}}
+      responses:
+        "200":
+          application/vnd.api+json: {}
+        "400":
+          application/vnd.api+json: {}
+        "503":
+          application/vnd.api+json: {}
+    MissingParameter:
+      parameters:
+        path:
+          kubernetes_cluster_id: "<id>"
+      requestBody:
+        application/vnd.api+json: {"data": {"type": "kubernetes_clusters", "attributes": {}}}
+      responses:
+        "400":
+          application/vnd.api+json: {"errors": [{"code": "VALIDATION_ERROR"}]}
+        "503":
+          application/vnd.api+json: {"errors": [{"code": "VALIDATION_ERROR"}]}
+    ScalingMutualExclusion:
+      parameters:
+        path:
+          kubernetes_cluster_id: "<id>"
+      requestBody:
+        application/vnd.api+json: {"data": {"type": "kubernetes_clusters", "attributes": {}}}
+      responses:
+        "400":
+          application/vnd.api+json: {"errors": [{"code": "VALIDATION_ERROR"}]}
+        "503":
+          application/vnd.api+json: {"errors": [{"code": "VALIDATION_ERROR"}]}
+    VersionWithScaling:
+      parameters:
+        path:
+          kubernetes_cluster_id: "<id>"
+      requestBody:
+        application/vnd.api+json: {"data": {"type": "kubernetes_clusters", "attributes": {}}}
+      responses:
+        "400":
+          application/vnd.api+json: {"errors": [{"code": "VALIDATION_ERROR"}]}
+        "503":
+          application/vnd.api+json: {"errors": [{"code": "VALIDATION_ERROR"}]}
+  list-kubernetes-available-versions:
+    Success:
+      responses:
+        "200":
+          application/vnd.api+json: {"data": [{"version": "v1.31.6+rke2r1", "minor": "1.31"}, {"version": "v1.32.5+rke2r1", "minor": "1.32"}, {"version": "v1.33.5+rke2r1", "minor": "1.33"}, {"version": "v1.34.6+rke2r1", "minor": "1.34"}, {"version": "v1.35.3+rke2r1", "minor": "1.35"}]}
+    InvalidToken:
+      responses:
+        "401":
+          application/vnd.api+json: {"errors": [{"code": "UNAUTHORIZED"}]}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `latitudesh.kubernetes_clusters.update_kubernetes_cluster()`: \n  *  `request.data.attributes` **Changed**\n  *  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.kubernetes_clusters.get_kubernetes_cluster()`:  `response.data.attributes.control_plane_status` **Added**\n* `latitudesh.servers.reinstall()`:  `error` **Changed**\n"
+releaseNotes: "## Python SDK Changes:\n* `latitudesh.kubernetes_clusters.update_kubernetes_cluster()`: \n  *  `request.data.attributes.kubernetes_version` **Added**\n  *  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.kubernetes_clusters.list_kubernetes_available_versions()`: **Added**\n* `latitudesh.kubernetes_clusters.get_kubernetes_cluster()`:  `response.data.attributes` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

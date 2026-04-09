@@ -295,9 +295,10 @@ with Latitudesh(
 
 * [list_kubernetes_clusters](docs/sdks/kubernetesclusterssdk/README.md#list_kubernetes_clusters) - List Kubernetes Clusters
 * [create_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#create_kubernetes_cluster) - Create a Kubernetes Cluster
+* [list_kubernetes_available_versions](docs/sdks/kubernetesclusterssdk/README.md#list_kubernetes_available_versions) - List Available Kubernetes Versions
 * [get_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster) - Get a Kubernetes Cluster
 * [delete_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#delete_kubernetes_cluster) - Delete a Kubernetes Cluster
-* [update_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#update_kubernetes_cluster) - Scale Kubernetes Cluster
+* [update_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#update_kubernetes_cluster) - Update Kubernetes Cluster
 * [get_kubernetes_cluster_kubeconfig](docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig
 
 ### [OperatingSystems](docs/sdks/operatingsystemssdk/README.md)
@@ -591,7 +592,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 19 of 128 methods.*
+* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 20 of 129 methods.*
 * [`ResponseValidationError`](./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
