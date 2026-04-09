@@ -19,9 +19,10 @@ class KubernetesClusterUpdateResponseType(str, Enum):
 
 
 class KubernetesClusterUpdateResponseStatus(str, Enum):
-    r"""The update status. 'scaling' indicates nodes are being added or removed. 'unchanged' indicates the requested count matches the current count."""
+    r"""The update status. 'scaling' indicates nodes are being added or removed. 'upgrading' indicates a version upgrade is in progress. 'unchanged' indicates no change was needed."""
 
     SCALING = "scaling"
+    UPGRADING = "upgrading"
     UNCHANGED = "unchanged"
 
 
@@ -29,11 +30,13 @@ class KubernetesClusterUpdateResponseAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The cluster name"""
     status: NotRequired[KubernetesClusterUpdateResponseStatus]
-    r"""The update status. 'scaling' indicates nodes are being added or removed. 'unchanged' indicates the requested count matches the current count."""
+    r"""The update status. 'scaling' indicates nodes are being added or removed. 'upgrading' indicates a version upgrade is in progress. 'unchanged' indicates no change was needed."""
     worker_count: NotRequired[Nullable[int]]
     r"""The requested number of worker nodes. Present when scaling workers."""
     control_plane_count: NotRequired[Nullable[int]]
     r"""The requested number of control plane nodes. Present when scaling control plane."""
+    kubernetes_version: NotRequired[Nullable[str]]
+    r"""The target Kubernetes version. Present when upgrading version."""
 
 
 class KubernetesClusterUpdateResponseAttributes(BaseModel):
@@ -41,7 +44,7 @@ class KubernetesClusterUpdateResponseAttributes(BaseModel):
     r"""The cluster name"""
 
     status: Optional[KubernetesClusterUpdateResponseStatus] = None
-    r"""The update status. 'scaling' indicates nodes are being added or removed. 'unchanged' indicates the requested count matches the current count."""
+    r"""The update status. 'scaling' indicates nodes are being added or removed. 'upgrading' indicates a version upgrade is in progress. 'unchanged' indicates no change was needed."""
 
     worker_count: OptionalNullable[int] = UNSET
     r"""The requested number of worker nodes. Present when scaling workers."""
@@ -49,10 +52,23 @@ class KubernetesClusterUpdateResponseAttributes(BaseModel):
     control_plane_count: OptionalNullable[int] = UNSET
     r"""The requested number of control plane nodes. Present when scaling control plane."""
 
+    kubernetes_version: OptionalNullable[str] = UNSET
+    r"""The target Kubernetes version. Present when upgrading version."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "status", "worker_count", "control_plane_count"])
-        nullable_fields = set(["worker_count", "control_plane_count"])
+        optional_fields = set(
+            [
+                "name",
+                "status",
+                "worker_count",
+                "control_plane_count",
+                "kubernetes_version",
+            ]
+        )
+        nullable_fields = set(
+            ["worker_count", "control_plane_count", "kubernetes_version"]
+        )
         serialized = handler(self)
         m = {}
 

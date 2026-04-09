@@ -657,6 +657,12 @@ if TYPE_CHECKING:
         IpmiSessionType,
         IpmiSessionTypedDict,
     )
+    from .kubernetes_available_versions import (
+        KubernetesAvailableVersions,
+        KubernetesAvailableVersionsData,
+        KubernetesAvailableVersionsDataTypedDict,
+        KubernetesAvailableVersionsTypedDict,
+    )
     from .kubernetes_cluster import KubernetesCluster, KubernetesClusterTypedDict
     from .kubernetes_cluster_create_response import (
         KubernetesClusterCreateResponse,
@@ -685,6 +691,7 @@ if TYPE_CHECKING:
         KubernetesClusterDataTypedDict,
         Nodes,
         NodesTypedDict,
+        VersionStatus,
         WorkerStatus,
         Workers,
         WorkersTypedDict,
@@ -2081,6 +2088,10 @@ __all__ = [
     "IpmiSessionType",
     "IpmiSessionTypedDict",
     "IpmiStatus",
+    "KubernetesAvailableVersions",
+    "KubernetesAvailableVersionsData",
+    "KubernetesAvailableVersionsDataTypedDict",
+    "KubernetesAvailableVersionsTypedDict",
     "KubernetesCluster",
     "KubernetesClusterCreateResponse",
     "KubernetesClusterCreateResponseAttributes",
@@ -2728,6 +2739,7 @@ __all__ = [
     "UserUpdateTypedDict",
     "Vcpu",
     "VcpuTypedDict",
+    "VersionStatus",
     "VirtualMachine",
     "VirtualMachineAttributes",
     "VirtualMachineAttributesAttributes",
@@ -3342,6 +3354,10 @@ _dynamic_imports: dict[str, str] = {
     "IpmiSessionDataTypedDict": ".ipmi_session",
     "IpmiSessionType": ".ipmi_session",
     "IpmiSessionTypedDict": ".ipmi_session",
+    "KubernetesAvailableVersions": ".kubernetes_available_versions",
+    "KubernetesAvailableVersionsData": ".kubernetes_available_versions",
+    "KubernetesAvailableVersionsDataTypedDict": ".kubernetes_available_versions",
+    "KubernetesAvailableVersionsTypedDict": ".kubernetes_available_versions",
     "KubernetesCluster": ".kubernetes_cluster",
     "KubernetesClusterTypedDict": ".kubernetes_cluster",
     "KubernetesClusterCreateResponse": ".kubernetes_cluster_create_response",
@@ -3368,6 +3384,7 @@ _dynamic_imports: dict[str, str] = {
     "KubernetesClusterDataTypedDict": ".kubernetes_cluster_data",
     "Nodes": ".kubernetes_cluster_data",
     "NodesTypedDict": ".kubernetes_cluster_data",
+    "VersionStatus": ".kubernetes_cluster_data",
     "WorkerStatus": ".kubernetes_cluster_data",
     "Workers": ".kubernetes_cluster_data",
     "WorkersTypedDict": ".kubernetes_cluster_data",
