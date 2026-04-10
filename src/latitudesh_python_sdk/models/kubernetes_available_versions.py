@@ -8,22 +8,22 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class KubernetesAvailableVersionsDataTypedDict(TypedDict):
-    version: NotRequired[str]
-    r"""The full Kubernetes version string (e.g., v1.35.3+rke2r1)"""
+    latest: NotRequired[str]
+    r"""The latest full Kubernetes version string for this minor version (e.g., v1.35.3+rke2r1)"""
     minor: NotRequired[str]
     r"""The minor version number (e.g., 1.35)"""
 
 
 class KubernetesAvailableVersionsData(BaseModel):
-    version: Optional[str] = None
-    r"""The full Kubernetes version string (e.g., v1.35.3+rke2r1)"""
+    latest: Optional[str] = None
+    r"""The latest full Kubernetes version string for this minor version (e.g., v1.35.3+rke2r1)"""
 
     minor: Optional[str] = None
     r"""The minor version number (e.g., 1.35)"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["version", "minor"])
+        optional_fields = set(["latest", "minor"])
         serialized = handler(self)
         m = {}
 
