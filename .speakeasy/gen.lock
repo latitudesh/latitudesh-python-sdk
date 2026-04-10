@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 97e9fd40-98a0-465e-9d1a-259beac76207
 management:
-  docChecksum: bdcfebaa99a560fdc2bbd2c30ae3f4ab
+  docChecksum: 798fe1dc155ac71b1d0ae91d3faebab9
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.761.1
-  generationVersion: 2.879.6
-  releaseVersion: 3.0.3
-  configChecksum: 234b9353939b4bcd9d4dce6babb224b4
+  speakeasyVersion: 1.761.2
+  generationVersion: 2.879.10
+  releaseVersion: 3.0.4
+  configChecksum: 1176c212a1572ae6b447960d331ffd0e
   repoURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 9ea8018a-0ac2-4dd6-b10a-fdb8e6ff3d77
-  pristine_commit_hash: 31d66d4e9f486879ed6d122519c4ece4ae67ba50
-  pristine_tree_hash: cf22a60ffd7a94fc4a224c90e64416c19d4694b8
+  generation_id: 53ba33c4-807e-4b5c-956a-56666fc7c489
+  pristine_commit_hash: cc7fae9208171909bfc26c693c3285d137559c78
+  pristine_tree_hash: a4735454a0e64390726af5f513759b42fada91d7
 features:
   python:
     additionalDependencies: 1.0.0
@@ -1173,8 +1173,8 @@ trackedFiles:
     pristine_git_object: cb210265dfd1c1829bd5c0def1d6921b4145a7a9
   docs/models/kubernetesavailableversionsdata.md:
     id: d69ede582aab
-    last_write_checksum: sha1:e619cca6cbaf01b0a74f4918a74c31b0f353f9c6
-    pristine_git_object: 99b61ac7655aa074962e93af61742c7801c3e80c
+    last_write_checksum: sha1:69b31ba1e30546bb25e9024019526ae0c9816194
+    pristine_git_object: 8490a855bab3645ba0cd2c64e39d4b54d53b10df
   docs/models/kubernetescluster.md:
     id: 6e2147480019
     last_write_checksum: sha1:ebe95874bcdbee9ad51499f0694606949b9d5a79
@@ -2885,8 +2885,8 @@ trackedFiles:
     pristine_git_object: 495af181eae515a187c909b4220d2e4acb64d71d
   docs/sdks/kubernetesclusterssdk/README.md:
     id: 146c991cc428
-    last_write_checksum: sha1:83c66f748e8e6f26f7cb60cc923b9d1ebd5bfbc4
-    pristine_git_object: 1cf8144c0d336247dd9304ac252cf4c8bb3277ef
+    last_write_checksum: sha1:d50db7e0224ea0c1e587e601ded6468cea2bd2f5
+    pristine_git_object: 27058ce6a5742c3a50d8a11b6369dd4fb97636e5
   docs/sdks/operatingsystemssdk/README.md:
     id: 7ec5e73ce22f
     last_write_checksum: sha1:4aba6b170e8ed0b43d13fe735ec6980ed367f05e
@@ -2969,8 +2969,8 @@ trackedFiles:
     pristine_git_object: 250e4a286482ffcc3629575515a40adcb44a2702
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:231a3803a9a25c5cbb3e4484f5c7f6f06ee3eff0
-    pristine_git_object: 504f83fe7bd67813d9975998dae7c4ab0196706f
+    last_write_checksum: sha1:8cee73a4255ffd60c37c231f02dac48e446edc20
+    pristine_git_object: 445abbdc02eaf55ab257827c4395aee0126df207
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:5354f07fd2821a42340f1573b7f3e029b8a852e1
@@ -2997,8 +2997,8 @@ trackedFiles:
     pristine_git_object: 403c936eb3b6407be163aeedfcdce9c4d83072d7
   src/latitudesh_python_sdk/_version.py:
     id: 65dde1ef31c9
-    last_write_checksum: sha1:08a0c99775fa757d42f6303f897ca7c73c0ed13f
-    pristine_git_object: fdabd901052049fa3951f6249329474dbd92c63d
+    last_write_checksum: sha1:4a10aad77aa82e97e5722a6770235c0228fca8a0
+    pristine_git_object: 9df047ed0be981c025a76ea1443350068f46fa5f
   src/latitudesh_python_sdk/apikeys_sdk.py:
     id: 633cbc9c65bd
     last_write_checksum: sha1:fc62d31144c7c0aeeb5a1ea1d84b3f36b42b94ec
@@ -3033,8 +3033,8 @@ trackedFiles:
     pristine_git_object: 526c761606787f181331ba4a598b0ba26e3018a2
   src/latitudesh_python_sdk/kubernetes_clusters_sdk.py:
     id: 9ab3b75263fa
-    last_write_checksum: sha1:88744e6783cc8f789b97697b7375c25da605bf08
-    pristine_git_object: 4c6ac7396196cc883a87fd76dd7eff2ee0534ffc
+    last_write_checksum: sha1:6b67240d4eef184415a29f47914f21f2939da1f8
+    pristine_git_object: c43069193f34f0926ac51d6bcb33c49fade78459
   src/latitudesh_python_sdk/models/__init__.py:
     id: 7f64ed71d43c
     last_write_checksum: sha1:5fcab0540e98ad87093a873cb1365069c62c7109
@@ -3473,8 +3473,8 @@ trackedFiles:
     pristine_git_object: ce1f13e7ba0e42637ce54cc2e53531fe89a4b6f6
   src/latitudesh_python_sdk/models/kubernetes_available_versions.py:
     id: f7a0c127d8d6
-    last_write_checksum: sha1:cf5177892d9e3afd6bacadbf3f62e86efd6645de
-    pristine_git_object: ed508d1957519036d5c77da085b2b2e9cbbe8d12
+    last_write_checksum: sha1:726d77b2c57b34a7e3747e9a05307b35377ebb1b
+    pristine_git_object: 6428ce439e3256d12b129e0a9366c5b582f47634
   src/latitudesh_python_sdk/models/kubernetes_cluster.py:
     id: b01c79b42f58
     last_write_checksum: sha1:bcc3df8718dfb5c8f50cd0260f824a7370e6d2b1
@@ -7474,14 +7474,16 @@ examples:
     Success:
       responses:
         "200":
-          application/vnd.api+json: {"data": [{"version": "v1.31.6+rke2r1", "minor": "1.31"}, {"version": "v1.32.5+rke2r1", "minor": "1.32"}, {"version": "v1.33.5+rke2r1", "minor": "1.33"}, {"version": "v1.34.6+rke2r1", "minor": "1.34"}, {"version": "v1.35.3+rke2r1", "minor": "1.35"}]}
+          application/vnd.api+json: {"data": [{"latest": "v1.31.6+rke2r1", "minor": "1.31"}, {"latest": "v1.32.5+rke2r1", "minor": "1.32"}, {"latest": "v1.33.5+rke2r1", "minor": "1.33"}, {"latest": "v1.34.6+rke2r1", "minor": "1.34"}, {"latest": "v1.35.3+rke2r1", "minor": "1.35"}]}
     InvalidToken:
       responses:
         "401":
           application/vnd.api+json: {"errors": [{"code": "UNAUTHORIZED"}]}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `latitudesh.kubernetes_clusters.update_kubernetes_cluster()`: \n  *  `request.data.attributes.kubernetes_version` **Added**\n  *  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.kubernetes_clusters.list_kubernetes_available_versions()`: **Added**\n* `latitudesh.kubernetes_clusters.get_kubernetes_cluster()`:  `response.data.attributes` **Changed**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `latitudesh.kubernetes_clusters.list_kubernetes_available_versions()`:  `response.data[]` **Changed** (Breaking ⚠️)
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
