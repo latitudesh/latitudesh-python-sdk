@@ -111,7 +111,7 @@ class IPAddressesSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -125,8 +125,8 @@ class IPAddressesSDK(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if isinstance(request.page_size, int) else 20
-            if len(results[0]) < limit:
+            limit_ = request.page_size if isinstance(request.page_size, int) else 20
+            if len(results[0]) < limit_:
                 return None
 
             return self.list(
@@ -260,7 +260,7 @@ class IPAddressesSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -274,8 +274,8 @@ class IPAddressesSDK(BaseSDK):
             results = JSONPath("$.data").parse(body)
             if len(results) == 0 or len(results[0]) == 0:
                 return None
-            limit = request.page_size if isinstance(request.page_size, int) else 20
-            if len(results[0]) < limit:
+            limit_ = request.page_size if isinstance(request.page_size, int) else 20
+            if len(results[0]) < limit_:
                 return None
 
             return self.list(
@@ -381,7 +381,7 @@ class IPAddressesSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
@@ -468,7 +468,7 @@ class IPAddressesSDK(BaseSDK):
                 ),
             ),
             request=req,
-            error_status_codes=["4XX", "5XX"],
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 

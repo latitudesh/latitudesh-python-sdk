@@ -69,7 +69,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 400, 401, 403            | application/vnd.api+json |
+| models.ErrorObject       | 400, 401                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## create_kubernetes_cluster
@@ -177,7 +177,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 400, 403, 422            | application/vnd.api+json |
+| models.ErrorObject       | 400, 422                 | application/vnd.api+json |
 | models.ErrorObject       | 503                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
@@ -225,7 +225,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 401, 403                 | application/vnd.api+json |
+| models.ErrorObject       | 401                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_kubernetes_cluster
@@ -285,7 +285,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 401, 403, 404            | application/vnd.api+json |
+| models.ErrorObject       | 401, 404                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## delete_kubernetes_cluster
@@ -322,7 +322,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 401, 403, 404, 422       | application/vnd.api+json |
+| models.ErrorObject       | 401, 404, 422            | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## update_kubernetes_cluster
@@ -923,5 +923,5 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 401, 403, 404            | application/vnd.api+json |
+| models.ErrorObject       | 401, 404                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
