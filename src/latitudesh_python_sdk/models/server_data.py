@@ -269,7 +269,7 @@ class ServerDataRole(str, Enum):
 class InterfacesTypedDict(TypedDict):
     role: NotRequired[ServerDataRole]
     name: NotRequired[str]
-    mac_address: NotRequired[str]
+    mac_address: NotRequired[Nullable[str]]
     description: NotRequired[str]
 
 
@@ -278,22 +278,31 @@ class Interfaces(BaseModel):
 
     name: Optional[str] = None
 
-    mac_address: Optional[str] = None
+    mac_address: OptionalNullable[str] = UNSET
 
     description: Optional[str] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["role", "name", "mac_address", "description"])
+        nullable_fields = set(["mac_address"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
