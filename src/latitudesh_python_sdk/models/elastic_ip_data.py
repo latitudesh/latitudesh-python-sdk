@@ -42,7 +42,7 @@ class Status(str, Enum):
 
 
 class ElasticIPDataServerTypedDict(TypedDict):
-    r"""The server this Elastic IP is assigned to"""
+    r"""The server this Elastic IP is assigned to. Returns null when the Elastic IP is not assigned to a server or when the assigned server is not active (e.g., decommissioning or deleted)."""
 
     id: NotRequired[str]
     hostname: NotRequired[str]
@@ -51,7 +51,7 @@ class ElasticIPDataServerTypedDict(TypedDict):
 
 
 class ElasticIPDataServer(BaseModel):
-    r"""The server this Elastic IP is assigned to"""
+    r"""The server this Elastic IP is assigned to. Returns null when the Elastic IP is not assigned to a server or when the assigned server is not active (e.g., decommissioning or deleted)."""
 
     id: Optional[str] = None
 
@@ -215,7 +215,7 @@ class ElasticIPDataAttributesTypedDict(TypedDict):
     created_at: NotRequired[datetime]
     r"""The timestamp when the Elastic IP was created"""
     server: NotRequired[Nullable[ElasticIPDataServerTypedDict]]
-    r"""The server this Elastic IP is assigned to"""
+    r"""The server this Elastic IP is assigned to. Returns null when the Elastic IP is not assigned to a server or when the assigned server is not active (e.g., decommissioning or deleted)."""
     project: NotRequired[ElasticIPDataProjectTypedDict]
     r"""The project this Elastic IP belongs to"""
     region: NotRequired[Nullable[ElasticIPDataRegionTypedDict]]
@@ -242,7 +242,7 @@ class ElasticIPDataAttributes(BaseModel):
     r"""The timestamp when the Elastic IP was created"""
 
     server: OptionalNullable[ElasticIPDataServer] = UNSET
-    r"""The server this Elastic IP is assigned to"""
+    r"""The server this Elastic IP is assigned to. Returns null when the Elastic IP is not assigned to a server or when the assigned server is not active (e.g., decommissioning or deleted)."""
 
     project: Optional[ElasticIPDataProject] = None
     r"""The project this Elastic IP belongs to"""

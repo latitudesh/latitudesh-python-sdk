@@ -14,16 +14,16 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PatchStorageFilesystemsStorageType(str, Enum):
+class PatchStorageFilesystemsFilesystemStorageType(str, Enum):
     FILESYSTEMS = "filesystems"
 
 
-class PatchStorageFilesystemsStorageAttributesTypedDict(TypedDict):
+class PatchStorageFilesystemsFilesystemStorageAttributesTypedDict(TypedDict):
     size_in_gb: NotRequired[int]
     r"""Size in GB (not required, default is 1500)"""
 
 
-class PatchStorageFilesystemsStorageAttributes(BaseModel):
+class PatchStorageFilesystemsFilesystemStorageAttributes(BaseModel):
     size_in_gb: Optional[int] = 1500
     r"""Size in GB (not required, default is 1500)"""
 
@@ -44,33 +44,33 @@ class PatchStorageFilesystemsStorageAttributes(BaseModel):
         return m
 
 
-class PatchStorageFilesystemsStorageDataTypedDict(TypedDict):
+class PatchStorageFilesystemsFilesystemStorageDataTypedDict(TypedDict):
     id: str
     r"""Filesystem ID"""
-    type: PatchStorageFilesystemsStorageType
-    attributes: PatchStorageFilesystemsStorageAttributesTypedDict
+    type: PatchStorageFilesystemsFilesystemStorageType
+    attributes: PatchStorageFilesystemsFilesystemStorageAttributesTypedDict
 
 
-class PatchStorageFilesystemsStorageData(BaseModel):
+class PatchStorageFilesystemsFilesystemStorageData(BaseModel):
     id: str
     r"""Filesystem ID"""
 
-    type: PatchStorageFilesystemsStorageType
+    type: PatchStorageFilesystemsFilesystemStorageType
 
-    attributes: PatchStorageFilesystemsStorageAttributes
-
-
-class PatchStorageFilesystemsStorageRequestBodyTypedDict(TypedDict):
-    data: PatchStorageFilesystemsStorageDataTypedDict
+    attributes: PatchStorageFilesystemsFilesystemStorageAttributes
 
 
-class PatchStorageFilesystemsStorageRequestBody(BaseModel):
-    data: PatchStorageFilesystemsStorageData
+class PatchStorageFilesystemsFilesystemStorageRequestBodyTypedDict(TypedDict):
+    data: PatchStorageFilesystemsFilesystemStorageDataTypedDict
+
+
+class PatchStorageFilesystemsFilesystemStorageRequestBody(BaseModel):
+    data: PatchStorageFilesystemsFilesystemStorageData
 
 
 class PatchStorageFilesystemsRequestTypedDict(TypedDict):
     filesystem_id: str
-    request_body: PatchStorageFilesystemsStorageRequestBodyTypedDict
+    request_body: PatchStorageFilesystemsFilesystemStorageRequestBodyTypedDict
 
 
 class PatchStorageFilesystemsRequest(BaseModel):
@@ -79,7 +79,7 @@ class PatchStorageFilesystemsRequest(BaseModel):
     ]
 
     request_body: Annotated[
-        PatchStorageFilesystemsStorageRequestBody,
+        PatchStorageFilesystemsFilesystemStorageRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
 

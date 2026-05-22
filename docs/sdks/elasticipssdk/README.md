@@ -14,8 +14,6 @@
 
 List all Elastic IPs for the authenticated team. Elastic IPs are static public IP addresses that can be assigned to servers and moved between servers within the same project.
 
-**Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. When the flag is disabled, the endpoint returns an empty list.
-
 
 ### Example Usage
 
@@ -61,9 +59,7 @@ with Latitudesh(
 
 ## create_elastic_ip
 
-Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `configuring` and the `id` will be `null` until provisioning completes.
-
-**Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. Currently only IPv4 /32 addresses in routed mode are supported.
+Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `configuring` and the `id` will be `null` until provisioning completes. Currently only IPv4 /32 addresses in routed mode are supported.
 
 
 ### Example Usage: Accepted
@@ -141,6 +137,106 @@ with Latitudesh(
     print(res)
 
 ```
+### Example Usage: IpAllocationFailed
+
+<!-- UsageSnippet language="python" operationID="create-elastic-ip" method="post" path="/elastic_ips" example="IpAllocationFailed" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.elastic_ips.create_elastic_ip(data={
+        "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
+        "attributes": {
+            "project_id": "<id>",
+            "server_id": "<id>",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ServerNetworkIncompatible
+
+<!-- UsageSnippet language="python" operationID="create-elastic-ip" method="post" path="/elastic_ips" example="ServerNetworkIncompatible" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.elastic_ips.create_elastic_ip(data={
+        "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
+        "attributes": {
+            "project_id": "<id>",
+            "server_id": "<id>",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ServerNotInProject
+
+<!-- UsageSnippet language="python" operationID="create-elastic-ip" method="post" path="/elastic_ips" example="ServerNotInProject" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.elastic_ips.create_elastic_ip(data={
+        "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
+        "attributes": {
+            "project_id": "<id>",
+            "server_id": "<id>",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: SiteNotSupported
+
+<!-- UsageSnippet language="python" operationID="create-elastic-ip" method="post" path="/elastic_ips" example="SiteNotSupported" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.elastic_ips.create_elastic_ip(data={
+        "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
+        "attributes": {
+            "project_id": "<id>",
+            "server_id": "<id>",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
 
 ### Parameters
 
@@ -157,14 +253,12 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 422                 | application/vnd.api+json |
+| models.ErrorObject       | 422                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_elastic_ip
 
 Returns a single Elastic IP by its ID.
-
-**Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team.
 
 
 ### Example Usage
@@ -201,14 +295,12 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## delete_elastic_ip
 
-Releases an Elastic IP, returning it to the available pool. The IP will transition to `releasing` status before being fully removed.
-
-**Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. Only Elastic IPs with status `active` or `error` can be released.
+Releases an Elastic IP, returning it to the available pool. The IP will transition to `releasing` status before being fully removed. Only Elastic IPs with status `active` or `error` can be released.
 
 
 ### Example Usage
@@ -240,14 +332,12 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
+| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## update_elastic_ip
 
-Moves an Elastic IP to a different server within the same project. The reassignment is performed asynchronously.
-
-**Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. The Elastic IP must be in `active` status and the target server must belong to the same project.
+Moves an Elastic IP to a different server within the same project and site. The reassignment is performed asynchronously. The Elastic IP must be in `active` status, the target server must belong to the same project, and the target server must be in the same site as the currently assigned server.
 
 
 ### Example Usage: FeatureNotEnabled
@@ -339,5 +429,5 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
+| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |

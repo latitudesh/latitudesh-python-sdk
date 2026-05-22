@@ -204,6 +204,8 @@ class KubernetesClustersSDK(BaseSDK):
 
         Creates a new managed Kubernetes cluster. Maximum of 1 cluster per project.
 
+        **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can create clusters. Users with the `billing` role cannot perform this action.
+
         Cluster names must follow Kubernetes naming rules: lowercase alphanumeric characters or hyphens, must start and end with an alphanumeric character, and be at most 63 characters long.
 
 
@@ -275,7 +277,9 @@ class KubernetesClustersSDK(BaseSDK):
             return unmarshal_json_response(
                 models.KubernetesClusterCreateResponse, http_res
             )
-        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
+        if utils.match_response(
+            http_res, ["400", "403", "422"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "503", "application/vnd.api+json"):
@@ -305,6 +309,8 @@ class KubernetesClustersSDK(BaseSDK):
         r"""Create a Kubernetes Cluster
 
         Creates a new managed Kubernetes cluster. Maximum of 1 cluster per project.
+
+        **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can create clusters. Users with the `billing` role cannot perform this action.
 
         Cluster names must follow Kubernetes naming rules: lowercase alphanumeric characters or hyphens, must start and end with an alphanumeric character, and be at most 63 characters long.
 
@@ -377,7 +383,9 @@ class KubernetesClustersSDK(BaseSDK):
             return unmarshal_json_response(
                 models.KubernetesClusterCreateResponse, http_res
             )
-        if utils.match_response(http_res, ["400", "422"], "application/vnd.api+json"):
+        if utils.match_response(
+            http_res, ["400", "403", "422"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "503", "application/vnd.api+json"):
@@ -759,6 +767,8 @@ class KubernetesClustersSDK(BaseSDK):
 
         Deletes a Kubernetes cluster. This action is irreversible and will destroy all cluster resources.
 
+        **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can delete clusters. Users with the `billing` role cannot perform this action.
+
 
         :param kubernetes_cluster_id: The cluster ID (format: kc_<hash>) or cluster name. Both formats are accepted for backward compatibility.
         :param retries: Override the default retry configuration for this method
@@ -824,7 +834,7 @@ class KubernetesClustersSDK(BaseSDK):
         if utils.match_response(http_res, "204", "*"):
             return
         if utils.match_response(
-            http_res, ["401", "404", "422"], "application/vnd.api+json"
+            http_res, ["401", "403", "404", "422"], "application/vnd.api+json"
         ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
@@ -849,6 +859,8 @@ class KubernetesClustersSDK(BaseSDK):
         r"""Delete a Kubernetes Cluster
 
         Deletes a Kubernetes cluster. This action is irreversible and will destroy all cluster resources.
+
+        **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can delete clusters. Users with the `billing` role cannot perform this action.
 
 
         :param kubernetes_cluster_id: The cluster ID (format: kc_<hash>) or cluster name. Both formats are accepted for backward compatibility.
@@ -915,7 +927,7 @@ class KubernetesClustersSDK(BaseSDK):
         if utils.match_response(http_res, "204", "*"):
             return
         if utils.match_response(
-            http_res, ["401", "404", "422"], "application/vnd.api+json"
+            http_res, ["401", "403", "404", "422"], "application/vnd.api+json"
         ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
@@ -1205,6 +1217,8 @@ class KubernetesClustersSDK(BaseSDK):
 
         Retrieves the kubeconfig file for a Kubernetes cluster. The kubeconfig is only available once the cluster is fully provisioned.
 
+        **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can access cluster credentials. Users with the `billing` role cannot perform this action.
+
 
         :param kubernetes_cluster_id: The cluster ID (format: kc_<hash>) or cluster name. Both formats are accepted for backward compatibility.
         :param retries: Override the default retry configuration for this method
@@ -1269,7 +1283,9 @@ class KubernetesClustersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.KubernetesClusterKubeconfig, http_res)
-        if utils.match_response(http_res, ["401", "404"], "application/vnd.api+json"):
+        if utils.match_response(
+            http_res, ["401", "403", "404"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1293,6 +1309,8 @@ class KubernetesClustersSDK(BaseSDK):
         r"""Get Kubernetes Cluster Kubeconfig
 
         Retrieves the kubeconfig file for a Kubernetes cluster. The kubeconfig is only available once the cluster is fully provisioned.
+
+        **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can access cluster credentials. Users with the `billing` role cannot perform this action.
 
 
         :param kubernetes_cluster_id: The cluster ID (format: kc_<hash>) or cluster name. Both formats are accepted for backward compatibility.
@@ -1358,7 +1376,9 @@ class KubernetesClustersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.KubernetesClusterKubeconfig, http_res)
-        if utils.match_response(http_res, ["401", "404"], "application/vnd.api+json"):
+        if utils.match_response(
+            http_res, ["401", "403", "404"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):

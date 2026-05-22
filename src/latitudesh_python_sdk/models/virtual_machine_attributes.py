@@ -160,14 +160,20 @@ class VirtualMachineAttributesOperatingSystem(BaseModel):
 
 
 class CredentialsTypedDict(TypedDict):
+    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running."""
+
     username: NotRequired[str]
+    r"""The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS."""
     host: NotRequired[str]
     password: NotRequired[str]
     ssh_keys: NotRequired[List[str]]
 
 
 class Credentials(BaseModel):
+    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running."""
+
     username: Optional[str] = None
+    r"""The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS."""
 
     host: Optional[str] = None
 
@@ -274,6 +280,7 @@ class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     ]
     r"""The operating system installed on the virtual machine"""
     credentials: NotRequired[Nullable[CredentialsTypedDict]]
+    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running."""
     plan: NotRequired[VirtualMachineAttributesPlanTypedDict]
     specs: NotRequired[VirtualMachineAttributesSpecsTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
@@ -293,6 +300,7 @@ class VirtualMachineAttributesAttributes(BaseModel):
     r"""The operating system installed on the virtual machine"""
 
     credentials: OptionalNullable[Credentials] = UNSET
+    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running."""
 
     plan: Optional[VirtualMachineAttributesPlan] = None
 

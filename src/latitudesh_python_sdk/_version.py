@@ -3,11 +3,11 @@
 import importlib.metadata
 
 __title__: str = "latitudesh-python-sdk"
-__version__: str = "3.0.5"
+__version__: str = "3.1.0"
 __openapi_doc_version__: str = "2023-06-01"
-__gen_version__: str = "2.881.16"
+__gen_version__: str = "2.884.13"
 __user_agent__: str = (
-    "speakeasy-sdk/python 3.0.5 2.881.16 2023-06-01 latitudesh-python-sdk"
+    "speakeasy-sdk/python 3.1.0 2.884.13 2023-06-01 latitudesh-python-sdk"
 )
 
 try:

@@ -262,6 +262,14 @@ with Latitudesh(
 
 * [list_usage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/billing/README.md#list_usage) - Retrieve billing usage
 
+### [BlockStorage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md)
+
+* [get_storage_volumes](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#get_storage_volumes) - List volumes
+* [post_storage_volumes](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#post_storage_volumes) - Create volume
+* [get_storage_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#get_storage_volume) - Retrieve volume
+* [delete_storage_volumes](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#delete_storage_volumes) - Delete volume
+* [post_storage_volumes_mount](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#post_storage_volumes_mount) - Mount volume
+
 ### [ElasticIps](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/elasticipssdk/README.md)
 
 * [list_elastic_ips](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/elasticipssdk/README.md#list_elastic_ips) - List Elastic IPs
@@ -273,6 +281,13 @@ with Latitudesh(
 ### [Events](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/eventssdk/README.md)
 
 * [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/eventssdk/README.md#list) - List events
+
+### [FilesystemStorage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/filesystemstorage/README.md)
+
+* [create_filesystem](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/filesystemstorage/README.md#create_filesystem) - Create filesystem
+* [list_filesystems](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/filesystemstorage/README.md#list_filesystems) - List filesystems
+* [delete_filesystem](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/filesystemstorage/README.md#delete_filesystem) - Delete filesystem
+* [update_filesystem](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/filesystemstorage/README.md#update_filesystem) - Update filesystem
 
 ### [Firewalls](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/firewallssdk/README.md)
 
@@ -300,6 +315,13 @@ with Latitudesh(
 * [delete_kubernetes_cluster](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#delete_kubernetes_cluster) - Delete a Kubernetes Cluster
 * [update_kubernetes_cluster](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#update_kubernetes_cluster) - Update Kubernetes Cluster
 * [get_kubernetes_cluster_kubeconfig](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig
+
+### [ObjectStorage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md)
+
+* [get_storage_objects](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_objects) - List object storages
+* [post_storage_objects](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#post_storage_objects) - Create object storage
+* [get_storage_object](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_object) - Retrieve object storage
+* [delete_storage_objects](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#delete_storage_objects) - Delete object storage
 
 ### [OperatingSystems](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/operatingsystemssdk/README.md)
 
@@ -375,22 +397,6 @@ with Latitudesh(
 * [get_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#get_ssh_key) - Retrieve SSH Key
 * [delete_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#delete_ssh_key) - Delete SSH Key
 * [put_ssh_key](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/sshkeyssdk/README.md#put_ssh_key) - Update SSH Key
-
-### [Storage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md)
-
-* [create_filesystem](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#create_filesystem) - Create filesystem
-* [list_filesystems](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#list_filesystems) - List filesystems
-* [delete_filesystem](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#delete_filesystem) - Delete filesystem
-* [update_filesystem](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#update_filesystem) - Update filesystem
-* [get_storage_volumes](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#get_storage_volumes) - List volumes
-* [post_storage_volumes](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#post_storage_volumes) - Create volume
-* [get_storage_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#get_storage_volume) - Retrieve volume
-* [delete_storage_volumes](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#delete_storage_volumes) - Delete volume
-* [post_storage_volumes_mount](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#post_storage_volumes_mount) - Mount volume
-* [get_storage_objects](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#get_storage_objects) - List object storages
-* [post_storage_objects](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#post_storage_objects) - Create object storage
-* [get_storage_object](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#get_storage_object) - Retrieve object storage
-* [delete_storage_objects](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/storage/README.md#delete_storage_objects) - Delete object storage
 
 ### [Tags](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/tags/README.md)
 

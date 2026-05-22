@@ -17,11 +17,14 @@ import weakref
 if TYPE_CHECKING:
     from latitudesh_python_sdk.apikeys_sdk import APIKeysSDK
     from latitudesh_python_sdk.billing import Billing
+    from latitudesh_python_sdk.block_storage import BlockStorage
     from latitudesh_python_sdk.elastic_ips_sdk import ElasticIpsSDK
     from latitudesh_python_sdk.events_sdk import EventsSDK
+    from latitudesh_python_sdk.filesystem_storage import FilesystemStorage
     from latitudesh_python_sdk.firewalls_sdk import FirewallsSDK
     from latitudesh_python_sdk.ipaddresses_sdk import IPAddressesSDK
     from latitudesh_python_sdk.kubernetes_clusters_sdk import KubernetesClustersSDK
+    from latitudesh_python_sdk.object_storage import ObjectStorage
     from latitudesh_python_sdk.operatingsystems_sdk import OperatingSystemsSDK
     from latitudesh_python_sdk.plans import Plans
     from latitudesh_python_sdk.privatenetworks import PrivateNetworks
@@ -30,7 +33,6 @@ if TYPE_CHECKING:
     from latitudesh_python_sdk.roles import Roles
     from latitudesh_python_sdk.servers_sdk import ServersSDK
     from latitudesh_python_sdk.sshkeys_sdk import SSHKeysSDK
-    from latitudesh_python_sdk.storage import Storage
     from latitudesh_python_sdk.tags import Tags
     from latitudesh_python_sdk.teams_sdk import TeamsSDK
     from latitudesh_python_sdk.teamsmembers import TeamsMembers
@@ -60,7 +62,9 @@ class Latitudesh(BaseSDK):
     regions: "RegionsSDK"
     roles: "Roles"
     servers: "ServersSDK"
-    storage: "Storage"
+    filesystem_storage: "FilesystemStorage"
+    block_storage: "BlockStorage"
+    object_storage: "ObjectStorage"
     tags: "Tags"
     teams: "TeamsSDK"
     traffic: "TrafficSDK"
@@ -91,7 +95,12 @@ class Latitudesh(BaseSDK):
         "regions": ("latitudesh_python_sdk.regions_sdk", "RegionsSDK"),
         "roles": ("latitudesh_python_sdk.roles", "Roles"),
         "servers": ("latitudesh_python_sdk.servers_sdk", "ServersSDK"),
-        "storage": ("latitudesh_python_sdk.storage", "Storage"),
+        "filesystem_storage": (
+            "latitudesh_python_sdk.filesystem_storage",
+            "FilesystemStorage",
+        ),
+        "block_storage": ("latitudesh_python_sdk.block_storage", "BlockStorage"),
+        "object_storage": ("latitudesh_python_sdk.object_storage", "ObjectStorage"),
         "tags": ("latitudesh_python_sdk.tags", "Tags"),
         "teams": ("latitudesh_python_sdk.teams_sdk", "TeamsSDK"),
         "traffic": ("latitudesh_python_sdk.traffic_sdk", "TrafficSDK"),
@@ -154,7 +163,9 @@ class Latitudesh(BaseSDK):
         ), "The provided async_client must implement the AsyncHttpClient protocol."
 
         security: Any = None
-        if callable(bearer):
+        if bearer is None:
+            security = None
+        elif callable(bearer):
             # pylint: disable=unnecessary-lambda-assignment
             security = lambda: models.Security(bearer=bearer())
         else:

@@ -48,6 +48,67 @@ class UpdateServerDeployConfigServersRaid(str, Enum):
     RAID_1 = "raid-1"
 
 
+class UpdateServerDeployConfigServersRole(str, Enum):
+    OS = "os"
+    STORAGE = "storage"
+    RAW = "raw"
+
+
+class UpdateServerDeployConfigServersRaidLevel(str, Enum):
+    RAID_0 = "raid-0"
+    RAID_1 = "raid-1"
+
+
+class UpdateServerDeployConfigServersFilesystem(str, Enum):
+    EXT4 = "ext4"
+    XFS = "xfs"
+
+
+class UpdateServerDeployConfigServersDiskLayoutTypedDict(TypedDict):
+    count: int
+    role: UpdateServerDeployConfigServersRole
+    raid_level: NotRequired[Nullable[UpdateServerDeployConfigServersRaidLevel]]
+    filesystem: NotRequired[Nullable[UpdateServerDeployConfigServersFilesystem]]
+    mount_point: NotRequired[Nullable[str]]
+
+
+class UpdateServerDeployConfigServersDiskLayout(BaseModel):
+    count: int
+
+    role: UpdateServerDeployConfigServersRole
+
+    raid_level: OptionalNullable[UpdateServerDeployConfigServersRaidLevel] = UNSET
+
+    filesystem: OptionalNullable[UpdateServerDeployConfigServersFilesystem] = UNSET
+
+    mount_point: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["raid_level", "filesystem", "mount_point"])
+        nullable_fields = set(["raid_level", "filesystem", "mount_point"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class UpdateServerDeployConfigServersPartitionsTypedDict(TypedDict):
     size_in_gb: NotRequired[int]
     path: NotRequired[str]
@@ -85,6 +146,9 @@ class UpdateServerDeployConfigServersAttributesTypedDict(TypedDict):
     ]
     raid: NotRequired[Nullable[UpdateServerDeployConfigServersRaid]]
     r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+    disk_layout: NotRequired[
+        Nullable[List[UpdateServerDeployConfigServersDiskLayoutTypedDict]]
+    ]
     user_data: NotRequired[Nullable[str]]
     r"""User data to configure the server"""
     ssh_keys: NotRequired[Nullable[List[str]]]
@@ -105,6 +169,10 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
     raid: OptionalNullable[UpdateServerDeployConfigServersRaid] = UNSET
     r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
 
+    disk_layout: OptionalNullable[List[UpdateServerDeployConfigServersDiskLayout]] = (
+        UNSET
+    )
+
     user_data: OptionalNullable[str] = UNSET
     r"""User data to configure the server"""
 
@@ -124,6 +192,7 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
                 "hostname",
                 "operating_system",
                 "raid",
+                "disk_layout",
                 "user_data",
                 "ssh_keys",
                 "partitions",
@@ -135,6 +204,7 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
                 "hostname",
                 "operating_system",
                 "raid",
+                "disk_layout",
                 "user_data",
                 "ssh_keys",
                 "partitions",

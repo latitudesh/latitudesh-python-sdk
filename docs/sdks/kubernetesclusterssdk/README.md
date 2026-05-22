@@ -76,6 +76,8 @@ with Latitudesh(
 
 Creates a new managed Kubernetes cluster. Maximum of 1 cluster per project.
 
+**Note:** Only users with the `owner`, `administrator`, or `collaborator` role can create clusters. Users with the `billing` role cannot perform this action.
+
 Cluster names must follow Kubernetes naming rules: lowercase alphanumeric characters or hyphens, must start and end with an alphanumeric character, and be at most 63 characters long.
 
 
@@ -177,7 +179,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 400, 422                 | application/vnd.api+json |
+| models.ErrorObject       | 400, 403, 422            | application/vnd.api+json |
 | models.ErrorObject       | 503                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
@@ -292,6 +294,8 @@ with Latitudesh(
 
 Deletes a Kubernetes cluster. This action is irreversible and will destroy all cluster resources.
 
+**Note:** Only users with the `owner`, `administrator`, or `collaborator` role can delete clusters. Users with the `billing` role cannot perform this action.
+
 
 ### Example Usage
 
@@ -322,7 +326,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 401, 404, 422            | application/vnd.api+json |
+| models.ErrorObject       | 401, 403, 404, 422       | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## update_kubernetes_cluster
@@ -888,6 +892,8 @@ with Latitudesh(
 
 Retrieves the kubeconfig file for a Kubernetes cluster. The kubeconfig is only available once the cluster is fully provisioned.
 
+**Note:** Only users with the `owner`, `administrator`, or `collaborator` role can access cluster credentials. Users with the `billing` role cannot perform this action.
+
 
 ### Example Usage
 
@@ -923,5 +929,5 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 401, 404                 | application/vnd.api+json |
+| models.ErrorObject       | 401, 403, 404            | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
