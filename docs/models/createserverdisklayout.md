@@ -1,0 +1,12 @@
+# CreateServerDiskLayout
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `count`                                                                                | *int*                                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `role`                                                                                 | [models.CreateServerServersRole](../models/createserverserversrole.md)                 | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `raid_level`                                                                           | [OptionalNullable[models.CreateServerRaidLevel]](../models/createserverraidlevel.md)   | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `filesystem`                                                                           | [OptionalNullable[models.CreateServerFilesystem]](../models/createserverfilesystem.md) | :heavy_minus_sign:                                                                     | N/A                                                                                    |
+| `mount_point`                                                                          | *OptionalNullable[str]*                                                                | :heavy_minus_sign:                                                                     | N/A                                                                                    |

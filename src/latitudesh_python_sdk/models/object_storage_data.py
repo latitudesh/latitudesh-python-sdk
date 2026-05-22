@@ -13,7 +13,7 @@ from latitudesh_python_sdk.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -81,8 +81,8 @@ class ObjectStorageDataAttributesTypedDict(TypedDict):
     r"""S3-compatible bucket name"""
     endpoint: NotRequired[str]
     r"""S3-compatible endpoint URL for accessing the bucket"""
-    access_key: NotRequired[List[str]]
-    r"""S3 access key(s) for authentication"""
+    access_key: NotRequired[str]
+    r"""S3 access key for authentication"""
     region: NotRequired[Nullable[ObjectStorageDataRegionTypedDict]]
     r"""Region information where the object storage is located"""
     project: NotRequired[ProjectIncludeTypedDict]
@@ -105,8 +105,8 @@ class ObjectStorageDataAttributes(BaseModel):
     endpoint: Optional[str] = None
     r"""S3-compatible endpoint URL for accessing the bucket"""
 
-    access_key: Optional[List[str]] = None
-    r"""S3 access key(s) for authentication"""
+    access_key: Optional[str] = None
+    r"""S3 access key for authentication"""
 
     region: OptionalNullable[ObjectStorageDataRegion] = UNSET
     r"""Region information where the object storage is located"""

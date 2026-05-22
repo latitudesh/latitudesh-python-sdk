@@ -168,6 +168,42 @@ with Latitudesh(
     print(res)
 
 ```
+### Example Usage: when bare metal limit is not set
+
+<!-- UsageSnippet language="python" operationID="get-user-teams" method="get" path="/user/teams" example="when bare metal limit is not set" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.user_profile.list_teams()
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: when bare metal limit is set
+
+<!-- UsageSnippet language="python" operationID="get-user-teams" method="get" path="/user/teams" example="when bare metal limit is set" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.user_profile.list_teams()
+
+    # Handle response
+    print(res)
+
+```
 ### Example Usage: when team is older than one month
 
 <!-- UsageSnippet language="python" operationID="get-user-teams" method="get" path="/user/teams" example="when team is older than one month" -->

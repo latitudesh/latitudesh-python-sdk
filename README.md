@@ -262,6 +262,14 @@ with Latitudesh(
 
 * [list_usage](docs/sdks/billing/README.md#list_usage) - Retrieve billing usage
 
+### [BlockStorage](docs/sdks/blockstorage/README.md)
+
+* [get_storage_volumes](docs/sdks/blockstorage/README.md#get_storage_volumes) - List volumes
+* [post_storage_volumes](docs/sdks/blockstorage/README.md#post_storage_volumes) - Create volume
+* [get_storage_volume](docs/sdks/blockstorage/README.md#get_storage_volume) - Retrieve volume
+* [delete_storage_volumes](docs/sdks/blockstorage/README.md#delete_storage_volumes) - Delete volume
+* [post_storage_volumes_mount](docs/sdks/blockstorage/README.md#post_storage_volumes_mount) - Mount volume
+
 ### [ElasticIps](docs/sdks/elasticipssdk/README.md)
 
 * [list_elastic_ips](docs/sdks/elasticipssdk/README.md#list_elastic_ips) - List Elastic IPs
@@ -273,6 +281,13 @@ with Latitudesh(
 ### [Events](docs/sdks/eventssdk/README.md)
 
 * [list](docs/sdks/eventssdk/README.md#list) - List events
+
+### [FilesystemStorage](docs/sdks/filesystemstorage/README.md)
+
+* [create_filesystem](docs/sdks/filesystemstorage/README.md#create_filesystem) - Create filesystem
+* [list_filesystems](docs/sdks/filesystemstorage/README.md#list_filesystems) - List filesystems
+* [delete_filesystem](docs/sdks/filesystemstorage/README.md#delete_filesystem) - Delete filesystem
+* [update_filesystem](docs/sdks/filesystemstorage/README.md#update_filesystem) - Update filesystem
 
 ### [Firewalls](docs/sdks/firewallssdk/README.md)
 
@@ -300,6 +315,13 @@ with Latitudesh(
 * [delete_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#delete_kubernetes_cluster) - Delete a Kubernetes Cluster
 * [update_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#update_kubernetes_cluster) - Update Kubernetes Cluster
 * [get_kubernetes_cluster_kubeconfig](docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig
+
+### [ObjectStorage](docs/sdks/objectstorage/README.md)
+
+* [get_storage_objects](docs/sdks/objectstorage/README.md#get_storage_objects) - List object storages
+* [post_storage_objects](docs/sdks/objectstorage/README.md#post_storage_objects) - Create object storage
+* [get_storage_object](docs/sdks/objectstorage/README.md#get_storage_object) - Retrieve object storage
+* [delete_storage_objects](docs/sdks/objectstorage/README.md#delete_storage_objects) - Delete object storage
 
 ### [OperatingSystems](docs/sdks/operatingsystemssdk/README.md)
 
@@ -375,22 +397,6 @@ with Latitudesh(
 * [get_ssh_key](docs/sdks/sshkeyssdk/README.md#get_ssh_key) - Retrieve SSH Key
 * [delete_ssh_key](docs/sdks/sshkeyssdk/README.md#delete_ssh_key) - Delete SSH Key
 * [put_ssh_key](docs/sdks/sshkeyssdk/README.md#put_ssh_key) - Update SSH Key
-
-### [Storage](docs/sdks/storage/README.md)
-
-* [create_filesystem](docs/sdks/storage/README.md#create_filesystem) - Create filesystem
-* [list_filesystems](docs/sdks/storage/README.md#list_filesystems) - List filesystems
-* [delete_filesystem](docs/sdks/storage/README.md#delete_filesystem) - Delete filesystem
-* [update_filesystem](docs/sdks/storage/README.md#update_filesystem) - Update filesystem
-* [get_storage_volumes](docs/sdks/storage/README.md#get_storage_volumes) - List volumes
-* [post_storage_volumes](docs/sdks/storage/README.md#post_storage_volumes) - Create volume
-* [get_storage_volume](docs/sdks/storage/README.md#get_storage_volume) - Retrieve volume
-* [delete_storage_volumes](docs/sdks/storage/README.md#delete_storage_volumes) - Delete volume
-* [post_storage_volumes_mount](docs/sdks/storage/README.md#post_storage_volumes_mount) - Mount volume
-* [get_storage_objects](docs/sdks/storage/README.md#get_storage_objects) - List object storages
-* [post_storage_objects](docs/sdks/storage/README.md#post_storage_objects) - Create object storage
-* [get_storage_object](docs/sdks/storage/README.md#get_storage_object) - Retrieve object storage
-* [delete_storage_objects](docs/sdks/storage/README.md#delete_storage_objects) - Delete object storage
 
 ### [Tags](docs/sdks/tags/README.md)
 

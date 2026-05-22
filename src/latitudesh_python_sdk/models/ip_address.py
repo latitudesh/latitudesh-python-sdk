@@ -112,12 +112,16 @@ class IPAddressRegion(BaseModel):
 
 
 class AssignmentTypedDict(TypedDict):
+    r"""Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted)."""
+
     server_id: NotRequired[str]
     hostname: NotRequired[str]
     assigned_at: NotRequired[str]
 
 
 class Assignment(BaseModel):
+    r"""Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted)."""
+
     server_id: Optional[str] = None
 
     hostname: Optional[str] = None
@@ -155,6 +159,7 @@ class IPAddressAttributesTypedDict(TypedDict):
     region: NotRequired[IPAddressRegionTypedDict]
     available: NotRequired[bool]
     assignment: NotRequired[AssignmentTypedDict]
+    r"""Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted)."""
 
 
 class IPAddressAttributes(BaseModel):
@@ -183,6 +188,7 @@ class IPAddressAttributes(BaseModel):
     available: Optional[bool] = None
 
     assignment: Optional[Assignment] = None
+    r"""Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

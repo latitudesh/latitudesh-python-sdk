@@ -1,9 +1,0 @@
-# PostStorageFilesystemsStorageData
-
-
-## Fields
-
-| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                 | [models.PostStorageFilesystemsStorageType](../models/poststoragefilesystemsstoragetype.md)             | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
-| `attributes`                                                                                           | [models.PostStorageFilesystemsStorageAttributes](../models/poststoragefilesystemsstorageattributes.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

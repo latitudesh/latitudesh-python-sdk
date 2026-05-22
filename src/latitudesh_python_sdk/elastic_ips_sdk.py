@@ -28,8 +28,6 @@ class ElasticIpsSDK(BaseSDK):
 
         List all Elastic IPs for the authenticated team. Elastic IPs are static public IP addresses that can be assigned to servers and moved between servers within the same project.
 
-        **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. When the flag is disabled, the endpoint returns an empty list.
-
 
         :param filter_project: The project ID or slug to filter by
         :param filter_server: The server ID to filter by
@@ -156,8 +154,6 @@ class ElasticIpsSDK(BaseSDK):
 
         List all Elastic IPs for the authenticated team. Elastic IPs are static public IP addresses that can be assigned to servers and moved between servers within the same project.
 
-        **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. When the flag is disabled, the endpoint returns an empty list.
-
 
         :param filter_project: The project ID or slug to filter by
         :param filter_server: The server ID to filter by
@@ -278,9 +274,7 @@ class ElasticIpsSDK(BaseSDK):
     ) -> models.ElasticIP:
         r"""Create an Elastic IP
 
-        Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `configuring` and the `id` will be `null` until provisioning completes.
-
-        **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. Currently only IPv4 /32 addresses in routed mode are supported.
+        Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `configuring` and the `id` will be `null` until provisioning completes. Currently only IPv4 /32 addresses in routed mode are supported.
 
 
         :param data:
@@ -349,7 +343,7 @@ class ElasticIpsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "202", "application/vnd.api+json"):
             return unmarshal_json_response(models.ElasticIP, http_res)
-        if utils.match_response(http_res, ["403", "422"], "application/vnd.api+json"):
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -372,9 +366,7 @@ class ElasticIpsSDK(BaseSDK):
     ) -> models.ElasticIP:
         r"""Create an Elastic IP
 
-        Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `configuring` and the `id` will be `null` until provisioning completes.
-
-        **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. Currently only IPv4 /32 addresses in routed mode are supported.
+        Creates a new Elastic IP and assigns it to the specified server. The IP is provisioned asynchronously—the response will show status `configuring` and the `id` will be `null` until provisioning completes. Currently only IPv4 /32 addresses in routed mode are supported.
 
 
         :param data:
@@ -443,7 +435,7 @@ class ElasticIpsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "202", "application/vnd.api+json"):
             return unmarshal_json_response(models.ElasticIP, http_res)
-        if utils.match_response(http_res, ["403", "422"], "application/vnd.api+json"):
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -468,8 +460,6 @@ class ElasticIpsSDK(BaseSDK):
 
         Returns a single Elastic IP by its ID.
 
-        **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team.
-
 
         :param elastic_ip_id: The Elastic IP ID
         :param retries: Override the default retry configuration for this method
@@ -534,7 +524,7 @@ class ElasticIpsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.ElasticIP, http_res)
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -559,8 +549,6 @@ class ElasticIpsSDK(BaseSDK):
 
         Returns a single Elastic IP by its ID.
 
-        **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team.
-
 
         :param elastic_ip_id: The Elastic IP ID
         :param retries: Override the default retry configuration for this method
@@ -625,7 +613,7 @@ class ElasticIpsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.ElasticIP, http_res)
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -648,9 +636,7 @@ class ElasticIpsSDK(BaseSDK):
     ):
         r"""Release an Elastic IP
 
-        Releases an Elastic IP, returning it to the available pool. The IP will transition to `releasing` status before being fully removed.
-
-        **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. Only Elastic IPs with status `active` or `error` can be released.
+        Releases an Elastic IP, returning it to the available pool. The IP will transition to `releasing` status before being fully removed. Only Elastic IPs with status `active` or `error` can be released.
 
 
         :param elastic_ip_id: The Elastic IP ID
@@ -716,9 +702,7 @@ class ElasticIpsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(
-            http_res, ["403", "404", "422"], "application/vnd.api+json"
-        ):
+        if utils.match_response(http_res, ["404", "422"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -741,9 +725,7 @@ class ElasticIpsSDK(BaseSDK):
     ):
         r"""Release an Elastic IP
 
-        Releases an Elastic IP, returning it to the available pool. The IP will transition to `releasing` status before being fully removed.
-
-        **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. Only Elastic IPs with status `active` or `error` can be released.
+        Releases an Elastic IP, returning it to the available pool. The IP will transition to `releasing` status before being fully removed. Only Elastic IPs with status `active` or `error` can be released.
 
 
         :param elastic_ip_id: The Elastic IP ID
@@ -809,9 +791,7 @@ class ElasticIpsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(
-            http_res, ["403", "404", "422"], "application/vnd.api+json"
-        ):
+        if utils.match_response(http_res, ["404", "422"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -835,9 +815,7 @@ class ElasticIpsSDK(BaseSDK):
     ) -> models.ElasticIP:
         r"""Move an Elastic IP
 
-        Moves an Elastic IP to a different server within the same project. The reassignment is performed asynchronously.
-
-        **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. The Elastic IP must be in `active` status and the target server must belong to the same project.
+        Moves an Elastic IP to a different server within the same project and site. The reassignment is performed asynchronously. The Elastic IP must be in `active` status, the target server must belong to the same project, and the target server must be in the same site as the currently assigned server.
 
 
         :param elastic_ip_id: The Elastic IP ID
@@ -910,9 +888,7 @@ class ElasticIpsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "202", "application/vnd.api+json"):
             return unmarshal_json_response(models.ElasticIP, http_res)
-        if utils.match_response(
-            http_res, ["403", "404", "422"], "application/vnd.api+json"
-        ):
+        if utils.match_response(http_res, ["404", "422"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -936,9 +912,7 @@ class ElasticIpsSDK(BaseSDK):
     ) -> models.ElasticIP:
         r"""Move an Elastic IP
 
-        Moves an Elastic IP to a different server within the same project. The reassignment is performed asynchronously.
-
-        **Note:** This feature requires the `elastic_ips` feature flag to be enabled for your team. The Elastic IP must be in `active` status and the target server must belong to the same project.
+        Moves an Elastic IP to a different server within the same project and site. The reassignment is performed asynchronously. The Elastic IP must be in `active` status, the target server must belong to the same project, and the target server must be in the same site as the currently assigned server.
 
 
         :param elastic_ip_id: The Elastic IP ID
@@ -1011,9 +985,7 @@ class ElasticIpsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "202", "application/vnd.api+json"):
             return unmarshal_json_response(models.ElasticIP, http_res)
-        if utils.match_response(
-            http_res, ["403", "404", "422"], "application/vnd.api+json"
-        ):
+        if utils.match_response(http_res, ["404", "422"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):

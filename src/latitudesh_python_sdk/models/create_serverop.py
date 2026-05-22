@@ -92,6 +92,67 @@ class CreateServerRaid(str, Enum):
     RAID_1 = "raid-1"
 
 
+class CreateServerServersRole(str, Enum):
+    OS = "os"
+    STORAGE = "storage"
+    RAW = "raw"
+
+
+class CreateServerRaidLevel(str, Enum):
+    RAID_0 = "raid-0"
+    RAID_1 = "raid-1"
+
+
+class CreateServerFilesystem(str, Enum):
+    EXT4 = "ext4"
+    XFS = "xfs"
+
+
+class CreateServerDiskLayoutTypedDict(TypedDict):
+    count: int
+    role: CreateServerServersRole
+    raid_level: NotRequired[Nullable[CreateServerRaidLevel]]
+    filesystem: NotRequired[Nullable[CreateServerFilesystem]]
+    mount_point: NotRequired[Nullable[str]]
+
+
+class CreateServerDiskLayout(BaseModel):
+    count: int
+
+    role: CreateServerServersRole
+
+    raid_level: OptionalNullable[CreateServerRaidLevel] = UNSET
+
+    filesystem: OptionalNullable[CreateServerFilesystem] = UNSET
+
+    mount_point: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["raid_level", "filesystem", "mount_point"])
+        nullable_fields = set(["raid_level", "filesystem", "mount_point"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class CreateServerServersBilling(str, Enum):
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
 
@@ -117,6 +178,7 @@ class CreateServerServersAttributesTypedDict(TypedDict):
     r"""User data ID to set on the server. This is a custom script that will run after the deploy"""
     raid: NotRequired[Nullable[CreateServerRaid]]
     r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+    disk_layout: NotRequired[Nullable[List[CreateServerDiskLayoutTypedDict]]]
     ipxe: NotRequired[Nullable[str]]
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
     billing: NotRequired[Nullable[CreateServerServersBilling]]
@@ -148,6 +210,8 @@ class CreateServerServersAttributes(BaseModel):
     raid: OptionalNullable[CreateServerRaid] = UNSET
     r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
 
+    disk_layout: OptionalNullable[List[CreateServerDiskLayout]] = UNSET
+
     ipxe: OptionalNullable[str] = UNSET
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
 
@@ -166,11 +230,14 @@ class CreateServerServersAttributes(BaseModel):
                 "ssh_keys",
                 "user_data",
                 "raid",
+                "disk_layout",
                 "ipxe",
                 "billing",
             ]
         )
-        nullable_fields = set(["ssh_keys", "user_data", "raid", "ipxe", "billing"])
+        nullable_fields = set(
+            ["ssh_keys", "user_data", "raid", "disk_layout", "ipxe", "billing"]
+        )
         serialized = handler(self)
         m = {}
 

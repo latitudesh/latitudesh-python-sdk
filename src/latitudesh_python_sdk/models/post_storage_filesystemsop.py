@@ -9,11 +9,11 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class PostStorageFilesystemsStorageType(str, Enum):
+class PostStorageFilesystemsFilesystemStorageType(str, Enum):
     FILESYSTEMS = "filesystems"
 
 
-class PostStorageFilesystemsStorageAttributesTypedDict(TypedDict):
+class PostStorageFilesystemsFilesystemStorageAttributesTypedDict(TypedDict):
     project: str
     r"""Project ID or slug"""
     name: str
@@ -22,7 +22,7 @@ class PostStorageFilesystemsStorageAttributesTypedDict(TypedDict):
     r"""Size in GB (not required, default is 1500)"""
 
 
-class PostStorageFilesystemsStorageAttributes(BaseModel):
+class PostStorageFilesystemsFilesystemStorageAttributes(BaseModel):
     project: str
     r"""Project ID or slug"""
 
@@ -49,23 +49,23 @@ class PostStorageFilesystemsStorageAttributes(BaseModel):
         return m
 
 
-class PostStorageFilesystemsStorageDataTypedDict(TypedDict):
-    type: PostStorageFilesystemsStorageType
-    attributes: PostStorageFilesystemsStorageAttributesTypedDict
+class PostStorageFilesystemsFilesystemStorageDataTypedDict(TypedDict):
+    type: PostStorageFilesystemsFilesystemStorageType
+    attributes: PostStorageFilesystemsFilesystemStorageAttributesTypedDict
 
 
-class PostStorageFilesystemsStorageData(BaseModel):
-    type: PostStorageFilesystemsStorageType
+class PostStorageFilesystemsFilesystemStorageData(BaseModel):
+    type: PostStorageFilesystemsFilesystemStorageType
 
-    attributes: PostStorageFilesystemsStorageAttributes
-
-
-class PostStorageFilesystemsStorageRequestBodyTypedDict(TypedDict):
-    data: PostStorageFilesystemsStorageDataTypedDict
+    attributes: PostStorageFilesystemsFilesystemStorageAttributes
 
 
-class PostStorageFilesystemsStorageRequestBody(BaseModel):
-    data: PostStorageFilesystemsStorageData
+class PostStorageFilesystemsFilesystemStorageRequestBodyTypedDict(TypedDict):
+    data: PostStorageFilesystemsFilesystemStorageDataTypedDict
+
+
+class PostStorageFilesystemsFilesystemStorageRequestBody(BaseModel):
+    data: PostStorageFilesystemsFilesystemStorageData
 
 
 class PostStorageFilesystemsResponseBodyTypedDict(TypedDict):

@@ -80,6 +80,67 @@ class CreateServerReinstallServersRaid(str, Enum):
     RAID_1 = "raid-1"
 
 
+class CreateServerReinstallServersRole(str, Enum):
+    OS = "os"
+    STORAGE = "storage"
+    RAW = "raw"
+
+
+class CreateServerReinstallServersRaidLevel(str, Enum):
+    RAID_0 = "raid-0"
+    RAID_1 = "raid-1"
+
+
+class CreateServerReinstallServersFilesystem(str, Enum):
+    EXT4 = "ext4"
+    XFS = "xfs"
+
+
+class CreateServerReinstallServersDiskLayoutTypedDict(TypedDict):
+    count: int
+    role: CreateServerReinstallServersRole
+    raid_level: NotRequired[Nullable[CreateServerReinstallServersRaidLevel]]
+    filesystem: NotRequired[Nullable[CreateServerReinstallServersFilesystem]]
+    mount_point: NotRequired[Nullable[str]]
+
+
+class CreateServerReinstallServersDiskLayout(BaseModel):
+    count: int
+
+    role: CreateServerReinstallServersRole
+
+    raid_level: OptionalNullable[CreateServerReinstallServersRaidLevel] = UNSET
+
+    filesystem: OptionalNullable[CreateServerReinstallServersFilesystem] = UNSET
+
+    mount_point: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["raid_level", "filesystem", "mount_point"])
+        nullable_fields = set(["raid_level", "filesystem", "mount_point"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class CreateServerReinstallServersAttributesTypedDict(TypedDict):
     operating_system: NotRequired[CreateServerReinstallServersOperatingSystem]
     r"""The OS selected for the reinstall process"""
@@ -94,6 +155,9 @@ class CreateServerReinstallServersAttributesTypedDict(TypedDict):
     r"""User data ID to set upon reinstall"""
     raid: NotRequired[Nullable[CreateServerReinstallServersRaid]]
     r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+    disk_layout: NotRequired[
+        Nullable[List[CreateServerReinstallServersDiskLayoutTypedDict]]
+    ]
     ipxe: NotRequired[Nullable[str]]
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected."""
 
@@ -116,6 +180,8 @@ class CreateServerReinstallServersAttributes(BaseModel):
     raid: OptionalNullable[CreateServerReinstallServersRaid] = UNSET
     r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
 
+    disk_layout: OptionalNullable[List[CreateServerReinstallServersDiskLayout]] = UNSET
+
     ipxe: OptionalNullable[str] = UNSET
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected."""
 
@@ -129,10 +195,13 @@ class CreateServerReinstallServersAttributes(BaseModel):
                 "ssh_keys",
                 "user_data",
                 "raid",
+                "disk_layout",
                 "ipxe",
             ]
         )
-        nullable_fields = set(["partitions", "ssh_keys", "user_data", "raid", "ipxe"])
+        nullable_fields = set(
+            ["partitions", "ssh_keys", "user_data", "raid", "disk_layout", "ipxe"]
+        )
         serialized = handler(self)
         m = {}
 

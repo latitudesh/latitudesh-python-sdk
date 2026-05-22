@@ -9,11 +9,11 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class PostStorageVolumesStorageType(str, Enum):
+class PostStorageVolumesBlockStorageType(str, Enum):
     VOLUMES = "volumes"
 
 
-class PostStorageVolumesStorageAttributesTypedDict(TypedDict):
+class PostStorageVolumesBlockStorageAttributesTypedDict(TypedDict):
     project: str
     r"""Project ID or slug"""
     name: str
@@ -22,7 +22,7 @@ class PostStorageVolumesStorageAttributesTypedDict(TypedDict):
     r"""Size in GB (not required, default is 1500)"""
 
 
-class PostStorageVolumesStorageAttributes(BaseModel):
+class PostStorageVolumesBlockStorageAttributes(BaseModel):
     project: str
     r"""Project ID or slug"""
 
@@ -49,23 +49,23 @@ class PostStorageVolumesStorageAttributes(BaseModel):
         return m
 
 
-class PostStorageVolumesStorageDataTypedDict(TypedDict):
-    type: PostStorageVolumesStorageType
-    attributes: PostStorageVolumesStorageAttributesTypedDict
+class PostStorageVolumesBlockStorageDataTypedDict(TypedDict):
+    type: PostStorageVolumesBlockStorageType
+    attributes: PostStorageVolumesBlockStorageAttributesTypedDict
 
 
-class PostStorageVolumesStorageData(BaseModel):
-    type: PostStorageVolumesStorageType
+class PostStorageVolumesBlockStorageData(BaseModel):
+    type: PostStorageVolumesBlockStorageType
 
-    attributes: PostStorageVolumesStorageAttributes
-
-
-class PostStorageVolumesStorageRequestBodyTypedDict(TypedDict):
-    data: PostStorageVolumesStorageDataTypedDict
+    attributes: PostStorageVolumesBlockStorageAttributes
 
 
-class PostStorageVolumesStorageRequestBody(BaseModel):
-    data: PostStorageVolumesStorageData
+class PostStorageVolumesBlockStorageRequestBodyTypedDict(TypedDict):
+    data: PostStorageVolumesBlockStorageDataTypedDict
+
+
+class PostStorageVolumesBlockStorageRequestBody(BaseModel):
+    data: PostStorageVolumesBlockStorageData
 
 
 class PostStorageVolumesResponseBodyTypedDict(TypedDict):
