@@ -318,10 +318,10 @@ with Latitudesh(
 
 ### [ObjectStorage](docs/sdks/objectstorage/README.md)
 
-* [get_storage_objects](docs/sdks/objectstorage/README.md#get_storage_objects) - List object storages
-* [post_storage_objects](docs/sdks/objectstorage/README.md#post_storage_objects) - Create object storage
-* [get_storage_object](docs/sdks/objectstorage/README.md#get_storage_object) - Retrieve object storage
-* [delete_storage_objects](docs/sdks/objectstorage/README.md#delete_storage_objects) - Delete object storage
+* [get_storage_buckets](docs/sdks/objectstorage/README.md#get_storage_buckets) - List object storages
+* [post_storage_buckets](docs/sdks/objectstorage/README.md#post_storage_buckets) - Create object storage
+* [get_storage_bucket](docs/sdks/objectstorage/README.md#get_storage_bucket) - Retrieve object storage
+* [delete_storage_buckets](docs/sdks/objectstorage/README.md#delete_storage_buckets) - Delete object storage
 
 ### [OperatingSystems](docs/sdks/operatingsystemssdk/README.md)
 

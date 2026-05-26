@@ -21,6 +21,21 @@ class ObjectStorageDataType(str, Enum):
     OBJECT_STORAGES = "object_storages"
 
 
+class StorageClass(str, Enum):
+    r"""Storage class tier"""
+
+    STANDARD = "standard"
+    HIGH_PERFORMANCE = "high_performance"
+
+
+class RetentionMode(str, Enum):
+    r"""Object lock retention mode"""
+
+    NONE = "NONE"
+    COMPLIANCE = "COMPLIANCE"
+    GOVERNANCE = "GOVERNANCE"
+
+
 class ObjectStorageDataRegionTypedDict(TypedDict):
     r"""Region information where the object storage is located"""
 
@@ -73,16 +88,28 @@ class ObjectStorageDataRegion(BaseModel):
 class ObjectStorageDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""Display name of the object storage"""
-    size_in_gb: NotRequired[int]
-    r"""Storage capacity in gigabytes"""
+    storage_type: NotRequired[str]
+    r"""Type of storage (e.g., `object`)"""
+    storage_class: NotRequired[StorageClass]
+    r"""Storage class tier"""
     created_at: NotRequired[Nullable[datetime]]
     r"""Timestamp when the object storage was created"""
     bucket_name: NotRequired[str]
     r"""S3-compatible bucket name"""
     endpoint: NotRequired[str]
     r"""S3-compatible endpoint URL for accessing the bucket"""
-    access_key: NotRequired[str]
+    access_key: NotRequired[Nullable[str]]
     r"""S3 access key for authentication"""
+    secret_key: NotRequired[Nullable[str]]
+    r"""S3 secret key for authentication"""
+    versioning: NotRequired[Nullable[bool]]
+    r"""Whether bucket versioning is enabled"""
+    locking: NotRequired[Nullable[bool]]
+    r"""Whether object lock is enabled on the bucket"""
+    retention_mode: NotRequired[Nullable[RetentionMode]]
+    r"""Object lock retention mode"""
+    retention_period: NotRequired[Nullable[int]]
+    r"""Default retention period in days when object lock is enabled"""
     region: NotRequired[Nullable[ObjectStorageDataRegionTypedDict]]
     r"""Region information where the object storage is located"""
     project: NotRequired[ProjectIncludeTypedDict]
@@ -93,8 +120,11 @@ class ObjectStorageDataAttributes(BaseModel):
     name: Optional[str] = None
     r"""Display name of the object storage"""
 
-    size_in_gb: Optional[int] = None
-    r"""Storage capacity in gigabytes"""
+    storage_type: Optional[str] = None
+    r"""Type of storage (e.g., `object`)"""
+
+    storage_class: Optional[StorageClass] = None
+    r"""Storage class tier"""
 
     created_at: OptionalNullable[datetime] = UNSET
     r"""Timestamp when the object storage was created"""
@@ -105,8 +135,23 @@ class ObjectStorageDataAttributes(BaseModel):
     endpoint: Optional[str] = None
     r"""S3-compatible endpoint URL for accessing the bucket"""
 
-    access_key: Optional[str] = None
+    access_key: OptionalNullable[str] = UNSET
     r"""S3 access key for authentication"""
+
+    secret_key: OptionalNullable[str] = UNSET
+    r"""S3 secret key for authentication"""
+
+    versioning: OptionalNullable[bool] = UNSET
+    r"""Whether bucket versioning is enabled"""
+
+    locking: OptionalNullable[bool] = UNSET
+    r"""Whether object lock is enabled on the bucket"""
+
+    retention_mode: OptionalNullable[RetentionMode] = UNSET
+    r"""Object lock retention mode"""
+
+    retention_period: OptionalNullable[int] = UNSET
+    r"""Default retention period in days when object lock is enabled"""
 
     region: OptionalNullable[ObjectStorageDataRegion] = UNSET
     r"""Region information where the object storage is located"""
@@ -120,17 +165,34 @@ class ObjectStorageDataAttributes(BaseModel):
         optional_fields = set(
             [
                 "name",
-                "size_in_gb",
+                "storage_type",
+                "storage_class",
                 "created_at",
                 "bucket_name",
                 "endpoint",
                 "access_key",
+                "secret_key",
+                "versioning",
+                "locking",
+                "retention_mode",
+                "retention_period",
                 "region",
                 "project",
                 "team",
             ]
         )
-        nullable_fields = set(["created_at", "region"])
+        nullable_fields = set(
+            [
+                "created_at",
+                "access_key",
+                "secret_key",
+                "versioning",
+                "locking",
+                "retention_mode",
+                "retention_period",
+                "region",
+            ]
+        )
         serialized = handler(self)
         m = {}
 
