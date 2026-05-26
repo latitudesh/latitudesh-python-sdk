@@ -6,12 +6,12 @@ from latitudesh_python_sdk.utils import FieldMetadata, PathParamMetadata
 from typing_extensions import Annotated, TypedDict
 
 
-class DeleteStorageObjectsRequestTypedDict(TypedDict):
+class DeleteStorageBucketsRequestTypedDict(TypedDict):
     id: str
     r"""The object storage ID"""
 
 
-class DeleteStorageObjectsRequest(BaseModel):
+class DeleteStorageBucketsRequest(BaseModel):
     id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]

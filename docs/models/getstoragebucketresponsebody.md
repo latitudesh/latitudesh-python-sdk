@@ -1,6 +1,6 @@
-# PostStorageObjectsResponseBody
+# GetStorageBucketResponseBody
 
-Created
+Success
 
 
 ## Fields

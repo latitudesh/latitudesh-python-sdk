@@ -10,7 +10,7 @@ from typing import Any, Mapping, Optional, Union
 
 
 class ObjectStorage(BaseSDK):
-    def get_storage_objects(
+    def get_storage_buckets(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -39,13 +39,13 @@ class ObjectStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetStorageObjectsRequest(
+        request = models.GetStorageBucketsRequest(
             filter_project=filter_project,
         )
 
         req = self._build_request(
             method="GET",
-            path="/storage/objects",
+            path="/storage/buckets",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -72,7 +72,7 @@ class ObjectStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="get-storage-objects",
+                operation_id="get-storage-buckets",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -98,7 +98,7 @@ class ObjectStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    async def get_storage_objects_async(
+    async def get_storage_buckets_async(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -127,13 +127,13 @@ class ObjectStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetStorageObjectsRequest(
+        request = models.GetStorageBucketsRequest(
             filter_project=filter_project,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/storage/objects",
+            path="/storage/buckets",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -160,7 +160,7 @@ class ObjectStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="get-storage-objects",
+                operation_id="get-storage-buckets",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -186,17 +186,17 @@ class ObjectStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    def post_storage_objects(
+    def post_storage_buckets(
         self,
         *,
         data: Union[
-            models.PostStorageObjectsData, models.PostStorageObjectsDataTypedDict
+            models.PostStorageBucketsData, models.PostStorageBucketsDataTypedDict
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PostStorageObjectsResponseBody:
+    ) -> models.PostStorageBucketsResponseBody:
         r"""Create object storage
 
         Creates a new object storage bucket for a project.
@@ -217,13 +217,13 @@ class ObjectStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageObjectsRequestBody(
-            data=utils.get_pydantic_model(data, models.PostStorageObjectsData),
+        request = models.PostStorageBucketsRequestBody(
+            data=utils.get_pydantic_model(data, models.PostStorageBucketsData),
         )
 
         req = self._build_request(
             method="POST",
-            path="/storage/objects",
+            path="/storage/buckets",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -235,7 +235,7 @@ class ObjectStorage(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.PostStorageObjectsRequestBody
+                request, False, False, "json", models.PostStorageBucketsRequestBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -253,7 +253,7 @@ class ObjectStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post-storage-objects",
+                operation_id="post-storage-buckets",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -267,7 +267,7 @@ class ObjectStorage(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(
-                models.PostStorageObjectsResponseBody, http_res
+                models.PostStorageBucketsResponseBody, http_res
             )
         if utils.match_response(
             http_res, ["403", "404", "409", "422"], "application/vnd.api+json"
@@ -286,17 +286,17 @@ class ObjectStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    async def post_storage_objects_async(
+    async def post_storage_buckets_async(
         self,
         *,
         data: Union[
-            models.PostStorageObjectsData, models.PostStorageObjectsDataTypedDict
+            models.PostStorageBucketsData, models.PostStorageBucketsDataTypedDict
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PostStorageObjectsResponseBody:
+    ) -> models.PostStorageBucketsResponseBody:
         r"""Create object storage
 
         Creates a new object storage bucket for a project.
@@ -317,13 +317,13 @@ class ObjectStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageObjectsRequestBody(
-            data=utils.get_pydantic_model(data, models.PostStorageObjectsData),
+        request = models.PostStorageBucketsRequestBody(
+            data=utils.get_pydantic_model(data, models.PostStorageBucketsData),
         )
 
         req = self._build_request_async(
             method="POST",
-            path="/storage/objects",
+            path="/storage/buckets",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -335,7 +335,7 @@ class ObjectStorage(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.PostStorageObjectsRequestBody
+                request, False, False, "json", models.PostStorageBucketsRequestBody
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -353,7 +353,7 @@ class ObjectStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post-storage-objects",
+                operation_id="post-storage-buckets",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -367,7 +367,7 @@ class ObjectStorage(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(
-                models.PostStorageObjectsResponseBody, http_res
+                models.PostStorageBucketsResponseBody, http_res
             )
         if utils.match_response(
             http_res, ["403", "404", "409", "422"], "application/vnd.api+json"
@@ -386,7 +386,7 @@ class ObjectStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    def get_storage_object(
+    def get_storage_bucket(
         self,
         *,
         id: str,
@@ -394,7 +394,7 @@ class ObjectStorage(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetStorageObjectResponseBody:
+    ) -> models.GetStorageBucketResponseBody:
         r"""Retrieve object storage
 
         Shows details of a specific object storage.
@@ -415,13 +415,13 @@ class ObjectStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetStorageObjectRequest(
+        request = models.GetStorageBucketRequest(
             id=id,
         )
 
         req = self._build_request(
             method="GET",
-            path="/storage/objects/{id}",
+            path="/storage/buckets/{id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -448,7 +448,7 @@ class ObjectStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="get-storage-object",
+                operation_id="get-storage-bucket",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -462,7 +462,7 @@ class ObjectStorage(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(
-                models.GetStorageObjectResponseBody, http_res
+                models.GetStorageBucketResponseBody, http_res
             )
         if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
@@ -476,7 +476,7 @@ class ObjectStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    async def get_storage_object_async(
+    async def get_storage_bucket_async(
         self,
         *,
         id: str,
@@ -484,7 +484,7 @@ class ObjectStorage(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetStorageObjectResponseBody:
+    ) -> models.GetStorageBucketResponseBody:
         r"""Retrieve object storage
 
         Shows details of a specific object storage.
@@ -505,13 +505,13 @@ class ObjectStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetStorageObjectRequest(
+        request = models.GetStorageBucketRequest(
             id=id,
         )
 
         req = self._build_request_async(
             method="GET",
-            path="/storage/objects/{id}",
+            path="/storage/buckets/{id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -538,7 +538,7 @@ class ObjectStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="get-storage-object",
+                operation_id="get-storage-bucket",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -552,7 +552,7 @@ class ObjectStorage(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(
-                models.GetStorageObjectResponseBody, http_res
+                models.GetStorageBucketResponseBody, http_res
             )
         if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
@@ -566,7 +566,7 @@ class ObjectStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    def delete_storage_objects(
+    def delete_storage_buckets(
         self,
         *,
         id: str,
@@ -595,13 +595,13 @@ class ObjectStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteStorageObjectsRequest(
+        request = models.DeleteStorageBucketsRequest(
             id=id,
         )
 
         req = self._build_request(
             method="DELETE",
-            path="/storage/objects/{id}",
+            path="/storage/buckets/{id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -628,7 +628,7 @@ class ObjectStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="delete-storage-objects",
+                operation_id="delete-storage-buckets",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -642,7 +642,9 @@ class ObjectStorage(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+        if utils.match_response(
+            http_res, ["403", "404", "409"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "500", "application/vnd.api+json"):
@@ -657,7 +659,7 @@ class ObjectStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    async def delete_storage_objects_async(
+    async def delete_storage_buckets_async(
         self,
         *,
         id: str,
@@ -686,13 +688,13 @@ class ObjectStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteStorageObjectsRequest(
+        request = models.DeleteStorageBucketsRequest(
             id=id,
         )
 
         req = self._build_request_async(
             method="DELETE",
-            path="/storage/objects/{id}",
+            path="/storage/buckets/{id}",
             base_url=base_url,
             url_variables=url_variables,
             request=request,
@@ -719,7 +721,7 @@ class ObjectStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="delete-storage-objects",
+                operation_id="delete-storage-buckets",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
@@ -733,7 +735,9 @@ class ObjectStorage(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "204", "*"):
             return
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+        if utils.match_response(
+            http_res, ["403", "404", "409"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "500", "application/vnd.api+json"):

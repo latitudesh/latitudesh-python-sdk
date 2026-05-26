@@ -318,10 +318,10 @@ with Latitudesh(
 
 ### [ObjectStorage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md)
 
-* [get_storage_objects](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_objects) - List object storages
-* [post_storage_objects](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#post_storage_objects) - Create object storage
-* [get_storage_object](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_object) - Retrieve object storage
-* [delete_storage_objects](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#delete_storage_objects) - Delete object storage
+* [get_storage_buckets](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_buckets) - List object storages
+* [post_storage_buckets](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#post_storage_buckets) - Create object storage
+* [get_storage_bucket](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_bucket) - Retrieve object storage
+* [delete_storage_buckets](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#delete_storage_buckets) - Delete object storage
 
 ### [OperatingSystems](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/operatingsystemssdk/README.md)
 
