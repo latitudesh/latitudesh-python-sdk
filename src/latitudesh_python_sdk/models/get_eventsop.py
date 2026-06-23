@@ -134,39 +134,11 @@ class GetEventsRequest(BaseModel):
         return m
 
 
-class GetEventsResponseBodyTypedDict(TypedDict):
-    r"""Success"""
-
-    data: NotRequired[List[EventsTypedDict]]
-
-
-class GetEventsResponseBody(BaseModel):
-    r"""Success"""
-
-    data: Optional[List[Events]] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["data"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
 class GetEventsResponseTypedDict(TypedDict):
-    result: GetEventsResponseBodyTypedDict
+    result: EventsTypedDict
 
 
 class GetEventsResponse(BaseModel):
     next: Callable[[], Optional[GetEventsResponse]]
 
-    result: GetEventsResponseBody
+    result: Events

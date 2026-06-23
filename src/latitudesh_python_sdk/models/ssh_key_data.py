@@ -4,9 +4,15 @@ from __future__ import annotations
 from .project_include import ProjectInclude, ProjectIncludeTypedDict
 from .user_include import UserInclude, UserIncludeTypedDict
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -14,7 +20,50 @@ class SSHKeyDataType(str, Enum):
     SSH_KEYS = "ssh_keys"
 
 
+class TagsModelTypedDict(TypedDict):
+    id: NotRequired[str]
+    name: NotRequired[str]
+    description: NotRequired[Nullable[str]]
+    color: NotRequired[Nullable[str]]
+
+
+class TagsModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+    description: OptionalNullable[str] = UNSET
+
+    color: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name", "description", "color"])
+        nullable_fields = set(["description", "color"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class SSHKeyDataAttributesTypedDict(TypedDict):
+    tags: NotRequired[List[TagsModelTypedDict]]
     name: NotRequired[str]
     r"""Name of the SSH Key"""
     public_key: NotRequired[str]
@@ -28,6 +77,8 @@ class SSHKeyDataAttributesTypedDict(TypedDict):
 
 
 class SSHKeyDataAttributes(BaseModel):
+    tags: Optional[List[TagsModel]] = None
+
     name: Optional[str] = None
     r"""Name of the SSH Key"""
 
@@ -49,6 +100,7 @@ class SSHKeyDataAttributes(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "tags",
                 "name",
                 "public_key",
                 "fingerprint",

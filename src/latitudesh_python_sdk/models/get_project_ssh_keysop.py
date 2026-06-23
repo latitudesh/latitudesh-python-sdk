@@ -18,6 +18,12 @@ class GetProjectSSHKeysRequestTypedDict(TypedDict):
     r"""Project ID or Slug"""
     filter_tags: NotRequired[str]
     r"""The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`"""
+    stats_total: NotRequired[str]
+    r"""Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`."""
+    page_number: NotRequired[int]
+    r"""Page number for pagination"""
+    page_size: NotRequired[int]
+    r"""Number of items per page"""
 
 
 class GetProjectSSHKeysRequest(BaseModel):
@@ -33,9 +39,32 @@ class GetProjectSSHKeysRequest(BaseModel):
     ] = None
     r"""The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`"""
 
+    stats_total: Annotated[
+        Optional[str],
+        pydantic.Field(alias="stats[total]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`."""
+
+    page_number: Annotated[
+        Optional[int],
+        pydantic.Field(alias="page[number]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Page number for pagination"""
+
+    page_size: Annotated[
+        Optional[int],
+        pydantic.Field(alias="page[size]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Number of items per page"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["filter[tags]"])
+        optional_fields = set(
+            ["filter[tags]", "stats[total]", "page[number]", "page[size]"]
+        )
         serialized = handler(self)
         m = {}
 

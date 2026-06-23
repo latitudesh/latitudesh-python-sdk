@@ -22,6 +22,7 @@ class PostTeamTeamsAttributesTypedDict(TypedDict):
     name: str
     currency: PostTeamTeamsCurrency
     address: NotRequired[str]
+    enforce_mfa: NotRequired[bool]
     referred_code: NotRequired[str]
     r"""Supported only for first team creation"""
 
@@ -33,12 +34,14 @@ class PostTeamTeamsAttributes(BaseModel):
 
     address: Optional[str] = None
 
+    enforce_mfa: Optional[bool] = None
+
     referred_code: Optional[str] = None
     r"""Supported only for first team creation"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["address", "referred_code"])
+        optional_fields = set(["address", "enforce_mfa", "referred_code"])
         serialized = handler(self)
         m = {}
 

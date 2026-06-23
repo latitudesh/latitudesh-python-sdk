@@ -3,7 +3,7 @@
 
 ## Fields
 
-| Field                                                    | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `data`                                                   | List[[models.SSHKeyData](../models/sshkeydata.md)]       | :heavy_minus_sign:                                       | N/A                                                      |
-| `meta`                                                   | [Optional[models.SSHKeysMeta]](../models/sshkeysmeta.md) | :heavy_minus_sign:                                       | N/A                                                      |
+| Field                                                          | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `data`                                                         | List[[models.SSHKeyData](../models/sshkeydata.md)]             | :heavy_minus_sign:                                             | N/A                                                            |
+| `meta`                                                         | [Optional[models.PaginationMeta]](../models/paginationmeta.md) | :heavy_minus_sign:                                             | N/A                                                            |

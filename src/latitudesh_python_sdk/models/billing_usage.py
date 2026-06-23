@@ -107,7 +107,7 @@ class Discounts(BaseModel):
     r"""Value of the discount (percentage or amount)"""
 
 
-class Unit(str, Enum):
+class BillingUsageUnit(str, Enum):
     QUANTITY = "quantity"
     HOUR = "hour"
     MINUTE = "minute"
@@ -171,7 +171,7 @@ class ProductsTypedDict(TypedDict):
     amount_without_discount: NotRequired[int]
     start: NotRequired[datetime]
     end: NotRequired[Nullable[datetime]]
-    unit: NotRequired[Unit]
+    unit: NotRequired[BillingUsageUnit]
     unit_price: NotRequired[float]
     r"""The unit price of the product in cents"""
     usage_type: NotRequired[UsageType]
@@ -202,7 +202,7 @@ class Products(BaseModel):
 
     end: OptionalNullable[datetime] = UNSET
 
-    unit: Optional[Unit] = None
+    unit: Optional[BillingUsageUnit] = None
 
     unit_price: Optional[float] = None
     r"""The unit price of the product in cents"""

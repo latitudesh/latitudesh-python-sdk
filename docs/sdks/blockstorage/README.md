@@ -125,7 +125,7 @@ with Latitudesh(
 
 ## get_storage_volume
 
-Shows details of a specific volume storage.
+Shows details of a specific volume.
 
 ### Example Usage
 
@@ -150,7 +150,7 @@ with Latitudesh(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | The volume storage ID                                               |
+| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | The volume ID                                                       |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
@@ -165,7 +165,7 @@ with Latitudesh(
 
 ## delete_storage_volumes
 
-Allows you to remove persistent storage from a project.
+Allows you to remove a volume from a project.
 
 ### Example Usage
 
@@ -200,7 +200,7 @@ with Latitudesh(
 
 ## post_storage_volumes_mount
 
-Mounts volume storage by adding the client to an allowed list
+Mounts a volume by adding the client to an allowed list
 
 ### Example Usage
 
@@ -230,7 +230,7 @@ with Latitudesh(
 
 | Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
 | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| `id`                                                                              | *str*                                                                             | :heavy_check_mark:                                                                | Volume storage ID                                                                 |
+| `id`                                                                              | *str*                                                                             | :heavy_check_mark:                                                                | Volume ID                                                                         |
 | `data`                                                                            | [models.PostStorageVolumesMountData](../../models/poststoragevolumesmountdata.md) | :heavy_check_mark:                                                                | N/A                                                                               |
 | `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
 

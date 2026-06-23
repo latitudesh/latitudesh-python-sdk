@@ -19,7 +19,7 @@ class ObjectStorage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ObjectStorages:
-        r"""List object storages
+        r"""List buckets
 
         Lists all object storages from a team.
 
@@ -107,7 +107,7 @@ class ObjectStorage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ObjectStorages:
-        r"""List object storages
+        r"""List buckets
 
         Lists all object storages from a team.
 
@@ -197,7 +197,7 @@ class ObjectStorage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PostStorageBucketsResponseBody:
-        r"""Create object storage
+        r"""Create bucket
 
         Creates a new object storage bucket for a project.
 
@@ -297,7 +297,7 @@ class ObjectStorage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PostStorageBucketsResponseBody:
-        r"""Create object storage
+        r"""Create bucket
 
         Creates a new object storage bucket for a project.
 
@@ -395,7 +395,7 @@ class ObjectStorage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetStorageBucketResponseBody:
-        r"""Retrieve object storage
+        r"""Retrieve bucket
 
         Shows details of a specific object storage.
 
@@ -485,7 +485,7 @@ class ObjectStorage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.GetStorageBucketResponseBody:
-        r"""Retrieve object storage
+        r"""Retrieve bucket
 
         Shows details of a specific object storage.
 
@@ -575,7 +575,7 @@ class ObjectStorage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete object storage
+        r"""Delete bucket
 
         Allows you to remove an object storage from a project.
 
@@ -668,7 +668,7 @@ class ObjectStorage(BaseSDK):
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Delete object storage
+        r"""Delete bucket
 
         Allows you to remove an object storage from a project.
 

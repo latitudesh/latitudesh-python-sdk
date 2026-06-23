@@ -10,12 +10,24 @@ from latitudesh_python_sdk.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing import List, Optional, Union
+from typing_extensions import NotRequired, TypeAliasType, TypedDict
 
 
 class VirtualMachinePayloadType(str, Enum):
     VIRTUAL_MACHINES = "virtual_machines"
+
+
+VirtualMachinePayloadUserDataTypedDict = TypeAliasType(
+    "VirtualMachinePayloadUserDataTypedDict", Union[int, str]
+)
+r"""A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer id) to apply as cloud-init configuration"""
+
+
+VirtualMachinePayloadUserData = TypeAliasType(
+    "VirtualMachinePayloadUserData", Union[int, str]
+)
+r"""A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer id) to apply as cloud-init configuration"""
 
 
 class VirtualMachinePayloadAttributesTypedDict(TypedDict):
@@ -26,6 +38,10 @@ class VirtualMachinePayloadAttributesTypedDict(TypedDict):
     project: NotRequired[str]
     operating_system: NotRequired[Nullable[str]]
     r"""The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu-24-04 for CPU plans or ubuntu24_ml_in_a_box for GPU plans."""
+    user_data: NotRequired[Nullable[VirtualMachinePayloadUserDataTypedDict]]
+    r"""A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer id) to apply as cloud-init configuration"""
+    tags: NotRequired[Nullable[List[str]]]
+    r"""Array of tag IDs to assign to the VM."""
 
 
 class VirtualMachinePayloadAttributes(BaseModel):
@@ -41,12 +57,28 @@ class VirtualMachinePayloadAttributes(BaseModel):
     operating_system: OptionalNullable[str] = UNSET
     r"""The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu-24-04 for CPU plans or ubuntu24_ml_in_a_box for GPU plans."""
 
+    user_data: OptionalNullable[VirtualMachinePayloadUserData] = UNSET
+    r"""A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer id) to apply as cloud-init configuration"""
+
+    tags: OptionalNullable[List[str]] = UNSET
+    r"""Array of tag IDs to assign to the VM."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["name", "plan", "ssh_keys", "project", "operating_system"]
+            [
+                "name",
+                "plan",
+                "ssh_keys",
+                "project",
+                "operating_system",
+                "user_data",
+                "tags",
+            ]
         )
-        nullable_fields = set(["plan", "ssh_keys", "operating_system"])
+        nullable_fields = set(
+            ["plan", "ssh_keys", "operating_system", "user_data", "tags"]
+        )
         serialized = handler(self)
         m = {}
 

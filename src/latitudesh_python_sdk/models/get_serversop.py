@@ -35,12 +35,12 @@ class GetServersRequestTypedDict(TypedDict):
     r"""Filter servers with RAM size (in GB) greater than or equal the provided value."""
     filter_ram_lte: NotRequired[int]
     r"""Filter servers with RAM size (in GB) less than or equal the provided value."""
-    filter_disk: NotRequired[int]
-    r"""The disk size in Gigabytes to filter by, should be used with the following options:
-    [eql] to filter for values equal to the provided value.
-    [gte] to filter for values greater than or equal to the provided value.
-    [lte] to filter by values lower than or equal to the provided value.
-    """
+    filter_disk_eql: NotRequired[int]
+    r"""Filter servers with disk size (in GB) equal to the provided value."""
+    filter_disk_gte: NotRequired[int]
+    r"""Filter servers with disk size (in GB) greater than or equal to the provided value."""
+    filter_disk_lte: NotRequired[int]
+    r"""Filter servers with disk size (in GB) less than or equal to the provided value."""
     filter_tags: NotRequired[str]
     r"""The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`"""
     extra_fields_servers: NotRequired[str]
@@ -136,16 +136,26 @@ class GetServersRequest(BaseModel):
     ] = None
     r"""Filter servers with RAM size (in GB) less than or equal the provided value."""
 
-    filter_disk: Annotated[
+    filter_disk_eql: Annotated[
         Optional[int],
-        pydantic.Field(alias="filter[disk]"),
+        pydantic.Field(alias="filter[disk][eql]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The disk size in Gigabytes to filter by, should be used with the following options:
-    [eql] to filter for values equal to the provided value.
-    [gte] to filter for values greater than or equal to the provided value.
-    [lte] to filter by values lower than or equal to the provided value.
-    """
+    r"""Filter servers with disk size (in GB) equal to the provided value."""
+
+    filter_disk_gte: Annotated[
+        Optional[int],
+        pydantic.Field(alias="filter[disk][gte]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter servers with disk size (in GB) greater than or equal to the provided value."""
+
+    filter_disk_lte: Annotated[
+        Optional[int],
+        pydantic.Field(alias="filter[disk][lte]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter servers with disk size (in GB) less than or equal to the provided value."""
 
     filter_tags: Annotated[
         Optional[str],
@@ -191,7 +201,9 @@ class GetServersRequest(BaseModel):
                 "filter[ram][eql]",
                 "filter[ram][gte]",
                 "filter[ram][lte]",
-                "filter[disk]",
+                "filter[disk][eql]",
+                "filter[disk][gte]",
+                "filter[disk][lte]",
                 "filter[tags]",
                 "extra_fields[servers]",
                 "page[size]",

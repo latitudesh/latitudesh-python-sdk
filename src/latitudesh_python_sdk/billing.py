@@ -6,7 +6,7 @@ from latitudesh_python_sdk._hooks import HookContext
 from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
 from latitudesh_python_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import List, Mapping, Optional
+from typing import Iterable, List, Mapping, Optional
 
 
 class Billing(BaseSDK):
@@ -14,7 +14,7 @@ class Billing(BaseSDK):
         self,
         *,
         filter_project: str,
-        filter_products: Optional[List[str]] = None,
+        filter_products: Optional[Iterable[str]] = None,
         filter_plan: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -47,7 +47,7 @@ class Billing(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.GetBillingUsageRequest(
-            filter_products=filter_products,
+            filter_products=utils.unmarshal(filter_products, Optional[List[str]]),
             filter_plan=filter_plan,
             filter_project=filter_project,
         )
@@ -107,7 +107,7 @@ class Billing(BaseSDK):
         self,
         *,
         filter_project: str,
-        filter_products: Optional[List[str]] = None,
+        filter_products: Optional[Iterable[str]] = None,
         filter_plan: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -140,7 +140,7 @@ class Billing(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.GetBillingUsageRequest(
-            filter_products=filter_products,
+            filter_products=utils.unmarshal(filter_products, Optional[List[str]]),
             filter_plan=filter_plan,
             filter_project=filter_project,
         )

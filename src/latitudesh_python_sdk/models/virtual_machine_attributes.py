@@ -270,6 +270,48 @@ class VirtualMachineAttributesSpecs(BaseModel):
         return m
 
 
+class VirtualMachineAttributesTagsTypedDict(TypedDict):
+    id: NotRequired[str]
+    name: NotRequired[str]
+    description: NotRequired[Nullable[str]]
+    color: NotRequired[Nullable[str]]
+
+
+class VirtualMachineAttributesTags(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+    description: OptionalNullable[str] = UNSET
+
+    color: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name", "description", "color"])
+        nullable_fields = set(["description", "color"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     created_at: NotRequired[str]
@@ -281,10 +323,17 @@ class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     r"""The operating system installed on the virtual machine"""
     credentials: NotRequired[Nullable[CredentialsTypedDict]]
     r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running."""
+    site: NotRequired[Nullable[str]]
+    billing: NotRequired[Nullable[str]]
+    user_data: NotRequired[Nullable[str]]
+    r"""Encoded ID of the user data record applied to this VM, if any"""
     plan: NotRequired[VirtualMachineAttributesPlanTypedDict]
     specs: NotRequired[VirtualMachineAttributesSpecsTypedDict]
+    tags: NotRequired[List[VirtualMachineAttributesTagsTypedDict]]
     team: NotRequired[TeamIncludeTypedDict]
     project: NotRequired[ProjectIncludeTypedDict]
+    pending_restart: NotRequired[bool]
+    r"""Opt-in extra field. Request via `extra_fields[virtual_machines]=pending_restart`."""
 
 
 class VirtualMachineAttributesAttributes(BaseModel):
@@ -302,13 +351,25 @@ class VirtualMachineAttributesAttributes(BaseModel):
     credentials: OptionalNullable[Credentials] = UNSET
     r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running."""
 
+    site: OptionalNullable[str] = UNSET
+
+    billing: OptionalNullable[str] = UNSET
+
+    user_data: OptionalNullable[str] = UNSET
+    r"""Encoded ID of the user data record applied to this VM, if any"""
+
     plan: Optional[VirtualMachineAttributesPlan] = None
 
     specs: Optional[VirtualMachineAttributesSpecs] = None
 
+    tags: Optional[List[VirtualMachineAttributesTags]] = None
+
     team: Optional[TeamInclude] = None
 
     project: Optional[ProjectInclude] = None
+
+    pending_restart: Optional[bool] = None
+    r"""Opt-in extra field. Request via `extra_fields[virtual_machines]=pending_restart`."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -320,13 +381,27 @@ class VirtualMachineAttributesAttributes(BaseModel):
                 "primary_ipv4",
                 "operating_system",
                 "credentials",
+                "site",
+                "billing",
+                "user_data",
                 "plan",
                 "specs",
+                "tags",
                 "team",
                 "project",
+                "pending_restart",
             ]
         )
-        nullable_fields = set(["primary_ipv4", "operating_system", "credentials"])
+        nullable_fields = set(
+            [
+                "primary_ipv4",
+                "operating_system",
+                "credentials",
+                "site",
+                "billing",
+                "user_data",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

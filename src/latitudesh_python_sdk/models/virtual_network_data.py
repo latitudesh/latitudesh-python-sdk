@@ -83,14 +83,14 @@ class VirtualNetworkDataRegion(BaseModel):
         return m
 
 
-class TagsModelTypedDict(TypedDict):
+class VirtualNetworkDataTagsTypedDict(TypedDict):
     id: NotRequired[str]
     name: NotRequired[str]
     description: NotRequired[str]
     color: NotRequired[str]
 
 
-class TagsModel(BaseModel):
+class VirtualNetworkDataTags(BaseModel):
     id: Optional[str] = None
 
     name: Optional[str] = None
@@ -128,7 +128,7 @@ class VirtualNetworkDataAttributesTypedDict(TypedDict):
     created_at: NotRequired[Nullable[datetime]]
     assignments_count: NotRequired[int]
     r"""Amount of devices assigned to the virtual network"""
-    tags: NotRequired[List[TagsModelTypedDict]]
+    tags: NotRequired[List[VirtualNetworkDataTagsTypedDict]]
     r"""Tags associated with the virtual network"""
 
 
@@ -151,7 +151,7 @@ class VirtualNetworkDataAttributes(BaseModel):
     assignments_count: Optional[int] = None
     r"""Amount of devices assigned to the virtual network"""
 
-    tags: Optional[List[TagsModel]] = None
+    tags: Optional[List[VirtualNetworkDataTags]] = None
     r"""Tags associated with the virtual network"""
 
     @model_serializer(mode="wrap")

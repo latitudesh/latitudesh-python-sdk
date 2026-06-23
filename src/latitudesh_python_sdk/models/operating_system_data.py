@@ -9,7 +9,7 @@ from typing_extensions import NotRequired, TypedDict
 
 
 class OperatingSystemDataType(str, Enum):
-    OPERATING_SYSTEMS = "operating_systems"
+    OPERATING_SYSTEM = "operating_system"
 
 
 class FeaturesTypedDict(TypedDict):

@@ -5,12 +5,12 @@
 ```python
 from latitudesh_python_sdk.models import OperatingSystemDataType
 
-value = OperatingSystemDataType.OPERATING_SYSTEMS
+value = OperatingSystemDataType.OPERATING_SYSTEM
 ```
 
 
 ## Values
 
-| Name                | Value               |
-| ------------------- | ------------------- |
-| `OPERATING_SYSTEMS` | operating_systems   |
+| Name               | Value              |
+| ------------------ | ------------------ |
+| `OPERATING_SYSTEM` | operating_system   |

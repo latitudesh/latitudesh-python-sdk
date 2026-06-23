@@ -1,10 +1,8 @@
-# GetEventsResponseBody
-
-Success
+# VirtualMachineNetworkAttachmentCreatePayloadAttributes
 
 
 ## Fields
 
 | Field                                      | Type                                       | Required                                   | Description                                |
 | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| `data`                                     | List[[models.Events](../models/events.md)] | :heavy_minus_sign:                         | N/A                                        |
+| `virtual_network_id`                       | *str*                                      | :heavy_check_mark:                         | VLAN id_hash to attach (e.g. vlan_abc123). |

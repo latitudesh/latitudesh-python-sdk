@@ -113,9 +113,7 @@ class OperatingSystemsSDK(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return models.GetPlansOperatingSystemResponse(
-                result=unmarshal_json_response(
-                    models.GetPlansOperatingSystemResponseBody, http_res
-                ),
+                result=unmarshal_json_response(models.OperatingSystems, http_res),
                 next=next_func,
             )
         if utils.match_response(http_res, "4XX", "*"):
@@ -229,9 +227,7 @@ class OperatingSystemsSDK(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return models.GetPlansOperatingSystemResponse(
-                result=unmarshal_json_response(
-                    models.GetPlansOperatingSystemResponseBody, http_res
-                ),
+                result=unmarshal_json_response(models.OperatingSystems, http_res),
                 next=next_func,
             )
         if utils.match_response(http_res, "4XX", "*"):

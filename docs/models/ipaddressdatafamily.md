@@ -1,11 +1,11 @@
-# IPAddressFamily
+# IPAddressDataFamily
 
 ## Example Usage
 
 ```python
-from latitudesh_python_sdk.models import IPAddressFamily
+from latitudesh_python_sdk.models import IPAddressDataFamily
 
-value = IPAddressFamily.I_PV4
+value = IPAddressDataFamily.I_PV4
 ```
 
 

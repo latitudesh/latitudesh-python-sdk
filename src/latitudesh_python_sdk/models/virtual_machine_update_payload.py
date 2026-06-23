@@ -2,9 +2,15 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -13,13 +19,43 @@ class VirtualMachineUpdatePayloadType(str, Enum):
 
 
 class VirtualMachineUpdatePayloadAttributesTypedDict(TypedDict):
-    name: str
+    name: NotRequired[str]
     r"""The new display name (hostname) for the Virtual Machine"""
+    tags: NotRequired[Nullable[List[str]]]
+    r"""Array of tag IDs to assign to the VM. Replaces all existing tags."""
 
 
 class VirtualMachineUpdatePayloadAttributes(BaseModel):
-    name: str
+    name: Optional[str] = None
     r"""The new display name (hostname) for the Virtual Machine"""
+
+    tags: OptionalNullable[List[str]] = UNSET
+    r"""Array of tag IDs to assign to the VM. Replaces all existing tags."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["name", "tags"])
+        nullable_fields = set(["tags"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class VirtualMachineUpdatePayloadDataTypedDict(TypedDict):
