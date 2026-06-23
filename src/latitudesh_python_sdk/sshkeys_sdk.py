@@ -19,6 +19,9 @@ class SSHKeysSDK(BaseSDK):
         *,
         project_id: str,
         filter_tags: Optional[str] = None,
+        stats_total: Optional[str] = None,
+        page_number: Optional[int] = None,
+        page_size: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -31,6 +34,9 @@ class SSHKeysSDK(BaseSDK):
 
         :param project_id: Project ID or Slug
         :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param page_number: Page number for pagination
+        :param page_size: Number of items per page
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -49,6 +55,9 @@ class SSHKeysSDK(BaseSDK):
         request = models.GetProjectSSHKeysRequest(
             project_id=project_id,
             filter_tags=filter_tags,
+            stats_total=stats_total,
+            page_number=page_number,
+            page_size=page_size,
         )
 
         req = self._build_request(
@@ -110,6 +119,9 @@ class SSHKeysSDK(BaseSDK):
         *,
         project_id: str,
         filter_tags: Optional[str] = None,
+        stats_total: Optional[str] = None,
+        page_number: Optional[int] = None,
+        page_size: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -122,6 +134,9 @@ class SSHKeysSDK(BaseSDK):
 
         :param project_id: Project ID or Slug
         :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param page_number: Page number for pagination
+        :param page_size: Number of items per page
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -140,6 +155,9 @@ class SSHKeysSDK(BaseSDK):
         request = models.GetProjectSSHKeysRequest(
             project_id=project_id,
             filter_tags=filter_tags,
+            stats_total=stats_total,
+            page_number=page_number,
+            page_size=page_size,
         )
 
         req = self._build_request_async(
@@ -997,6 +1015,9 @@ class SSHKeysSDK(BaseSDK):
         filter_project: Optional[str] = None,
         filter_scope: Optional[str] = None,
         filter_tags: Optional[str] = None,
+        stats_total: Optional[str] = None,
+        page_number: Optional[int] = None,
+        page_size: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1010,6 +1031,9 @@ class SSHKeysSDK(BaseSDK):
         :param filter_project: Project ID or slug
         :param filter_scope: Filter by scope: `project` (has projects), `team` (no projects), or empty (all)
         :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param page_number: Page number for pagination
+        :param page_size: Number of items per page
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1029,6 +1053,9 @@ class SSHKeysSDK(BaseSDK):
             filter_project=filter_project,
             filter_scope=filter_scope,
             filter_tags=filter_tags,
+            stats_total=stats_total,
+            page_number=page_number,
+            page_size=page_size,
         )
 
         req = self._build_request(
@@ -1088,6 +1115,9 @@ class SSHKeysSDK(BaseSDK):
         filter_project: Optional[str] = None,
         filter_scope: Optional[str] = None,
         filter_tags: Optional[str] = None,
+        stats_total: Optional[str] = None,
+        page_number: Optional[int] = None,
+        page_size: Optional[int] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1101,6 +1131,9 @@ class SSHKeysSDK(BaseSDK):
         :param filter_project: Project ID or slug
         :param filter_scope: Filter by scope: `project` (has projects), `team` (no projects), or empty (all)
         :param filter_tags: The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param page_number: Page number for pagination
+        :param page_size: Number of items per page
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1120,6 +1153,9 @@ class SSHKeysSDK(BaseSDK):
             filter_project=filter_project,
             filter_scope=filter_scope,
             filter_tags=filter_tags,
+            stats_total=stats_total,
+            page_number=page_number,
+            page_size=page_size,
         )
 
         req = self._build_request_async(

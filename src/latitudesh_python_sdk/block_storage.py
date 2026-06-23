@@ -397,9 +397,9 @@ class BlockStorage(BaseSDK):
     ) -> models.GetStorageVolumeResponseBody:
         r"""Retrieve volume
 
-        Shows details of a specific volume storage.
+        Shows details of a specific volume.
 
-        :param id: The volume storage ID
+        :param id: The volume ID
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -483,9 +483,9 @@ class BlockStorage(BaseSDK):
     ) -> models.GetStorageVolumeResponseBody:
         r"""Retrieve volume
 
-        Shows details of a specific volume storage.
+        Shows details of a specific volume.
 
-        :param id: The volume storage ID
+        :param id: The volume ID
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -569,7 +569,7 @@ class BlockStorage(BaseSDK):
     ):
         r"""Delete volume
 
-        Allows you to remove persistent storage from a project.
+        Allows you to remove a volume from a project.
 
         :param id:
         :param retries: Override the default retry configuration for this method
@@ -653,7 +653,7 @@ class BlockStorage(BaseSDK):
     ):
         r"""Delete volume
 
-        Allows you to remove persistent storage from a project.
+        Allows you to remove a volume from a project.
 
         :param id:
         :param retries: Override the default retry configuration for this method
@@ -741,9 +741,9 @@ class BlockStorage(BaseSDK):
     ):
         r"""Mount volume
 
-        Mounts volume storage by adding the client to an allowed list
+        Mounts a volume by adding the client to an allowed list
 
-        :param id: Volume storage ID
+        :param id: Volume ID
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -840,9 +840,9 @@ class BlockStorage(BaseSDK):
     ):
         r"""Mount volume
 
-        Mounts volume storage by adding the client to an allowed list
+        Mounts a volume by adding the client to an allowed list
 
-        :param id: Volume storage ID
+        :param id: Volume ID
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

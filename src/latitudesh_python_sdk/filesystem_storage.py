@@ -393,7 +393,7 @@ class FilesystemStorage(BaseSDK):
     ):
         r"""Delete filesystem
 
-        Allows you to remove persistent storage from a project.
+        Allows you to remove a filesystem from a project.
 
         :param filesystem_id:
         :param retries: Override the default retry configuration for this method
@@ -477,7 +477,7 @@ class FilesystemStorage(BaseSDK):
     ):
         r"""Delete filesystem
 
-        Allows you to remove persistent storage from a project.
+        Allows you to remove a filesystem from a project.
 
         :param filesystem_id:
         :param retries: Override the default retry configuration for this method

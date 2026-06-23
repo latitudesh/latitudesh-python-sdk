@@ -5,6 +5,7 @@
 
 | Field                                                          | Type                                                           | Required                                                       | Description                                                    |
 | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `tags`                                                         | List[[models.TagsModel](../models/tagsmodel.md)]               | :heavy_minus_sign:                                             | N/A                                                            |
 | `name`                                                         | *Optional[str]*                                                | :heavy_minus_sign:                                             | Name of the SSH Key                                            |
 | `public_key`                                                   | *Optional[str]*                                                | :heavy_minus_sign:                                             | SSH Public Key                                                 |
 | `fingerprint`                                                  | *Optional[str]*                                                | :heavy_minus_sign:                                             | SSH Key fingerprint                                            |

@@ -318,10 +318,10 @@ with Latitudesh(
 
 ### [ObjectStorage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md)
 
-* [get_storage_buckets](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_buckets) - List object storages
-* [post_storage_buckets](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#post_storage_buckets) - Create object storage
-* [get_storage_bucket](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_bucket) - Retrieve object storage
-* [delete_storage_buckets](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#delete_storage_buckets) - Delete object storage
+* [get_storage_buckets](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_buckets) - List buckets
+* [post_storage_buckets](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#post_storage_buckets) - Create bucket
+* [get_storage_bucket](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_bucket) - Retrieve bucket
+* [delete_storage_buckets](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#delete_storage_buckets) - Delete bucket
 
 ### [OperatingSystems](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/operatingsystemssdk/README.md)
 
@@ -449,6 +449,10 @@ with Latitudesh(
 * [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#delete) - Destroy VM
 * [update_virtual_machine](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#update_virtual_machine) - Update VM
 * [create_virtual_machine_action](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#create_virtual_machine_action) - Run VM power action
+* [show_virtual_machine_metrics](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#show_virtual_machine_metrics) - Retrieve VM metrics
+* [list_virtual_machine_network_attachments](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#list_virtual_machine_network_attachments) - List VM network attachments
+* [create_virtual_machine_network_attachment](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#create_virtual_machine_network_attachment) - Attach a network to a VM
+* [destroy_virtual_machine_network_attachment](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#destroy_virtual_machine_network_attachment) - Detach a network from a VM
 
 ### [VpnSessions](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md)
 
@@ -598,7 +602,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 20 of 129 methods.*
+* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 20 of 133 methods.*
 * [`ResponseValidationError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

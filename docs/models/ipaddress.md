@@ -3,7 +3,7 @@
 
 ## Fields
 
-| Field                                                                    | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `id`                                                                     | *Optional[str]*                                                          | :heavy_minus_sign:                                                       | N/A                                                                      |
-| `attributes`                                                             | [Optional[models.IPAddressAttributes]](../models/ipaddressattributes.md) | :heavy_minus_sign:                                                       | N/A                                                                      |
+| Field                                                        | Type                                                         | Required                                                     | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `data`                                                       | [Optional[models.IPAddressData]](../models/ipaddressdata.md) | :heavy_minus_sign:                                           | N/A                                                          |
+| `meta`                                                       | [Optional[models.IPAddressMeta]](../models/ipaddressmeta.md) | :heavy_minus_sign:                                           | N/A                                                          |

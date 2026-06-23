@@ -17,12 +17,12 @@ class PostStorageVolumesMountType(str, Enum):
 
 class PostStorageVolumesMountAttributesTypedDict(TypedDict):
     nqn: str
-    r"""NVMe Qualified Name (NQN) of the client/server that will access the volume storage. Format: nqn.YYYY-MM.domain:identifier (e.g., \"nqn.2024-01.com.example:server01\"). This uniquely identifies the NVMe client and must be configured on the client server."""
+    r"""NVMe Qualified Name (NQN) of the client/server that will access the volume. Format: nqn.YYYY-MM.domain:identifier (e.g., \"nqn.2024-01.com.example:server01\"). This uniquely identifies the NVMe client and must be configured on the client server."""
 
 
 class PostStorageVolumesMountAttributes(BaseModel):
     nqn: str
-    r"""NVMe Qualified Name (NQN) of the client/server that will access the volume storage. Format: nqn.YYYY-MM.domain:identifier (e.g., \"nqn.2024-01.com.example:server01\"). This uniquely identifies the NVMe client and must be configured on the client server."""
+    r"""NVMe Qualified Name (NQN) of the client/server that will access the volume. Format: nqn.YYYY-MM.domain:identifier (e.g., \"nqn.2024-01.com.example:server01\"). This uniquely identifies the NVMe client and must be configured on the client server."""
 
 
 class PostStorageVolumesMountDataTypedDict(TypedDict):
@@ -46,7 +46,7 @@ class PostStorageVolumesMountRequestBody(BaseModel):
 
 class PostStorageVolumesMountRequestTypedDict(TypedDict):
     id: str
-    r"""Volume storage ID"""
+    r"""Volume ID"""
     request_body: PostStorageVolumesMountRequestBodyTypedDict
 
 
@@ -54,7 +54,7 @@ class PostStorageVolumesMountRequest(BaseModel):
     id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
-    r"""Volume storage ID"""
+    r"""Volume ID"""
 
     request_body: Annotated[
         PostStorageVolumesMountRequestBody,

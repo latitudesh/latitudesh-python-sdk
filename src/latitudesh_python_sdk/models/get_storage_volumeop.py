@@ -11,14 +11,14 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class GetStorageVolumeRequestTypedDict(TypedDict):
     id: str
-    r"""The volume storage ID"""
+    r"""The volume ID"""
 
 
 class GetStorageVolumeRequest(BaseModel):
     id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
-    r"""The volume storage ID"""
+    r"""The volume ID"""
 
 
 class GetStorageVolumeResponseBodyTypedDict(TypedDict):

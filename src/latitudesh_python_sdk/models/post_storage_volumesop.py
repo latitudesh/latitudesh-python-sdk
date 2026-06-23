@@ -17,7 +17,7 @@ class PostStorageVolumesBlockStorageAttributesTypedDict(TypedDict):
     project: str
     r"""Project ID or slug"""
     name: str
-    r"""Storage name"""
+    r"""Volume name"""
     size_in_gb: NotRequired[int]
     r"""Size in GB (not required, default is 1500)"""
 
@@ -27,7 +27,7 @@ class PostStorageVolumesBlockStorageAttributes(BaseModel):
     r"""Project ID or slug"""
 
     name: str
-    r"""Storage name"""
+    r"""Volume name"""
 
     size_in_gb: Optional[int] = 1500
     r"""Size in GB (not required, default is 1500)"""

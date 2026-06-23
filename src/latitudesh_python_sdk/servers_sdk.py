@@ -26,7 +26,9 @@ class ServersSDK(BaseSDK):
         filter_ram_eql: Optional[int] = None,
         filter_ram_gte: Optional[int] = None,
         filter_ram_lte: Optional[int] = None,
-        filter_disk: Optional[int] = None,
+        filter_disk_eql: Optional[int] = None,
+        filter_disk_gte: Optional[int] = None,
+        filter_disk_lte: Optional[int] = None,
         filter_tags: Optional[str] = None,
         extra_fields_servers: Optional[str] = None,
         page_size: Optional[int] = 20,
@@ -53,10 +55,9 @@ class ServersSDK(BaseSDK):
         :param filter_ram_eql: Filter servers with RAM size (in GB) equals the provided value.
         :param filter_ram_gte: Filter servers with RAM size (in GB) greater than or equal the provided value.
         :param filter_ram_lte: Filter servers with RAM size (in GB) less than or equal the provided value.
-        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:
-            [eql] to filter for values equal to the provided value.
-            [gte] to filter for values greater than or equal to the provided value.
-            [lte] to filter by values lower than or equal to the provided value.
+        :param filter_disk_eql: Filter servers with disk size (in GB) equal to the provided value.
+        :param filter_disk_gte: Filter servers with disk size (in GB) greater than or equal to the provided value.
+        :param filter_disk_lte: Filter servers with disk size (in GB) less than or equal to the provided value.
         :param filter_tags: The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`
         :param extra_fields_servers: The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
         :param page_size: Number of items to return per page
@@ -89,7 +90,9 @@ class ServersSDK(BaseSDK):
             filter_ram_eql=filter_ram_eql,
             filter_ram_gte=filter_ram_gte,
             filter_ram_lte=filter_ram_lte,
-            filter_disk=filter_disk,
+            filter_disk_eql=filter_disk_eql,
+            filter_disk_gte=filter_disk_gte,
+            filter_disk_lte=filter_disk_lte,
             filter_tags=filter_tags,
             extra_fields_servers=extra_fields_servers,
             page_size=page_size,
@@ -163,7 +166,9 @@ class ServersSDK(BaseSDK):
                 filter_ram_eql=filter_ram_eql,
                 filter_ram_gte=filter_ram_gte,
                 filter_ram_lte=filter_ram_lte,
-                filter_disk=filter_disk,
+                filter_disk_eql=filter_disk_eql,
+                filter_disk_gte=filter_disk_gte,
+                filter_disk_lte=filter_disk_lte,
                 filter_tags=filter_tags,
                 extra_fields_servers=extra_fields_servers,
                 page_size=page_size,
@@ -202,7 +207,9 @@ class ServersSDK(BaseSDK):
         filter_ram_eql: Optional[int] = None,
         filter_ram_gte: Optional[int] = None,
         filter_ram_lte: Optional[int] = None,
-        filter_disk: Optional[int] = None,
+        filter_disk_eql: Optional[int] = None,
+        filter_disk_gte: Optional[int] = None,
+        filter_disk_lte: Optional[int] = None,
         filter_tags: Optional[str] = None,
         extra_fields_servers: Optional[str] = None,
         page_size: Optional[int] = 20,
@@ -229,10 +236,9 @@ class ServersSDK(BaseSDK):
         :param filter_ram_eql: Filter servers with RAM size (in GB) equals the provided value.
         :param filter_ram_gte: Filter servers with RAM size (in GB) greater than or equal the provided value.
         :param filter_ram_lte: Filter servers with RAM size (in GB) less than or equal the provided value.
-        :param filter_disk: The disk size in Gigabytes to filter by, should be used with the following options:
-            [eql] to filter for values equal to the provided value.
-            [gte] to filter for values greater than or equal to the provided value.
-            [lte] to filter by values lower than or equal to the provided value.
+        :param filter_disk_eql: Filter servers with disk size (in GB) equal to the provided value.
+        :param filter_disk_gte: Filter servers with disk size (in GB) greater than or equal to the provided value.
+        :param filter_disk_lte: Filter servers with disk size (in GB) less than or equal to the provided value.
         :param filter_tags: The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`
         :param extra_fields_servers: The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
         :param page_size: Number of items to return per page
@@ -265,7 +271,9 @@ class ServersSDK(BaseSDK):
             filter_ram_eql=filter_ram_eql,
             filter_ram_gte=filter_ram_gte,
             filter_ram_lte=filter_ram_lte,
-            filter_disk=filter_disk,
+            filter_disk_eql=filter_disk_eql,
+            filter_disk_gte=filter_disk_gte,
+            filter_disk_lte=filter_disk_lte,
             filter_tags=filter_tags,
             extra_fields_servers=extra_fields_servers,
             page_size=page_size,
@@ -339,7 +347,9 @@ class ServersSDK(BaseSDK):
                 filter_ram_eql=filter_ram_eql,
                 filter_ram_gte=filter_ram_gte,
                 filter_ram_lte=filter_ram_lte,
-                filter_disk=filter_disk,
+                filter_disk_eql=filter_disk_eql,
+                filter_disk_gte=filter_disk_gte,
+                filter_disk_lte=filter_disk_lte,
                 filter_tags=filter_tags,
                 extra_fields_servers=extra_fields_servers,
                 page_size=page_size,

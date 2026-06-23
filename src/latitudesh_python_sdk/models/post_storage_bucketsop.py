@@ -20,14 +20,14 @@ class PostStorageBucketsType(str, Enum):
 
 
 class PostStorageBucketsStorageClass(str, Enum):
-    r"""Storage class tier for the bucket."""
+    r"""Backend storage tier. `standard` is the default S3-compatible tier. `high_performance` is a lower-latency, higher-throughput tier available in select regions only."""
 
     STANDARD = "standard"
     HIGH_PERFORMANCE = "high_performance"
 
 
 class PostStorageBucketsRetentionMode(str, Enum):
-    r"""Object lock retention mode. Requires `locking` to be true when not `NONE`."""
+    r"""Object Lock retention mode applied to new objects. `GOVERNANCE` allows privileged users to override the retention; `COMPLIANCE` cannot be overridden by anyone. Only applies when `locking` is `true`."""
 
     NONE = "NONE"
     COMPLIANCE = "COMPLIANCE"
@@ -46,15 +46,15 @@ class PostStorageBucketsAttributesTypedDict(TypedDict):
     customer: NotRequired[str]
     r"""Customer identifier for scoped storage. Used when `scoped` is true to create customer-specific bucket isolation."""
     storage_class: NotRequired[PostStorageBucketsStorageClass]
-    r"""Storage class tier for the bucket."""
+    r"""Backend storage tier. `standard` is the default S3-compatible tier. `high_performance` is a lower-latency, higher-throughput tier available in select regions only."""
     versioning: NotRequired[bool]
-    r"""Enable bucket versioning."""
+    r"""Enable S3 object versioning. Once enabled, versioning cannot be disabled."""
     locking: NotRequired[bool]
-    r"""Enable object lock on the bucket."""
+    r"""Enable S3 Object Lock (WORM). Must be enabled at bucket creation; cannot be added to an existing bucket. When `locking` is `true`, `versioning` is automatically enabled."""
     retention_mode: NotRequired[PostStorageBucketsRetentionMode]
-    r"""Object lock retention mode. Requires `locking` to be true when not `NONE`."""
+    r"""Object Lock retention mode applied to new objects. `GOVERNANCE` allows privileged users to override the retention; `COMPLIANCE` cannot be overridden by anyone. Only applies when `locking` is `true`."""
     retention_period: NotRequired[Nullable[int]]
-    r"""Default retention period in days when object lock is enabled."""
+    r"""Default retention period, in days, applied to new objects when Object Lock is enabled. Only applies when `locking` is `true`."""
 
 
 class PostStorageBucketsAttributes(BaseModel):
@@ -76,21 +76,21 @@ class PostStorageBucketsAttributes(BaseModel):
     storage_class: Optional[PostStorageBucketsStorageClass] = (
         PostStorageBucketsStorageClass.STANDARD
     )
-    r"""Storage class tier for the bucket."""
+    r"""Backend storage tier. `standard` is the default S3-compatible tier. `high_performance` is a lower-latency, higher-throughput tier available in select regions only."""
 
     versioning: Optional[bool] = False
-    r"""Enable bucket versioning."""
+    r"""Enable S3 object versioning. Once enabled, versioning cannot be disabled."""
 
     locking: Optional[bool] = False
-    r"""Enable object lock on the bucket."""
+    r"""Enable S3 Object Lock (WORM). Must be enabled at bucket creation; cannot be added to an existing bucket. When `locking` is `true`, `versioning` is automatically enabled."""
 
     retention_mode: Optional[PostStorageBucketsRetentionMode] = (
         PostStorageBucketsRetentionMode.NONE
     )
-    r"""Object lock retention mode. Requires `locking` to be true when not `NONE`."""
+    r"""Object Lock retention mode applied to new objects. `GOVERNANCE` allows privileged users to override the retention; `COMPLIANCE` cannot be overridden by anyone. Only applies when `locking` is `true`."""
 
     retention_period: OptionalNullable[int] = UNSET
-    r"""Default retention period in days when object lock is enabled."""
+    r"""Default retention period, in days, applied to new objects when Object Lock is enabled. Only applies when `locking` is `true`."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

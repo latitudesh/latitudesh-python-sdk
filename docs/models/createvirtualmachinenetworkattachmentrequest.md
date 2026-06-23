@@ -1,0 +1,9 @@
+# CreateVirtualMachineNetworkAttachmentRequest
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `virtual_machine_id`                                                                                             | *str*                                                                                                            | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
+| `virtual_machine_network_attachment_create_payload`                                                              | [models.VirtualMachineNetworkAttachmentCreatePayload](../models/virtualmachinenetworkattachmentcreatepayload.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

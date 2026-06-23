@@ -10,6 +10,10 @@
 * [delete](#delete) - Destroy VM
 * [update_virtual_machine](#update_virtual_machine) - Update VM
 * [create_virtual_machine_action](#create_virtual_machine_action) - Run VM power action
+* [show_virtual_machine_metrics](#show_virtual_machine_metrics) - Retrieve VM metrics
+* [list_virtual_machine_network_attachments](#list_virtual_machine_network_attachments) - List VM network attachments
+* [create_virtual_machine_network_attachment](#create_virtual_machine_network_attachment) - Attach a network to a VM
+* [destroy_virtual_machine_network_attachment](#destroy_virtual_machine_network_attachment) - Detach a network from a VM
 
 ## create
 
@@ -92,6 +96,32 @@ with Latitudesh(
     print(res)
 
 ```
+### Example Usage: CreatedWithUserData
+
+<!-- UsageSnippet language="python" operationID="create-virtual-machine" method="post" path="/virtual_machines" example="CreatedWithUserData" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.virtual_machines.create(data={
+        "type": latitudesh_python_sdk.VirtualMachinePayloadType.VIRTUAL_MACHINES,
+        "attributes": {
+            "name": "my-new-vm",
+            "project": "lightweight-leather-lamp",
+            "user_data": "ud_abc123",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
 ### Example Usage: Unprocessable Entity
 
 <!-- UsageSnippet language="python" operationID="create-virtual-machine" method="post" path="/virtual_machines" example="Unprocessable Entity" -->
@@ -161,11 +191,12 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                                                                                          | Type                                                                                                                                                               | Required                                                                                                                                                           | Description                                                                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `filter_project`                                                                                                                                                   | *Optional[str]*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                 | The project ID or Slug to filter by                                                                                                                                |
-| `extra_fields_virtual_machines`                                                                                                                                    | *Optional[str]*                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                 | The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[virtual_machines]=credentials` in the query string. |
-| `retries`                                                                                                                                                          | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                   | :heavy_minus_sign:                                                                                                                                                 | Configuration to override the default retry behavior of the client.                                                                                                |
+| Parameter                                                                                                                                                                         | Type                                                                                                                                                                              | Required                                                                                                                                                                          | Description                                                                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `filter_project`                                                                                                                                                                  | *Optional[str]*                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                | The project ID or Slug to filter by                                                                                                                                               |
+| `filter_tags`                                                                                                                                                                     | *Optional[str]*                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                | The tag IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2` will return VMs with `tag_1` AND `tag_2`.                                                           |
+| `extra_fields_virtual_machines`                                                                                                                                                   | *Optional[str]*                                                                                                                                                                   | :heavy_minus_sign:                                                                                                                                                                | Comma-separated extra attributes that are lazy-loaded. Supported values: `credentials`, `pending_restart`. Example: `extra_fields[virtual_machines]=credentials,pending_restart`. |
+| `retries`                                                                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                | Configuration to override the default retry behavior of the client.                                                                                                               |
 
 ### Response
 
@@ -341,6 +372,181 @@ with Latitudesh(
 | `type`                                                                                                                            | [models.CreateVirtualMachineActionVirtualMachinesType](../../models/createvirtualmachineactionvirtualmachinestype.md)             | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
 | `attributes`                                                                                                                      | [models.CreateVirtualMachineActionVirtualMachinesAttributes](../../models/createvirtualmachineactionvirtualmachinesattributes.md) | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
 | `retries`                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                  | :heavy_minus_sign:                                                                                                                | Configuration to override the default retry behavior of the client.                                                               |
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## show_virtual_machine_metrics
+
+Retrieve a time series for a single metric of a Virtual Machine.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="show-virtual-machine-metrics" method="get" path="/virtual_machines/{virtual_machine_id}/metrics" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.virtual_machines.show_virtual_machine_metrics(virtual_machine_id="<id>", metric=latitudesh_python_sdk.QueryParamMetric.MEMORY)
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `virtual_machine_id`                                                | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `metric`                                                            | [models.QueryParamMetric](../../models/queryparammetric.md)         | :heavy_check_mark:                                                  | N/A                                                                 |
+| `range`                                                             | [Optional[models.QueryParamRange]](../../models/queryparamrange.md) | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `force_refresh`                                                     | *Optional[bool]*                                                    | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.VirtualMachineMetrics](../../models/virtualmachinemetrics.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## list_virtual_machine_network_attachments
+
+Lists the secondary network attachments currently configured for a Virtual Machine.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="list-virtual-machine-network-attachments" method="get" path="/virtual_machines/{virtual_machine_id}/network_attachments" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.virtual_machines.list_virtual_machine_network_attachments(virtual_machine_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `virtual_machine_id`                                                | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.VirtualMachineNetworkAttachments](../../models/virtualmachinenetworkattachments.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## create_virtual_machine_network_attachment
+
+Attaches a virtual network (VLAN) to a Virtual Machine. Work runs asynchronously and returns 202 Accepted.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="create-virtual-machine-network-attachment" method="post" path="/virtual_machines/{virtual_machine_id}/network_attachments" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.virtual_machines.create_virtual_machine_network_attachment(virtual_machine_id="<id>", data={
+        "type": latitudesh_python_sdk.VirtualMachineNetworkAttachmentCreatePayloadType.VIRTUAL_MACHINE_NETWORK_ATTACHMENTS,
+        "attributes": {
+            "virtual_network_id": "<id>",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `virtual_machine_id`                                                                                                        | *str*                                                                                                                       | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         |
+| `data`                                                                                                                      | [models.VirtualMachineNetworkAttachmentCreatePayloadData](../../models/virtualmachinenetworkattachmentcreatepayloaddata.md) | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         |
+| `retries`                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                            | :heavy_minus_sign:                                                                                                          | Configuration to override the default retry behavior of the client.                                                         |
+
+### Response
+
+**[models.CreateVirtualMachineNetworkAttachmentResponseBody](../../models/createvirtualmachinenetworkattachmentresponsebody.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## destroy_virtual_machine_network_attachment
+
+Detaches a virtual network (VLAN) from a Virtual Machine. Work runs asynchronously and returns 202 Accepted.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="destroy-virtual-machine-network-attachment" method="delete" path="/virtual_machines/{virtual_machine_id}/network_attachments/{id}" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.virtual_machines.destroy_virtual_machine_network_attachment(virtual_machine_id="<id>", id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `virtual_machine_id`                                                | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | The VLAN id_hash to detach                                          |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.DestroyVirtualMachineNetworkAttachmentResponseBody](../../models/destroyvirtualmachinenetworkattachmentresponsebody.md)**
 
 ### Errors
 

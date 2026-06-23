@@ -17,8 +17,6 @@ from typing_extensions import NotRequired, TypedDict
 class TeamMembersRoleTypedDict(TypedDict):
     id: NotRequired[str]
     name: NotRequired[str]
-    created_at: NotRequired[str]
-    updated_at: NotRequired[str]
 
 
 class TeamMembersRole(BaseModel):
@@ -26,13 +24,9 @@ class TeamMembersRole(BaseModel):
 
     name: Optional[str] = None
 
-    created_at: Optional[str] = None
-
-    updated_at: Optional[str] = None
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "name", "created_at", "updated_at"])
+        optional_fields = set(["id", "name"])
         serialized = handler(self)
         m = {}
 
@@ -142,16 +136,27 @@ class TeamMembersData(BaseModel):
         return m
 
 
+class TeamMembersMetaTypedDict(TypedDict):
+    pass
+
+
+class TeamMembersMeta(BaseModel):
+    pass
+
+
 class TeamMembersTypedDict(TypedDict):
     data: NotRequired[List[TeamMembersDataTypedDict]]
+    meta: NotRequired[TeamMembersMetaTypedDict]
 
 
 class TeamMembers(BaseModel):
     data: Optional[List[TeamMembersData]] = None
 
+    meta: Optional[TeamMembersMeta] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         serialized = handler(self)
         m = {}
 

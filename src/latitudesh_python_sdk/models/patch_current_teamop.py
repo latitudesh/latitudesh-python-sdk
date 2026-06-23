@@ -18,16 +18,10 @@ class PatchCurrentTeamTeamsType(str, Enum):
     TEAMS = "teams"
 
 
-class PatchCurrentTeamTeamsCurrency(str, Enum):
-    USD = "USD"
-    BRL = "BRL"
-
-
 class PatchCurrentTeamTeamsAttributesTypedDict(TypedDict):
     address: NotRequired[str]
     name: NotRequired[str]
-    currency: NotRequired[PatchCurrentTeamTeamsCurrency]
-    referred_code: NotRequired[str]
+    enforce_mfa: NotRequired[bool]
 
 
 class PatchCurrentTeamTeamsAttributes(BaseModel):
@@ -35,15 +29,11 @@ class PatchCurrentTeamTeamsAttributes(BaseModel):
 
     name: Optional[str] = None
 
-    currency: Optional[PatchCurrentTeamTeamsCurrency] = (
-        PatchCurrentTeamTeamsCurrency.USD
-    )
-
-    referred_code: Optional[str] = None
+    enforce_mfa: Optional[bool] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["address", "name", "currency", "referred_code"])
+        optional_fields = set(["address", "name", "enforce_mfa"])
         serialized = handler(self)
         m = {}
 

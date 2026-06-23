@@ -12,8 +12,10 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class IndexVirtualMachineRequestTypedDict(TypedDict):
     filter_project: NotRequired[str]
     r"""The project ID or Slug to filter by"""
+    filter_tags: NotRequired[str]
+    r"""The tag IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2` will return VMs with `tag_1` AND `tag_2`."""
     extra_fields_virtual_machines: NotRequired[str]
-    r"""The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[virtual_machines]=credentials` in the query string."""
+    r"""Comma-separated extra attributes that are lazy-loaded. Supported values: `credentials`, `pending_restart`. Example: `extra_fields[virtual_machines]=credentials,pending_restart`."""
 
 
 class IndexVirtualMachineRequest(BaseModel):
@@ -24,16 +26,25 @@ class IndexVirtualMachineRequest(BaseModel):
     ] = None
     r"""The project ID or Slug to filter by"""
 
+    filter_tags: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[tags]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The tag IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2` will return VMs with `tag_1` AND `tag_2`."""
+
     extra_fields_virtual_machines: Annotated[
         Optional[str],
         pydantic.Field(alias="extra_fields[virtual_machines]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[virtual_machines]=credentials` in the query string."""
+    r"""Comma-separated extra attributes that are lazy-loaded. Supported values: `credentials`, `pending_restart`. Example: `extra_fields[virtual_machines]=credentials,pending_restart`."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["filter[project]", "extra_fields[virtual_machines]"])
+        optional_fields = set(
+            ["filter[project]", "filter[tags]", "extra_fields[virtual_machines]"]
+        )
         serialized = handler(self)
         m = {}
 
