@@ -333,22 +333,19 @@ mock_user_data = {
 mock_user_data_list = {
     "data": [
         {
-            "data": {
-                "id": "userdata_test123",
-                "type": "user_data",
-                "attributes": {
-                    "description": "Test User Data Script",
-                    "content": "#!/bin/bash\necho \"Hello World\"\napt-get update\napt-get install -y nginx",
-                    "project": {
-                        "id": "proj_test123",
-                        "name": "Test Project",
-                        "slug": "test-project",
-                    },
-                    "created_at": "2024-01-01T00:00:00Z",
-                    "updated_at": "2024-01-01T00:00:00Z",
+            "id": "userdata_test123",
+            "type": "user_data",
+            "attributes": {
+                "description": "Test User Data Script",
+                "content": "#!/bin/bash\necho \"Hello World\"\napt-get update\napt-get install -y nginx",
+                "project": {
+                    "id": "proj_test123",
+                    "name": "Test Project",
+                    "slug": "test-project",
                 },
+                "created_at": "2024-01-01T00:00:00Z",
+                "updated_at": "2024-01-01T00:00:00Z",
             },
-            "meta": {},
         },
     ],
     "meta": {},
