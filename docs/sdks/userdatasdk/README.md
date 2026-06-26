@@ -557,25 +557,30 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.user_data.get_users_data(extra_fields_user_data="decoded_content")
+    res = latitudesh.user_data.get_users_data(extra_fields_user_data="decoded_content", page_size=20, page_number=1)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
 ### Parameters
 
-| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
-| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `filter_project`                                                                            | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | Project ID or slug                                                                          |
-| `filter_scope`                                                                              | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | Filter by scope: `project` (has project), `team` (no project), or empty (all)               |
-| `extra_fields_user_data`                                                                    | *Optional[str]*                                                                             | :heavy_minus_sign:                                                                          | The `decoded_content` is provided as an extra attribute that shows content in decoded form. |
-| `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
+| Parameter                                                                                                                             | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `filter_project`                                                                                                                      | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Project ID or slug                                                                                                                    |
+| `filter_scope`                                                                                                                        | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Filter by scope: `project` (has project), `team` (no project), or empty (all)                                                         |
+| `stats_total`                                                                                                                         | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`. |
+| `extra_fields_user_data`                                                                                                              | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | The `decoded_content` is provided as an extra attribute that shows content in decoded form.                                           |
+| `page_size`                                                                                                                           | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Number of items to return per page                                                                                                    |
+| `page_number`                                                                                                                         | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Page number to return (starts at 1)                                                                                                   |
+| `retries`                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                      | :heavy_minus_sign:                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                   |
 
 ### Response
 
-**[models.UserData](../../models/userdata.md)**
+**[models.GetUsersDataResponse](../../models/getusersdataresponse.md)**
 
 ### Errors
 

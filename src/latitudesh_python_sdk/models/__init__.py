@@ -627,7 +627,12 @@ if TYPE_CHECKING:
         GetUserProfileResponseBody,
         GetUserProfileResponseBodyTypedDict,
     )
-    from .get_users_dataop import GetUsersDataRequest, GetUsersDataRequestTypedDict
+    from .get_users_dataop import (
+        GetUsersDataRequest,
+        GetUsersDataRequestTypedDict,
+        GetUsersDataResponse,
+        GetUsersDataResponseTypedDict,
+    )
     from .get_virtual_networkop import (
         GetVirtualNetworkRequest,
         GetVirtualNetworkRequestTypedDict,
@@ -1461,12 +1466,7 @@ if TYPE_CHECKING:
         UserRoleTypedDict,
         UserTypedDict,
     )
-    from .user_data import (
-        UserData,
-        UserDataMeta,
-        UserDataMetaTypedDict,
-        UserDataTypedDict,
-    )
+    from .user_data import UserData, UserDataTypedDict
     from .user_data_object import (
         UserDataObject,
         UserDataObjectMeta,
@@ -2169,6 +2169,8 @@ __all__ = [
     "GetUserProfileResponseBodyTypedDict",
     "GetUsersDataRequest",
     "GetUsersDataRequestTypedDict",
+    "GetUsersDataResponse",
+    "GetUsersDataResponseTypedDict",
     "GetVMPlansRequest",
     "GetVMPlansRequestTypedDict",
     "GetVirtualNetworkRequest",
@@ -2865,8 +2867,6 @@ __all__ = [
     "UserAttributes",
     "UserAttributesTypedDict",
     "UserData",
-    "UserDataMeta",
-    "UserDataMetaTypedDict",
     "UserDataObject",
     "UserDataObjectMeta",
     "UserDataObjectMetaTypedDict",
@@ -3516,6 +3516,8 @@ _dynamic_imports: dict[str, str] = {
     "GetUserProfileResponseBodyTypedDict": ".get_user_profileop",
     "GetUsersDataRequest": ".get_users_dataop",
     "GetUsersDataRequestTypedDict": ".get_users_dataop",
+    "GetUsersDataResponse": ".get_users_dataop",
+    "GetUsersDataResponseTypedDict": ".get_users_dataop",
     "GetVirtualNetworkRequest": ".get_virtual_networkop",
     "GetVirtualNetworkRequestTypedDict": ".get_virtual_networkop",
     "GetVirtualNetworksAssignmentsRequest": ".get_virtual_networks_assignmentsop",
@@ -4204,8 +4206,6 @@ _dynamic_imports: dict[str, str] = {
     "UserRoleTypedDict": ".user",
     "UserTypedDict": ".user",
     "UserData": ".user_data",
-    "UserDataMeta": ".user_data",
-    "UserDataMetaTypedDict": ".user_data",
     "UserDataTypedDict": ".user_data",
     "UserDataObject": ".user_data_object",
     "UserDataObjectMeta": ".user_data_object",
