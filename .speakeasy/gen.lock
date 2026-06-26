@@ -1,24 +1,24 @@
 lockVersion: 2.0.0
 id: 97e9fd40-98a0-465e-9d1a-259beac76207
 management:
-  docChecksum: 42abcc7b796bca9bcebbc3a5463e95cc
+  docChecksum: 76149577c78c1b7e25703db669fb9e10
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.784.0
-  generationVersion: 2.911.0
-  releaseVersion: 3.2.0
-  configChecksum: 2cfe58cad07d81f3dccf4e288107701c
+  speakeasyVersion: 1.785.0
+  generationVersion: 2.912.1
+  releaseVersion: 3.2.1
+  configChecksum: edb1f0006e99aed4f37530cc4224420a
   repoURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   published: true
 persistentEdits:
-  generation_id: f120cbec-d315-4934-a1bb-7ece45a64416
-  pristine_commit_hash: 2dc612add7cdce3e7db91b39b8c4cab21a337464
-  pristine_tree_hash: 09d08f10665357d9cd6651291bdf6fa2cf5ab136
+  generation_id: 6b84d58f-ae86-497b-b11f-5c2a31796903
+  pristine_commit_hash: 7ca3739cf19c08c07fdf5b7ad0b7ecb35cb4c80f
+  pristine_tree_hash: fa90d27db44d2e085edc6a20534946532f46b2de
 features:
   python:
     additionalDependencies: 1.1.0
     constsAndDefaults: 1.0.7
-    core: 6.0.30
+    core: 6.0.31
     defaultEnabledRetries: 0.2.0
     deprecations: 3.0.2
     devContainers: 3.0.0
@@ -1130,8 +1130,12 @@ trackedFiles:
     pristine_git_object: 81bf876949f98489578f7425ba32f990b62d6344
   docs/models/getusersdatarequest.md:
     id: b41a0ab233ab
-    last_write_checksum: sha1:9542be3a0ce2b05ad26c285585617e282ea5565b
-    pristine_git_object: 7f6c8bac9fdf113a198b2016be5e62b11352603f
+    last_write_checksum: sha1:2a4b1bbd2aee0bf50c228db584b9dc82f786d42a
+    pristine_git_object: 388a241b3e25953d35e6e56e2bad1e92387ef8de
+  docs/models/getusersdataresponse.md:
+    id: bb30c274f426
+    last_write_checksum: sha1:1f5e3f6cb7a1bd4e1e5b105aada069a7ceba8f13
+    pristine_git_object: 9e7018ff9fc1b0537aa8a182998d245bda408d5b
   docs/models/getvirtualnetworkrequest.md:
     id: 09e644200f39
     last_write_checksum: sha1:246f95e613fd7837b0d26e3961ce28e07519853a
@@ -2690,12 +2694,8 @@ trackedFiles:
     pristine_git_object: 5d362c6ac348d9b11c8d97d3f4666cf9000058cb
   docs/models/userdata.md:
     id: 9ee78d14b93d
-    last_write_checksum: sha1:32a7ff9775d33dd120df8379830ffd5e04380884
-    pristine_git_object: 09f27702d11d03a87ccb5594e73a06483a4b26e1
-  docs/models/userdatameta.md:
-    id: 8a1444ef632a
-    last_write_checksum: sha1:55dfdd22bd99c4272f8b527f6737d9c68704022b
-    pristine_git_object: d610fe755d16090c700d3a2a9a4f695f95558591
+    last_write_checksum: sha1:2bbdd0af15b56bb340b87822a1c75f75a9cb3e4c
+    pristine_git_object: ddb3c9c55077aa89a82c808abdf347a5d2d89db2
   docs/models/userdataobject.md:
     id: 35aec7ee75d0
     last_write_checksum: sha1:e30e015d6af3795f77d39c8f62fad89c4d751951
@@ -2710,8 +2710,8 @@ trackedFiles:
     pristine_git_object: 8d7b37a1dbd6d0c0fd8ebbbcb9a5e511da9bf925
   docs/models/userdatapropertiesattributes.md:
     id: 9bf58e62bc2f
-    last_write_checksum: sha1:394f72aaa524cddd7c872c6404d41037145abada
-    pristine_git_object: 85ebf780fb3d176325f72d2852fbc960d66bc85e
+    last_write_checksum: sha1:3a9ac2b92ead53860645a99ae14019eac04f5699
+    pristine_git_object: 31f8f38d5b07c6255ac3707a7a069e41d1d28a52
   docs/models/userdatapropertiestype.md:
     id: 660f338583eb
     last_write_checksum: sha1:8dc7160d4911b2438111f8a5dc0870974e772219
@@ -3154,8 +3154,8 @@ trackedFiles:
     pristine_git_object: 7ca613b91ae6eb441bc22902c73c3f6950a824f3
   docs/sdks/userdatasdk/README.md:
     id: e2285af6ddb8
-    last_write_checksum: sha1:85fc4cf3a33e40132a3cc30fb62c53db1ba71e2d
-    pristine_git_object: 39cdc40699c09e759cb52b1d9da2a0222fd4d436
+    last_write_checksum: sha1:152366fd9c2e42faae901cb349bec8ebebbe6171
+    pristine_git_object: be50b2de08d7bd8fe1288970e85f6457106c6f8c
   docs/sdks/userprofile/README.md:
     id: e89a7f3efcd6
     last_write_checksum: sha1:f030fe53f8e060eb30604c89a749fe0ae015550d
@@ -3182,8 +3182,8 @@ trackedFiles:
     pristine_git_object: 250e4a286482ffcc3629575515a40adcb44a2702
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:9cf822a1ec1a2632bbd26cc8a2265b82ff35b1ee
-    pristine_git_object: 456fe1a2695557a57d534e1e592b2dee18cc630d
+    last_write_checksum: sha1:1a7593bcf04ba56f622a5ce1194ab684d417cc98
+    pristine_git_object: 1b6bb890c296c01f0bc3b924e2181c03c2bb5a89
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:5354f07fd2821a42340f1573b7f3e029b8a852e1
@@ -3210,8 +3210,8 @@ trackedFiles:
     pristine_git_object: 403c936eb3b6407be163aeedfcdce9c4d83072d7
   src/latitudesh_python_sdk/_version.py:
     id: 65dde1ef31c9
-    last_write_checksum: sha1:fc6870d0530f565d7fed5947e6a5abaaeb760ead
-    pristine_git_object: 57ebfc904c91c83d0379d2d4b892e41ba8b94dbb
+    last_write_checksum: sha1:1957ee197a9548de2528e38cabd055babc252493
+    pristine_git_object: 3931cf5276105a70289dd51cb3b09af73ecb2747
   src/latitudesh_python_sdk/apikeys_sdk.py:
     id: 633cbc9c65bd
     last_write_checksum: sha1:bc686242de54119b1206ef57043f80109dd38497
@@ -3258,8 +3258,8 @@ trackedFiles:
     pristine_git_object: abd4e3659f6514de2d2986503154424feba4a976
   src/latitudesh_python_sdk/models/__init__.py:
     id: 7f64ed71d43c
-    last_write_checksum: sha1:1a810ac6da9d695fe882b8753dcebc380a518331
-    pristine_git_object: dbb75232f2a7e268f0f3ce7238c2e65440b13dbe
+    last_write_checksum: sha1:fe58f33d561db05370b77be66bbfbc4834d9665a
+    pristine_git_object: 0144d3ea9fd573ef5c16fcdba9db3079e024cf4b
   src/latitudesh_python_sdk/models/api_key.py:
     id: c61bf1d38797
     last_write_checksum: sha1:7f2a209ff9e0d3a9a8d928690d7b302c03a4f069
@@ -3662,8 +3662,8 @@ trackedFiles:
     pristine_git_object: cdc6e9955a592b7e28d68e97ac3a66b4da05be4f
   src/latitudesh_python_sdk/models/get_users_dataop.py:
     id: 3d1507f61690
-    last_write_checksum: sha1:765671e79c21917ff054de630866d515fc593df6
-    pristine_git_object: ff6c22be3ffb0b43a475b90ff8261a193f36d122
+    last_write_checksum: sha1:1d95882816c7cc07f234393b4d08871afccd754c
+    pristine_git_object: 012a3cc65e1f29662fda7b2eff308650db0acb7f
   src/latitudesh_python_sdk/models/get_virtual_networkop.py:
     id: 5ab11cf2ae36
     last_write_checksum: sha1:5cd2149bd7768f8a8c805d3c15bd8a926c351ae0
@@ -4082,16 +4082,16 @@ trackedFiles:
     pristine_git_object: 1c2471b0d83000cbdbad0c6c3ef4b42bdab14a49
   src/latitudesh_python_sdk/models/user_data.py:
     id: c4e848d4022a
-    last_write_checksum: sha1:76291ed1113b11dac86e6a7d9d0cef2ac42b2da8
-    pristine_git_object: 8ef2417e20d932e9b88b0a1a8cb089f3a464ffe9
+    last_write_checksum: sha1:7c1089b48e0e1b358a5a18a09e7a604294f3d668
+    pristine_git_object: 1e60d2490c58b82bdb91c91c3bd82d00dbd01608
   src/latitudesh_python_sdk/models/user_data_object.py:
     id: 96a3071c465f
     last_write_checksum: sha1:9b6cae7745d3a78a080b4001b289dd564471ed2c
     pristine_git_object: dd735bcface03b2c8c64dffd6dd8e73c1f741e66
   src/latitudesh_python_sdk/models/user_data_properties.py:
     id: 38bfdb50ca97
-    last_write_checksum: sha1:6bdfcfba3bfcd5aa28b6e4edcbade46a583d7003
-    pristine_git_object: 0c2bfc25667cb20fbded3a3d65d3f482df15b915
+    last_write_checksum: sha1:0507a0e3bfc880fde2277a226faefe71b0c8cdb3
+    pristine_git_object: 828d368938a591fad0dfb5e6e77a3fc512eb91a0
   src/latitudesh_python_sdk/models/user_include.py:
     id: 638424e759a1
     last_write_checksum: sha1:571efac029d09acc22073fa5b419a558580cb4fb
@@ -4262,8 +4262,8 @@ trackedFiles:
     pristine_git_object: a9a640a1a7048736383f96c67c6290c86bf536ee
   src/latitudesh_python_sdk/userdata_sdk.py:
     id: 50b9c8b9c5f1
-    last_write_checksum: sha1:da4bd9f93c346af9558c53a36f446651b1c1209e
-    pristine_git_object: 0cab3ac470fbf8d5ce39ad99d17f3e0d68903144
+    last_write_checksum: sha1:220dc23d64965b57d4d350adf496db05b618a8de
+    pristine_git_object: f672bfce1babc3d5bb21d34ab163eecec7708761
   src/latitudesh_python_sdk/userprofile.py:
     id: 8dec582c6a5c
     last_write_checksum: sha1:265810bfcdf660b6c60ff3ceadaf67b07992f458
@@ -6419,7 +6419,7 @@ examples:
           extra_fields[user_data]: "decoded_content"
       responses:
         "200":
-          application/vnd.api+json: {"data": [{}], "meta": {}}
+          application/vnd.api+json: {"data": [{"id": "ud_AW6Q2D9lqKLpr", "type": "user_data", "attributes": {"description": "Three eggs with cilantro, tomatoes, onions, avocados and melted Emmental cheese. With a side of roasted potatoes, and your choice of toast or croissant.", "content": "QnJlYWRlZCBmcmllZCBjaGlja2VuIHdpdGggd2FmZmxlcywgYW5kIGEgc2lkZSBvZiBtYXBsZSBzeXJ1cC4=", "decoded_content": "Breaded fried chicken with waffles, and a side of maple syrup.", "project": {"id": "proj_LYV8DZYQq5QoE", "name": "Sleek Cotton Bottle", "slug": "sleek-cotton-bottle", "description": "Intelligent Aluminum Watch", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:56:43+00:00", "updated_at": "2026-01-14T15:56:43+00:00"}}], "meta": {}}
   post-project-user-data:
     Created:
       parameters:
@@ -6430,7 +6430,7 @@ examples:
         application/vnd.api+json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
       responses:
         "201":
-          application/vnd.api+json: {"data": {"id": "ud_pRMLydp0dQKr1", "type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "project": {"id": "proj_8NkvdyMKdeLpx", "name": "Intelligent Bronze Car", "slug": "intelligent-bronze-car", "description": "Small Iron Shoes", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:56:43+00:00", "updated_at": "2026-01-14T15:56:43+00:00"}}, "meta": {}}
+          application/vnd.api+json: {"data": {"id": "ud_pRMLydp0dQKr1", "type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "decoded_content": "#cloud-config\nruncmd:\n - [ touch,  /home/ubuntu/test ]", "project": {"id": "proj_8NkvdyMKdeLpx", "name": "Intelligent Bronze Car", "slug": "intelligent-bronze-car", "description": "Small Iron Shoes", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:56:43+00:00", "updated_at": "2026-01-14T15:56:43+00:00"}}, "meta": {}}
     Bad Request:
       parameters:
         path:
@@ -6491,7 +6491,7 @@ examples:
           extra_fields[user_data]: "decoded_content"
       responses:
         "200":
-          application/vnd.api+json: {"data": {"id": "ud_VLMmAD8EOwop2", "type": "user_data", "attributes": {"description": "Three egg omelet with Roquefort cheese, chives, and ham. With a side of roasted potatoes, and your choice of toast or croissant.", "content": "Q3JlYW15IG1hc2NhcnBvbmUgY2hlZXNlIGFuZCBjdXN0YXJkIGxheWVyZWQgYmV0d2VlbiBlc3ByZXNzbyBhbmQgcnVtIHNvYWtlZCBob3VzZS1tYWRlIGxhZHlmaW5nZXJzLCB0b3BwZWQgd2l0aCBWYWxyaG9uYSBjb2NvYSBwb3dkZXIu", "project": {"id": "proj_e8pKq0GYdWAob", "name": "Enormous Silk Car", "slug": "enormous-silk-car", "description": "Aerodynamic Granite Bag", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:56:43+00:00", "updated_at": "2026-01-14T15:56:43+00:00"}}, "meta": {}}
+          application/vnd.api+json: {"data": {"id": "ud_VLMmAD8EOwop2", "type": "user_data", "attributes": {"description": "Three egg omelet with Roquefort cheese, chives, and ham. With a side of roasted potatoes, and your choice of toast or croissant.", "content": "Q3JlYW15IG1hc2NhcnBvbmUgY2hlZXNlIGFuZCBjdXN0YXJkIGxheWVyZWQgYmV0d2VlbiBlc3ByZXNzbyBhbmQgcnVtIHNvYWtlZCBob3VzZS1tYWRlIGxhZHlmaW5nZXJzLCB0b3BwZWQgd2l0aCBWYWxyaG9uYSBjb2NvYSBwb3dkZXIu", "decoded_content": "Creamy mascarpone cheese and custard layered between espresso and rum soaked house-made ladyfingers, topped with Valrhona cocoa powder.", "project": {"id": "proj_e8pKq0GYdWAob", "name": "Enormous Silk Car", "slug": "enormous-silk-car", "description": "Aerodynamic Granite Bag", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:56:43+00:00", "updated_at": "2026-01-14T15:56:43+00:00"}}, "meta": {}}
     Not Found:
       parameters:
         path:
@@ -6604,9 +6604,11 @@ examples:
       parameters:
         query:
           extra_fields[user_data]: "decoded_content"
+          page[size]: 20
+          page[number]: 1
       responses:
         "200":
-          application/vnd.api+json: {"data": [{}], "meta": {}}
+          application/vnd.api+json: {"data": [{"id": "ud_1Qkm7dXzD8nZV", "type": "user_data", "attributes": {"description": "Thick slices of French toast bread, brown sugar, half-and-half and vanilla, topped with powdered sugar. With two eggs served any style, and your choice of smoked bacon or smoked ham.", "content": "VHdvIGJ1dHRlcm1pbGsgd2FmZmxlcywgdG9wcGVkIHdpdGggd2hpcHBlZCBjcmVhbSBhbmQgbWFwbGUgc3lydXAsIGEgc2lkZSBvZiB0d28gZWdncyBzZXJ2ZWQgYW55IHN0eWxlLCBhbmQgeW91ciBjaG9pY2Ugb2Ygc21va2VkIGJhY29uIG9yIHNtb2tlZCBoYW0u", "decoded_content": "Two buttermilk waffles, topped with whipped cream and maple syrup, a side of two eggs served any style, and your choice of smoked bacon or smoked ham.", "project": {"id": "proj_1ZJrdxoyOg4LV", "name": "Heavy Duty Aluminum Coat", "slug": "heavy-duty-aluminum-coat", "description": "Enormous Bronze Bag", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:57:11+00:00", "updated_at": "2026-01-14T15:57:11+00:00"}}], "meta": {}}
   post-user-data:
     Created:
       requestBody:
@@ -6614,7 +6616,7 @@ examples:
         application/vnd.api+json: {"data": {"type": "user_data", "attributes": {"description": "User Data description", "project": "proj_QraYDPW3qpjwW", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd"}}}
       responses:
         "201":
-          application/vnd.api+json: {"data": {"id": "ud_w49QDB55qagKb", "type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "project": {"id": "proj_QraYDPW3qpjwW", "name": "Rustic Granite Gloves", "slug": "rustic-granite-gloves", "description": "Heavy Duty Leather Wallet", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:57:11+00:00", "updated_at": "2026-01-14T15:57:11+00:00"}}, "meta": {}}
+          application/vnd.api+json: {"data": {"id": "ud_w49QDB55qagKb", "type": "user_data", "attributes": {"description": "User Data description", "content": "I2Nsb3VkLWNvbmZpZwpydW5jbWQ6CiAtIFsgdG91Y2gsICAvaG9tZS91YnVudHUvdGVzdCBd", "decoded_content": "#cloud-config\nruncmd:\n - [ touch,  /home/ubuntu/test ]", "project": {"id": "proj_QraYDPW3qpjwW", "name": "Rustic Granite Gloves", "slug": "rustic-granite-gloves", "description": "Heavy Duty Leather Wallet", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:57:11+00:00", "updated_at": "2026-01-14T15:57:11+00:00"}}, "meta": {}}
   get-user-data:
     Success:
       parameters:
@@ -6624,7 +6626,7 @@ examples:
           extra_fields[user_data]: "decoded_content"
       responses:
         "200":
-          application/vnd.api+json: {"data": {"id": "ud_MLGXPdWgdnNWk", "type": "user_data", "attributes": {"description": "Three egg whites with spinach, mushrooms, caramelized onions, tomatoes and low-fat feta cheese. With herbed quinoa, and your choice of rye or whole-grain toast.", "content": "VHdvIGJ1dHRlcm1pbGsgd2FmZmxlcywgdG9wcGVkIHdpdGggd2hpcHBlZCBjcmVhbSBhbmQgbWFwbGUgc3lydXAsIGEgc2lkZSBvZiB0d28gZWdncyBzZXJ2ZWQgYW55IHN0eWxlLCBhbmQgeW91ciBjaG9pY2Ugb2Ygc21va2VkIGJhY29uIG9yIHNtb2tlZCBoYW0u", "project": {"id": "proj_pbV0DgkzD4AWz", "name": "Sleek Iron Wallet", "slug": "sleek-iron-wallet", "description": "Small Silk Shoes", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:57:11+00:00", "updated_at": "2026-01-14T15:57:11+00:00"}}, "meta": {}}
+          application/vnd.api+json: {"data": {"id": "ud_MLGXPdWgdnNWk", "type": "user_data", "attributes": {"description": "Three egg whites with spinach, mushrooms, caramelized onions, tomatoes and low-fat feta cheese. With herbed quinoa, and your choice of rye or whole-grain toast.", "content": "VHdvIGJ1dHRlcm1pbGsgd2FmZmxlcywgdG9wcGVkIHdpdGggd2hpcHBlZCBjcmVhbSBhbmQgbWFwbGUgc3lydXAsIGEgc2lkZSBvZiB0d28gZWdncyBzZXJ2ZWQgYW55IHN0eWxlLCBhbmQgeW91ciBjaG9pY2Ugb2Ygc21va2VkIGJhY29uIG9yIHNtb2tlZCBoYW0u", "decoded_content": "Two buttermilk waffles, topped with whipped cream and maple syrup, a side of two eggs served any style, and your choice of smoked bacon or smoked ham.", "project": {"id": "proj_pbV0DgkzD4AWz", "name": "Sleek Iron Wallet", "slug": "sleek-iron-wallet", "description": "Small Silk Shoes", "billing_type": "Normal", "provisioning_type": "on_demand", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {}, "stats": {"ip_addresses": 0, "prefixes": 0, "servers": 0, "vlans": 0}}, "created_at": "2026-01-14T15:57:11+00:00", "updated_at": "2026-01-14T15:57:11+00:00"}}, "meta": {}}
     Not Found:
       parameters:
         path:
@@ -7936,7 +7938,7 @@ examples:
           application/vnd.api+json: {"meta": {"status": "accepted"}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `latitudesh.teams_members.list()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.teams.update()`: \n  *  `request.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.list()`:  `request` **Changed** (Breaking ⚠️)\n* `latitudesh.operating_systems.list()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.events.list()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.ip_addresses.list()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.ip_addresses.get()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.ssh_keys.update()`:  `response.data.attributes.tags` **Added**\n* `latitudesh.ssh_keys.put_ssh_key()`:  `response.data.attributes.tags` **Added**\n* `latitudesh.ssh_keys.list_for_project()`: \n  *  `request` **Changed**\n  *  `response` **Changed**\n* `latitudesh.ssh_keys.create()`:  `response.data.attributes.tags` **Added**\n* `latitudesh.ssh_keys.get()`:  `response.data.attributes.tags` **Added**\n* `latitudesh.virtual_machines.show_virtual_machine_metrics()`: **Added**\n* `latitudesh.ssh_keys.get_ssh_keys()`: \n  *  `request` **Changed**\n  *  `response` **Changed**\n* `latitudesh.ssh_keys.post_ssh_key()`:  `response.data.attributes.tags` **Added**\n* `latitudesh.ssh_keys.get_ssh_key()`:  `response.data.attributes.tags` **Added**\n* `latitudesh.virtual_machines.destroy_virtual_machine_network_attachment()`: **Added**\n* `latitudesh.virtual_machines.create_virtual_machine_network_attachment()`: **Added**\n* `latitudesh.servers.get_deploy_config()`:  `response.data.attributes.disk_layout` **Added**\n* `latitudesh.servers.update_deploy_config()`:  `response.data.attributes.disk_layout` **Added**\n* `latitudesh.teams.create()`: \n  *  `request.data.attributes.enforce_mfa` **Added**\n* `latitudesh.virtual_machines.list_virtual_machine_network_attachments()`: **Added**\n* `latitudesh.virtual_machines.create()`: \n  *  `request.data.attributes` **Changed**\n  *  `response.data.attributes` **Changed**\n* `latitudesh.virtual_machines.list()`: \n  *  `request.filter[tags]` **Added**\n  *  `response.data[].attributes` **Changed**\n* `latitudesh.virtual_machines.get()`:  `response.data.attributes` **Changed**\n* `latitudesh.virtual_machines.update_virtual_machine()`: \n  *  `request.data.attributes` **Changed**\n  *  `response.data.attributes` **Changed**\n"
+releaseNotes: "## Python SDK Changes:\n* `latitudesh.user_data.list_project_user_data()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.user_data.get_users_data()`: \n  *  `request` **Changed**\n  *  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.user_data.create()`:  `response.data.attributes.decoded_content` **Added**\n* `latitudesh.user_data.get_project_user_data()`:  `response.data.attributes.decoded_content` **Added**\n* `latitudesh.user_data.update()`:  `response.data.attributes.decoded_content` **Added**\n* `latitudesh.user_data.post_user_data()`:  `response.data.attributes.decoded_content` **Added**\n* `latitudesh.user_data.get_user_data()`:  `response.data.attributes.decoded_content` **Added**\n* `latitudesh.user_data.patch_user_data()`:  `response.data.attributes.decoded_content` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
