@@ -88,6 +88,10 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-virtual-machine"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -183,6 +187,10 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-virtual-machine"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -274,6 +282,8 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={"x-mint": {"href": "/api-reference/index-virtual-machine"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -365,6 +375,8 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={"x-mint": {"href": "/api-reference/index-virtual-machine"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -450,6 +462,8 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={"x-mint": {"href": "/api-reference/show-virtual-machine"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -535,6 +549,8 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={"x-mint": {"href": "/api-reference/show-virtual-machine"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -620,6 +636,10 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/destroy-virtual-machine"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -705,6 +725,10 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/destroy-virtual-machine"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -807,6 +831,10 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/update-virtual-machine"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -909,6 +937,10 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/update-virtual-machine"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1021,6 +1053,10 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-virtual-machine-action"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1133,6 +1169,10 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-virtual-machine-action"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1226,6 +1266,10 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/show-virtual-machine-metrics"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1319,6 +1363,10 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/show-virtual-machine-metrics"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1404,6 +1452,8 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1491,6 +1541,8 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1595,6 +1647,8 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1699,6 +1753,8 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1789,6 +1845,8 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1879,6 +1937,8 @@ class VirtualMachinesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Virtual machines"],
+                extensions=None,
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

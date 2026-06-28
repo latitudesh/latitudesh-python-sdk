@@ -91,6 +91,8 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={"x-mint": {"href": "/api-reference/get-virtual-networks"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -217,6 +219,8 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={"x-mint": {"href": "/api-reference/get-virtual-networks"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -343,6 +347,10 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-virtual-network"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -440,6 +448,10 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-virtual-network"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -542,6 +554,10 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/update-virtual-network"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -644,6 +660,10 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/update-virtual-network"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -729,6 +749,10 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/destroy-virtual-network"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -814,6 +838,10 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/destroy-virtual-network"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -899,6 +927,8 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={"x-mint": {"href": "/api-reference/get-virtual-network"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -984,6 +1014,8 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={"x-mint": {"href": "/api-reference/get-virtual-network"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1081,6 +1113,12 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/get-virtual-networks-assignments"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1209,6 +1247,12 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/get-virtual-networks-assignments"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1336,6 +1380,10 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/assign-server-virtual-network"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1432,6 +1480,10 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/assign-server-virtual-network"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1517,6 +1569,12 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/delete-virtual-networks-assignments"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1602,6 +1660,12 @@ class PrivateNetworks(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Private Networks"],
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/delete-virtual-networks-assignments"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

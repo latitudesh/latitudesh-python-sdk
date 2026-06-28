@@ -68,6 +68,8 @@ class TeamsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Teams"],
+                extensions={"x-mint": {"href": "/api-reference/get-team"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -143,6 +145,8 @@ class TeamsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Teams"],
+                extensions={"x-mint": {"href": "/api-reference/get-team"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -228,6 +232,8 @@ class TeamsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Teams"],
+                extensions={"x-mint": {"href": "/api-reference/post-team"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -313,6 +319,8 @@ class TeamsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Teams"],
+                extensions={"x-mint": {"href": "/api-reference/post-team"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -409,6 +417,8 @@ class TeamsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Teams"],
+                extensions={"x-mint": {"href": "/api-reference/patch-current-team"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -507,6 +517,8 @@ class TeamsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Teams"],
+                extensions={"x-mint": {"href": "/api-reference/patch-current-team"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
