@@ -13,3 +13,4 @@
 | `currency`                                         | [Optional[models.Currency]](../models/currency.md) | :heavy_minus_sign:                                 | N/A                                                |
 | `status`                                           | *Optional[str]*                                    | :heavy_minus_sign:                                 | N/A                                                |
 | `feature_flags`                                    | List[*str*]                                        | :heavy_minus_sign:                                 | N/A                                                |
+| `limits`                                           | [Optional[models.Limits]](../models/limits.md)     | :heavy_minus_sign:                                 | N/A                                                |

@@ -106,6 +106,8 @@ class Plans(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Plans"],
+                extensions={"x-mint": {"href": "/api-reference/get-plans"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -218,6 +220,8 @@ class Plans(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Plans"],
+                extensions={"x-mint": {"href": "/api-reference/get-plans"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -300,6 +304,8 @@ class Plans(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Plans"],
+                extensions={"x-mint": {"href": "/api-reference/get-plan"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -382,6 +388,8 @@ class Plans(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Plans"],
+                extensions={"x-mint": {"href": "/api-reference/get-plan"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -475,6 +483,8 @@ class Plans(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Plans"],
+                extensions={"x-mint": {"href": "/api-reference/get-bandwidth-plans"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -596,6 +606,8 @@ class Plans(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Plans"],
+                extensions={"x-mint": {"href": "/api-reference/get-bandwidth-plans"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -723,6 +735,10 @@ class Plans(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Plans"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/update-plans-bandwidth"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -822,6 +838,10 @@ class Plans(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Plans"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/update-plans-bandwidth"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -897,6 +917,8 @@ class Plans(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Plans"],
+                extensions={"x-mint": {"href": "/api-reference/get-storage-plans"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -972,6 +994,8 @@ class Plans(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Plans"],
+                extensions={"x-mint": {"href": "/api-reference/get-storage-plans"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1054,6 +1078,8 @@ class Plans(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Plans"],
+                extensions={"x-mint": {"href": "/api-reference/get-vm-plans"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1136,6 +1162,8 @@ class Plans(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Plans"],
+                extensions={"x-mint": {"href": "/api-reference/get-vm-plans"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

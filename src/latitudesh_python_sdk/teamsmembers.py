@@ -79,6 +79,8 @@ class TeamsMembers(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Team members"],
+                extensions={"x-mint": {"href": "/api-reference/get-team-members"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -190,6 +192,8 @@ class TeamsMembers(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Team members"],
+                extensions={"x-mint": {"href": "/api-reference/get-team-members"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -308,6 +312,8 @@ class TeamsMembers(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Team members"],
+                extensions={"x-mint": {"href": "/api-reference/post-team-members"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -400,6 +406,8 @@ class TeamsMembers(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Team members"],
+                extensions={"x-mint": {"href": "/api-reference/post-team-members"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -482,6 +490,8 @@ class TeamsMembers(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Team members"],
+                extensions={"x-mint": {"href": "/api-reference/destroy-team-member"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -564,6 +574,8 @@ class TeamsMembers(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Team members"],
+                extensions={"x-mint": {"href": "/api-reference/destroy-team-member"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

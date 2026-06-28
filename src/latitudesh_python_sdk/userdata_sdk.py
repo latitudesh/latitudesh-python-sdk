@@ -86,6 +86,10 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-project-users-data"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -177,6 +181,10 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-project-users-data"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -282,6 +290,10 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/post-project-user-data"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -387,6 +399,10 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/post-project-user-data"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -481,6 +497,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/get-project-user-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -575,6 +593,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/get-project-user-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -683,6 +703,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/put-project-user-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -791,6 +813,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/put-project-user-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -882,6 +906,10 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/delete-project-user-data"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -973,6 +1001,10 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/delete-project-user-data"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1073,6 +1105,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/get-users-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1203,6 +1237,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/get-users-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1323,6 +1359,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/post-user-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1413,6 +1451,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/post-user-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1501,6 +1541,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/get-user-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1589,6 +1631,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/get-user-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1671,6 +1715,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/delete-user-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1753,6 +1799,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/delete-user-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1852,6 +1900,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/patch-user-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1951,6 +2001,8 @@ class UserDataSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["User data"],
+                extensions={"x-mint": {"href": "/api-reference/patch-user-data"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
