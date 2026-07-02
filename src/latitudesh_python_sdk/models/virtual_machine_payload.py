@@ -42,6 +42,8 @@ class VirtualMachinePayloadAttributesTypedDict(TypedDict):
     r"""A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer id) to apply as cloud-init configuration"""
     tags: NotRequired[Nullable[List[str]]]
     r"""Array of tag IDs to assign to the VM."""
+    site: NotRequired[Nullable[str]]
+    r"""Site/region slug where the VM is provisioned (e.g. DAL, SAO). Defaults to DAL when omitted."""
 
 
 class VirtualMachinePayloadAttributes(BaseModel):
@@ -63,6 +65,9 @@ class VirtualMachinePayloadAttributes(BaseModel):
     tags: OptionalNullable[List[str]] = UNSET
     r"""Array of tag IDs to assign to the VM."""
 
+    site: OptionalNullable[str] = "DAL"
+    r"""Site/region slug where the VM is provisioned (e.g. DAL, SAO). Defaults to DAL when omitted."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -74,10 +79,11 @@ class VirtualMachinePayloadAttributes(BaseModel):
                 "operating_system",
                 "user_data",
                 "tags",
+                "site",
             ]
         )
         nullable_fields = set(
-            ["plan", "ssh_keys", "operating_system", "user_data", "tags"]
+            ["plan", "ssh_keys", "operating_system", "user_data", "tags", "site"]
         )
         serialized = handler(self)
         m = {}

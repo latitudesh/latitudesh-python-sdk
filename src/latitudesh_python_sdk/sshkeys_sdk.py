@@ -94,6 +94,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/get-project-ssh-keys"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -194,6 +196,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/get-project-ssh-keys"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -299,6 +303,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/post-project-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -406,6 +412,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/post-project-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -499,6 +507,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/get-project-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -592,6 +602,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/get-project-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -700,6 +712,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/put-project-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -808,6 +822,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/put-project-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -901,6 +917,10 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/delete-project-ssh-key"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -992,6 +1012,10 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/delete-project-ssh-key"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1092,6 +1116,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/get-ssh-keys"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1192,6 +1218,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/get-ssh-keys"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1282,6 +1310,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/post-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1372,6 +1402,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/post-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1457,6 +1489,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/get-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1542,6 +1576,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/get-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1627,6 +1663,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/delete-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1712,6 +1750,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/delete-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1809,6 +1849,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/put-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1906,6 +1948,8 @@ class SSHKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["SSH Keys"],
+                extensions={"x-mint": {"href": "/api-reference/put-ssh-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

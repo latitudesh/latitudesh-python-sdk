@@ -26,6 +26,8 @@ class RulesTypedDict(TypedDict):
     r"""Destination IP address, IP range in CIDR notation, or 'ANY' (e.g., \"192.168.1.1\", \"192.168.1.0/24\", \"ANY\")"""
     port: NotRequired[str]
     protocol: NotRequired[str]
+    default: NotRequired[bool]
+    r"""True when this rule was seeded by Latitude when the firewall was created (cannot be deleted); false for user-added rules."""
     description: NotRequired[Nullable[str]]
     r"""Optional description explaining the purpose of this rule"""
 
@@ -41,12 +43,17 @@ class Rules(BaseModel):
 
     protocol: Optional[str] = None
 
+    default: Optional[bool] = None
+    r"""True when this rule was seeded by Latitude when the firewall was created (cannot be deleted); false for user-added rules."""
+
     description: OptionalNullable[str] = UNSET
     r"""Optional description explaining the purpose of this rule"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["from", "to", "port", "protocol", "description"])
+        optional_fields = set(
+            ["from", "to", "port", "protocol", "default", "description"]
+        )
         nullable_fields = set(["description"])
         serialized = handler(self)
         m = {}

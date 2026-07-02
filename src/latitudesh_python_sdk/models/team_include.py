@@ -21,6 +21,87 @@ class Currency(BaseModel):
     pass
 
 
+class LimitsTypedDict(TypedDict):
+    bare_metal: NotRequired[Nullable[int]]
+    bare_metal_gpu: NotRequired[Nullable[int]]
+    virtual_machine: NotRequired[Nullable[int]]
+    virtual_machine_gpu: NotRequired[Nullable[int]]
+    elastic_ip: NotRequired[Nullable[int]]
+    virtual_network: NotRequired[Nullable[int]]
+    database: NotRequired[Nullable[int]]
+    filesystem: NotRequired[Nullable[int]]
+    block_storage: NotRequired[Nullable[int]]
+
+
+class Limits(BaseModel):
+    bare_metal: OptionalNullable[int] = UNSET
+
+    bare_metal_gpu: OptionalNullable[int] = UNSET
+
+    virtual_machine: OptionalNullable[int] = UNSET
+
+    virtual_machine_gpu: OptionalNullable[int] = UNSET
+
+    elastic_ip: OptionalNullable[int] = UNSET
+
+    virtual_network: OptionalNullable[int] = UNSET
+
+    database: OptionalNullable[int] = UNSET
+
+    filesystem: OptionalNullable[int] = UNSET
+
+    block_storage: OptionalNullable[int] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "bare_metal",
+                "bare_metal_gpu",
+                "virtual_machine",
+                "virtual_machine_gpu",
+                "elastic_ip",
+                "virtual_network",
+                "database",
+                "filesystem",
+                "block_storage",
+            ]
+        )
+        nullable_fields = set(
+            [
+                "bare_metal",
+                "bare_metal_gpu",
+                "virtual_machine",
+                "virtual_machine_gpu",
+                "elastic_ip",
+                "virtual_network",
+                "database",
+                "filesystem",
+                "block_storage",
+            ]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class TeamIncludeTypedDict(TypedDict):
     id: NotRequired[str]
     name: NotRequired[str]
@@ -30,6 +111,7 @@ class TeamIncludeTypedDict(TypedDict):
     currency: NotRequired[CurrencyTypedDict]
     status: NotRequired[str]
     feature_flags: NotRequired[List[str]]
+    limits: NotRequired[LimitsTypedDict]
 
 
 class TeamInclude(BaseModel):
@@ -49,6 +131,8 @@ class TeamInclude(BaseModel):
 
     feature_flags: Optional[List[str]] = None
 
+    limits: Optional[Limits] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -61,6 +145,7 @@ class TeamInclude(BaseModel):
                 "currency",
                 "status",
                 "feature_flags",
+                "limits",
             ]
         )
         nullable_fields = set(["description"])

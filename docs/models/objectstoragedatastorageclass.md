@@ -1,11 +1,13 @@
-# StorageClass
+# ObjectStorageDataStorageClass
+
+Storage class tier
 
 ## Example Usage
 
 ```python
-from latitudesh_python_sdk.models import StorageClass
+from latitudesh_python_sdk.models import ObjectStorageDataStorageClass
 
-value = StorageClass.STANDARD
+value = ObjectStorageDataStorageClass.STANDARD
 ```
 
 

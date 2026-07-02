@@ -1,4 +1,4 @@
-# FilesystemDataProject
+# FirewallAssignmentDataFirewall
 
 
 ## Fields
@@ -7,4 +7,3 @@
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `id`               | *Optional[str]*    | :heavy_minus_sign: | N/A                |
 | `name`             | *Optional[str]*    | :heavy_minus_sign: | N/A                |
-| `slug`             | *Optional[str]*    | :heavy_minus_sign: | N/A                |

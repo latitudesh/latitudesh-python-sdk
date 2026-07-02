@@ -83,6 +83,8 @@ class RegionsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Regions"],
+                extensions={"x-mint": {"href": "/api-reference/get-regions"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -197,6 +199,8 @@ class RegionsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Regions"],
+                extensions={"x-mint": {"href": "/api-reference/get-regions"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -304,6 +308,8 @@ class RegionsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Regions"],
+                extensions={"x-mint": {"href": "/api-reference/get-region"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -386,6 +392,8 @@ class RegionsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Regions"],
+                extensions={"x-mint": {"href": "/api-reference/get-region"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
