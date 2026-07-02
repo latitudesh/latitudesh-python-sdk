@@ -75,6 +75,8 @@ class VpnSessions(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["VPN Sessions"],
+                extensions={"x-mint": {"href": "/api-reference/get-vpn-sessions"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -157,6 +159,8 @@ class VpnSessions(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["VPN Sessions"],
+                extensions={"x-mint": {"href": "/api-reference/get-vpn-sessions"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -257,6 +261,8 @@ class VpnSessions(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["VPN Sessions"],
+                extensions={"x-mint": {"href": "/api-reference/post-vpn-session"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -357,6 +363,8 @@ class VpnSessions(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["VPN Sessions"],
+                extensions={"x-mint": {"href": "/api-reference/post-vpn-session"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -442,6 +450,8 @@ class VpnSessions(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["VPN Sessions"],
+                extensions={"x-mint": {"href": "/api-reference/put-vpn-session"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -527,6 +537,8 @@ class VpnSessions(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["VPN Sessions"],
+                extensions={"x-mint": {"href": "/api-reference/put-vpn-session"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -612,6 +624,8 @@ class VpnSessions(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["VPN Sessions"],
+                extensions={"x-mint": {"href": "/api-reference/delete-vpn-session"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -697,6 +711,8 @@ class VpnSessions(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["VPN Sessions"],
+                extensions={"x-mint": {"href": "/api-reference/delete-vpn-session"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

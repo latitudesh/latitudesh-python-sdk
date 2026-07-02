@@ -77,6 +77,8 @@ class ObjectStorage(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Object Storage"],
+                extensions={"x-mint": {"href": "/api-reference/get-storage-buckets"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -165,6 +167,8 @@ class ObjectStorage(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Object Storage"],
+                extensions={"x-mint": {"href": "/api-reference/get-storage-buckets"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -258,6 +262,8 @@ class ObjectStorage(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Object Storage"],
+                extensions={"x-mint": {"href": "/api-reference/post-storage-buckets"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -358,6 +364,8 @@ class ObjectStorage(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Object Storage"],
+                extensions={"x-mint": {"href": "/api-reference/post-storage-buckets"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -453,6 +461,8 @@ class ObjectStorage(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Object Storage"],
+                extensions={"x-mint": {"href": "/api-reference/get-storage-bucket"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -543,6 +553,8 @@ class ObjectStorage(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Object Storage"],
+                extensions={"x-mint": {"href": "/api-reference/get-storage-bucket"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -633,6 +645,10 @@ class ObjectStorage(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Object Storage"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/delete-storage-buckets"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -726,6 +742,10 @@ class ObjectStorage(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Object Storage"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/delete-storage-buckets"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
