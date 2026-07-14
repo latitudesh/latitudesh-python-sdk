@@ -463,5 +463,7 @@ class TestProjectsCRUDOperations:
         assert project.attributes.stats.ip_addresses == 2
         assert project.attributes.stats.servers == 1
         assert project.attributes.stats.vlans == 1
-        assert project.attributes.stats.containers == 0
+        assert project.attributes.stats.databases == 0
+        assert project.attributes.stats.storages == 0
+        assert project.attributes.stats.virtual_machines == 0
         assert project.attributes.stats.prefixes == 0
