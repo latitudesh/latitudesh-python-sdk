@@ -1,6 +1,6 @@
 # CreateVirtualNetworkPrivateNetworksSite
 
-Site ID or slug
+Site slug
 
 ## Example Usage
 
@@ -8,6 +8,8 @@ Site ID or slug
 from latitudesh_python_sdk.models import CreateVirtualNetworkPrivateNetworksSite
 
 value = CreateVirtualNetworkPrivateNetworksSite.ASH
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

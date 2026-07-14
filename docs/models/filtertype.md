@@ -17,3 +17,4 @@ value = FilterType.PRIVATE
 | --------- | --------- |
 | `PRIVATE` | private   |
 | `PUBLIC`  | public    |
+| `ELASTIC` | elastic   |

@@ -39,6 +39,12 @@ if TYPE_CHECKING:
     from latitudesh_python_sdk.traffic_sdk import TrafficSDK
     from latitudesh_python_sdk.userdata_sdk import UserDataSDK
     from latitudesh_python_sdk.userprofile import UserProfile
+    from latitudesh_python_sdk.virtual_machine_backups_sdk import (
+        VirtualMachineBackupsSDK,
+    )
+    from latitudesh_python_sdk.virtual_machine_restores_sdk import (
+        VirtualMachineRestoresSDK,
+    )
     from latitudesh_python_sdk.virtualmachines_sdk import VirtualMachinesSDK
     from latitudesh_python_sdk.vpnsessions import VpnSessions
 
@@ -70,6 +76,8 @@ class Latitudesh(BaseSDK):
     traffic: "TrafficSDK"
     user_profile: "UserProfile"
     virtual_machines: "VirtualMachinesSDK"
+    virtual_machine_backups: "VirtualMachineBackupsSDK"
+    virtual_machine_restores: "VirtualMachineRestoresSDK"
     private_networks: "PrivateNetworks"
     vpn_sessions: "VpnSessions"
     _sub_sdk_map = {
@@ -108,6 +116,14 @@ class Latitudesh(BaseSDK):
         "virtual_machines": (
             "latitudesh_python_sdk.virtualmachines_sdk",
             "VirtualMachinesSDK",
+        ),
+        "virtual_machine_backups": (
+            "latitudesh_python_sdk.virtual_machine_backups_sdk",
+            "VirtualMachineBackupsSDK",
+        ),
+        "virtual_machine_restores": (
+            "latitudesh_python_sdk.virtual_machine_restores_sdk",
+            "VirtualMachineRestoresSDK",
         ),
         "private_networks": (
             "latitudesh_python_sdk.privatenetworks",

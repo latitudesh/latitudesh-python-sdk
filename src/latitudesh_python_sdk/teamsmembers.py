@@ -16,6 +16,7 @@ class TeamsMembers(BaseSDK):
         *,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
+        stats_total: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -25,6 +26,7 @@ class TeamsMembers(BaseSDK):
 
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -43,6 +45,7 @@ class TeamsMembers(BaseSDK):
         request = models.GetTeamMembersRequest(
             page_size=page_size,
             page_number=page_number,
+            stats_total=stats_total,
         )
 
         req = self._build_request(
@@ -79,6 +82,8 @@ class TeamsMembers(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Team members"],
+                extensions={"x-mint": {"href": "/api-reference/get-team-members"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -102,6 +107,7 @@ class TeamsMembers(BaseSDK):
             return self.list(
                 page_size=page_size,
                 page_number=next_page,
+                stats_total=stats_total,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -127,6 +133,7 @@ class TeamsMembers(BaseSDK):
         *,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
+        stats_total: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -136,6 +143,7 @@ class TeamsMembers(BaseSDK):
 
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -154,6 +162,7 @@ class TeamsMembers(BaseSDK):
         request = models.GetTeamMembersRequest(
             page_size=page_size,
             page_number=page_number,
+            stats_total=stats_total,
         )
 
         req = self._build_request_async(
@@ -190,6 +199,8 @@ class TeamsMembers(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Team members"],
+                extensions={"x-mint": {"href": "/api-reference/get-team-members"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -213,6 +224,7 @@ class TeamsMembers(BaseSDK):
             return self.list(
                 page_size=page_size,
                 page_number=next_page,
+                stats_total=stats_total,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -308,6 +320,8 @@ class TeamsMembers(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Team members"],
+                extensions={"x-mint": {"href": "/api-reference/post-team-members"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -400,6 +414,8 @@ class TeamsMembers(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Team members"],
+                extensions={"x-mint": {"href": "/api-reference/post-team-members"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -482,6 +498,8 @@ class TeamsMembers(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Team members"],
+                extensions={"x-mint": {"href": "/api-reference/destroy-team-member"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -564,6 +582,8 @@ class TeamsMembers(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Team members"],
+                extensions={"x-mint": {"href": "/api-reference/destroy-team-member"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

@@ -33,6 +33,7 @@ class ServersSDK(BaseSDK):
         extra_fields_servers: Optional[str] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
+        stats_total: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -62,6 +63,7 @@ class ServersSDK(BaseSDK):
         :param extra_fields_servers: The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -97,6 +99,7 @@ class ServersSDK(BaseSDK):
             extra_fields_servers=extra_fields_servers,
             page_size=page_size,
             page_number=page_number,
+            stats_total=stats_total,
         )
 
         req = self._build_request(
@@ -133,6 +136,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/get-servers"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -173,6 +178,7 @@ class ServersSDK(BaseSDK):
                 extra_fields_servers=extra_fields_servers,
                 page_size=page_size,
                 page_number=next_page,
+                stats_total=stats_total,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -214,6 +220,7 @@ class ServersSDK(BaseSDK):
         extra_fields_servers: Optional[str] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
+        stats_total: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -243,6 +250,7 @@ class ServersSDK(BaseSDK):
         :param extra_fields_servers: The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -278,6 +286,7 @@ class ServersSDK(BaseSDK):
             extra_fields_servers=extra_fields_servers,
             page_size=page_size,
             page_number=page_number,
+            stats_total=stats_total,
         )
 
         req = self._build_request_async(
@@ -314,6 +323,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/get-servers"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -354,6 +365,7 @@ class ServersSDK(BaseSDK):
                 extra_fields_servers=extra_fields_servers,
                 page_size=page_size,
                 page_number=next_page,
+                stats_total=stats_total,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -447,6 +459,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/create-server"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -538,6 +552,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/create-server"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -626,6 +642,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/get-server"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -714,6 +732,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/get-server"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -814,6 +834,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/update-server"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -914,6 +936,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/update-server"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -999,6 +1023,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/destroy-server"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1084,6 +1110,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/destroy-server"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1166,6 +1194,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-server-deploy-config"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1248,6 +1280,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-server-deploy-config"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1353,6 +1389,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/update-server-deploy-config"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1458,6 +1498,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/update-server-deploy-config"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1542,6 +1586,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/server-lock"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1626,6 +1672,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/server-lock"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1710,6 +1758,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/server-unlock"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1794,6 +1844,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/server-unlock"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1893,6 +1945,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-server-out-of-band"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1992,6 +2048,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-server-out-of-band"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2074,6 +2134,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-server-out-of-band"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2156,6 +2220,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-server-out-of-band"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2261,6 +2329,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/create-server-action"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2366,6 +2436,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/create-server-action"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2454,6 +2526,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/create-ipmi-session"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2542,6 +2616,8 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={"x-mint": {"href": "/api-reference/create-ipmi-session"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2626,6 +2702,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/server-start-rescue-mode"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2710,6 +2790,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/server-start-rescue-mode"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2794,6 +2878,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/server-exit-rescue-mode"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2878,6 +2966,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/server-exit-rescue-mode"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2962,6 +3054,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/server-schedule-deletion"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3046,6 +3142,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/server-schedule-deletion"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3130,6 +3230,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/server-unschedule-deletion"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3214,6 +3318,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/server-unschedule-deletion"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3313,6 +3421,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-server-reinstall"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -3416,6 +3528,10 @@ class ServersSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Servers"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-server-reinstall"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

@@ -24,6 +24,8 @@ class EventsSDK(BaseSDK):
         filter_created_at: Optional[Iterable[str]] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
+        stats_total: Optional[str] = None,
+        sort: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -44,6 +46,8 @@ class EventsSDK(BaseSDK):
         :param filter_created_at: The created at between date range date1, date2 (inclusive) to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param sort: Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at. Example: `sort=-created_at` sorts by creation date descending.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -70,6 +74,8 @@ class EventsSDK(BaseSDK):
             filter_created_at=utils.unmarshal(filter_created_at, Optional[List[str]]),
             page_size=page_size,
             page_number=page_number,
+            stats_total=stats_total,
+            sort=sort,
         )
 
         req = self._build_request(
@@ -106,6 +112,8 @@ class EventsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Events"],
+                extensions={"x-mint": {"href": "/api-reference/get-events"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -137,6 +145,8 @@ class EventsSDK(BaseSDK):
                 filter_created_at=filter_created_at,
                 page_size=page_size,
                 page_number=next_page,
+                stats_total=stats_total,
+                sort=sort,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -169,6 +179,8 @@ class EventsSDK(BaseSDK):
         filter_created_at: Optional[Iterable[str]] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
+        stats_total: Optional[str] = None,
+        sort: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -189,6 +201,8 @@ class EventsSDK(BaseSDK):
         :param filter_created_at: The created at between date range date1, date2 (inclusive) to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param sort: Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at. Example: `sort=-created_at` sorts by creation date descending.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -215,6 +229,8 @@ class EventsSDK(BaseSDK):
             filter_created_at=utils.unmarshal(filter_created_at, Optional[List[str]]),
             page_size=page_size,
             page_number=page_number,
+            stats_total=stats_total,
+            sort=sort,
         )
 
         req = self._build_request_async(
@@ -251,6 +267,8 @@ class EventsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Events"],
+                extensions={"x-mint": {"href": "/api-reference/get-events"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -282,6 +300,8 @@ class EventsSDK(BaseSDK):
                 filter_created_at=filter_created_at,
                 page_size=page_size,
                 page_number=next_page,
+                stats_total=stats_total,
+                sort=sort,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,

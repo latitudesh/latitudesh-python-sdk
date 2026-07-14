@@ -24,6 +24,8 @@ class GetVirtualNetworksAssignmentsRequestTypedDict(TypedDict):
     r"""Number of items to return per page"""
     page_number: NotRequired[int]
     r"""Page number to return (starts at 1)"""
+    stats_total: NotRequired[str]
+    r"""Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`."""
 
 
 class GetVirtualNetworksAssignmentsRequest(BaseModel):
@@ -62,6 +64,13 @@ class GetVirtualNetworksAssignmentsRequest(BaseModel):
     ] = 1
     r"""Page number to return (starts at 1)"""
 
+    stats_total: Annotated[
+        Optional[str],
+        pydantic.Field(alias="stats[total]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -71,6 +80,7 @@ class GetVirtualNetworksAssignmentsRequest(BaseModel):
                 "filter[virtual_network_id]",
                 "page[size]",
                 "page[number]",
+                "stats[total]",
             ]
         )
         serialized = handler(self)

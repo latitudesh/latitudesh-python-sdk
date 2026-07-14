@@ -6,6 +6,8 @@
 from latitudesh_python_sdk.models import BillingType
 
 value = BillingType.YEARLY
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

@@ -52,25 +52,44 @@ class BillingModel(BaseModel):
         return m
 
 
-class StatsTypedDict(TypedDict):
+class ProjectIncludeStatsTypedDict(TypedDict):
+    databases: NotRequired[int]
     ip_addresses: NotRequired[int]
     prefixes: NotRequired[int]
     servers: NotRequired[int]
+    storages: NotRequired[int]
+    virtual_machines: NotRequired[int]
     vlans: NotRequired[int]
 
 
-class Stats(BaseModel):
+class ProjectIncludeStats(BaseModel):
+    databases: Optional[int] = None
+
     ip_addresses: Optional[int] = None
 
     prefixes: Optional[int] = None
 
     servers: Optional[int] = None
 
+    storages: Optional[int] = None
+
+    virtual_machines: Optional[int] = None
+
     vlans: Optional[int] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["ip_addresses", "prefixes", "servers", "vlans"])
+        optional_fields = set(
+            [
+                "databases",
+                "ip_addresses",
+                "prefixes",
+                "servers",
+                "storages",
+                "virtual_machines",
+                "vlans",
+            ]
+        )
         serialized = handler(self)
         m = {}
 
@@ -96,7 +115,7 @@ class ProjectIncludeTypedDict(TypedDict):
     bandwidth_alert: NotRequired[bool]
     environment: NotRequired[Nullable[str]]
     billing: NotRequired[BillingModelTypedDict]
-    stats: NotRequired[StatsTypedDict]
+    stats: NotRequired[ProjectIncludeStatsTypedDict]
 
 
 class ProjectInclude(BaseModel):
@@ -120,7 +139,7 @@ class ProjectInclude(BaseModel):
 
     billing: Optional[BillingModel] = None
 
-    stats: Optional[Stats] = None
+    stats: Optional[ProjectIncludeStats] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

@@ -1,0 +1,10 @@
+# CreateVirtualMachineRestoreRequest
+
+
+## Fields
+
+| Field                                                                                      | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `virtual_machine_id`                                                                       | *str*                                                                                      | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `backup_id`                                                                                | *str*                                                                                      | :heavy_check_mark:                                                                         | N/A                                                                                        |
+| `virtual_machine_restore_payload`                                                          | [Optional[models.VirtualMachineRestorePayload]](../models/virtualmachinerestorepayload.md) | :heavy_minus_sign:                                                                         | N/A                                                                                        |

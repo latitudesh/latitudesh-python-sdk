@@ -335,6 +335,7 @@ with Latitudesh(
 * [update_bandwidth](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#update_bandwidth) - Update bandwidth packages
 * [list_storage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_storage) - List storage plans
 * [list_vm_plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_vm_plans) - List VM plans
+* [get_managed_database_plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#get_managed_database_plans) - List managed database plans
 
 ### [PrivateNetworks](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md)
 
@@ -440,6 +441,24 @@ with Latitudesh(
 * [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userprofile/README.md#get) - Retrieve profile
 * [update](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userprofile/README.md#update) - Update profile
 * [list_teams](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/userprofile/README.md#list_teams) - List user teams
+
+### [VirtualMachineBackups](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinebackupssdk/README.md)
+
+* [list_virtual_machine_scoped_backups](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinebackupssdk/README.md#list_virtual_machine_scoped_backups) - List a VM's backups
+* [create_virtual_machine_backup](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinebackupssdk/README.md#create_virtual_machine_backup) - Create VM backup
+* [list_virtual_machine_backups](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinebackupssdk/README.md#list_virtual_machine_backups) - List all VM backups
+* [create_virtual_machine_backup_top_level](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinebackupssdk/README.md#create_virtual_machine_backup_top_level) - Create VM backup (top-level)
+* [get_virtual_machine_backup](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinebackupssdk/README.md#get_virtual_machine_backup) - Get VM backup
+* [delete_virtual_machine_backup](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinebackupssdk/README.md#delete_virtual_machine_backup) - Delete VM backup
+
+### [VirtualMachineRestores](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinerestoressdk/README.md)
+
+* [list_virtual_machine_scoped_restores](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinerestoressdk/README.md#list_virtual_machine_scoped_restores) - List a backup's restores
+* [create_virtual_machine_restore](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinerestoressdk/README.md#create_virtual_machine_restore) - Create VM restore
+* [list_backup_restores](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinerestoressdk/README.md#list_backup_restores) - List a backup's restores (top-level backup path)
+* [list_virtual_machine_restores](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinerestoressdk/README.md#list_virtual_machine_restores) - List all VM restores
+* [create_virtual_machine_restore_flat](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinerestoressdk/README.md#create_virtual_machine_restore_flat) - Create VM restore (flat)
+* [get_virtual_machine_restore](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinerestoressdk/README.md#get_virtual_machine_restore) - Get VM restore
 
 ### [VirtualMachines](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md)
 
@@ -602,7 +621,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 20 of 133 methods.*
+* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 33 of 146 methods.*
 * [`ResponseValidationError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

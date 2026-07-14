@@ -1,0 +1,9 @@
+# VirtualMachineRestorePayloadData
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                         | [Optional[models.VirtualMachineRestorePayloadType]](../models/virtualmachinerestorepayloadtype.md)             | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |
+| `attributes`                                                                                                   | [Optional[models.VirtualMachineRestorePayloadAttributes]](../models/virtualmachinerestorepayloadattributes.md) | :heavy_minus_sign:                                                                                             | N/A                                                                                                            |

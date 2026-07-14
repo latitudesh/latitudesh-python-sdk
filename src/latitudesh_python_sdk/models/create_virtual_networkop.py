@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -12,8 +13,8 @@ class CreateVirtualNetworkPrivateNetworksType(str, Enum):
     VIRTUAL_NETWORK = "virtual_network"
 
 
-class CreateVirtualNetworkPrivateNetworksSite(str, Enum):
-    r"""Site ID or slug"""
+class CreateVirtualNetworkPrivateNetworksSite(str, Enum, metaclass=utils.OpenEnumMeta):
+    r"""Site slug"""
 
     ASH = "ASH"
     BUE = "BUE"
@@ -40,7 +41,7 @@ class CreateVirtualNetworkPrivateNetworksAttributesTypedDict(TypedDict):
     project: str
     r"""Project ID or slug"""
     site: NotRequired[CreateVirtualNetworkPrivateNetworksSite]
-    r"""Site ID or slug"""
+    r"""Site slug"""
 
 
 class CreateVirtualNetworkPrivateNetworksAttributes(BaseModel):
@@ -50,7 +51,16 @@ class CreateVirtualNetworkPrivateNetworksAttributes(BaseModel):
     r"""Project ID or slug"""
 
     site: Optional[CreateVirtualNetworkPrivateNetworksSite] = None
-    r"""Site ID or slug"""
+    r"""Site slug"""
+
+    @field_serializer("site")
+    def serialize_site(self, value):
+        if isinstance(value, str):
+            try:
+                return models.CreateVirtualNetworkPrivateNetworksSite(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

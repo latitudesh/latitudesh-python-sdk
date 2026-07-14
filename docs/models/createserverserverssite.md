@@ -8,6 +8,8 @@ The site slug to deploy the server
 from latitudesh_python_sdk.models import CreateServerServersSite
 
 value = CreateServerServersSite.ASH
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

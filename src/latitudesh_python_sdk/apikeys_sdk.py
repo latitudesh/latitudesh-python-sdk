@@ -71,6 +71,8 @@ class APIKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["API keys"],
+                extensions={"x-mint": {"href": "/api-reference/get-api-keys"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -149,6 +151,8 @@ class APIKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["API keys"],
+                extensions={"x-mint": {"href": "/api-reference/get-api-keys"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -237,6 +241,8 @@ class APIKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["API keys"],
+                extensions={"x-mint": {"href": "/api-reference/post-api-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -325,6 +331,8 @@ class APIKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["API keys"],
+                extensions={"x-mint": {"href": "/api-reference/post-api-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -421,6 +429,8 @@ class APIKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["API keys"],
+                extensions={"x-mint": {"href": "/api-reference/rotate-api-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -517,6 +527,8 @@ class APIKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["API keys"],
+                extensions={"x-mint": {"href": "/api-reference/rotate-api-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -602,6 +614,8 @@ class APIKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["API keys"],
+                extensions={"x-mint": {"href": "/api-reference/delete-api-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -687,6 +701,8 @@ class APIKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["API keys"],
+                extensions={"x-mint": {"href": "/api-reference/delete-api-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -783,6 +799,8 @@ class APIKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["API keys"],
+                extensions={"x-mint": {"href": "/api-reference/update-api-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -879,6 +897,8 @@ class APIKeysSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["API keys"],
+                extensions={"x-mint": {"href": "/api-reference/update-api-key"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

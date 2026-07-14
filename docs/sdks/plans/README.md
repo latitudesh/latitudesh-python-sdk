@@ -10,6 +10,7 @@
 * [update_bandwidth](#update_bandwidth) - Update bandwidth packages
 * [list_storage](#list_storage) - List storage plans
 * [list_vm_plans](#list_vm_plans) - List VM plans
+* [get_managed_database_plans](#get_managed_database_plans) - List managed database plans
 
 ## list
 
@@ -126,13 +127,14 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `api_version`                                                       | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `filter_id`                                                         | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The plan ID to filter by                                            |
-| `page_size`                                                         | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Number of items to return per page                                  |
-| `page_number`                                                       | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Page number to return (starts at 1)                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                                                                             | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `api_version`                                                                                                                         | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | N/A                                                                                                                                   |
+| `filter_id`                                                                                                                           | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | The plan ID to filter by                                                                                                              |
+| `page_size`                                                                                                                           | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Number of items to return per page                                                                                                    |
+| `page_number`                                                                                                                         | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Page number to return (starts at 1)                                                                                                   |
+| `stats_total`                                                                                                                         | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`. |
+| `retries`                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                      | :heavy_minus_sign:                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                   |
 
 ### Response
 
@@ -291,6 +293,45 @@ with Latitudesh(
 ### Response
 
 **[models.VirtualMachinePlans](../../models/virtualmachineplans.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## get_managed_database_plans
+
+List managed database plans
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get-managed-database-plans" method="get" path="/plans/managed_databases" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.plans.get_managed_database_plans()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.ManagedDatabasePlans](../../models/manageddatabaseplans.md)**
 
 ### Errors
 

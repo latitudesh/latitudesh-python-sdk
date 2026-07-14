@@ -20,15 +20,6 @@ class VirtualMachineAttributesType(str, Enum):
     VIRTUAL_MACHINES = "virtual_machines"
 
 
-class VirtualMachineAttributesStatus(str, Enum):
-    RUNNING = "Running"
-    CONFIGURING_NETWORK = "Configuring network"
-    STARTING = "Starting"
-    SCHEDULING = "Scheduling"
-    SCHEDULED = "Scheduled"
-    DESTROYING = "Destroying"
-
-
 class VirtualMachineAttributesFeaturesTypedDict(TypedDict):
     r"""Features supported by this operating system"""
 
@@ -38,6 +29,10 @@ class VirtualMachineAttributesFeaturesTypedDict(TypedDict):
     r"""Whether SSH keys are supported"""
     user_data: NotRequired[bool]
     r"""Whether user data is supported"""
+    rescue: NotRequired[bool]
+    r"""Whether rescue mode is supported"""
+    workflow: NotRequired[bool]
+    r"""Whether workflow is supported"""
 
 
 class VirtualMachineAttributesFeatures(BaseModel):
@@ -52,9 +47,15 @@ class VirtualMachineAttributesFeatures(BaseModel):
     user_data: Optional[bool] = None
     r"""Whether user data is supported"""
 
+    rescue: Optional[bool] = None
+    r"""Whether rescue mode is supported"""
+
+    workflow: Optional[bool] = None
+    r"""Whether workflow is supported"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["raid", "ssh_keys", "user_data"])
+        optional_fields = set(["raid", "ssh_keys", "user_data", "rescue", "workflow"])
         serialized = handler(self)
         m = {}
 
@@ -160,7 +161,7 @@ class VirtualMachineAttributesOperatingSystem(BaseModel):
 
 
 class CredentialsTypedDict(TypedDict):
-    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running."""
+    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`."""
 
     username: NotRequired[str]
     r"""The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS."""
@@ -170,7 +171,7 @@ class CredentialsTypedDict(TypedDict):
 
 
 class Credentials(BaseModel):
-    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running."""
+    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`."""
 
     username: Optional[str] = None
     r"""The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS."""
@@ -315,14 +316,15 @@ class VirtualMachineAttributesTags(BaseModel):
 class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     created_at: NotRequired[str]
-    status: NotRequired[VirtualMachineAttributesStatus]
+    status: NotRequired[str]
+    r"""Current lifecycle status of the VM, derived from the underlying KubeVirt phase/printable status and capitalized. This is an open set that may grow over time — do not treat it as a closed enum. Known values include: Running, Starting, Stopped, Stopping, Failed, Off, Error, Rebooting, Deleting, Destroying, Configuring network, Scheduling, Scheduled, Provisioning."""
     primary_ipv4: NotRequired[Nullable[str]]
     operating_system: NotRequired[
         Nullable[VirtualMachineAttributesOperatingSystemTypedDict]
     ]
     r"""The operating system installed on the virtual machine"""
     credentials: NotRequired[Nullable[CredentialsTypedDict]]
-    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running."""
+    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`."""
     site: NotRequired[Nullable[str]]
     billing: NotRequired[Nullable[str]]
     user_data: NotRequired[Nullable[str]]
@@ -341,7 +343,8 @@ class VirtualMachineAttributesAttributes(BaseModel):
 
     created_at: Optional[str] = None
 
-    status: Optional[VirtualMachineAttributesStatus] = None
+    status: Optional[str] = None
+    r"""Current lifecycle status of the VM, derived from the underlying KubeVirt phase/printable status and capitalized. This is an open set that may grow over time — do not treat it as a closed enum. Known values include: Running, Starting, Stopped, Stopping, Failed, Off, Error, Rebooting, Deleting, Destroying, Configuring network, Scheduling, Scheduled, Provisioning."""
 
     primary_ipv4: OptionalNullable[str] = UNSET
 
@@ -349,7 +352,7 @@ class VirtualMachineAttributesAttributes(BaseModel):
     r"""The operating system installed on the virtual machine"""
 
     credentials: OptionalNullable[Credentials] = UNSET
-    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running."""
+    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`."""
 
     site: OptionalNullable[str] = UNSET
 

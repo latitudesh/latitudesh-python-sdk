@@ -1,4 +1,4 @@
-# VirtualNetworksMeta
+# VirtualMachineBackupsMeta
 
 
 ## Fields

@@ -6,6 +6,8 @@
 from latitudesh_python_sdk.models import PostVpnSessionVpnSessionsSite
 
 value = PostVpnSessionVpnSessionsSite.ASH
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

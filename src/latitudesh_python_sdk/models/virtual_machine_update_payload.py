@@ -18,11 +18,23 @@ class VirtualMachineUpdatePayloadType(str, Enum):
     VIRTUAL_MACHINES = "virtual_machines"
 
 
+class VirtualMachineUpdatePayloadBilling(str, Enum):
+    r"""Target billing cycle. Upgrades only (hourly → monthly → yearly); downgrades and reserved-project changes return 422."""
+
+    HOURLY = "hourly"
+    MONTHLY = "monthly"
+    YEARLY = "yearly"
+
+
 class VirtualMachineUpdatePayloadAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The new display name (hostname) for the Virtual Machine"""
     tags: NotRequired[Nullable[List[str]]]
     r"""Array of tag IDs to assign to the VM. Replaces all existing tags."""
+    billing: NotRequired[VirtualMachineUpdatePayloadBilling]
+    r"""Target billing cycle. Upgrades only (hourly → monthly → yearly); downgrades and reserved-project changes return 422."""
+    plan: NotRequired[str]
+    r"""Target plan slug for a vertical upgrade. Upgrades only (cpu, memory, and/or storage must scale up; nothing may shrink). The VM is powered off to apply the new resources and powered back on. Must be sent on its own (cannot be combined with name, tags, or billing). Returns 202 Accepted."""
 
 
 class VirtualMachineUpdatePayloadAttributes(BaseModel):
@@ -32,9 +44,15 @@ class VirtualMachineUpdatePayloadAttributes(BaseModel):
     tags: OptionalNullable[List[str]] = UNSET
     r"""Array of tag IDs to assign to the VM. Replaces all existing tags."""
 
+    billing: Optional[VirtualMachineUpdatePayloadBilling] = None
+    r"""Target billing cycle. Upgrades only (hourly → monthly → yearly); downgrades and reserved-project changes return 422."""
+
+    plan: Optional[str] = None
+    r"""Target plan slug for a vertical upgrade. Upgrades only (cpu, memory, and/or storage must scale up; nothing may shrink). The VM is powered off to apply the new resources and powered back on. Must be sent on its own (cannot be combined with name, tags, or billing). Returns 202 Accepted."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "tags"])
+        optional_fields = set(["name", "tags", "billing", "plan"])
         nullable_fields = set(["tags"])
         serialized = handler(self)
         m = {}

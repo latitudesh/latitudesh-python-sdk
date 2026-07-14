@@ -6,6 +6,8 @@
 from latitudesh_python_sdk.models import FilterLocation
 
 value = FilterLocation.ASH
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

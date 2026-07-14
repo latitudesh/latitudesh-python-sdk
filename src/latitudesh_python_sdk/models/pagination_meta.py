@@ -33,11 +33,11 @@ class Total(BaseModel):
         return m
 
 
-class PaginationMetaStatsTypedDict(TypedDict):
+class StatsTypedDict(TypedDict):
     total: NotRequired[TotalTypedDict]
 
 
-class PaginationMetaStats(BaseModel):
+class Stats(BaseModel):
     total: Optional[Total] = None
 
     @model_serializer(mode="wrap")
@@ -58,11 +58,11 @@ class PaginationMetaStats(BaseModel):
 
 
 class PaginationMetaTypedDict(TypedDict):
-    stats: NotRequired[PaginationMetaStatsTypedDict]
+    stats: NotRequired[StatsTypedDict]
 
 
 class PaginationMeta(BaseModel):
-    stats: Optional[PaginationMetaStats] = None
+    stats: Optional[Stats] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
