@@ -91,6 +91,8 @@ class ElasticIpsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Elastic Ips"],
+                extensions={"x-mint": {"href": "/api-reference/list-elastic-ips"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -217,6 +219,8 @@ class ElasticIpsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Elastic Ips"],
+                extensions={"x-mint": {"href": "/api-reference/list-elastic-ips"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -334,6 +338,8 @@ class ElasticIpsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Elastic Ips"],
+                extensions={"x-mint": {"href": "/api-reference/create-elastic-ip"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -426,6 +432,8 @@ class ElasticIpsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Elastic Ips"],
+                extensions={"x-mint": {"href": "/api-reference/create-elastic-ip"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -515,6 +523,8 @@ class ElasticIpsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Elastic Ips"],
+                extensions={"x-mint": {"href": "/api-reference/get-elastic-ip"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -604,6 +614,8 @@ class ElasticIpsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Elastic Ips"],
+                extensions={"x-mint": {"href": "/api-reference/get-elastic-ip"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -693,6 +705,8 @@ class ElasticIpsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Elastic Ips"],
+                extensions={"x-mint": {"href": "/api-reference/delete-elastic-ip"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -782,6 +796,8 @@ class ElasticIpsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Elastic Ips"],
+                extensions={"x-mint": {"href": "/api-reference/delete-elastic-ip"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -879,6 +895,8 @@ class ElasticIpsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Elastic Ips"],
+                extensions={"x-mint": {"href": "/api-reference/update-elastic-ip"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -976,6 +994,8 @@ class ElasticIpsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Elastic Ips"],
+                extensions={"x-mint": {"href": "/api-reference/update-elastic-ip"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

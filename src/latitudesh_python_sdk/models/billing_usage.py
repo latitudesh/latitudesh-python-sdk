@@ -15,6 +15,14 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class BillingUsageMetaTypedDict(TypedDict):
+    pass
+
+
+class BillingUsageMeta(BaseModel):
+    pass
+
+
 class BillingUsageProjectTypedDict(TypedDict):
     r"""The project in which the returned usage belongs to"""
 
@@ -111,6 +119,7 @@ class BillingUsageUnit(str, Enum):
     QUANTITY = "quantity"
     HOUR = "hour"
     MINUTE = "minute"
+    GB = "GB"
 
 
 class UsageType(str, Enum):
@@ -118,26 +127,97 @@ class UsageType(str, Enum):
     METERED = "metered"
 
 
-class MetadataTypedDict(TypedDict):
-    id: NotRequired[Nullable[str]]
-    hostname: NotRequired[Nullable[str]]
-    plan: NotRequired[Nullable[str]]
+class BillingUsageServersTypedDict(TypedDict):
+    id: NotRequired[str]
+    hostname: NotRequired[str]
+    plan: NotRequired[str]
     tags: NotRequired[List[str]]
 
 
-class Metadata(BaseModel):
-    id: OptionalNullable[str] = UNSET
+class BillingUsageServers(BaseModel):
+    id: Optional[str] = None
 
-    hostname: OptionalNullable[str] = UNSET
+    hostname: Optional[str] = None
 
-    plan: OptionalNullable[str] = UNSET
+    plan: Optional[str] = None
 
     tags: Optional[List[str]] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["id", "hostname", "plan", "tags"])
-        nullable_fields = set(["id", "hostname", "plan"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class BucketTypedDict(TypedDict):
+    id: NotRequired[str]
+    name: NotRequired[str]
+    location: NotRequired[Nullable[str]]
+
+
+class Bucket(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+    location: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name", "location"])
+        nullable_fields = set(["location"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
+class MetadataTypedDict(TypedDict):
+    servers: NotRequired[List[BillingUsageServersTypedDict]]
+    bucket: NotRequired[BucketTypedDict]
+    billing_unit_divisor: NotRequired[Nullable[int]]
+    r"""For products priced per divided unit (e.g. $0.01 per 1000 API calls), the divisor applied to the quantity before pricing. Omitted for products that are not priced by divided units."""
+
+
+class Metadata(BaseModel):
+    servers: Optional[List[BillingUsageServers]] = None
+
+    bucket: Optional[Bucket] = None
+
+    billing_unit_divisor: OptionalNullable[int] = UNSET
+    r"""For products priced per divided unit (e.g. $0.01 per 1000 API calls), the divisor applied to the quantity before pricing. Omitted for products that are not priced by divided units."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["servers", "bucket", "billing_unit_divisor"])
+        nullable_fields = set(["billing_unit_divisor"])
         serialized = handler(self)
         m = {}
 
@@ -172,10 +252,14 @@ class ProductsTypedDict(TypedDict):
     start: NotRequired[datetime]
     end: NotRequired[Nullable[datetime]]
     unit: NotRequired[BillingUsageUnit]
+    unit_amount: NotRequired[float]
+    r"""The unit amount of the product in cents"""
     unit_price: NotRequired[float]
     r"""The unit price of the product in cents"""
     usage_type: NotRequired[UsageType]
     quantity: NotRequired[float]
+    amount: NotRequired[float]
+    r"""The total usage amount of the product in cents"""
     price: NotRequired[float]
     r"""The total usage price of the product in cents"""
     metadata: NotRequired[MetadataTypedDict]
@@ -204,12 +288,18 @@ class Products(BaseModel):
 
     unit: Optional[BillingUsageUnit] = None
 
+    unit_amount: Optional[float] = None
+    r"""The unit amount of the product in cents"""
+
     unit_price: Optional[float] = None
     r"""The unit price of the product in cents"""
 
     usage_type: Optional[UsageType] = None
 
     quantity: Optional[float] = None
+
+    amount: Optional[float] = None
+    r"""The total usage amount of the product in cents"""
 
     price: Optional[float] = None
     r"""The total usage price of the product in cents"""
@@ -231,9 +321,11 @@ class Products(BaseModel):
                 "start",
                 "end",
                 "unit",
+                "unit_amount",
                 "unit_price",
                 "usage_type",
                 "quantity",
+                "amount",
                 "price",
                 "metadata",
             ]
@@ -268,6 +360,8 @@ class BillingUsageAttributesTypedDict(TypedDict):
     r"""The period from the returned billing cycle"""
     available_credit_balance: NotRequired[int]
     r"""The available credit balance in cents"""
+    amount: NotRequired[float]
+    r"""The total usage amount in cents"""
     price: NotRequired[float]
     r"""The total usage price in cents"""
     threshold: NotRequired[Nullable[float]]
@@ -285,6 +379,9 @@ class BillingUsageAttributes(BaseModel):
     available_credit_balance: Optional[int] = None
     r"""The available credit balance in cents"""
 
+    amount: Optional[float] = None
+    r"""The total usage amount in cents"""
+
     price: Optional[float] = None
     r"""The total usage price in cents"""
 
@@ -300,6 +397,7 @@ class BillingUsageAttributes(BaseModel):
                 "project",
                 "period",
                 "available_credit_balance",
+                "amount",
                 "price",
                 "threshold",
                 "products",
@@ -330,17 +428,20 @@ class BillingUsageAttributes(BaseModel):
 
 class BillingUsageDataTypedDict(TypedDict):
     id: NotRequired[str]
+    type: NotRequired[str]
     attributes: NotRequired[BillingUsageAttributesTypedDict]
 
 
 class BillingUsageData(BaseModel):
     id: Optional[str] = None
 
+    type: Optional[str] = None
+
     attributes: Optional[BillingUsageAttributes] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "attributes"])
+        optional_fields = set(["id", "type", "attributes"])
         serialized = handler(self)
         m = {}
 
@@ -356,15 +457,18 @@ class BillingUsageData(BaseModel):
 
 
 class BillingUsageTypedDict(TypedDict):
+    meta: NotRequired[BillingUsageMetaTypedDict]
     data: NotRequired[BillingUsageDataTypedDict]
 
 
 class BillingUsage(BaseModel):
+    meta: Optional[BillingUsageMeta] = None
+
     data: Optional[BillingUsageData] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["meta", "data"])
         serialized = handler(self)
         m = {}
 

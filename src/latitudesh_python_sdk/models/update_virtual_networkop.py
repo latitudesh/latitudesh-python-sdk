@@ -25,7 +25,7 @@ class UpdateVirtualNetworkPrivateNetworksAttributesTypedDict(TypedDict):
 class UpdateVirtualNetworkPrivateNetworksAttributes(BaseModel):
     tags: Optional[List[str]] = None
 
-    description: Optional[str] = "Test virtual network update"
+    description: Optional[str] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

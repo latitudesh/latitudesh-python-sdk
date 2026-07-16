@@ -6,15 +6,16 @@ from .vpn_session_data_with_password import (
     VpnSessionDataWithPasswordTypedDict,
 )
 from enum import Enum
+from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from latitudesh_python_sdk.utils import FieldMetadata, QueryParamMetadata
 import pydantic
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class FilterLocation(str, Enum):
+class FilterLocation(str, Enum, metaclass=utils.OpenEnumMeta):
     ASH = "ASH"
     BUE = "BUE"
     CHI = "CHI"
@@ -45,6 +46,15 @@ class GetVpnSessionsRequest(BaseModel):
         pydantic.Field(alias="filter[location]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
+
+    @field_serializer("filter_location")
+    def serialize_filter_location(self, value):
+        if isinstance(value, str):
+            try:
+                return models.FilterLocation(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

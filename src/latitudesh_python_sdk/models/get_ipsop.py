@@ -23,6 +23,7 @@ class FilterType(str, Enum):
 
     PRIVATE = "private"
     PUBLIC = "public"
+    ELASTIC = "elastic"
 
 
 class GetIpsRequestTypedDict(TypedDict):
@@ -40,12 +41,20 @@ class GetIpsRequestTypedDict(TypedDict):
     r"""The address of IP to filter by starts_with"""
     filter_additional: NotRequired[bool]
     r"""Filter by additional IPs (true) or management IPs (false)"""
+    filter_available: NotRequired[bool]
+    r"""Filter by unassigned IPs (true) or assigned IPs (false)"""
+    filter_management: NotRequired[bool]
+    r"""Filter by management IPs (true) or additional/elastic IPs (false)"""
     extra_fields_ip_addresses: NotRequired[str]
     r"""The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string."""
     page_size: NotRequired[int]
     r"""Number of items to return per page"""
     page_number: NotRequired[int]
     r"""Page number to return (starts at 1)"""
+    stats_total: NotRequired[str]
+    r"""Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`."""
+    sort: NotRequired[str]
+    r"""Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: address, family, type, created_at. Example: `sort=type,-created_at` sorts by type ascending, then by creation date descending."""
 
 
 class GetIpsRequest(BaseModel):
@@ -98,6 +107,20 @@ class GetIpsRequest(BaseModel):
     ] = None
     r"""Filter by additional IPs (true) or management IPs (false)"""
 
+    filter_available: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="filter[available]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter by unassigned IPs (true) or assigned IPs (false)"""
+
+    filter_management: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="filter[management]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter by management IPs (true) or additional/elastic IPs (false)"""
+
     extra_fields_ip_addresses: Annotated[
         Optional[str],
         pydantic.Field(alias="extra_fields[ip_addresses]"),
@@ -119,6 +142,19 @@ class GetIpsRequest(BaseModel):
     ] = 1
     r"""Page number to return (starts at 1)"""
 
+    stats_total: Annotated[
+        Optional[str],
+        pydantic.Field(alias="stats[total]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`."""
+
+    sort: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: address, family, type, created_at. Example: `sort=type,-created_at` sorts by type ascending, then by creation date descending."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -130,9 +166,13 @@ class GetIpsRequest(BaseModel):
                 "filter[location]",
                 "filter[address]",
                 "filter[additional]",
+                "filter[available]",
+                "filter[management]",
                 "extra_fields[ip_addresses]",
                 "page[size]",
                 "page[number]",
+                "stats[total]",
+                "sort",
             ]
         )
         serialized = handler(self)

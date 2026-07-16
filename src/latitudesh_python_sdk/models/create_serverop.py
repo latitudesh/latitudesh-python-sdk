@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from enum import Enum
+from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk.types import (
     BaseModel,
     Nullable,
@@ -9,7 +10,7 @@ from latitudesh_python_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -18,7 +19,7 @@ class CreateServerServersType(str, Enum):
     SERVERS = "servers"
 
 
-class CreateServerServersPlan(str, Enum):
+class CreateServerServersPlan(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The plan slug to choose server from, defining the specs the server will have"""
 
     C2_LARGE_X86 = "c2-large-x86"
@@ -42,7 +43,7 @@ class CreateServerServersPlan(str, Enum):
     S3_LARGE_X86 = "s3-large-x86"
 
 
-class CreateServerServersSite(str, Enum):
+class CreateServerServersSite(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The site slug to deploy the server"""
 
     ASH = "ASH"
@@ -217,6 +218,24 @@ class CreateServerServersAttributes(BaseModel):
 
     billing: OptionalNullable[CreateServerServersBilling] = UNSET
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
+
+    @field_serializer("plan")
+    def serialize_plan(self, value):
+        if isinstance(value, str):
+            try:
+                return models.CreateServerServersPlan(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("site")
+    def serialize_site(self, value):
+        if isinstance(value, str):
+            try:
+                return models.CreateServerServersSite(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

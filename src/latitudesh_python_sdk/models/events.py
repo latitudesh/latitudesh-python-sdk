@@ -2,29 +2,22 @@
 
 from __future__ import annotations
 from .event_data import EventData, EventDataTypedDict
+from .pagination_meta import PaginationMeta, PaginationMetaTypedDict
 from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class EventsMetaTypedDict(TypedDict):
-    pass
-
-
-class EventsMeta(BaseModel):
-    pass
-
-
 class EventsTypedDict(TypedDict):
     data: NotRequired[List[EventDataTypedDict]]
-    meta: NotRequired[EventsMetaTypedDict]
+    meta: NotRequired[PaginationMetaTypedDict]
 
 
 class Events(BaseModel):
     data: Optional[List[EventData]] = None
 
-    meta: Optional[EventsMeta] = None
+    meta: Optional[PaginationMeta] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

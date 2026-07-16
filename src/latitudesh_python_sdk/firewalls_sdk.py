@@ -84,6 +84,10 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-all-firewall-assignments"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -201,6 +205,10 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-all-firewall-assignments"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -318,6 +326,8 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={"x-mint": {"href": "/api-reference/create-firewall"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -408,6 +418,8 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={"x-mint": {"href": "/api-reference/create-firewall"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -498,6 +510,8 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={"x-mint": {"href": "/api-reference/list-firewalls"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -615,6 +629,8 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={"x-mint": {"href": "/api-reference/list-firewalls"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -726,6 +742,8 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={"x-mint": {"href": "/api-reference/get-firewall"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -810,6 +828,8 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={"x-mint": {"href": "/api-reference/get-firewall"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -909,6 +929,8 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={"x-mint": {"href": "/api-reference/update-firewall"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1008,6 +1030,8 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={"x-mint": {"href": "/api-reference/update-firewall"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1090,6 +1114,8 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={"x-mint": {"href": "/api-reference/delete-firewall"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1172,6 +1198,8 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={"x-mint": {"href": "/api-reference/delete-firewall"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1273,6 +1301,10 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-firewall-assignment"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1374,6 +1406,10 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-firewall-assignment"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1464,6 +1500,10 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-firewall-assignments"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1581,6 +1621,10 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-firewall-assignments"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1695,6 +1739,10 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/delete-firewall-assignment"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1782,6 +1830,10 @@ class FirewallsSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["Firewalls"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/delete-firewall-assignment"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

@@ -21,9 +21,13 @@ class IPAddressesSDK(BaseSDK):
         filter_location: Optional[str] = None,
         filter_address: Optional[str] = None,
         filter_additional: Optional[bool] = None,
+        filter_available: Optional[bool] = None,
+        filter_management: Optional[bool] = None,
         extra_fields_ip_addresses: Optional[str] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
+        stats_total: Optional[str] = None,
+        sort: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -44,9 +48,13 @@ class IPAddressesSDK(BaseSDK):
         :param filter_location: The site slug to filter by
         :param filter_address: The address of IP to filter by starts_with
         :param filter_additional: Filter by additional IPs (true) or management IPs (false)
+        :param filter_available: Filter by unassigned IPs (true) or assigned IPs (false)
+        :param filter_management: Filter by management IPs (true) or additional/elastic IPs (false)
         :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param sort: Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: address, family, type, created_at. Example: `sort=type,-created_at` sorts by type ascending, then by creation date descending.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -70,9 +78,13 @@ class IPAddressesSDK(BaseSDK):
             filter_location=filter_location,
             filter_address=filter_address,
             filter_additional=filter_additional,
+            filter_available=filter_available,
+            filter_management=filter_management,
             extra_fields_ip_addresses=extra_fields_ip_addresses,
             page_size=page_size,
             page_number=page_number,
+            stats_total=stats_total,
+            sort=sort,
         )
 
         req = self._build_request(
@@ -109,6 +121,8 @@ class IPAddressesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["IP Addresses"],
+                extensions={"x-mint": {"href": "/api-reference/get-ips"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -137,9 +151,13 @@ class IPAddressesSDK(BaseSDK):
                 filter_location=filter_location,
                 filter_address=filter_address,
                 filter_additional=filter_additional,
+                filter_available=filter_available,
+                filter_management=filter_management,
                 extra_fields_ip_addresses=extra_fields_ip_addresses,
                 page_size=page_size,
                 page_number=next_page,
+                stats_total=stats_total,
+                sort=sort,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -170,9 +188,13 @@ class IPAddressesSDK(BaseSDK):
         filter_location: Optional[str] = None,
         filter_address: Optional[str] = None,
         filter_additional: Optional[bool] = None,
+        filter_available: Optional[bool] = None,
+        filter_management: Optional[bool] = None,
         extra_fields_ip_addresses: Optional[str] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
+        stats_total: Optional[str] = None,
+        sort: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -193,9 +215,13 @@ class IPAddressesSDK(BaseSDK):
         :param filter_location: The site slug to filter by
         :param filter_address: The address of IP to filter by starts_with
         :param filter_additional: Filter by additional IPs (true) or management IPs (false)
+        :param filter_available: Filter by unassigned IPs (true) or assigned IPs (false)
+        :param filter_management: Filter by management IPs (true) or additional/elastic IPs (false)
         :param extra_fields_ip_addresses: The `region` and `server` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[ip_addresses]=region,server` in the query string.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param sort: Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: address, family, type, created_at. Example: `sort=type,-created_at` sorts by type ascending, then by creation date descending.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -219,9 +245,13 @@ class IPAddressesSDK(BaseSDK):
             filter_location=filter_location,
             filter_address=filter_address,
             filter_additional=filter_additional,
+            filter_available=filter_available,
+            filter_management=filter_management,
             extra_fields_ip_addresses=extra_fields_ip_addresses,
             page_size=page_size,
             page_number=page_number,
+            stats_total=stats_total,
+            sort=sort,
         )
 
         req = self._build_request_async(
@@ -258,6 +288,8 @@ class IPAddressesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["IP Addresses"],
+                extensions={"x-mint": {"href": "/api-reference/get-ips"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -286,9 +318,13 @@ class IPAddressesSDK(BaseSDK):
                 filter_location=filter_location,
                 filter_address=filter_address,
                 filter_additional=filter_additional,
+                filter_available=filter_available,
+                filter_management=filter_management,
                 extra_fields_ip_addresses=extra_fields_ip_addresses,
                 page_size=page_size,
                 page_number=next_page,
+                stats_total=stats_total,
+                sort=sort,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -379,6 +415,8 @@ class IPAddressesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["IP Addresses"],
+                extensions={"x-mint": {"href": "/api-reference/get-ip"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -466,6 +504,8 @@ class IPAddressesSDK(BaseSDK):
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
+                tags=["IP Addresses"],
+                extensions={"x-mint": {"href": "/api-reference/get-ip"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

@@ -3,8 +3,8 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `id`               | *Optional[str]*    | :heavy_minus_sign: | N/A                |
-| `name`             | *Optional[str]*    | :heavy_minus_sign: | N/A                |
-| `email`            | *Optional[str]*    | :heavy_minus_sign: | N/A                |
+| Field                   | Type                    | Required                | Description             |
+| ----------------------- | ----------------------- | ----------------------- | ----------------------- |
+| `id`                    | *OptionalNullable[str]* | :heavy_minus_sign:      | N/A                     |
+| `name`                  | *OptionalNullable[str]* | :heavy_minus_sign:      | N/A                     |
+| `email`                 | *OptionalNullable[str]* | :heavy_minus_sign:      | N/A                     |

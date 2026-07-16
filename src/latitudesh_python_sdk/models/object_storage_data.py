@@ -21,7 +21,7 @@ class ObjectStorageDataType(str, Enum):
     OBJECT_STORAGES = "object_storages"
 
 
-class StorageClass(str, Enum):
+class ObjectStorageDataStorageClass(str, Enum):
     r"""Storage class tier"""
 
     STANDARD = "standard"
@@ -90,7 +90,7 @@ class ObjectStorageDataAttributesTypedDict(TypedDict):
     r"""Display name of the object storage"""
     storage_type: NotRequired[str]
     r"""Type of storage (e.g., `object`)"""
-    storage_class: NotRequired[StorageClass]
+    storage_class: NotRequired[ObjectStorageDataStorageClass]
     r"""Storage class tier"""
     created_at: NotRequired[Nullable[datetime]]
     r"""Timestamp when the object storage was created"""
@@ -123,7 +123,7 @@ class ObjectStorageDataAttributes(BaseModel):
     storage_type: Optional[str] = None
     r"""Type of storage (e.g., `object`)"""
 
-    storage_class: Optional[StorageClass] = None
+    storage_class: Optional[ObjectStorageDataStorageClass] = None
     r"""Storage class tier"""
 
     created_at: OptionalNullable[datetime] = UNSET

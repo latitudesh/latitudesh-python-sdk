@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 from enum import Enum
+from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
@@ -12,7 +13,7 @@ class PostVpnSessionVpnSessionsType(str, Enum):
     VPN_SESSIONS = "vpn_sessions"
 
 
-class PostVpnSessionVpnSessionsSite(str, Enum):
+class PostVpnSessionVpnSessionsSite(str, Enum, metaclass=utils.OpenEnumMeta):
     ASH = "ASH"
     BUE = "BUE"
     CHI = "CHI"
@@ -42,6 +43,15 @@ class PostVpnSessionVpnSessionsAttributes(BaseModel):
     site: Optional[PostVpnSessionVpnSessionsSite] = None
 
     server_id: Optional[str] = None
+
+    @field_serializer("site")
+    def serialize_site(self, value):
+        if isinstance(value, str):
+            try:
+                return models.PostVpnSessionVpnSessionsSite(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

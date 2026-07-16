@@ -2,29 +2,22 @@
 
 from __future__ import annotations
 from .ip_address_data import IPAddressData, IPAddressDataTypedDict
+from .pagination_meta import PaginationMeta, PaginationMetaTypedDict
 from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class IPAddressesMetaTypedDict(TypedDict):
-    pass
-
-
-class IPAddressesMeta(BaseModel):
-    pass
-
-
 class IPAddressesTypedDict(TypedDict):
     data: NotRequired[List[IPAddressDataTypedDict]]
-    meta: NotRequired[IPAddressesMetaTypedDict]
+    meta: NotRequired[PaginationMetaTypedDict]
 
 
 class IPAddresses(BaseModel):
     data: Optional[List[IPAddressData]] = None
 
-    meta: Optional[IPAddressesMeta] = None
+    meta: Optional[PaginationMeta] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

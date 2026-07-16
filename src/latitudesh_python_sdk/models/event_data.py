@@ -19,87 +19,114 @@ class EventDataType(str, Enum):
 
 
 class AuthorTypedDict(TypedDict):
-    id: NotRequired[str]
-    name: NotRequired[str]
-    email: NotRequired[str]
+    id: NotRequired[Nullable[str]]
+    name: NotRequired[Nullable[str]]
+    email: NotRequired[Nullable[str]]
 
 
 class Author(BaseModel):
-    id: Optional[str] = None
+    id: OptionalNullable[str] = UNSET
 
-    name: Optional[str] = None
+    name: OptionalNullable[str] = UNSET
 
-    email: Optional[str] = None
+    email: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["id", "name", "email"])
+        nullable_fields = set(["id", "name", "email"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
 
 
 class EventDataProjectTypedDict(TypedDict):
-    id: NotRequired[str]
-    name: NotRequired[str]
-    slug: NotRequired[str]
+    id: NotRequired[Nullable[str]]
+    name: NotRequired[Nullable[str]]
+    slug: NotRequired[Nullable[str]]
 
 
 class EventDataProject(BaseModel):
-    id: Optional[str] = None
+    id: OptionalNullable[str] = UNSET
 
-    name: Optional[str] = None
+    name: OptionalNullable[str] = UNSET
 
-    slug: Optional[str] = None
+    slug: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["id", "name", "slug"])
+        nullable_fields = set(["id", "name", "slug"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
 
 
 class EventDataTeamTypedDict(TypedDict):
-    id: NotRequired[str]
-    name: NotRequired[str]
+    id: NotRequired[Nullable[str]]
+    name: NotRequired[Nullable[str]]
 
 
 class EventDataTeam(BaseModel):
-    id: Optional[str] = None
+    id: OptionalNullable[str] = UNSET
 
-    name: Optional[str] = None
+    name: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["id", "name"])
+        nullable_fields = set(["id", "name"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

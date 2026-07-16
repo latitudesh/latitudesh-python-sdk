@@ -335,6 +335,7 @@ with Latitudesh(
 * [update_bandwidth](docs/sdks/plans/README.md#update_bandwidth) - Update bandwidth packages
 * [list_storage](docs/sdks/plans/README.md#list_storage) - List storage plans
 * [list_vm_plans](docs/sdks/plans/README.md#list_vm_plans) - List VM plans
+* [get_managed_database_plans](docs/sdks/plans/README.md#get_managed_database_plans) - List managed database plans
 
 ### [PrivateNetworks](docs/sdks/privatenetworks/README.md)
 
@@ -440,6 +441,24 @@ with Latitudesh(
 * [get](docs/sdks/userprofile/README.md#get) - Retrieve profile
 * [update](docs/sdks/userprofile/README.md#update) - Update profile
 * [list_teams](docs/sdks/userprofile/README.md#list_teams) - List user teams
+
+### [VirtualMachineBackups](docs/sdks/virtualmachinebackupssdk/README.md)
+
+* [list_virtual_machine_scoped_backups](docs/sdks/virtualmachinebackupssdk/README.md#list_virtual_machine_scoped_backups) - List a VM's backups
+* [create_virtual_machine_backup](docs/sdks/virtualmachinebackupssdk/README.md#create_virtual_machine_backup) - Create VM backup
+* [list_virtual_machine_backups](docs/sdks/virtualmachinebackupssdk/README.md#list_virtual_machine_backups) - List all VM backups
+* [create_virtual_machine_backup_top_level](docs/sdks/virtualmachinebackupssdk/README.md#create_virtual_machine_backup_top_level) - Create VM backup (top-level)
+* [get_virtual_machine_backup](docs/sdks/virtualmachinebackupssdk/README.md#get_virtual_machine_backup) - Get VM backup
+* [delete_virtual_machine_backup](docs/sdks/virtualmachinebackupssdk/README.md#delete_virtual_machine_backup) - Delete VM backup
+
+### [VirtualMachineRestores](docs/sdks/virtualmachinerestoressdk/README.md)
+
+* [list_virtual_machine_scoped_restores](docs/sdks/virtualmachinerestoressdk/README.md#list_virtual_machine_scoped_restores) - List a backup's restores
+* [create_virtual_machine_restore](docs/sdks/virtualmachinerestoressdk/README.md#create_virtual_machine_restore) - Create VM restore
+* [list_backup_restores](docs/sdks/virtualmachinerestoressdk/README.md#list_backup_restores) - List a backup's restores (top-level backup path)
+* [list_virtual_machine_restores](docs/sdks/virtualmachinerestoressdk/README.md#list_virtual_machine_restores) - List all VM restores
+* [create_virtual_machine_restore_flat](docs/sdks/virtualmachinerestoressdk/README.md#create_virtual_machine_restore_flat) - Create VM restore (flat)
+* [get_virtual_machine_restore](docs/sdks/virtualmachinerestoressdk/README.md#get_virtual_machine_restore) - Get VM restore
 
 ### [VirtualMachines](docs/sdks/virtualmachinessdk/README.md)
 
@@ -602,7 +621,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 20 of 133 methods.*
+* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 33 of 146 methods.*
 * [`ResponseValidationError`](./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

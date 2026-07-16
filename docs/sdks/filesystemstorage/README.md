@@ -163,7 +163,7 @@ Lists all the filesystems from a team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-storage-filesystems" method="get" path="/storage/filesystems" -->
+<!-- UsageSnippet language="python" operationID="get-storage-filesystems" method="get" path="/storage/filesystems" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -173,9 +173,10 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.filesystem_storage.list_filesystems(filter_project="small-rubber-shirt")
+    res = latitudesh.filesystem_storage.list_filesystems(filter_project="small-rubber-shirt")
 
-    # Use the SDK ...
+    # Handle response
+    print(res)
 
 ```
 
@@ -185,6 +186,10 @@ with Latitudesh(
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `filter_project`                                                    | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The project ID or Slug to filter by                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.Filesystems](../../models/filesystems.md)**
 
 ### Errors
 

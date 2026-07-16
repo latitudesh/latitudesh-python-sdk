@@ -8,6 +8,8 @@ The plan slug to choose server from, defining the specs the server will have
 from latitudesh_python_sdk.models import CreateServerServersPlan
 
 value = CreateServerServersPlan.C2_LARGE_X86
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

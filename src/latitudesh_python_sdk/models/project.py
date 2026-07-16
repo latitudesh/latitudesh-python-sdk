@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .team_include import TeamInclude, TeamIncludeTypedDict
 from enum import Enum
+from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk.types import (
     BaseModel,
     Nullable,
@@ -10,12 +11,24 @@ from latitudesh_python_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from pydantic import model_serializer
-from typing import Optional
+from pydantic import field_serializer, model_serializer
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class BillingType(str, Enum):
+class ProjectType(str, Enum):
+    PROJECTS = "projects"
+
+
+class TagsModelTypedDict(TypedDict):
+    pass
+
+
+class TagsModel(BaseModel):
+    pass
+
+
+class BillingType(str, Enum, metaclass=utils.OpenEnumMeta):
     YEARLY = "Yearly"
     MONTHLY = "Monthly"
     HOURLY = "Hourly"
@@ -23,31 +36,38 @@ class BillingType(str, Enum):
     CUSTOM = "Custom"
 
 
-class BillingMethod(str, Enum):
+class BillingMethod(str, Enum, metaclass=utils.OpenEnumMeta):
     NORMAL = "Normal"
     NINETY_FIVETH_PERCENTILE = "95th percentile"
 
 
-class Environment(str, Enum):
+class Environment(str, Enum, metaclass=utils.OpenEnumMeta):
     DEVELOPMENT = "Development"
     STAGING = "Staging"
     PRODUCTION = "Production"
 
 
 class ProjectStatsTypedDict(TypedDict):
+    databases: NotRequired[float]
+    r"""The number of database servers assigned to the project"""
     ip_addresses: NotRequired[float]
     r"""The number of IP addresses assigned to the project"""
     prefixes: NotRequired[float]
     r"""The IP address prefixes in the project"""
     servers: NotRequired[float]
     r"""The number of servers assigned to the project"""
-    containers: NotRequired[float]
-    r"""The number of containers assigned to the project"""
+    storages: NotRequired[float]
+    r"""The number of storages assigned to the project"""
+    virtual_machines: NotRequired[float]
+    r"""The number of active virtual machines assigned to the project"""
     vlans: NotRequired[float]
     r"""The number of VLANs assigned to the project"""
 
 
 class ProjectStats(BaseModel):
+    databases: Optional[float] = None
+    r"""The number of database servers assigned to the project"""
+
     ip_addresses: Optional[float] = None
     r"""The number of IP addresses assigned to the project"""
 
@@ -57,8 +77,11 @@ class ProjectStats(BaseModel):
     servers: Optional[float] = None
     r"""The number of servers assigned to the project"""
 
-    containers: Optional[float] = None
-    r"""The number of containers assigned to the project"""
+    storages: Optional[float] = None
+    r"""The number of storages assigned to the project"""
+
+    virtual_machines: Optional[float] = None
+    r"""The number of active virtual machines assigned to the project"""
 
     vlans: Optional[float] = None
     r"""The number of VLANs assigned to the project"""
@@ -66,7 +89,15 @@ class ProjectStats(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["ip_addresses", "prefixes", "servers", "containers", "vlans"]
+            [
+                "databases",
+                "ip_addresses",
+                "prefixes",
+                "servers",
+                "storages",
+                "virtual_machines",
+                "vlans",
+            ]
         )
         serialized = handler(self)
         m = {}
@@ -113,6 +144,8 @@ class ProjectBilling(BaseModel):
 
 
 class ProjectAttributesTypedDict(TypedDict):
+    tags: NotRequired[List[TagsModelTypedDict]]
+    r"""The tags assigned to the project"""
     name: NotRequired[str]
     r"""The project name"""
     slug: NotRequired[str]
@@ -122,7 +155,11 @@ class ProjectAttributesTypedDict(TypedDict):
     billing_type: NotRequired[Nullable[BillingType]]
     billing_method: NotRequired[Nullable[BillingMethod]]
     cost: NotRequired[Nullable[str]]
+    bandwidth_alert: NotRequired[Nullable[bool]]
+    r"""Whether bandwidth quota alerts are enabled for the project"""
     environment: NotRequired[Nullable[Environment]]
+    provisioning_type: NotRequired[Nullable[str]]
+    r"""The project provisioning model, either on_demand (pay-as-you-go, hourly or monthly billing) or reserved (annual contract with yearly billing). Defaults to on_demand."""
     stats: NotRequired[ProjectStatsTypedDict]
     billing: NotRequired[ProjectBillingTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
@@ -131,6 +168,9 @@ class ProjectAttributesTypedDict(TypedDict):
 
 
 class ProjectAttributes(BaseModel):
+    tags: Optional[List[TagsModel]] = None
+    r"""The tags assigned to the project"""
+
     name: Optional[str] = None
     r"""The project name"""
 
@@ -146,7 +186,13 @@ class ProjectAttributes(BaseModel):
 
     cost: OptionalNullable[str] = UNSET
 
+    bandwidth_alert: OptionalNullable[bool] = UNSET
+    r"""Whether bandwidth quota alerts are enabled for the project"""
+
     environment: OptionalNullable[Environment] = UNSET
+
+    provisioning_type: OptionalNullable[str] = UNSET
+    r"""The project provisioning model, either on_demand (pay-as-you-go, hourly or monthly billing) or reserved (annual contract with yearly billing). Defaults to on_demand."""
 
     stats: Optional[ProjectStats] = None
 
@@ -158,17 +204,47 @@ class ProjectAttributes(BaseModel):
 
     updated_at: Optional[str] = None
 
+    @field_serializer("billing_type")
+    def serialize_billing_type(self, value):
+        if isinstance(value, str):
+            try:
+                return models.BillingType(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("billing_method")
+    def serialize_billing_method(self, value):
+        if isinstance(value, str):
+            try:
+                return models.BillingMethod(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("environment")
+    def serialize_environment(self, value):
+        if isinstance(value, str):
+            try:
+                return models.Environment(value)
+            except ValueError:
+                return value
+        return value
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "tags",
                 "name",
                 "slug",
                 "description",
                 "billing_type",
                 "billing_method",
                 "cost",
+                "bandwidth_alert",
                 "environment",
+                "provisioning_type",
                 "stats",
                 "billing",
                 "team",
@@ -177,7 +253,15 @@ class ProjectAttributes(BaseModel):
             ]
         )
         nullable_fields = set(
-            ["description", "billing_type", "billing_method", "cost", "environment"]
+            [
+                "description",
+                "billing_type",
+                "billing_method",
+                "cost",
+                "bandwidth_alert",
+                "environment",
+                "provisioning_type",
+            ]
         )
         serialized = handler(self)
         m = {}
@@ -204,6 +288,7 @@ class ProjectAttributes(BaseModel):
 class ProjectTypedDict(TypedDict):
     id: NotRequired[str]
     r"""The project ID"""
+    type: NotRequired[ProjectType]
     attributes: NotRequired[ProjectAttributesTypedDict]
 
 
@@ -211,11 +296,13 @@ class Project(BaseModel):
     id: Optional[str] = None
     r"""The project ID"""
 
+    type: Optional[ProjectType] = None
+
     attributes: Optional[ProjectAttributes] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "attributes"])
+        optional_fields = set(["id", "type", "attributes"])
         serialized = handler(self)
         m = {}
 

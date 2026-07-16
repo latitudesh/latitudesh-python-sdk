@@ -16,3 +16,4 @@ value = BillingUsageUnit.QUANTITY
 | `QUANTITY` | quantity   |
 | `HOUR`     | hour       |
 | `MINUTE`   | minute     |
+| `GB`       | GB         |

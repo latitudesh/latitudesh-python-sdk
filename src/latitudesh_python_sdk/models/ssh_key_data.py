@@ -20,14 +20,14 @@ class SSHKeyDataType(str, Enum):
     SSH_KEYS = "ssh_keys"
 
 
-class TagsModelTypedDict(TypedDict):
+class SSHKeyDataTagsTypedDict(TypedDict):
     id: NotRequired[str]
     name: NotRequired[str]
     description: NotRequired[Nullable[str]]
     color: NotRequired[Nullable[str]]
 
 
-class TagsModel(BaseModel):
+class SSHKeyDataTags(BaseModel):
     id: Optional[str] = None
 
     name: Optional[str] = None
@@ -63,7 +63,7 @@ class TagsModel(BaseModel):
 
 
 class SSHKeyDataAttributesTypedDict(TypedDict):
-    tags: NotRequired[List[TagsModelTypedDict]]
+    tags: NotRequired[List[SSHKeyDataTagsTypedDict]]
     name: NotRequired[str]
     r"""Name of the SSH Key"""
     public_key: NotRequired[str]
@@ -77,7 +77,7 @@ class SSHKeyDataAttributesTypedDict(TypedDict):
 
 
 class SSHKeyDataAttributes(BaseModel):
-    tags: Optional[List[TagsModel]] = None
+    tags: Optional[List[SSHKeyDataTags]] = None
 
     name: Optional[str] = None
     r"""Name of the SSH Key"""

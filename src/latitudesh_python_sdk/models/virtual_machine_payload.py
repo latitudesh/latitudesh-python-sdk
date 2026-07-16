@@ -37,11 +37,13 @@ class VirtualMachinePayloadAttributesTypedDict(TypedDict):
     ssh_keys: NotRequired[Nullable[List[str]]]
     project: NotRequired[str]
     operating_system: NotRequired[Nullable[str]]
-    r"""The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu-24-04 for CPU plans or ubuntu24_ml_in_a_box for GPU plans."""
+    r"""The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu_24_04_x64_lts for CPU plans or ubuntu24_ml_in_a_box for GPU plans."""
     user_data: NotRequired[Nullable[VirtualMachinePayloadUserDataTypedDict]]
     r"""A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer id) to apply as cloud-init configuration"""
     tags: NotRequired[Nullable[List[str]]]
     r"""Array of tag IDs to assign to the VM."""
+    site: NotRequired[Nullable[str]]
+    r"""Site/region slug where the VM is provisioned (e.g. DAL, SAO). Defaults to DAL when omitted."""
 
 
 class VirtualMachinePayloadAttributes(BaseModel):
@@ -55,13 +57,16 @@ class VirtualMachinePayloadAttributes(BaseModel):
     project: Optional[str] = "my-project"
 
     operating_system: OptionalNullable[str] = UNSET
-    r"""The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu-24-04 for CPU plans or ubuntu24_ml_in_a_box for GPU plans."""
+    r"""The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu_24_04_x64_lts for CPU plans or ubuntu24_ml_in_a_box for GPU plans."""
 
     user_data: OptionalNullable[VirtualMachinePayloadUserData] = UNSET
     r"""A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer id) to apply as cloud-init configuration"""
 
     tags: OptionalNullable[List[str]] = UNSET
     r"""Array of tag IDs to assign to the VM."""
+
+    site: OptionalNullable[str] = "DAL"
+    r"""Site/region slug where the VM is provisioned (e.g. DAL, SAO). Defaults to DAL when omitted."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -74,10 +79,11 @@ class VirtualMachinePayloadAttributes(BaseModel):
                 "operating_system",
                 "user_data",
                 "tags",
+                "site",
             ]
         )
         nullable_fields = set(
-            ["plan", "ssh_keys", "operating_system", "user_data", "tags"]
+            ["plan", "ssh_keys", "operating_system", "user_data", "tags", "site"]
         )
         serialized = handler(self)
         m = {}

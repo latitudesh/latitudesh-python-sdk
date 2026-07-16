@@ -2,29 +2,22 @@
 
 from __future__ import annotations
 from .operating_system_data import OperatingSystemData, OperatingSystemDataTypedDict
+from .pagination_meta import PaginationMeta, PaginationMetaTypedDict
 from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class OperatingSystemsMetaTypedDict(TypedDict):
-    pass
-
-
-class OperatingSystemsMeta(BaseModel):
-    pass
-
-
 class OperatingSystemsTypedDict(TypedDict):
     data: NotRequired[List[OperatingSystemDataTypedDict]]
-    meta: NotRequired[OperatingSystemsMetaTypedDict]
+    meta: NotRequired[PaginationMetaTypedDict]
 
 
 class OperatingSystems(BaseModel):
     data: Optional[List[OperatingSystemData]] = None
 
-    meta: Optional[OperatingSystemsMeta] = None
+    meta: Optional[PaginationMeta] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
