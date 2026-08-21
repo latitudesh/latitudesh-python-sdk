@@ -5,6 +5,7 @@ Success
 
 ## Fields
 
-| Field                                                  | Type                                                   | Required                                               | Description                                            |
-| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
-| `data`                                                 | [Optional[models.UserUpdate]](../models/userupdate.md) | :heavy_minus_sign:                                     | N/A                                                    |
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `data`                                                                     | [Optional[models.UserUpdate]](../models/userupdate.md)                     | :heavy_minus_sign:                                                         | N/A                                                                        |
+| `meta`                                                                     | [Optional[models.PatchUserProfileMeta]](../models/patchuserprofilemeta.md) | :heavy_minus_sign:                                                         | N/A                                                                        |

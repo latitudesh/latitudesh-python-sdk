@@ -266,7 +266,9 @@ with Latitudesh(
     res = latitudesh.ssh_keys.update(project_id="proj_GMy1DbW0ON50m", ssh_key_id="ssh_W6Q2D9plqKLpr", data={
         "id": "ssh_W6Q2D9plqKLpr",
         "type": latitudesh_python_sdk.PutProjectSSHKeySSHKeysType.SSH_KEYS,
-        "attributes": {},
+        "attributes": {
+            "name": "New SSH Key Name",
+        },
     })
 
     # Handle response
@@ -321,6 +323,7 @@ with Latitudesh(
             "tags": [
                 "invalid-tag",
             ],
+            "name": "New SSH Key Name",
         },
     })
 
@@ -344,7 +347,9 @@ with Latitudesh(
     res = latitudesh.ssh_keys.update(project_id="proj_WVQJDMAvDRbyE", ssh_key_id="ssh_LMmAD8pEDwop2", data={
         "id": "ssh_LMmAD8pEDwop2",
         "type": latitudesh_python_sdk.PutProjectSSHKeySSHKeysType.SSH_KEYS,
-        "attributes": {},
+        "attributes": {
+            "name": "New SSH Key Name",
+        },
     })
 
     # Handle response
@@ -653,7 +658,9 @@ with Latitudesh(
     res = latitudesh.ssh_keys.put_ssh_key(ssh_key_id="ssh_xkjQwdENqYNVP", data={
         "id": "ssh_xkjQwdENqYNVP",
         "type": latitudesh_python_sdk.PutSSHKeySSHKeysType.SSH_KEYS,
-        "attributes": {},
+        "attributes": {
+            "name": "New SSH Key Name",
+        },
     })
 
     # Handle response
@@ -708,6 +715,7 @@ with Latitudesh(
             "tags": [
                 "invalid-tag",
             ],
+            "name": "New SSH Key Name",
         },
     })
 
@@ -731,7 +739,9 @@ with Latitudesh(
     res = latitudesh.ssh_keys.put_ssh_key(ssh_key_id="ssh_6059EqYkOQj8p", data={
         "id": "ssh_6059EqYkOQj8p",
         "type": latitudesh_python_sdk.PutSSHKeySSHKeysType.SSH_KEYS,
-        "attributes": {},
+        "attributes": {
+            "name": "New SSH Key Name",
+        },
     })
 
     # Handle response

@@ -14,27 +14,27 @@ class PostSSHKeySSHKeysType(str, Enum):
 
 
 class PostSSHKeySSHKeysAttributesTypedDict(TypedDict):
-    name: NotRequired[str]
+    name: str
     r"""Name of the SSH Key"""
+    public_key: str
+    r"""SSH Public Key"""
     project: NotRequired[str]
     r"""Project ID or slug"""
-    public_key: NotRequired[str]
-    r"""SSH Public Key"""
 
 
 class PostSSHKeySSHKeysAttributes(BaseModel):
-    name: Optional[str] = None
+    name: str
     r"""Name of the SSH Key"""
+
+    public_key: str
+    r"""SSH Public Key"""
 
     project: Optional[str] = None
     r"""Project ID or slug"""
 
-    public_key: Optional[str] = None
-    r"""SSH Public Key"""
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "project", "public_key"])
+        optional_fields = set(["project"])
         serialized = handler(self)
         m = {}
 

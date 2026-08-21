@@ -29,11 +29,13 @@ class Mode(str, Enum):
     r"""The routing mode for this Elastic IP"""
 
     ROUTED = "routed"
+    BGP = "bgp"
 
 
 class Status(str, Enum):
     r"""The current status of the Elastic IP"""
 
+    PENDING = "pending"
     CONFIGURING = "configuring"
     ACTIVE = "active"
     MOVING = "moving"

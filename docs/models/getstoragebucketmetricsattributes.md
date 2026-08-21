@@ -1,0 +1,10 @@
+# GetStorageBucketMetricsAttributes
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `period`                                                                                     | [Optional[models.GetStorageBucketMetricsPeriod]](../models/getstoragebucketmetricsperiod.md) | :heavy_minus_sign:                                                                           | The current billing period                                                                   |
+| `storage`                                                                                    | [Optional[models.Storage]](../models/storage.md)                                             | :heavy_minus_sign:                                                                           | Storage consumption metrics                                                                  |
+| `estimated_cost`                                                                             | [Optional[models.EstimatedCost]](../models/estimatedcost.md)                                 | :heavy_minus_sign:                                                                           | Estimated cost for the current billing period                                                |

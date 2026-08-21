@@ -3,6 +3,7 @@
 from __future__ import annotations
 from datetime import datetime
 from enum import Enum
+from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk.types import (
     BaseModel,
     Nullable,
@@ -10,19 +11,21 @@ from latitudesh_python_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class KubernetesClusterDataPhase(str, Enum):
-    r"""The current phase of the cluster lifecycle"""
+class KubernetesClusterDataPhase(str, Enum, metaclass=utils.OpenEnumMeta):
+    r"""The current phase of the cluster lifecycle. 'Upgrading' is reported while a Kubernetes version upgrade is rolling through the cluster."""
 
     PENDING = "Pending"
     PROVISIONING = "Provisioning"
     PROVISIONED = "Provisioned"
+    UPGRADING = "Upgrading"
     DELETING = "Deleting"
     FAILED = "Failed"
+    UNKNOWN = "Unknown"
 
 
 class VersionStatus(str, Enum):
@@ -102,20 +105,22 @@ class Workers(BaseModel):
         return m
 
 
-class WorkerStatus(str, Enum):
-    r"""Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed."""
+class WorkerStatus(str, Enum, metaclass=utils.OpenEnumMeta):
+    r"""Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'upgrading' while a Kubernetes version upgrade is rolling through the workers, 'error' when a worker has failed."""
 
     IDLE = "idle"
     READY = "ready"
     SCALING = "scaling"
+    UPGRADING = "upgrading"
     ERROR = "error"
 
 
-class ControlPlaneStatus(str, Enum):
-    r"""Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'error' when a control plane node has failed."""
+class ControlPlaneStatus(str, Enum, metaclass=utils.OpenEnumMeta):
+    r"""Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'upgrading' while a Kubernetes version upgrade is rolling through the control plane, 'error' when a control plane node has failed."""
 
     READY = "ready"
     SCALING = "scaling"
+    UPGRADING = "upgrading"
     ERROR = "error"
 
 
@@ -315,27 +320,27 @@ class KubernetesClusterDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The cluster name"""
     phase: NotRequired[KubernetesClusterDataPhase]
-    r"""The current phase of the cluster lifecycle"""
+    r"""The current phase of the cluster lifecycle. 'Upgrading' is reported while a Kubernetes version upgrade is rolling through the cluster."""
     ready: NotRequired[bool]
     r"""Whether the cluster is ready to accept workloads"""
     control_plane_endpoint: NotRequired[Nullable[str]]
     r"""The URL endpoint for the Kubernetes API server"""
     kubeconfig_url: NotRequired[Nullable[str]]
     r"""The URL to retrieve the kubeconfig file"""
-    location: NotRequired[str]
-    r"""The site/region where the cluster is deployed"""
+    location: NotRequired[Nullable[str]]
+    r"""The site/region where the cluster is deployed. May be null when the cluster's resources are not fully available (e.g., incomplete provisioning or deletion in progress)."""
     load_balancer_ips: NotRequired[List[str]]
     r"""IP addresses assigned to the cluster's load balancer"""
-    kubernetes_version: NotRequired[str]
-    r"""The Kubernetes version running on the cluster"""
+    kubernetes_version: NotRequired[Nullable[str]]
+    r"""The Kubernetes version running on the cluster. May be null when the control plane resource is not fully available (e.g., incomplete provisioning or deletion in progress)."""
     version_status: NotRequired[VersionStatus]
     r"""The cluster's version status relative to available upgrades"""
     available_upgrade: NotRequired[Nullable[str]]
     r"""The next available Kubernetes version for upgrade. Null if the cluster is already on the latest version, or if version status is unknown or unsupported."""
     created_at: NotRequired[datetime]
     r"""When the cluster was created"""
-    plan: NotRequired[str]
-    r"""The machine plan slug for control plane nodes"""
+    plan: NotRequired[Nullable[str]]
+    r"""The machine plan slug for control plane nodes. May be null when the control plane machine template is not available (e.g., incomplete provisioning or deletion in progress)."""
     worker_plan: NotRequired[Nullable[str]]
     r"""The machine plan slug for worker nodes. Null if no workers exist."""
     control_plane_count: NotRequired[int]
@@ -347,9 +352,9 @@ class KubernetesClusterDataAttributesTypedDict(TypedDict):
     workers: NotRequired[Nullable[WorkersTypedDict]]
     r"""Worker nodes status information"""
     worker_status: NotRequired[Nullable[WorkerStatus]]
-    r"""Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed."""
+    r"""Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'upgrading' while a Kubernetes version upgrade is rolling through the workers, 'error' when a worker has failed."""
     control_plane_status: NotRequired[ControlPlaneStatus]
-    r"""Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'error' when a control plane node has failed."""
+    r"""Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'upgrading' while a Kubernetes version upgrade is rolling through the control plane, 'error' when a control plane node has failed."""
     infrastructure_ready: NotRequired[bool]
     r"""Whether the underlying infrastructure is ready"""
     control_plane_ready: NotRequired[bool]
@@ -375,7 +380,7 @@ class KubernetesClusterDataAttributes(BaseModel):
     r"""The cluster name"""
 
     phase: Optional[KubernetesClusterDataPhase] = None
-    r"""The current phase of the cluster lifecycle"""
+    r"""The current phase of the cluster lifecycle. 'Upgrading' is reported while a Kubernetes version upgrade is rolling through the cluster."""
 
     ready: Optional[bool] = None
     r"""Whether the cluster is ready to accept workloads"""
@@ -386,14 +391,14 @@ class KubernetesClusterDataAttributes(BaseModel):
     kubeconfig_url: OptionalNullable[str] = UNSET
     r"""The URL to retrieve the kubeconfig file"""
 
-    location: Optional[str] = None
-    r"""The site/region where the cluster is deployed"""
+    location: OptionalNullable[str] = UNSET
+    r"""The site/region where the cluster is deployed. May be null when the cluster's resources are not fully available (e.g., incomplete provisioning or deletion in progress)."""
 
     load_balancer_ips: Optional[List[str]] = None
     r"""IP addresses assigned to the cluster's load balancer"""
 
-    kubernetes_version: Optional[str] = None
-    r"""The Kubernetes version running on the cluster"""
+    kubernetes_version: OptionalNullable[str] = UNSET
+    r"""The Kubernetes version running on the cluster. May be null when the control plane resource is not fully available (e.g., incomplete provisioning or deletion in progress)."""
 
     version_status: Optional[VersionStatus] = None
     r"""The cluster's version status relative to available upgrades"""
@@ -404,8 +409,8 @@ class KubernetesClusterDataAttributes(BaseModel):
     created_at: Optional[datetime] = None
     r"""When the cluster was created"""
 
-    plan: Optional[str] = None
-    r"""The machine plan slug for control plane nodes"""
+    plan: OptionalNullable[str] = UNSET
+    r"""The machine plan slug for control plane nodes. May be null when the control plane machine template is not available (e.g., incomplete provisioning or deletion in progress)."""
 
     worker_plan: OptionalNullable[str] = UNSET
     r"""The machine plan slug for worker nodes. Null if no workers exist."""
@@ -423,10 +428,10 @@ class KubernetesClusterDataAttributes(BaseModel):
     r"""Worker nodes status information"""
 
     worker_status: OptionalNullable[WorkerStatus] = UNSET
-    r"""Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'error' when a worker has failed."""
+    r"""Current status of worker nodes. 'idle' when 0 workers, 'ready' when all workers are ready, 'scaling' when workers are being provisioned/removed, 'upgrading' while a Kubernetes version upgrade is rolling through the workers, 'error' when a worker has failed."""
 
     control_plane_status: Optional[ControlPlaneStatus] = None
-    r"""Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'error' when a control plane node has failed."""
+    r"""Current status of control plane nodes. 'ready' when control plane is operational, 'scaling' when nodes are being provisioned/removed, 'upgrading' while a Kubernetes version upgrade is rolling through the control plane, 'error' when a control plane node has failed."""
 
     infrastructure_ready: Optional[bool] = None
     r"""Whether the underlying infrastructure is ready"""
@@ -454,6 +459,33 @@ class KubernetesClusterDataAttributes(BaseModel):
 
     project: Optional[KubernetesClusterDataProject] = None
     r"""The project this cluster belongs to"""
+
+    @field_serializer("phase")
+    def serialize_phase(self, value):
+        if isinstance(value, str):
+            try:
+                return models.KubernetesClusterDataPhase(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("worker_status")
+    def serialize_worker_status(self, value):
+        if isinstance(value, str):
+            try:
+                return models.WorkerStatus(value)
+            except ValueError:
+                return value
+        return value
+
+    @field_serializer("control_plane_status")
+    def serialize_control_plane_status(self, value):
+        if isinstance(value, str):
+            try:
+                return models.ControlPlaneStatus(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -493,7 +525,10 @@ class KubernetesClusterDataAttributes(BaseModel):
             [
                 "control_plane_endpoint",
                 "kubeconfig_url",
+                "location",
+                "kubernetes_version",
                 "available_upgrade",
+                "plan",
                 "worker_plan",
                 "control_plane",
                 "workers",

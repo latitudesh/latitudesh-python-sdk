@@ -1,5 +1,7 @@
 # Filesystem
 
+Filesystem to format the group with. Only valid for the 'storage' role
+
 ## Example Usage
 
 ```python
@@ -14,4 +16,3 @@ value = Filesystem.EXT4
 | Name   | Value  |
 | ------ | ------ |
 | `EXT4` | ext4   |
-| `XFS`  | xfs    |

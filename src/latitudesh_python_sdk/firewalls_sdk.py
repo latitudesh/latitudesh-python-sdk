@@ -15,6 +15,7 @@ class FirewallsSDK(BaseSDK):
         self,
         *,
         filter_server: Optional[str] = None,
+        filter_virtual_machine: Optional[str] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -24,9 +25,10 @@ class FirewallsSDK(BaseSDK):
     ) -> Optional[models.GetAllFirewallAssignmentsResponse]:
         r"""List firewall assignments
 
-        Returns a list of all servers assigned to one or more firewalls.
+        Returns a list of all servers and virtual machines assigned to one or more firewalls.
 
         :param filter_server: The server ID to filter by
+        :param filter_virtual_machine: The virtual machine ID to filter by
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param retries: Override the default retry configuration for this method
@@ -46,6 +48,7 @@ class FirewallsSDK(BaseSDK):
 
         request = models.GetAllFirewallAssignmentsRequest(
             filter_server=filter_server,
+            filter_virtual_machine=filter_virtual_machine,
             page_size=page_size,
             page_number=page_number,
         )
@@ -110,6 +113,7 @@ class FirewallsSDK(BaseSDK):
 
             return self.get_all_firewall_assignments(
                 filter_server=filter_server,
+                filter_virtual_machine=filter_virtual_machine,
                 page_size=page_size,
                 page_number=next_page,
                 retries=retries,
@@ -136,6 +140,7 @@ class FirewallsSDK(BaseSDK):
         self,
         *,
         filter_server: Optional[str] = None,
+        filter_virtual_machine: Optional[str] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -145,9 +150,10 @@ class FirewallsSDK(BaseSDK):
     ) -> Optional[models.GetAllFirewallAssignmentsResponse]:
         r"""List firewall assignments
 
-        Returns a list of all servers assigned to one or more firewalls.
+        Returns a list of all servers and virtual machines assigned to one or more firewalls.
 
         :param filter_server: The server ID to filter by
+        :param filter_virtual_machine: The virtual machine ID to filter by
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param retries: Override the default retry configuration for this method
@@ -167,6 +173,7 @@ class FirewallsSDK(BaseSDK):
 
         request = models.GetAllFirewallAssignmentsRequest(
             filter_server=filter_server,
+            filter_virtual_machine=filter_virtual_machine,
             page_size=page_size,
             page_number=page_number,
         )
@@ -231,6 +238,7 @@ class FirewallsSDK(BaseSDK):
 
             return self.get_all_firewall_assignments(
                 filter_server=filter_server,
+                filter_virtual_machine=filter_virtual_machine,
                 page_size=page_size,
                 page_number=next_page,
                 retries=retries,
@@ -441,6 +449,7 @@ class FirewallsSDK(BaseSDK):
         self,
         *,
         filter_project: Optional[str] = None,
+        filter_tags: Optional[str] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -453,6 +462,7 @@ class FirewallsSDK(BaseSDK):
         List firewalls
 
         :param filter_project:
+        :param filter_tags: Comma-separated tag IDs. Returns firewalls that have all the given tags.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param retries: Override the default retry configuration for this method
@@ -472,6 +482,7 @@ class FirewallsSDK(BaseSDK):
 
         request = models.ListFirewallsRequest(
             filter_project=filter_project,
+            filter_tags=filter_tags,
             page_size=page_size,
             page_number=page_number,
         )
@@ -534,6 +545,7 @@ class FirewallsSDK(BaseSDK):
 
             return self.list(
                 filter_project=filter_project,
+                filter_tags=filter_tags,
                 page_size=page_size,
                 page_number=next_page,
                 retries=retries,
@@ -560,6 +572,7 @@ class FirewallsSDK(BaseSDK):
         self,
         *,
         filter_project: Optional[str] = None,
+        filter_tags: Optional[str] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
@@ -572,6 +585,7 @@ class FirewallsSDK(BaseSDK):
         List firewalls
 
         :param filter_project:
+        :param filter_tags: Comma-separated tag IDs. Returns firewalls that have all the given tags.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param retries: Override the default retry configuration for this method
@@ -591,6 +605,7 @@ class FirewallsSDK(BaseSDK):
 
         request = models.ListFirewallsRequest(
             filter_project=filter_project,
+            filter_tags=filter_tags,
             page_size=page_size,
             page_number=page_number,
         )
@@ -653,6 +668,7 @@ class FirewallsSDK(BaseSDK):
 
             return self.list(
                 filter_project=filter_project,
+                filter_tags=filter_tags,
                 page_size=page_size,
                 page_number=next_page,
                 retries=retries,
@@ -1232,7 +1248,7 @@ class FirewallsSDK(BaseSDK):
     ) -> models.FirewallServer:
         r"""Assign server to firewall
 
-        Assigns a server to a firewall by its ID.
+        Assigns a server or a virtual machine to a firewall by its ID.
 
         :param firewall_id: The Firewall ID
         :param data:
@@ -1337,7 +1353,7 @@ class FirewallsSDK(BaseSDK):
     ) -> models.FirewallServer:
         r"""Assign server to firewall
 
-        Assigns a server to a firewall by its ID.
+        Assigns a server or a virtual machine to a firewall by its ID.
 
         :param firewall_id: The Firewall ID
         :param data:
@@ -1440,7 +1456,7 @@ class FirewallsSDK(BaseSDK):
     ) -> Optional[models.GetFirewallAssignmentsResponse]:
         r"""Firewall assignments
 
-        Returns a list of all servers assigned to a particular firewall.
+        Returns a list of all servers and virtual machines assigned to a particular firewall.
 
         :param firewall_id: The Firewall ID
         :param page_size: Number of items to return per page
@@ -1561,7 +1577,7 @@ class FirewallsSDK(BaseSDK):
     ) -> Optional[models.GetFirewallAssignmentsResponse]:
         r"""Firewall assignments
 
-        Returns a list of all servers assigned to a particular firewall.
+        Returns a list of all servers and virtual machines assigned to a particular firewall.
 
         :param firewall_id: The Firewall ID
         :param page_size: Number of items to return per page
@@ -1681,7 +1697,7 @@ class FirewallsSDK(BaseSDK):
     ):
         r"""Delete assignment
 
-        Removes a server from a firewall by its ID.
+        Removes a server or a virtual machine from a firewall by its assignment ID.
 
         :param firewall_id: The Firewall ID
         :param assignment_id: The Assignment ID
@@ -1772,7 +1788,7 @@ class FirewallsSDK(BaseSDK):
     ):
         r"""Delete assignment
 
-        Removes a server from a firewall by its ID.
+        Removes a server or a virtual machine from a firewall by its assignment ID.
 
         :param firewall_id: The Firewall ID
         :param assignment_id: The Assignment ID

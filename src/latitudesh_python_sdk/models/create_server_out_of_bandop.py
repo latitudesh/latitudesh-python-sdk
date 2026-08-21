@@ -18,29 +18,13 @@ class CreateServerOutOfBandServersType(str, Enum):
 
 
 class CreateServerOutOfBandServersAttributesTypedDict(TypedDict):
-    ssh_key_id: NotRequired[str]
+    ssh_key_id: str
     r"""SSH Key ID to set for out of band"""
 
 
 class CreateServerOutOfBandServersAttributes(BaseModel):
-    ssh_key_id: Optional[str] = None
+    ssh_key_id: str
     r"""SSH Key ID to set for out of band"""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["ssh_key_id"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
 
 
 class CreateServerOutOfBandServersDataTypedDict(TypedDict):

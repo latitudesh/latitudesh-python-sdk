@@ -16,3 +16,4 @@ value = Mode.ROUTED
 | Name     | Value    |
 | -------- | -------- |
 | `ROUTED` | routed   |
+| `BGP`    | bgp      |

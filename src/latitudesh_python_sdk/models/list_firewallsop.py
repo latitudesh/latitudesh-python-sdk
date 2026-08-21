@@ -12,6 +12,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class ListFirewallsRequestTypedDict(TypedDict):
     filter_project: NotRequired[str]
+    filter_tags: NotRequired[str]
+    r"""Comma-separated tag IDs. Returns firewalls that have all the given tags."""
     page_size: NotRequired[int]
     r"""Number of items to return per page"""
     page_number: NotRequired[int]
@@ -24,6 +26,13 @@ class ListFirewallsRequest(BaseModel):
         pydantic.Field(alias="filter[project]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
+
+    filter_tags: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[tags]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Comma-separated tag IDs. Returns firewalls that have all the given tags."""
 
     page_size: Annotated[
         Optional[int],
@@ -41,7 +50,9 @@ class ListFirewallsRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["filter[project]", "page[size]", "page[number]"])
+        optional_fields = set(
+            ["filter[project]", "filter[tags]", "page[size]", "page[number]"]
+        )
         serialized = handler(self)
         m = {}
 

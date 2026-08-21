@@ -43,36 +43,6 @@ class CreateServerReinstallServersOperatingSystem(str, Enum):
     WINDOWS_SERVER_2019_STD_V1 = "windows_server_2019_std_v1"
 
 
-class CreateServerReinstallServersPartitionsTypedDict(TypedDict):
-    size_in_gb: NotRequired[int]
-    path: NotRequired[str]
-    filesystem_type: NotRequired[str]
-
-
-class CreateServerReinstallServersPartitions(BaseModel):
-    size_in_gb: Optional[int] = None
-
-    path: Optional[str] = None
-
-    filesystem_type: Optional[str] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["size_in_gb", "path", "filesystem_type"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
 class CreateServerReinstallServersRaid(str, Enum):
     r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
 
@@ -146,9 +116,6 @@ class CreateServerReinstallServersAttributesTypedDict(TypedDict):
     r"""The OS selected for the reinstall process"""
     hostname: NotRequired[str]
     r"""The server hostname to set upon reinstall"""
-    partitions: NotRequired[
-        Nullable[List[CreateServerReinstallServersPartitionsTypedDict]]
-    ]
     ssh_keys: NotRequired[Nullable[List[str]]]
     r"""SSH Key IDs to set upon reinstall"""
     user_data: NotRequired[Nullable[str]]
@@ -160,6 +127,12 @@ class CreateServerReinstallServersAttributesTypedDict(TypedDict):
     ]
     ipxe: NotRequired[Nullable[str]]
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected."""
+    persistent_netboot: NotRequired[bool]
+    r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
+    public_network: NotRequired[Nullable[bool]]
+    r"""**Preview** (`public_network` feature flag). Set to 'true' to attach the server onto the given 'public_network_id', or 'false' to detach an existing public network, during the reinstall. Requires 'public_network_id' when attaching."""
+    public_network_id: NotRequired[Nullable[str]]
+    r"""ID of a customer public network to attach this server to during the reinstall. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. Applies to this reinstall only; omit it to leave any existing public network unchanged."""
 
 
 class CreateServerReinstallServersAttributes(BaseModel):
@@ -168,8 +141,6 @@ class CreateServerReinstallServersAttributes(BaseModel):
 
     hostname: Optional[str] = None
     r"""The server hostname to set upon reinstall"""
-
-    partitions: OptionalNullable[List[CreateServerReinstallServersPartitions]] = UNSET
 
     ssh_keys: OptionalNullable[List[str]] = UNSET
     r"""SSH Key IDs to set upon reinstall"""
@@ -185,22 +156,41 @@ class CreateServerReinstallServersAttributes(BaseModel):
     ipxe: OptionalNullable[str] = UNSET
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected."""
 
+    persistent_netboot: Optional[bool] = None
+    r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
+
+    public_network: OptionalNullable[bool] = UNSET
+    r"""**Preview** (`public_network` feature flag). Set to 'true' to attach the server onto the given 'public_network_id', or 'false' to detach an existing public network, during the reinstall. Requires 'public_network_id' when attaching."""
+
+    public_network_id: OptionalNullable[str] = UNSET
+    r"""ID of a customer public network to attach this server to during the reinstall. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. Applies to this reinstall only; omit it to leave any existing public network unchanged."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
             [
                 "operating_system",
                 "hostname",
-                "partitions",
                 "ssh_keys",
                 "user_data",
                 "raid",
                 "disk_layout",
                 "ipxe",
+                "persistent_netboot",
+                "public_network",
+                "public_network_id",
             ]
         )
         nullable_fields = set(
-            ["partitions", "ssh_keys", "user_data", "raid", "disk_layout", "ipxe"]
+            [
+                "ssh_keys",
+                "user_data",
+                "raid",
+                "disk_layout",
+                "ipxe",
+                "public_network",
+                "public_network_id",
+            ]
         )
         serialized = handler(self)
         m = {}

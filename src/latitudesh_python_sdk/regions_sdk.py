@@ -17,6 +17,8 @@ class RegionsSDK(BaseSDK):
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
         stats_total: Optional[str] = None,
+        include_custom: Optional[bool] = None,
+        filter_features: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -31,6 +33,8 @@ class RegionsSDK(BaseSDK):
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param include_custom: When set to `true`, the response also includes custom regions (such as storage-only regions) alongside the default core regions. When omitted or `false`, only core regions are returned.
+        :param filter_features: Return only locations that support the given capability, e.g. `filter[features]=public_network`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -50,6 +54,8 @@ class RegionsSDK(BaseSDK):
             page_size=page_size,
             page_number=page_number,
             stats_total=stats_total,
+            include_custom=include_custom,
+            filter_features=filter_features,
         )
 
         req = self._build_request(
@@ -112,6 +118,8 @@ class RegionsSDK(BaseSDK):
                 page_size=page_size,
                 page_number=next_page,
                 stats_total=stats_total,
+                include_custom=include_custom,
+                filter_features=filter_features,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -137,6 +145,8 @@ class RegionsSDK(BaseSDK):
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
         stats_total: Optional[str] = None,
+        include_custom: Optional[bool] = None,
+        filter_features: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -151,6 +161,8 @@ class RegionsSDK(BaseSDK):
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param include_custom: When set to `true`, the response also includes custom regions (such as storage-only regions) alongside the default core regions. When omitted or `false`, only core regions are returned.
+        :param filter_features: Return only locations that support the given capability, e.g. `filter[features]=public_network`.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -170,6 +182,8 @@ class RegionsSDK(BaseSDK):
             page_size=page_size,
             page_number=page_number,
             stats_total=stats_total,
+            include_custom=include_custom,
+            filter_features=filter_features,
         )
 
         req = self._build_request_async(
@@ -232,6 +246,8 @@ class RegionsSDK(BaseSDK):
                 page_size=page_size,
                 page_number=next_page,
                 stats_total=stats_total,
+                include_custom=include_custom,
+                filter_features=filter_features,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,

@@ -258,6 +258,13 @@ with Latitudesh(
 * [delete](docs/sdks/apikeyssdk/README.md#delete) - Delete API key
 * [update_api_key](docs/sdks/apikeyssdk/README.md#update_api_key) - Update API key settings
 
+### [BaselinesPreview](docs/sdks/baselinespreview/README.md)
+
+* [get_baselines](docs/sdks/baselinespreview/README.md#get_baselines) - List baselines
+* [create_baseline](docs/sdks/baselinespreview/README.md#create_baseline) - Create baseline
+* [get_baseline](docs/sdks/baselinespreview/README.md#get_baseline) - Retrieve baseline
+* [destroy_baseline](docs/sdks/baselinespreview/README.md#destroy_baseline) - Delete baseline
+
 ### [Billing](docs/sdks/billing/README.md)
 
 * [list_usage](docs/sdks/billing/README.md#list_usage) - Retrieve billing usage
@@ -277,6 +284,10 @@ with Latitudesh(
 * [get_elastic_ip](docs/sdks/elasticipssdk/README.md#get_elastic_ip) - Retrieve an Elastic IP
 * [delete_elastic_ip](docs/sdks/elasticipssdk/README.md#delete_elastic_ip) - Release an Elastic IP
 * [update_elastic_ip](docs/sdks/elasticipssdk/README.md#update_elastic_ip) - Move an Elastic IP
+* [list_elastic_ip_bgp_sessions](docs/sdks/elasticipssdk/README.md#list_elastic_ip_bgp_sessions) - List BGP sessions
+* [create_elastic_ip_bgp_session](docs/sdks/elasticipssdk/README.md#create_elastic_ip_bgp_session) - Create a BGP session
+* [get_elastic_ip_bgp_session](docs/sdks/elasticipssdk/README.md#get_elastic_ip_bgp_session) - Retrieve a BGP session
+* [delete_elastic_ip_bgp_session](docs/sdks/elasticipssdk/README.md#delete_elastic_ip_bgp_session) - Delete a BGP session
 
 ### [Events](docs/sdks/eventssdk/README.md)
 
@@ -318,10 +329,21 @@ with Latitudesh(
 
 ### [ObjectStorage](docs/sdks/objectstorage/README.md)
 
+* [get_storage_usage](docs/sdks/objectstorage/README.md#get_storage_usage) - List storage usage
+* [get_storage_access_keys](docs/sdks/objectstorage/README.md#get_storage_access_keys) - List access keys
+* [post_storage_access_keys](docs/sdks/objectstorage/README.md#post_storage_access_keys) - Create access key
+* [delete_storage_access_keys_username](docs/sdks/objectstorage/README.md#delete_storage_access_keys_username) - Delete access key
+* [get_storage_bucket_access_keys](docs/sdks/objectstorage/README.md#get_storage_bucket_access_keys) - List bucket access keys
 * [get_storage_buckets](docs/sdks/objectstorage/README.md#get_storage_buckets) - List buckets
 * [post_storage_buckets](docs/sdks/objectstorage/README.md#post_storage_buckets) - Create bucket
 * [get_storage_bucket](docs/sdks/objectstorage/README.md#get_storage_bucket) - Retrieve bucket
 * [delete_storage_buckets](docs/sdks/objectstorage/README.md#delete_storage_buckets) - Delete bucket
+* [get_storage_bucket_lifecycle_rules](docs/sdks/objectstorage/README.md#get_storage_bucket_lifecycle_rules) - List lifecycle rules
+* [post_storage_bucket_lifecycle_rules](docs/sdks/objectstorage/README.md#post_storage_bucket_lifecycle_rules) - Create lifecycle rule
+* [get_storage_bucket_lifecycle_rule](docs/sdks/objectstorage/README.md#get_storage_bucket_lifecycle_rule) - Retrieve lifecycle rule
+* [put_storage_bucket_lifecycle_rule](docs/sdks/objectstorage/README.md#put_storage_bucket_lifecycle_rule) - Update lifecycle rule
+* [delete_storage_bucket_lifecycle_rule](docs/sdks/objectstorage/README.md#delete_storage_bucket_lifecycle_rule) - Delete lifecycle rule
+* [get_storage_bucket_metrics](docs/sdks/objectstorage/README.md#get_storage_bucket_metrics) - Retrieve bucket metrics
 
 ### [OperatingSystems](docs/sdks/operatingsystemssdk/README.md)
 
@@ -354,6 +376,13 @@ with Latitudesh(
 * [create](docs/sdks/projectssdk/README.md#create) - Create project
 * [update](docs/sdks/projectssdk/README.md#update) - Update project
 * [delete](docs/sdks/projectssdk/README.md#delete) - Delete project
+
+### [PublicNetworks](docs/sdks/publicnetworkssdk/README.md)
+
+* [get_public_networks](docs/sdks/publicnetworkssdk/README.md#get_public_networks) - List networks
+* [create_public_network](docs/sdks/publicnetworkssdk/README.md#create_public_network) - Create a network
+* [get_public_network](docs/sdks/publicnetworkssdk/README.md#get_public_network) - Retrieve a network
+* [destroy_public_network](docs/sdks/publicnetworkssdk/README.md#destroy_public_network) - Delete a network
 
 ### [Regions](docs/sdks/regionssdk/README.md)
 
@@ -584,8 +613,8 @@ with Latitudesh(
         res = latitudesh.elastic_ips.create_elastic_ip(data={
             "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
             "attributes": {
-                "project_id": "proj_AoW6vRnwkvLn0",
                 "server_id": "sv_2GmAlJ6BXlK1a",
+                "project_id": "proj_AoW6vRnwkvLn0",
             },
         })
 
@@ -621,7 +650,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 33 of 146 methods.*
+* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 49 of 169 methods.*
 * [`ResponseValidationError`](./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -767,6 +796,20 @@ class CustomClient(AsyncHttpClient):
 
 s = Latitudesh(async_client=CustomClient(httpx.AsyncClient()))
 ```
+### httpx2 (Pydantic's httpx fork)
+
+[httpx2](https://httpx2.pydantic.dev/) is Pydantic's maintained fork of `httpx`. To run this SDK on httpx2, call `alias_httpx()` at your program's entry point, before importing the SDK, so every `import httpx` — including the ones inside the SDK — resolves to `httpx2`:
+```python
+import httpx2
+
+httpx2.alias_httpx()
+
+from latitudesh_python_sdk import Latitudesh
+
+s = Latitudesh()
+```
+
+An SDK can also be generated against httpx2 directly, so it depends on the fork instead of `httpx`, by setting `python.httpClientLibrary: httpx2` in `gen.yaml`.
 <!-- End Custom HTTP Client [http-client] -->
 
 <!-- Start Resource Management [resource-management] -->

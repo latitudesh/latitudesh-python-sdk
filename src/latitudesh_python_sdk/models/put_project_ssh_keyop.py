@@ -27,7 +27,7 @@ class PutProjectSSHKeySSHKeysAttributesTypedDict(TypedDict):
 class PutProjectSSHKeySSHKeysAttributes(BaseModel):
     tags: Optional[List[str]] = None
 
-    name: Optional[str] = "New SSH Key Name"
+    name: Optional[str] = None
     r"""Name of the SSH Key"""
 
     @model_serializer(mode="wrap")
@@ -48,21 +48,21 @@ class PutProjectSSHKeySSHKeysAttributes(BaseModel):
 
 
 class PutProjectSSHKeySSHKeysDataTypedDict(TypedDict):
+    id: str
     type: PutProjectSSHKeySSHKeysType
-    id: NotRequired[str]
     attributes: NotRequired[PutProjectSSHKeySSHKeysAttributesTypedDict]
 
 
 class PutProjectSSHKeySSHKeysData(BaseModel):
-    type: PutProjectSSHKeySSHKeysType
+    id: str
 
-    id: Optional[str] = "ssh_81EVOtR1N4J2Z"
+    type: PutProjectSSHKeySSHKeysType
 
     attributes: Optional[PutProjectSSHKeySSHKeysAttributes] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "attributes"])
+        optional_fields = set(["attributes"])
         serialized = handler(self)
         m = {}
 

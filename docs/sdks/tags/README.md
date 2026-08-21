@@ -134,6 +134,7 @@ with Latitudesh(
         "attributes": {
             "name": "Tag Name",
             "description": "",
+            "color": "#ffffff",
         },
     })
 
@@ -297,6 +298,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.UpdateTagTagsType.TAGS,
         "attributes": {
             "name": "Tag Name",
+            "color": "#ffffff",
         },
     })
 
@@ -347,6 +349,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.UpdateTagTagsType.TAGS,
         "attributes": {
             "name": "",
+            "color": "#ffffff",
         },
     })
 
@@ -397,6 +400,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.UpdateTagTagsType.TAGS,
         "attributes": {
             "description": "sdfil1bdxt8hoe5tf0q54af15q2984xhaxmyqzkqr945acgllrmy1h7nrqy70lvz3lfiqla2on8ulx12949f6ffejxog1x5hzj5ec2eqkx1keeabd5k4b4jrfa0yzpii9a04xevll2r1530u2yzjexvqku7budmlmrp5y5o2ypxpds5wh2o69hjkpjw7fapf1lafjdibw6f5xd8n730qjh40eh9rqujovey0xovs7rn6b4w3qbjaxac48fcvr23e",
+            "color": "#ffffff",
         },
     })
 
@@ -422,6 +426,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.UpdateTagTagsType.TAGS,
         "attributes": {
             "name": "Tag Name 2",
+            "color": "#ffffff",
         },
     })
 

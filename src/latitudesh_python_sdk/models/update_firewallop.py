@@ -80,17 +80,22 @@ class UpdateFirewallFirewallsRules(BaseModel):
 
 class UpdateFirewallFirewallsAttributesTypedDict(TypedDict):
     name: NotRequired[str]
+    tags: NotRequired[List[str]]
+    r"""IDs of the tags to attach to the firewall. Replaces the current tags; send an empty array to remove all tags."""
     rules: NotRequired[List[UpdateFirewallFirewallsRulesTypedDict]]
 
 
 class UpdateFirewallFirewallsAttributes(BaseModel):
     name: Optional[str] = None
 
+    tags: Optional[List[str]] = None
+    r"""IDs of the tags to attach to the firewall. Replaces the current tags; send an empty array to remove all tags."""
+
     rules: Optional[List[UpdateFirewallFirewallsRules]] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "rules"])
+        optional_fields = set(["name", "tags", "rules"])
         serialized = handler(self)
         m = {}
 

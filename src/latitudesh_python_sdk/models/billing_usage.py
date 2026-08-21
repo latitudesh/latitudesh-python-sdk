@@ -130,7 +130,7 @@ class UsageType(str, Enum):
 class BillingUsageServersTypedDict(TypedDict):
     id: NotRequired[str]
     hostname: NotRequired[str]
-    plan: NotRequired[str]
+    plan: NotRequired[Nullable[str]]
     tags: NotRequired[List[str]]
 
 
@@ -139,22 +139,31 @@ class BillingUsageServers(BaseModel):
 
     hostname: Optional[str] = None
 
-    plan: Optional[str] = None
+    plan: OptionalNullable[str] = UNSET
 
     tags: Optional[List[str]] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["id", "hostname", "plan", "tags"])
+        nullable_fields = set(["plan"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

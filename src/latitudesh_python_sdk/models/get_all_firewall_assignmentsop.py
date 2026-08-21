@@ -13,6 +13,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class GetAllFirewallAssignmentsRequestTypedDict(TypedDict):
     filter_server: NotRequired[str]
     r"""The server ID to filter by"""
+    filter_virtual_machine: NotRequired[str]
+    r"""The virtual machine ID to filter by"""
     page_size: NotRequired[int]
     r"""Number of items to return per page"""
     page_number: NotRequired[int]
@@ -26,6 +28,13 @@ class GetAllFirewallAssignmentsRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The server ID to filter by"""
+
+    filter_virtual_machine: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[virtual_machine]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The virtual machine ID to filter by"""
 
     page_size: Annotated[
         Optional[int],
@@ -43,7 +52,9 @@ class GetAllFirewallAssignmentsRequest(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["filter[server]", "page[size]", "page[number]"])
+        optional_fields = set(
+            ["filter[server]", "filter[virtual_machine]", "page[size]", "page[number]"]
+        )
         serialized = handler(self)
         m = {}
 

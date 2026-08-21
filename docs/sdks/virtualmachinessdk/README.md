@@ -62,6 +62,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.VirtualMachinePayloadType.VIRTUAL_MACHINES,
         "attributes": {
             "name": "my-new-vm",
+            "billing": latitudesh_python_sdk.VirtualMachinePayloadBilling.MONTHLY,
             "project": "lightweight-leather-lamp",
         },
     })
@@ -87,6 +88,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.VirtualMachinePayloadType.VIRTUAL_MACHINES,
         "attributes": {
             "name": "my-new-vm",
+            "billing": latitudesh_python_sdk.VirtualMachinePayloadBilling.MONTHLY,
             "project": "lightweight-leather-lamp",
             "operating_system": "ubuntu_24_04_x64_lts",
         },
@@ -113,6 +115,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.VirtualMachinePayloadType.VIRTUAL_MACHINES,
         "attributes": {
             "name": "my-new-vm",
+            "billing": latitudesh_python_sdk.VirtualMachinePayloadBilling.MONTHLY,
             "project": "lightweight-leather-lamp",
             "user_data": "ud_abc123",
         },
@@ -349,8 +352,30 @@ Performs a power action on a given virtual machine:
 - `power_off` - Stops the virtual machine
 - `reboot` - Restarts the virtual machine
 
+`power_on` is never blocked. A `power_off` or `reboot` returns `409 Conflict` when a backup is in progress for the virtual machine.
 
-### Example Usage
+
+### Example Usage: BackupInProgress
+
+<!-- UsageSnippet language="python" operationID="create-virtual-machine-action" method="post" path="/virtual_machines/{virtual_machine_id}/actions" example="BackupInProgress" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    latitudesh.virtual_machines.create_virtual_machine_action(virtual_machine_id="<id>", id="<id>", type_=latitudesh_python_sdk.CreateVirtualMachineActionVirtualMachinesType.VIRTUAL_MACHINES, attributes={
+        "action": latitudesh_python_sdk.CreateVirtualMachineActionVirtualMachinesAction.REBOOT,
+    })
+
+    # Use the SDK ...
+
+```
+### Example Usage: Created
 
 <!-- UsageSnippet language="python" operationID="create-virtual-machine-action" method="post" path="/virtual_machines/{virtual_machine_id}/actions" example="Created" -->
 ```python
@@ -383,9 +408,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 409, 422                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## show_virtual_machine_metrics
 

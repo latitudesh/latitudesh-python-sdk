@@ -2,38 +2,94 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
-from typing_extensions import TypedDict
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
+from typing import List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class CreateElasticIPType(str, Enum):
     ELASTIC_IPS = "elastic_ips"
 
 
+class CreateElasticIPMode(str, Enum):
+    r"""How the elastic IP is delivered. Defaults to routed"""
+
+    ROUTED = "routed"
+    BGP = "bgp"
+
+
 class CreateElasticIPAttributesTypedDict(TypedDict):
     project_id: str
-    r"""The project ID or slug"""
-    server_id: str
-    r"""The server ID to assign the Elastic IP to"""
+    r"""The project to create the elastic IP in"""
+    mode: NotRequired[CreateElasticIPMode]
+    r"""How the elastic IP is delivered. Defaults to routed"""
+    server_id: NotRequired[str]
+    r"""The server to assign the elastic IP to. Required in routed mode and rejected in bgp mode, which uses server_ids"""
+    server_ids: NotRequired[List[str]]
+    r"""The servers that announce the elastic IP over BGP. Only used in bgp mode, where it may be omitted to allocate a VIP with no sessions"""
+    site: NotRequired[str]
+    r"""The site slug to allocate the elastic IP in. Only used in bgp mode, where it is required when no server_ids are given"""
 
 
 class CreateElasticIPAttributes(BaseModel):
     project_id: str
-    r"""The project ID or slug"""
+    r"""The project to create the elastic IP in"""
 
-    server_id: str
-    r"""The server ID to assign the Elastic IP to"""
+    mode: Optional[CreateElasticIPMode] = CreateElasticIPMode.ROUTED
+    r"""How the elastic IP is delivered. Defaults to routed"""
+
+    server_id: Optional[str] = None
+    r"""The server to assign the elastic IP to. Required in routed mode and rejected in bgp mode, which uses server_ids"""
+
+    server_ids: Optional[List[str]] = None
+    r"""The servers that announce the elastic IP over BGP. Only used in bgp mode, where it may be omitted to allocate a VIP with no sessions"""
+
+    site: Optional[str] = None
+    r"""The site slug to allocate the elastic IP in. Only used in bgp mode, where it is required when no server_ids are given"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["mode", "server_id", "server_ids", "site"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateElasticIPDataTypedDict(TypedDict):
     type: CreateElasticIPType
-    attributes: CreateElasticIPAttributesTypedDict
+    attributes: NotRequired[CreateElasticIPAttributesTypedDict]
 
 
 class CreateElasticIPData(BaseModel):
     type: CreateElasticIPType
 
-    attributes: CreateElasticIPAttributes
+    attributes: Optional[CreateElasticIPAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateElasticIPTypedDict(TypedDict):

@@ -39,7 +39,7 @@ class UpdateTagTagsAttributes(BaseModel):
     description: OptionalNullable[str] = UNSET
     r"""Description of the Tag"""
 
-    color: Optional[str] = "#ffffff"
+    color: Optional[str] = None
     r"""Color of the Tag"""
 
     @model_serializer(mode="wrap")

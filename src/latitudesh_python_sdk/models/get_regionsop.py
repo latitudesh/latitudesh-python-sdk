@@ -17,6 +17,10 @@ class GetRegionsRequestTypedDict(TypedDict):
     r"""Page number to return (starts at 1)"""
     stats_total: NotRequired[str]
     r"""Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`."""
+    include_custom: NotRequired[bool]
+    r"""When set to `true`, the response also includes custom regions (such as storage-only regions) alongside the default core regions. When omitted or `false`, only core regions are returned."""
+    filter_features: NotRequired[str]
+    r"""Return only locations that support the given capability, e.g. `filter[features]=public_network`."""
 
 
 class GetRegionsRequest(BaseModel):
@@ -41,9 +45,30 @@ class GetRegionsRequest(BaseModel):
     ] = None
     r"""Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`."""
 
+    include_custom: Annotated[
+        Optional[bool],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""When set to `true`, the response also includes custom regions (such as storage-only regions) alongside the default core regions. When omitted or `false`, only core regions are returned."""
+
+    filter_features: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[features]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Return only locations that support the given capability, e.g. `filter[features]=public_network`."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["page[size]", "page[number]", "stats[total]"])
+        optional_fields = set(
+            [
+                "page[size]",
+                "page[number]",
+                "stats[total]",
+                "include_custom",
+                "filter[features]",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

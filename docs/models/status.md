@@ -7,7 +7,7 @@ The current status of the Elastic IP
 ```python
 from latitudesh_python_sdk.models import Status
 
-value = Status.CONFIGURING
+value = Status.PENDING
 ```
 
 
@@ -15,6 +15,7 @@ value = Status.CONFIGURING
 
 | Name          | Value         |
 | ------------- | ------------- |
+| `PENDING`     | pending       |
 | `CONFIGURING` | configuring   |
 | `ACTIVE`      | active        |
 | `MOVING`      | moving        |

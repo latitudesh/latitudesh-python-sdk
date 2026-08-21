@@ -33,13 +33,13 @@ class UpdateProjectProjectsAttributesTypedDict(TypedDict):
 
 
 class UpdateProjectProjectsAttributes(BaseModel):
-    name: Optional[str] = "A brand new name for the virtual network"
+    name: Optional[str] = None
 
-    description: Optional[str] = "A brand new description for the virtual network"
+    description: Optional[str] = None
 
     environment: Optional[UpdateProjectProjectsEnvironment] = None
 
-    bandwidth_alert: Optional[bool] = False
+    bandwidth_alert: Optional[bool] = None
 
     tags: Optional[List[str]] = None
 
@@ -63,21 +63,21 @@ class UpdateProjectProjectsAttributes(BaseModel):
 
 
 class UpdateProjectProjectsDataTypedDict(TypedDict):
+    id: str
     type: UpdateProjectProjectsType
-    id: NotRequired[str]
     attributes: NotRequired[UpdateProjectProjectsAttributesTypedDict]
 
 
 class UpdateProjectProjectsData(BaseModel):
-    type: UpdateProjectProjectsType
+    id: str
 
-    id: Optional[str] = "proj_81EVOtR1N4J2Z"
+    type: UpdateProjectProjectsType
 
     attributes: Optional[UpdateProjectProjectsAttributes] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "attributes"])
+        optional_fields = set(["attributes"])
         serialized = handler(self)
         m = {}
 

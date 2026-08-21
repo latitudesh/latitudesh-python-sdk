@@ -1399,8 +1399,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.DeployConfig, http_res)
+        if utils.match_response(http_res, ["403", "422"], "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1508,8 +1512,12 @@ class ServersSDK(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.DeployConfig, http_res)
+        if utils.match_response(http_res, ["403", "422"], "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -3434,7 +3442,9 @@ class ServersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "*"):
             return
-        if utils.match_response(http_res, ["404", "422"], "application/vnd.api+json"):
+        if utils.match_response(
+            http_res, ["403", "404", "422"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -3541,7 +3551,9 @@ class ServersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "*"):
             return
-        if utils.match_response(http_res, ["404", "422"], "application/vnd.api+json"):
+        if utils.match_response(
+            http_res, ["403", "404", "422"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):

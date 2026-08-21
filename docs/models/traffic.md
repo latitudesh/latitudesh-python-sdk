@@ -6,3 +6,4 @@
 | Field                                                    | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `data`                                                   | [Optional[models.TrafficData]](../models/trafficdata.md) | :heavy_minus_sign:                                       | N/A                                                      |
+| `meta`                                                   | [Optional[models.TrafficMeta]](../models/trafficmeta.md) | :heavy_minus_sign:                                       | N/A                                                      |

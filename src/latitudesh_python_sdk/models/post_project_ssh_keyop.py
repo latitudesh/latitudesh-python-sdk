@@ -19,34 +19,18 @@ class PostProjectSSHKeySSHKeysType(str, Enum):
 
 
 class PostProjectSSHKeySSHKeysAttributesTypedDict(TypedDict):
-    name: NotRequired[str]
+    name: str
     r"""Name of the SSH Key"""
-    public_key: NotRequired[str]
+    public_key: str
     r"""SSH Public Key"""
 
 
 class PostProjectSSHKeySSHKeysAttributes(BaseModel):
-    name: Optional[str] = None
+    name: str
     r"""Name of the SSH Key"""
 
-    public_key: Optional[str] = None
+    public_key: str
     r"""SSH Public Key"""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["name", "public_key"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
 
 
 class PostProjectSSHKeySSHKeysDataTypedDict(TypedDict):

@@ -1,11 +1,11 @@
-# CreateServerRaidLevel
+# DeployConfigRaidLevel
 
 ## Example Usage
 
 ```python
-from latitudesh_python_sdk.models import CreateServerRaidLevel
+from latitudesh_python_sdk.models import DeployConfigRaidLevel
 
-value = CreateServerRaidLevel.RAID_0
+value = DeployConfigRaidLevel.RAID_0
 ```
 
 

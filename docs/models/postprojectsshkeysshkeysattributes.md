@@ -5,5 +5,5 @@
 
 | Field               | Type                | Required            | Description         |
 | ------------------- | ------------------- | ------------------- | ------------------- |
-| `name`              | *Optional[str]*     | :heavy_minus_sign:  | Name of the SSH Key |
-| `public_key`        | *Optional[str]*     | :heavy_minus_sign:  | SSH Public Key      |
+| `name`              | *str*               | :heavy_check_mark:  | Name of the SSH Key |
+| `public_key`        | *str*               | :heavy_check_mark:  | SSH Public Key      |

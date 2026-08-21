@@ -48,6 +48,7 @@ class TeamLimitsTypedDict(TypedDict):
     virtual_machine: NotRequired[Nullable[int]]
     virtual_machine_gpu: NotRequired[Nullable[int]]
     elastic_ip: NotRequired[Nullable[int]]
+    public_network: NotRequired[Nullable[int]]
     virtual_network: NotRequired[Nullable[int]]
     database: NotRequired[Nullable[int]]
     filesystem: NotRequired[Nullable[int]]
@@ -64,6 +65,8 @@ class TeamLimits(BaseModel):
     virtual_machine_gpu: OptionalNullable[int] = UNSET
 
     elastic_ip: OptionalNullable[int] = UNSET
+
+    public_network: OptionalNullable[int] = UNSET
 
     virtual_network: OptionalNullable[int] = UNSET
 
@@ -82,6 +85,7 @@ class TeamLimits(BaseModel):
                 "virtual_machine",
                 "virtual_machine_gpu",
                 "elastic_ip",
+                "public_network",
                 "virtual_network",
                 "database",
                 "filesystem",
@@ -95,6 +99,7 @@ class TeamLimits(BaseModel):
                 "virtual_machine",
                 "virtual_machine_gpu",
                 "elastic_ip",
+                "public_network",
                 "virtual_network",
                 "database",
                 "filesystem",
@@ -131,7 +136,11 @@ class TeamAttributesTypedDict(TypedDict):
     currency: NotRequired[str]
     created_at: NotRequired[str]
     updated_at: NotRequired[str]
+    status: NotRequired[Nullable[str]]
     enforce_mfa: NotRequired[bool]
+    token: NotRequired[Nullable[str]]
+    customer_billing_id: NotRequired[Nullable[str]]
+    referred_code: NotRequired[Nullable[str]]
     users: NotRequired[List[UserIncludeTypedDict]]
     projects: NotRequired[List[ProjectIncludeTypedDict]]
     owner: NotRequired[UserIncludeTypedDict]
@@ -155,7 +164,15 @@ class TeamAttributes(BaseModel):
 
     updated_at: Optional[str] = None
 
+    status: OptionalNullable[str] = UNSET
+
     enforce_mfa: Optional[bool] = None
+
+    token: OptionalNullable[str] = UNSET
+
+    customer_billing_id: OptionalNullable[str] = UNSET
+
+    referred_code: OptionalNullable[str] = UNSET
 
     users: Optional[List[UserInclude]] = None
 
@@ -180,7 +197,11 @@ class TeamAttributes(BaseModel):
                 "currency",
                 "created_at",
                 "updated_at",
+                "status",
                 "enforce_mfa",
+                "token",
+                "customer_billing_id",
+                "referred_code",
                 "users",
                 "projects",
                 "owner",
@@ -189,7 +210,16 @@ class TeamAttributes(BaseModel):
                 "limits",
             ]
         )
-        nullable_fields = set(["description", "address"])
+        nullable_fields = set(
+            [
+                "description",
+                "address",
+                "status",
+                "token",
+                "customer_billing_id",
+                "referred_code",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

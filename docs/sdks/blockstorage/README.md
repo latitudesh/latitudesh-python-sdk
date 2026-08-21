@@ -72,6 +72,7 @@ with Latitudesh(
         "attributes": {
             "project": "proj_enPbqoZ6dA2MQ",
             "name": "my-data",
+            "region": "DAL",
         },
     })
 
@@ -97,6 +98,7 @@ with Latitudesh(
         "attributes": {
             "project": "<value>",
             "name": "<value>",
+            "region": "<value>",
         },
     })
 

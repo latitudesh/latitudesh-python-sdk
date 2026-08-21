@@ -20,12 +20,12 @@ class DeployConfigRole(str, Enum):
     RAW = "raw"
 
 
-class RaidLevel(str, Enum):
+class DeployConfigRaidLevel(str, Enum):
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
 
 
-class Filesystem(str, Enum):
+class DeployConfigFilesystem(str, Enum):
     EXT4 = "ext4"
     XFS = "xfs"
 
@@ -33,8 +33,8 @@ class Filesystem(str, Enum):
 class DiskLayoutTypedDict(TypedDict):
     count: int
     role: DeployConfigRole
-    raid_level: NotRequired[Nullable[RaidLevel]]
-    filesystem: NotRequired[Nullable[Filesystem]]
+    raid_level: NotRequired[Nullable[DeployConfigRaidLevel]]
+    filesystem: NotRequired[Nullable[DeployConfigFilesystem]]
     mount_point: NotRequired[Nullable[str]]
 
 
@@ -43,9 +43,9 @@ class DiskLayout(BaseModel):
 
     role: DeployConfigRole
 
-    raid_level: OptionalNullable[RaidLevel] = UNSET
+    raid_level: OptionalNullable[DeployConfigRaidLevel] = UNSET
 
-    filesystem: OptionalNullable[Filesystem] = UNSET
+    filesystem: OptionalNullable[DeployConfigFilesystem] = UNSET
 
     mount_point: OptionalNullable[str] = UNSET
 
@@ -75,36 +75,6 @@ class DiskLayout(BaseModel):
         return m
 
 
-class PartitionsTypedDict(TypedDict):
-    path: NotRequired[str]
-    size_in_gb: NotRequired[int]
-    filesystem_type: NotRequired[str]
-
-
-class Partitions(BaseModel):
-    path: Optional[str] = None
-
-    size_in_gb: Optional[int] = None
-
-    filesystem_type: Optional[str] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["path", "size_in_gb", "filesystem_type"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
 class DeployConfigAttributesTypedDict(TypedDict):
     operating_system: NotRequired[str]
     hostname: NotRequired[str]
@@ -112,7 +82,10 @@ class DeployConfigAttributesTypedDict(TypedDict):
     disk_layout: NotRequired[Nullable[List[DiskLayoutTypedDict]]]
     user_data: NotRequired[str]
     ssh_keys: NotRequired[List[str]]
-    partitions: NotRequired[Nullable[List[PartitionsTypedDict]]]
+    persistent_netboot: NotRequired[Nullable[bool]]
+    r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
+    public_network: NotRequired[Nullable[bool]]
+    public_network_id: NotRequired[Nullable[str]]
 
 
 class DeployConfigAttributes(BaseModel):
@@ -128,7 +101,12 @@ class DeployConfigAttributes(BaseModel):
 
     ssh_keys: Optional[List[str]] = None
 
-    partitions: OptionalNullable[List[Partitions]] = UNSET
+    persistent_netboot: OptionalNullable[bool] = UNSET
+    r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
+
+    public_network: OptionalNullable[bool] = UNSET
+
+    public_network_id: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -140,10 +118,14 @@ class DeployConfigAttributes(BaseModel):
                 "disk_layout",
                 "user_data",
                 "ssh_keys",
-                "partitions",
+                "persistent_netboot",
+                "public_network",
+                "public_network_id",
             ]
         )
-        nullable_fields = set(["disk_layout", "partitions"])
+        nullable_fields = set(
+            ["disk_layout", "persistent_netboot", "public_network", "public_network_id"]
+        )
         serialized = handler(self)
         m = {}
 

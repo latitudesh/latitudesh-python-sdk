@@ -85,6 +85,36 @@ class ObjectStorageDataRegion(BaseModel):
         return m
 
 
+class CredentialsTypedDict(TypedDict):
+    r"""S3 access credentials. Only included when `extra_fields[object_storages]=credentials` is requested and the requesting user is the bucket's creator."""
+
+    access_key: NotRequired[str]
+    r"""S3 access key for authentication"""
+
+
+class Credentials(BaseModel):
+    r"""S3 access credentials. Only included when `extra_fields[object_storages]=credentials` is requested and the requesting user is the bucket's creator."""
+
+    access_key: Optional[str] = None
+    r"""S3 access key for authentication"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["access_key"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
 class ObjectStorageDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""Display name of the object storage"""
@@ -97,11 +127,7 @@ class ObjectStorageDataAttributesTypedDict(TypedDict):
     bucket_name: NotRequired[str]
     r"""S3-compatible bucket name"""
     endpoint: NotRequired[str]
-    r"""S3-compatible endpoint URL for accessing the bucket"""
-    access_key: NotRequired[Nullable[str]]
-    r"""S3 access key for authentication"""
-    secret_key: NotRequired[Nullable[str]]
-    r"""S3 secret key for authentication"""
+    r"""Region-specific S3-compatible endpoint URL for accessing the bucket. The endpoint varies based on the bucket's location."""
     versioning: NotRequired[Nullable[bool]]
     r"""Whether bucket versioning is enabled"""
     locking: NotRequired[Nullable[bool]]
@@ -110,8 +136,12 @@ class ObjectStorageDataAttributesTypedDict(TypedDict):
     r"""Object lock retention mode"""
     retention_period: NotRequired[Nullable[int]]
     r"""Default retention period in days when object lock is enabled"""
+    source: NotRequired[str]
+    r"""How the bucket originated: `default` for buckets created through the API, or `synchronized` for buckets imported from the storage provider."""
     region: NotRequired[Nullable[ObjectStorageDataRegionTypedDict]]
     r"""Region information where the object storage is located"""
+    credentials: NotRequired[Nullable[CredentialsTypedDict]]
+    r"""S3 access credentials. Only included when `extra_fields[object_storages]=credentials` is requested and the requesting user is the bucket's creator."""
     project: NotRequired[ProjectIncludeTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
 
@@ -133,13 +163,7 @@ class ObjectStorageDataAttributes(BaseModel):
     r"""S3-compatible bucket name"""
 
     endpoint: Optional[str] = None
-    r"""S3-compatible endpoint URL for accessing the bucket"""
-
-    access_key: OptionalNullable[str] = UNSET
-    r"""S3 access key for authentication"""
-
-    secret_key: OptionalNullable[str] = UNSET
-    r"""S3 secret key for authentication"""
+    r"""Region-specific S3-compatible endpoint URL for accessing the bucket. The endpoint varies based on the bucket's location."""
 
     versioning: OptionalNullable[bool] = UNSET
     r"""Whether bucket versioning is enabled"""
@@ -153,8 +177,14 @@ class ObjectStorageDataAttributes(BaseModel):
     retention_period: OptionalNullable[int] = UNSET
     r"""Default retention period in days when object lock is enabled"""
 
+    source: Optional[str] = None
+    r"""How the bucket originated: `default` for buckets created through the API, or `synchronized` for buckets imported from the storage provider."""
+
     region: OptionalNullable[ObjectStorageDataRegion] = UNSET
     r"""Region information where the object storage is located"""
+
+    credentials: OptionalNullable[Credentials] = UNSET
+    r"""S3 access credentials. Only included when `extra_fields[object_storages]=credentials` is requested and the requesting user is the bucket's creator."""
 
     project: Optional[ProjectInclude] = None
 
@@ -170,13 +200,13 @@ class ObjectStorageDataAttributes(BaseModel):
                 "created_at",
                 "bucket_name",
                 "endpoint",
-                "access_key",
-                "secret_key",
                 "versioning",
                 "locking",
                 "retention_mode",
                 "retention_period",
+                "source",
                 "region",
+                "credentials",
                 "project",
                 "team",
             ]
@@ -184,13 +214,12 @@ class ObjectStorageDataAttributes(BaseModel):
         nullable_fields = set(
             [
                 "created_at",
-                "access_key",
-                "secret_key",
                 "versioning",
                 "locking",
                 "retention_mode",
                 "retention_period",
                 "region",
+                "credentials",
             ]
         )
         serialized = handler(self)

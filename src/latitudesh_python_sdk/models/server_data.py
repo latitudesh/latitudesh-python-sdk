@@ -20,6 +20,48 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class ServerDataTagsTypedDict(TypedDict):
+    id: NotRequired[str]
+    name: NotRequired[str]
+    description: NotRequired[Nullable[str]]
+    color: NotRequired[Nullable[str]]
+
+
+class ServerDataTags(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+    description: OptionalNullable[str] = UNSET
+
+    color: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name", "description", "color"])
+        nullable_fields = set(["description", "color"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class ServerDataStatus(str, Enum):
     r"""`on` - The server is powered ON
     `off` - The server is powered OFF
@@ -44,6 +86,49 @@ class IpmiStatus(str, Enum):
     UNAVAILABLE = "Unavailable"
     INTERMITTENT = "Intermittent"
     NORMAL = "Normal"
+
+
+class ServerDataPublicNetworkTypedDict(TypedDict):
+    r"""**Preview** (`public_network` feature flag). The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}."""
+
+    id: NotRequired[str]
+    ipv4: NotRequired[Nullable[str]]
+    ipv6: NotRequired[Nullable[str]]
+
+
+class ServerDataPublicNetwork(BaseModel):
+    r"""**Preview** (`public_network` feature flag). The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}."""
+
+    id: Optional[str] = None
+
+    ipv4: OptionalNullable[str] = UNSET
+
+    ipv6: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "ipv4", "ipv6"])
+        nullable_fields = set(["ipv4", "ipv6"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class ServerDataPlanTypedDict(TypedDict):
@@ -309,9 +394,11 @@ class Interfaces(BaseModel):
 
 
 class ServerDataAttributesTypedDict(TypedDict):
+    tags: NotRequired[List[ServerDataTagsTypedDict]]
     hostname: NotRequired[str]
     label: NotRequired[str]
     r"""The server label"""
+    price: NotRequired[Nullable[float]]
     status: NotRequired[ServerDataStatus]
     r"""`on` - The server is powered ON
     `off` - The server is powered OFF
@@ -322,9 +409,13 @@ class ServerDataAttributesTypedDict(TypedDict):
     `rescue_mode` - The server is in rescue mode
 
     """
-    ipmi_status: NotRequired[IpmiStatus]
+    ipmi_status: NotRequired[Nullable[IpmiStatus]]
     role: NotRequired[str]
     r"""The server role (e.g. Bare Metal)"""
+    public_network_eligible: NotRequired[bool]
+    r"""Whether the server is eligible to attach a public network (carries the bond-vpc-enabled tag)."""
+    public_network: NotRequired[Nullable[ServerDataPublicNetworkTypedDict]]
+    r"""**Preview** (`public_network` feature flag). The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}."""
     site: NotRequired[str]
     locked: NotRequired[bool]
     rescue_allowed: NotRequired[bool]
@@ -342,10 +433,14 @@ class ServerDataAttributesTypedDict(TypedDict):
 
 
 class ServerDataAttributes(BaseModel):
+    tags: Optional[List[ServerDataTags]] = None
+
     hostname: Optional[str] = None
 
     label: Optional[str] = None
     r"""The server label"""
+
+    price: OptionalNullable[float] = UNSET
 
     status: Optional[ServerDataStatus] = None
     r"""`on` - The server is powered ON
@@ -358,10 +453,16 @@ class ServerDataAttributes(BaseModel):
 
     """
 
-    ipmi_status: Optional[IpmiStatus] = None
+    ipmi_status: OptionalNullable[IpmiStatus] = UNSET
 
     role: Optional[str] = None
     r"""The server role (e.g. Bare Metal)"""
+
+    public_network_eligible: Optional[bool] = None
+    r"""Whether the server is eligible to attach a public network (carries the bond-vpc-enabled tag)."""
+
+    public_network: OptionalNullable[ServerDataPublicNetwork] = UNSET
+    r"""**Preview** (`public_network` feature flag). The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}."""
 
     site: Optional[str] = None
 
@@ -395,11 +496,15 @@ class ServerDataAttributes(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "tags",
                 "hostname",
                 "label",
+                "price",
                 "status",
                 "ipmi_status",
                 "role",
+                "public_network_eligible",
+                "public_network",
                 "site",
                 "locked",
                 "rescue_allowed",
@@ -417,7 +522,15 @@ class ServerDataAttributes(BaseModel):
             ]
         )
         nullable_fields = set(
-            ["primary_ipv4", "primary_ipv6", "created_at", "scheduled_deletion_at"]
+            [
+                "price",
+                "ipmi_status",
+                "public_network",
+                "primary_ipv4",
+                "primary_ipv6",
+                "created_at",
+                "scheduled_deletion_at",
+            ]
         )
         serialized = handler(self)
         m = {}

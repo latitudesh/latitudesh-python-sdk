@@ -8,16 +8,27 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class PlanMetaTypedDict(TypedDict):
+    pass
+
+
+class PlanMeta(BaseModel):
+    pass
+
+
 class PlanTypedDict(TypedDict):
     data: NotRequired[PlanDataTypedDict]
+    meta: NotRequired[PlanMetaTypedDict]
 
 
 class Plan(BaseModel):
     data: Optional[PlanData] = None
 
+    meta: Optional[PlanMeta] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         serialized = handler(self)
         m = {}
 

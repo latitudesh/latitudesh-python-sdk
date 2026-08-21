@@ -73,7 +73,7 @@ class Vcpu(BaseModel):
 class VirtualMachinePlansNicsTypedDict(TypedDict):
     type: NotRequired[str]
     r"""NIC speed/type"""
-    count: NotRequired[str]
+    count: NotRequired[int]
     r"""Number of NICs"""
 
 
@@ -81,7 +81,7 @@ class VirtualMachinePlansNics(BaseModel):
     type: Optional[str] = None
     r"""NIC speed/type"""
 
-    count: Optional[str] = None
+    count: Optional[int] = None
     r"""Number of NICs"""
 
     @model_serializer(mode="wrap")
@@ -107,14 +107,14 @@ class VirtualMachinePlansUnit(str, Enum):
     GIB = "gib"
 
 
-class SizeTypedDict(TypedDict):
+class VirtualMachinePlansSizeTypedDict(TypedDict):
     amount: NotRequired[int]
     r"""The total size of the disk"""
     unit: NotRequired[VirtualMachinePlansUnit]
     r"""The unit of the disk size"""
 
 
-class Size(BaseModel):
+class VirtualMachinePlansSize(BaseModel):
     amount: Optional[int] = None
     r"""The total size of the disk"""
 
@@ -141,14 +141,14 @@ class Size(BaseModel):
 class DiskTypedDict(TypedDict):
     type: NotRequired[str]
     r"""The type of the disk (e.g., local SSD, local NVMe)"""
-    size: NotRequired[SizeTypedDict]
+    size: NotRequired[VirtualMachinePlansSizeTypedDict]
 
 
 class Disk(BaseModel):
     type: Optional[str] = None
     r"""The type of the disk (e.g., local SSD, local NVMe)"""
 
-    size: Optional[Size] = None
+    size: Optional[VirtualMachinePlansSize] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -170,7 +170,7 @@ class Disk(BaseModel):
 class VirtualMachinePlansSpecsTypedDict(TypedDict):
     memory: NotRequired[int]
     r"""The total memory"""
-    gpu: NotRequired[str]
+    gpu: NotRequired[Nullable[str]]
     r"""The GPU type"""
     vram_per_gpu: NotRequired[Nullable[int]]
     r"""VRAM per GPU in GB"""
@@ -187,7 +187,7 @@ class VirtualMachinePlansSpecs(BaseModel):
     memory: Optional[int] = None
     r"""The total memory"""
 
-    gpu: Optional[str] = None
+    gpu: OptionalNullable[str] = UNSET
     r"""The GPU type"""
 
     vram_per_gpu: OptionalNullable[int] = UNSET
@@ -209,7 +209,7 @@ class VirtualMachinePlansSpecs(BaseModel):
         optional_fields = set(
             ["memory", "gpu", "vram_per_gpu", "vcpus", "vcpu", "nics", "disk"]
         )
-        nullable_fields = set(["vram_per_gpu", "nics"])
+        nullable_fields = set(["gpu", "vram_per_gpu", "nics"])
         serialized = handler(self)
         m = {}
 
@@ -411,6 +411,8 @@ class VirtualMachinePlansStockLevel(str, Enum):
 class VirtualMachinePlansAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The name of the plan"""
+    slug: NotRequired[str]
+    r"""The slug of the plan, used to create virtual machines"""
     specs: NotRequired[VirtualMachinePlansSpecsTypedDict]
     regions: NotRequired[List[VirtualMachinePlansRegionsTypedDict]]
     stock_level: NotRequired[VirtualMachinePlansStockLevel]
@@ -422,6 +424,9 @@ class VirtualMachinePlansAttributesTypedDict(TypedDict):
 class VirtualMachinePlansAttributes(BaseModel):
     name: Optional[str] = None
     r"""The name of the plan"""
+
+    slug: Optional[str] = None
+    r"""The slug of the plan, used to create virtual machines"""
 
     specs: Optional[VirtualMachinePlansSpecs] = None
 
@@ -436,7 +441,14 @@ class VirtualMachinePlansAttributes(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["name", "specs", "regions", "stock_level", "available_operating_systems"]
+            [
+                "name",
+                "slug",
+                "specs",
+                "regions",
+                "stock_level",
+                "available_operating_systems",
+            ]
         )
         serialized = handler(self)
         m = {}

@@ -16,6 +16,9 @@ class FeaturesTypedDict(TypedDict):
     raid: NotRequired[bool]
     ssh_keys: NotRequired[bool]
     user_data: NotRequired[bool]
+    accelerate: NotRequired[bool]
+    rescue: NotRequired[bool]
+    workflow: NotRequired[bool]
 
 
 class Features(BaseModel):
@@ -25,9 +28,17 @@ class Features(BaseModel):
 
     user_data: Optional[bool] = None
 
+    accelerate: Optional[bool] = None
+
+    rescue: Optional[bool] = None
+
+    workflow: Optional[bool] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["raid", "ssh_keys", "user_data"])
+        optional_fields = set(
+            ["raid", "ssh_keys", "user_data", "accelerate", "rescue", "workflow"]
+        )
         serialized = handler(self)
         m = {}
 

@@ -2,21 +2,38 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
+import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class StoragePlanDataType(str, Enum):
     STORAGE_PLANS = "storage_plans"
 
 
-class StoragePlanDataPricingTypedDict(TypedDict):
+class StorageType(str, Enum):
+    FILESYSTEM = "filesystem"
+    OBJECT = "object"
+
+
+class StorageClass(str, Enum):
+    STANDARD = "standard"
+    HIGH_PERFORMANCE = "high_performance"
+
+
+class StoragePlanDataUSDTypedDict(TypedDict):
     month: NotRequired[float]
 
 
-class StoragePlanDataPricing(BaseModel):
+class StoragePlanDataUSD(BaseModel):
     month: Optional[float] = None
 
     @model_serializer(mode="wrap")
@@ -36,13 +53,64 @@ class StoragePlanDataPricing(BaseModel):
         return m
 
 
-class StoragePlanDataAttributesTypedDict(TypedDict):
+class StoragePlanDataBRLTypedDict(TypedDict):
+    month: NotRequired[float]
+
+
+class StoragePlanDataBRL(BaseModel):
+    month: Optional[float] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["month"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class StoragePlanDataPricingTypedDict(TypedDict):
+    usd: NotRequired[StoragePlanDataUSDTypedDict]
+    brl: NotRequired[StoragePlanDataBRLTypedDict]
+
+
+class StoragePlanDataPricing(BaseModel):
+    usd: Annotated[Optional[StoragePlanDataUSD], pydantic.Field(alias="USD")] = None
+
+    brl: Annotated[Optional[StoragePlanDataBRL], pydantic.Field(alias="BRL")] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["USD", "BRL"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class StoragePlanDataRegionsTypedDict(TypedDict):
     name: NotRequired[str]
     locations: NotRequired[List[str]]
     pricing: NotRequired[StoragePlanDataPricingTypedDict]
 
 
-class StoragePlanDataAttributes(BaseModel):
+class StoragePlanDataRegions(BaseModel):
     name: Optional[str] = None
 
     locations: Optional[List[str]] = None
@@ -61,6 +129,48 @@ class StoragePlanDataAttributes(BaseModel):
 
             if val != UNSET_SENTINEL:
                 if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class StoragePlanDataAttributesTypedDict(TypedDict):
+    name: NotRequired[str]
+    storage_type: NotRequired[StorageType]
+    storage_class: NotRequired[Nullable[StorageClass]]
+    regions: NotRequired[List[StoragePlanDataRegionsTypedDict]]
+
+
+class StoragePlanDataAttributes(BaseModel):
+    name: Optional[str] = None
+
+    storage_type: Optional[StorageType] = None
+
+    storage_class: OptionalNullable[StorageClass] = UNSET
+
+    regions: Optional[List[StoragePlanDataRegions]] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["name", "storage_type", "storage_class", "regions"])
+        nullable_fields = set(["storage_class"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -94,3 +204,9 @@ class StoragePlanData(BaseModel):
                     m[k] = val
 
         return m
+
+
+try:
+    StoragePlanDataPricing.model_rebuild()
+except NameError:
+    pass

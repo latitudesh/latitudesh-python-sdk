@@ -10,3 +10,5 @@
 | `outbound_gb`             | *Optional[int]*           | :heavy_minus_sign:        | Value in GB               |
 | `avg_outbound_speed_mbps` | *Optional[float]*         | :heavy_minus_sign:        | Value in Mbps             |
 | `avg_inbound_speed_mbps`  | *Optional[float]*         | :heavy_minus_sign:        | Value in Mbps             |
+| `outbound_speed_mbps`     | *Optional[float]*         | :heavy_minus_sign:        | Value in Mbps             |
+| `inbound_speed_mbps`      | *Optional[float]*         | :heavy_minus_sign:        | Value in Mbps             |

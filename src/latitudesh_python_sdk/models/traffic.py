@@ -24,6 +24,10 @@ class TrafficDataDataTypedDict(TypedDict):
     r"""Value in Mbps"""
     avg_inbound_speed_mbps: NotRequired[float]
     r"""Value in Mbps"""
+    outbound_speed_mbps: NotRequired[float]
+    r"""Value in Mbps"""
+    inbound_speed_mbps: NotRequired[float]
+    r"""Value in Mbps"""
 
 
 class TrafficDataData(BaseModel):
@@ -42,6 +46,12 @@ class TrafficDataData(BaseModel):
     avg_inbound_speed_mbps: Optional[float] = None
     r"""Value in Mbps"""
 
+    outbound_speed_mbps: Optional[float] = None
+    r"""Value in Mbps"""
+
+    inbound_speed_mbps: Optional[float] = None
+    r"""Value in Mbps"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -51,6 +61,8 @@ class TrafficDataData(BaseModel):
                 "outbound_gb",
                 "avg_outbound_speed_mbps",
                 "avg_inbound_speed_mbps",
+                "outbound_speed_mbps",
+                "inbound_speed_mbps",
             ]
         )
         serialized = handler(self)
@@ -74,9 +86,9 @@ class TrafficRegionsTypedDict(TypedDict):
     total_outbound_gb: NotRequired[int]
     r"""Value in GB"""
     total_inbound_95th_percentile_mbps: NotRequired[float]
-    r"""The 95th percentile of inbound bandwidth for this region, calculated from 30-minute intervals. Value in Mbps"""
+    r"""The 95th percentile of inbound bandwidth for this region. Value in Mbps"""
     total_outbound_95th_percentile_mbps: NotRequired[float]
-    r"""The 95th percentile of outbound bandwidth for this region, calculated from 30-minute intervals. Value in Mbps"""
+    r"""The 95th percentile of outbound bandwidth for this region. Value in Mbps"""
     data: NotRequired[List[TrafficDataDataTypedDict]]
 
 
@@ -90,10 +102,10 @@ class TrafficRegions(BaseModel):
     r"""Value in GB"""
 
     total_inbound_95th_percentile_mbps: Optional[float] = None
-    r"""The 95th percentile of inbound bandwidth for this region, calculated from 30-minute intervals. Value in Mbps"""
+    r"""The 95th percentile of inbound bandwidth for this region. Value in Mbps"""
 
     total_outbound_95th_percentile_mbps: Optional[float] = None
-    r"""The 95th percentile of outbound bandwidth for this region, calculated from 30-minute intervals. Value in Mbps"""
+    r"""The 95th percentile of outbound bandwidth for this region. Value in Mbps"""
 
     data: Optional[List[TrafficDataData]] = None
 
@@ -134,9 +146,9 @@ class TrafficAttributesTypedDict(TypedDict):
     total_outbound_gb: NotRequired[int]
     r"""Value in GB"""
     total_inbound_95th_percentile_mbps: NotRequired[float]
-    r"""The 95th percentile of inbound bandwidth across all regions, calculated from all 30-minute intervals combined. This is a global percentile, not a sum of regional percentiles. Value in Mbps"""
+    r"""The 95th percentile of inbound bandwidth across all regions. This is a global percentile, not a sum of regional percentiles. Value in Mbps"""
     total_outbound_95th_percentile_mbps: NotRequired[float]
-    r"""The 95th percentile of outbound bandwidth across all regions, calculated from all 30-minute intervals combined. This is a global percentile, not a sum of regional percentiles. Value in Mbps"""
+    r"""The 95th percentile of outbound bandwidth across all regions. This is a global percentile, not a sum of regional percentiles. Value in Mbps"""
 
 
 class TrafficAttributes(BaseModel):
@@ -155,10 +167,10 @@ class TrafficAttributes(BaseModel):
     r"""Value in GB"""
 
     total_inbound_95th_percentile_mbps: Optional[float] = None
-    r"""The 95th percentile of inbound bandwidth across all regions, calculated from all 30-minute intervals combined. This is a global percentile, not a sum of regional percentiles. Value in Mbps"""
+    r"""The 95th percentile of inbound bandwidth across all regions. This is a global percentile, not a sum of regional percentiles. Value in Mbps"""
 
     total_outbound_95th_percentile_mbps: Optional[float] = None
-    r"""The 95th percentile of outbound bandwidth across all regions, calculated from all 30-minute intervals combined. This is a global percentile, not a sum of regional percentiles. Value in Mbps"""
+    r"""The 95th percentile of outbound bandwidth across all regions. This is a global percentile, not a sum of regional percentiles. Value in Mbps"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -217,16 +229,27 @@ class TrafficData(BaseModel):
         return m
 
 
+class TrafficMetaTypedDict(TypedDict):
+    pass
+
+
+class TrafficMeta(BaseModel):
+    pass
+
+
 class TrafficTypedDict(TypedDict):
     data: NotRequired[TrafficDataTypedDict]
+    meta: NotRequired[TrafficMetaTypedDict]
 
 
 class Traffic(BaseModel):
     data: Optional[TrafficData] = None
 
+    meta: Optional[TrafficMeta] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         serialized = handler(self)
         m = {}
 

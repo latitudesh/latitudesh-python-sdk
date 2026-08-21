@@ -25,7 +25,7 @@ class TrafficSDK(BaseSDK):
         r"""Retrieve traffic
 
         :param filter_date_gte: The start timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-01T00:00:00Z
-        :param filter_date_lte: The end timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-31T23:59:59Z
+        :param filter_date_lte: The end timestamp to retrieve the traffic. You must provide in ISO8601 format. The period must not exceed 366 days. Example: filter[date][gte]=2024-04-31T23:59:59Z
         :param filter_server: The server id to filter by
         :param filter_project: The project id to filter by
         :param retries: Override the default retry configuration for this method
@@ -120,7 +120,7 @@ class TrafficSDK(BaseSDK):
         r"""Retrieve traffic
 
         :param filter_date_gte: The start timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-01T00:00:00Z
-        :param filter_date_lte: The end timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-31T23:59:59Z
+        :param filter_date_lte: The end timestamp to retrieve the traffic. You must provide in ISO8601 format. The period must not exceed 366 days. Example: filter[date][gte]=2024-04-31T23:59:59Z
         :param filter_server: The server id to filter by
         :param filter_project: The project id to filter by
         :param retries: Override the default retry configuration for this method

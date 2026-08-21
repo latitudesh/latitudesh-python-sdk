@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
@@ -15,6 +21,8 @@ class IpmiSessionType(str, Enum):
 class IpmiSessionAttributesTypedDict(TypedDict):
     ipmi_address: NotRequired[str]
     r"""The IPMI IP Address"""
+    ipmi_url: NotRequired[Nullable[str]]
+    r"""The IPMI URL for direct access"""
     ipmi_username: NotRequired[str]
     r"""The IPMI username"""
     ipmi_password: NotRequired[str]
@@ -25,6 +33,9 @@ class IpmiSessionAttributes(BaseModel):
     ipmi_address: Optional[str] = None
     r"""The IPMI IP Address"""
 
+    ipmi_url: OptionalNullable[str] = UNSET
+    r"""The IPMI URL for direct access"""
+
     ipmi_username: Optional[str] = None
     r"""The IPMI username"""
 
@@ -33,16 +44,27 @@ class IpmiSessionAttributes(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["ipmi_address", "ipmi_username", "ipmi_password"])
+        optional_fields = set(
+            ["ipmi_address", "ipmi_url", "ipmi_username", "ipmi_password"]
+        )
+        nullable_fields = set(["ipmi_url"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

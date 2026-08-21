@@ -52,6 +52,12 @@ class VolumeDataAttributesTypedDict(TypedDict):
     namespace_id: NotRequired[Nullable[str]]
     connector_id: NotRequired[Nullable[str]]
     initiators: NotRequired[Nullable[List[InitiatorsTypedDict]]]
+    keyring: NotRequired[Nullable[str]]
+    r"""Cephx keyring secret used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
+    cluster_user: NotRequired[Nullable[str]]
+    r"""Ceph cluster user used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
+    volume_path: NotRequired[Nullable[str]]
+    r"""Path of the volume inside the cluster. Returned only for dashboard-origin requests; null until the volume is provisioned."""
     project: NotRequired[ProjectIncludeTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
 
@@ -69,6 +75,15 @@ class VolumeDataAttributes(BaseModel):
 
     initiators: OptionalNullable[List[Initiators]] = UNSET
 
+    keyring: OptionalNullable[str] = UNSET
+    r"""Cephx keyring secret used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
+
+    cluster_user: OptionalNullable[str] = UNSET
+    r"""Ceph cluster user used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
+
+    volume_path: OptionalNullable[str] = UNSET
+    r"""Path of the volume inside the cluster. Returned only for dashboard-origin requests; null until the volume is provisioned."""
+
     project: Optional[ProjectInclude] = None
 
     team: Optional[TeamInclude] = None
@@ -83,12 +98,23 @@ class VolumeDataAttributes(BaseModel):
                 "namespace_id",
                 "connector_id",
                 "initiators",
+                "keyring",
+                "cluster_user",
+                "volume_path",
                 "project",
                 "team",
             ]
         )
         nullable_fields = set(
-            ["created_at", "namespace_id", "connector_id", "initiators"]
+            [
+                "created_at",
+                "namespace_id",
+                "connector_id",
+                "initiators",
+                "keyring",
+                "cluster_user",
+                "volume_path",
+            ]
         )
         serialized = handler(self)
         m = {}
