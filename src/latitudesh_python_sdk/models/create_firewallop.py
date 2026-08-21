@@ -80,7 +80,10 @@ class CreateFirewallRules(BaseModel):
 class CreateFirewallFirewallsAttributesTypedDict(TypedDict):
     name: str
     project: str
+    tags: NotRequired[List[str]]
+    r"""IDs of the tags to attach to the firewall"""
     rules: NotRequired[List[CreateFirewallRulesTypedDict]]
+    r"""Firewall rules. When empty, Latitude seeds a default rule allowing SSH (TCP port 22) from any source."""
 
 
 class CreateFirewallFirewallsAttributes(BaseModel):
@@ -88,11 +91,15 @@ class CreateFirewallFirewallsAttributes(BaseModel):
 
     project: str
 
+    tags: Optional[List[str]] = None
+    r"""IDs of the tags to attach to the firewall"""
+
     rules: Optional[List[CreateFirewallRules]] = None
+    r"""Firewall rules. When empty, Latitude seeds a default rule allowing SSH (TCP port 22) from any source."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["rules"])
+        optional_fields = set(["tags", "rules"])
         serialized = handler(self)
         m = {}
 

@@ -1,11 +1,11 @@
-# CreateServerFilesystem
+# DeployConfigFilesystem
 
 ## Example Usage
 
 ```python
-from latitudesh_python_sdk.models import CreateServerFilesystem
+from latitudesh_python_sdk.models import DeployConfigFilesystem
 
-value = CreateServerFilesystem.EXT4
+value = DeployConfigFilesystem.EXT4
 ```
 
 

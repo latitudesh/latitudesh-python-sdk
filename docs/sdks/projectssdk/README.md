@@ -361,6 +361,9 @@ with Latitudesh(
         "id": "proj_Z8rodm2Yq1jLB",
         "type": latitudesh_python_sdk.UpdateProjectProjectsType.PROJECTS,
         "attributes": {
+            "name": "A brand new name for the virtual network",
+            "description": "A brand new description for the virtual network",
+            "bandwidth_alert": False,
             "tags": [
                 "invalid-tag",
             ],
@@ -389,6 +392,8 @@ with Latitudesh(
         "type": latitudesh_python_sdk.UpdateProjectProjectsType.PROJECTS,
         "attributes": {
             "name": "123",
+            "description": "A brand new description for the virtual network",
+            "bandwidth_alert": False,
         },
     })
 

@@ -1,0 +1,9 @@
+# PostStorageBucketLifecycleRulesData
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                     | [models.PostStorageBucketLifecycleRulesType](../models/poststoragebucketlifecyclerulestype.md)             | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `attributes`                                                                                               | [models.PostStorageBucketLifecycleRulesAttributes](../models/poststoragebucketlifecyclerulesattributes.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

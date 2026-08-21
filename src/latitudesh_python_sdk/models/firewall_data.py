@@ -27,7 +27,7 @@ class RulesTypedDict(TypedDict):
     port: NotRequired[str]
     protocol: NotRequired[str]
     default: NotRequired[bool]
-    r"""True when this rule was seeded by Latitude when the firewall was created (cannot be deleted); false for user-added rules."""
+    r"""True when this rule was seeded by Latitude when the firewall was created; false for user-added rules. Read-only: this flag cannot be set through the API."""
     description: NotRequired[Nullable[str]]
     r"""Optional description explaining the purpose of this rule"""
 
@@ -44,7 +44,7 @@ class Rules(BaseModel):
     protocol: Optional[str] = None
 
     default: Optional[bool] = None
-    r"""True when this rule was seeded by Latitude when the firewall was created (cannot be deleted); false for user-added rules."""
+    r"""True when this rule was seeded by Latitude when the firewall was created; false for user-added rules. Read-only: this flag cannot be set through the API."""
 
     description: OptionalNullable[str] = UNSET
     r"""Optional description explaining the purpose of this rule"""
@@ -107,10 +107,53 @@ class FirewallDataProject(BaseModel):
         return m
 
 
+class TagsModelTypedDict(TypedDict):
+    id: NotRequired[str]
+    name: NotRequired[str]
+    description: NotRequired[Nullable[str]]
+    color: NotRequired[Nullable[str]]
+
+
+class TagsModel(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+    description: OptionalNullable[str] = UNSET
+
+    color: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name", "description", "color"])
+        nullable_fields = set(["description", "color"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class FirewallDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     rules: NotRequired[List[RulesTypedDict]]
     project: NotRequired[FirewallDataProjectTypedDict]
+    tags: NotRequired[List[TagsModelTypedDict]]
 
 
 class FirewallDataAttributes(BaseModel):
@@ -120,9 +163,11 @@ class FirewallDataAttributes(BaseModel):
 
     project: Optional[FirewallDataProject] = None
 
+    tags: Optional[List[TagsModel]] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "rules", "project"])
+        optional_fields = set(["name", "rules", "project", "tags"])
         serialized = handler(self)
         m = {}
 

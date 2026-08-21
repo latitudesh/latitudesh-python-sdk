@@ -3,10 +3,15 @@
 from __future__ import annotations
 from .team_include import TeamInclude, TeamIncludeTypedDict
 from datetime import datetime
+from enum import Enum
 from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
+
+
+class UserType(str, Enum):
+    USERS = "users"
 
 
 class UserRoleTypedDict(TypedDict):
@@ -47,6 +52,8 @@ class UserAttributesTypedDict(TypedDict):
     last_name: NotRequired[str]
     email: NotRequired[str]
     authentication_factor_id: NotRequired[str]
+    created_at: NotRequired[str]
+    updated_at: NotRequired[str]
     role: NotRequired[UserRoleTypedDict]
     teams: NotRequired[List[TeamIncludeTypedDict]]
 
@@ -60,6 +67,10 @@ class UserAttributes(BaseModel):
 
     authentication_factor_id: Optional[str] = None
 
+    created_at: Optional[str] = None
+
+    updated_at: Optional[str] = None
+
     role: Optional[UserRole] = None
 
     teams: Optional[List[TeamInclude]] = None
@@ -72,6 +83,8 @@ class UserAttributes(BaseModel):
                 "last_name",
                 "email",
                 "authentication_factor_id",
+                "created_at",
+                "updated_at",
                 "role",
                 "teams",
             ]
@@ -92,17 +105,20 @@ class UserAttributes(BaseModel):
 
 class UserTypedDict(TypedDict):
     id: NotRequired[str]
+    type: NotRequired[UserType]
     attributes: NotRequired[UserAttributesTypedDict]
 
 
 class User(BaseModel):
     id: Optional[str] = None
 
+    type: Optional[UserType] = None
+
     attributes: Optional[UserAttributes] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "attributes"])
+        optional_fields = set(["id", "type", "attributes"])
         serialized = handler(self)
         m = {}
 

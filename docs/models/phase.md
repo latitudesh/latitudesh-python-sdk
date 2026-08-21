@@ -1,6 +1,6 @@
 # Phase
 
-The current phase of the cluster lifecycle
+The current phase of the cluster lifecycle.
 
 ## Example Usage
 
@@ -8,6 +8,8 @@ The current phase of the cluster lifecycle
 from latitudesh_python_sdk.models import Phase
 
 value = Phase.PENDING
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 
@@ -18,5 +20,7 @@ value = Phase.PENDING
 | `PENDING`      | Pending        |
 | `PROVISIONING` | Provisioning   |
 | `PROVISIONED`  | Provisioned    |
+| `UPGRADING`    | Upgrading      |
 | `DELETING`     | Deleting       |
 | `FAILED`       | Failed         |
+| `UNKNOWN`      | Unknown        |

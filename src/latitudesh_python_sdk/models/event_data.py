@@ -133,27 +133,36 @@ class EventDataTeam(BaseModel):
 
 
 class TargetTypedDict(TypedDict):
-    id: NotRequired[str]
+    id: NotRequired[Nullable[str]]
     name: NotRequired[str]
 
 
 class Target(BaseModel):
-    id: Optional[str] = None
+    id: OptionalNullable[str] = UNSET
 
     name: Optional[str] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["id", "name"])
+        nullable_fields = set(["id"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

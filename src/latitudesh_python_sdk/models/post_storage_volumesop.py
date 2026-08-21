@@ -18,6 +18,8 @@ class PostStorageVolumesBlockStorageAttributesTypedDict(TypedDict):
     r"""Project ID or slug"""
     name: str
     r"""Volume name"""
+    region: str
+    r"""Region (site) slug where the volume is provisioned"""
     size_in_gb: NotRequired[int]
     r"""Size in GB (not required, default is 1500)"""
 
@@ -28,6 +30,9 @@ class PostStorageVolumesBlockStorageAttributes(BaseModel):
 
     name: str
     r"""Volume name"""
+
+    region: str
+    r"""Region (site) slug where the volume is provisioned"""
 
     size_in_gb: Optional[int] = 1500
     r"""Size in GB (not required, default is 1500)"""

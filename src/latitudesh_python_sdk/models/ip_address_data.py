@@ -118,34 +118,43 @@ class IPAddressDataRegion(BaseModel):
 
 
 class AssignmentTypedDict(TypedDict):
-    r"""Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted)."""
+    r"""Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted). The hostname is null when the assigned server has no hostname set."""
 
     server_id: NotRequired[str]
-    hostname: NotRequired[str]
-    assigned_at: NotRequired[str]
+    hostname: NotRequired[Nullable[str]]
+    assigned_at: NotRequired[Nullable[str]]
 
 
 class Assignment(BaseModel):
-    r"""Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted)."""
+    r"""Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted). The hostname is null when the assigned server has no hostname set."""
 
     server_id: Optional[str] = None
 
-    hostname: Optional[str] = None
+    hostname: OptionalNullable[str] = UNSET
 
-    assigned_at: Optional[str] = None
+    assigned_at: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["server_id", "hostname", "assigned_at"])
+        nullable_fields = set(["hostname", "assigned_at"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -199,7 +208,7 @@ class IPAddressDataAttributesTypedDict(TypedDict):
     region: NotRequired[IPAddressDataRegionTypedDict]
     available: NotRequired[bool]
     assignment: NotRequired[AssignmentTypedDict]
-    r"""Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted)."""
+    r"""Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted). The hostname is null when the assigned server has no hostname set."""
     elastic: NotRequired[ElasticTypedDict]
     r"""Elastic IP details. Returns an empty object when the IP is not an Elastic IP."""
     created_at: NotRequired[Nullable[datetime]]
@@ -231,7 +240,7 @@ class IPAddressDataAttributes(BaseModel):
     available: Optional[bool] = None
 
     assignment: Optional[Assignment] = None
-    r"""Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted)."""
+    r"""Server assignment information. Returns an empty object when the IP is not assigned to an active server (e.g., when the server is decommissioning or deleted). The hostname is null when the assigned server has no hostname set."""
 
     elastic: Optional[Elastic] = None
     r"""Elastic IP details. Returns an empty object when the IP is not an Elastic IP."""

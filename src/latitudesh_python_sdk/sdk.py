@@ -16,6 +16,7 @@ import weakref
 
 if TYPE_CHECKING:
     from latitudesh_python_sdk.apikeys_sdk import APIKeysSDK
+    from latitudesh_python_sdk.baselines_preview_ import BaselinesPreview
     from latitudesh_python_sdk.billing import Billing
     from latitudesh_python_sdk.block_storage import BlockStorage
     from latitudesh_python_sdk.elastic_ips_sdk import ElasticIpsSDK
@@ -29,6 +30,7 @@ if TYPE_CHECKING:
     from latitudesh_python_sdk.plans import Plans
     from latitudesh_python_sdk.privatenetworks import PrivateNetworks
     from latitudesh_python_sdk.projects_sdk import ProjectsSDK
+    from latitudesh_python_sdk.public_networks_sdk import PublicNetworksSDK
     from latitudesh_python_sdk.regions_sdk import RegionsSDK
     from latitudesh_python_sdk.roles import Roles
     from latitudesh_python_sdk.servers_sdk import ServersSDK
@@ -53,6 +55,8 @@ class Latitudesh(BaseSDK):
     r"""Latitude.sh API: The Latitude.sh API is a RESTful API to manage your Latitude.sh account. It allows you to perform the same actions as the Latitude.sh dashboard."""
 
     api_keys: "APIKeysSDK"
+    baselines_preview: "BaselinesPreview"
+    r"""Preview. Available to teams with the `baselines_api` feature flag. The shape of these endpoints may change before general availability."""
     billing: "Billing"
     events: "EventsSDK"
     firewalls: "FirewallsSDK"
@@ -62,15 +66,16 @@ class Latitudesh(BaseSDK):
     operating_systems: "OperatingSystemsSDK"
     kubernetes_clusters: "KubernetesClustersSDK"
     plans: "Plans"
+    public_networks: "PublicNetworksSDK"
     projects: "ProjectsSDK"
     ssh_keys: "SSHKeysSDK"
+    object_storage: "ObjectStorage"
     user_data: "UserDataSDK"
     regions: "RegionsSDK"
     roles: "Roles"
     servers: "ServersSDK"
     filesystem_storage: "FilesystemStorage"
     block_storage: "BlockStorage"
-    object_storage: "ObjectStorage"
     tags: "Tags"
     teams: "TeamsSDK"
     traffic: "TrafficSDK"
@@ -82,6 +87,10 @@ class Latitudesh(BaseSDK):
     vpn_sessions: "VpnSessions"
     _sub_sdk_map = {
         "api_keys": ("latitudesh_python_sdk.apikeys_sdk", "APIKeysSDK"),
+        "baselines_preview": (
+            "latitudesh_python_sdk.baselines_preview_",
+            "BaselinesPreview",
+        ),
         "billing": ("latitudesh_python_sdk.billing", "Billing"),
         "events": ("latitudesh_python_sdk.events_sdk", "EventsSDK"),
         "firewalls": ("latitudesh_python_sdk.firewalls_sdk", "FirewallsSDK"),
@@ -97,8 +106,13 @@ class Latitudesh(BaseSDK):
             "KubernetesClustersSDK",
         ),
         "plans": ("latitudesh_python_sdk.plans", "Plans"),
+        "public_networks": (
+            "latitudesh_python_sdk.public_networks_sdk",
+            "PublicNetworksSDK",
+        ),
         "projects": ("latitudesh_python_sdk.projects_sdk", "ProjectsSDK"),
         "ssh_keys": ("latitudesh_python_sdk.sshkeys_sdk", "SSHKeysSDK"),
+        "object_storage": ("latitudesh_python_sdk.object_storage", "ObjectStorage"),
         "user_data": ("latitudesh_python_sdk.userdata_sdk", "UserDataSDK"),
         "regions": ("latitudesh_python_sdk.regions_sdk", "RegionsSDK"),
         "roles": ("latitudesh_python_sdk.roles", "Roles"),
@@ -108,7 +122,6 @@ class Latitudesh(BaseSDK):
             "FilesystemStorage",
         ),
         "block_storage": ("latitudesh_python_sdk.block_storage", "BlockStorage"),
-        "object_storage": ("latitudesh_python_sdk.object_storage", "ObjectStorage"),
         "tags": ("latitudesh_python_sdk.tags", "Tags"),
         "teams": ("latitudesh_python_sdk.teams_sdk", "TeamsSDK"),
         "traffic": ("latitudesh_python_sdk.traffic_sdk", "TrafficSDK"),

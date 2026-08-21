@@ -321,7 +321,13 @@ with Latitudesh(
 
     res = latitudesh.servers.create(data={
         "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
-        "attributes": {},
+        "attributes": {
+            "project": "<value>",
+            "plan": latitudesh_python_sdk.CreateServerServersPlan.M4_METAL_SMALL,
+            "site": latitudesh_python_sdk.CreateServerServersSite.ASH,
+            "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_20_04_X64_LTS,
+            "hostname": "amused-shadowbox.com",
+        },
     })
 
     # Handle response
@@ -440,6 +446,7 @@ with Latitudesh(
         "id": "sv_g1mbDwrZqLv5B",
         "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
         "attributes": {
+            "hostname": "new-hostname",
             "billing": latitudesh_python_sdk.UpdateServerServersBilling.HOURLY,
         },
     })
@@ -465,6 +472,7 @@ with Latitudesh(
         "id": "sv_1ZJrdxe4qg4LV",
         "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
         "attributes": {
+            "hostname": "new-hostname",
             "billing": latitudesh_python_sdk.UpdateServerServersBilling.MONTHLY,
         },
     })
@@ -490,6 +498,7 @@ with Latitudesh(
         "id": "sv_w49QDBaQqagKb",
         "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
         "attributes": {
+            "hostname": "new-hostname",
             "billing": latitudesh_python_sdk.UpdateServerServersBilling.HOURLY,
         },
     })
@@ -540,6 +549,7 @@ with Latitudesh(
         "id": "sv_3YjJOLLNOvZ87",
         "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
         "attributes": {
+            "hostname": "new-hostname",
             "billing": latitudesh_python_sdk.UpdateServerServersBilling.MONTHLY,
         },
     })
@@ -565,6 +575,7 @@ with Latitudesh(
         "id": "sv_vYAZqGNJdMQ94",
         "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
         "attributes": {
+            "hostname": "new-hostname",
             "billing": latitudesh_python_sdk.UpdateServerServersBilling.MONTHLY,
             "project": "new-project",
         },
@@ -591,6 +602,7 @@ with Latitudesh(
         "id": "sv_W6Q2D9lGqKLpr",
         "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
         "attributes": {
+            "hostname": "new-hostname",
             "billing": latitudesh_python_sdk.UpdateServerServersBilling.YEARLY,
         },
     })
@@ -616,6 +628,7 @@ with Latitudesh(
         "id": "sv_LMmAD8k4qwop2",
         "type": latitudesh_python_sdk.UpdateServerServersType.SERVERS,
         "attributes": {
+            "hostname": "new-hostname",
             "billing": latitudesh_python_sdk.UpdateServerServersBilling.YEARLY,
         },
     })
@@ -723,6 +736,25 @@ with Latitudesh(
 
 Update deploy config
 
+### Example Usage: FeatureNotEnabled
+
+<!-- UsageSnippet language="python" operationID="update-server-deploy-config" method="patch" path="/servers/{server_id}/deploy_config" example="FeatureNotEnabled" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.servers.update_deploy_config(server_id="<id>", type_=latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG)
+
+    # Handle response
+    print(res)
+
+```
 ### Example Usage: Forbidden
 
 <!-- UsageSnippet language="python" operationID="update-server-deploy-config" method="patch" path="/servers/{server_id}/deploy_config" example="Forbidden" -->
@@ -815,9 +847,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 422                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## lock
 
@@ -1595,6 +1628,26 @@ with Latitudesh(
     # Use the SDK ...
 
 ```
+### Example Usage: FeatureNotEnabled
+
+<!-- UsageSnippet language="python" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" example="FeatureNotEnabled" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    latitudesh.servers.reinstall(server_id="<id>", data={
+        "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
+    })
+
+    # Use the SDK ...
+
+```
 ### Example Usage: Forbidden
 
 <!-- UsageSnippet language="python" operationID="create-server-reinstall" method="post" path="/servers/{server_id}/reinstall" example="Forbidden" -->
@@ -1735,5 +1788,5 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
+| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |

@@ -18,6 +18,14 @@ class VirtualMachinePayloadType(str, Enum):
     VIRTUAL_MACHINES = "virtual_machines"
 
 
+class VirtualMachinePayloadBilling(str, Enum):
+    r"""Billing cycle for the VM. The supported set is validated per-project (on_demand vs reserved). Defaults to the project's default billing when omitted."""
+
+    HOURLY = "hourly"
+    MONTHLY = "monthly"
+    YEARLY = "yearly"
+
+
 VirtualMachinePayloadUserDataTypedDict = TypeAliasType(
     "VirtualMachinePayloadUserDataTypedDict", Union[int, str]
 )
@@ -32,6 +40,8 @@ r"""A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer
 
 class VirtualMachinePayloadAttributesTypedDict(TypedDict):
     name: NotRequired[str]
+    billing: NotRequired[VirtualMachinePayloadBilling]
+    r"""Billing cycle for the VM. The supported set is validated per-project (on_demand vs reserved). Defaults to the project's default billing when omitted."""
     plan: NotRequired[Nullable[str]]
     r"""The plan ID or Slug for the Virtual Machine"""
     ssh_keys: NotRequired[Nullable[List[str]]]
@@ -48,6 +58,9 @@ class VirtualMachinePayloadAttributesTypedDict(TypedDict):
 
 class VirtualMachinePayloadAttributes(BaseModel):
     name: Optional[str] = "my-vm"
+
+    billing: Optional[VirtualMachinePayloadBilling] = None
+    r"""Billing cycle for the VM. The supported set is validated per-project (on_demand vs reserved). Defaults to the project's default billing when omitted."""
 
     plan: OptionalNullable[str] = UNSET
     r"""The plan ID or Slug for the Virtual Machine"""
@@ -73,6 +86,7 @@ class VirtualMachinePayloadAttributes(BaseModel):
         optional_fields = set(
             [
                 "name",
+                "billing",
                 "plan",
                 "ssh_keys",
                 "project",

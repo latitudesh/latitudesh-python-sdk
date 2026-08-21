@@ -13,7 +13,7 @@ class GetTrafficConsumptionRequestTypedDict(TypedDict):
     filter_date_gte: str
     r"""The start timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-01T00:00:00Z"""
     filter_date_lte: str
-    r"""The end timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-31T23:59:59Z"""
+    r"""The end timestamp to retrieve the traffic. You must provide in ISO8601 format. The period must not exceed 366 days. Example: filter[date][gte]=2024-04-31T23:59:59Z"""
     filter_server: NotRequired[str]
     r"""The server id to filter by"""
     filter_project: NotRequired[str]
@@ -33,7 +33,7 @@ class GetTrafficConsumptionRequest(BaseModel):
         pydantic.Field(alias="filter[date][lte]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ]
-    r"""The end timestamp to retrieve the traffic. You must provide in ISO8601 format. Example: filter[date][gte]=2024-04-31T23:59:59Z"""
+    r"""The end timestamp to retrieve the traffic. You must provide in ISO8601 format. The period must not exceed 366 days. Example: filter[date][gte]=2024-04-31T23:59:59Z"""
 
     filter_server: Annotated[
         Optional[str],

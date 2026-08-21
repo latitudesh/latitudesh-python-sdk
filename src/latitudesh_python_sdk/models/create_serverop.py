@@ -99,12 +99,12 @@ class CreateServerServersRole(str, Enum):
     RAW = "raw"
 
 
-class CreateServerRaidLevel(str, Enum):
+class CreateServerServersRaidLevel(str, Enum):
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
 
 
-class CreateServerFilesystem(str, Enum):
+class CreateServerServersFilesystem(str, Enum):
     EXT4 = "ext4"
     XFS = "xfs"
 
@@ -112,8 +112,8 @@ class CreateServerFilesystem(str, Enum):
 class CreateServerDiskLayoutTypedDict(TypedDict):
     count: int
     role: CreateServerServersRole
-    raid_level: NotRequired[Nullable[CreateServerRaidLevel]]
-    filesystem: NotRequired[Nullable[CreateServerFilesystem]]
+    raid_level: NotRequired[Nullable[CreateServerServersRaidLevel]]
+    filesystem: NotRequired[Nullable[CreateServerServersFilesystem]]
     mount_point: NotRequired[Nullable[str]]
 
 
@@ -122,9 +122,9 @@ class CreateServerDiskLayout(BaseModel):
 
     role: CreateServerServersRole
 
-    raid_level: OptionalNullable[CreateServerRaidLevel] = UNSET
+    raid_level: OptionalNullable[CreateServerServersRaidLevel] = UNSET
 
-    filesystem: OptionalNullable[CreateServerFilesystem] = UNSET
+    filesystem: OptionalNullable[CreateServerServersFilesystem] = UNSET
 
     mount_point: OptionalNullable[str] = UNSET
 
@@ -163,15 +163,15 @@ class CreateServerServersBilling(str, Enum):
 
 
 class CreateServerServersAttributesTypedDict(TypedDict):
-    project: NotRequired[str]
+    project: str
     r"""The project (ID or Slug) to deploy the server"""
-    plan: NotRequired[CreateServerServersPlan]
+    plan: CreateServerServersPlan
     r"""The plan slug to choose server from, defining the specs the server will have"""
-    site: NotRequired[CreateServerServersSite]
+    site: CreateServerServersSite
     r"""The site slug to deploy the server"""
-    operating_system: NotRequired[CreateServerServersOperatingSystem]
+    operating_system: CreateServerServersOperatingSystem
     r"""The operating system slug for the new server"""
-    hostname: NotRequired[str]
+    hostname: str
     r"""The server hostname"""
     ssh_keys: NotRequired[Nullable[List[str]]]
     r"""SSH Keys to set on the server"""
@@ -182,24 +182,26 @@ class CreateServerServersAttributesTypedDict(TypedDict):
     disk_layout: NotRequired[Nullable[List[CreateServerDiskLayoutTypedDict]]]
     ipxe: NotRequired[Nullable[str]]
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
+    persistent_netboot: NotRequired[bool]
+    r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
     billing: NotRequired[Nullable[CreateServerServersBilling]]
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
 
 
 class CreateServerServersAttributes(BaseModel):
-    project: Optional[str] = None
+    project: str
     r"""The project (ID or Slug) to deploy the server"""
 
-    plan: Optional[CreateServerServersPlan] = None
+    plan: CreateServerServersPlan
     r"""The plan slug to choose server from, defining the specs the server will have"""
 
-    site: Optional[CreateServerServersSite] = None
+    site: CreateServerServersSite
     r"""The site slug to deploy the server"""
 
-    operating_system: Optional[CreateServerServersOperatingSystem] = None
+    operating_system: CreateServerServersOperatingSystem
     r"""The operating system slug for the new server"""
 
-    hostname: Optional[str] = None
+    hostname: str
     r"""The server hostname"""
 
     ssh_keys: OptionalNullable[List[str]] = UNSET
@@ -215,6 +217,9 @@ class CreateServerServersAttributes(BaseModel):
 
     ipxe: OptionalNullable[str] = UNSET
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
+
+    persistent_netboot: Optional[bool] = None
+    r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
 
     billing: OptionalNullable[CreateServerServersBilling] = UNSET
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
@@ -241,16 +246,12 @@ class CreateServerServersAttributes(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
-                "project",
-                "plan",
-                "site",
-                "operating_system",
-                "hostname",
                 "ssh_keys",
                 "user_data",
                 "raid",
                 "disk_layout",
                 "ipxe",
+                "persistent_netboot",
                 "billing",
             ]
         )

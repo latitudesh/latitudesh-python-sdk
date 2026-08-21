@@ -19,29 +19,13 @@ class PatchStorageFilesystemsFilesystemStorageType(str, Enum):
 
 
 class PatchStorageFilesystemsFilesystemStorageAttributesTypedDict(TypedDict):
-    size_in_gb: NotRequired[int]
+    size_in_gb: int
     r"""Size in GB (not required, default is 1500)"""
 
 
 class PatchStorageFilesystemsFilesystemStorageAttributes(BaseModel):
-    size_in_gb: Optional[int] = 1500
+    size_in_gb: int
     r"""Size in GB (not required, default is 1500)"""
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["size_in_gb"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
 
 
 class PatchStorageFilesystemsFilesystemStorageDataTypedDict(TypedDict):

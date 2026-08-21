@@ -870,6 +870,8 @@ class Plans(BaseSDK):
     def list_storage(
         self,
         *,
+        filter_storage_type: Optional[str] = None,
+        filter_storage_class: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -877,6 +879,8 @@ class Plans(BaseSDK):
     ) -> models.StoragePlans:
         r"""List storage plans
 
+        :param filter_storage_type: Filter by storage type (filesystem or object)
+        :param filter_storage_class: Filter by storage class (standard or high_performance)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -891,12 +895,18 @@ class Plans(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetStoragePlansRequest(
+            filter_storage_type=filter_storage_type,
+            filter_storage_class=filter_storage_class,
+        )
+
         req = self._build_request(
             method="GET",
             path="/plans/storage",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,
@@ -947,6 +957,8 @@ class Plans(BaseSDK):
     async def list_storage_async(
         self,
         *,
+        filter_storage_type: Optional[str] = None,
+        filter_storage_class: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -954,6 +966,8 @@ class Plans(BaseSDK):
     ) -> models.StoragePlans:
         r"""List storage plans
 
+        :param filter_storage_type: Filter by storage type (filesystem or object)
+        :param filter_storage_class: Filter by storage class (standard or high_performance)
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -968,12 +982,18 @@ class Plans(BaseSDK):
             base_url = server_url
         else:
             base_url = self._get_url(base_url, url_variables)
+
+        request = models.GetStoragePlansRequest(
+            filter_storage_type=filter_storage_type,
+            filter_storage_class=filter_storage_class,
+        )
+
         req = self._build_request_async(
             method="GET",
             path="/plans/storage",
             base_url=base_url,
             url_variables=url_variables,
-            request=None,
+            request=request,
             request_body_required=False,
             request_has_path_params=False,
             request_has_query_params=True,

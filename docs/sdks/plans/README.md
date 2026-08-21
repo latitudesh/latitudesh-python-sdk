@@ -248,6 +248,8 @@ with Latitudesh(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `filter_storage_type`                                               | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Filter by storage type (filesystem or object)                       |
+| `filter_storage_class`                                              | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Filter by storage class (standard or high_performance)              |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response

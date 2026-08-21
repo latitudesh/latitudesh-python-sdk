@@ -1,0 +1,10 @@
+# GetStorageBucketMetricsData
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                 | *Optional[str]*                                                                                      | :heavy_minus_sign:                                                                                   | The bucket ID                                                                                        |
+| `type`                                                                                               | [Optional[models.GetStorageBucketMetricsType]](../models/getstoragebucketmetricstype.md)             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `attributes`                                                                                         | [Optional[models.GetStorageBucketMetricsAttributes]](../models/getstoragebucketmetricsattributes.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

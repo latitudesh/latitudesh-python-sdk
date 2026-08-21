@@ -6,4 +6,4 @@
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
 | `type`             | *Optional[str]*    | :heavy_minus_sign: | NIC speed/type     |
-| `count`            | *Optional[str]*    | :heavy_minus_sign: | Number of NICs     |
+| `count`            | *Optional[int]*    | :heavy_minus_sign: | Number of NICs     |

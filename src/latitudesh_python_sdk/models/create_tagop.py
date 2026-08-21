@@ -19,27 +19,27 @@ class CreateTagTagsType(str, Enum):
 
 
 class CreateTagTagsAttributesTypedDict(TypedDict):
-    name: NotRequired[str]
+    name: str
     r"""Name of the Tag"""
+    color: str
+    r"""Color of the Tag"""
     description: NotRequired[Nullable[str]]
     r"""Description of the Tag"""
-    color: NotRequired[str]
-    r"""Color of the Tag"""
 
 
 class CreateTagTagsAttributes(BaseModel):
-    name: Optional[str] = None
+    name: str
     r"""Name of the Tag"""
+
+    color: str
+    r"""Color of the Tag"""
 
     description: OptionalNullable[str] = UNSET
     r"""Description of the Tag"""
 
-    color: Optional[str] = "#ffffff"
-    r"""Color of the Tag"""
-
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["name", "description", "color"])
+        optional_fields = set(["description"])
         nullable_fields = set(["description"])
         serialized = handler(self)
         m = {}

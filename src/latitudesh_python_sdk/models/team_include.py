@@ -61,6 +61,7 @@ class LimitsTypedDict(TypedDict):
     virtual_machine: NotRequired[Nullable[int]]
     virtual_machine_gpu: NotRequired[Nullable[int]]
     elastic_ip: NotRequired[Nullable[int]]
+    public_network: NotRequired[Nullable[int]]
     virtual_network: NotRequired[Nullable[int]]
     database: NotRequired[Nullable[int]]
     filesystem: NotRequired[Nullable[int]]
@@ -77,6 +78,8 @@ class Limits(BaseModel):
     virtual_machine_gpu: OptionalNullable[int] = UNSET
 
     elastic_ip: OptionalNullable[int] = UNSET
+
+    public_network: OptionalNullable[int] = UNSET
 
     virtual_network: OptionalNullable[int] = UNSET
 
@@ -95,6 +98,7 @@ class Limits(BaseModel):
                 "virtual_machine",
                 "virtual_machine_gpu",
                 "elastic_ip",
+                "public_network",
                 "virtual_network",
                 "database",
                 "filesystem",
@@ -108,6 +112,7 @@ class Limits(BaseModel):
                 "virtual_machine",
                 "virtual_machine_gpu",
                 "elastic_ip",
+                "public_network",
                 "virtual_network",
                 "database",
                 "filesystem",

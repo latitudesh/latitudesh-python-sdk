@@ -5,6 +5,6 @@
 
 | Field                   | Type                    | Required                | Description             |
 | ----------------------- | ----------------------- | ----------------------- | ----------------------- |
-| `name`                  | *Optional[str]*         | :heavy_minus_sign:      | Name of the Tag         |
+| `name`                  | *str*                   | :heavy_check_mark:      | Name of the Tag         |
 | `description`           | *OptionalNullable[str]* | :heavy_minus_sign:      | Description of the Tag  |
-| `color`                 | *Optional[str]*         | :heavy_minus_sign:      | Color of the Tag        |
+| `color`                 | *str*                   | :heavy_check_mark:      | Color of the Tag        |

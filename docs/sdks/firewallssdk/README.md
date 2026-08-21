@@ -16,7 +16,7 @@
 
 ## get_all_firewall_assignments
 
-Returns a list of all servers assigned to one or more firewalls.
+Returns a list of all servers and virtual machines assigned to one or more firewalls.
 
 ### Example Usage
 
@@ -44,6 +44,7 @@ with Latitudesh(
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `filter_server`                                                     | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The server ID to filter by                                          |
+| `filter_virtual_machine`                                            | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The virtual machine ID to filter by                                 |
 | `page_size`                                                         | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Number of items to return per page                                  |
 | `page_number`                                                       | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Page number to return (starts at 1)                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
@@ -224,12 +225,13 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `filter_project`                                                    | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | N/A                                                                 |
-| `page_size`                                                         | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Number of items to return per page                                  |
-| `page_number`                                                       | *Optional[int]*                                                     | :heavy_minus_sign:                                                  | Page number to return (starts at 1)                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `filter_project`                                                         | *Optional[str]*                                                          | :heavy_minus_sign:                                                       | N/A                                                                      |
+| `filter_tags`                                                            | *Optional[str]*                                                          | :heavy_minus_sign:                                                       | Comma-separated tag IDs. Returns firewalls that have all the given tags. |
+| `page_size`                                                              | *Optional[int]*                                                          | :heavy_minus_sign:                                                       | Number of items to return per page                                       |
+| `page_number`                                                            | *Optional[int]*                                                          | :heavy_minus_sign:                                                       | Page number to return (starts at 1)                                      |
+| `retries`                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)         | :heavy_minus_sign:                                                       | Configuration to override the default retry behavior of the client.      |
 
 ### Response
 
@@ -419,7 +421,7 @@ with Latitudesh(
 
 ## assign
 
-Assigns a server to a firewall by its ID.
+Assigns a server or a virtual machine to a firewall by its ID.
 
 ### Example Usage: Conflict
 
@@ -562,7 +564,7 @@ with Latitudesh(
 
 ## list_assignments
 
-Returns a list of all servers assigned to a particular firewall.
+Returns a list of all servers and virtual machines assigned to a particular firewall.
 
 ### Example Usage: Ok
 
@@ -626,7 +628,7 @@ with Latitudesh(
 
 ## delete_assignment
 
-Removes a server from a firewall by its ID.
+Removes a server or a virtual machine from a firewall by its assignment ID.
 
 ### Example Usage
 

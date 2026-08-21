@@ -1,0 +1,10 @@
+# PublicNetworkData
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `id`                                                                                     | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `type`                                                                                   | [Optional[models.PublicNetworkDataType]](../models/publicnetworkdatatype.md)             | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `attributes`                                                                             | [Optional[models.PublicNetworkDataAttributes]](../models/publicnetworkdataattributes.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |

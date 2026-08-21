@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
@@ -13,30 +19,86 @@ class FirewallAssignmentDataType(str, Enum):
 
 
 class FirewallAssignmentDataServerTypedDict(TypedDict):
+    r"""Present only when the assignment targets a server."""
+
     id: NotRequired[str]
-    primary_ipv4: NotRequired[str]
+    primary_ipv4: NotRequired[Nullable[str]]
     hostname: NotRequired[str]
 
 
 class FirewallAssignmentDataServer(BaseModel):
+    r"""Present only when the assignment targets a server."""
+
     id: Optional[str] = None
 
-    primary_ipv4: Optional[str] = None
+    primary_ipv4: OptionalNullable[str] = UNSET
 
     hostname: Optional[str] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(["id", "primary_ipv4", "hostname"])
+        nullable_fields = set(["primary_ipv4"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
+class FirewallAssignmentDataVirtualMachineTypedDict(TypedDict):
+    r"""Present only when the assignment targets a virtual machine."""
+
+    id: NotRequired[str]
+    primary_ipv4: NotRequired[Nullable[str]]
+    hostname: NotRequired[str]
+
+
+class FirewallAssignmentDataVirtualMachine(BaseModel):
+    r"""Present only when the assignment targets a virtual machine."""
+
+    id: Optional[str] = None
+
+    primary_ipv4: OptionalNullable[str] = UNSET
+
+    hostname: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "primary_ipv4", "hostname"])
+        nullable_fields = set(["primary_ipv4"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -71,12 +133,19 @@ class FirewallAssignmentDataFirewall(BaseModel):
 
 class FirewallAssignmentDataAttributesTypedDict(TypedDict):
     server: NotRequired[FirewallAssignmentDataServerTypedDict]
+    r"""Present only when the assignment targets a server."""
+    virtual_machine: NotRequired[FirewallAssignmentDataVirtualMachineTypedDict]
+    r"""Present only when the assignment targets a virtual machine."""
     firewall: NotRequired[FirewallAssignmentDataFirewallTypedDict]
     firewall_id: NotRequired[str]
 
 
 class FirewallAssignmentDataAttributes(BaseModel):
     server: Optional[FirewallAssignmentDataServer] = None
+    r"""Present only when the assignment targets a server."""
+
+    virtual_machine: Optional[FirewallAssignmentDataVirtualMachine] = None
+    r"""Present only when the assignment targets a virtual machine."""
 
     firewall: Optional[FirewallAssignmentDataFirewall] = None
 
@@ -84,7 +153,7 @@ class FirewallAssignmentDataAttributes(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["server", "firewall", "firewall_id"])
+        optional_fields = set(["server", "virtual_machine", "firewall", "firewall_id"])
         serialized = handler(self)
         m = {}
 

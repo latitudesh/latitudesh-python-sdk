@@ -160,31 +160,33 @@ class VirtualMachineAttributesOperatingSystem(BaseModel):
         return m
 
 
-class CredentialsTypedDict(TypedDict):
-    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`."""
+class VirtualMachineAttributesSSHKeysTypedDict(TypedDict):
+    id: NotRequired[str]
+    name: NotRequired[str]
+    fingerprint: NotRequired[str]
+    public_key: NotRequired[str]
+    created_at: NotRequired[str]
+    updated_at: NotRequired[str]
 
-    username: NotRequired[str]
-    r"""The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS."""
-    host: NotRequired[str]
-    password: NotRequired[str]
-    ssh_keys: NotRequired[List[str]]
 
+class VirtualMachineAttributesSSHKeys(BaseModel):
+    id: Optional[str] = None
 
-class Credentials(BaseModel):
-    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`."""
+    name: Optional[str] = None
 
-    username: Optional[str] = None
-    r"""The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS."""
+    fingerprint: Optional[str] = None
 
-    host: Optional[str] = None
+    public_key: Optional[str] = None
 
-    password: Optional[str] = None
+    created_at: Optional[str] = None
 
-    ssh_keys: Optional[List[str]] = None
+    updated_at: Optional[str] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["username", "host", "password", "ssh_keys"])
+        optional_fields = set(
+            ["id", "name", "fingerprint", "public_key", "created_at", "updated_at"]
+        )
         serialized = handler(self)
         m = {}
 
@@ -199,9 +201,58 @@ class Credentials(BaseModel):
         return m
 
 
+class VirtualMachineAttributesCredentialsTypedDict(TypedDict):
+    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`."""
+
+    username: NotRequired[Nullable[str]]
+    r"""The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS. Returns null when the VM is not running."""
+    host: NotRequired[Nullable[str]]
+    password: NotRequired[Nullable[str]]
+    ssh_keys: NotRequired[Nullable[List[VirtualMachineAttributesSSHKeysTypedDict]]]
+
+
+class VirtualMachineAttributesCredentials(BaseModel):
+    r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`."""
+
+    username: OptionalNullable[str] = UNSET
+    r"""The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS. Returns null when the VM is not running."""
+
+    host: OptionalNullable[str] = UNSET
+
+    password: OptionalNullable[str] = UNSET
+
+    ssh_keys: OptionalNullable[List[VirtualMachineAttributesSSHKeys]] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["username", "host", "password", "ssh_keys"])
+        nullable_fields = set(["username", "host", "password", "ssh_keys"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class VirtualMachineAttributesPlanTypedDict(TypedDict):
     id: NotRequired[str]
     name: NotRequired[str]
+    slug: NotRequired[str]
 
 
 class VirtualMachineAttributesPlan(BaseModel):
@@ -209,9 +260,11 @@ class VirtualMachineAttributesPlan(BaseModel):
 
     name: Optional[str] = None
 
+    slug: Optional[str] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "name"])
+        optional_fields = set(["id", "name", "slug"])
         serialized = handler(self)
         m = {}
 
@@ -323,7 +376,7 @@ class VirtualMachineAttributesAttributesTypedDict(TypedDict):
         Nullable[VirtualMachineAttributesOperatingSystemTypedDict]
     ]
     r"""The operating system installed on the virtual machine"""
-    credentials: NotRequired[Nullable[CredentialsTypedDict]]
+    credentials: NotRequired[Nullable[VirtualMachineAttributesCredentialsTypedDict]]
     r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`."""
     site: NotRequired[Nullable[str]]
     billing: NotRequired[Nullable[str]]
@@ -351,7 +404,7 @@ class VirtualMachineAttributesAttributes(BaseModel):
     operating_system: OptionalNullable[VirtualMachineAttributesOperatingSystem] = UNSET
     r"""The operating system installed on the virtual machine"""
 
-    credentials: OptionalNullable[Credentials] = UNSET
+    credentials: OptionalNullable[VirtualMachineAttributesCredentials] = UNSET
     r"""SSH credentials for connecting to the virtual machine. Only available when the VM is running. Opt-in extra field: request via `extra_fields[virtual_machines]=credentials`."""
 
     site: OptionalNullable[str] = UNSET

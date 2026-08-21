@@ -217,3 +217,13 @@ Based on:
 - [python v3.3.0] .
 ### Releases
 - [PyPI v3.3.0] https://pypi.org/project/latitudesh-python-sdk/3.3.0 - .
+
+## 2026-08-21 00:13:04
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.795.1 (2.932.9) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [python v3.4.0] .
+### Releases
+- [PyPI v3.4.0] https://pypi.org/project/latitudesh-python-sdk/3.4.0 - .

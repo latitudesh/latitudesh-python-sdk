@@ -109,10 +109,19 @@ class PatchUserProfileRequest(BaseModel):
     ]
 
 
+class PatchUserProfileMetaTypedDict(TypedDict):
+    pass
+
+
+class PatchUserProfileMeta(BaseModel):
+    pass
+
+
 class PatchUserProfileResponseBodyTypedDict(TypedDict):
     r"""Success"""
 
     data: NotRequired[UserUpdateTypedDict]
+    meta: NotRequired[PatchUserProfileMetaTypedDict]
 
 
 class PatchUserProfileResponseBody(BaseModel):
@@ -120,9 +129,11 @@ class PatchUserProfileResponseBody(BaseModel):
 
     data: Optional[UserUpdate] = None
 
+    meta: Optional[PatchUserProfileMeta] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         serialized = handler(self)
         m = {}
 

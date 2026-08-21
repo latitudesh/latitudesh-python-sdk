@@ -1081,6 +1081,8 @@ class VirtualMachinesSDK(BaseSDK):
         - `power_off` - Stops the virtual machine
         - `reboot` - Restarts the virtual machine
 
+        `power_on` is never blocked. A `power_off` or `reboot` returns `409 Conflict` when a backup is in progress for the virtual machine.
+
 
         :param virtual_machine_id:
         :param id:
@@ -1123,7 +1125,7 @@ class VirtualMachinesSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="*/*",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -1164,8 +1166,12 @@ class VirtualMachinesSDK(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "201", "*"):
             return
+        if utils.match_response(http_res, ["409", "422"], "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1196,6 +1202,8 @@ class VirtualMachinesSDK(BaseSDK):
         - `power_on` - Starts the virtual machine
         - `power_off` - Stops the virtual machine
         - `reboot` - Restarts the virtual machine
+
+        `power_on` is never blocked. A `power_off` or `reboot` returns `409 Conflict` when a backup is in progress for the virtual machine.
 
 
         :param virtual_machine_id:
@@ -1239,7 +1247,7 @@ class VirtualMachinesSDK(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="*/*",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -1280,8 +1288,12 @@ class VirtualMachinesSDK(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "201", "*"):
             return
+        if utils.match_response(http_res, ["409", "422"], "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)

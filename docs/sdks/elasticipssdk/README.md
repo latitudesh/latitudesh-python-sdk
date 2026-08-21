@@ -9,6 +9,10 @@
 * [get_elastic_ip](#get_elastic_ip) - Retrieve an Elastic IP
 * [delete_elastic_ip](#delete_elastic_ip) - Release an Elastic IP
 * [update_elastic_ip](#update_elastic_ip) - Move an Elastic IP
+* [list_elastic_ip_bgp_sessions](#list_elastic_ip_bgp_sessions) - List BGP sessions
+* [create_elastic_ip_bgp_session](#create_elastic_ip_bgp_session) - Create a BGP session
+* [get_elastic_ip_bgp_session](#get_elastic_ip_bgp_session) - Retrieve a BGP session
+* [delete_elastic_ip_bgp_session](#delete_elastic_ip_bgp_session) - Delete a BGP session
 
 ## list_elastic_ips
 
@@ -77,10 +81,6 @@ with Latitudesh(
 
     res = latitudesh.elastic_ips.create_elastic_ip(data={
         "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
-        "attributes": {
-            "project_id": "<id>",
-            "server_id": "<id>",
-        },
     })
 
     # Handle response
@@ -103,8 +103,8 @@ with Latitudesh(
     res = latitudesh.elastic_ips.create_elastic_ip(data={
         "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
         "attributes": {
-            "project_id": "proj_AoW6vRnwkvLn0",
             "server_id": "sv_2GmAlJ6BXlK1a",
+            "project_id": "proj_AoW6vRnwkvLn0",
         },
     })
 
@@ -128,8 +128,8 @@ with Latitudesh(
     res = latitudesh.elastic_ips.create_elastic_ip(data={
         "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
         "attributes": {
-            "project_id": "<id>",
             "server_id": "<id>",
+            "project_id": "<id>",
         },
     })
 
@@ -152,10 +152,6 @@ with Latitudesh(
 
     res = latitudesh.elastic_ips.create_elastic_ip(data={
         "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
-        "attributes": {
-            "project_id": "<id>",
-            "server_id": "<id>",
-        },
     })
 
     # Handle response
@@ -177,10 +173,6 @@ with Latitudesh(
 
     res = latitudesh.elastic_ips.create_elastic_ip(data={
         "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
-        "attributes": {
-            "project_id": "<id>",
-            "server_id": "<id>",
-        },
     })
 
     # Handle response
@@ -202,10 +194,6 @@ with Latitudesh(
 
     res = latitudesh.elastic_ips.create_elastic_ip(data={
         "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
-        "attributes": {
-            "project_id": "<id>",
-            "server_id": "<id>",
-        },
     })
 
     # Handle response
@@ -227,10 +215,6 @@ with Latitudesh(
 
     res = latitudesh.elastic_ips.create_elastic_ip(data={
         "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
-        "attributes": {
-            "project_id": "<id>",
-            "server_id": "<id>",
-        },
     })
 
     # Handle response
@@ -431,3 +415,168 @@ with Latitudesh(
 | ------------------------ | ------------------------ | ------------------------ |
 | models.ErrorObject       | 404, 422                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
+
+## list_elastic_ip_bgp_sessions
+
+List the BGP sessions announcing an elastic IP
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="list-elastic-ip-bgp-sessions" method="get" path="/elastic_ips/{elastic_ip_id}/bgp_sessions" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.elastic_ips.list_elastic_ip_bgp_sessions(elastic_ip_id="ueip_v9BVDaGvdRm1W")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `elastic_ip_id`                                                     | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.BgpSessions](../../models/bgpsessions.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## create_elastic_ip_bgp_session
+
+Announce an elastic IP from a server over BGP
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="create-elastic-ip-bgp-session" method="post" path="/elastic_ips/{elastic_ip_id}/bgp_sessions" example="Accepted" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.elastic_ips.create_elastic_ip_bgp_session(elastic_ip_id="ueip_059EqY7kOQj8p", data={
+        "type": latitudesh_python_sdk.CreateBgpSessionType.BGP_SESSIONS,
+        "attributes": {
+            "server_id": "sv_A05EdQp4OvKYQ",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `elastic_ip_id`                                                     | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `data`                                                              | [models.CreateBgpSessionData](../../models/createbgpsessiondata.md) | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.BgpSession](../../models/bgpsession.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## get_elastic_ip_bgp_session
+
+Retrieve a BGP session announcing an elastic IP
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get-elastic-ip-bgp-session" method="get" path="/elastic_ips/{elastic_ip_id}/bgp_sessions/{id}" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.elastic_ips.get_elastic_ip_bgp_session(elastic_ip_id="ueip_e8pKq015DWAob", id="bgps_w49QDB9PqagKb")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `elastic_ip_id`                                                     | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.BgpSession](../../models/bgpsession.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## delete_elastic_ip_bgp_session
+
+Stop announcing an elastic IP from a server
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="delete-elastic-ip-bgp-session" method="delete" path="/elastic_ips/{elastic_ip_id}/bgp_sessions/{id}" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    latitudesh.elastic_ips.delete_elastic_ip_bgp_session(elastic_ip_id="<id>", id="<id>")
+
+    # Use the SDK ...
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `elastic_ip_id`                                                     | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `force`                                                             | *Optional[bool]*                                                    | :heavy_minus_sign:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

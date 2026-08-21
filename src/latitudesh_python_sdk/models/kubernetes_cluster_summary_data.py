@@ -3,6 +3,7 @@
 from __future__ import annotations
 from datetime import datetime
 from enum import Enum
+from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk.types import (
     BaseModel,
     Nullable,
@@ -10,19 +11,21 @@ from latitudesh_python_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-from pydantic import model_serializer
+from pydantic import field_serializer, model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class Phase(str, Enum):
-    r"""The current phase of the cluster lifecycle"""
+class Phase(str, Enum, metaclass=utils.OpenEnumMeta):
+    r"""The current phase of the cluster lifecycle."""
 
     PENDING = "Pending"
     PROVISIONING = "Provisioning"
     PROVISIONED = "Provisioned"
+    UPGRADING = "Upgrading"
     DELETING = "Deleting"
     FAILED = "Failed"
+    UNKNOWN = "Unknown"
 
 
 class Name(str, Enum):
@@ -76,7 +79,7 @@ class KubernetesClusterSummaryDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""The cluster name"""
     phase: NotRequired[Phase]
-    r"""The current phase of the cluster lifecycle"""
+    r"""The current phase of the cluster lifecycle."""
     ready: NotRequired[bool]
     r"""Whether the cluster is ready to accept workloads"""
     infrastructure_ready: NotRequired[bool]
@@ -98,7 +101,7 @@ class KubernetesClusterSummaryDataAttributes(BaseModel):
     r"""The cluster name"""
 
     phase: Optional[Phase] = None
-    r"""The current phase of the cluster lifecycle"""
+    r"""The current phase of the cluster lifecycle."""
 
     ready: Optional[bool] = None
     r"""Whether the cluster is ready to accept workloads"""
@@ -120,6 +123,15 @@ class KubernetesClusterSummaryDataAttributes(BaseModel):
 
     created_at: Optional[datetime] = None
     r"""When the cluster was created"""
+
+    @field_serializer("phase")
+    def serialize_phase(self, value):
+        if isinstance(value, str):
+            try:
+                return models.Phase(value)
+            except ValueError:
+                return value
+        return value
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

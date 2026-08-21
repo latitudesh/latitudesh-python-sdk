@@ -81,6 +81,7 @@ class QuotaInMbps(BaseModel):
 class QuotaPerRegionTypedDict(TypedDict):
     region_id: NotRequired[str]
     region_slug: NotRequired[str]
+    price: NotRequired[Nullable[int]]
     quota_in_tb: NotRequired[QuotaInTbTypedDict]
     quota_in_mbps: NotRequired[QuotaInMbpsTypedDict]
 
@@ -90,6 +91,8 @@ class QuotaPerRegion(BaseModel):
 
     region_slug: Optional[str] = None
 
+    price: OptionalNullable[int] = UNSET
+
     quota_in_tb: Optional[QuotaInTb] = None
 
     quota_in_mbps: Optional[QuotaInMbps] = None
@@ -97,17 +100,26 @@ class QuotaPerRegion(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["region_id", "region_slug", "quota_in_tb", "quota_in_mbps"]
+            ["region_id", "region_slug", "price", "quota_in_tb", "quota_in_mbps"]
         )
+        nullable_fields = set(["price"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -220,16 +232,27 @@ class TrafficQuotaData(BaseModel):
         return m
 
 
+class TrafficQuotaMetaTypedDict(TypedDict):
+    pass
+
+
+class TrafficQuotaMeta(BaseModel):
+    pass
+
+
 class TrafficQuotaTypedDict(TypedDict):
     data: NotRequired[TrafficQuotaDataTypedDict]
+    meta: NotRequired[TrafficQuotaMetaTypedDict]
 
 
 class TrafficQuota(BaseModel):
     data: Optional[TrafficQuotaData] = None
 
+    meta: Optional[TrafficQuotaMeta] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         serialized = handler(self)
         m = {}
 

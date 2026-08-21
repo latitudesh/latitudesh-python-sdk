@@ -2,10 +2,21 @@
 
 from __future__ import annotations
 from .pagination_meta import PaginationMeta, PaginationMetaTypedDict
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from enum import Enum
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
+
+
+class RegionsType(str, Enum):
+    REGIONS = "regions"
 
 
 class CountryTypedDict(TypedDict):
@@ -38,7 +49,13 @@ class Country(BaseModel):
 class RegionsAttributesTypedDict(TypedDict):
     slug: NotRequired[str]
     name: NotRequired[str]
+    facility: NotRequired[Nullable[str]]
     country: NotRequired[CountryTypedDict]
+    type: NotRequired[Nullable[str]]
+    features: NotRequired[List[str]]
+    r"""Location capabilities available at this location (e.g. `public_network`)."""
+    network_group: NotRequired[Nullable[str]]
+    r"""The location's network group slug (e.g. `TYO`, `LON2`)."""
 
 
 class RegionsAttributes(BaseModel):
@@ -46,20 +63,41 @@ class RegionsAttributes(BaseModel):
 
     name: Optional[str] = None
 
+    facility: OptionalNullable[str] = UNSET
+
     country: Optional[Country] = None
+
+    type: OptionalNullable[str] = UNSET
+
+    features: Optional[List[str]] = None
+    r"""Location capabilities available at this location (e.g. `public_network`)."""
+
+    network_group: OptionalNullable[str] = UNSET
+    r"""The location's network group slug (e.g. `TYO`, `LON2`)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["slug", "name", "country"])
+        optional_fields = set(
+            ["slug", "name", "facility", "country", "type", "features", "network_group"]
+        )
+        nullable_fields = set(["facility", "type", "network_group"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -67,17 +105,20 @@ class RegionsAttributes(BaseModel):
 
 class RegionsDataTypedDict(TypedDict):
     id: NotRequired[str]
+    type: NotRequired[RegionsType]
     attributes: NotRequired[RegionsAttributesTypedDict]
 
 
 class RegionsData(BaseModel):
     id: Optional[str] = None
 
+    type: Optional[RegionsType] = None
+
     attributes: Optional[RegionsAttributes] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "attributes"])
+        optional_fields = set(["id", "type", "attributes"])
         serialized = handler(self)
         m = {}
 

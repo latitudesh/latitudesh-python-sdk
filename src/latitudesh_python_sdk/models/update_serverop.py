@@ -42,7 +42,7 @@ class UpdateServerServersAttributesTypedDict(TypedDict):
 
 
 class UpdateServerServersAttributes(BaseModel):
-    hostname: Optional[str] = "new-hostname"
+    hostname: Optional[str] = None
 
     billing: OptionalNullable[UpdateServerServersBilling] = UNSET
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
@@ -86,7 +86,7 @@ class UpdateServerServersDataTypedDict(TypedDict):
 
 
 class UpdateServerServersData(BaseModel):
-    id: Optional[str] = "sv_81EVOtR1N4J2Z"
+    id: Optional[str] = None
 
     type: Optional[UpdateServerServersType] = None
 

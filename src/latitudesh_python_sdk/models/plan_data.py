@@ -412,6 +412,7 @@ class PlanDataAttributesTypedDict(TypedDict):
     r"""List of available features for the plan"""
     specs: NotRequired[SpecsTypedDict]
     regions: NotRequired[List[PlanDataRegionsTypedDict]]
+    available_operating_systems: NotRequired[List[str]]
 
 
 class PlanDataAttributes(BaseModel):
@@ -426,9 +427,20 @@ class PlanDataAttributes(BaseModel):
 
     regions: Optional[List[PlanDataRegions]] = None
 
+    available_operating_systems: Optional[List[str]] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["slug", "name", "features", "specs", "regions"])
+        optional_fields = set(
+            [
+                "slug",
+                "name",
+                "features",
+                "specs",
+                "regions",
+                "available_operating_systems",
+            ]
+        )
         serialized = handler(self)
         m = {}
 

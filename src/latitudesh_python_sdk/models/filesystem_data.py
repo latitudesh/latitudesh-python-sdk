@@ -21,7 +21,7 @@ class FilesystemDataType(str, Enum):
     FILESYSTEMS = "filesystems"
 
 
-class StorageClass(str, Enum):
+class FilesystemDataStorageClass(str, Enum):
     STANDARD = "standard"
     HIGH_PERFORMANCE = "high_performance"
 
@@ -29,8 +29,14 @@ class StorageClass(str, Enum):
 class FilesystemDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     size_in_gb: NotRequired[int]
-    storage_class: NotRequired[Nullable[StorageClass]]
+    storage_class: NotRequired[Nullable[FilesystemDataStorageClass]]
     created_at: NotRequired[Nullable[datetime]]
+    keyring: NotRequired[Nullable[str]]
+    r"""Cephx keyring secret used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
+    cluster_user: NotRequired[Nullable[str]]
+    r"""Ceph cluster user used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
+    volume_path: NotRequired[Nullable[str]]
+    r"""Path of the filesystem volume inside the cluster. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
     project: NotRequired[ProjectIncludeTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
 
@@ -40,9 +46,18 @@ class FilesystemDataAttributes(BaseModel):
 
     size_in_gb: Optional[int] = None
 
-    storage_class: OptionalNullable[StorageClass] = UNSET
+    storage_class: OptionalNullable[FilesystemDataStorageClass] = UNSET
 
     created_at: OptionalNullable[datetime] = UNSET
+
+    keyring: OptionalNullable[str] = UNSET
+    r"""Cephx keyring secret used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
+
+    cluster_user: OptionalNullable[str] = UNSET
+    r"""Ceph cluster user used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
+
+    volume_path: OptionalNullable[str] = UNSET
+    r"""Path of the filesystem volume inside the cluster. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
 
     project: Optional[ProjectInclude] = None
 
@@ -51,9 +66,21 @@ class FilesystemDataAttributes(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["name", "size_in_gb", "storage_class", "created_at", "project", "team"]
+            [
+                "name",
+                "size_in_gb",
+                "storage_class",
+                "created_at",
+                "keyring",
+                "cluster_user",
+                "volume_path",
+                "project",
+                "team",
+            ]
         )
-        nullable_fields = set(["storage_class", "created_at"])
+        nullable_fields = set(
+            ["storage_class", "created_at", "keyring", "cluster_user", "volume_path"]
+        )
         serialized = handler(self)
         m = {}
 

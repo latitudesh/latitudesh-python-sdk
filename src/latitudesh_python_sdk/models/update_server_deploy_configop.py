@@ -109,36 +109,6 @@ class UpdateServerDeployConfigServersDiskLayout(BaseModel):
         return m
 
 
-class UpdateServerDeployConfigServersPartitionsTypedDict(TypedDict):
-    size_in_gb: NotRequired[int]
-    path: NotRequired[str]
-    filesystem_type: NotRequired[str]
-
-
-class UpdateServerDeployConfigServersPartitions(BaseModel):
-    size_in_gb: Optional[int] = None
-
-    path: Optional[str] = None
-
-    filesystem_type: Optional[str] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["size_in_gb", "path", "filesystem_type"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
 class UpdateServerDeployConfigServersAttributesTypedDict(TypedDict):
     hostname: NotRequired[Nullable[str]]
     operating_system: NotRequired[
@@ -152,11 +122,14 @@ class UpdateServerDeployConfigServersAttributesTypedDict(TypedDict):
     user_data: NotRequired[Nullable[str]]
     r"""User data to configure the server"""
     ssh_keys: NotRequired[Nullable[List[str]]]
-    partitions: NotRequired[
-        Nullable[List[UpdateServerDeployConfigServersPartitionsTypedDict]]
-    ]
     ipxe_url: NotRequired[Nullable[str]]
     r"""URL where iPXE script is stored on, necessary for custom image deployments. This attribute is required when operating system iPXE is selected."""
+    persistent_netboot: NotRequired[bool]
+    r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
+    public_network: NotRequired[Nullable[bool]]
+    r"""Set to 'true' to attach the server onto a public network. Requires 'public_network_id'. Available only when the public network feature is enabled for your team."""
+    public_network_id: NotRequired[Nullable[str]]
+    r"""ID of a customer public network to attach the server onto. Requires 'public_network' to be 'true'. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. This public network configuration is saved to the deploy config and inherited by future reinstalls until changed. Available only when the public network feature is enabled for your team."""
 
 
 class UpdateServerDeployConfigServersAttributes(BaseModel):
@@ -178,12 +151,17 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
 
     ssh_keys: OptionalNullable[List[str]] = UNSET
 
-    partitions: OptionalNullable[List[UpdateServerDeployConfigServersPartitions]] = (
-        UNSET
-    )
-
     ipxe_url: OptionalNullable[str] = UNSET
     r"""URL where iPXE script is stored on, necessary for custom image deployments. This attribute is required when operating system iPXE is selected."""
+
+    persistent_netboot: Optional[bool] = None
+    r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
+
+    public_network: OptionalNullable[bool] = UNSET
+    r"""Set to 'true' to attach the server onto a public network. Requires 'public_network_id'. Available only when the public network feature is enabled for your team."""
+
+    public_network_id: OptionalNullable[str] = UNSET
+    r"""ID of a customer public network to attach the server onto. Requires 'public_network' to be 'true'. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. This public network configuration is saved to the deploy config and inherited by future reinstalls until changed. Available only when the public network feature is enabled for your team."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -195,8 +173,10 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
                 "disk_layout",
                 "user_data",
                 "ssh_keys",
-                "partitions",
                 "ipxe_url",
+                "persistent_netboot",
+                "public_network",
+                "public_network_id",
             ]
         )
         nullable_fields = set(
@@ -207,8 +187,9 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
                 "disk_layout",
                 "user_data",
                 "ssh_keys",
-                "partitions",
                 "ipxe_url",
+                "public_network",
+                "public_network_id",
             ]
         )
         serialized = handler(self)

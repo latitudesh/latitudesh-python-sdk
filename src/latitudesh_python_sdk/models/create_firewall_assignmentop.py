@@ -18,11 +18,34 @@ class CreateFirewallAssignmentFirewallsType(str, Enum):
 
 
 class CreateFirewallAssignmentFirewallsAttributesTypedDict(TypedDict):
-    server_id: str
+    server_id: NotRequired[str]
+    r"""The server ID to assign. Provide exactly one of server_id or virtual_machine_id."""
+    virtual_machine_id: NotRequired[str]
+    r"""The virtual machine ID to assign. Provide exactly one of server_id or virtual_machine_id. A virtual machine can be assigned to at most one firewall."""
 
 
 class CreateFirewallAssignmentFirewallsAttributes(BaseModel):
-    server_id: str
+    server_id: Optional[str] = None
+    r"""The server ID to assign. Provide exactly one of server_id or virtual_machine_id."""
+
+    virtual_machine_id: Optional[str] = None
+    r"""The virtual machine ID to assign. Provide exactly one of server_id or virtual_machine_id. A virtual machine can be assigned to at most one firewall."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["server_id", "virtual_machine_id"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateFirewallAssignmentFirewallsDataTypedDict(TypedDict):

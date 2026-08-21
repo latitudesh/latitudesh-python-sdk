@@ -20,11 +20,11 @@ class ProjectType(str, Enum):
     PROJECTS = "projects"
 
 
-class TagsModelTypedDict(TypedDict):
+class ProjectTagsTypedDict(TypedDict):
     pass
 
 
-class TagsModel(BaseModel):
+class ProjectTags(BaseModel):
     pass
 
 
@@ -144,7 +144,7 @@ class ProjectBilling(BaseModel):
 
 
 class ProjectAttributesTypedDict(TypedDict):
-    tags: NotRequired[List[TagsModelTypedDict]]
+    tags: NotRequired[List[ProjectTagsTypedDict]]
     r"""The tags assigned to the project"""
     name: NotRequired[str]
     r"""The project name"""
@@ -168,7 +168,7 @@ class ProjectAttributesTypedDict(TypedDict):
 
 
 class ProjectAttributes(BaseModel):
-    tags: Optional[List[TagsModel]] = None
+    tags: Optional[List[ProjectTags]] = None
     r"""The tags assigned to the project"""
 
     name: Optional[str] = None

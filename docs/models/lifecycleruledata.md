@@ -1,0 +1,10 @@
+# LifecycleRuleData
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `id`                                                                                     | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | Lifecycle rule ID with lifecycle_ prefix                                                 |
+| `type`                                                                                   | [Optional[models.LifecycleRuleDataType]](../models/lifecycleruledatatype.md)             | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `attributes`                                                                             | [Optional[models.LifecycleRuleDataAttributes]](../models/lifecycleruledataattributes.md) | :heavy_minus_sign:                                                                       | N/A                                                                                      |
