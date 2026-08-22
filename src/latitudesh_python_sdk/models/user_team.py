@@ -53,6 +53,7 @@ class UserTeamLimitsTypedDict(TypedDict):
     virtual_machine: NotRequired[Nullable[int]]
     virtual_machine_gpu: NotRequired[Nullable[int]]
     elastic_ip: NotRequired[Nullable[int]]
+    bgp_session_per_ip: NotRequired[Nullable[int]]
     public_network: NotRequired[Nullable[int]]
     virtual_network: NotRequired[Nullable[int]]
     database: NotRequired[Nullable[int]]
@@ -70,6 +71,8 @@ class UserTeamLimits(BaseModel):
     virtual_machine_gpu: OptionalNullable[int] = UNSET
 
     elastic_ip: OptionalNullable[int] = UNSET
+
+    bgp_session_per_ip: OptionalNullable[int] = UNSET
 
     public_network: OptionalNullable[int] = UNSET
 
@@ -90,6 +93,7 @@ class UserTeamLimits(BaseModel):
                 "virtual_machine",
                 "virtual_machine_gpu",
                 "elastic_ip",
+                "bgp_session_per_ip",
                 "public_network",
                 "virtual_network",
                 "database",
@@ -104,6 +108,7 @@ class UserTeamLimits(BaseModel):
                 "virtual_machine",
                 "virtual_machine_gpu",
                 "elastic_ip",
+                "bgp_session_per_ip",
                 "public_network",
                 "virtual_network",
                 "database",
