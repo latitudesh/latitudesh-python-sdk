@@ -376,6 +376,7 @@ with Latitudesh(
 * [create](docs/sdks/projectssdk/README.md#create) - Create project
 * [update](docs/sdks/projectssdk/README.md#update) - Update project
 * [delete](docs/sdks/projectssdk/README.md#delete) - Delete project
+* [get_project](docs/sdks/projectssdk/README.md#get_project) - Retrieve project
 
 ### [PublicNetworks](docs/sdks/publicnetworkssdk/README.md)
 
@@ -650,7 +651,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 49 of 169 methods.*
+* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 49 of 170 methods.*
 * [`ResponseValidationError`](./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

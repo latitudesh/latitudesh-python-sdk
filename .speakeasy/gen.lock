@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 97e9fd40-98a0-465e-9d1a-259beac76207
 management:
-  docChecksum: ef1251f611f817b7651e661b72016060
+  docChecksum: 99193f59ade72b4360722639ae1495f8
   docVersion: "2023-06-01"
   speakeasyVersion: 1.795.1
   generationVersion: 2.932.9
-  releaseVersion: 3.4.0
-  configChecksum: cab76f21838a619e052ae409d62a1a90
+  releaseVersion: 3.4.1
+  configChecksum: 79525c7502b48d9dd8c272936a30ca3e
   repoURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 5f448449-c806-4d0c-ab70-08ee89fd48e4
-  pristine_commit_hash: bd836a8fbddede173116a57736a0598af640181b
-  pristine_tree_hash: c993f97df77ce613ac02b896b6b5bd298f57dd8e
+  generation_id: 072ec891-1d80-4bb8-9534-b7b3e9954c52
+  pristine_commit_hash: 2dfd3bea65da372589abe871b5104eceff1c9a84
+  pristine_tree_hash: 8fa088cb69f768ac45f46b9a110ac22c1820aa4a
 features:
   python:
     additionalDependencies: 1.1.0
@@ -1221,6 +1221,18 @@ trackedFiles:
     id: a6aee31ee7ec
     last_write_checksum: sha1:598867aaf5cfa96b7f480e9c7551100d258b9b08
     pristine_git_object: e8852ad4998421d53a463aeb73c820aa2fe5923c
+  docs/models/getprojectmeta.md:
+    id: b56d94df89c6
+    last_write_checksum: sha1:b80c46964e4feaac1882ffa525e82a0a7e4e0c24
+    pristine_git_object: 4450bbab5e5829969bcc92154a31d7117c85b0e3
+  docs/models/getprojectrequest.md:
+    id: c663b7dfe2e5
+    last_write_checksum: sha1:2878d0cd9b46c6d948ab85e139c13846c7f78c3c
+    pristine_git_object: e6f58801eca37b5d88cf5f661376f5348f933bba
+  docs/models/getprojectresponsebody.md:
+    id: 5773f9028f0e
+    last_write_checksum: sha1:fa75184ef9ad0fdb0744c34a75e0bf5d6370e724
+    pristine_git_object: 19f5b16c5ae2fdd5e156c286f9cc0e5f4a825397
   docs/models/getprojectsrequest.md:
     id: db174d3e944f
     last_write_checksum: sha1:360ad89e31425deb73aea72672aabd826dea1ef3
@@ -1711,8 +1723,8 @@ trackedFiles:
     pristine_git_object: dd37f446ed46203e01de7d5f5e55dddb9be6d1b3
   docs/models/limits.md:
     id: 2b9da9f1a79f
-    last_write_checksum: sha1:3204f9f5d4abd4e5164338991b43a54839f93597
-    pristine_git_object: 8a839f7a5a1d2cac582ffd6ea83233f95b0792a1
+    last_write_checksum: sha1:9568772cda5e1ad684d8190294f3a0d3780a7f96
+    pristine_git_object: 2df759c4ee11fa79cf37f91d83a4a0dbf404e40c
   docs/models/listbackuprestoresrequest.md:
     id: c15b2269eb4e
     last_write_checksum: sha1:de442a7f8b4a29f32f396477e57ad976df3903b2
@@ -2317,10 +2329,14 @@ trackedFiles:
     id: de79dc9acbe7
     last_write_checksum: sha1:1c7a6171207e06055029cdb8cb9848b5db82bfe7
     pristine_git_object: dd2e6b238e02982eee1402e2dfb43ba782425788
+  docs/models/postteammeta.md:
+    id: 2b879122ba34
+    last_write_checksum: sha1:c0a96cd38e911a5bf871fe6c09f90e35282fab20
+    pristine_git_object: 70b17f2807171f888e272ed54c98218ad8bfed45
   docs/models/postteamresponsebody.md:
     id: c6d71e95f084
-    last_write_checksum: sha1:d01ca1111f6ecbbef275afeddf8b39dc75af63aa
-    pristine_git_object: 2eb5033c47367cc08f2856748c4a41317309f794
+    last_write_checksum: sha1:684c53cc1f70b5734dc6c49f0ccf70987904f960
+    pristine_git_object: bf12e845a3aabf777657657cafa5c1232f4f5de5
   docs/models/postteamteamsattributes.md:
     id: b7a7e8a66f98
     last_write_checksum: sha1:d8c9812b7690453922024966545226f5900058df
@@ -2939,8 +2955,8 @@ trackedFiles:
     pristine_git_object: 405a8af5cd574e38aee39ef7090d117ac94e9d41
   docs/models/teamattributes.md:
     id: aada971dd7b5
-    last_write_checksum: sha1:4e42083e88d5924aab55cef1395cafc085506272
-    pristine_git_object: 24173fdc4824af295101636f8b2c47558a883b84
+    last_write_checksum: sha1:6022705c0ef18c75cd89c19fbae64424ba975d86
+    pristine_git_object: ab25a5191e6e6f2c6aafecef41924aba1a3fa6d2
   docs/models/teambilling.md:
     id: 9036471f4739
     last_write_checksum: sha1:a23fcff70c62a4dab712de9bbb151ee19fed90fd
@@ -2951,8 +2967,8 @@ trackedFiles:
     pristine_git_object: b9279dede44f198caceeb08d15107941e66cfef2
   docs/models/teamlimits.md:
     id: 3b1251642d09
-    last_write_checksum: sha1:86be958b56cee8a350c203727b327ff62ea61eaa
-    pristine_git_object: 0117cf46d8643f2453354711828b06fae8386976
+    last_write_checksum: sha1:34902d0dc30f0497464c56034c480fa008aad9c1
+    pristine_git_object: 4db44ff4c16dc73bcb5e74383c317aa64c3cc5b1
   docs/models/teammembers.md:
     id: fca5c723eca5
     last_write_checksum: sha1:b1879c0904d1b857e4b2e8199c184e62250ad102
@@ -3347,8 +3363,8 @@ trackedFiles:
     pristine_git_object: c2c5a9d817ab7643d01d34937b70923a6eb6286c
   docs/models/userteamlimits.md:
     id: 072ab6a4b61f
-    last_write_checksum: sha1:f1a737056da233ca9924382fce750484b11296a4
-    pristine_git_object: 2bc45a65bc9f97c0fddc93271067be9a966caba8
+    last_write_checksum: sha1:660575daeeeeb9151d37c709301f1fc9b685e59d
+    pristine_git_object: 53f3668601c4044f5affa7035e43ad611f316109
   docs/models/userteams.md:
     id: b03b425f1bb1
     last_write_checksum: sha1:674ef867aa611c2089867394ec52dfeab533e404
@@ -3851,8 +3867,8 @@ trackedFiles:
     pristine_git_object: df9d3e91a73f401498cfae744ca72122ab643b51
   docs/sdks/projectssdk/README.md:
     id: db9b5959a0bc
-    last_write_checksum: sha1:ab70742d8a18e11e4e4cda7c1da6f6f1939118d7
-    pristine_git_object: 96b3bc929982a806de469a7c867612dff8092012
+    last_write_checksum: sha1:9344b3e09bd9bfccdd455064c786312ae8e0f38e
+    pristine_git_object: 79c41c5339ee2939bdb6dc34e06f7ab8ee8f0c82
   docs/sdks/publicnetworkssdk/README.md:
     id: 1353477b6a8b
     last_write_checksum: sha1:2a63e11e8386cc7265b7ab13203617dad0e7fbc1
@@ -3927,8 +3943,8 @@ trackedFiles:
     pristine_git_object: 250e4a286482ffcc3629575515a40adcb44a2702
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:0f63f17161be0e796b2ab93c5abf194149064269
-    pristine_git_object: 14fa86257e5433ead79ee0089ca4d11769ae65f3
+    last_write_checksum: sha1:612d003b0ad0e1de1ad43ec9f32492080119a585
+    pristine_git_object: d8dcb6aca7c907d3917155c00ed6c22ba3ce0175
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:5354f07fd2821a42340f1573b7f3e029b8a852e1
@@ -3955,8 +3971,8 @@ trackedFiles:
     pristine_git_object: 7482ca81a653516ecd30fd1a10fdb6cc68839195
   src/latitudesh_python_sdk/_version.py:
     id: 65dde1ef31c9
-    last_write_checksum: sha1:5a4644dcd5913c28f376898bfbd0d0d2d2355713
-    pristine_git_object: 82c31625f72659f0279b43ce1438a51f71823df7
+    last_write_checksum: sha1:b6c40194a6d07c576345998954504f67f5fb6af3
+    pristine_git_object: 14266e3f0019b97e5fb12bfa7f5309220774e655
   src/latitudesh_python_sdk/apikeys_sdk.py:
     id: 633cbc9c65bd
     last_write_checksum: sha1:af2a49602a6b6a0bc09a8c64a01481e9ded6230b
@@ -4007,8 +4023,8 @@ trackedFiles:
     pristine_git_object: 89f6bce810394decb1b25187e3bb27fdbb097d7c
   src/latitudesh_python_sdk/models/__init__.py:
     id: 7f64ed71d43c
-    last_write_checksum: sha1:dbc78da0f2617ba390cca8721c10d1cbc13dd42f
-    pristine_git_object: 133ea20bce5a5cf58873112ead2c18ca3017f889
+    last_write_checksum: sha1:ce3824b739fcd268e284218aac0eb518eb62ebba
+    pristine_git_object: eadcaa1c4b76f00f4cc6f6e1ac47cff66ae755ef
   src/latitudesh_python_sdk/models/api_key.py:
     id: c61bf1d38797
     last_write_checksum: sha1:7f2a209ff9e0d3a9a8d928690d7b302c03a4f069
@@ -4413,6 +4429,10 @@ trackedFiles:
     id: 6db81754ca72
     last_write_checksum: sha1:fd38d7aa58510ac1929016cf1f32467674fc3094
     pristine_git_object: c0879c2d9ce5d14a32f7a5787bb8908981953da8
+  src/latitudesh_python_sdk/models/get_projectop.py:
+    id: 7bd998210b47
+    last_write_checksum: sha1:b9a84c099f09c42e9d8b8412f79cca9219a5efe5
+    pristine_git_object: 576c098f301c1e965e602a84ec211d6f74123f37
   src/latitudesh_python_sdk/models/get_projectsop.py:
     id: 6b81189ed3a8
     last_write_checksum: sha1:d1a1cdb5f02acde08e04cab601fb5208b6833299
@@ -4771,8 +4791,8 @@ trackedFiles:
     pristine_git_object: 51ac52dc352af110161523c26c8945f966fd7787
   src/latitudesh_python_sdk/models/post_teamop.py:
     id: ec5556d9f0da
-    last_write_checksum: sha1:97a0f3f644ff08627f7e59659905d271e42e889a
-    pristine_git_object: fdc24e3721e7599c99090c68ea4006fce9990f25
+    last_write_checksum: sha1:ddf77b0555d271ab8bd00b514f581e78760774d2
+    pristine_git_object: d08b43f3eb31f1e8476188f25b3e9a4980f366c3
   src/latitudesh_python_sdk/models/post_user_dataop.py:
     id: bea5a7a725cd
     last_write_checksum: sha1:81001da74e981d79ff514360f8fd0b0c53093188
@@ -4939,12 +4959,12 @@ trackedFiles:
     pristine_git_object: 7b89c8e96c9952bac7fe9e155bb83188cb825a01
   src/latitudesh_python_sdk/models/team.py:
     id: cf7f06ad9173
-    last_write_checksum: sha1:272cbe8f4c43a4134ca52c5cf14cf4a1e998c8a4
-    pristine_git_object: 95cd08558eccec35e94f258456828d655b2d2af5
+    last_write_checksum: sha1:e4fe57bb30d844724d5809ebd3e251a3d37cac0c
+    pristine_git_object: f82cac9701302b0e011ff117611975f6e9315f38
   src/latitudesh_python_sdk/models/team_include.py:
     id: c4f702e35a50
-    last_write_checksum: sha1:b6a5092700d89c0597c39482a0ead4512873fb94
-    pristine_git_object: 94138d4a128635b2a69a7c3b863072edbcd1aaaa
+    last_write_checksum: sha1:392cd9ce3fa08f2b20ffae05a947093f2cfe64c1
+    pristine_git_object: 716e6627ee4ebf6e03ac5739e13b487d452475a7
   src/latitudesh_python_sdk/models/team_members.py:
     id: 614c51439edb
     last_write_checksum: sha1:8386e0d5434eb0c3209b761a221454e4f3ea562e
@@ -5039,8 +5059,8 @@ trackedFiles:
     pristine_git_object: 94b2db3ba972f9fda93b0e609c47e06889b334a1
   src/latitudesh_python_sdk/models/user_team.py:
     id: 3ab6e5e05749
-    last_write_checksum: sha1:e25dbf063c9a190ea831c6728bf04fe8d6f05f4a
-    pristine_git_object: ce1ef7f67e41ac71b9789259cbb78069491342a3
+    last_write_checksum: sha1:ccd19e4a9130f67d2623226ad0243f09d08039e5
+    pristine_git_object: a61dae805f09a85859f3550cd3f5dcd476fc981c
   src/latitudesh_python_sdk/models/user_teams.py:
     id: b05913289ecd
     last_write_checksum: sha1:775ab19bfbef50be14192406861cd6994a96aa48
@@ -5175,8 +5195,8 @@ trackedFiles:
     pristine_git_object: 71993ce33ab6782b89021a58aff4378e3f1134d6
   src/latitudesh_python_sdk/projects_sdk.py:
     id: afb58b634eee
-    last_write_checksum: sha1:50a793bd564ece79cf8cc10f6ca0863b466caa5e
-    pristine_git_object: 7c5d8bb7939d9aa1b76ee0135b695ead45b4cb44
+    last_write_checksum: sha1:8b24649bf59734c21906b016d7e578f83d528a11
+    pristine_git_object: d3bdec3612fc7baf5a378530dad77f80f886d9c9
   src/latitudesh_python_sdk/public_networks_sdk.py:
     id: 74658efac763
     last_write_checksum: sha1:48bbba62bcf77d54cfd14ae8a192a0ab1f8f34f9
@@ -7299,7 +7319,7 @@ examples:
         application/vnd.api+json: {"data": {"type": "teams", "attributes": {"name": "Name", "currency": "USD", "address": "Address"}}}
       responses:
         "201":
-          application/vnd.api+json: {"data": {"id": "team_aEjv7ZKeWzCrjA5ANeMvImmKEoV", "attributes": {"name": "Name", "slug": "name", "address": "Address", "currency": "USD", "enforce_mfa": false, "token": "token-for-team", "customer_billing_id": "cus_hp2b02do", "referred_code": null}}}
+          application/vnd.api+json: {"data": {"id": "team_aEjv7ZKeWzCrjA5ANeMvImmKEoV", "attributes": {"name": "Name", "slug": "name", "address": "Address", "currency": "USD", "enforce_mfa": false, "customer_billing_id": "cus_hp2b02do", "referred_code": null}}, "meta": {"session_token": "token-for-team"}}
     Unprocessable Entity:
       requestBody:
         application/json: {"data": {"type": "teams", "attributes": {"name": "", "currency": "BRL", "address": ""}}}
@@ -9544,9 +9564,61 @@ examples:
       responses:
         "403":
           application/vnd.api+json: {"errors": [{"code": "STORAGE_NOT_ENABLED", "title": "Object Storage not enabled"}]}
+  get-project:
+    speakeasy-default-get-project:
+      parameters:
+        path:
+          project_id: "<id>"
+      responses:
+        "200":
+          application/vnd.api+json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `latitudesh.plans.list_storage()`: \n  *  `request` **Changed**\n  *  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.events.list()`:  `response.data[].attributes.target.id` **Changed** (Breaking ⚠️)\n* `latitudesh.firewalls.get_all_firewall_assignments()`: \n  *  `request.filter[virtual_machine]` **Added**\n  *  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.firewalls.list_assignments()`:  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.elastic_ips.list_elastic_ips()`:  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.vpn_sessions.create()`: \n  *  `request.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.virtual_machine_backups.create_virtual_machine_backup_top_level()`: \n  *  `request.data.attributes.virtual_machine` **Changed** (Breaking ⚠️)\n  *  `response.data.attributes.team.limits.public_network` **Added**\n* `latitudesh.virtual_machines.update_virtual_machine()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.virtual_machines.get()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.virtual_machines.list()`:  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.virtual_machines.create()`: \n  *  `request.data.attributes.billing` **Added**\n  *  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.user_profile.update()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.tags.create()`: \n  *  `request.data.attributes` **Changed** (Breaking ⚠️)\n  *  `response.data.attributes.team.limits.public_network` **Added**\n* `latitudesh.object_storage.get_storage_bucket()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.object_storage.post_storage_buckets()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.object_storage.get_storage_buckets()`:  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.block_storage.post_storage_volumes()`: \n  *  `request.data.attributes.region` **Added** (Breaking ⚠️)\n  *  `response.data.attributes` **Changed**\n* `latitudesh.filesystem_storage.update_filesystem()`: \n  *  `request.data.attributes.size_in_gb` **Changed** (Breaking ⚠️)\n  *  `response.data.attributes` **Changed**\n* `latitudesh.servers.reinstall()`: \n  *  `request.data.attributes` **Changed** (Breaking ⚠️)\n  *  `error.status[403]` **Added**\n* `latitudesh.servers.list_out_of_band_connections()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.create_out_of_band_connection()`: \n  *  `request.data.attributes.ssh_key_id` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.unlock()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.lock()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.update_deploy_config()`: \n  *  `request.attributes` **Changed** (Breaking ⚠️)\n  *  `response.data.attributes` **Changed** (Breaking ⚠️)\n  *  `error` **Changed**\n* `latitudesh.servers.get_deploy_config()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.update()`: \n  *  `request.data` **Changed**\n  *  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.get()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.create()`: \n  *  `request.data.attributes` **Changed** (Breaking ⚠️)\n  *  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.list()`:  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.billing.list_usage()`:  `response.data.attributes.products[].metadata.servers[].plan` **Changed** (Breaking ⚠️)\n* `latitudesh.ssh_keys.put_ssh_key()`:  `request.data` **Changed** (Breaking ⚠️)\n* `latitudesh.elastic_ips.create_elastic_ip()`: \n  *  `request.data.attributes` **Changed**\n  *  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.elastic_ips.get_elastic_ip()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.elastic_ips.update_elastic_ip()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.ip_addresses.list()`:  `response.data[].attributes.assignment` **Changed** (Breaking ⚠️)\n* `latitudesh.ip_addresses.get()`:  `response.data.attributes.assignment` **Changed** (Breaking ⚠️)\n* `latitudesh.ssh_keys.post_ssh_key()`: \n  *  `request.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.ssh_keys.update()`:  `request.data` **Changed** (Breaking ⚠️)\n* `latitudesh.ssh_keys.create()`: \n  *  `request.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.kubernetes_clusters.list_kubernetes_clusters()`:  `response.data[].attributes.phase` **Changed** (Breaking ⚠️)\n* `latitudesh.kubernetes_clusters.get_kubernetes_cluster()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.projects.update()`: \n  *  `request.data` **Changed** (Breaking ⚠️)\n  *  `response.data.attributes.team.limits.public_network` **Added**\n* `latitudesh.plans.list_vm_plans()`:  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.regions.list()`: \n  *  `request` **Changed**\n  *  `response.data[]` **Changed**\n* `latitudesh.public_networks.get_public_networks()`: **Added**\n* `latitudesh.projects.list()`:  `response.data[].attributes.team.limits.public_network` **Added**\n* `latitudesh.projects.create()`:  `response.data.attributes.team.limits.public_network` **Added**\n* `latitudesh.plans.list()`:  `response.data[].attributes.available_operating_systems` **Added**\n* `latitudesh.operating_systems.list()`:  `response.data[].attributes.features` **Changed**\n* `latitudesh.firewalls.assign()`: \n  *  `request.data.attributes` **Changed**\n* `latitudesh.firewalls.update()`: \n  *  `request.data.attributes.tags` **Added**\n  *  `response.data.attributes.tags` **Added**\n* `latitudesh.firewalls.get()`:  `response.data.attributes.tags` **Added**\n* `latitudesh.firewalls.list()`: \n  *  `request.filter[tags]` **Added**\n  *  `response.data[].attributes.tags` **Added**\n* `latitudesh.regions.get()`:  `response.data` **Changed**\n* `latitudesh.firewalls.create()`: \n  *  `request.data.attributes.tags` **Added**\n  *  `response.data.attributes.tags` **Added**\n* `latitudesh.object_storage.get_storage_bucket_metrics()`: **Added**\n* `latitudesh.object_storage.delete_storage_bucket_lifecycle_rule()`: **Added**\n* `latitudesh.object_storage.put_storage_bucket_lifecycle_rule()`: **Added**\n* `latitudesh.object_storage.get_storage_bucket_lifecycle_rule()`: **Added**\n* `latitudesh.object_storage.post_storage_bucket_lifecycle_rules()`: **Added**\n* `latitudesh.object_storage.get_storage_bucket_lifecycle_rules()`: **Added**\n* `latitudesh.object_storage.get_storage_bucket_access_keys()`: **Added**\n* `latitudesh.object_storage.delete_storage_access_keys_username()`: **Added**\n* `latitudesh.object_storage.post_storage_access_keys()`: **Added**\n* `latitudesh.servers.create_ipmi_session()`:  `response.data.attributes.ipmi_url` **Added**\n* `latitudesh.object_storage.get_storage_access_keys()`: **Added**\n* `latitudesh.filesystem_storage.create_filesystem()`:  `response.data.attributes` **Changed**\n* `latitudesh.filesystem_storage.list_filesystems()`:  `response.data[].attributes` **Changed**\n* `latitudesh.object_storage.get_storage_usage()`: **Added**\n* `latitudesh.block_storage.get_storage_volumes()`:  `response.data[].attributes` **Changed**\n* `latitudesh.public_networks.destroy_public_network()`: **Added**\n* `latitudesh.block_storage.get_storage_volume()`:  `response.data.attributes` **Changed**\n* `latitudesh.public_networks.get_public_network()`: **Added**\n* `latitudesh.public_networks.create_public_network()`: **Added**\n* `latitudesh.plans.get()`:  `response` **Changed**\n* `latitudesh.tags.list()`:  `response.data[].attributes.team.limits.public_network` **Added**\n* `latitudesh.elastic_ips.delete_elastic_ip_bgp_session()`: **Added**\n* `latitudesh.tags.update()`: \n  *  `request.data.attributes.color` **Changed**\n  *  `response.data.attributes.team.limits.public_network` **Added**\n* `latitudesh.teams.get()`:  `response.data[].attributes` **Changed**\n* `latitudesh.teams.create()`:  `response.data.attributes` **Changed**\n* `latitudesh.teams.update()`:  `response.data.attributes` **Changed**\n* `latitudesh.traffic.get()`:  `response` **Changed**\n* `latitudesh.traffic.get_quota()`:  `response` **Changed**\n* `latitudesh.user_profile.get()`:  `response.data` **Changed**\n* `latitudesh.elastic_ips.get_elastic_ip_bgp_session()`: **Added**\n* `latitudesh.user_profile.list_teams()`:  `response.data[]` **Changed**\n* `latitudesh.elastic_ips.create_elastic_ip_bgp_session()`: **Added**\n* `latitudesh.elastic_ips.list_elastic_ip_bgp_sessions()`: **Added**\n* `latitudesh.baselines_(preview).destroy_baseline()`: **Added**\n* `latitudesh.baselines_(preview).get_baseline()`: **Added**\n* `latitudesh.virtual_machines.create_virtual_machine_action()`:  `error` **Changed**\n* `latitudesh.virtual_machine_backups.list_virtual_machine_scoped_backups()`:  `response.data[].attributes.team.limits.public_network` **Added**\n* `latitudesh.virtual_machine_backups.create_virtual_machine_backup()`:  `response.data.attributes.team.limits.public_network` **Added**\n* `latitudesh.virtual_machine_backups.list_virtual_machine_backups()`:  `response.data[].attributes.team.limits.public_network` **Added**\n* `latitudesh.baselines_(preview).create_baseline()`: **Added**\n* `latitudesh.virtual_machine_backups.get_virtual_machine_backup()`:  `response.data.attributes.team.limits.public_network` **Added**\n* `latitudesh.virtual_machine_backups.delete_virtual_machine_backup()`:  `response.data.attributes.team.limits.public_network` **Added**\n* `latitudesh.virtual_machine_restores.list_virtual_machine_scoped_restores()`:  `response.data[].attributes.team.limits.public_network` **Added**\n* `latitudesh.virtual_machine_restores.create_virtual_machine_restore()`:  `response.data.attributes.team.limits.public_network` **Added**\n* `latitudesh.virtual_machine_restores.list_backup_restores()`:  `response.data[].attributes.team.limits.public_network` **Added**\n* `latitudesh.virtual_machine_restores.list_virtual_machine_restores()`:  `response.data[].attributes.team.limits.public_network` **Added**\n* `latitudesh.virtual_machine_restores.create_virtual_machine_restore_flat()`:  `response.data.attributes.team.limits.public_network` **Added**\n* `latitudesh.virtual_machine_restores.get_virtual_machine_restore()`:  `response.data.attributes.team.limits.public_network` **Added**\n* `latitudesh.baselines_(preview).get_baselines()`: **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `latitudesh.teams.get()`:  `response.data[].attributes` **Changed** (Breaking ⚠️)
+  * `latitudesh.teams.update()`:  `response.data.attributes` **Changed** (Breaking ⚠️)
+  * `latitudesh.teams.create()`:  `response` **Changed** (Breaking ⚠️)
+  * `latitudesh.tags.create()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.block_storage.post_storage_volumes()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.object_storage.post_storage_buckets()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.object_storage.get_storage_bucket()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.servers.list()`:  `response.data[].attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.servers.create()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.servers.get()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.servers.update()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.servers.lock()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.servers.unlock()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.filesystem_storage.create_filesystem()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.filesystem_storage.list_filesystems()`:  `response.data[].attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.filesystem_storage.update_filesystem()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.block_storage.get_storage_volumes()`:  `response.data[].attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.projects.update()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.block_storage.get_storage_volume()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.tags.list()`:  `response.data[].attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.projects.get_project()`: **Added**
+  * `latitudesh.object_storage.get_storage_buckets()`:  `response.data[].attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.tags.update()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machines.list()`:  `response.data[].attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.projects.list()`:  `response.data[].attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.user_profile.get()`:  `response.data.attributes.teams[].limits.bgp_session_per_ip` **Added**
+  * `latitudesh.user_profile.list_teams()`:  `response.data[].attributes.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machines.create()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.projects.create()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machines.get()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machines.update_virtual_machine()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machine_backups.list_virtual_machine_scoped_backups()`:  `response.data[].attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machine_backups.create_virtual_machine_backup()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machine_backups.list_virtual_machine_backups()`:  `response.data[].attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machine_backups.create_virtual_machine_backup_top_level()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machine_backups.get_virtual_machine_backup()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machine_backups.delete_virtual_machine_backup()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machine_restores.list_virtual_machine_scoped_restores()`:  `response.data[].attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machine_restores.create_virtual_machine_restore()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machine_restores.list_backup_restores()`:  `response.data[].attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machine_restores.list_virtual_machine_restores()`:  `response.data[].attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machine_restores.create_virtual_machine_restore_flat()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
+  * `latitudesh.virtual_machine_restores.get_virtual_machine_restore()`:  `response.data.attributes.team.limits.bgp_session_per_ip` **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

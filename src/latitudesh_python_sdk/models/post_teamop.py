@@ -91,10 +91,37 @@ class PostTeamTeamsRequestBody(BaseModel):
     data: PostTeamTeamsData
 
 
+class PostTeamMetaTypedDict(TypedDict):
+    session_token: NotRequired[str]
+    r"""Create-only session token to authenticate follow-up requests against the new team"""
+
+
+class PostTeamMeta(BaseModel):
+    session_token: Optional[str] = None
+    r"""Create-only session token to authenticate follow-up requests against the new team"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["session_token"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
 class PostTeamResponseBodyTypedDict(TypedDict):
     r"""Created"""
 
     data: NotRequired[TeamTypedDict]
+    meta: NotRequired[PostTeamMetaTypedDict]
 
 
 class PostTeamResponseBody(BaseModel):
@@ -102,9 +129,11 @@ class PostTeamResponseBody(BaseModel):
 
     data: Optional[Team] = None
 
+    meta: Optional[PostTeamMeta] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         serialized = handler(self)
         m = {}
 
