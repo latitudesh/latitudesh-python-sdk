@@ -184,6 +184,8 @@ class CreateServerServersAttributesTypedDict(TypedDict):
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
     persistent_netboot: NotRequired[bool]
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
+    bgp_ready: NotRequired[Nullable[bool]]
+    r"""Deploy the server onto hardware that can announce an Elastic IP over BGP."""
     billing: NotRequired[Nullable[CreateServerServersBilling]]
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
 
@@ -221,6 +223,9 @@ class CreateServerServersAttributes(BaseModel):
     persistent_netboot: Optional[bool] = None
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
 
+    bgp_ready: OptionalNullable[bool] = UNSET
+    r"""Deploy the server onto hardware that can announce an Elastic IP over BGP."""
+
     billing: OptionalNullable[CreateServerServersBilling] = UNSET
     r"""The server billing type. Accepts `hourly` and `monthly` for on demand projects and `yearly` for reserved projects."""
 
@@ -252,11 +257,20 @@ class CreateServerServersAttributes(BaseModel):
                 "disk_layout",
                 "ipxe",
                 "persistent_netboot",
+                "bgp_ready",
                 "billing",
             ]
         )
         nullable_fields = set(
-            ["ssh_keys", "user_data", "raid", "disk_layout", "ipxe", "billing"]
+            [
+                "ssh_keys",
+                "user_data",
+                "raid",
+                "disk_layout",
+                "ipxe",
+                "bgp_ready",
+                "billing",
+            ]
         )
         serialized = handler(self)
         m = {}

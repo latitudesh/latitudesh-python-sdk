@@ -158,6 +158,8 @@ class BgpSessionDataAttributesTypedDict(TypedDict):
     status_message: NotRequired[Nullable[str]]
     r"""Generic explanation when the session could not be configured. Infrastructure diagnostics are intentionally not exposed."""
     server_ip: NotRequired[Nullable[str]]
+    peer_address: NotRequired[Nullable[str]]
+    r"""IP address on the other end of the announcing server's /31 — the address you configure as the BGP neighbor when peering. Use it as the neighbor in BIRD or as peerAddress in MetalLB. Null while the session is still pending, or when the address cannot be resolved."""
     asn: NotRequired[Nullable[int]]
     created_at: NotRequired[Nullable[datetime]]
     server: NotRequired[Nullable[BgpSessionDataServerTypedDict]]
@@ -173,6 +175,9 @@ class BgpSessionDataAttributes(BaseModel):
     r"""Generic explanation when the session could not be configured. Infrastructure diagnostics are intentionally not exposed."""
 
     server_ip: OptionalNullable[str] = UNSET
+
+    peer_address: OptionalNullable[str] = UNSET
+    r"""IP address on the other end of the announcing server's /31 — the address you configure as the BGP neighbor when peering. Use it as the neighbor in BIRD or as peerAddress in MetalLB. Null while the session is still pending, or when the address cannot be resolved."""
 
     asn: OptionalNullable[int] = UNSET
 
@@ -191,6 +196,7 @@ class BgpSessionDataAttributes(BaseModel):
                 "status",
                 "status_message",
                 "server_ip",
+                "peer_address",
                 "asn",
                 "created_at",
                 "server",
@@ -202,6 +208,7 @@ class BgpSessionDataAttributes(BaseModel):
                 "status",
                 "status_message",
                 "server_ip",
+                "peer_address",
                 "asn",
                 "created_at",
                 "server",

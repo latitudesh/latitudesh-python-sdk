@@ -16,8 +16,8 @@
 * [get_storage_bucket_lifecycle_rules](#get_storage_bucket_lifecycle_rules) - List lifecycle rules
 * [post_storage_bucket_lifecycle_rules](#post_storage_bucket_lifecycle_rules) - Create lifecycle rule
 * [get_storage_bucket_lifecycle_rule](#get_storage_bucket_lifecycle_rule) - Retrieve lifecycle rule
-* [put_storage_bucket_lifecycle_rule](#put_storage_bucket_lifecycle_rule) - Update lifecycle rule
 * [delete_storage_bucket_lifecycle_rule](#delete_storage_bucket_lifecycle_rule) - Delete lifecycle rule
+* [patch_storage_bucket_lifecycle_rule](#patch_storage_bucket_lifecycle_rule) - Update lifecycle rule
 * [get_storage_bucket_metrics](#get_storage_bucket_metrics) - Retrieve bucket metrics
 
 ## get_storage_usage
@@ -843,130 +843,6 @@ with Latitudesh(
 | models.ErrorObject       | 403, 404                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## put_storage_bucket_lifecycle_rule
-
-Updates an existing lifecycle rule for an object storage bucket.
-
-### Example Usage: FeatureNotEnabled
-
-<!-- UsageSnippet language="python" operationID="put-storage-bucket-lifecycle-rule" method="put" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="FeatureNotEnabled" -->
-```python
-import latitudesh_python_sdk
-from latitudesh_python_sdk import Latitudesh
-import os
-
-
-with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
-) as latitudesh:
-
-    res = latitudesh.object_storage.put_storage_bucket_lifecycle_rule(bucket_id="<id>", id="<id>", data={
-        "type": latitudesh_python_sdk.PutStorageBucketLifecycleRuleType.LIFECYCLE_RULES,
-        "attributes": {
-            "name": "<value>",
-        },
-    })
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: InsufficientPermissions
-
-<!-- UsageSnippet language="python" operationID="put-storage-bucket-lifecycle-rule" method="put" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="InsufficientPermissions" -->
-```python
-import latitudesh_python_sdk
-from latitudesh_python_sdk import Latitudesh
-import os
-
-
-with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
-) as latitudesh:
-
-    res = latitudesh.object_storage.put_storage_bucket_lifecycle_rule(bucket_id="<id>", id="<id>", data={
-        "type": latitudesh_python_sdk.PutStorageBucketLifecycleRuleType.LIFECYCLE_RULES,
-        "attributes": {
-            "name": "<value>",
-        },
-    })
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: Success
-
-<!-- UsageSnippet language="python" operationID="put-storage-bucket-lifecycle-rule" method="put" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="Success" -->
-```python
-import latitudesh_python_sdk
-from latitudesh_python_sdk import Latitudesh
-import os
-
-
-with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
-) as latitudesh:
-
-    res = latitudesh.object_storage.put_storage_bucket_lifecycle_rule(bucket_id="<id>", id="<id>", data={
-        "type": latitudesh_python_sdk.PutStorageBucketLifecycleRuleType.LIFECYCLE_RULES,
-        "attributes": {
-            "name": "<value>",
-        },
-    })
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: Update
-
-<!-- UsageSnippet language="python" operationID="put-storage-bucket-lifecycle-rule" method="put" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="Update" -->
-```python
-import latitudesh_python_sdk
-from latitudesh_python_sdk import Latitudesh
-import os
-
-
-with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
-) as latitudesh:
-
-    res = latitudesh.object_storage.put_storage_bucket_lifecycle_rule(bucket_id="<id>", id="<id>", data={
-        "type": latitudesh_python_sdk.PutStorageBucketLifecycleRuleType.LIFECYCLE_RULES,
-        "attributes": {
-            "name": "delete-old-logs",
-            "enabled": False,
-            "expiration_days": 60,
-        },
-    })
-
-    # Handle response
-    print(res)
-
-```
-
-### Parameters
-
-| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `bucket_id`                                                                                   | *str*                                                                                         | :heavy_check_mark:                                                                            | The object storage bucket ID                                                                  |
-| `id`                                                                                          | *str*                                                                                         | :heavy_check_mark:                                                                            | The lifecycle rule ID                                                                         |
-| `data`                                                                                        | [models.PutStorageBucketLifecycleRuleData](../../models/putstoragebucketlifecycleruledata.md) | :heavy_check_mark:                                                                            | N/A                                                                                           |
-| `retries`                                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                              | :heavy_minus_sign:                                                                            | Configuration to override the default retry behavior of the client.                           |
-
-### Response
-
-**[models.PutStorageBucketLifecycleRuleResponseBody](../../models/putstoragebucketlifecycleruleresponsebody.md)**
-
-### Errors
-
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
-| models.ErrorObject       | 500                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
-
 ## delete_storage_bucket_lifecycle_rule
 
 Deletes a lifecycle rule from an object storage bucket.
@@ -1002,6 +878,130 @@ with Latitudesh(
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
 | models.ErrorObject       | 403, 404                 | application/vnd.api+json |
+| models.ErrorObject       | 500                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+
+## patch_storage_bucket_lifecycle_rule
+
+Updates an existing lifecycle rule for an object storage bucket.
+
+### Example Usage: FeatureNotEnabled
+
+<!-- UsageSnippet language="python" operationID="patch-storage-bucket-lifecycle-rule" method="patch" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="FeatureNotEnabled" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.object_storage.patch_storage_bucket_lifecycle_rule(bucket_id="<id>", id="<id>", data={
+        "type": latitudesh_python_sdk.PatchStorageBucketLifecycleRuleType.LIFECYCLE_RULES,
+        "attributes": {
+            "name": "<value>",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: InsufficientPermissions
+
+<!-- UsageSnippet language="python" operationID="patch-storage-bucket-lifecycle-rule" method="patch" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="InsufficientPermissions" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.object_storage.patch_storage_bucket_lifecycle_rule(bucket_id="<id>", id="<id>", data={
+        "type": latitudesh_python_sdk.PatchStorageBucketLifecycleRuleType.LIFECYCLE_RULES,
+        "attributes": {
+            "name": "<value>",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="patch-storage-bucket-lifecycle-rule" method="patch" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="Success" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.object_storage.patch_storage_bucket_lifecycle_rule(bucket_id="<id>", id="<id>", data={
+        "type": latitudesh_python_sdk.PatchStorageBucketLifecycleRuleType.LIFECYCLE_RULES,
+        "attributes": {
+            "name": "<value>",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Update
+
+<!-- UsageSnippet language="python" operationID="patch-storage-bucket-lifecycle-rule" method="patch" path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}" example="Update" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.object_storage.patch_storage_bucket_lifecycle_rule(bucket_id="<id>", id="<id>", data={
+        "type": latitudesh_python_sdk.PatchStorageBucketLifecycleRuleType.LIFECYCLE_RULES,
+        "attributes": {
+            "name": "delete-old-logs",
+            "enabled": False,
+            "expiration_days": 60,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `bucket_id`                                                                                       | *str*                                                                                             | :heavy_check_mark:                                                                                | The object storage bucket ID                                                                      |
+| `id`                                                                                              | *str*                                                                                             | :heavy_check_mark:                                                                                | The lifecycle rule ID                                                                             |
+| `data`                                                                                            | [models.PatchStorageBucketLifecycleRuleData](../../models/patchstoragebucketlifecycleruledata.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `retries`                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                  | :heavy_minus_sign:                                                                                | Configuration to override the default retry behavior of the client.                               |
+
+### Response
+
+**[models.PatchStorageBucketLifecycleRuleResponseBody](../../models/patchstoragebucketlifecycleruleresponsebody.md)**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
 | models.ErrorObject       | 500                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 

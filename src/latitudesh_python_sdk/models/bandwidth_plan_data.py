@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
@@ -15,6 +21,7 @@ class BandwidthPlanDataType(str, Enum):
 class UsdTypedDict(TypedDict):
     monthly: NotRequired[int]
     hourly: NotRequired[int]
+    yearly: NotRequired[Nullable[int]]
 
 
 class Usd(BaseModel):
@@ -22,18 +29,29 @@ class Usd(BaseModel):
 
     hourly: Optional[int] = None
 
+    yearly: OptionalNullable[int] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["monthly", "hourly"])
+        optional_fields = set(["monthly", "hourly", "yearly"])
+        nullable_fields = set(["yearly"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -42,6 +60,7 @@ class Usd(BaseModel):
 class BrlTypedDict(TypedDict):
     monthly: NotRequired[int]
     hourly: NotRequired[int]
+    yearly: NotRequired[Nullable[int]]
 
 
 class Brl(BaseModel):
@@ -49,18 +68,29 @@ class Brl(BaseModel):
 
     hourly: Optional[int] = None
 
+    yearly: OptionalNullable[int] = UNSET
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["monthly", "hourly"])
+        optional_fields = set(["monthly", "hourly", "yearly"])
+        nullable_fields = set(["yearly"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

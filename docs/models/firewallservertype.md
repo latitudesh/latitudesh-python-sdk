@@ -5,12 +5,12 @@
 ```python
 from latitudesh_python_sdk.models import FirewallServerType
 
-value = FirewallServerType.FIREWALL_SERVERS
+value = FirewallServerType.FIREWALL_ASSIGNMENTS
 ```
 
 
 ## Values
 
-| Name               | Value              |
-| ------------------ | ------------------ |
-| `FIREWALL_SERVERS` | firewall_servers   |
+| Name                   | Value                  |
+| ---------------------- | ---------------------- |
+| `FIREWALL_ASSIGNMENTS` | firewall_assignments   |

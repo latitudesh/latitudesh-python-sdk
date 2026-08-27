@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
@@ -13,13 +19,13 @@ class BandwidthPackagesType(str, Enum):
 
 
 class BandwidthPackagesProjectTypedDict(TypedDict):
-    id: NotRequired[int]
+    id: NotRequired[str]
     name: NotRequired[str]
     slug: NotRequired[str]
 
 
 class BandwidthPackagesProject(BaseModel):
-    id: Optional[int] = None
+    id: Optional[str] = None
 
     name: Optional[str] = None
 
@@ -45,7 +51,7 @@ class BandwidthPackagesProject(BaseModel):
 class PackagesTypedDict(TypedDict):
     region_slug: NotRequired[str]
     currency: NotRequired[str]
-    unit_price: NotRequired[float]
+    unit_price: NotRequired[Nullable[float]]
     contracted: NotRequired[int]
     total_price: NotRequired[float]
 
@@ -55,7 +61,7 @@ class Packages(BaseModel):
 
     currency: Optional[str] = None
 
-    unit_price: Optional[float] = None
+    unit_price: OptionalNullable[float] = UNSET
 
     contracted: Optional[int] = None
 
@@ -66,15 +72,24 @@ class Packages(BaseModel):
         optional_fields = set(
             ["region_slug", "currency", "unit_price", "contracted", "total_price"]
         )
+        nullable_fields = set(["unit_price"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -107,19 +122,57 @@ class BandwidthPackagesAttributes(BaseModel):
         return m
 
 
-class BandwidthPackagesTypedDict(TypedDict):
+class BandwidthPackagesDataTypedDict(TypedDict):
+    id: NotRequired[str]
     type: NotRequired[BandwidthPackagesType]
     attributes: NotRequired[BandwidthPackagesAttributesTypedDict]
 
 
-class BandwidthPackages(BaseModel):
+class BandwidthPackagesData(BaseModel):
+    id: Optional[str] = None
+
     type: Optional[BandwidthPackagesType] = None
 
     attributes: Optional[BandwidthPackagesAttributes] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["type", "attributes"])
+        optional_fields = set(["id", "type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class BandwidthPackagesMetaTypedDict(TypedDict):
+    pass
+
+
+class BandwidthPackagesMeta(BaseModel):
+    pass
+
+
+class BandwidthPackagesTypedDict(TypedDict):
+    data: NotRequired[BandwidthPackagesDataTypedDict]
+    meta: NotRequired[BandwidthPackagesMetaTypedDict]
+
+
+class BandwidthPackages(BaseModel):
+    data: Optional[BandwidthPackagesData] = None
+
+    meta: Optional[BandwidthPackagesMeta] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data", "meta"])
         serialized = handler(self)
         m = {}
 

@@ -50,6 +50,8 @@ class VirtualMachinePayloadAttributesTypedDict(TypedDict):
     r"""The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu_24_04_x64_lts for CPU plans or ubuntu24_ml_in_a_box for GPU plans."""
     user_data: NotRequired[Nullable[VirtualMachinePayloadUserDataTypedDict]]
     r"""A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer id) to apply as cloud-init configuration"""
+    marketplace_app: NotRequired[Nullable[str]]
+    r"""A marketplace app reference (slug, e.g. \"openclaw\", or encoded id_hash \"mkapp_xxx\") to preinstall on the VM via cloud-init. Cannot be combined with operating_system; the app defines its own."""
     tags: NotRequired[Nullable[List[str]]]
     r"""Array of tag IDs to assign to the VM."""
     site: NotRequired[Nullable[str]]
@@ -75,6 +77,9 @@ class VirtualMachinePayloadAttributes(BaseModel):
     user_data: OptionalNullable[VirtualMachinePayloadUserData] = UNSET
     r"""A user data record reference (encoded id_hash, e.g. 'ud_xxx', or raw integer id) to apply as cloud-init configuration"""
 
+    marketplace_app: OptionalNullable[str] = UNSET
+    r"""A marketplace app reference (slug, e.g. \"openclaw\", or encoded id_hash \"mkapp_xxx\") to preinstall on the VM via cloud-init. Cannot be combined with operating_system; the app defines its own."""
+
     tags: OptionalNullable[List[str]] = UNSET
     r"""Array of tag IDs to assign to the VM."""
 
@@ -92,12 +97,21 @@ class VirtualMachinePayloadAttributes(BaseModel):
                 "project",
                 "operating_system",
                 "user_data",
+                "marketplace_app",
                 "tags",
                 "site",
             ]
         )
         nullable_fields = set(
-            ["plan", "ssh_keys", "operating_system", "user_data", "tags", "site"]
+            [
+                "plan",
+                "ssh_keys",
+                "operating_system",
+                "user_data",
+                "marketplace_app",
+                "tags",
+                "site",
+            ]
         )
         serialized = handler(self)
         m = {}

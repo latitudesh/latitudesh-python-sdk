@@ -138,11 +138,11 @@ class TeamAttributesTypedDict(TypedDict):
     slug: NotRequired[str]
     description: NotRequired[Nullable[str]]
     address: NotRequired[Nullable[str]]
-    currency: NotRequired[str]
+    currency: NotRequired[Nullable[str]]
     created_at: NotRequired[str]
     updated_at: NotRequired[str]
     status: NotRequired[Nullable[str]]
-    enforce_mfa: NotRequired[bool]
+    enforce_mfa: NotRequired[Nullable[bool]]
     customer_billing_id: NotRequired[Nullable[str]]
     referred_code: NotRequired[Nullable[str]]
     users: NotRequired[List[UserIncludeTypedDict]]
@@ -162,7 +162,7 @@ class TeamAttributes(BaseModel):
 
     address: OptionalNullable[str] = UNSET
 
-    currency: Optional[str] = None
+    currency: OptionalNullable[str] = UNSET
 
     created_at: Optional[str] = None
 
@@ -170,7 +170,7 @@ class TeamAttributes(BaseModel):
 
     status: OptionalNullable[str] = UNSET
 
-    enforce_mfa: Optional[bool] = None
+    enforce_mfa: OptionalNullable[bool] = UNSET
 
     customer_billing_id: OptionalNullable[str] = UNSET
 
@@ -212,7 +212,15 @@ class TeamAttributes(BaseModel):
             ]
         )
         nullable_fields = set(
-            ["description", "address", "status", "customer_billing_id", "referred_code"]
+            [
+                "description",
+                "address",
+                "currency",
+                "status",
+                "enforce_mfa",
+                "customer_billing_id",
+                "referred_code",
+            ]
         )
         serialized = handler(self)
         m = {}

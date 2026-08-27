@@ -20,11 +20,11 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PutStorageBucketLifecycleRuleType(str, Enum):
+class PatchStorageBucketLifecycleRuleType(str, Enum):
     LIFECYCLE_RULES = "lifecycle_rules"
 
 
-class PutStorageBucketLifecycleRuleAttributesTypedDict(TypedDict):
+class PatchStorageBucketLifecycleRuleAttributesTypedDict(TypedDict):
     name: str
     r"""Name of the lifecycle rule"""
     enabled: NotRequired[bool]
@@ -39,7 +39,7 @@ class PutStorageBucketLifecycleRuleAttributesTypedDict(TypedDict):
     r"""Number of days after initiation to abort incomplete multipart uploads"""
 
 
-class PutStorageBucketLifecycleRuleAttributes(BaseModel):
+class PatchStorageBucketLifecycleRuleAttributes(BaseModel):
     name: str
     r"""Name of the lifecycle rule"""
 
@@ -94,34 +94,34 @@ class PutStorageBucketLifecycleRuleAttributes(BaseModel):
         return m
 
 
-class PutStorageBucketLifecycleRuleDataTypedDict(TypedDict):
-    type: PutStorageBucketLifecycleRuleType
-    attributes: PutStorageBucketLifecycleRuleAttributesTypedDict
+class PatchStorageBucketLifecycleRuleDataTypedDict(TypedDict):
+    type: PatchStorageBucketLifecycleRuleType
+    attributes: PatchStorageBucketLifecycleRuleAttributesTypedDict
 
 
-class PutStorageBucketLifecycleRuleData(BaseModel):
-    type: PutStorageBucketLifecycleRuleType
+class PatchStorageBucketLifecycleRuleData(BaseModel):
+    type: PatchStorageBucketLifecycleRuleType
 
-    attributes: PutStorageBucketLifecycleRuleAttributes
-
-
-class PutStorageBucketLifecycleRuleRequestBodyTypedDict(TypedDict):
-    data: PutStorageBucketLifecycleRuleDataTypedDict
+    attributes: PatchStorageBucketLifecycleRuleAttributes
 
 
-class PutStorageBucketLifecycleRuleRequestBody(BaseModel):
-    data: PutStorageBucketLifecycleRuleData
+class PatchStorageBucketLifecycleRuleRequestBodyTypedDict(TypedDict):
+    data: PatchStorageBucketLifecycleRuleDataTypedDict
 
 
-class PutStorageBucketLifecycleRuleRequestTypedDict(TypedDict):
+class PatchStorageBucketLifecycleRuleRequestBody(BaseModel):
+    data: PatchStorageBucketLifecycleRuleData
+
+
+class PatchStorageBucketLifecycleRuleRequestTypedDict(TypedDict):
     bucket_id: str
     r"""The object storage bucket ID"""
     id: str
     r"""The lifecycle rule ID"""
-    request_body: PutStorageBucketLifecycleRuleRequestBodyTypedDict
+    request_body: PatchStorageBucketLifecycleRuleRequestBodyTypedDict
 
 
-class PutStorageBucketLifecycleRuleRequest(BaseModel):
+class PatchStorageBucketLifecycleRuleRequest(BaseModel):
     bucket_id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
@@ -133,18 +133,18 @@ class PutStorageBucketLifecycleRuleRequest(BaseModel):
     r"""The lifecycle rule ID"""
 
     request_body: Annotated[
-        PutStorageBucketLifecycleRuleRequestBody,
+        PatchStorageBucketLifecycleRuleRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/vnd.api+json")),
     ]
 
 
-class PutStorageBucketLifecycleRuleResponseBodyTypedDict(TypedDict):
+class PatchStorageBucketLifecycleRuleResponseBodyTypedDict(TypedDict):
     r"""Success"""
 
     data: NotRequired[LifecycleRuleDataTypedDict]
 
 
-class PutStorageBucketLifecycleRuleResponseBody(BaseModel):
+class PatchStorageBucketLifecycleRuleResponseBody(BaseModel):
     r"""Success"""
 
     data: Optional[LifecycleRuleData] = None

@@ -249,6 +249,49 @@ class VirtualMachineAttributesCredentials(BaseModel):
         return m
 
 
+class VirtualMachineAttributesMarketplaceAppTypedDict(TypedDict):
+    r"""Deploy-time snapshot of the marketplace app this VM was created with. Null when the VM was deployed from a plain operating system."""
+
+    slug: NotRequired[str]
+    name: NotRequired[Nullable[str]]
+    version: NotRequired[Nullable[str]]
+
+
+class VirtualMachineAttributesMarketplaceApp(BaseModel):
+    r"""Deploy-time snapshot of the marketplace app this VM was created with. Null when the VM was deployed from a plain operating system."""
+
+    slug: Optional[str] = None
+
+    name: OptionalNullable[str] = UNSET
+
+    version: OptionalNullable[str] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["slug", "name", "version"])
+        nullable_fields = set(["name", "version"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class VirtualMachineAttributesPlanTypedDict(TypedDict):
     id: NotRequired[str]
     name: NotRequired[str]
@@ -382,6 +425,10 @@ class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     billing: NotRequired[Nullable[str]]
     user_data: NotRequired[Nullable[str]]
     r"""Encoded ID of the user data record applied to this VM, if any"""
+    marketplace_app: NotRequired[
+        Nullable[VirtualMachineAttributesMarketplaceAppTypedDict]
+    ]
+    r"""Deploy-time snapshot of the marketplace app this VM was created with. Null when the VM was deployed from a plain operating system."""
     plan: NotRequired[VirtualMachineAttributesPlanTypedDict]
     specs: NotRequired[VirtualMachineAttributesSpecsTypedDict]
     tags: NotRequired[List[VirtualMachineAttributesTagsTypedDict]]
@@ -414,6 +461,9 @@ class VirtualMachineAttributesAttributes(BaseModel):
     user_data: OptionalNullable[str] = UNSET
     r"""Encoded ID of the user data record applied to this VM, if any"""
 
+    marketplace_app: OptionalNullable[VirtualMachineAttributesMarketplaceApp] = UNSET
+    r"""Deploy-time snapshot of the marketplace app this VM was created with. Null when the VM was deployed from a plain operating system."""
+
     plan: Optional[VirtualMachineAttributesPlan] = None
 
     specs: Optional[VirtualMachineAttributesSpecs] = None
@@ -440,6 +490,7 @@ class VirtualMachineAttributesAttributes(BaseModel):
                 "site",
                 "billing",
                 "user_data",
+                "marketplace_app",
                 "plan",
                 "specs",
                 "tags",
@@ -456,6 +507,7 @@ class VirtualMachineAttributesAttributes(BaseModel):
                 "site",
                 "billing",
                 "user_data",
+                "marketplace_app",
             ]
         )
         serialized = handler(self)

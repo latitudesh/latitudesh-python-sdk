@@ -32,9 +32,9 @@ class FilesystemDataAttributesTypedDict(TypedDict):
     storage_class: NotRequired[Nullable[FilesystemDataStorageClass]]
     created_at: NotRequired[Nullable[datetime]]
     keyring: NotRequired[Nullable[str]]
-    r"""Cephx keyring secret used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
+    r"""Keyring secret used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
     cluster_user: NotRequired[Nullable[str]]
-    r"""Ceph cluster user used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
+    r"""Cluster user used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
     volume_path: NotRequired[Nullable[str]]
     r"""Path of the filesystem volume inside the cluster. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
     project: NotRequired[ProjectIncludeTypedDict]
@@ -51,10 +51,10 @@ class FilesystemDataAttributes(BaseModel):
     created_at: OptionalNullable[datetime] = UNSET
 
     keyring: OptionalNullable[str] = UNSET
-    r"""Cephx keyring secret used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
+    r"""Keyring secret used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
 
     cluster_user: OptionalNullable[str] = UNSET
-    r"""Ceph cluster user used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
+    r"""Cluster user used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
 
     volume_path: OptionalNullable[str] = UNSET
     r"""Path of the filesystem volume inside the cluster. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""

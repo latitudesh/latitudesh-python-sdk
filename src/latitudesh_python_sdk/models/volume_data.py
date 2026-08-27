@@ -45,6 +45,127 @@ class Initiators(BaseModel):
         return m
 
 
+class BlockTypedDict(TypedDict):
+    r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
+
+    nqn: NotRequired[Nullable[str]]
+    r"""NVMe Qualified Name of the mapped server."""
+    nsid: NotRequired[Nullable[int]]
+    r"""NVMe namespace ID of the mapping."""
+    server_id: NotRequired[Nullable[str]]
+    r"""ID of the server the volume is mapped to."""
+
+
+class Block(BaseModel):
+    r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
+
+    nqn: OptionalNullable[str] = UNSET
+    r"""NVMe Qualified Name of the mapped server."""
+
+    nsid: OptionalNullable[int] = UNSET
+    r"""NVMe namespace ID of the mapping."""
+
+    server_id: OptionalNullable[str] = UNSET
+    r"""ID of the server the volume is mapped to."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["nqn", "nsid", "server_id"])
+        nullable_fields = set(["nqn", "nsid", "server_id"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
+class VolumeDataSiteTypedDict(TypedDict):
+    id: NotRequired[str]
+    name: NotRequired[str]
+    slug: NotRequired[str]
+    facility: NotRequired[str]
+
+
+class VolumeDataSite(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+    slug: Optional[str] = None
+
+    facility: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name", "slug", "facility"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class VolumeDataRegionTypedDict(TypedDict):
+    city: NotRequired[Nullable[str]]
+    country: NotRequired[Nullable[str]]
+    site: NotRequired[Nullable[VolumeDataSiteTypedDict]]
+
+
+class VolumeDataRegion(BaseModel):
+    city: OptionalNullable[str] = UNSET
+
+    country: OptionalNullable[str] = UNSET
+
+    site: OptionalNullable[VolumeDataSite] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["city", "country", "site"])
+        nullable_fields = set(["city", "country", "site"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class VolumeDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     size_in_gb: NotRequired[int]
@@ -52,12 +173,15 @@ class VolumeDataAttributesTypedDict(TypedDict):
     namespace_id: NotRequired[Nullable[str]]
     connector_id: NotRequired[Nullable[str]]
     initiators: NotRequired[Nullable[List[InitiatorsTypedDict]]]
+    block: NotRequired[Nullable[BlockTypedDict]]
+    r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
     keyring: NotRequired[Nullable[str]]
-    r"""Cephx keyring secret used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
+    r"""Keyring secret used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
     cluster_user: NotRequired[Nullable[str]]
-    r"""Ceph cluster user used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
+    r"""Cluster user used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
     volume_path: NotRequired[Nullable[str]]
     r"""Path of the volume inside the cluster. Returned only for dashboard-origin requests; null until the volume is provisioned."""
+    region: NotRequired[Nullable[VolumeDataRegionTypedDict]]
     project: NotRequired[ProjectIncludeTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
 
@@ -75,14 +199,19 @@ class VolumeDataAttributes(BaseModel):
 
     initiators: OptionalNullable[List[Initiators]] = UNSET
 
+    block: OptionalNullable[Block] = UNSET
+    r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
+
     keyring: OptionalNullable[str] = UNSET
-    r"""Cephx keyring secret used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
+    r"""Keyring secret used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
 
     cluster_user: OptionalNullable[str] = UNSET
-    r"""Ceph cluster user used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
+    r"""Cluster user used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
 
     volume_path: OptionalNullable[str] = UNSET
     r"""Path of the volume inside the cluster. Returned only for dashboard-origin requests; null until the volume is provisioned."""
+
+    region: OptionalNullable[VolumeDataRegion] = UNSET
 
     project: Optional[ProjectInclude] = None
 
@@ -98,9 +227,11 @@ class VolumeDataAttributes(BaseModel):
                 "namespace_id",
                 "connector_id",
                 "initiators",
+                "block",
                 "keyring",
                 "cluster_user",
                 "volume_path",
+                "region",
                 "project",
                 "team",
             ]
@@ -111,9 +242,11 @@ class VolumeDataAttributes(BaseModel):
                 "namespace_id",
                 "connector_id",
                 "initiators",
+                "block",
                 "keyring",
                 "cluster_user",
                 "volume_path",
+                "region",
             ]
         )
         serialized = handler(self)

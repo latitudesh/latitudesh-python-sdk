@@ -276,6 +276,7 @@ with Latitudesh(
 * [get_storage_volume](docs/sdks/blockstorage/README.md#get_storage_volume) - Retrieve volume
 * [delete_storage_volumes](docs/sdks/blockstorage/README.md#delete_storage_volumes) - Delete volume
 * [post_storage_volumes_mount](docs/sdks/blockstorage/README.md#post_storage_volumes_mount) - Mount volume
+* [post_storage_volumes_map](docs/sdks/blockstorage/README.md#post_storage_volumes_map) - Map volume to server
 
 ### [ElasticIps](docs/sdks/elasticipssdk/README.md)
 
@@ -327,6 +328,11 @@ with Latitudesh(
 * [update_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#update_kubernetes_cluster) - Update Kubernetes Cluster
 * [get_kubernetes_cluster_kubeconfig](docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig
 
+### [MarketplaceApps](docs/sdks/marketplaceappssdk/README.md)
+
+* [list_marketplace_apps](docs/sdks/marketplaceappssdk/README.md#list_marketplace_apps) - List marketplace apps
+* [get_marketplace_app](docs/sdks/marketplaceappssdk/README.md#get_marketplace_app) - Retrieve a marketplace app
+
 ### [ObjectStorage](docs/sdks/objectstorage/README.md)
 
 * [get_storage_usage](docs/sdks/objectstorage/README.md#get_storage_usage) - List storage usage
@@ -341,8 +347,8 @@ with Latitudesh(
 * [get_storage_bucket_lifecycle_rules](docs/sdks/objectstorage/README.md#get_storage_bucket_lifecycle_rules) - List lifecycle rules
 * [post_storage_bucket_lifecycle_rules](docs/sdks/objectstorage/README.md#post_storage_bucket_lifecycle_rules) - Create lifecycle rule
 * [get_storage_bucket_lifecycle_rule](docs/sdks/objectstorage/README.md#get_storage_bucket_lifecycle_rule) - Retrieve lifecycle rule
-* [put_storage_bucket_lifecycle_rule](docs/sdks/objectstorage/README.md#put_storage_bucket_lifecycle_rule) - Update lifecycle rule
 * [delete_storage_bucket_lifecycle_rule](docs/sdks/objectstorage/README.md#delete_storage_bucket_lifecycle_rule) - Delete lifecycle rule
+* [patch_storage_bucket_lifecycle_rule](docs/sdks/objectstorage/README.md#patch_storage_bucket_lifecycle_rule) - Update lifecycle rule
 * [get_storage_bucket_metrics](docs/sdks/objectstorage/README.md#get_storage_bucket_metrics) - Retrieve bucket metrics
 
 ### [OperatingSystems](docs/sdks/operatingsystemssdk/README.md)
@@ -651,7 +657,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 49 of 170 methods.*
+* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 50 of 173 methods.*
 * [`ResponseValidationError`](./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

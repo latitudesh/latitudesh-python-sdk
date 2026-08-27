@@ -127,9 +127,9 @@ class UpdateServerDeployConfigServersAttributesTypedDict(TypedDict):
     persistent_netboot: NotRequired[bool]
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
     public_network: NotRequired[Nullable[bool]]
-    r"""Set to 'true' to attach the server onto a public network. Requires 'public_network_id'. Available only when the public network feature is enabled for your team."""
+    r"""Set to 'true' to attach the server onto a public network. Requires 'public_network_id'. Available only when the public network feature is enabled for the server's location."""
     public_network_id: NotRequired[Nullable[str]]
-    r"""ID of a customer public network to attach the server onto. Requires 'public_network' to be 'true'. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. This public network configuration is saved to the deploy config and inherited by future reinstalls until changed. Available only when the public network feature is enabled for your team."""
+    r"""ID of a customer public network to attach the server onto. Requires 'public_network' to be 'true'. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. This public network configuration is saved to the deploy config and inherited by future reinstalls until changed. Available only when the public network feature is enabled for the server's location."""
 
 
 class UpdateServerDeployConfigServersAttributes(BaseModel):
@@ -158,10 +158,10 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
 
     public_network: OptionalNullable[bool] = UNSET
-    r"""Set to 'true' to attach the server onto a public network. Requires 'public_network_id'. Available only when the public network feature is enabled for your team."""
+    r"""Set to 'true' to attach the server onto a public network. Requires 'public_network_id'. Available only when the public network feature is enabled for the server's location."""
 
     public_network_id: OptionalNullable[str] = UNSET
-    r"""ID of a customer public network to attach the server onto. Requires 'public_network' to be 'true'. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. This public network configuration is saved to the deploy config and inherited by future reinstalls until changed. Available only when the public network feature is enabled for your team."""
+    r"""ID of a customer public network to attach the server onto. Requires 'public_network' to be 'true'. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. This public network configuration is saved to the deploy config and inherited by future reinstalls until changed. Available only when the public network feature is enabled for the server's location."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

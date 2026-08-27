@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel
-from typing_extensions import TypedDict
+from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from pydantic import model_serializer
+from typing import Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class VirtualMachineNetworkAttachmentCreatePayloadType(str, Enum):
@@ -13,11 +15,32 @@ class VirtualMachineNetworkAttachmentCreatePayloadType(str, Enum):
 class VirtualMachineNetworkAttachmentCreatePayloadAttributesTypedDict(TypedDict):
     virtual_network_id: str
     r"""VLAN id_hash to attach (e.g. vlan_abc123)."""
+    address: NotRequired[str]
+    r"""Optional static IPv4 address with prefix (e.g. 10.0.0.5/24) for the NIC inside the guest. When omitted the NIC is configured for DHCP without a default route. Applying the regenerated network configuration requires running `sudo cloud-init clean --logs --reboot` inside the guest. Warning: that command makes cloud-init treat the next boot as a first boot — it re-runs the instance user-data (e.g. runcmd scripts) and regenerates the SSH host keys, so SSH clients will see a host-key changed warning."""
 
 
 class VirtualMachineNetworkAttachmentCreatePayloadAttributes(BaseModel):
     virtual_network_id: str
     r"""VLAN id_hash to attach (e.g. vlan_abc123)."""
+
+    address: Optional[str] = None
+    r"""Optional static IPv4 address with prefix (e.g. 10.0.0.5/24) for the NIC inside the guest. When omitted the NIC is configured for DHCP without a default route. Applying the regenerated network configuration requires running `sudo cloud-init clean --logs --reboot` inside the guest. Warning: that command makes cloud-init treat the next boot as a first boot — it re-runs the instance user-data (e.g. runcmd scripts) and regenerates the SSH host keys, so SSH clients will see a host-key changed warning."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["address"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class VirtualMachineNetworkAttachmentCreatePayloadDataTypedDict(TypedDict):
