@@ -52,7 +52,7 @@ class RegionAttributesTypedDict(TypedDict):
     country: NotRequired[RegionCountryTypedDict]
     type: NotRequired[Nullable[str]]
     features: NotRequired[List[str]]
-    r"""Location capabilities available at this location (e.g. `public_network`)."""
+    r"""Location capabilities available at this location (e.g. `public_network`, `elastic_ip_bgp`)."""
     network_group: NotRequired[Nullable[str]]
     r"""The location's network group slug (e.g. `TYO`, `LON2`)."""
 
@@ -69,7 +69,7 @@ class RegionAttributes(BaseModel):
     type: OptionalNullable[str] = UNSET
 
     features: Optional[List[str]] = None
-    r"""Location capabilities available at this location (e.g. `public_network`)."""
+    r"""Location capabilities available at this location (e.g. `public_network`, `elastic_ip_bgp`)."""
 
     network_group: OptionalNullable[str] = UNSET
     r"""The location's network group slug (e.g. `TYO`, `LON2`)."""

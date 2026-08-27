@@ -1,0 +1,9 @@
+# PatchStorageBucketLifecycleRuleData
+
+
+## Fields
+
+| Field                                                                                                      | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                     | [models.PatchStorageBucketLifecycleRuleType](../models/patchstoragebucketlifecycleruletype.md)             | :heavy_check_mark:                                                                                         | N/A                                                                                                        |
+| `attributes`                                                                                               | [models.PatchStorageBucketLifecycleRuleAttributes](../models/patchstoragebucketlifecycleruleattributes.md) | :heavy_check_mark:                                                                                         | N/A                                                                                                        |

@@ -25,6 +25,7 @@ if TYPE_CHECKING:
     from latitudesh_python_sdk.firewalls_sdk import FirewallsSDK
     from latitudesh_python_sdk.ipaddresses_sdk import IPAddressesSDK
     from latitudesh_python_sdk.kubernetes_clusters_sdk import KubernetesClustersSDK
+    from latitudesh_python_sdk.marketplace_apps_sdk import MarketplaceAppsSDK
     from latitudesh_python_sdk.object_storage import ObjectStorage
     from latitudesh_python_sdk.operatingsystems_sdk import OperatingSystemsSDK
     from latitudesh_python_sdk.plans import Plans
@@ -80,6 +81,7 @@ class Latitudesh(BaseSDK):
     teams: "TeamsSDK"
     traffic: "TrafficSDK"
     user_profile: "UserProfile"
+    marketplace_apps: "MarketplaceAppsSDK"
     virtual_machines: "VirtualMachinesSDK"
     virtual_machine_backups: "VirtualMachineBackupsSDK"
     virtual_machine_restores: "VirtualMachineRestoresSDK"
@@ -126,6 +128,10 @@ class Latitudesh(BaseSDK):
         "teams": ("latitudesh_python_sdk.teams_sdk", "TeamsSDK"),
         "traffic": ("latitudesh_python_sdk.traffic_sdk", "TrafficSDK"),
         "user_profile": ("latitudesh_python_sdk.userprofile", "UserProfile"),
+        "marketplace_apps": (
+            "latitudesh_python_sdk.marketplace_apps_sdk",
+            "MarketplaceAppsSDK",
+        ),
         "virtual_machines": (
             "latitudesh_python_sdk.virtualmachines_sdk",
             "VirtualMachinesSDK",

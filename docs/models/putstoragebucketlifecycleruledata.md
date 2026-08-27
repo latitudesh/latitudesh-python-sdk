@@ -1,9 +1,0 @@
-# PutStorageBucketLifecycleRuleData
-
-
-## Fields
-
-| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `type`                                                                                                 | [models.PutStorageBucketLifecycleRuleType](../models/putstoragebucketlifecycleruletype.md)             | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
-| `attributes`                                                                                           | [models.PutStorageBucketLifecycleRuleAttributes](../models/putstoragebucketlifecycleruleattributes.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |

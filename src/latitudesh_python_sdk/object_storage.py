@@ -2371,248 +2371,6 @@ class ObjectStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    def put_storage_bucket_lifecycle_rule(
-        self,
-        *,
-        bucket_id: str,
-        id: str,
-        data: Union[
-            models.PutStorageBucketLifecycleRuleData,
-            models.PutStorageBucketLifecycleRuleDataTypedDict,
-        ],
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PutStorageBucketLifecycleRuleResponseBody:
-        r"""Update lifecycle rule
-
-        Updates an existing lifecycle rule for an object storage bucket.
-
-        :param bucket_id: The object storage bucket ID
-        :param id: The lifecycle rule ID
-        :param data:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.PutStorageBucketLifecycleRuleRequest(
-            bucket_id=bucket_id,
-            id=id,
-            request_body=models.PutStorageBucketLifecycleRuleRequestBody(
-                data=utils.get_pydantic_model(
-                    data, models.PutStorageBucketLifecycleRuleData
-                ),
-            ),
-        )
-
-        req = self._build_request(
-            method="PUT",
-            path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
-                False,
-                False,
-                "json",
-                models.PutStorageBucketLifecycleRuleRequestBody,
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = self.do_request(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="put-storage-bucket-lifecycle-rule",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-                tags=["Object Storage"],
-                extensions={
-                    "x-mint": {
-                        "href": "/api-reference/put-storage-bucket-lifecycle-rule"
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(
-                models.PutStorageBucketLifecycleRuleResponseBody, http_res
-            )
-        if utils.match_response(
-            http_res, ["403", "404", "422"], "application/vnd.api+json"
-        ):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = utils.stream_to_text(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
-    async def put_storage_bucket_lifecycle_rule_async(
-        self,
-        *,
-        bucket_id: str,
-        id: str,
-        data: Union[
-            models.PutStorageBucketLifecycleRuleData,
-            models.PutStorageBucketLifecycleRuleDataTypedDict,
-        ],
-        retries: OptionalNullable[utils.RetryConfig] = UNSET,
-        server_url: Optional[str] = None,
-        timeout_ms: Optional[int] = None,
-        http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PutStorageBucketLifecycleRuleResponseBody:
-        r"""Update lifecycle rule
-
-        Updates an existing lifecycle rule for an object storage bucket.
-
-        :param bucket_id: The object storage bucket ID
-        :param id: The lifecycle rule ID
-        :param data:
-        :param retries: Override the default retry configuration for this method
-        :param server_url: Override the default server URL for this method
-        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
-        :param http_headers: Additional headers to set or replace on requests.
-        """
-        base_url = None
-        url_variables = None
-        if timeout_ms is None:
-            timeout_ms = self.sdk_configuration.timeout_ms
-
-        if server_url is not None:
-            base_url = server_url
-        else:
-            base_url = self._get_url(base_url, url_variables)
-
-        request = models.PutStorageBucketLifecycleRuleRequest(
-            bucket_id=bucket_id,
-            id=id,
-            request_body=models.PutStorageBucketLifecycleRuleRequestBody(
-                data=utils.get_pydantic_model(
-                    data, models.PutStorageBucketLifecycleRuleData
-                ),
-            ),
-        )
-
-        req = self._build_request_async(
-            method="PUT",
-            path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}",
-            base_url=base_url,
-            url_variables=url_variables,
-            request=request,
-            request_body_required=True,
-            request_has_path_params=True,
-            request_has_query_params=True,
-            user_agent_header="user-agent",
-            accept_header_value="application/vnd.api+json",
-            http_headers=http_headers,
-            security=self.sdk_configuration.security,
-            get_serialized_body=lambda: utils.serialize_request_body(
-                request.request_body,
-                False,
-                False,
-                "json",
-                models.PutStorageBucketLifecycleRuleRequestBody,
-            ),
-            allow_empty_value=None,
-            timeout_ms=timeout_ms,
-        )
-
-        if retries == UNSET:
-            if self.sdk_configuration.retry_config is not UNSET:
-                retries = self.sdk_configuration.retry_config
-
-        retry_config = None
-        if isinstance(retries, utils.RetryConfig):
-            retry_config = (retries, ["429", "500", "502", "503", "504"])
-
-        http_res = await self.do_request_async(
-            hook_ctx=HookContext(
-                config=self.sdk_configuration,
-                base_url=base_url or "",
-                operation_id="put-storage-bucket-lifecycle-rule",
-                oauth2_scopes=None,
-                security_source=get_security_from_env(
-                    self.sdk_configuration.security, models.Security
-                ),
-                tags=["Object Storage"],
-                extensions={
-                    "x-mint": {
-                        "href": "/api-reference/put-storage-bucket-lifecycle-rule"
-                    }
-                },
-            ),
-            request=req,
-            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
-            retry_config=retry_config,
-        )
-
-        response_data: Any = None
-        if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(
-                models.PutStorageBucketLifecycleRuleResponseBody, http_res
-            )
-        if utils.match_response(
-            http_res, ["403", "404", "422"], "application/vnd.api+json"
-        ):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
-        if utils.match_response(http_res, "500", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
-        if utils.match_response(http_res, "4XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-        if utils.match_response(http_res, "5XX", "*"):
-            http_res_text = await utils.stream_to_text_async(http_res)
-            raise models.APIError("API error occurred", http_res, http_res_text)
-
-        raise models.APIError("Unexpected response received", http_res)
-
     def delete_storage_bucket_lifecycle_rule(
         self,
         *,
@@ -2799,6 +2557,248 @@ class ObjectStorage(BaseSDK):
         if utils.match_response(http_res, "204", "*"):
             return
         if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def patch_storage_bucket_lifecycle_rule(
+        self,
+        *,
+        bucket_id: str,
+        id: str,
+        data: Union[
+            models.PatchStorageBucketLifecycleRuleData,
+            models.PatchStorageBucketLifecycleRuleDataTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.PatchStorageBucketLifecycleRuleResponseBody:
+        r"""Update lifecycle rule
+
+        Updates an existing lifecycle rule for an object storage bucket.
+
+        :param bucket_id: The object storage bucket ID
+        :param id: The lifecycle rule ID
+        :param data:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.PatchStorageBucketLifecycleRuleRequest(
+            bucket_id=bucket_id,
+            id=id,
+            request_body=models.PatchStorageBucketLifecycleRuleRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PatchStorageBucketLifecycleRuleData
+                ),
+            ),
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                False,
+                "json",
+                models.PatchStorageBucketLifecycleRuleRequestBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="patch-storage-bucket-lifecycle-rule",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Object Storage"],
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/patch-storage-bucket-lifecycle-rule"
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(
+                models.PatchStorageBucketLifecycleRuleResponseBody, http_res
+            )
+        if utils.match_response(
+            http_res, ["403", "404", "422"], "application/vnd.api+json"
+        ):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "500", "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def patch_storage_bucket_lifecycle_rule_async(
+        self,
+        *,
+        bucket_id: str,
+        id: str,
+        data: Union[
+            models.PatchStorageBucketLifecycleRuleData,
+            models.PatchStorageBucketLifecycleRuleDataTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.PatchStorageBucketLifecycleRuleResponseBody:
+        r"""Update lifecycle rule
+
+        Updates an existing lifecycle rule for an object storage bucket.
+
+        :param bucket_id: The object storage bucket ID
+        :param id: The lifecycle rule ID
+        :param data:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.PatchStorageBucketLifecycleRuleRequest(
+            bucket_id=bucket_id,
+            id=id,
+            request_body=models.PatchStorageBucketLifecycleRuleRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PatchStorageBucketLifecycleRuleData
+                ),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/storage/buckets/{bucket_id}/lifecycle_rules/{id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                False,
+                "json",
+                models.PatchStorageBucketLifecycleRuleRequestBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="patch-storage-bucket-lifecycle-rule",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Object Storage"],
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/patch-storage-bucket-lifecycle-rule"
+                    }
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(
+                models.PatchStorageBucketLifecycleRuleResponseBody, http_res
+            )
+        if utils.match_response(
+            http_res, ["403", "404", "422"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "500", "application/vnd.api+json"):

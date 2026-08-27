@@ -9,6 +9,7 @@
 * [get_storage_volume](#get_storage_volume) - Retrieve volume
 * [delete_storage_volumes](#delete_storage_volumes) - Delete volume
 * [post_storage_volumes_mount](#post_storage_volumes_mount) - Mount volume
+* [post_storage_volumes_map](#post_storage_volumes_map) - Map volume to server
 
 ## get_storage_volumes
 
@@ -73,6 +74,7 @@ with Latitudesh(
             "project": "proj_enPbqoZ6dA2MQ",
             "name": "my-data",
             "region": "DAL",
+            "size_in_gb": 1500,
         },
     })
 
@@ -99,6 +101,7 @@ with Latitudesh(
             "project": "<value>",
             "name": "<value>",
             "region": "<value>",
+            "size_in_gb": 1500,
         },
     })
 
@@ -235,6 +238,53 @@ with Latitudesh(
 | `id`                                                                              | *str*                                                                             | :heavy_check_mark:                                                                | Volume ID                                                                         |
 | `data`                                                                            | [models.PostStorageVolumesMountData](../../models/poststoragevolumesmountdata.md) | :heavy_check_mark:                                                                | N/A                                                                               |
 | `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## post_storage_volumes_map
+
+Maps a high performance volume to a server over NVMe-TCP.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="post-storage-volumes-map" method="post" path="/storage/volumes/{id}/map" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.block_storage.post_storage_volumes_map(id="<id>", data={
+        "type": latitudesh_python_sdk.PostStorageVolumesMapType.VOLUMES,
+        "attributes": {
+            "server_id": "sv_abcd1234",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `id`                                                                          | *str*                                                                         | :heavy_check_mark:                                                            | Volume ID                                                                     |
+| `data`                                                                        | [models.PostStorageVolumesMapData](../../models/poststoragevolumesmapdata.md) | :heavy_check_mark:                                                            | N/A                                                                           |
+| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |
+
+### Response
+
+**[models.PostStorageVolumesMapResponseBody](../../models/poststoragevolumesmapresponsebody.md)**
 
 ### Errors
 
