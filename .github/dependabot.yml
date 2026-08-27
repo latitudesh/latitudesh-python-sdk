@@ -1,0 +1,21 @@
+version: 2
+updates:
+  # Python dependencies resolved from pyproject.toml / poetry.lock.
+  # Keeps the lock file patched so CI (sdk_lint, sdk_integration_tests) does not
+  # install versions with known advisories.
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    groups:
+      dev-dependencies:
+        dependency-type: "development"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
