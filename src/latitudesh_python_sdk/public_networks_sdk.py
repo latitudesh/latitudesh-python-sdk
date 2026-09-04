@@ -22,6 +22,8 @@ class PublicNetworksSDK(BaseSDK):
     ) -> models.PublicNetworks:
         r"""List networks
 
+        **Preview.** Available at locations where the `public_network` feature is enabled.
+
         List the customer networks owned by the team
 
         :param filter_project:
@@ -114,6 +116,8 @@ class PublicNetworksSDK(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PublicNetworks:
         r"""List networks
+
+        **Preview.** Available at locations where the `public_network` feature is enabled.
 
         List the customer networks owned by the team
 
@@ -208,6 +212,8 @@ class PublicNetworksSDK(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PublicNetwork:
         r"""Create a network
+
+        **Preview.** Available at locations where the `public_network` feature is enabled.
 
         Provision a customer network: an IPv4 block of the chosen size plus a paired IPv6 /64. The network is allocated synchronously and returned in the response; billing is settled in the background.
 
@@ -305,6 +311,8 @@ class PublicNetworksSDK(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.PublicNetwork:
         r"""Create a network
+
+        **Preview.** Available at locations where the `public_network` feature is enabled.
 
         Provision a customer network: an IPv4 block of the chosen size plus a paired IPv6 /64. The network is allocated synchronously and returned in the response; billing is settled in the background.
 
@@ -581,6 +589,8 @@ class PublicNetworksSDK(BaseSDK):
     ):
         r"""Delete a network
 
+        **Preview.** Available at locations where the `public_network` feature is enabled.
+
         Delete a customer network. Only allowed while the network has no IPs in use.
 
         :param id:
@@ -674,6 +684,8 @@ class PublicNetworksSDK(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ):
         r"""Delete a network
+
+        **Preview.** Available at locations where the `public_network` feature is enabled.
 
         Delete a customer network. Only allowed while the network has no IPs in use.
 

@@ -9,10 +9,9 @@ from latitudesh_python_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Dict, List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class StoragePlanDataType(str, Enum):
@@ -29,67 +28,16 @@ class StorageClass(str, Enum):
     HIGH_PERFORMANCE = "high_performance"
 
 
-class StoragePlanDataUSDTypedDict(TypedDict):
-    month: NotRequired[float]
-
-
-class StoragePlanDataUSD(BaseModel):
-    month: Optional[float] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["month"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
-class StoragePlanDataBRLTypedDict(TypedDict):
-    month: NotRequired[float]
-
-
-class StoragePlanDataBRL(BaseModel):
-    month: Optional[float] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["month"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
 class StoragePlanDataPricingTypedDict(TypedDict):
-    usd: NotRequired[StoragePlanDataUSDTypedDict]
-    brl: NotRequired[StoragePlanDataBRLTypedDict]
+    month: NotRequired[float]
 
 
 class StoragePlanDataPricing(BaseModel):
-    usd: Annotated[Optional[StoragePlanDataUSD], pydantic.Field(alias="USD")] = None
-
-    brl: Annotated[Optional[StoragePlanDataBRL], pydantic.Field(alias="BRL")] = None
+    month: Optional[float] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["USD", "BRL"])
+        optional_fields = set(["month"])
         serialized = handler(self)
         m = {}
 
@@ -107,7 +55,8 @@ class StoragePlanDataPricing(BaseModel):
 class StoragePlanDataRegionsTypedDict(TypedDict):
     name: NotRequired[str]
     locations: NotRequired[List[str]]
-    pricing: NotRequired[StoragePlanDataPricingTypedDict]
+    pricing: NotRequired[Dict[str, StoragePlanDataPricingTypedDict]]
+    r"""Prices keyed by ISO 4217 currency code (e.g. USD, BRL)."""
 
 
 class StoragePlanDataRegions(BaseModel):
@@ -115,7 +64,8 @@ class StoragePlanDataRegions(BaseModel):
 
     locations: Optional[List[str]] = None
 
-    pricing: Optional[StoragePlanDataPricing] = None
+    pricing: Optional[Dict[str, StoragePlanDataPricing]] = None
+    r"""Prices keyed by ISO 4217 currency code (e.g. USD, BRL)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -204,9 +154,3 @@ class StoragePlanData(BaseModel):
                     m[k] = val
 
         return m
-
-
-try:
-    StoragePlanDataPricing.model_rebuild()
-except NameError:
-    pass

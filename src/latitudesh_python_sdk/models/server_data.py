@@ -7,6 +7,7 @@ from .server_region_resource_data import (
     ServerRegionResourceDataTypedDict,
 )
 from .team_include import TeamInclude, TeamIncludeTypedDict
+from datetime import datetime
 from enum import Enum
 from latitudesh_python_sdk.types import (
     BaseModel,
@@ -62,26 +63,6 @@ class ServerDataTags(BaseModel):
         return m
 
 
-class ServerDataStatus(str, Enum):
-    r"""`on` - The server is powered ON
-    `off` - The server is powered OFF
-    `unknown` - The server power status is unknown
-    `disk_erasing` - The server is in reinstalling state `disk_erasing`
-    `deploying` - The server is deploying or reinstalling
-    `failed_deployment` - The server has failed deployment or reinstall
-    `rescue_mode` - The server is in rescue mode
-
-    """
-
-    ON = "on"
-    OFF = "off"
-    UNKNOWN = "unknown"
-    DISK_ERASING = "disk_erasing"
-    DEPLOYING = "deploying"
-    FAILED_DEPLOYMENT = "failed_deployment"
-    RESCUE_MODE = "rescue_mode"
-
-
 class IpmiStatus(str, Enum):
     UNAVAILABLE = "Unavailable"
     INTERMITTENT = "Intermittent"
@@ -89,7 +70,7 @@ class IpmiStatus(str, Enum):
 
 
 class ServerDataPublicNetworkTypedDict(TypedDict):
-    r"""**Preview** (`public_network` feature flag). The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}."""
+    r"""**Preview.** Available to teams with public networks enabled. The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}."""
 
     id: NotRequired[str]
     ipv4: NotRequired[Nullable[str]]
@@ -97,7 +78,7 @@ class ServerDataPublicNetworkTypedDict(TypedDict):
 
 
 class ServerDataPublicNetwork(BaseModel):
-    r"""**Preview** (`public_network` feature flag). The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}."""
+    r"""**Preview.** Available to teams with public networks enabled. The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}."""
 
     id: Optional[str] = None
 
@@ -185,6 +166,9 @@ class ServerDataFeaturesTypedDict(TypedDict):
     raid: NotRequired[bool]
     ssh_keys: NotRequired[bool]
     user_data: NotRequired[bool]
+    accelerate: NotRequired[bool]
+    rescue: NotRequired[bool]
+    workflow: NotRequired[bool]
 
 
 class ServerDataFeatures(BaseModel):
@@ -194,9 +178,17 @@ class ServerDataFeatures(BaseModel):
 
     user_data: Optional[bool] = None
 
+    accelerate: Optional[bool] = None
+
+    rescue: Optional[bool] = None
+
+    workflow: Optional[bool] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["raid", "ssh_keys", "user_data"])
+        optional_fields = set(
+            ["raid", "ssh_keys", "user_data", "accelerate", "rescue", "workflow"]
+        )
         serialized = handler(self)
         m = {}
 
@@ -393,13 +385,124 @@ class Interfaces(BaseModel):
         return m
 
 
+class ServerDataSSHKeysTypedDict(TypedDict):
+    id: NotRequired[int]
+    name: NotRequired[str]
+    fingerprint: NotRequired[str]
+    public_key: NotRequired[str]
+    created_at: NotRequired[datetime]
+    updated_at: NotRequired[datetime]
+    user_id: NotRequired[str]
+    group_id: NotRequired[Nullable[int]]
+
+
+class ServerDataSSHKeys(BaseModel):
+    id: Optional[int] = None
+
+    name: Optional[str] = None
+
+    fingerprint: Optional[str] = None
+
+    public_key: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    updated_at: Optional[datetime] = None
+
+    user_id: Optional[str] = None
+
+    group_id: OptionalNullable[int] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "id",
+                "name",
+                "fingerprint",
+                "public_key",
+                "created_at",
+                "updated_at",
+                "user_id",
+                "group_id",
+            ]
+        )
+        nullable_fields = set(["group_id"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
+class CredentialsTypedDict(TypedDict):
+    r"""Latest provisioning credentials, lazy loaded. Request it with `extra_fields[servers]=credentials`. Empty when the latest provisioning has no valid credentials."""
+
+    username: NotRequired[Nullable[str]]
+    password: NotRequired[Nullable[str]]
+    ssh_keys: NotRequired[Nullable[List[ServerDataSSHKeysTypedDict]]]
+    expires_at: NotRequired[Nullable[datetime]]
+
+
+class Credentials(BaseModel):
+    r"""Latest provisioning credentials, lazy loaded. Request it with `extra_fields[servers]=credentials`. Empty when the latest provisioning has no valid credentials."""
+
+    username: OptionalNullable[str] = UNSET
+
+    password: OptionalNullable[str] = UNSET
+
+    ssh_keys: OptionalNullable[List[ServerDataSSHKeys]] = UNSET
+
+    expires_at: OptionalNullable[datetime] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["username", "password", "ssh_keys", "expires_at"])
+        nullable_fields = set(["username", "password", "ssh_keys", "expires_at"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class ServerDataAttributesTypedDict(TypedDict):
     tags: NotRequired[List[ServerDataTagsTypedDict]]
     hostname: NotRequired[str]
     label: NotRequired[str]
     r"""The server label"""
     price: NotRequired[Nullable[float]]
-    status: NotRequired[ServerDataStatus]
+    status: NotRequired[str]
     r"""`on` - The server is powered ON
     `off` - The server is powered OFF
     `unknown` - The server power status is unknown
@@ -407,6 +510,12 @@ class ServerDataAttributesTypedDict(TypedDict):
     `deploying` - The server is deploying or reinstalling
     `failed_deployment` - The server has failed deployment or reinstall
     `rescue_mode` - The server is in rescue mode
+    `entering_rescue_mode` - The server is entering rescue mode
+    `exiting_rescue_mode` - The server is exiting rescue mode
+
+    While a server is provisioning, the provisioning state slug is returned verbatim,
+    so values outside this list (e.g. `queued`, `starting_deploy`, `commissioning`)
+    are possible. Treat this field as an open set, not a closed enum.
 
     """
     ipmi_status: NotRequired[Nullable[IpmiStatus]]
@@ -414,10 +523,18 @@ class ServerDataAttributesTypedDict(TypedDict):
     r"""The server role (e.g. Bare Metal)"""
     public_network_eligible: NotRequired[bool]
     r"""Whether the server is eligible to attach a public network (carries the bond-vpc-enabled tag)."""
+    bgp_eligible: NotRequired[bool]
+    r"""Whether the server can announce a BGP Elastic IP. Lazy loaded; request it with `extra_fields[servers]=bgp_eligible`."""
+    bgp_deployed: NotRequired[bool]
+    r"""Whether the server was deployed with the BGP option."""
     public_network: NotRequired[Nullable[ServerDataPublicNetworkTypedDict]]
-    r"""**Preview** (`public_network` feature flag). The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}."""
+    r"""**Preview.** Available to teams with public networks enabled. The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}."""
     site: NotRequired[str]
     locked: NotRequired[bool]
+    legacy_network: NotRequired[Nullable[bool]]
+    r"""Whether the server is attached to a legacy network."""
+    features: NotRequired[Nullable[List[str]]]
+    r"""Feature slugs supported by the server hardware (e.g. `direct_remote_access`)."""
     rescue_allowed: NotRequired[bool]
     primary_ipv4: NotRequired[Nullable[str]]
     primary_ipv6: NotRequired[Nullable[str]]
@@ -428,6 +545,8 @@ class ServerDataAttributesTypedDict(TypedDict):
     region: NotRequired[ServerRegionResourceDataTypedDict]
     specs: NotRequired[ServerDataSpecsTypedDict]
     interfaces: NotRequired[List[InterfacesTypedDict]]
+    credentials: NotRequired[Nullable[CredentialsTypedDict]]
+    r"""Latest provisioning credentials, lazy loaded. Request it with `extra_fields[servers]=credentials`. Empty when the latest provisioning has no valid credentials."""
     project: NotRequired[ProjectIncludeTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
 
@@ -442,7 +561,7 @@ class ServerDataAttributes(BaseModel):
 
     price: OptionalNullable[float] = UNSET
 
-    status: Optional[ServerDataStatus] = None
+    status: Optional[str] = None
     r"""`on` - The server is powered ON
     `off` - The server is powered OFF
     `unknown` - The server power status is unknown
@@ -450,6 +569,12 @@ class ServerDataAttributes(BaseModel):
     `deploying` - The server is deploying or reinstalling
     `failed_deployment` - The server has failed deployment or reinstall
     `rescue_mode` - The server is in rescue mode
+    `entering_rescue_mode` - The server is entering rescue mode
+    `exiting_rescue_mode` - The server is exiting rescue mode
+
+    While a server is provisioning, the provisioning state slug is returned verbatim,
+    so values outside this list (e.g. `queued`, `starting_deploy`, `commissioning`)
+    are possible. Treat this field as an open set, not a closed enum.
 
     """
 
@@ -461,12 +586,24 @@ class ServerDataAttributes(BaseModel):
     public_network_eligible: Optional[bool] = None
     r"""Whether the server is eligible to attach a public network (carries the bond-vpc-enabled tag)."""
 
+    bgp_eligible: Optional[bool] = None
+    r"""Whether the server can announce a BGP Elastic IP. Lazy loaded; request it with `extra_fields[servers]=bgp_eligible`."""
+
+    bgp_deployed: Optional[bool] = None
+    r"""Whether the server was deployed with the BGP option."""
+
     public_network: OptionalNullable[ServerDataPublicNetwork] = UNSET
-    r"""**Preview** (`public_network` feature flag). The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}."""
+    r"""**Preview.** Available to teams with public networks enabled. The public network this server is attached onto, or null. Fetch full details from GET /public_networks/{id}."""
 
     site: Optional[str] = None
 
     locked: Optional[bool] = None
+
+    legacy_network: OptionalNullable[bool] = UNSET
+    r"""Whether the server is attached to a legacy network."""
+
+    features: OptionalNullable[List[str]] = UNSET
+    r"""Feature slugs supported by the server hardware (e.g. `direct_remote_access`)."""
 
     rescue_allowed: Optional[bool] = None
 
@@ -488,6 +625,9 @@ class ServerDataAttributes(BaseModel):
 
     interfaces: Optional[List[Interfaces]] = None
 
+    credentials: OptionalNullable[Credentials] = UNSET
+    r"""Latest provisioning credentials, lazy loaded. Request it with `extra_fields[servers]=credentials`. Empty when the latest provisioning has no valid credentials."""
+
     project: Optional[ProjectInclude] = None
 
     team: Optional[TeamInclude] = None
@@ -504,9 +644,13 @@ class ServerDataAttributes(BaseModel):
                 "ipmi_status",
                 "role",
                 "public_network_eligible",
+                "bgp_eligible",
+                "bgp_deployed",
                 "public_network",
                 "site",
                 "locked",
+                "legacy_network",
+                "features",
                 "rescue_allowed",
                 "primary_ipv4",
                 "primary_ipv6",
@@ -517,6 +661,7 @@ class ServerDataAttributes(BaseModel):
                 "region",
                 "specs",
                 "interfaces",
+                "credentials",
                 "project",
                 "team",
             ]
@@ -526,10 +671,13 @@ class ServerDataAttributes(BaseModel):
                 "price",
                 "ipmi_status",
                 "public_network",
+                "legacy_network",
+                "features",
                 "primary_ipv4",
                 "primary_ipv6",
                 "created_at",
                 "scheduled_deletion_at",
+                "credentials",
             ]
         )
         serialized = handler(self)

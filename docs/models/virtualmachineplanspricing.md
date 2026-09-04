@@ -3,7 +3,8 @@
 
 ## Fields
 
-| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `usd`                                                                          | [Optional[models.VirtualMachinePlansUSD]](../models/virtualmachineplansusd.md) | :heavy_minus_sign:                                                             | N/A                                                                            |
-| `brl`                                                                          | [Optional[models.VirtualMachinePlansBRL]](../models/virtualmachineplansbrl.md) | :heavy_minus_sign:                                                             | N/A                                                                            |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `hour`             | *Optional[float]*  | :heavy_minus_sign: | N/A                |
+| `month`            | *Optional[float]*  | :heavy_minus_sign: | N/A                |
+| `year`             | *Optional[float]*  | :heavy_minus_sign: | N/A                |

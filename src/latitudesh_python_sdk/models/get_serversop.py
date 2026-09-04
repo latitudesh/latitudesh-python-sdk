@@ -11,22 +11,50 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class GetServersRequestTypedDict(TypedDict):
+    filter_id: NotRequired[str]
+    r"""The server ID to filter by (exact match)"""
     filter_project: NotRequired[str]
     r"""The project ID or Slug to filter by"""
     filter_region: NotRequired[str]
     r"""The region Slug to filter by"""
     filter_hostname: NotRequired[str]
     r"""The hostname of server to filter by"""
+    filter_hostname_eql: NotRequired[str]
+    r"""The exact (case-sensitive) hostname of server to filter by"""
+    filter_hostname_prefix: NotRequired[str]
+    r"""Filter servers whose hostname starts with the provided value"""
+    filter_hostname_suffix: NotRequired[str]
+    r"""Filter servers whose hostname ends with the provided value"""
+    filter_hostname_match: NotRequired[str]
+    r"""Filter servers whose hostname contains the provided value"""
     filter_created_at_gte: NotRequired[str]
-    r"""The created at greater than equal date to filter by"""
+    r"""The created at greater than equal date to filter by. `created_at` is the date the server was added to the project"""
     filter_created_at_lte: NotRequired[str]
-    r"""The created at less than equal date to filter by"""
+    r"""The created at less than equal date to filter by. `created_at` is the date the server was added to the project"""
+    filter_created_at: NotRequired[str]
+    r"""The created at date range to filter by, as two comma-separated ISO 8601 datetimes (both bounds required), e.g. `filter[created_at]=2026-01-01T00:00:00Z,2026-01-31T23:59:59Z`. `created_at` is the date the server was added to the project"""
     filter_label: NotRequired[str]
     r"""The label of server to filter by"""
+    filter_label_eql: NotRequired[str]
+    r"""The exact (case-sensitive) label of server to filter by"""
+    filter_label_prefix: NotRequired[str]
+    r"""Filter servers whose label starts with the provided value"""
+    filter_label_suffix: NotRequired[str]
+    r"""Filter servers whose label ends with the provided value"""
+    filter_label_match: NotRequired[str]
+    r"""Filter servers whose label contains the provided value"""
     filter_status: NotRequired[str]
     r"""The status of server to filter by"""
     filter_plan: NotRequired[str]
     r"""The platform/plan name of the server to filter by"""
+    filter_plan_eql: NotRequired[str]
+    r"""The exact platform/plan name of the server to filter by (case-insensitive)"""
+    filter_plan_prefix: NotRequired[str]
+    r"""Filter servers whose platform/plan name starts with the provided value"""
+    filter_plan_suffix: NotRequired[str]
+    r"""Filter servers whose platform/plan name ends with the provided value"""
+    filter_plan_match: NotRequired[str]
+    r"""Filter servers whose platform/plan name contains the provided value"""
     filter_gpu: NotRequired[bool]
     r"""Filter by the existence of an associated GPU"""
     filter_ram_eql: NotRequired[int]
@@ -43,8 +71,12 @@ class GetServersRequestTypedDict(TypedDict):
     r"""Filter servers with disk size (in GB) less than or equal to the provided value."""
     filter_tags: NotRequired[str]
     r"""The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`"""
+    filter_bgp_eligible: NotRequired[bool]
+    r"""Filter by whether the server can announce a BGP Elastic IP."""
     extra_fields_servers: NotRequired[str]
     r"""The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string."""
+    sort: NotRequired[str]
+    r"""Comma-separated sort fields. Prefix a field with `-` for descending order. Supported: hostname, created_at, location, operating_system."""
     page_size: NotRequired[int]
     r"""Number of items to return per page"""
     page_number: NotRequired[int]
@@ -54,6 +86,13 @@ class GetServersRequestTypedDict(TypedDict):
 
 
 class GetServersRequest(BaseModel):
+    filter_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[id]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The server ID to filter by (exact match)"""
+
     filter_project: Annotated[
         Optional[str],
         pydantic.Field(alias="filter[project]"),
@@ -75,19 +114,54 @@ class GetServersRequest(BaseModel):
     ] = None
     r"""The hostname of server to filter by"""
 
+    filter_hostname_eql: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[hostname][eql]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The exact (case-sensitive) hostname of server to filter by"""
+
+    filter_hostname_prefix: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[hostname][prefix]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter servers whose hostname starts with the provided value"""
+
+    filter_hostname_suffix: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[hostname][suffix]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter servers whose hostname ends with the provided value"""
+
+    filter_hostname_match: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[hostname][match]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter servers whose hostname contains the provided value"""
+
     filter_created_at_gte: Annotated[
         Optional[str],
         pydantic.Field(alias="filter[created_at_gte]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The created at greater than equal date to filter by"""
+    r"""The created at greater than equal date to filter by. `created_at` is the date the server was added to the project"""
 
     filter_created_at_lte: Annotated[
         Optional[str],
         pydantic.Field(alias="filter[created_at_lte]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The created at less than equal date to filter by"""
+    r"""The created at less than equal date to filter by. `created_at` is the date the server was added to the project"""
+
+    filter_created_at: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[created_at]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The created at date range to filter by, as two comma-separated ISO 8601 datetimes (both bounds required), e.g. `filter[created_at]=2026-01-01T00:00:00Z,2026-01-31T23:59:59Z`. `created_at` is the date the server was added to the project"""
 
     filter_label: Annotated[
         Optional[str],
@@ -95,6 +169,34 @@ class GetServersRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The label of server to filter by"""
+
+    filter_label_eql: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[label][eql]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The exact (case-sensitive) label of server to filter by"""
+
+    filter_label_prefix: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[label][prefix]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter servers whose label starts with the provided value"""
+
+    filter_label_suffix: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[label][suffix]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter servers whose label ends with the provided value"""
+
+    filter_label_match: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[label][match]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter servers whose label contains the provided value"""
 
     filter_status: Annotated[
         Optional[str],
@@ -109,6 +211,34 @@ class GetServersRequest(BaseModel):
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The platform/plan name of the server to filter by"""
+
+    filter_plan_eql: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[plan][eql]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The exact platform/plan name of the server to filter by (case-insensitive)"""
+
+    filter_plan_prefix: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[plan][prefix]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter servers whose platform/plan name starts with the provided value"""
+
+    filter_plan_suffix: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[plan][suffix]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter servers whose platform/plan name ends with the provided value"""
+
+    filter_plan_match: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[plan][match]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter servers whose platform/plan name contains the provided value"""
 
     filter_gpu: Annotated[
         Optional[bool],
@@ -166,12 +296,25 @@ class GetServersRequest(BaseModel):
     ] = None
     r"""The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`"""
 
+    filter_bgp_eligible: Annotated[
+        Optional[bool],
+        pydantic.Field(alias="filter[bgp_eligible]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Filter by whether the server can announce a BGP Elastic IP."""
+
     extra_fields_servers: Annotated[
         Optional[str],
         pydantic.Field(alias="extra_fields[servers]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
     r"""The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string."""
+
+    sort: Annotated[
+        Optional[str],
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Comma-separated sort fields. Prefix a field with `-` for descending order. Supported: hostname, created_at, location, operating_system."""
 
     page_size: Annotated[
         Optional[int],
@@ -198,14 +341,28 @@ class GetServersRequest(BaseModel):
     def serialize_model(self, handler):
         optional_fields = set(
             [
+                "filter[id]",
                 "filter[project]",
                 "filter[region]",
                 "filter[hostname]",
+                "filter[hostname][eql]",
+                "filter[hostname][prefix]",
+                "filter[hostname][suffix]",
+                "filter[hostname][match]",
                 "filter[created_at_gte]",
                 "filter[created_at_lte]",
+                "filter[created_at]",
                 "filter[label]",
+                "filter[label][eql]",
+                "filter[label][prefix]",
+                "filter[label][suffix]",
+                "filter[label][match]",
                 "filter[status]",
                 "filter[plan]",
+                "filter[plan][eql]",
+                "filter[plan][prefix]",
+                "filter[plan][suffix]",
+                "filter[plan][match]",
                 "filter[gpu]",
                 "filter[ram][eql]",
                 "filter[ram][gte]",
@@ -214,7 +371,9 @@ class GetServersRequest(BaseModel):
                 "filter[disk][gte]",
                 "filter[disk][lte]",
                 "filter[tags]",
+                "filter[bgp_eligible]",
                 "extra_fields[servers]",
+                "sort",
                 "page[size]",
                 "page[number]",
                 "stats[total]",

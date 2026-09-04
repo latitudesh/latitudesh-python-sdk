@@ -9,10 +9,9 @@ from latitudesh_python_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Dict, List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class PlanDataType(str, Enum):
@@ -262,106 +261,40 @@ class StockLevel(str, Enum):
     HIGH = "high"
 
 
-class PlanDataUSDTypedDict(TypedDict):
-    hour: NotRequired[Nullable[float]]
-    month: NotRequired[Nullable[float]]
-    year: NotRequired[Nullable[float]]
-
-
-class PlanDataUSD(BaseModel):
-    hour: OptionalNullable[float] = UNSET
-
-    month: OptionalNullable[float] = UNSET
-
-    year: OptionalNullable[float] = UNSET
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["hour", "month", "year"])
-        nullable_fields = set(["hour", "month", "year"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-            is_nullable_and_explicitly_set = (
-                k in nullable_fields
-                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
-            )
-
-            if val != UNSET_SENTINEL:
-                if (
-                    val is not None
-                    or k not in optional_fields
-                    or is_nullable_and_explicitly_set
-                ):
-                    m[k] = val
-
-        return m
-
-
-class PlanDataBRLTypedDict(TypedDict):
-    hour: NotRequired[Nullable[float]]
-    month: NotRequired[Nullable[float]]
-    year: NotRequired[Nullable[float]]
-
-
-class PlanDataBRL(BaseModel):
-    hour: OptionalNullable[float] = UNSET
-
-    month: OptionalNullable[float] = UNSET
-
-    year: OptionalNullable[float] = UNSET
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["hour", "month", "year"])
-        nullable_fields = set(["hour", "month", "year"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-            is_nullable_and_explicitly_set = (
-                k in nullable_fields
-                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
-            )
-
-            if val != UNSET_SENTINEL:
-                if (
-                    val is not None
-                    or k not in optional_fields
-                    or is_nullable_and_explicitly_set
-                ):
-                    m[k] = val
-
-        return m
-
-
 class PlanDataPricingTypedDict(TypedDict):
-    usd: NotRequired[PlanDataUSDTypedDict]
-    brl: NotRequired[PlanDataBRLTypedDict]
+    hour: NotRequired[Nullable[float]]
+    month: NotRequired[Nullable[float]]
+    year: NotRequired[Nullable[float]]
 
 
 class PlanDataPricing(BaseModel):
-    usd: Annotated[Optional[PlanDataUSD], pydantic.Field(alias="USD")] = None
+    hour: OptionalNullable[float] = UNSET
 
-    brl: Annotated[Optional[PlanDataBRL], pydantic.Field(alias="BRL")] = None
+    month: OptionalNullable[float] = UNSET
+
+    year: OptionalNullable[float] = UNSET
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["USD", "BRL"])
+        optional_fields = set(["hour", "month", "year"])
+        nullable_fields = set(["hour", "month", "year"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
@@ -372,7 +305,8 @@ class PlanDataRegionsTypedDict(TypedDict):
     deploys_instantly: NotRequired[List[str]]
     locations: NotRequired[LocationsTypedDict]
     stock_level: NotRequired[StockLevel]
-    pricing: NotRequired[PlanDataPricingTypedDict]
+    pricing: NotRequired[Dict[str, PlanDataPricingTypedDict]]
+    r"""Prices keyed by ISO 4217 currency code (e.g. USD, BRL)."""
 
 
 class PlanDataRegions(BaseModel):
@@ -384,7 +318,8 @@ class PlanDataRegions(BaseModel):
 
     stock_level: Optional[StockLevel] = None
 
-    pricing: Optional[PlanDataPricing] = None
+    pricing: Optional[Dict[str, PlanDataPricing]] = None
+    r"""Prices keyed by ISO 4217 currency code (e.g. USD, BRL)."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -483,9 +418,3 @@ class PlanData(BaseModel):
                     m[k] = val
 
         return m
-
-
-try:
-    PlanDataPricing.model_rebuild()
-except NameError:
-    pass

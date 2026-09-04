@@ -85,14 +85,14 @@ class ObjectStorageDataRegion(BaseModel):
         return m
 
 
-class CredentialsTypedDict(TypedDict):
+class ObjectStorageDataCredentialsTypedDict(TypedDict):
     r"""S3 access credentials. Only included when `extra_fields[object_storages]=credentials` is requested and the requesting user is the bucket's creator."""
 
     access_key: NotRequired[str]
     r"""S3 access key for authentication"""
 
 
-class Credentials(BaseModel):
+class ObjectStorageDataCredentials(BaseModel):
     r"""S3 access credentials. Only included when `extra_fields[object_storages]=credentials` is requested and the requesting user is the bucket's creator."""
 
     access_key: Optional[str] = None
@@ -140,7 +140,7 @@ class ObjectStorageDataAttributesTypedDict(TypedDict):
     r"""How the bucket originated: `default` for buckets created through the API, or `synchronized` for buckets imported from the storage provider."""
     region: NotRequired[Nullable[ObjectStorageDataRegionTypedDict]]
     r"""Region information where the object storage is located"""
-    credentials: NotRequired[Nullable[CredentialsTypedDict]]
+    credentials: NotRequired[Nullable[ObjectStorageDataCredentialsTypedDict]]
     r"""S3 access credentials. Only included when `extra_fields[object_storages]=credentials` is requested and the requesting user is the bucket's creator."""
     project: NotRequired[ProjectIncludeTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
@@ -183,7 +183,7 @@ class ObjectStorageDataAttributes(BaseModel):
     region: OptionalNullable[ObjectStorageDataRegion] = UNSET
     r"""Region information where the object storage is located"""
 
-    credentials: OptionalNullable[Credentials] = UNSET
+    credentials: OptionalNullable[ObjectStorageDataCredentials] = UNSET
     r"""S3 access credentials. Only included when `extra_fields[object_storages]=credentials` is requested and the requesting user is the bucket's creator."""
 
     project: Optional[ProjectInclude] = None
@@ -246,14 +246,14 @@ class ObjectStorageDataAttributes(BaseModel):
 
 class ObjectStorageDataTypedDict(TypedDict):
     id: NotRequired[str]
-    r"""Object storage ID with bucket_ prefix"""
+    r"""Object storage ID with bkt_ prefix"""
     type: NotRequired[ObjectStorageDataType]
     attributes: NotRequired[ObjectStorageDataAttributesTypedDict]
 
 
 class ObjectStorageData(BaseModel):
     id: Optional[str] = None
-    r"""Object storage ID with bucket_ prefix"""
+    r"""Object storage ID with bkt_ prefix"""
 
     type: Optional[ObjectStorageDataType] = None
 

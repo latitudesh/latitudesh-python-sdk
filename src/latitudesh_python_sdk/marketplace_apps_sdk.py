@@ -20,7 +20,7 @@ class MarketplaceAppsSDK(BaseSDK):
     ) -> models.MarketplaceApps:
         r"""List marketplace apps
 
-        Lists the marketplace apps available to deploy on Virtual Machines. Only published apps are returned. Requires the `marketplace_apps` feature to be enabled for the team.
+        Lists the marketplace apps available to deploy on Virtual Machines. Only published apps are returned.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -99,7 +99,7 @@ class MarketplaceAppsSDK(BaseSDK):
     ) -> models.MarketplaceApps:
         r"""List marketplace apps
 
-        Lists the marketplace apps available to deploy on Virtual Machines. Only published apps are returned. Requires the `marketplace_apps` feature to be enabled for the team.
+        Lists the marketplace apps available to deploy on Virtual Machines. Only published apps are returned.
 
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -179,7 +179,7 @@ class MarketplaceAppsSDK(BaseSDK):
     ) -> models.MarketplaceApp:
         r"""Retrieve a marketplace app
 
-        Retrieve a single marketplace app by ID or slug. Only published apps are visible. Requires the `marketplace_apps` feature to be enabled for the team.
+        Retrieve a single marketplace app by ID or slug. Only published apps are visible.
 
         :param id: The marketplace app ID or slug
         :param retries: Override the default retry configuration for this method
@@ -269,7 +269,7 @@ class MarketplaceAppsSDK(BaseSDK):
     ) -> models.MarketplaceApp:
         r"""Retrieve a marketplace app
 
-        Retrieve a single marketplace app by ID or slug. Only published apps are visible. Requires the `marketplace_apps` feature to be enabled for the team.
+        Retrieve a single marketplace app by ID or slug. Only published apps are visible.
 
         :param id: The marketplace app ID or slug
         :param retries: Override the default retry configuration for this method
