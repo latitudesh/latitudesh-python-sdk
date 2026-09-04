@@ -14,4 +14,3 @@ value = UpdateServerDeployConfigServersFilesystem.EXT4
 | Name   | Value  |
 | ------ | ------ |
 | `EXT4` | ext4   |
-| `XFS`  | xfs    |

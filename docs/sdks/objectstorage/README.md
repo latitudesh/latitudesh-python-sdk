@@ -188,11 +188,11 @@ with Latitudesh(
             "region": "DAL",
             "bucket_permissions": [
                 {
-                    "bucket_id": "bucket_6VE1Wd37dXnZJ",
+                    "bucket_id": "bkt_6VE1Wd37dXnZJ",
                     "permission": latitudesh_python_sdk.Permission.READONLY,
                 },
                 {
-                    "bucket_id": "bucket_7WF2Xe48eYoAK",
+                    "bucket_id": "bkt_7WF2Xe48eYoAK",
                     "permission": latitudesh_python_sdk.Permission.RW,
                 },
             ],

@@ -328,6 +328,10 @@ with Latitudesh(
 * [update_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#update_kubernetes_cluster) - Update Kubernetes Cluster
 * [get_kubernetes_cluster_kubeconfig](docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig
 
+### [ManagedDatabases](docs/sdks/manageddatabases/README.md)
+
+* [show_managed_database_metrics](docs/sdks/manageddatabases/README.md#show_managed_database_metrics) - Show managed database metrics
+
 ### [MarketplaceApps](docs/sdks/marketplaceappssdk/README.md)
 
 * [list_marketplace_apps](docs/sdks/marketplaceappssdk/README.md#list_marketplace_apps) - List marketplace apps
@@ -657,7 +661,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 50 of 173 methods.*
+* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 52 of 174 methods.*
 * [`ResponseValidationError`](./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

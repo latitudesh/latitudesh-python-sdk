@@ -8,6 +8,8 @@ The operating system slug for the new server
 from latitudesh_python_sdk.models import CreateServerServersOperatingSystem
 
 value = CreateServerServersOperatingSystem.CENTOS_7_4_X64
+
+# Open enum: unrecognized values are captured as UnrecognizedStr
 ```
 
 

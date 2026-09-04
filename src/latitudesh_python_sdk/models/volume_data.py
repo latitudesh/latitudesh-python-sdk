@@ -48,6 +48,8 @@ class Initiators(BaseModel):
 class BlockTypedDict(TypedDict):
     r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
 
+    status: NotRequired[Nullable[str]]
+    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, or \"failed\". Mapping is asynchronous, so poll the volume until this reaches a terminal state."""
     nqn: NotRequired[Nullable[str]]
     r"""NVMe Qualified Name of the mapped server."""
     nsid: NotRequired[Nullable[int]]
@@ -58,6 +60,9 @@ class BlockTypedDict(TypedDict):
 
 class Block(BaseModel):
     r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
+
+    status: OptionalNullable[str] = UNSET
+    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, or \"failed\". Mapping is asynchronous, so poll the volume until this reaches a terminal state."""
 
     nqn: OptionalNullable[str] = UNSET
     r"""NVMe Qualified Name of the mapped server."""
@@ -70,8 +75,8 @@ class Block(BaseModel):
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["nqn", "nsid", "server_id"])
-        nullable_fields = set(["nqn", "nsid", "server_id"])
+        optional_fields = set(["status", "nqn", "nsid", "server_id"])
+        nullable_fields = set(["status", "nqn", "nsid", "server_id"])
         serialized = handler(self)
         m = {}
 

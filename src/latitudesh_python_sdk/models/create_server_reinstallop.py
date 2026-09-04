@@ -130,7 +130,7 @@ class CreateServerReinstallServersAttributesTypedDict(TypedDict):
     persistent_netboot: NotRequired[bool]
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
     public_network: NotRequired[Nullable[bool]]
-    r"""**Preview** (`public_network` feature flag). Set to 'true' to attach the server onto the given 'public_network_id', or 'false' to detach an existing public network, during the reinstall. Requires 'public_network_id' when attaching."""
+    r"""**Preview.** Available to teams with public networks enabled. Set to 'true' to attach the server onto the given 'public_network_id', or 'false' to detach an existing public network, during the reinstall. Requires 'public_network_id' when attaching."""
     public_network_id: NotRequired[Nullable[str]]
     r"""ID of a customer public network to attach this server to during the reinstall. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. Applies to this reinstall only; omit it to leave any existing public network unchanged."""
 
@@ -160,7 +160,7 @@ class CreateServerReinstallServersAttributes(BaseModel):
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
 
     public_network: OptionalNullable[bool] = UNSET
-    r"""**Preview** (`public_network` feature flag). Set to 'true' to attach the server onto the given 'public_network_id', or 'false' to detach an existing public network, during the reinstall. Requires 'public_network_id' when attaching."""
+    r"""**Preview.** Available to teams with public networks enabled. Set to 'true' to attach the server onto the given 'public_network_id', or 'false' to detach an existing public network, during the reinstall. Requires 'public_network_id' when attaching."""
 
     public_network_id: OptionalNullable[str] = UNSET
     r"""ID of a customer public network to attach this server to during the reinstall. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. Applies to this reinstall only; omit it to leave any existing public network unchanged."""

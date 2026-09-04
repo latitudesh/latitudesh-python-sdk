@@ -674,6 +674,24 @@ with Latitudesh(
     print(res)
 
 ```
+### Example Usage: StorageVlanNotAssignable
+
+<!-- UsageSnippet language="python" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" example="StorageVlanNotAssignable" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.private_networks.assign()
+
+    # Handle response
+    print(res)
+
+```
 ### Example Usage: validation error
 
 <!-- UsageSnippet language="python" operationID="assign-server-virtual-network" method="post" path="/virtual_networks/assignments" example="validation error" -->
@@ -713,9 +731,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 422                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## remove_assignment
 
@@ -749,6 +768,7 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 422                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |

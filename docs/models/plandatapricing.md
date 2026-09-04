@@ -3,7 +3,8 @@
 
 ## Fields
 
-| Field                                                    | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `usd`                                                    | [Optional[models.PlanDataUSD]](../models/plandatausd.md) | :heavy_minus_sign:                                       | N/A                                                      |
-| `brl`                                                    | [Optional[models.PlanDataBRL]](../models/plandatabrl.md) | :heavy_minus_sign:                                       | N/A                                                      |
+| Field                     | Type                      | Required                  | Description               |
+| ------------------------- | ------------------------- | ------------------------- | ------------------------- |
+| `hour`                    | *OptionalNullable[float]* | :heavy_minus_sign:        | N/A                       |
+| `month`                   | *OptionalNullable[float]* | :heavy_minus_sign:        | N/A                       |
+| `year`                    | *OptionalNullable[float]* | :heavy_minus_sign:        | N/A                       |

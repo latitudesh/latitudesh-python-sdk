@@ -61,7 +61,6 @@ class UpdateServerDeployConfigServersRaidLevel(str, Enum):
 
 class UpdateServerDeployConfigServersFilesystem(str, Enum):
     EXT4 = "ext4"
-    XFS = "xfs"
 
 
 class UpdateServerDeployConfigServersDiskLayoutTypedDict(TypedDict):
@@ -124,6 +123,8 @@ class UpdateServerDeployConfigServersAttributesTypedDict(TypedDict):
     ssh_keys: NotRequired[Nullable[List[str]]]
     ipxe_url: NotRequired[Nullable[str]]
     r"""URL where iPXE script is stored on, necessary for custom image deployments. This attribute is required when operating system iPXE is selected."""
+    ipxe: NotRequired[Nullable[str]]
+    r"""URL where the iPXE script is stored, or the iPXE script encoded in base64. This attribute is required when the iPXE operating system is selected. Replaces the deprecated 'ipxe_url'."""
     persistent_netboot: NotRequired[bool]
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
     public_network: NotRequired[Nullable[bool]]
@@ -154,6 +155,9 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
     ipxe_url: OptionalNullable[str] = UNSET
     r"""URL where iPXE script is stored on, necessary for custom image deployments. This attribute is required when operating system iPXE is selected."""
 
+    ipxe: OptionalNullable[str] = UNSET
+    r"""URL where the iPXE script is stored, or the iPXE script encoded in base64. This attribute is required when the iPXE operating system is selected. Replaces the deprecated 'ipxe_url'."""
+
     persistent_netboot: Optional[bool] = None
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
 
@@ -174,6 +178,7 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
                 "user_data",
                 "ssh_keys",
                 "ipxe_url",
+                "ipxe",
                 "persistent_netboot",
                 "public_network",
                 "public_network_id",
@@ -188,6 +193,7 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
                 "user_data",
                 "ssh_keys",
                 "ipxe_url",
+                "ipxe",
                 "public_network",
                 "public_network_id",
             ]
@@ -214,19 +220,22 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
         return m
 
 
-class UpdateServerDeployConfigServersRequestBodyTypedDict(TypedDict):
+class UpdateServerDeployConfigServersDataTypedDict(TypedDict):
     type: UpdateServerDeployConfigServersType
+    id: NotRequired[str]
     attributes: NotRequired[UpdateServerDeployConfigServersAttributesTypedDict]
 
 
-class UpdateServerDeployConfigServersRequestBody(BaseModel):
+class UpdateServerDeployConfigServersData(BaseModel):
     type: UpdateServerDeployConfigServersType
+
+    id: Optional[str] = None
 
     attributes: Optional[UpdateServerDeployConfigServersAttributes] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["attributes"])
+        optional_fields = set(["id", "attributes"])
         serialized = handler(self)
         m = {}
 
@@ -239,6 +248,14 @@ class UpdateServerDeployConfigServersRequestBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+class UpdateServerDeployConfigServersRequestBodyTypedDict(TypedDict):
+    data: UpdateServerDeployConfigServersDataTypedDict
+
+
+class UpdateServerDeployConfigServersRequestBody(BaseModel):
+    data: UpdateServerDeployConfigServersData
 
 
 class UpdateServerDeployConfigRequestTypedDict(TypedDict):

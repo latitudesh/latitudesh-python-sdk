@@ -86,7 +86,9 @@ class StorageTypedDict(TypedDict):
     r"""Storage consumption metrics"""
 
     consumed: NotRequired[int]
-    r"""Amount of storage consumed"""
+    r"""Billed storage usage for the current period"""
+    current: NotRequired[int]
+    r"""Latest recorded storage usage (last datapoint)"""
     unit: NotRequired[GetStorageBucketMetricsUnit]
     r"""Unit of measurement for storage"""
 
@@ -95,14 +97,17 @@ class Storage(BaseModel):
     r"""Storage consumption metrics"""
 
     consumed: Optional[int] = None
-    r"""Amount of storage consumed"""
+    r"""Billed storage usage for the current period"""
+
+    current: Optional[int] = None
+    r"""Latest recorded storage usage (last datapoint)"""
 
     unit: Optional[GetStorageBucketMetricsUnit] = None
     r"""Unit of measurement for storage"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["consumed", "unit"])
+        optional_fields = set(["consumed", "current", "unit"])
         serialized = handler(self)
         m = {}
 

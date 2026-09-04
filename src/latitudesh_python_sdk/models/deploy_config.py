@@ -14,6 +14,10 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class DeployConfigType(str, Enum):
+    DEPLOY_CONFIG = "deploy_config"
+
+
 class DeployConfigRole(str, Enum):
     OS = "os"
     STORAGE = "storage"
@@ -27,7 +31,6 @@ class DeployConfigRaidLevel(str, Enum):
 
 class DeployConfigFilesystem(str, Enum):
     EXT4 = "ext4"
-    XFS = "xfs"
 
 
 class DiskLayoutTypedDict(TypedDict):
@@ -78,10 +81,12 @@ class DiskLayout(BaseModel):
 class DeployConfigAttributesTypedDict(TypedDict):
     operating_system: NotRequired[str]
     hostname: NotRequired[str]
-    raid: NotRequired[str]
+    raid: NotRequired[Nullable[str]]
     disk_layout: NotRequired[Nullable[List[DiskLayoutTypedDict]]]
     user_data: NotRequired[str]
     ssh_keys: NotRequired[List[str]]
+    ipxe_url: NotRequired[Nullable[str]]
+    ipxe: NotRequired[Nullable[str]]
     persistent_netboot: NotRequired[Nullable[bool]]
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
     public_network: NotRequired[Nullable[bool]]
@@ -93,13 +98,17 @@ class DeployConfigAttributes(BaseModel):
 
     hostname: Optional[str] = None
 
-    raid: Optional[str] = None
+    raid: OptionalNullable[str] = UNSET
 
     disk_layout: OptionalNullable[List[DiskLayout]] = UNSET
 
     user_data: Optional[str] = None
 
     ssh_keys: Optional[List[str]] = None
+
+    ipxe_url: OptionalNullable[str] = UNSET
+
+    ipxe: OptionalNullable[str] = UNSET
 
     persistent_netboot: OptionalNullable[bool] = UNSET
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
@@ -118,13 +127,23 @@ class DeployConfigAttributes(BaseModel):
                 "disk_layout",
                 "user_data",
                 "ssh_keys",
+                "ipxe_url",
+                "ipxe",
                 "persistent_netboot",
                 "public_network",
                 "public_network_id",
             ]
         )
         nullable_fields = set(
-            ["disk_layout", "persistent_netboot", "public_network", "public_network_id"]
+            [
+                "raid",
+                "disk_layout",
+                "ipxe_url",
+                "ipxe",
+                "persistent_netboot",
+                "public_network",
+                "public_network_id",
+            ]
         )
         serialized = handler(self)
         m = {}
@@ -150,17 +169,20 @@ class DeployConfigAttributes(BaseModel):
 
 class DeployConfigDataTypedDict(TypedDict):
     id: NotRequired[str]
+    type: NotRequired[DeployConfigType]
     attributes: NotRequired[DeployConfigAttributesTypedDict]
 
 
 class DeployConfigData(BaseModel):
     id: Optional[str] = None
 
+    type: Optional[DeployConfigType] = None
+
     attributes: Optional[DeployConfigAttributes] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "attributes"])
+        optional_fields = set(["id", "type", "attributes"])
         serialized = handler(self)
         m = {}
 
@@ -175,16 +197,27 @@ class DeployConfigData(BaseModel):
         return m
 
 
+class DeployConfigMetaTypedDict(TypedDict):
+    pass
+
+
+class DeployConfigMeta(BaseModel):
+    pass
+
+
 class DeployConfigTypedDict(TypedDict):
     data: NotRequired[DeployConfigDataTypedDict]
+    meta: NotRequired[DeployConfigMetaTypedDict]
 
 
 class DeployConfig(BaseModel):
     data: Optional[DeployConfigData] = None
 
+    meta: Optional[DeployConfigMeta] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         serialized = handler(self)
         m = {}
 

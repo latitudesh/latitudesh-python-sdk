@@ -139,6 +139,8 @@ class VirtualNetworkDataAttributesTypedDict(TypedDict):
     r"""Amount of devices assigned to the virtual network"""
     tags: NotRequired[List[VirtualNetworkDataTagsTypedDict]]
     r"""Tags associated with the virtual network"""
+    storage: NotRequired[bool]
+    r"""Whether this is an auto-provisioned storage service VLAN"""
 
 
 class VirtualNetworkDataAttributes(BaseModel):
@@ -163,6 +165,9 @@ class VirtualNetworkDataAttributes(BaseModel):
     tags: Optional[List[VirtualNetworkDataTags]] = None
     r"""Tags associated with the virtual network"""
 
+    storage: Optional[bool] = None
+    r"""Whether this is an auto-provisioned storage service VLAN"""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -175,6 +180,7 @@ class VirtualNetworkDataAttributes(BaseModel):
                 "created_at",
                 "assignments_count",
                 "tags",
+                "storage",
             ]
         )
         nullable_fields = set(["created_at"])

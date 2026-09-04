@@ -14,14 +14,28 @@ class ServersSDK(BaseSDK):
     def list(
         self,
         *,
+        filter_id: Optional[str] = None,
         filter_project: Optional[str] = None,
         filter_region: Optional[str] = None,
         filter_hostname: Optional[str] = None,
+        filter_hostname_eql: Optional[str] = None,
+        filter_hostname_prefix: Optional[str] = None,
+        filter_hostname_suffix: Optional[str] = None,
+        filter_hostname_match: Optional[str] = None,
         filter_created_at_gte: Optional[str] = None,
         filter_created_at_lte: Optional[str] = None,
+        filter_created_at: Optional[str] = None,
         filter_label: Optional[str] = None,
+        filter_label_eql: Optional[str] = None,
+        filter_label_prefix: Optional[str] = None,
+        filter_label_suffix: Optional[str] = None,
+        filter_label_match: Optional[str] = None,
         filter_status: Optional[str] = None,
         filter_plan: Optional[str] = None,
+        filter_plan_eql: Optional[str] = None,
+        filter_plan_prefix: Optional[str] = None,
+        filter_plan_suffix: Optional[str] = None,
+        filter_plan_match: Optional[str] = None,
         filter_gpu: Optional[bool] = None,
         filter_ram_eql: Optional[int] = None,
         filter_ram_gte: Optional[int] = None,
@@ -30,7 +44,9 @@ class ServersSDK(BaseSDK):
         filter_disk_gte: Optional[int] = None,
         filter_disk_lte: Optional[int] = None,
         filter_tags: Optional[str] = None,
+        filter_bgp_eligible: Optional[bool] = None,
         extra_fields_servers: Optional[str] = None,
+        sort: Optional[str] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
         stats_total: Optional[str] = None,
@@ -44,14 +60,28 @@ class ServersSDK(BaseSDK):
         Returns a list of all servers belonging to the team.
 
 
+        :param filter_id: The server ID to filter by (exact match)
         :param filter_project: The project ID or Slug to filter by
         :param filter_region: The region Slug to filter by
         :param filter_hostname: The hostname of server to filter by
-        :param filter_created_at_gte: The created at greater than equal date to filter by
-        :param filter_created_at_lte: The created at less than equal date to filter by
+        :param filter_hostname_eql: The exact (case-sensitive) hostname of server to filter by
+        :param filter_hostname_prefix: Filter servers whose hostname starts with the provided value
+        :param filter_hostname_suffix: Filter servers whose hostname ends with the provided value
+        :param filter_hostname_match: Filter servers whose hostname contains the provided value
+        :param filter_created_at_gte: The created at greater than equal date to filter by. `created_at` is the date the server was added to the project
+        :param filter_created_at_lte: The created at less than equal date to filter by. `created_at` is the date the server was added to the project
+        :param filter_created_at: The created at date range to filter by, as two comma-separated ISO 8601 datetimes (both bounds required), e.g. `filter[created_at]=2026-01-01T00:00:00Z,2026-01-31T23:59:59Z`. `created_at` is the date the server was added to the project
         :param filter_label: The label of server to filter by
+        :param filter_label_eql: The exact (case-sensitive) label of server to filter by
+        :param filter_label_prefix: Filter servers whose label starts with the provided value
+        :param filter_label_suffix: Filter servers whose label ends with the provided value
+        :param filter_label_match: Filter servers whose label contains the provided value
         :param filter_status: The status of server to filter by
         :param filter_plan: The platform/plan name of the server to filter by
+        :param filter_plan_eql: The exact platform/plan name of the server to filter by (case-insensitive)
+        :param filter_plan_prefix: Filter servers whose platform/plan name starts with the provided value
+        :param filter_plan_suffix: Filter servers whose platform/plan name ends with the provided value
+        :param filter_plan_match: Filter servers whose platform/plan name contains the provided value
         :param filter_gpu: Filter by the existence of an associated GPU
         :param filter_ram_eql: Filter servers with RAM size (in GB) equals the provided value.
         :param filter_ram_gte: Filter servers with RAM size (in GB) greater than or equal the provided value.
@@ -60,7 +90,9 @@ class ServersSDK(BaseSDK):
         :param filter_disk_gte: Filter servers with disk size (in GB) greater than or equal to the provided value.
         :param filter_disk_lte: Filter servers with disk size (in GB) less than or equal to the provided value.
         :param filter_tags: The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`
+        :param filter_bgp_eligible: Filter by whether the server can announce a BGP Elastic IP.
         :param extra_fields_servers: The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
+        :param sort: Comma-separated sort fields. Prefix a field with `-` for descending order. Supported: hostname, created_at, location, operating_system.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
@@ -80,14 +112,28 @@ class ServersSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.GetServersRequest(
+            filter_id=filter_id,
             filter_project=filter_project,
             filter_region=filter_region,
             filter_hostname=filter_hostname,
+            filter_hostname_eql=filter_hostname_eql,
+            filter_hostname_prefix=filter_hostname_prefix,
+            filter_hostname_suffix=filter_hostname_suffix,
+            filter_hostname_match=filter_hostname_match,
             filter_created_at_gte=filter_created_at_gte,
             filter_created_at_lte=filter_created_at_lte,
+            filter_created_at=filter_created_at,
             filter_label=filter_label,
+            filter_label_eql=filter_label_eql,
+            filter_label_prefix=filter_label_prefix,
+            filter_label_suffix=filter_label_suffix,
+            filter_label_match=filter_label_match,
             filter_status=filter_status,
             filter_plan=filter_plan,
+            filter_plan_eql=filter_plan_eql,
+            filter_plan_prefix=filter_plan_prefix,
+            filter_plan_suffix=filter_plan_suffix,
+            filter_plan_match=filter_plan_match,
             filter_gpu=filter_gpu,
             filter_ram_eql=filter_ram_eql,
             filter_ram_gte=filter_ram_gte,
@@ -96,7 +142,9 @@ class ServersSDK(BaseSDK):
             filter_disk_gte=filter_disk_gte,
             filter_disk_lte=filter_disk_lte,
             filter_tags=filter_tags,
+            filter_bgp_eligible=filter_bgp_eligible,
             extra_fields_servers=extra_fields_servers,
+            sort=sort,
             page_size=page_size,
             page_number=page_number,
             stats_total=stats_total,
@@ -159,14 +207,28 @@ class ServersSDK(BaseSDK):
                 return None
 
             return self.list(
+                filter_id=filter_id,
                 filter_project=filter_project,
                 filter_region=filter_region,
                 filter_hostname=filter_hostname,
+                filter_hostname_eql=filter_hostname_eql,
+                filter_hostname_prefix=filter_hostname_prefix,
+                filter_hostname_suffix=filter_hostname_suffix,
+                filter_hostname_match=filter_hostname_match,
                 filter_created_at_gte=filter_created_at_gte,
                 filter_created_at_lte=filter_created_at_lte,
+                filter_created_at=filter_created_at,
                 filter_label=filter_label,
+                filter_label_eql=filter_label_eql,
+                filter_label_prefix=filter_label_prefix,
+                filter_label_suffix=filter_label_suffix,
+                filter_label_match=filter_label_match,
                 filter_status=filter_status,
                 filter_plan=filter_plan,
+                filter_plan_eql=filter_plan_eql,
+                filter_plan_prefix=filter_plan_prefix,
+                filter_plan_suffix=filter_plan_suffix,
+                filter_plan_match=filter_plan_match,
                 filter_gpu=filter_gpu,
                 filter_ram_eql=filter_ram_eql,
                 filter_ram_gte=filter_ram_gte,
@@ -175,7 +237,9 @@ class ServersSDK(BaseSDK):
                 filter_disk_gte=filter_disk_gte,
                 filter_disk_lte=filter_disk_lte,
                 filter_tags=filter_tags,
+                filter_bgp_eligible=filter_bgp_eligible,
                 extra_fields_servers=extra_fields_servers,
+                sort=sort,
                 page_size=page_size,
                 page_number=next_page,
                 stats_total=stats_total,
@@ -201,14 +265,28 @@ class ServersSDK(BaseSDK):
     async def list_async(
         self,
         *,
+        filter_id: Optional[str] = None,
         filter_project: Optional[str] = None,
         filter_region: Optional[str] = None,
         filter_hostname: Optional[str] = None,
+        filter_hostname_eql: Optional[str] = None,
+        filter_hostname_prefix: Optional[str] = None,
+        filter_hostname_suffix: Optional[str] = None,
+        filter_hostname_match: Optional[str] = None,
         filter_created_at_gte: Optional[str] = None,
         filter_created_at_lte: Optional[str] = None,
+        filter_created_at: Optional[str] = None,
         filter_label: Optional[str] = None,
+        filter_label_eql: Optional[str] = None,
+        filter_label_prefix: Optional[str] = None,
+        filter_label_suffix: Optional[str] = None,
+        filter_label_match: Optional[str] = None,
         filter_status: Optional[str] = None,
         filter_plan: Optional[str] = None,
+        filter_plan_eql: Optional[str] = None,
+        filter_plan_prefix: Optional[str] = None,
+        filter_plan_suffix: Optional[str] = None,
+        filter_plan_match: Optional[str] = None,
         filter_gpu: Optional[bool] = None,
         filter_ram_eql: Optional[int] = None,
         filter_ram_gte: Optional[int] = None,
@@ -217,7 +295,9 @@ class ServersSDK(BaseSDK):
         filter_disk_gte: Optional[int] = None,
         filter_disk_lte: Optional[int] = None,
         filter_tags: Optional[str] = None,
+        filter_bgp_eligible: Optional[bool] = None,
         extra_fields_servers: Optional[str] = None,
+        sort: Optional[str] = None,
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
         stats_total: Optional[str] = None,
@@ -231,14 +311,28 @@ class ServersSDK(BaseSDK):
         Returns a list of all servers belonging to the team.
 
 
+        :param filter_id: The server ID to filter by (exact match)
         :param filter_project: The project ID or Slug to filter by
         :param filter_region: The region Slug to filter by
         :param filter_hostname: The hostname of server to filter by
-        :param filter_created_at_gte: The created at greater than equal date to filter by
-        :param filter_created_at_lte: The created at less than equal date to filter by
+        :param filter_hostname_eql: The exact (case-sensitive) hostname of server to filter by
+        :param filter_hostname_prefix: Filter servers whose hostname starts with the provided value
+        :param filter_hostname_suffix: Filter servers whose hostname ends with the provided value
+        :param filter_hostname_match: Filter servers whose hostname contains the provided value
+        :param filter_created_at_gte: The created at greater than equal date to filter by. `created_at` is the date the server was added to the project
+        :param filter_created_at_lte: The created at less than equal date to filter by. `created_at` is the date the server was added to the project
+        :param filter_created_at: The created at date range to filter by, as two comma-separated ISO 8601 datetimes (both bounds required), e.g. `filter[created_at]=2026-01-01T00:00:00Z,2026-01-31T23:59:59Z`. `created_at` is the date the server was added to the project
         :param filter_label: The label of server to filter by
+        :param filter_label_eql: The exact (case-sensitive) label of server to filter by
+        :param filter_label_prefix: Filter servers whose label starts with the provided value
+        :param filter_label_suffix: Filter servers whose label ends with the provided value
+        :param filter_label_match: Filter servers whose label contains the provided value
         :param filter_status: The status of server to filter by
         :param filter_plan: The platform/plan name of the server to filter by
+        :param filter_plan_eql: The exact platform/plan name of the server to filter by (case-insensitive)
+        :param filter_plan_prefix: Filter servers whose platform/plan name starts with the provided value
+        :param filter_plan_suffix: Filter servers whose platform/plan name ends with the provided value
+        :param filter_plan_match: Filter servers whose platform/plan name contains the provided value
         :param filter_gpu: Filter by the existence of an associated GPU
         :param filter_ram_eql: Filter servers with RAM size (in GB) equals the provided value.
         :param filter_ram_gte: Filter servers with RAM size (in GB) greater than or equal the provided value.
@@ -247,7 +341,9 @@ class ServersSDK(BaseSDK):
         :param filter_disk_gte: Filter servers with disk size (in GB) greater than or equal to the provided value.
         :param filter_disk_lte: Filter servers with disk size (in GB) less than or equal to the provided value.
         :param filter_tags: The tags IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return servers with `tag_1` AND `tag_2`
+        :param filter_bgp_eligible: Filter by whether the server can announce a BGP Elastic IP.
         :param extra_fields_servers: The `credentials` are provided as extra attributes that are lazy loaded. To request it, just set `extra_fields[servers]=credentials` in the query string.
+        :param sort: Comma-separated sort fields. Prefix a field with `-` for descending order. Supported: hostname, created_at, location, operating_system.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
@@ -267,14 +363,28 @@ class ServersSDK(BaseSDK):
             base_url = self._get_url(base_url, url_variables)
 
         request = models.GetServersRequest(
+            filter_id=filter_id,
             filter_project=filter_project,
             filter_region=filter_region,
             filter_hostname=filter_hostname,
+            filter_hostname_eql=filter_hostname_eql,
+            filter_hostname_prefix=filter_hostname_prefix,
+            filter_hostname_suffix=filter_hostname_suffix,
+            filter_hostname_match=filter_hostname_match,
             filter_created_at_gte=filter_created_at_gte,
             filter_created_at_lte=filter_created_at_lte,
+            filter_created_at=filter_created_at,
             filter_label=filter_label,
+            filter_label_eql=filter_label_eql,
+            filter_label_prefix=filter_label_prefix,
+            filter_label_suffix=filter_label_suffix,
+            filter_label_match=filter_label_match,
             filter_status=filter_status,
             filter_plan=filter_plan,
+            filter_plan_eql=filter_plan_eql,
+            filter_plan_prefix=filter_plan_prefix,
+            filter_plan_suffix=filter_plan_suffix,
+            filter_plan_match=filter_plan_match,
             filter_gpu=filter_gpu,
             filter_ram_eql=filter_ram_eql,
             filter_ram_gte=filter_ram_gte,
@@ -283,7 +393,9 @@ class ServersSDK(BaseSDK):
             filter_disk_gte=filter_disk_gte,
             filter_disk_lte=filter_disk_lte,
             filter_tags=filter_tags,
+            filter_bgp_eligible=filter_bgp_eligible,
             extra_fields_servers=extra_fields_servers,
+            sort=sort,
             page_size=page_size,
             page_number=page_number,
             stats_total=stats_total,
@@ -346,14 +458,28 @@ class ServersSDK(BaseSDK):
                 return None
 
             return self.list(
+                filter_id=filter_id,
                 filter_project=filter_project,
                 filter_region=filter_region,
                 filter_hostname=filter_hostname,
+                filter_hostname_eql=filter_hostname_eql,
+                filter_hostname_prefix=filter_hostname_prefix,
+                filter_hostname_suffix=filter_hostname_suffix,
+                filter_hostname_match=filter_hostname_match,
                 filter_created_at_gte=filter_created_at_gte,
                 filter_created_at_lte=filter_created_at_lte,
+                filter_created_at=filter_created_at,
                 filter_label=filter_label,
+                filter_label_eql=filter_label_eql,
+                filter_label_prefix=filter_label_prefix,
+                filter_label_suffix=filter_label_suffix,
+                filter_label_match=filter_label_match,
                 filter_status=filter_status,
                 filter_plan=filter_plan,
+                filter_plan_eql=filter_plan_eql,
+                filter_plan_prefix=filter_plan_prefix,
+                filter_plan_suffix=filter_plan_suffix,
+                filter_plan_match=filter_plan_match,
                 filter_gpu=filter_gpu,
                 filter_ram_eql=filter_ram_eql,
                 filter_ram_gte=filter_ram_gte,
@@ -362,7 +488,9 @@ class ServersSDK(BaseSDK):
                 filter_disk_gte=filter_disk_gte,
                 filter_disk_lte=filter_disk_lte,
                 filter_tags=filter_tags,
+                filter_bgp_eligible=filter_bgp_eligible,
                 extra_fields_servers=extra_fields_servers,
+                sort=sort,
                 page_size=page_size,
                 page_number=next_page,
                 stats_total=stats_total,
@@ -1305,13 +1433,10 @@ class ServersSDK(BaseSDK):
         self,
         *,
         server_id: str,
-        type_: models.UpdateServerDeployConfigServersType,
-        attributes: Optional[
-            Union[
-                models.UpdateServerDeployConfigServersAttributes,
-                models.UpdateServerDeployConfigServersAttributesTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.UpdateServerDeployConfigServersData,
+            models.UpdateServerDeployConfigServersDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1320,8 +1445,7 @@ class ServersSDK(BaseSDK):
         r"""Update deploy config
 
         :param server_id: The Server ID
-        :param type:
-        :param attributes:
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1340,10 +1464,8 @@ class ServersSDK(BaseSDK):
         request = models.UpdateServerDeployConfigRequest(
             server_id=server_id,
             request_body=models.UpdateServerDeployConfigServersRequestBody(
-                type=type_,
-                attributes=utils.get_pydantic_model(
-                    attributes,
-                    Optional[models.UpdateServerDeployConfigServersAttributes],
+                data=utils.get_pydantic_model(
+                    data, models.UpdateServerDeployConfigServersData
                 ),
             ),
         )
@@ -1418,13 +1540,10 @@ class ServersSDK(BaseSDK):
         self,
         *,
         server_id: str,
-        type_: models.UpdateServerDeployConfigServersType,
-        attributes: Optional[
-            Union[
-                models.UpdateServerDeployConfigServersAttributes,
-                models.UpdateServerDeployConfigServersAttributesTypedDict,
-            ]
-        ] = None,
+        data: Union[
+            models.UpdateServerDeployConfigServersData,
+            models.UpdateServerDeployConfigServersDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1433,8 +1552,7 @@ class ServersSDK(BaseSDK):
         r"""Update deploy config
 
         :param server_id: The Server ID
-        :param type:
-        :param attributes:
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1453,10 +1571,8 @@ class ServersSDK(BaseSDK):
         request = models.UpdateServerDeployConfigRequest(
             server_id=server_id,
             request_body=models.UpdateServerDeployConfigServersRequestBody(
-                type=type_,
-                attributes=utils.get_pydantic_model(
-                    attributes,
-                    Optional[models.UpdateServerDeployConfigServersAttributes],
+                data=utils.get_pydantic_model(
+                    data, models.UpdateServerDeployConfigServersData
                 ),
             ),
         )

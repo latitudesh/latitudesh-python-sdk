@@ -9,10 +9,9 @@ from latitudesh_python_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
-import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
-from typing_extensions import Annotated, NotRequired, TypedDict
+from typing import Dict, List, Optional
+from typing_extensions import NotRequired, TypedDict
 
 
 class VirtualMachinePlansType(str, Enum):
@@ -232,79 +231,22 @@ class VirtualMachinePlansSpecs(BaseModel):
         return m
 
 
-class VirtualMachinePlansUSDTypedDict(TypedDict):
-    hour: NotRequired[float]
-    month: NotRequired[float]
-    year: NotRequired[float]
-
-
-class VirtualMachinePlansUSD(BaseModel):
-    hour: Optional[float] = None
-
-    month: Optional[float] = None
-
-    year: Optional[float] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["hour", "month", "year"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
-class VirtualMachinePlansBRLTypedDict(TypedDict):
-    hour: NotRequired[float]
-    month: NotRequired[float]
-    year: NotRequired[float]
-
-
-class VirtualMachinePlansBRL(BaseModel):
-    hour: Optional[float] = None
-
-    month: Optional[float] = None
-
-    year: Optional[float] = None
-
-    @model_serializer(mode="wrap")
-    def serialize_model(self, handler):
-        optional_fields = set(["hour", "month", "year"])
-        serialized = handler(self)
-        m = {}
-
-        for n, f in type(self).model_fields.items():
-            k = f.alias or n
-            val = serialized.get(k, serialized.get(n))
-
-            if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
-                    m[k] = val
-
-        return m
-
-
 class VirtualMachinePlansPricingTypedDict(TypedDict):
-    usd: NotRequired[VirtualMachinePlansUSDTypedDict]
-    brl: NotRequired[VirtualMachinePlansBRLTypedDict]
+    hour: NotRequired[float]
+    month: NotRequired[float]
+    year: NotRequired[float]
 
 
 class VirtualMachinePlansPricing(BaseModel):
-    usd: Annotated[Optional[VirtualMachinePlansUSD], pydantic.Field(alias="USD")] = None
+    hour: Optional[float] = None
 
-    brl: Annotated[Optional[VirtualMachinePlansBRL], pydantic.Field(alias="BRL")] = None
+    month: Optional[float] = None
+
+    year: Optional[float] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["USD", "BRL"])
+        optional_fields = set(["hour", "month", "year"])
         serialized = handler(self)
         m = {}
 
@@ -362,7 +304,8 @@ class VirtualMachinePlansDataStockLevel(str, Enum):
 class VirtualMachinePlansRegionsTypedDict(TypedDict):
     name: NotRequired[str]
     available: NotRequired[List[str]]
-    pricing: NotRequired[VirtualMachinePlansPricingTypedDict]
+    pricing: NotRequired[Dict[str, VirtualMachinePlansPricingTypedDict]]
+    r"""Prices keyed by ISO 4217 currency code (e.g. USD, BRL)."""
     locations: NotRequired[VirtualMachinePlansLocationsTypedDict]
     stock_level: NotRequired[VirtualMachinePlansDataStockLevel]
     r"""The stock level in this region"""
@@ -373,7 +316,8 @@ class VirtualMachinePlansRegions(BaseModel):
 
     available: Optional[List[str]] = None
 
-    pricing: Optional[VirtualMachinePlansPricing] = None
+    pricing: Optional[Dict[str, VirtualMachinePlansPricing]] = None
+    r"""Prices keyed by ISO 4217 currency code (e.g. USD, BRL)."""
 
     locations: Optional[VirtualMachinePlansLocations] = None
 
@@ -520,9 +464,3 @@ class VirtualMachinePlans(BaseModel):
                     m[k] = val
 
         return m
-
-
-try:
-    VirtualMachinePlansPricing.model_rebuild()
-except NameError:
-    pass

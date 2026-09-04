@@ -74,14 +74,14 @@ class PostStorageVolumesMapMeta(BaseModel):
 
 
 class PostStorageVolumesMapResponseBodyTypedDict(TypedDict):
-    r"""Success"""
+    r"""Accepted"""
 
     data: NotRequired[VolumeDataTypedDict]
     meta: NotRequired[PostStorageVolumesMapMetaTypedDict]
 
 
 class PostStorageVolumesMapResponseBody(BaseModel):
-    r"""Success"""
+    r"""Accepted"""
 
     data: Optional[VolumeData] = None
 

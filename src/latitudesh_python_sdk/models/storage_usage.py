@@ -18,8 +18,10 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class StorageUsageAttributesTypedDict(TypedDict):
     date_: NotRequired[date]
     r"""The day this usage row refers to"""
-    storage_id: NotRequired[int]
-    project_id: NotRequired[int]
+    storage_id: NotRequired[str]
+    r"""The storage/bucket ID. A numeric value serialized as a string, e.g. \"42\"."""
+    project_id: NotRequired[str]
+    r"""The project ID. A numeric value serialized as a string, e.g. \"1234\"."""
     storage_type: NotRequired[Nullable[str]]
     r"""Storage kind. One of: object, file, block."""
     tier: NotRequired[Nullable[str]]
@@ -38,9 +40,11 @@ class StorageUsageAttributes(BaseModel):
     date_: Annotated[Optional[date], pydantic.Field(alias="date")] = None
     r"""The day this usage row refers to"""
 
-    storage_id: Optional[int] = None
+    storage_id: Optional[str] = None
+    r"""The storage/bucket ID. A numeric value serialized as a string, e.g. \"42\"."""
 
-    project_id: Optional[int] = None
+    project_id: Optional[str] = None
+    r"""The project ID. A numeric value serialized as a string, e.g. \"1234\"."""
 
     storage_type: OptionalNullable[str] = UNSET
     r"""Storage kind. One of: object, file, block."""

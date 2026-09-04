@@ -66,7 +66,7 @@ class CreateServerServersSite(str, Enum, metaclass=utils.OpenEnumMeta):
     TYO2 = "TYO2"
 
 
-class CreateServerServersOperatingSystem(str, Enum):
+class CreateServerServersOperatingSystem(str, Enum, metaclass=utils.OpenEnumMeta):
     r"""The operating system slug for the new server"""
 
     CENTOS_7_4_X64 = "centos_7_4_x64"
@@ -182,6 +182,10 @@ class CreateServerServersAttributesTypedDict(TypedDict):
     disk_layout: NotRequired[Nullable[List[CreateServerDiskLayoutTypedDict]]]
     ipxe: NotRequired[Nullable[str]]
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
+    public_network: NotRequired[Nullable[bool]]
+    r"""**Preview.** Available to teams with public networks enabled. Set to true to deploy the server attached to the given public_network_id. Requires public_network_id; only public-network-capable stock is selected."""
+    public_network_id: NotRequired[Nullable[str]]
+    r"""**Preview.** Available to teams with public networks enabled. ID of a customer public network to attach the server onto. Requires public_network: true. The public network must belong to the same project and location as the deployment and have a free address."""
     persistent_netboot: NotRequired[bool]
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
     bgp_ready: NotRequired[Nullable[bool]]
@@ -220,6 +224,12 @@ class CreateServerServersAttributes(BaseModel):
     ipxe: OptionalNullable[str] = UNSET
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
 
+    public_network: OptionalNullable[bool] = UNSET
+    r"""**Preview.** Available to teams with public networks enabled. Set to true to deploy the server attached to the given public_network_id. Requires public_network_id; only public-network-capable stock is selected."""
+
+    public_network_id: OptionalNullable[str] = UNSET
+    r"""**Preview.** Available to teams with public networks enabled. ID of a customer public network to attach the server onto. Requires public_network: true. The public network must belong to the same project and location as the deployment and have a free address."""
+
     persistent_netboot: Optional[bool] = None
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
 
@@ -247,6 +257,15 @@ class CreateServerServersAttributes(BaseModel):
                 return value
         return value
 
+    @field_serializer("operating_system")
+    def serialize_operating_system(self, value):
+        if isinstance(value, str):
+            try:
+                return models.CreateServerServersOperatingSystem(value)
+            except ValueError:
+                return value
+        return value
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -256,6 +275,8 @@ class CreateServerServersAttributes(BaseModel):
                 "raid",
                 "disk_layout",
                 "ipxe",
+                "public_network",
+                "public_network_id",
                 "persistent_netboot",
                 "bgp_ready",
                 "billing",
@@ -268,6 +289,8 @@ class CreateServerServersAttributes(BaseModel):
                 "raid",
                 "disk_layout",
                 "ipxe",
+                "public_network",
+                "public_network_id",
                 "bgp_ready",
                 "billing",
             ]
