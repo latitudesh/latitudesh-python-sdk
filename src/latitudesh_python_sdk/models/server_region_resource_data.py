@@ -13,6 +13,7 @@ class SiteTypedDict(TypedDict):
     slug: NotRequired[str]
     facility: NotRequired[str]
     rack_id: NotRequired[str]
+    rack_name: NotRequired[str]
 
 
 class Site(BaseModel):
@@ -26,9 +27,13 @@ class Site(BaseModel):
 
     rack_id: Optional[str] = None
 
+    rack_name: Optional[str] = None
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["id", "name", "slug", "facility", "rack_id"])
+        optional_fields = set(
+            ["id", "name", "slug", "facility", "rack_id", "rack_name"]
+        )
         serialized = handler(self)
         m = {}
 
