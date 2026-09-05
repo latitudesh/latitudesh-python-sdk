@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 97e9fd40-98a0-465e-9d1a-259beac76207
 management:
-  docChecksum: be1cf1ac2e1316dc3c5102d0dc1cc08d
+  docChecksum: 023524a10ed2e0bdfd0d3880acd42e06
   docVersion: "2023-06-01"
   speakeasyVersion: 1.796.4
   generationVersion: 2.935.1
-  releaseVersion: 3.4.3
-  configChecksum: 39440de6a9efcf07db57705cb96a07f3
+  releaseVersion: 3.4.4
+  configChecksum: e3202416bdabf8ed69e05db159785a6e
   repoURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 56917191-aba1-4b3f-8f3b-27bd503dea92
-  pristine_commit_hash: 884556eb04c5975b30e7c30df3bf33d525458304
-  pristine_tree_hash: c39ec6866742e9e9927a4d231bbe97bada373832
+  generation_id: 5aa571fa-1776-4872-b065-114a1986619d
+  pristine_commit_hash: 5f05aab670ba3a0cdb8586d2c969d0cefbaf2d37
+  pristine_tree_hash: cac36ea23d9ca069558d0311ef492b88acd15af4
 features:
   python:
     additionalDependencies: 1.1.0
@@ -2919,8 +2919,8 @@ trackedFiles:
     pristine_git_object: db47e90d921d9350a13ba215e2b07bbb05eb4a5e
   docs/models/site.md:
     id: 750de751fd5e
-    last_write_checksum: sha1:aee4e21bbbc90a5da0a9d6d417667e10cacc740b
-    pristine_git_object: 78b8f4b1eb368112c4a8c0db676919d0f30a5f85
+    last_write_checksum: sha1:f9d659b7f9b4d87579edc5243020675ec71559ed
+    pristine_git_object: c64733d8015f06f804336608d3352377ee779b7a
   docs/models/size.md:
     id: fa13061e86ae
     last_write_checksum: sha1:0291be923cfea5745e15e25c076e70adf93f8054
@@ -4055,8 +4055,8 @@ trackedFiles:
     pristine_git_object: 250e4a286482ffcc3629575515a40adcb44a2702
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:f6a09058bb3086dba4ad4b026969b0d5b1a7c1da
-    pristine_git_object: 9f8737f80d104f7aa945f77af6519759a4ac4860
+    last_write_checksum: sha1:277af5d4326dc16b76b571b3a006e1aec2445afd
+    pristine_git_object: 5236b20965bf83d34c4fe8e0a82e8600209d0e03
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:5354f07fd2821a42340f1573b7f3e029b8a852e1
@@ -4083,8 +4083,8 @@ trackedFiles:
     pristine_git_object: 7482ca81a653516ecd30fd1a10fdb6cc68839195
   src/latitudesh_python_sdk/_version.py:
     id: 65dde1ef31c9
-    last_write_checksum: sha1:961d593c23ef6badc7961cce5bac8bfac7477b15
-    pristine_git_object: 64baacee20f0dfdc7522cadb7c604a718a172ec5
+    last_write_checksum: sha1:b68a9ca8ced99a6c0aa1d66f015776805ed57bbe
+    pristine_git_object: 9af739aaedf12e2e1b4f78be346da4c66645c7dd
   src/latitudesh_python_sdk/apikeys_sdk.py:
     id: 633cbc9c65bd
     last_write_checksum: sha1:af2a49602a6b6a0bc09a8c64a01481e9ded6230b
@@ -5039,8 +5039,8 @@ trackedFiles:
     pristine_git_object: 7b4e1d96300d1c3fdf5ba1f1f782ab1220304eaf
   src/latitudesh_python_sdk/models/server_region_resource_data.py:
     id: 3f2fe372c6df
-    last_write_checksum: sha1:1d9fccd86e4fb72eb7c024958a98b0c19c43909d
-    pristine_git_object: d1eca969a9c5ad275d5850e0f006bea8d2212066
+    last_write_checksum: sha1:63ca5eb601395b8e02dc52270ae5469ed63ce611
+    pristine_git_object: e04ebd7d8ab534fde1ad72c0fbe91b4c6ec02d0a
   src/latitudesh_python_sdk/models/server_rescue.py:
     id: ed0f1dd7d1a5
     last_write_checksum: sha1:13230ea01f46e2c58029c84cb0b1823eac5da3af
@@ -9817,7 +9817,14 @@ examples:
           application/json: {"from": "2025-12-18T07:10:10.998Z", "to": "2025-08-10T01:07:23.648Z", "metrics": {"key": {"unit": "ratio", "current": 0.0041, "points": [{"timestamp": "2026-01-23T20:57:17.621Z", "value": 4617.4}]}}}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `latitudesh.block_storage.post_storage_volumes_map()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.list()`: \n  *  `request` **Changed**\n  *  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.plans.get()`:  `response.data.attributes.regions[].pricing` **Changed** (Breaking ⚠️)\n* `latitudesh.plans.list_storage()`:  `response.data[].attributes.regions[].pricing` **Changed** (Breaking ⚠️)\n* `latitudesh.plans.list_vm_plans()`:  `response.data[].attributes.regions[].pricing` **Changed** (Breaking ⚠️)\n* `latitudesh.object_storage.get_storage_usage()`:  `response.data[].attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.lock()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.update_deploy_config()`: \n  *  `request` **Changed** (Breaking ⚠️)\n  *  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.create()`: \n  *  `request.data.attributes` **Changed**\n  *  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.get()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.update()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.get_deploy_config()`:  `response` **Changed** (Breaking ⚠️)\n* `latitudesh.plans.list()`:  `response.data[].attributes.regions[].pricing` **Changed** (Breaking ⚠️)\n* `latitudesh.servers.unlock()`:  `response.data.attributes` **Changed** (Breaking ⚠️)\n* `latitudesh.private_networks.update()`:  `response.data.attributes.storage` **Added**\n* `latitudesh.block_storage.get_storage_volumes()`:  `response.data[].attributes.block.status` **Added**\n* `latitudesh.block_storage.post_storage_volumes()`:  `response.data.attributes.block.status` **Added**\n* `latitudesh.block_storage.get_storage_volume()`:  `response.data.attributes.block.status` **Added**\n* `latitudesh.managed_databases.show_managed_database_metrics()`: **Added**\n* `latitudesh.private_networks.list()`:  `response.data[].attributes.storage` **Added**\n* `latitudesh.private_networks.create()`:  `response.data.attributes.storage` **Added**\n* `latitudesh.object_storage.get_storage_bucket_metrics()`:  `response.data.attributes.storage.current` **Added**\n* `latitudesh.private_networks.get()`:  `response.data.attributes.storage` **Added**\n* `latitudesh.private_networks.assign()`:  `error.status[422]` **Added**\n* `latitudesh.private_networks.remove_assignment()`:  `error.status[422]` **Added**\n"
+releaseNotes: |
+  ## Python SDK Changes:
+  * `latitudesh.servers.list()`:  `response.data[].attributes.region.site.rack_name` **Added**
+  * `latitudesh.servers.create()`:  `response.data.attributes.region.site.rack_name` **Added**
+  * `latitudesh.servers.get()`:  `response.data.attributes.region.site.rack_name` **Added**
+  * `latitudesh.servers.update()`:  `response.data.attributes.region.site.rack_name` **Added**
+  * `latitudesh.servers.lock()`:  `response.data.attributes.region.site.rack_name` **Added**
+  * `latitudesh.servers.unlock()`:  `response.data.attributes.region.site.rack_name` **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
