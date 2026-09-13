@@ -25,7 +25,7 @@ if TYPE_CHECKING:
     from latitudesh_python_sdk.firewalls_sdk import FirewallsSDK
     from latitudesh_python_sdk.ipaddresses_sdk import IPAddressesSDK
     from latitudesh_python_sdk.kubernetes_clusters_sdk import KubernetesClustersSDK
-    from latitudesh_python_sdk.managed_databases import ManagedDatabases
+    from latitudesh_python_sdk.managed_databases_sdk import ManagedDatabasesSDK
     from latitudesh_python_sdk.marketplace_apps_sdk import MarketplaceAppsSDK
     from latitudesh_python_sdk.object_storage import ObjectStorage
     from latitudesh_python_sdk.operatingsystems_sdk import OperatingSystemsSDK
@@ -88,7 +88,8 @@ class Latitudesh(BaseSDK):
     virtual_machine_restores: "VirtualMachineRestoresSDK"
     private_networks: "PrivateNetworks"
     vpn_sessions: "VpnSessions"
-    managed_databases: "ManagedDatabases"
+    managed_databases: "ManagedDatabasesSDK"
+    r"""Managed database instances (PostgreSQL, ClickHouse)"""
     _sub_sdk_map = {
         "api_keys": ("latitudesh_python_sdk.apikeys_sdk", "APIKeysSDK"),
         "baselines_preview": (
@@ -152,8 +153,8 @@ class Latitudesh(BaseSDK):
         ),
         "vpn_sessions": ("latitudesh_python_sdk.vpnsessions", "VpnSessions"),
         "managed_databases": (
-            "latitudesh_python_sdk.managed_databases",
-            "ManagedDatabases",
+            "latitudesh_python_sdk.managed_databases_sdk",
+            "ManagedDatabasesSDK",
         ),
     }
 

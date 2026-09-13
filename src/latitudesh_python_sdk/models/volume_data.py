@@ -49,7 +49,7 @@ class BlockTypedDict(TypedDict):
     r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
 
     status: NotRequired[Nullable[str]]
-    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, or \"failed\". Mapping is asynchronous, so poll the volume until this reaches a terminal state."""
+    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, \"unmapping\" while the mapping is being removed, or \"failed\". Mapping and unmapping are asynchronous, so poll the volume until this reaches a terminal state. The block object becomes null once the volume is fully unmapped."""
     nqn: NotRequired[Nullable[str]]
     r"""NVMe Qualified Name of the mapped server."""
     nsid: NotRequired[Nullable[int]]
@@ -62,7 +62,7 @@ class Block(BaseModel):
     r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
 
     status: OptionalNullable[str] = UNSET
-    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, or \"failed\". Mapping is asynchronous, so poll the volume until this reaches a terminal state."""
+    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, \"unmapping\" while the mapping is being removed, or \"failed\". Mapping and unmapping are asynchronous, so poll the volume until this reaches a terminal state. The block object becomes null once the volume is fully unmapped."""
 
     nqn: OptionalNullable[str] = UNSET
     r"""NVMe Qualified Name of the mapped server."""
