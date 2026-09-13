@@ -1,0 +1,9 @@
+# PostStorageVolumesMapBlockStorageData
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                         | [models.PostStorageVolumesMapBlockStorageType](../models/poststoragevolumesmapblockstoragetype.md)             | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `attributes`                                                                                                   | [models.PostStorageVolumesMapBlockStorageAttributes](../models/poststoragevolumesmapblockstorageattributes.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

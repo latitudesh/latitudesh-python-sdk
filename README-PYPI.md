@@ -277,6 +277,7 @@ with Latitudesh(
 * [delete_storage_volumes](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#delete_storage_volumes) - Delete volume
 * [post_storage_volumes_mount](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#post_storage_volumes_mount) - Mount volume
 * [post_storage_volumes_map](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#post_storage_volumes_map) - Map volume to server
+* [post_storage_volumes_unmap](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#post_storage_volumes_unmap) - Unmap volume from server
 
 ### [ElasticIps](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/elasticipssdk/README.md)
 
@@ -328,9 +329,15 @@ with Latitudesh(
 * [update_kubernetes_cluster](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#update_kubernetes_cluster) - Update Kubernetes Cluster
 * [get_kubernetes_cluster_kubeconfig](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig
 
-### [ManagedDatabases](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabases/README.md)
+### [ManagedDatabases](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md)
 
-* [show_managed_database_metrics](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabases/README.md#show_managed_database_metrics) - Show managed database metrics
+* [show_managed_database_metrics](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#show_managed_database_metrics) - Show managed database metrics
+* [list_managed_databases](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#list_managed_databases) - List managed databases
+* [create_managed_database](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#create_managed_database) - Create a managed database
+* [show_managed_database](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#show_managed_database) - Show a managed database
+* [destroy_managed_database](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#destroy_managed_database) - Destroy a managed database
+* [update_managed_database](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#update_managed_database) - Update a managed database
+* [list_managed_database_backups](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#list_managed_database_backups) - List managed database backups
 
 ### [MarketplaceApps](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/marketplaceappssdk/README.md)
 
@@ -661,7 +668,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 52 of 174 methods.*
+* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 52 of 181 methods.*
 * [`ResponseValidationError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

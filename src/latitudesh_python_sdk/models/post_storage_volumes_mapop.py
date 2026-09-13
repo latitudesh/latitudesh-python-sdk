@@ -14,43 +14,43 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PostStorageVolumesMapType(str, Enum):
+class PostStorageVolumesMapBlockStorageType(str, Enum):
     VOLUMES = "volumes"
 
 
-class PostStorageVolumesMapAttributesTypedDict(TypedDict):
+class PostStorageVolumesMapBlockStorageAttributesTypedDict(TypedDict):
     server_id: str
     r"""ID of the server that will access the volume. The server must belong to the same project and location as the volume, and must be eligible for bonding."""
 
 
-class PostStorageVolumesMapAttributes(BaseModel):
+class PostStorageVolumesMapBlockStorageAttributes(BaseModel):
     server_id: str
     r"""ID of the server that will access the volume. The server must belong to the same project and location as the volume, and must be eligible for bonding."""
 
 
-class PostStorageVolumesMapDataTypedDict(TypedDict):
-    type: PostStorageVolumesMapType
-    attributes: PostStorageVolumesMapAttributesTypedDict
+class PostStorageVolumesMapBlockStorageDataTypedDict(TypedDict):
+    type: PostStorageVolumesMapBlockStorageType
+    attributes: PostStorageVolumesMapBlockStorageAttributesTypedDict
 
 
-class PostStorageVolumesMapData(BaseModel):
-    type: PostStorageVolumesMapType
+class PostStorageVolumesMapBlockStorageData(BaseModel):
+    type: PostStorageVolumesMapBlockStorageType
 
-    attributes: PostStorageVolumesMapAttributes
-
-
-class PostStorageVolumesMapRequestBodyTypedDict(TypedDict):
-    data: PostStorageVolumesMapDataTypedDict
+    attributes: PostStorageVolumesMapBlockStorageAttributes
 
 
-class PostStorageVolumesMapRequestBody(BaseModel):
-    data: PostStorageVolumesMapData
+class PostStorageVolumesMapBlockStorageRequestBodyTypedDict(TypedDict):
+    data: PostStorageVolumesMapBlockStorageDataTypedDict
+
+
+class PostStorageVolumesMapBlockStorageRequestBody(BaseModel):
+    data: PostStorageVolumesMapBlockStorageData
 
 
 class PostStorageVolumesMapRequestTypedDict(TypedDict):
     id: str
     r"""Volume ID"""
-    request_body: PostStorageVolumesMapRequestBodyTypedDict
+    request_body: PostStorageVolumesMapBlockStorageRequestBodyTypedDict
 
 
 class PostStorageVolumesMapRequest(BaseModel):
@@ -60,7 +60,7 @@ class PostStorageVolumesMapRequest(BaseModel):
     r"""Volume ID"""
 
     request_body: Annotated[
-        PostStorageVolumesMapRequestBody,
+        PostStorageVolumesMapBlockStorageRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
 

@@ -10,6 +10,7 @@
 * [delete_storage_volumes](#delete_storage_volumes) - Delete volume
 * [post_storage_volumes_mount](#post_storage_volumes_mount) - Mount volume
 * [post_storage_volumes_map](#post_storage_volumes_map) - Map volume to server
+* [post_storage_volumes_unmap](#post_storage_volumes_unmap) - Unmap volume from server
 
 ## get_storage_volumes
 
@@ -263,7 +264,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.block_storage.post_storage_volumes_map(id="<id>", data={
-        "type": latitudesh_python_sdk.PostStorageVolumesMapType.VOLUMES,
+        "type": latitudesh_python_sdk.PostStorageVolumesMapBlockStorageType.VOLUMES,
         "attributes": {
             "server_id": "sv_abcd1234",
         },
@@ -276,15 +277,55 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `id`                                                                          | *str*                                                                         | :heavy_check_mark:                                                            | Volume ID                                                                     |
-| `data`                                                                        | [models.PostStorageVolumesMapData](../../models/poststoragevolumesmapdata.md) | :heavy_check_mark:                                                            | N/A                                                                           |
-| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                  | *str*                                                                                                 | :heavy_check_mark:                                                                                    | Volume ID                                                                                             |
+| `data`                                                                                                | [models.PostStorageVolumesMapBlockStorageData](../../models/poststoragevolumesmapblockstoragedata.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `retries`                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                      | :heavy_minus_sign:                                                                                    | Configuration to override the default retry behavior of the client.                                   |
 
 ### Response
 
 **[models.PostStorageVolumesMapResponseBody](../../models/poststoragevolumesmapresponsebody.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## post_storage_volumes_unmap
+
+Unmaps a high performance volume from the server it is currently mapped to.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="post-storage-volumes-unmap" method="post" path="/storage/volumes/{id}/unmap" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.block_storage.post_storage_volumes_unmap(id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | Volume ID                                                           |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.PostStorageVolumesUnmapResponseBody](../../models/poststoragevolumesunmapresponsebody.md)**
 
 ### Errors
 
