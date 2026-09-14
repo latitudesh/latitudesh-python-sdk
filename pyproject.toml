@@ -29,7 +29,7 @@ in-project = true
 [tool.poetry.group.dev.dependencies]
 mypy = "==2.3.1"
 pylint = "==4.0.8"
-pyright = "==1.1.411"
+pyright = "==1.1.414"
 pytest = ">=8.0.0"
 pytest-cov = ">=5.0.0"
 
