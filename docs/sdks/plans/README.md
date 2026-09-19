@@ -9,6 +9,7 @@
 * [list_bandwidth](#list_bandwidth) - List bandwidth plans
 * [update_bandwidth](#update_bandwidth) - Update bandwidth packages
 * [list_storage](#list_storage) - List storage plans
+* [get_lks_plans](#get_lks_plans) - List LKS plans
 * [list_vm_plans](#list_vm_plans) - List VM plans
 * [get_managed_database_plans](#get_managed_database_plans) - List managed database plans
 
@@ -248,13 +249,54 @@ with Latitudesh(
 
 | Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `filter_storage_type`                                               | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Filter by storage type (filesystem or object)                       |
+| `filter_storage_type`                                               | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Filter by storage type (filesystem, object, or volume)              |
 | `filter_storage_class`                                              | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Filter by storage class (standard or high_performance)              |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
 
 ### Response
 
 **[models.StoragePlans](../../models/storageplans.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## get_lks_plans
+
+Lists bare metal plans available to LKS with per-site capacity for a node pool.
+`attributes.regions.locations.in_stock_count` gives the number of servers a node pool can get, keyed by site slug.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get-lks-plans" method="get" path="/plans/lks" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.plans.get_lks_plans()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.LksPlans](../../models/lksplans.md)**
 
 ### Errors
 

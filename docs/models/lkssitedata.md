@@ -1,0 +1,10 @@
+# LksSiteData
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `id`                                                                         | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | Site slug — pass it as `site` when creating a cluster                        | DAL2                                                                         |
+| `type`                                                                       | [Optional[models.LksSiteDataType]](../models/lkssitedatatype.md)             | :heavy_minus_sign:                                                           | N/A                                                                          |                                                                              |
+| `attributes`                                                                 | [Optional[models.LksSiteDataAttributes]](../models/lkssitedataattributes.md) | :heavy_minus_sign:                                                           | N/A                                                                          |                                                                              |

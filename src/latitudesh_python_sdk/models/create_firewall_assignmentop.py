@@ -19,14 +19,14 @@ class CreateFirewallAssignmentFirewallsType(str, Enum):
 
 class CreateFirewallAssignmentFirewallsAttributesTypedDict(TypedDict):
     server_id: NotRequired[str]
-    r"""The server ID to assign. Provide exactly one of server_id or virtual_machine_id."""
+    r"""The server ID to assign. Provide exactly one of server_id or virtual_machine_id. A server can be assigned to at most one firewall."""
     virtual_machine_id: NotRequired[str]
     r"""The virtual machine ID to assign. Provide exactly one of server_id or virtual_machine_id. A virtual machine can be assigned to at most one firewall."""
 
 
 class CreateFirewallAssignmentFirewallsAttributes(BaseModel):
     server_id: Optional[str] = None
-    r"""The server ID to assign. Provide exactly one of server_id or virtual_machine_id."""
+    r"""The server ID to assign. Provide exactly one of server_id or virtual_machine_id. A server can be assigned to at most one firewall."""
 
     virtual_machine_id: Optional[str] = None
     r"""The virtual machine ID to assign. Provide exactly one of server_id or virtual_machine_id. A virtual machine can be assigned to at most one firewall."""

@@ -6,11 +6,12 @@ from latitudesh_python_sdk._hooks import HookContext
 from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
 from latitudesh_python_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Mapping, Optional, Union
+from typing_extensions import deprecated
 
 
 class BlockStorage(BaseSDK):
-    def get_storage_volumes(
+    def list_volumes(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -18,7 +19,7 @@ class BlockStorage(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetStorageVolumesResponseBody:
+    ) -> models.ListVolumesResponseBody:
         r"""List volumes
 
         Lists all the volumes from a team.
@@ -39,7 +40,7 @@ class BlockStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetStorageVolumesRequest(
+        request = models.ListVolumesRequest(
             filter_project=filter_project,
         )
 
@@ -72,13 +73,13 @@ class BlockStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="get-storage-volumes",
+                operation_id="list-volumes",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Block Storage"],
-                extensions={"x-mint": {"href": "/api-reference/get-storage-volumes"}},
+                extensions={"x-mint": {"href": "/api-reference/list-volumes"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -86,9 +87,7 @@ class BlockStorage(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(
-                models.GetStorageVolumesResponseBody, http_res
-            )
+            return unmarshal_json_response(models.ListVolumesResponseBody, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -98,7 +97,7 @@ class BlockStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    async def get_storage_volumes_async(
+    async def list_volumes_async(
         self,
         *,
         filter_project: Optional[str] = None,
@@ -106,7 +105,7 @@ class BlockStorage(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetStorageVolumesResponseBody:
+    ) -> models.ListVolumesResponseBody:
         r"""List volumes
 
         Lists all the volumes from a team.
@@ -127,7 +126,7 @@ class BlockStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetStorageVolumesRequest(
+        request = models.ListVolumesRequest(
             filter_project=filter_project,
         )
 
@@ -160,13 +159,13 @@ class BlockStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="get-storage-volumes",
+                operation_id="list-volumes",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Block Storage"],
-                extensions={"x-mint": {"href": "/api-reference/get-storage-volumes"}},
+                extensions={"x-mint": {"href": "/api-reference/list-volumes"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -174,9 +173,7 @@ class BlockStorage(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(
-                models.GetStorageVolumesResponseBody, http_res
-            )
+            return unmarshal_json_response(models.ListVolumesResponseBody, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -186,18 +183,18 @@ class BlockStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    def post_storage_volumes(
+    def create_volume(
         self,
         *,
         data: Union[
-            models.PostStorageVolumesBlockStorageData,
-            models.PostStorageVolumesBlockStorageDataTypedDict,
+            models.CreateVolumeBlockStorageData,
+            models.CreateVolumeBlockStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PostStorageVolumesResponseBody:
+    ) -> models.CreateVolumeResponseBody:
         r"""Create volume
 
         Allows you to add persistent storage to a project. These volumes can be used to store data across your servers.
@@ -218,10 +215,8 @@ class BlockStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageVolumesBlockStorageRequestBody(
-            data=utils.get_pydantic_model(
-                data, models.PostStorageVolumesBlockStorageData
-            ),
+        request = models.CreateVolumeBlockStorageRequestBody(
+            data=utils.get_pydantic_model(data, models.CreateVolumeBlockStorageData),
         )
 
         req = self._build_request(
@@ -242,7 +237,7 @@ class BlockStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PostStorageVolumesBlockStorageRequestBody,
+                models.CreateVolumeBlockStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -260,27 +255,21 @@ class BlockStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post-storage-volumes",
+                operation_id="create-volume",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Block Storage"],
-                extensions={"x-mint": {"href": "/api-reference/post-storage-volumes"}},
+                extensions={"x-mint": {"href": "/api-reference/create-volume"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return unmarshal_json_response(
-                models.PostStorageVolumesResponseBody, http_res
-            )
-        if utils.match_response(http_res, "503", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
+            return unmarshal_json_response(models.CreateVolumeResponseBody, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -290,18 +279,18 @@ class BlockStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    async def post_storage_volumes_async(
+    async def create_volume_async(
         self,
         *,
         data: Union[
-            models.PostStorageVolumesBlockStorageData,
-            models.PostStorageVolumesBlockStorageDataTypedDict,
+            models.CreateVolumeBlockStorageData,
+            models.CreateVolumeBlockStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PostStorageVolumesResponseBody:
+    ) -> models.CreateVolumeResponseBody:
         r"""Create volume
 
         Allows you to add persistent storage to a project. These volumes can be used to store data across your servers.
@@ -322,10 +311,8 @@ class BlockStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageVolumesBlockStorageRequestBody(
-            data=utils.get_pydantic_model(
-                data, models.PostStorageVolumesBlockStorageData
-            ),
+        request = models.CreateVolumeBlockStorageRequestBody(
+            data=utils.get_pydantic_model(data, models.CreateVolumeBlockStorageData),
         )
 
         req = self._build_request_async(
@@ -346,7 +333,7 @@ class BlockStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PostStorageVolumesBlockStorageRequestBody,
+                models.CreateVolumeBlockStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -364,27 +351,21 @@ class BlockStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post-storage-volumes",
+                operation_id="create-volume",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Block Storage"],
-                extensions={"x-mint": {"href": "/api-reference/post-storage-volumes"}},
+                extensions={"x-mint": {"href": "/api-reference/create-volume"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
-            return unmarshal_json_response(
-                models.PostStorageVolumesResponseBody, http_res
-            )
-        if utils.match_response(http_res, "503", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
+            return unmarshal_json_response(models.CreateVolumeResponseBody, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -394,7 +375,7 @@ class BlockStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    def get_storage_volume(
+    def retrieve_volume(
         self,
         *,
         id: str,
@@ -402,7 +383,7 @@ class BlockStorage(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetStorageVolumeResponseBody:
+    ) -> models.RetrieveVolumeResponseBody:
         r"""Retrieve volume
 
         Shows details of a specific volume.
@@ -423,7 +404,7 @@ class BlockStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetStorageVolumeRequest(
+        request = models.RetrieveVolumeRequest(
             id=id,
         )
 
@@ -456,13 +437,13 @@ class BlockStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="get-storage-volume",
+                operation_id="retrieve-volume",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Block Storage"],
-                extensions={"x-mint": {"href": "/api-reference/get-storage-volume"}},
+                extensions={"x-mint": {"href": "/api-reference/retrieve-volume"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -470,9 +451,7 @@ class BlockStorage(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(
-                models.GetStorageVolumeResponseBody, http_res
-            )
+            return unmarshal_json_response(models.RetrieveVolumeResponseBody, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -482,7 +461,7 @@ class BlockStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    async def get_storage_volume_async(
+    async def retrieve_volume_async(
         self,
         *,
         id: str,
@@ -490,7 +469,7 @@ class BlockStorage(BaseSDK):
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.GetStorageVolumeResponseBody:
+    ) -> models.RetrieveVolumeResponseBody:
         r"""Retrieve volume
 
         Shows details of a specific volume.
@@ -511,7 +490,7 @@ class BlockStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetStorageVolumeRequest(
+        request = models.RetrieveVolumeRequest(
             id=id,
         )
 
@@ -544,13 +523,13 @@ class BlockStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="get-storage-volume",
+                operation_id="retrieve-volume",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Block Storage"],
-                extensions={"x-mint": {"href": "/api-reference/get-storage-volume"}},
+                extensions={"x-mint": {"href": "/api-reference/retrieve-volume"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -558,9 +537,7 @@ class BlockStorage(BaseSDK):
         )
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(
-                models.GetStorageVolumeResponseBody, http_res
-            )
+            return unmarshal_json_response(models.RetrieveVolumeResponseBody, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -570,7 +547,7 @@ class BlockStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    def delete_storage_volumes(
+    def delete_volume(
         self,
         *,
         id: str,
@@ -599,7 +576,7 @@ class BlockStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteStorageVolumesRequest(
+        request = models.DeleteVolumeRequest(
             id=id,
         )
 
@@ -632,15 +609,13 @@ class BlockStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="delete-storage-volumes",
+                operation_id="delete-volume",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Block Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/delete-storage-volumes"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/delete-volume"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -658,7 +633,7 @@ class BlockStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    async def delete_storage_volumes_async(
+    async def delete_volume_async(
         self,
         *,
         id: str,
@@ -687,7 +662,7 @@ class BlockStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteStorageVolumesRequest(
+        request = models.DeleteVolumeRequest(
             id=id,
         )
 
@@ -720,15 +695,13 @@ class BlockStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="delete-storage-volumes",
+                operation_id="delete-volume",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Block Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/delete-storage-volumes"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/delete-volume"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -746,20 +719,20 @@ class BlockStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    def post_storage_volumes_mount(
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
+    def mount_volume(
         self,
         *,
         id: str,
-        data: Union[
-            models.PostStorageVolumesMountData,
-            models.PostStorageVolumesMountDataTypedDict,
-        ],
+        data: Union[models.MountVolumeData, models.MountVolumeDataTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Mount volume
+        r"""Mount volume (deprecated)
 
         Mounts a volume by adding the client to an allowed list
 
@@ -780,10 +753,10 @@ class BlockStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageVolumesMountRequest(
+        request = models.MountVolumeRequest(
             id=id,
-            request_body=models.PostStorageVolumesMountRequestBody(
-                data=utils.get_pydantic_model(data, models.PostStorageVolumesMountData),
+            request_body=models.MountVolumeRequestBody(
+                data=utils.get_pydantic_model(data, models.MountVolumeData),
             ),
         )
 
@@ -805,7 +778,7 @@ class BlockStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PostStorageVolumesMountRequestBody,
+                models.MountVolumeRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -823,15 +796,13 @@ class BlockStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post-storage-volumes-mount",
+                operation_id="mount-volume",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Block Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/post-storage-volumes-mount"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/mount-volume"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -849,20 +820,20 @@ class BlockStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    async def post_storage_volumes_mount_async(
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
+    async def mount_volume_async(
         self,
         *,
         id: str,
-        data: Union[
-            models.PostStorageVolumesMountData,
-            models.PostStorageVolumesMountDataTypedDict,
-        ],
+        data: Union[models.MountVolumeData, models.MountVolumeDataTypedDict],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
     ):
-        r"""Mount volume
+        r"""Mount volume (deprecated)
 
         Mounts a volume by adding the client to an allowed list
 
@@ -883,10 +854,10 @@ class BlockStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageVolumesMountRequest(
+        request = models.MountVolumeRequest(
             id=id,
-            request_body=models.PostStorageVolumesMountRequestBody(
-                data=utils.get_pydantic_model(data, models.PostStorageVolumesMountData),
+            request_body=models.MountVolumeRequestBody(
+                data=utils.get_pydantic_model(data, models.MountVolumeData),
             ),
         )
 
@@ -908,7 +879,7 @@ class BlockStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PostStorageVolumesMountRequestBody,
+                models.MountVolumeRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -926,15 +897,13 @@ class BlockStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post-storage-volumes-mount",
+                operation_id="mount-volume",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Block Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/post-storage-volumes-mount"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/mount-volume"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -952,19 +921,19 @@ class BlockStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    def post_storage_volumes_map(
+    def map_volume(
         self,
         *,
         id: str,
         data: Union[
-            models.PostStorageVolumesMapData, models.PostStorageVolumesMapDataTypedDict
+            models.MapVolumeBlockStorageData, models.MapVolumeBlockStorageDataTypedDict
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PostStorageVolumesMapResponseBody:
-        r"""Map volume to server
+    ) -> models.MapVolumeResponseBody:
+        r"""Map volume
 
         Maps a high performance volume to a server over NVMe-TCP.
 
@@ -985,10 +954,10 @@ class BlockStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageVolumesMapRequest(
+        request = models.MapVolumeRequest(
             id=id,
-            request_body=models.PostStorageVolumesMapRequestBody(
-                data=utils.get_pydantic_model(data, models.PostStorageVolumesMapData),
+            request_body=models.MapVolumeBlockStorageRequestBody(
+                data=utils.get_pydantic_model(data, models.MapVolumeBlockStorageData),
             ),
         )
 
@@ -1002,7 +971,7 @@ class BlockStorage(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -1010,7 +979,7 @@ class BlockStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PostStorageVolumesMapRequestBody,
+                models.MapVolumeBlockStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1028,25 +997,21 @@ class BlockStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post-storage-volumes-map",
+                operation_id="map-volume",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Block Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/post-storage-volumes-map"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/map-volume"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "202", "application/json"):
-            return unmarshal_json_response(
-                models.PostStorageVolumesMapResponseBody, http_res
-            )
+        if utils.match_response(http_res, "202", "application/vnd.api+json"):
+            return unmarshal_json_response(models.MapVolumeResponseBody, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1056,19 +1021,19 @@ class BlockStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
-    async def post_storage_volumes_map_async(
+    async def map_volume_async(
         self,
         *,
         id: str,
         data: Union[
-            models.PostStorageVolumesMapData, models.PostStorageVolumesMapDataTypedDict
+            models.MapVolumeBlockStorageData, models.MapVolumeBlockStorageDataTypedDict
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PostStorageVolumesMapResponseBody:
-        r"""Map volume to server
+    ) -> models.MapVolumeResponseBody:
+        r"""Map volume
 
         Maps a high performance volume to a server over NVMe-TCP.
 
@@ -1089,10 +1054,10 @@ class BlockStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageVolumesMapRequest(
+        request = models.MapVolumeRequest(
             id=id,
-            request_body=models.PostStorageVolumesMapRequestBody(
-                data=utils.get_pydantic_model(data, models.PostStorageVolumesMapData),
+            request_body=models.MapVolumeBlockStorageRequestBody(
+                data=utils.get_pydantic_model(data, models.MapVolumeBlockStorageData),
             ),
         )
 
@@ -1106,7 +1071,7 @@ class BlockStorage(BaseSDK):
             request_has_path_params=True,
             request_has_query_params=True,
             user_agent_header="user-agent",
-            accept_header_value="application/json",
+            accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
@@ -1114,7 +1079,7 @@ class BlockStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PostStorageVolumesMapRequestBody,
+                models.MapVolumeBlockStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1132,25 +1097,193 @@ class BlockStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post-storage-volumes-map",
+                operation_id="map-volume",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Block Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/post-storage-volumes-map"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/map-volume"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "202", "application/json"):
-            return unmarshal_json_response(
-                models.PostStorageVolumesMapResponseBody, http_res
-            )
+        if utils.match_response(http_res, "202", "application/vnd.api+json"):
+            return unmarshal_json_response(models.MapVolumeResponseBody, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def unmap_volume(
+        self,
+        *,
+        id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UnmapVolumeResponseBody:
+        r"""Unmap volume
+
+        Unmaps a high performance volume from the server it is currently mapped to.
+
+        :param id: Volume ID
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UnmapVolumeRequest(
+            id=id,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/storage/volumes/{id}/unmap",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="unmap-volume",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Block Storage"],
+                extensions={"x-mint": {"href": "/api-reference/unmap-volume"}},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "202", "application/vnd.api+json"):
+            return unmarshal_json_response(models.UnmapVolumeResponseBody, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def unmap_volume_async(
+        self,
+        *,
+        id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.UnmapVolumeResponseBody:
+        r"""Unmap volume
+
+        Unmaps a high performance volume from the server it is currently mapped to.
+
+        :param id: Volume ID
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UnmapVolumeRequest(
+            id=id,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/storage/volumes/{id}/unmap",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="unmap-volume",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Block Storage"],
+                extensions={"x-mint": {"href": "/api-reference/unmap-volume"}},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "202", "application/vnd.api+json"):
+            return unmarshal_json_response(models.UnmapVolumeResponseBody, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
