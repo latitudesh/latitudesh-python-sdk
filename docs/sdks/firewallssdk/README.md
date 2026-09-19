@@ -16,7 +16,7 @@
 
 ## get_all_firewall_assignments
 
-Returns a list of all servers and virtual machines assigned to one or more firewalls.
+Returns a list of all servers and virtual machines assigned to a firewall.
 
 ### Example Usage
 
