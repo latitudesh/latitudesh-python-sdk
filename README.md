@@ -271,12 +271,13 @@ with Latitudesh(
 
 ### [BlockStorage](docs/sdks/blockstorage/README.md)
 
-* [get_storage_volumes](docs/sdks/blockstorage/README.md#get_storage_volumes) - List volumes
-* [post_storage_volumes](docs/sdks/blockstorage/README.md#post_storage_volumes) - Create volume
-* [get_storage_volume](docs/sdks/blockstorage/README.md#get_storage_volume) - Retrieve volume
-* [delete_storage_volumes](docs/sdks/blockstorage/README.md#delete_storage_volumes) - Delete volume
-* [post_storage_volumes_mount](docs/sdks/blockstorage/README.md#post_storage_volumes_mount) - Mount volume
-* [post_storage_volumes_map](docs/sdks/blockstorage/README.md#post_storage_volumes_map) - Map volume to server
+* [list_volumes](docs/sdks/blockstorage/README.md#list_volumes) - List volumes
+* [create_volume](docs/sdks/blockstorage/README.md#create_volume) - Create volume
+* [retrieve_volume](docs/sdks/blockstorage/README.md#retrieve_volume) - Retrieve volume
+* [delete_volume](docs/sdks/blockstorage/README.md#delete_volume) - Delete volume
+* [~~mount_volume~~](docs/sdks/blockstorage/README.md#mount_volume) - Mount volume (deprecated) :warning: **Deprecated**
+* [map_volume](docs/sdks/blockstorage/README.md#map_volume) - Map volume
+* [unmap_volume](docs/sdks/blockstorage/README.md#unmap_volume) - Unmap volume
 
 ### [ElasticIps](docs/sdks/elasticipssdk/README.md)
 
@@ -318,19 +319,41 @@ with Latitudesh(
 * [list](docs/sdks/ipaddressessdk/README.md#list) - List IPs
 * [get](docs/sdks/ipaddressessdk/README.md#get) - Retrieve an IP
 
-### [KubernetesClusters](docs/sdks/kubernetesclusterssdk/README.md)
+### [~~KubernetesClusters~~](docs/sdks/kubernetesclusterssdk/README.md)
 
-* [list_kubernetes_clusters](docs/sdks/kubernetesclusterssdk/README.md#list_kubernetes_clusters) - List Kubernetes Clusters
-* [create_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#create_kubernetes_cluster) - Create a Kubernetes Cluster
-* [list_kubernetes_available_versions](docs/sdks/kubernetesclusterssdk/README.md#list_kubernetes_available_versions) - List Available Kubernetes Versions
-* [get_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster) - Get a Kubernetes Cluster
-* [delete_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#delete_kubernetes_cluster) - Delete a Kubernetes Cluster
-* [update_kubernetes_cluster](docs/sdks/kubernetesclusterssdk/README.md#update_kubernetes_cluster) - Update Kubernetes Cluster
-* [get_kubernetes_cluster_kubeconfig](docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig
+* [~~list_kubernetes_clusters~~](docs/sdks/kubernetesclusterssdk/README.md#list_kubernetes_clusters) - List Kubernetes Clusters :warning: **Deprecated**
+* [~~create_kubernetes_cluster~~](docs/sdks/kubernetesclusterssdk/README.md#create_kubernetes_cluster) - Create a Kubernetes Cluster :warning: **Deprecated**
+* [~~list_kubernetes_available_versions~~](docs/sdks/kubernetesclusterssdk/README.md#list_kubernetes_available_versions) - List Available Kubernetes Versions :warning: **Deprecated**
+* [~~get_kubernetes_cluster~~](docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster) - Get a Kubernetes Cluster :warning: **Deprecated**
+* [~~delete_kubernetes_cluster~~](docs/sdks/kubernetesclusterssdk/README.md#delete_kubernetes_cluster) - Delete a Kubernetes Cluster :warning: **Deprecated**
+* [~~update_kubernetes_cluster~~](docs/sdks/kubernetesclusterssdk/README.md#update_kubernetes_cluster) - Update Kubernetes Cluster :warning: **Deprecated**
+* [~~get_kubernetes_cluster_kubeconfig~~](docs/sdks/kubernetesclusterssdk/README.md#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig :warning: **Deprecated**
 
-### [ManagedDatabases](docs/sdks/manageddatabases/README.md)
+### [Lks](docs/sdks/lks/README.md)
 
-* [show_managed_database_metrics](docs/sdks/manageddatabases/README.md#show_managed_database_metrics) - Show managed database metrics
+* [list_lks_clusters](docs/sdks/lks/README.md#list_lks_clusters) - List LKS clusters
+* [create_lks_cluster](docs/sdks/lks/README.md#create_lks_cluster) - Create an LKS cluster
+* [get_lks_cluster](docs/sdks/lks/README.md#get_lks_cluster) - Get an LKS cluster
+* [delete_lks_cluster](docs/sdks/lks/README.md#delete_lks_cluster) - Delete an LKS cluster
+* [update_lks_cluster](docs/sdks/lks/README.md#update_lks_cluster) - Update an LKS cluster
+* [get_lks_cluster_kubeconfig](docs/sdks/lks/README.md#get_lks_cluster_kubeconfig) - Get the cluster kubeconfig
+* [list_lks_node_pools](docs/sdks/lks/README.md#list_lks_node_pools) - List node pools
+* [create_lks_node_pool](docs/sdks/lks/README.md#create_lks_node_pool) - Create a node pool
+* [get_lks_node_pool](docs/sdks/lks/README.md#get_lks_node_pool) - Get a node pool
+* [delete_lks_node_pool](docs/sdks/lks/README.md#delete_lks_node_pool) - Delete a node pool
+* [update_lks_node_pool](docs/sdks/lks/README.md#update_lks_node_pool) - Update a node pool
+* [list_lks_available_versions](docs/sdks/lks/README.md#list_lks_available_versions) - List available Kubernetes versions
+* [list_lks_sites](docs/sdks/lks/README.md#list_lks_sites) - List sites available for LKS
+
+### [ManagedDatabases](docs/sdks/manageddatabasessdk/README.md)
+
+* [show_managed_database_metrics](docs/sdks/manageddatabasessdk/README.md#show_managed_database_metrics) - Show managed database metrics
+* [list_managed_databases](docs/sdks/manageddatabasessdk/README.md#list_managed_databases) - List managed databases
+* [create_managed_database](docs/sdks/manageddatabasessdk/README.md#create_managed_database) - Create a managed database
+* [show_managed_database](docs/sdks/manageddatabasessdk/README.md#show_managed_database) - Show a managed database
+* [destroy_managed_database](docs/sdks/manageddatabasessdk/README.md#destroy_managed_database) - Destroy a managed database
+* [update_managed_database](docs/sdks/manageddatabasessdk/README.md#update_managed_database) - Update a managed database
+* [list_managed_database_backups](docs/sdks/manageddatabasessdk/README.md#list_managed_database_backups) - List managed database backups
 
 ### [MarketplaceApps](docs/sdks/marketplaceappssdk/README.md)
 
@@ -366,6 +389,7 @@ with Latitudesh(
 * [list_bandwidth](docs/sdks/plans/README.md#list_bandwidth) - List bandwidth plans
 * [update_bandwidth](docs/sdks/plans/README.md#update_bandwidth) - Update bandwidth packages
 * [list_storage](docs/sdks/plans/README.md#list_storage) - List storage plans
+* [get_lks_plans](docs/sdks/plans/README.md#get_lks_plans) - List LKS plans
 * [list_vm_plans](docs/sdks/plans/README.md#list_vm_plans) - List VM plans
 * [get_managed_database_plans](docs/sdks/plans/README.md#get_managed_database_plans) - List managed database plans
 
@@ -661,7 +685,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 52 of 174 methods.*
+* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 64 of 195 methods.*
 * [`ResponseValidationError`](./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
