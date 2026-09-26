@@ -11,7 +11,7 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 
 class GetStoragePlansRequestTypedDict(TypedDict):
     filter_storage_type: NotRequired[str]
-    r"""Filter by storage type (filesystem or object)"""
+    r"""Filter by storage type (filesystem, object, or volume)"""
     filter_storage_class: NotRequired[str]
     r"""Filter by storage class (standard or high_performance)"""
 
@@ -22,7 +22,7 @@ class GetStoragePlansRequest(BaseModel):
         pydantic.Field(alias="filter[storage_type]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Filter by storage type (filesystem or object)"""
+    r"""Filter by storage type (filesystem, object, or volume)"""
 
     filter_storage_class: Annotated[
         Optional[str],
