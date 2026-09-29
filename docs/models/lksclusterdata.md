@@ -1,0 +1,10 @@
+# LksClusterData
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        | Example                                                                            |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `id`                                                                               | *Optional[str]*                                                                    | :heavy_minus_sign:                                                                 | N/A                                                                                | lksc_pRMLydp0dQKr1                                                                 |
+| `type`                                                                             | [Optional[models.LksClusterDataType]](../models/lksclusterdatatype.md)             | :heavy_minus_sign:                                                                 | N/A                                                                                |                                                                                    |
+| `attributes`                                                                       | [Optional[models.LksClusterDataAttributes]](../models/lksclusterdataattributes.md) | :heavy_minus_sign:                                                                 | N/A                                                                                |                                                                                    |

@@ -7,9 +7,13 @@ from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
 from latitudesh_python_sdk.utils.unmarshal_json_response import unmarshal_json_response
 from typing import Any, Mapping, Optional, Union
+from typing_extensions import deprecated
 
 
 class KubernetesClustersSDK(BaseSDK):
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def list_kubernetes_clusters(
         self,
         *,
@@ -101,6 +105,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def list_kubernetes_clusters_async(
         self,
         *,
@@ -192,6 +199,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create_kubernetes_cluster(
         self,
         *,
@@ -300,6 +310,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_kubernetes_cluster_async(
         self,
         *,
@@ -408,6 +421,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def list_kubernetes_available_versions(
         self,
         *,
@@ -498,6 +514,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def list_kubernetes_available_versions_async(
         self,
         *,
@@ -588,6 +607,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def get_kubernetes_cluster(
         self,
         *,
@@ -679,6 +701,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def get_kubernetes_cluster_async(
         self,
         *,
@@ -770,6 +795,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def delete_kubernetes_cluster(
         self,
         *,
@@ -865,6 +893,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def delete_kubernetes_cluster_async(
         self,
         *,
@@ -960,6 +991,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def update_kubernetes_cluster(
         self,
         *,
@@ -1094,6 +1128,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def update_kubernetes_cluster_async(
         self,
         *,
@@ -1228,6 +1265,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def get_kubernetes_cluster_kubeconfig(
         self,
         *,
@@ -1323,6 +1363,9 @@ class KubernetesClustersSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def get_kubernetes_cluster_kubeconfig_async(
         self,
         *,

@@ -282,9 +282,9 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
         "attributes": {
             "project": "proj_lxWpD699qm6rk",
-            "plan": latitudesh_python_sdk.CreateServerServersPlan.C2_SMALL_X86,
+            "plan": latitudesh_python_sdk.CreateServerServersPlan.M4_METAL_XLARGE,
             "site": latitudesh_python_sdk.CreateServerServersSite.ASH,
-            "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_22_04_X64_LTS,
+            "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.ALMALINUX_10,
             "hostname": "BRC1",
         },
     })
@@ -310,9 +310,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
         "attributes": {
             "project": "proj_kjQwdEMXdYNVP",
-            "plan": latitudesh_python_sdk.CreateServerServersPlan.C2_SMALL_X86,
             "site": latitudesh_python_sdk.CreateServerServersSite.SAO,
-            "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_22_04_X64_LTS,
             "hostname": "BRC1",
             "billing": latitudesh_python_sdk.CreateServerServersBilling.MONTHLY,
         },
@@ -339,9 +337,9 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
         "attributes": {
             "project": "<value>",
-            "plan": latitudesh_python_sdk.CreateServerServersPlan.M4_METAL_SMALL,
-            "site": latitudesh_python_sdk.CreateServerServersSite.ASH,
-            "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_20_04_X64_LTS,
+            "plan": latitudesh_python_sdk.CreateServerServersPlan.M4_METAL_XLARGE,
+            "site": latitudesh_python_sdk.CreateServerServersSite.AMS,
+            "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.ROCKY_9,
             "hostname": "amused-shadowbox.com",
         },
     })
@@ -367,9 +365,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateServerServersType.SERVERS,
         "attributes": {
             "project": "proj_RMLydp9XqQKr1",
-            "plan": latitudesh_python_sdk.CreateServerServersPlan.C2_SMALL_X86,
             "site": latitudesh_python_sdk.CreateServerServersSite.SAO,
-            "operating_system": latitudesh_python_sdk.CreateServerServersOperatingSystem.UBUNTU_22_04_X64_LTS,
             "hostname": "BRC1",
             "ssh_keys": [
                 "ssh_93YjJOLydvZ87",
@@ -832,7 +828,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.UpdateServerDeployConfigServersType.DEPLOY_CONFIG,
         "attributes": {
             "hostname": "my-hostname",
-            "operating_system": latitudesh_python_sdk.UpdateServerDeployConfigServersOperatingSystem.UBUNTU_20_04_X64_LTS,
+            "operating_system": latitudesh_python_sdk.UpdateServerDeployConfigServersOperatingSystem.CENTOS_9_STREAM,
             "raid": latitudesh_python_sdk.UpdateServerDeployConfigServersRaid.RAID_1,
             "user_data": "ud_5LA73qkjdaJ2o",
             "ssh_keys": [
@@ -1698,7 +1694,6 @@ with Latitudesh(
     latitudesh.servers.reinstall(server_id="sv_LGXPdWK8dnNWk", data={
         "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
         "attributes": {
-            "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.UBUNTU_22_04_X64_LTS,
             "hostname": "BRC1",
         },
     })
@@ -1722,7 +1717,6 @@ with Latitudesh(
     latitudesh.servers.reinstall(server_id="sv_Gr47qlKvdAg0m", data={
         "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
         "attributes": {
-            "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.UBUNTU_22_04_X64_LTS,
             "hostname": "BRC1",
             "ssh_keys": [
                 "37",
@@ -1751,7 +1745,6 @@ with Latitudesh(
     latitudesh.servers.reinstall(server_id="sv_0L6WO1m1OPlXy", data={
         "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
         "attributes": {
-            "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.UBUNTU_22_04_X64_LTS,
             "hostname": "BRC1",
             "ssh_keys": [
                 "36",
@@ -1800,7 +1793,6 @@ with Latitudesh(
     latitudesh.servers.reinstall(server_id="sv_RMLydp9XqQKr1", data={
         "type": latitudesh_python_sdk.CreateServerReinstallServersType.REINSTALLS,
         "attributes": {
-            "operating_system": latitudesh_python_sdk.CreateServerReinstallServersOperatingSystem.WINDOWS_SERVER_2019_STD_V1,
             "hostname": "BRC1",
             "raid": latitudesh_python_sdk.CreateServerReinstallServersRaid.RAID_0,
         },

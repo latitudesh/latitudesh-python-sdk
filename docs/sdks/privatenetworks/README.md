@@ -183,7 +183,7 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK,
         "attributes": {
             "description": "São Paulo VLAN",
-            "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
+            "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.LAX2,
             "project": "ergonomic-steel-bag",
         },
     })
@@ -234,7 +234,6 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK,
         "attributes": {
             "description": "São Paulo VLAN",
-            "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
             "project": "lightweight-rubber-shirt",
         },
     })
@@ -260,7 +259,6 @@ with Latitudesh(
         "type": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksType.VIRTUAL_NETWORK,
         "attributes": {
             "description": "São Paulo VLAN",
-            "site": latitudesh_python_sdk.CreateVirtualNetworkPrivateNetworksSite.MIA,
             "project": "enormous-paper-clock",
         },
     })
