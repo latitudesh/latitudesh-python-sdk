@@ -1,21 +1,26 @@
-# KubernetesClusters
+# ~~KubernetesClusters~~
+
+> [!WARNING]
+> This SDK is **DEPRECATED**
 
 ## Overview
 
 ### Available Operations
 
-* [list_kubernetes_clusters](#list_kubernetes_clusters) - List Kubernetes Clusters
-* [create_kubernetes_cluster](#create_kubernetes_cluster) - Create a Kubernetes Cluster
-* [list_kubernetes_available_versions](#list_kubernetes_available_versions) - List Available Kubernetes Versions
-* [get_kubernetes_cluster](#get_kubernetes_cluster) - Get a Kubernetes Cluster
-* [delete_kubernetes_cluster](#delete_kubernetes_cluster) - Delete a Kubernetes Cluster
-* [update_kubernetes_cluster](#update_kubernetes_cluster) - Update Kubernetes Cluster
-* [get_kubernetes_cluster_kubeconfig](#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig
+* [~~list_kubernetes_clusters~~](#list_kubernetes_clusters) - List Kubernetes Clusters :warning: **Deprecated**
+* [~~create_kubernetes_cluster~~](#create_kubernetes_cluster) - Create a Kubernetes Cluster :warning: **Deprecated**
+* [~~list_kubernetes_available_versions~~](#list_kubernetes_available_versions) - List Available Kubernetes Versions :warning: **Deprecated**
+* [~~get_kubernetes_cluster~~](#get_kubernetes_cluster) - Get a Kubernetes Cluster :warning: **Deprecated**
+* [~~delete_kubernetes_cluster~~](#delete_kubernetes_cluster) - Delete a Kubernetes Cluster :warning: **Deprecated**
+* [~~update_kubernetes_cluster~~](#update_kubernetes_cluster) - Update Kubernetes Cluster :warning: **Deprecated**
+* [~~get_kubernetes_cluster_kubeconfig~~](#get_kubernetes_cluster_kubeconfig) - Get Kubernetes Cluster Kubeconfig :warning: **Deprecated**
 
-## list_kubernetes_clusters
+## ~~list_kubernetes_clusters~~
 
 Lists all Kubernetes clusters for a project.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage: EmptyList
 
@@ -72,7 +77,7 @@ with Latitudesh(
 | models.ErrorObject       | 400, 401                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## create_kubernetes_cluster
+## ~~create_kubernetes_cluster~~
 
 Creates a new managed Kubernetes cluster. Maximum of 1 cluster per project.
 
@@ -80,6 +85,8 @@ Creates a new managed Kubernetes cluster. Maximum of 1 cluster per project.
 
 Cluster names must follow Kubernetes naming rules: lowercase alphanumeric characters or hyphens, must start and end with an alphanumeric character, and be at most 63 characters long.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage: Created
 
@@ -183,7 +190,7 @@ with Latitudesh(
 | models.ErrorObject       | 503                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## list_kubernetes_available_versions
+## ~~list_kubernetes_available_versions~~
 
 Returns the list of available Kubernetes versions for cluster creation and upgrades. Versions are sourced from the RKE2 release channels and cached for 24 hours.
 
@@ -193,6 +200,8 @@ Each version object includes:
 
 The API returns the latest 5 supported minor versions. When upgrading clusters, you can only upgrade one minor version at a time (e.g., from 1.34 to 1.35).
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -230,10 +239,12 @@ with Latitudesh(
 | models.ErrorObject       | 401                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## get_kubernetes_cluster
+## ~~get_kubernetes_cluster~~
 
 Retrieves detailed information about a Kubernetes cluster including its status, control plane, worker node details, and individual node information.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage: Provisioning
 
@@ -290,12 +301,14 @@ with Latitudesh(
 | models.ErrorObject       | 401, 404                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## delete_kubernetes_cluster
+## ~~delete_kubernetes_cluster~~
 
 Deletes a Kubernetes cluster. This action is irreversible and will destroy all cluster resources.
 
 **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can delete clusters. Users with the `billing` role cannot perform this action.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
@@ -329,7 +342,7 @@ with Latitudesh(
 | models.ErrorObject       | 401, 403, 404, 422       | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## update_kubernetes_cluster
+## ~~update_kubernetes_cluster~~
 
 Updates a Kubernetes cluster by scaling nodes or upgrading the Kubernetes version. The cluster must be in `Provisioned` phase to accept updates.
 
@@ -354,6 +367,8 @@ Provide a `kubernetes_version` parameter to upgrade the cluster to a new Kuberne
 
 Returns 202 Accepted when an update operation is triggered. Poll the GET endpoint to monitor progress. Returns 200 OK if no change is needed (no-op).
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage: ControlPlaneUnchanged
 
@@ -888,12 +903,14 @@ with Latitudesh(
 | models.ErrorObject       | 503                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
-## get_kubernetes_cluster_kubeconfig
+## ~~get_kubernetes_cluster_kubeconfig~~
 
 Retrieves the kubeconfig file for a Kubernetes cluster. The kubeconfig is only available once the cluster is fully provisioned.
 
 **Note:** Only users with the `owner`, `administrator`, or `collaborator` role can access cluster credentials. Users with the `billing` role cannot perform this action.
 
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 

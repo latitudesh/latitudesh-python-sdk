@@ -7,7 +7,7 @@ The site slug to deploy the server
 ```python
 from latitudesh_python_sdk.models import CreateServerServersSite
 
-value = CreateServerServersSite.ASH
+value = CreateServerServersSite.AMS
 
 # Open enum: unrecognized values are captured as UnrecognizedStr
 ```
@@ -17,21 +17,29 @@ value = CreateServerServersSite.ASH
 
 | Name   | Value  |
 | ------ | ------ |
+| `AMS`  | AMS    |
 | `ASH`  | ASH    |
+| `ASH2` | ASH2   |
+| `BGT`  | BGT    |
 | `BUE`  | BUE    |
 | `CHI`  | CHI    |
 | `DAL`  | DAL    |
 | `FRA`  | FRA    |
+| `FRA2` | FRA2   |
 | `LAX`  | LAX    |
+| `LAX2` | LAX2   |
 | `LON`  | LON    |
-| `MEX`  | MEX    |
+| `LON2` | LON2   |
 | `MEX2` | MEX2   |
-| `MIA`  | MIA    |
 | `MIA2` | MIA2   |
 | `NYC`  | NYC    |
+| `SAN3` | SAN3   |
 | `SAO`  | SAO    |
 | `SAO2` | SAO2   |
 | `SGP`  | SGP    |
+| `SJC2` | SJC2   |
 | `SYD`  | SYD    |
-| `TYO`  | TYO    |
-| `TYO2` | TYO2   |
+| `SYD2` | SYD2   |
+| `TOR`  | TOR    |
+| `TYO3` | TYO3   |
+| `TYO4` | TYO4   |

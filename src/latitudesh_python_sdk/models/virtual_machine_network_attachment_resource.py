@@ -18,7 +18,7 @@ class VirtualMachineNetworkAttachmentResourceAttributesTypedDict(TypedDict):
     vid: NotRequired[int]
     r"""The 802.1Q VLAN ID"""
     pending_restart: NotRequired[bool]
-    r"""True if the attachment requires a VM restart to take effect"""
+    r"""Deprecated, always false. Attaching and detaching restart the VM automatically, so an attachment never waits on a manual restart."""
 
 
 class VirtualMachineNetworkAttachmentResourceAttributes(BaseModel):
@@ -29,7 +29,7 @@ class VirtualMachineNetworkAttachmentResourceAttributes(BaseModel):
     r"""The 802.1Q VLAN ID"""
 
     pending_restart: Optional[bool] = None
-    r"""True if the attachment requires a VM restart to take effect"""
+    r"""Deprecated, always false. Attaching and detaching restart the VM automatically, so an attachment never waits on a manual restart."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

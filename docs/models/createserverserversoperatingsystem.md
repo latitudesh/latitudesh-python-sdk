@@ -7,7 +7,7 @@ The operating system slug for the new server
 ```python
 from latitudesh_python_sdk.models import CreateServerServersOperatingSystem
 
-value = CreateServerServersOperatingSystem.CENTOS_7_4_X64
+value = CreateServerServersOperatingSystem.ALMALINUX_10
 
 # Open enum: unrecognized values are captured as UnrecognizedStr
 ```
@@ -15,20 +15,24 @@ value = CreateServerServersOperatingSystem.CENTOS_7_4_X64
 
 ## Values
 
-| Name                         | Value                        |
-| ---------------------------- | ---------------------------- |
-| `CENTOS_7_4_X64`             | centos_7_4_x64               |
-| `CENTOS_8_X64`               | centos_8_x64                 |
-| `DEBIAN_10`                  | debian_10                    |
-| `DEBIAN_11`                  | debian_11                    |
-| `DEBIAN_12`                  | debian_12                    |
-| `IPXE`                       | ipxe                         |
-| `RHEL8`                      | rhel8                        |
-| `ROCKYLINUX_8`               | rockylinux_8                 |
-| `UBUNTU22_ML_IN_A_BOX`       | ubuntu22_ml_in_a_box         |
-| `UBUNTU24_ML_IN_A_BOX`       | ubuntu24_ml_in_a_box         |
-| `UBUNTU_20_04_X64_LTS`       | ubuntu_20_04_x64_lts         |
-| `UBUNTU_22_04_X64_LTS`       | ubuntu_22_04_x64_lts         |
-| `UBUNTU_24_04_X64_LTS`       | ubuntu_24_04_x64_lts         |
-| `WINDOWS_2022_STD`           | windows_2022_std             |
-| `WINDOWS_SERVER_2019_STD_V1` | windows_server_2019_std_v1   |
+| Name                       | Value                      |
+| -------------------------- | -------------------------- |
+| `ALMALINUX_10`             | almalinux-10               |
+| `ALMALINUX_9`              | almalinux-9                |
+| `CENTOS_9_STREAM`          | centos-9-stream            |
+| `DEBIAN_12`                | debian_12                  |
+| `DEBIAN_13`                | debian_13                  |
+| `FEDORA_44`                | fedora-44                  |
+| `IPXE`                     | ipxe                       |
+| `OPENSUSE_15`              | opensuse-15                |
+| `ORACLELINUX_10`           | oraclelinux-10             |
+| `ORACLELINUX_9`            | oraclelinux-9              |
+| `PROXMOX_9`                | proxmox-9                  |
+| `PROXMOX_BACKUP_SERVER_4`  | proxmox-backup-server-4    |
+| `ROCKY_10`                 | rocky-10                   |
+| `ROCKY_9`                  | rocky-9                    |
+| `UBUNTU24_ML_IN_A_BOX`     | ubuntu24_ml_in_a_box       |
+| `UBUNTU24_ML_IN_A_BOX_SXM` | ubuntu24_ml_in_a_box_sxm   |
+| `UBUNTU26_ML_IN_A_BOX`     | ubuntu26_ml_in_a_box       |
+| `UBUNTU_24_04_X64_LTS`     | ubuntu_24_04_x64_lts       |
+| `UBUNTU_26_04_X64_LTS`     | ubuntu_26_04_x64_lts       |

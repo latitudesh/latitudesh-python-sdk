@@ -21,7 +21,7 @@ class FilesystemDataType(str, Enum):
     FILESYSTEMS = "filesystems"
 
 
-class FilesystemDataStorageClass(str, Enum):
+class StorageClass(str, Enum):
     STANDARD = "standard"
     HIGH_PERFORMANCE = "high_performance"
 
@@ -29,7 +29,7 @@ class FilesystemDataStorageClass(str, Enum):
 class FilesystemDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     size_in_gb: NotRequired[int]
-    storage_class: NotRequired[Nullable[FilesystemDataStorageClass]]
+    storage_class: NotRequired[Nullable[StorageClass]]
     created_at: NotRequired[Nullable[datetime]]
     keyring: NotRequired[Nullable[str]]
     r"""Keyring secret used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
@@ -46,7 +46,7 @@ class FilesystemDataAttributes(BaseModel):
 
     size_in_gb: Optional[int] = None
 
-    storage_class: OptionalNullable[FilesystemDataStorageClass] = UNSET
+    storage_class: OptionalNullable[StorageClass] = UNSET
 
     created_at: OptionalNullable[datetime] = UNSET
 

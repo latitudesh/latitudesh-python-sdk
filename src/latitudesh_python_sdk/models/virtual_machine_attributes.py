@@ -435,7 +435,7 @@ class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     team: NotRequired[TeamIncludeTypedDict]
     project: NotRequired[ProjectIncludeTypedDict]
     pending_restart: NotRequired[bool]
-    r"""Opt-in extra field. Request via `extra_fields[virtual_machines]=pending_restart`."""
+    r"""Deprecated, always false. Opt-in extra field, requested via `extra_fields[virtual_machines]=pending_restart`. Attaching and detaching restart the VM automatically."""
 
 
 class VirtualMachineAttributesAttributes(BaseModel):
@@ -475,7 +475,7 @@ class VirtualMachineAttributesAttributes(BaseModel):
     project: Optional[ProjectInclude] = None
 
     pending_restart: Optional[bool] = None
-    r"""Opt-in extra field. Request via `extra_fields[virtual_machines]=pending_restart`."""
+    r"""Deprecated, always false. Opt-in extra field, requested via `extra_fields[virtual_machines]=pending_restart`. Attaching and detaching restart the VM automatically."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

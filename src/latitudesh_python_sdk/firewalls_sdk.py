@@ -25,7 +25,7 @@ class FirewallsSDK(BaseSDK):
     ) -> Optional[models.GetAllFirewallAssignmentsResponse]:
         r"""List firewall assignments
 
-        Returns a list of all servers and virtual machines assigned to one or more firewalls.
+        Returns a list of all servers and virtual machines assigned to a firewall.
 
         :param filter_server: The server ID to filter by
         :param filter_virtual_machine: The virtual machine ID to filter by
@@ -150,7 +150,7 @@ class FirewallsSDK(BaseSDK):
     ) -> Optional[models.GetAllFirewallAssignmentsResponse]:
         r"""List firewall assignments
 
-        Returns a list of all servers and virtual machines assigned to one or more firewalls.
+        Returns a list of all servers and virtual machines assigned to a firewall.
 
         :param filter_server: The server ID to filter by
         :param filter_virtual_machine: The virtual machine ID to filter by

@@ -45,24 +45,94 @@ class Initiators(BaseModel):
         return m
 
 
+class StorageNetworkTypedDict(TypedDict):
+    r"""Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume."""
+
+    vid: NotRequired[Nullable[int]]
+    r"""VLAN ID of the storage VLAN to tag on the server bond."""
+    host_cidr: NotRequired[Nullable[str]]
+    r"""Storage IP of the mapped server, in CIDR notation. Null until the mapping status is \"mapped\"."""
+    gateway: NotRequired[Nullable[str]]
+    r"""Gateway of the storage network, used for the routes below."""
+    routes: NotRequired[Nullable[List[str]]]
+    r"""Storage infrastructure prefixes to route via the gateway."""
+    block_gateway: NotRequired[Nullable[str]]
+    r"""NVMe-oF/TCP discovery portal address."""
+    block_port: NotRequired[Nullable[int]]
+    r"""NVMe-oF/TCP discovery portal port."""
+
+
+class StorageNetwork(BaseModel):
+    r"""Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume."""
+
+    vid: OptionalNullable[int] = UNSET
+    r"""VLAN ID of the storage VLAN to tag on the server bond."""
+
+    host_cidr: OptionalNullable[str] = UNSET
+    r"""Storage IP of the mapped server, in CIDR notation. Null until the mapping status is \"mapped\"."""
+
+    gateway: OptionalNullable[str] = UNSET
+    r"""Gateway of the storage network, used for the routes below."""
+
+    routes: OptionalNullable[List[str]] = UNSET
+    r"""Storage infrastructure prefixes to route via the gateway."""
+
+    block_gateway: OptionalNullable[str] = UNSET
+    r"""NVMe-oF/TCP discovery portal address."""
+
+    block_port: OptionalNullable[int] = UNSET
+    r"""NVMe-oF/TCP discovery portal port."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(
+            ["vid", "host_cidr", "gateway", "routes", "block_gateway", "block_port"]
+        )
+        nullable_fields = set(
+            ["vid", "host_cidr", "gateway", "routes", "block_gateway", "block_port"]
+        )
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class BlockTypedDict(TypedDict):
     r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
 
     status: NotRequired[Nullable[str]]
-    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, or \"failed\". Mapping is asynchronous, so poll the volume until this reaches a terminal state."""
+    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, \"unmapping\" while the mapping is being removed, or \"failed\". Mapping and unmapping are asynchronous, so poll the volume until this reaches a terminal state. The block object becomes null once the volume is fully unmapped."""
     nqn: NotRequired[Nullable[str]]
     r"""NVMe Qualified Name of the mapped server."""
     nsid: NotRequired[Nullable[int]]
     r"""NVMe namespace ID of the mapping."""
     server_id: NotRequired[Nullable[str]]
     r"""ID of the server the volume is mapped to."""
+    storage_network: NotRequired[Nullable[StorageNetworkTypedDict]]
+    r"""Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume."""
 
 
 class Block(BaseModel):
     r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
 
     status: OptionalNullable[str] = UNSET
-    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, or \"failed\". Mapping is asynchronous, so poll the volume until this reaches a terminal state."""
+    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, \"unmapping\" while the mapping is being removed, or \"failed\". Mapping and unmapping are asynchronous, so poll the volume until this reaches a terminal state. The block object becomes null once the volume is fully unmapped."""
 
     nqn: OptionalNullable[str] = UNSET
     r"""NVMe Qualified Name of the mapped server."""
@@ -73,10 +143,13 @@ class Block(BaseModel):
     server_id: OptionalNullable[str] = UNSET
     r"""ID of the server the volume is mapped to."""
 
+    storage_network: OptionalNullable[StorageNetwork] = UNSET
+    r"""Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["status", "nqn", "nsid", "server_id"])
-        nullable_fields = set(["status", "nqn", "nsid", "server_id"])
+        optional_fields = set(["status", "nqn", "nsid", "server_id", "storage_network"])
+        nullable_fields = set(["status", "nqn", "nsid", "server_id", "storage_network"])
         serialized = handler(self)
         m = {}
 
@@ -175,7 +248,7 @@ class VolumeDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     size_in_gb: NotRequired[int]
     created_at: NotRequired[Nullable[datetime]]
-    namespace_id: NotRequired[Nullable[str]]
+    namespace_id: NotRequired[Nullable[int]]
     connector_id: NotRequired[Nullable[str]]
     initiators: NotRequired[Nullable[List[InitiatorsTypedDict]]]
     block: NotRequired[Nullable[BlockTypedDict]]
@@ -198,7 +271,7 @@ class VolumeDataAttributes(BaseModel):
 
     created_at: OptionalNullable[datetime] = UNSET
 
-    namespace_id: OptionalNullable[str] = UNSET
+    namespace_id: OptionalNullable[int] = UNSET
 
     connector_id: OptionalNullable[str] = UNSET
 
