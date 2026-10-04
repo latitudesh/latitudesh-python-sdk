@@ -6,11 +6,11 @@ from latitudesh_python_sdk.utils import FieldMetadata, PathParamMetadata
 from typing_extensions import Annotated, TypedDict
 
 
-class DeleteStorageFilesystemsRequestTypedDict(TypedDict):
+class DeleteFilesystemRequestTypedDict(TypedDict):
     filesystem_id: str
 
 
-class DeleteStorageFilesystemsRequest(BaseModel):
+class DeleteFilesystemRequest(BaseModel):
     filesystem_id: Annotated[
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]

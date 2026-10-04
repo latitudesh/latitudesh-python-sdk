@@ -275,6 +275,7 @@ with Latitudesh(
 * [create_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#create_volume) - Create volume
 * [retrieve_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#retrieve_volume) - Retrieve volume
 * [delete_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#delete_volume) - Delete volume
+* [update_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#update_volume) - Update volume
 * [~~mount_volume~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#mount_volume) - Mount volume (deprecated) :warning: **Deprecated**
 * [map_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#map_volume) - Map volume
 * [unmap_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#unmap_volume) - Unmap volume
@@ -685,7 +686,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 64 of 195 methods.*
+* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 64 of 196 methods.*
 * [`ResponseValidationError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

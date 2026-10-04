@@ -8,6 +8,7 @@
 * [create_volume](#create_volume) - Create volume
 * [retrieve_volume](#retrieve_volume) - Retrieve volume
 * [delete_volume](#delete_volume) - Delete volume
+* [update_volume](#update_volume) - Update volume
 * [~~mount_volume~~](#mount_volume) - Mount volume (deprecated) :warning: **Deprecated**
 * [map_volume](#map_volume) - Map volume
 * [unmap_volume](#unmap_volume) - Unmap volume
@@ -169,6 +170,53 @@ with Latitudesh(
 | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
 | `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## update_volume
+
+Increases the size of a high performance volume. Shrinking is not supported. Billing is prorated to the new size.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="update-volume" method="patch" path="/storage/volumes/{id}" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.block_storage.update_volume(id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateVolumeBlockStorageType.VOLUMES,
+        "attributes": {
+            "size_in_gb": 873925,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                           | Type                                                                                | Required                                                                            | Description                                                                         |
+| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `id`                                                                                | *str*                                                                               | :heavy_check_mark:                                                                  | Volume ID                                                                           |
+| `data`                                                                              | [models.UpdateVolumeBlockStorageData](../../models/updatevolumeblockstoragedata.md) | :heavy_check_mark:                                                                  | N/A                                                                                 |
+| `retries`                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                    | :heavy_minus_sign:                                                                  | Configuration to override the default retry behavior of the client.                 |
+
+### Response
+
+**[models.UpdateVolumeResponseBody](../../models/updatevolumeresponsebody.md)**
 
 ### Errors
 
