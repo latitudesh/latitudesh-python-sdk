@@ -13,7 +13,7 @@ from latitudesh_python_sdk.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -24,6 +24,83 @@ class FilesystemDataType(str, Enum):
 class StorageClass(str, Enum):
     STANDARD = "standard"
     HIGH_PERFORMANCE = "high_performance"
+
+
+class Protocols(str, Enum):
+    NFS3 = "nfs3"
+    NFS4 = "nfs4"
+
+
+class FilesystemDataSiteTypedDict(TypedDict):
+    id: NotRequired[str]
+    name: NotRequired[str]
+    slug: NotRequired[str]
+    facility: NotRequired[str]
+
+
+class FilesystemDataSite(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+    slug: Optional[str] = None
+
+    facility: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name", "slug", "facility"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class FilesystemDataRegionTypedDict(TypedDict):
+    city: NotRequired[Nullable[str]]
+    country: NotRequired[Nullable[str]]
+    site: NotRequired[Nullable[FilesystemDataSiteTypedDict]]
+
+
+class FilesystemDataRegion(BaseModel):
+    city: OptionalNullable[str] = UNSET
+
+    country: OptionalNullable[str] = UNSET
+
+    site: OptionalNullable[FilesystemDataSite] = UNSET
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["city", "country", "site"])
+        nullable_fields = set(["city", "country", "site"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class FilesystemDataAttributesTypedDict(TypedDict):
@@ -37,6 +114,13 @@ class FilesystemDataAttributesTypedDict(TypedDict):
     r"""Cluster user used to mount the filesystem. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
     volume_path: NotRequired[Nullable[str]]
     r"""Path of the filesystem volume inside the cluster. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
+    nfs_mount_path: NotRequired[Nullable[str]]
+    r"""Path of the NFS view (NFSv3 and NFSv4) backing the filesystem. Null for filesystems that are not backed by high performance file storage."""
+    protocols: NotRequired[Nullable[List[Protocols]]]
+    r"""NFS protocol version(s) the filesystem was requested to be mounted with. Null for filesystems that are not backed by high performance file storage."""
+    file_endpoint: NotRequired[Nullable[str]]
+    r"""Hostname of the NFS endpoint backing the filesystem. Null for filesystems that are not backed by high performance file storage."""
+    region: NotRequired[Nullable[FilesystemDataRegionTypedDict]]
     project: NotRequired[ProjectIncludeTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
 
@@ -59,6 +143,17 @@ class FilesystemDataAttributes(BaseModel):
     volume_path: OptionalNullable[str] = UNSET
     r"""Path of the filesystem volume inside the cluster. Returned only for dashboard-origin requests; null until the filesystem is provisioned."""
 
+    nfs_mount_path: OptionalNullable[str] = UNSET
+    r"""Path of the NFS view (NFSv3 and NFSv4) backing the filesystem. Null for filesystems that are not backed by high performance file storage."""
+
+    protocols: OptionalNullable[List[Protocols]] = UNSET
+    r"""NFS protocol version(s) the filesystem was requested to be mounted with. Null for filesystems that are not backed by high performance file storage."""
+
+    file_endpoint: OptionalNullable[str] = UNSET
+    r"""Hostname of the NFS endpoint backing the filesystem. Null for filesystems that are not backed by high performance file storage."""
+
+    region: OptionalNullable[FilesystemDataRegion] = UNSET
+
     project: Optional[ProjectInclude] = None
 
     team: Optional[TeamInclude] = None
@@ -74,12 +169,26 @@ class FilesystemDataAttributes(BaseModel):
                 "keyring",
                 "cluster_user",
                 "volume_path",
+                "nfs_mount_path",
+                "protocols",
+                "file_endpoint",
+                "region",
                 "project",
                 "team",
             ]
         )
         nullable_fields = set(
-            ["storage_class", "created_at", "keyring", "cluster_user", "volume_path"]
+            [
+                "storage_class",
+                "created_at",
+                "keyring",
+                "cluster_user",
+                "volume_path",
+                "nfs_mount_path",
+                "protocols",
+                "file_endpoint",
+                "region",
+            ]
         )
         serialized = handler(self)
         m = {}
