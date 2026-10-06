@@ -9,12 +9,12 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class GetStorageFilesystemsRequestTypedDict(TypedDict):
+class ListFilesystemsRequestTypedDict(TypedDict):
     filter_project: NotRequired[str]
     r"""The project ID or Slug to filter by"""
 
 
-class GetStorageFilesystemsRequest(BaseModel):
+class ListFilesystemsRequest(BaseModel):
     filter_project: Annotated[
         Optional[str],
         pydantic.Field(alias="filter[project]"),

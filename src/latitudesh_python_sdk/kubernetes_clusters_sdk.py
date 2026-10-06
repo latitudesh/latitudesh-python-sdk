@@ -93,7 +93,9 @@ class KubernetesClustersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.KubernetesClusters, http_res)
-        if utils.match_response(http_res, ["400", "401"], "application/vnd.api+json"):
+        if utils.match_response(
+            http_res, ["400", "401", "403"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -187,7 +189,9 @@ class KubernetesClustersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.KubernetesClusters, http_res)
-        if utils.match_response(http_res, ["400", "401"], "application/vnd.api+json"):
+        if utils.match_response(
+            http_res, ["400", "401", "403"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -502,7 +506,7 @@ class KubernetesClustersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.KubernetesAvailableVersions, http_res)
-        if utils.match_response(http_res, "401", "application/vnd.api+json"):
+        if utils.match_response(http_res, ["401", "403"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -595,7 +599,7 @@ class KubernetesClustersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.KubernetesAvailableVersions, http_res)
-        if utils.match_response(http_res, "401", "application/vnd.api+json"):
+        if utils.match_response(http_res, ["401", "403"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -689,7 +693,9 @@ class KubernetesClustersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.KubernetesCluster, http_res)
-        if utils.match_response(http_res, ["401", "404"], "application/vnd.api+json"):
+        if utils.match_response(
+            http_res, ["401", "403", "404"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -783,7 +789,9 @@ class KubernetesClustersSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.KubernetesCluster, http_res)
-        if utils.match_response(http_res, ["401", "404"], "application/vnd.api+json"):
+        if utils.match_response(
+            http_res, ["401", "403", "404"], "application/vnd.api+json"
+        ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):

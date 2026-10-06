@@ -13,34 +13,9 @@
 
 Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
 
-### Example Usage: Conflict
-
-<!-- UsageSnippet language="python" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" example="Conflict" -->
-```python
-import latitudesh_python_sdk
-from latitudesh_python_sdk import Latitudesh
-import os
-
-
-with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
-) as latitudesh:
-
-    res = latitudesh.filesystem_storage.create_filesystem(data={
-        "type": latitudesh_python_sdk.PostStorageFilesystemsFilesystemStorageType.FILESYSTEMS,
-        "attributes": {
-            "project": "proj_0L6WO19lOPlXy",
-            "name": "my-data",
-        },
-    })
-
-    # Handle response
-    print(res)
-
-```
 ### Example Usage: Created
 
-<!-- UsageSnippet language="python" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" example="Created" -->
+<!-- UsageSnippet language="python" operationID="create-filesystem" method="post" path="/storage/filesystems" example="Created" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -52,35 +27,14 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.filesystem_storage.create_filesystem(data={
-        "type": latitudesh_python_sdk.PostStorageFilesystemsFilesystemStorageType.FILESYSTEMS,
+        "type": latitudesh_python_sdk.CreateFilesystemFilesystemStorageType.FILESYSTEMS,
         "attributes": {
             "project": "proj_lkg1De6ROvZE5",
             "name": "my-data",
-        },
-    })
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: Forbidden
-
-<!-- UsageSnippet language="python" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" example="Forbidden" -->
-```python
-import latitudesh_python_sdk
-from latitudesh_python_sdk import Latitudesh
-import os
-
-
-with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
-) as latitudesh:
-
-    res = latitudesh.filesystem_storage.create_filesystem(data={
-        "type": latitudesh_python_sdk.PostStorageFilesystemsFilesystemStorageType.FILESYSTEMS,
-        "attributes": {
-            "project": "proj_3YjJOLejdvZ87",
-            "name": "my-data",
+            "region": "NYC",
+            "protocols": [
+                latitudesh_python_sdk.CreateFilesystemProtocols.NFS3,
+            ],
         },
     })
 
@@ -90,7 +44,7 @@ with Latitudesh(
 ```
 ### Example Usage: Storage creation frozen
 
-<!-- UsageSnippet language="python" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" example="Storage creation frozen" -->
+<!-- UsageSnippet language="python" operationID="create-filesystem" method="post" path="/storage/filesystems" example="Storage creation frozen" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -102,35 +56,14 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.filesystem_storage.create_filesystem(data={
-        "type": latitudesh_python_sdk.PostStorageFilesystemsFilesystemStorageType.FILESYSTEMS,
+        "type": latitudesh_python_sdk.CreateFilesystemFilesystemStorageType.FILESYSTEMS,
         "attributes": {
             "project": "<value>",
             "name": "<value>",
-        },
-    })
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: Unprocessable Entity
-
-<!-- UsageSnippet language="python" operationID="post-storage-filesystems" method="post" path="/storage/filesystems" example="Unprocessable Entity" -->
-```python
-import latitudesh_python_sdk
-from latitudesh_python_sdk import Latitudesh
-import os
-
-
-with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
-) as latitudesh:
-
-    res = latitudesh.filesystem_storage.create_filesystem(data={
-        "type": latitudesh_python_sdk.PostStorageFilesystemsFilesystemStorageType.FILESYSTEMS,
-        "attributes": {
-            "project": "proj_pRMLydp0dQKr1",
-            "name": "test storage @",
+            "region": "<value>",
+            "protocols": [
+                latitudesh_python_sdk.CreateFilesystemProtocols.NFS4,
+            ],
         },
     })
 
@@ -141,14 +74,14 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                                         | Type                                                                                                              | Required                                                                                                          | Description                                                                                                       |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `data`                                                                                                            | [models.PostStorageFilesystemsFilesystemStorageData](../../models/poststoragefilesystemsfilesystemstoragedata.md) | :heavy_check_mark:                                                                                                | N/A                                                                                                               |
-| `retries`                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                  | :heavy_minus_sign:                                                                                                | Configuration to override the default retry behavior of the client.                                               |
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `data`                                                                                                | [models.CreateFilesystemFilesystemStorageData](../../models/createfilesystemfilesystemstoragedata.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `retries`                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                      | :heavy_minus_sign:                                                                                    | Configuration to override the default retry behavior of the client.                                   |
 
 ### Response
 
-**[models.PostStorageFilesystemsResponseBody](../../models/poststoragefilesystemsresponsebody.md)**
+**[models.CreateFilesystemResponseBody](../../models/createfilesystemresponsebody.md)**
 
 ### Errors
 
@@ -163,7 +96,7 @@ Lists all the filesystems from a team.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="get-storage-filesystems" method="get" path="/storage/filesystems" example="Success" -->
+<!-- UsageSnippet language="python" operationID="list-filesystems" method="get" path="/storage/filesystems" example="Success" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -203,7 +136,7 @@ Allows you to remove a filesystem from a project.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="delete-storage-filesystems" method="delete" path="/storage/filesystems/{filesystem_id}" -->
+<!-- UsageSnippet language="python" operationID="delete-filesystem" method="delete" path="/storage/filesystems/{filesystem_id}" -->
 ```python
 from latitudesh_python_sdk import Latitudesh
 import os
@@ -213,7 +146,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    latitudesh.filesystem_storage.delete_filesystem(filesystem_id="fs_123")
+    latitudesh.filesystem_storage.delete_filesystem(filesystem_id="<id>")
 
     # Use the SDK ...
 
@@ -236,34 +169,9 @@ with Latitudesh(
 
 Allow you to upgrade the size of a filesystem.
 
-### Example Usage: Forbidden
+### Example Usage
 
-<!-- UsageSnippet language="python" operationID="patch-storage-filesystems" method="patch" path="/storage/filesystems/{filesystem_id}" example="Forbidden" -->
-```python
-import latitudesh_python_sdk
-from latitudesh_python_sdk import Latitudesh
-import os
-
-
-with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
-) as latitudesh:
-
-    res = latitudesh.filesystem_storage.update_filesystem(filesystem_id="fs_x1ZJrdx5qg4LV", data={
-        "id": "fs_x1ZJrdx5qg4LV",
-        "type": latitudesh_python_sdk.PatchStorageFilesystemsFilesystemStorageType.FILESYSTEMS,
-        "attributes": {
-            "size_in_gb": 1501,
-        },
-    })
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: Success
-
-<!-- UsageSnippet language="python" operationID="patch-storage-filesystems" method="patch" path="/storage/filesystems/{filesystem_id}" example="Success" -->
+<!-- UsageSnippet language="python" operationID="update-filesystem" method="patch" path="/storage/filesystems/{filesystem_id}" example="Success" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -276,34 +184,9 @@ with Latitudesh(
 
     res = latitudesh.filesystem_storage.update_filesystem(filesystem_id="fs_7vYAZqGBdMQ94", data={
         "id": "fs_7vYAZqGBdMQ94",
-        "type": latitudesh_python_sdk.PatchStorageFilesystemsFilesystemStorageType.FILESYSTEMS,
+        "type": latitudesh_python_sdk.UpdateFilesystemFilesystemStorageType.FILESYSTEMS,
         "attributes": {
             "size_in_gb": 1501,
-        },
-    })
-
-    # Handle response
-    print(res)
-
-```
-### Example Usage: Validation Error
-
-<!-- UsageSnippet language="python" operationID="patch-storage-filesystems" method="patch" path="/storage/filesystems/{filesystem_id}" example="Validation Error" -->
-```python
-import latitudesh_python_sdk
-from latitudesh_python_sdk import Latitudesh
-import os
-
-
-with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
-) as latitudesh:
-
-    res = latitudesh.filesystem_storage.update_filesystem(filesystem_id="fs_r0MK4O4kDa95w", data={
-        "id": "fs_r0MK4O4kDa95w",
-        "type": latitudesh_python_sdk.PatchStorageFilesystemsFilesystemStorageType.FILESYSTEMS,
-        "attributes": {
-            "size_in_gb": 1499,
         },
     })
 
@@ -314,15 +197,15 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                                           | Type                                                                                                                | Required                                                                                                            | Description                                                                                                         |
-| ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `filesystem_id`                                                                                                     | *str*                                                                                                               | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
-| `data`                                                                                                              | [models.PatchStorageFilesystemsFilesystemStorageData](../../models/patchstoragefilesystemsfilesystemstoragedata.md) | :heavy_check_mark:                                                                                                  | N/A                                                                                                                 |
-| `retries`                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                    | :heavy_minus_sign:                                                                                                  | Configuration to override the default retry behavior of the client.                                                 |
+| Parameter                                                                                             | Type                                                                                                  | Required                                                                                              | Description                                                                                           |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `filesystem_id`                                                                                       | *str*                                                                                                 | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `data`                                                                                                | [models.UpdateFilesystemFilesystemStorageData](../../models/updatefilesystemfilesystemstoragedata.md) | :heavy_check_mark:                                                                                    | N/A                                                                                                   |
+| `retries`                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                      | :heavy_minus_sign:                                                                                    | Configuration to override the default retry behavior of the client.                                   |
 
 ### Response
 
-**[models.PatchStorageFilesystemsResponseBody](../../models/patchstoragefilesystemsresponsebody.md)**
+**[models.UpdateFilesystemResponseBody](../../models/updatefilesystemresponsebody.md)**
 
 ### Errors
 

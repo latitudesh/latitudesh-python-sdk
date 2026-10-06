@@ -8,6 +8,7 @@
 * [create_public_network](#create_public_network) - Create a network
 * [get_public_network](#get_public_network) - Retrieve a network
 * [destroy_public_network](#destroy_public_network) - Delete a network
+* [update_public_network_ip](#update_public_network_ip) - Update a network IP
 
 ## get_public_networks
 
@@ -176,4 +177,51 @@ with Latitudesh(
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
 | models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+
+## update_public_network_ip
+
+**Preview.** Available at locations where the `public_network` feature is enabled.
+
+Reserve an available address of a network for your own use, so servers are never attached to the network with it, or release an address you reserved.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="update-public-network-ip" method="patch" path="/public_networks/{id}/ips" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.public_networks.update_public_network_ip(id="<id>", data={
+        "type": latitudesh_python_sdk.UpdatePublicNetworkIPType.PUBLIC_NETWORKS,
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
+| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `id`                                                                          | *str*                                                                         | :heavy_check_mark:                                                            | N/A                                                                           |
+| `data`                                                                        | [models.UpdatePublicNetworkIPData](../../models/updatepublicnetworkipdata.md) | :heavy_check_mark:                                                            | N/A                                                                           |
+| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |
+
+### Response
+
+**[models.PublicNetwork](../../models/publicnetwork.md)**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |

@@ -1,0 +1,9 @@
+# UpdatePublicNetworkIPData
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `type`                                                                                           | [models.UpdatePublicNetworkIPType](../models/updatepublicnetworkiptype.md)                       | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `attributes`                                                                                     | [Optional[models.UpdatePublicNetworkIPAttributes]](../models/updatepublicnetworkipattributes.md) | :heavy_minus_sign:                                                                               | N/A                                                                                              |

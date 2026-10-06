@@ -14,14 +14,14 @@ class FilesystemStorage(BaseSDK):
         self,
         *,
         data: Union[
-            models.PostStorageFilesystemsFilesystemStorageData,
-            models.PostStorageFilesystemsFilesystemStorageDataTypedDict,
+            models.CreateFilesystemFilesystemStorageData,
+            models.CreateFilesystemFilesystemStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PostStorageFilesystemsResponseBody:
+    ) -> models.CreateFilesystemResponseBody:
         r"""Create filesystem
 
         Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
@@ -42,9 +42,9 @@ class FilesystemStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageFilesystemsFilesystemStorageRequestBody(
+        request = models.CreateFilesystemFilesystemStorageRequestBody(
             data=utils.get_pydantic_model(
-                data, models.PostStorageFilesystemsFilesystemStorageData
+                data, models.CreateFilesystemFilesystemStorageData
             ),
         )
 
@@ -66,7 +66,7 @@ class FilesystemStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PostStorageFilesystemsFilesystemStorageRequestBody,
+                models.CreateFilesystemFilesystemStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -84,15 +84,13 @@ class FilesystemStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post-storage-filesystems",
+                operation_id="create-filesystem",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Filesystem Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/post-storage-filesystems"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/create-filesystem"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -102,7 +100,7 @@ class FilesystemStorage(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(
-                models.PostStorageFilesystemsResponseBody, http_res
+                models.CreateFilesystemResponseBody, http_res
             )
         if utils.match_response(http_res, "503", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
@@ -120,14 +118,14 @@ class FilesystemStorage(BaseSDK):
         self,
         *,
         data: Union[
-            models.PostStorageFilesystemsFilesystemStorageData,
-            models.PostStorageFilesystemsFilesystemStorageDataTypedDict,
+            models.CreateFilesystemFilesystemStorageData,
+            models.CreateFilesystemFilesystemStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PostStorageFilesystemsResponseBody:
+    ) -> models.CreateFilesystemResponseBody:
         r"""Create filesystem
 
         Allows you to add persistent storage to a project. These filesystems can be used to store data across your servers.
@@ -148,9 +146,9 @@ class FilesystemStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageFilesystemsFilesystemStorageRequestBody(
+        request = models.CreateFilesystemFilesystemStorageRequestBody(
             data=utils.get_pydantic_model(
-                data, models.PostStorageFilesystemsFilesystemStorageData
+                data, models.CreateFilesystemFilesystemStorageData
             ),
         )
 
@@ -172,7 +170,7 @@ class FilesystemStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PostStorageFilesystemsFilesystemStorageRequestBody,
+                models.CreateFilesystemFilesystemStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -190,15 +188,13 @@ class FilesystemStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="post-storage-filesystems",
+                operation_id="create-filesystem",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Filesystem Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/post-storage-filesystems"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/create-filesystem"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -208,7 +204,7 @@ class FilesystemStorage(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(
-                models.PostStorageFilesystemsResponseBody, http_res
+                models.CreateFilesystemResponseBody, http_res
             )
         if utils.match_response(http_res, "503", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
@@ -251,7 +247,7 @@ class FilesystemStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetStorageFilesystemsRequest(
+        request = models.ListFilesystemsRequest(
             filter_project=filter_project,
         )
 
@@ -284,15 +280,13 @@ class FilesystemStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="get-storage-filesystems",
+                operation_id="list-filesystems",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Filesystem Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/get-storage-filesystems"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/list-filesystems"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -339,7 +333,7 @@ class FilesystemStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.GetStorageFilesystemsRequest(
+        request = models.ListFilesystemsRequest(
             filter_project=filter_project,
         )
 
@@ -372,15 +366,13 @@ class FilesystemStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="get-storage-filesystems",
+                operation_id="list-filesystems",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Filesystem Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/get-storage-filesystems"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/list-filesystems"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -427,7 +419,7 @@ class FilesystemStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteStorageFilesystemsRequest(
+        request = models.DeleteFilesystemRequest(
             filesystem_id=filesystem_id,
         )
 
@@ -460,15 +452,13 @@ class FilesystemStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="delete-storage-filesystems",
+                operation_id="delete-filesystem",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Filesystem Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/delete-storage-filesystems"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/delete-filesystem"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -515,7 +505,7 @@ class FilesystemStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.DeleteStorageFilesystemsRequest(
+        request = models.DeleteFilesystemRequest(
             filesystem_id=filesystem_id,
         )
 
@@ -548,15 +538,13 @@ class FilesystemStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="delete-storage-filesystems",
+                operation_id="delete-filesystem",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Filesystem Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/delete-storage-filesystems"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/delete-filesystem"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -579,14 +567,14 @@ class FilesystemStorage(BaseSDK):
         *,
         filesystem_id: str,
         data: Union[
-            models.PatchStorageFilesystemsFilesystemStorageData,
-            models.PatchStorageFilesystemsFilesystemStorageDataTypedDict,
+            models.UpdateFilesystemFilesystemStorageData,
+            models.UpdateFilesystemFilesystemStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PatchStorageFilesystemsResponseBody:
+    ) -> models.UpdateFilesystemResponseBody:
         r"""Update filesystem
 
         Allow you to upgrade the size of a filesystem.
@@ -608,11 +596,11 @@ class FilesystemStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PatchStorageFilesystemsRequest(
+        request = models.UpdateFilesystemRequest(
             filesystem_id=filesystem_id,
-            request_body=models.PatchStorageFilesystemsFilesystemStorageRequestBody(
+            request_body=models.UpdateFilesystemFilesystemStorageRequestBody(
                 data=utils.get_pydantic_model(
-                    data, models.PatchStorageFilesystemsFilesystemStorageData
+                    data, models.UpdateFilesystemFilesystemStorageData
                 ),
             ),
         )
@@ -635,7 +623,7 @@ class FilesystemStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PatchStorageFilesystemsFilesystemStorageRequestBody,
+                models.UpdateFilesystemFilesystemStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -653,15 +641,13 @@ class FilesystemStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="patch-storage-filesystems",
+                operation_id="update-filesystem",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Filesystem Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/patch-storage-filesystems"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/update-filesystem"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -670,7 +656,7 @@ class FilesystemStorage(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(
-                models.PatchStorageFilesystemsResponseBody, http_res
+                models.UpdateFilesystemResponseBody, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -686,14 +672,14 @@ class FilesystemStorage(BaseSDK):
         *,
         filesystem_id: str,
         data: Union[
-            models.PatchStorageFilesystemsFilesystemStorageData,
-            models.PatchStorageFilesystemsFilesystemStorageDataTypedDict,
+            models.UpdateFilesystemFilesystemStorageData,
+            models.UpdateFilesystemFilesystemStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.PatchStorageFilesystemsResponseBody:
+    ) -> models.UpdateFilesystemResponseBody:
         r"""Update filesystem
 
         Allow you to upgrade the size of a filesystem.
@@ -715,11 +701,11 @@ class FilesystemStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PatchStorageFilesystemsRequest(
+        request = models.UpdateFilesystemRequest(
             filesystem_id=filesystem_id,
-            request_body=models.PatchStorageFilesystemsFilesystemStorageRequestBody(
+            request_body=models.UpdateFilesystemFilesystemStorageRequestBody(
                 data=utils.get_pydantic_model(
-                    data, models.PatchStorageFilesystemsFilesystemStorageData
+                    data, models.UpdateFilesystemFilesystemStorageData
                 ),
             ),
         )
@@ -742,7 +728,7 @@ class FilesystemStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PatchStorageFilesystemsFilesystemStorageRequestBody,
+                models.UpdateFilesystemFilesystemStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -760,15 +746,13 @@ class FilesystemStorage(BaseSDK):
             hook_ctx=HookContext(
                 config=self.sdk_configuration,
                 base_url=base_url or "",
-                operation_id="patch-storage-filesystems",
+                operation_id="update-filesystem",
                 oauth2_scopes=None,
                 security_source=get_security_from_env(
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Filesystem Storage"],
-                extensions={
-                    "x-mint": {"href": "/api-reference/patch-storage-filesystems"}
-                },
+                extensions={"x-mint": {"href": "/api-reference/update-filesystem"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -777,7 +761,7 @@ class FilesystemStorage(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(
-                models.PatchStorageFilesystemsResponseBody, http_res
+                models.UpdateFilesystemResponseBody, http_res
             )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
