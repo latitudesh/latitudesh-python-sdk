@@ -11,7 +11,7 @@ from latitudesh_python_sdk.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -26,6 +26,109 @@ class Size(int, Enum):
     TWENTY_SEVEN = 27
     TWENTY_EIGHT = 28
     TWENTY_NINE = 29
+
+
+class PublicNetworkDataRole(str, Enum):
+    r"""gateway: reserved for the network gateway; server: a server on the network; elastic_ip: an elastic IP; reserved: held in IPAM but not by a server, including addresses you reserved; available: free to use"""
+
+    GATEWAY = "gateway"
+    SERVER = "server"
+    ELASTIC_IP = "elastic_ip"
+    RESERVED = "reserved"
+    AVAILABLE = "available"
+
+
+class PublicNetworkDataAttributesType(str, Enum):
+    SERVER = "server"
+    ELASTIC_IP = "elastic_ip"
+
+
+class PublicNetworkDataAssignmentTypedDict(TypedDict):
+    r"""The resource holding the address, when it is a server or an elastic IP"""
+
+    type: NotRequired[PublicNetworkDataAttributesType]
+    id: NotRequired[str]
+    hostname: NotRequired[Nullable[str]]
+    r"""Servers only"""
+
+
+class PublicNetworkDataAssignment(BaseModel):
+    r"""The resource holding the address, when it is a server or an elastic IP"""
+
+    type: Optional[PublicNetworkDataAttributesType] = None
+
+    id: Optional[str] = None
+
+    hostname: OptionalNullable[str] = UNSET
+    r"""Servers only"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["type", "id", "hostname"])
+        nullable_fields = set(["hostname"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
+class IpsTypedDict(TypedDict):
+    address: NotRequired[str]
+    role: NotRequired[PublicNetworkDataRole]
+    r"""gateway: reserved for the network gateway; server: a server on the network; elastic_ip: an elastic IP; reserved: held in IPAM but not by a server, including addresses you reserved; available: free to use"""
+    assignment: NotRequired[Nullable[PublicNetworkDataAssignmentTypedDict]]
+    r"""The resource holding the address, when it is a server or an elastic IP"""
+
+
+class Ips(BaseModel):
+    address: Optional[str] = None
+
+    role: Optional[PublicNetworkDataRole] = None
+    r"""gateway: reserved for the network gateway; server: a server on the network; elastic_ip: an elastic IP; reserved: held in IPAM but not by a server, including addresses you reserved; available: free to use"""
+
+    assignment: OptionalNullable[PublicNetworkDataAssignment] = UNSET
+    r"""The resource holding the address, when it is a server or an elastic IP"""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["address", "role", "assignment"])
+        nullable_fields = set(["assignment"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
 
 
 class PublicNetworkDataProjectTypedDict(TypedDict):
@@ -131,6 +234,8 @@ class PublicNetworkDataAttributesTypedDict(TypedDict):
     r"""Servers this public network can host"""
     ips_used: NotRequired[int]
     ips_free: NotRequired[int]
+    ips: NotRequired[List[IpsTypedDict]]
+    r"""Every host address of the IPv4 network and what holds it. Only returned when retrieving a single public network."""
     created_at: NotRequired[datetime]
     project: NotRequired[Nullable[PublicNetworkDataProjectTypedDict]]
     region: NotRequired[Nullable[PublicNetworkDataRegionTypedDict]]
@@ -156,6 +261,9 @@ class PublicNetworkDataAttributes(BaseModel):
 
     ips_free: Optional[int] = None
 
+    ips: Optional[List[Ips]] = None
+    r"""Every host address of the IPv4 network and what holds it. Only returned when retrieving a single public network."""
+
     created_at: Optional[datetime] = None
 
     project: OptionalNullable[PublicNetworkDataProject] = UNSET
@@ -173,6 +281,7 @@ class PublicNetworkDataAttributes(BaseModel):
                 "capacity",
                 "ips_used",
                 "ips_free",
+                "ips",
                 "created_at",
                 "project",
                 "region",

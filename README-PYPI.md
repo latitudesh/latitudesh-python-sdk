@@ -275,6 +275,7 @@ with Latitudesh(
 * [create_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#create_volume) - Create volume
 * [retrieve_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#retrieve_volume) - Retrieve volume
 * [delete_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#delete_volume) - Delete volume
+* [update_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#update_volume) - Update volume
 * [~~mount_volume~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#mount_volume) - Mount volume (deprecated) :warning: **Deprecated**
 * [map_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#map_volume) - Map volume
 * [unmap_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#unmap_volume) - Unmap volume
@@ -418,6 +419,7 @@ with Latitudesh(
 * [create_public_network](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/publicnetworkssdk/README.md#create_public_network) - Create a network
 * [get_public_network](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/publicnetworkssdk/README.md#get_public_network) - Retrieve a network
 * [destroy_public_network](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/publicnetworkssdk/README.md#destroy_public_network) - Delete a network
+* [update_public_network_ip](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/publicnetworkssdk/README.md#update_public_network_ip) - Update a network IP
 
 ### [Regions](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/regionssdk/README.md)
 
@@ -685,7 +687,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 64 of 195 methods.*
+* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 65 of 197 methods.*
 * [`ResponseValidationError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

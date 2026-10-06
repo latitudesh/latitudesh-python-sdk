@@ -54,6 +54,8 @@ class ManagedDatabasePayloadRecovery(BaseModel):
 
 
 class ManagedDatabasePayloadAttributesTypedDict(TypedDict):
+    name: str
+    r"""Display name; used to derive the helm release name"""
     project_id: str
     r"""Project slug"""
     region: str
@@ -62,8 +64,6 @@ class ManagedDatabasePayloadAttributesTypedDict(TypedDict):
     r"""Plan slug (e.g. db.psql.small)"""
     engine: str
     r"""Database engine"""
-    name: NotRequired[str]
-    r"""Display name (optional)"""
     billing: NotRequired[ManagedDatabasePayloadBilling]
     r"""Billing cycle (postgres/clickhouse). Defaults to monthly when omitted."""
     parameters: NotRequired[Dict[str, Any]]
@@ -79,6 +79,9 @@ class ManagedDatabasePayloadAttributesTypedDict(TypedDict):
 
 
 class ManagedDatabasePayloadAttributes(BaseModel):
+    name: str
+    r"""Display name; used to derive the helm release name"""
+
     project_id: str
     r"""Project slug"""
 
@@ -90,9 +93,6 @@ class ManagedDatabasePayloadAttributes(BaseModel):
 
     engine: str
     r"""Database engine"""
-
-    name: Optional[str] = None
-    r"""Display name (optional)"""
 
     billing: Optional[ManagedDatabasePayloadBilling] = None
     r"""Billing cycle (postgres/clickhouse). Defaults to monthly when omitted."""
@@ -115,15 +115,7 @@ class ManagedDatabasePayloadAttributes(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            [
-                "name",
-                "billing",
-                "parameters",
-                "pooler",
-                "backup",
-                "recovery",
-                "replica_regions",
-            ]
+            ["billing", "parameters", "pooler", "backup", "recovery", "replica_regions"]
         )
         serialized = handler(self)
         m = {}

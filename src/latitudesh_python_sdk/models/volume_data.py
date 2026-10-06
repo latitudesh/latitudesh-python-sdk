@@ -251,6 +251,8 @@ class VolumeDataAttributesTypedDict(TypedDict):
     namespace_id: NotRequired[Nullable[int]]
     connector_id: NotRequired[Nullable[str]]
     initiators: NotRequired[Nullable[List[InitiatorsTypedDict]]]
+    nguid: NotRequired[Nullable[str]]
+    r"""NVMe namespace globally unique identifier (NGUID) of the volume, exactly as reported by the storage cluster, in UUID form (e.g. \"b338cb51-7593-413d-8c87-2657af7ecae9\"). Without the dashes it matches the NGUID the mapped server reports for the NVMe device of the volume. Null when it has not been recorded for the volume."""
     block: NotRequired[Nullable[BlockTypedDict]]
     r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
     keyring: NotRequired[Nullable[str]]
@@ -276,6 +278,9 @@ class VolumeDataAttributes(BaseModel):
     connector_id: OptionalNullable[str] = UNSET
 
     initiators: OptionalNullable[List[Initiators]] = UNSET
+
+    nguid: OptionalNullable[str] = UNSET
+    r"""NVMe namespace globally unique identifier (NGUID) of the volume, exactly as reported by the storage cluster, in UUID form (e.g. \"b338cb51-7593-413d-8c87-2657af7ecae9\"). Without the dashes it matches the NGUID the mapped server reports for the NVMe device of the volume. Null when it has not been recorded for the volume."""
 
     block: OptionalNullable[Block] = UNSET
     r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
@@ -305,6 +310,7 @@ class VolumeDataAttributes(BaseModel):
                 "namespace_id",
                 "connector_id",
                 "initiators",
+                "nguid",
                 "block",
                 "keyring",
                 "cluster_user",
@@ -320,6 +326,7 @@ class VolumeDataAttributes(BaseModel):
                 "namespace_id",
                 "connector_id",
                 "initiators",
+                "nguid",
                 "block",
                 "keyring",
                 "cluster_user",
