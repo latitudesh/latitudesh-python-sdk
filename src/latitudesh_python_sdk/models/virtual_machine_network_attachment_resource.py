@@ -2,7 +2,13 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
+    UNSET_SENTINEL,
+)
 from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
@@ -17,6 +23,10 @@ class VirtualMachineNetworkAttachmentResourceAttributesTypedDict(TypedDict):
     r"""The encoded VLAN id_hash"""
     vid: NotRequired[int]
     r"""The 802.1Q VLAN ID"""
+    address: NotRequired[Nullable[str]]
+    r"""The static IPv4 address with prefix given when the network was attached (e.g. 10.0.0.5/24). Null when the attachment has no static address."""
+    mac_address: NotRequired[Nullable[str]]
+    r"""MAC address of the NIC inside the guest. Interface names differ between images, so use the MAC to find the interface. Null until the VM has restarted with the network attached."""
     pending_restart: NotRequired[bool]
     r"""Deprecated, always false. Attaching and detaching restart the VM automatically, so an attachment never waits on a manual restart."""
 
@@ -28,21 +38,38 @@ class VirtualMachineNetworkAttachmentResourceAttributes(BaseModel):
     vid: Optional[int] = None
     r"""The 802.1Q VLAN ID"""
 
+    address: OptionalNullable[str] = UNSET
+    r"""The static IPv4 address with prefix given when the network was attached (e.g. 10.0.0.5/24). Null when the attachment has no static address."""
+
+    mac_address: OptionalNullable[str] = UNSET
+    r"""MAC address of the NIC inside the guest. Interface names differ between images, so use the MAC to find the interface. Null until the VM has restarted with the network attached."""
+
     pending_restart: Optional[bool] = None
     r"""Deprecated, always false. Attaching and detaching restart the VM automatically, so an attachment never waits on a manual restart."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["virtual_network_id", "vid", "pending_restart"])
+        optional_fields = set(
+            ["virtual_network_id", "vid", "address", "mac_address", "pending_restart"]
+        )
+        nullable_fields = set(["address", "mac_address"])
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
             k = f.alias or n
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
