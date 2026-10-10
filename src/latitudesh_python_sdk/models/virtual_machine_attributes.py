@@ -434,6 +434,8 @@ class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     tags: NotRequired[List[VirtualMachineAttributesTagsTypedDict]]
     team: NotRequired[TeamIncludeTypedDict]
     project: NotRequired[ProjectIncludeTypedDict]
+    apply_network_on_boot: NotRequired[bool]
+    r"""Whether the VM re-applies the platform network configuration on every boot. Set at creation; false for VMs created before this option was available."""
     pending_restart: NotRequired[bool]
     r"""Deprecated, always false. Opt-in extra field, requested via `extra_fields[virtual_machines]=pending_restart`. Attaching and detaching restart the VM automatically."""
 
@@ -474,6 +476,9 @@ class VirtualMachineAttributesAttributes(BaseModel):
 
     project: Optional[ProjectInclude] = None
 
+    apply_network_on_boot: Optional[bool] = None
+    r"""Whether the VM re-applies the platform network configuration on every boot. Set at creation; false for VMs created before this option was available."""
+
     pending_restart: Optional[bool] = None
     r"""Deprecated, always false. Opt-in extra field, requested via `extra_fields[virtual_machines]=pending_restart`. Attaching and detaching restart the VM automatically."""
 
@@ -496,6 +501,7 @@ class VirtualMachineAttributesAttributes(BaseModel):
                 "tags",
                 "team",
                 "project",
+                "apply_network_on_boot",
                 "pending_restart",
             ]
         )

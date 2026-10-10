@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 97e9fd40-98a0-465e-9d1a-259beac76207
 management:
-  docChecksum: 76954d95a8c75021c72f27794f9b4d7d
+  docChecksum: 9b158a5ed20840a6812d5f0effded2ce
   docVersion: "2023-06-01"
-  speakeasyVersion: 1.800.1
-  generationVersion: 2.943.0
-  releaseVersion: 3.4.5
-  configChecksum: 01287d17f8009bbd5d910f96b4dc5011
+  speakeasyVersion: 1.801.0
+  generationVersion: 2.946.0
+  releaseVersion: 3.4.6
+  configChecksum: cd23d543d270f5c66a8f58953c3c0411
   repoURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   installationURL: https://github.com/latitudesh/latitudesh-python-sdk.git
   published: true
 persistentEdits:
-  generation_id: 095dfed4-fd05-4476-bafc-2479db4e93e7
-  pristine_commit_hash: 53f8e0871d1ac04b2d83bcdb02b54a273009a795
-  pristine_tree_hash: daeda51421db92506c8ed518339b0c25b05db62a
+  generation_id: f77984aa-ef38-4922-8097-9b2c5dbde014
+  pristine_commit_hash: 6fffc48b16718728d1a652cce2ab9ad64e487ab9
+  pristine_tree_hash: 1405dd22944e650d3e2e0ef3c88fe7bc5ae94c8c
 features:
   python:
     additionalDependencies: 1.1.0
@@ -4019,8 +4019,8 @@ trackedFiles:
     pristine_git_object: 558b8e14970c2fc62fe6ab2bc484dd440cf18fa1
   docs/models/virtualmachineattributesattributes.md:
     id: ba8971a2fd16
-    last_write_checksum: sha1:970afe335c81e927ef92440b6f446d7da9664e14
-    pristine_git_object: 71b049a92032bd9c4f78840600538962c2a975ad
+    last_write_checksum: sha1:59343cf4596ab036b1ab72e2fc209a75fe3387b4
+    pristine_git_object: 4ef80a5a0822af2c20433fe075986e65cdbf4928
   docs/models/virtualmachineattributescredentials.md:
     id: d6c913d66765
     last_write_checksum: sha1:dc7a1c78d766dcbed30729de8f4ae936754b8d7f
@@ -4127,8 +4127,8 @@ trackedFiles:
     pristine_git_object: 12c0fed64346d69d1557ae419bf57c503c085fd0
   docs/models/virtualmachinenetworkattachmentcreatepayloadattributes.md:
     id: 4c53351a5e1d
-    last_write_checksum: sha1:d8c4e96c15f777002fd94138a36e5fde513bab42
-    pristine_git_object: b9cdcaf65645dcad553025d5502436d098999de0
+    last_write_checksum: sha1:036ad278a2387973bca2054428e87c1b21650bae
+    pristine_git_object: d96b7a1a4908276ebb3ab72bd7a9bdaeccaa4a35
   docs/models/virtualmachinenetworkattachmentcreatepayloaddata.md:
     id: 9db9dad41524
     last_write_checksum: sha1:6635c5e8abbe052a47cf22653810a3e7f4765b97
@@ -4143,8 +4143,8 @@ trackedFiles:
     pristine_git_object: 7bc00edd05c4191810ce8e739f8c3cb648921c20
   docs/models/virtualmachinenetworkattachmentresourceattributes.md:
     id: 846540e4de22
-    last_write_checksum: sha1:894e8f0bc0e9d359e8165bf025d28d8968b06234
-    pristine_git_object: fcd007416fe78d3c0d843ae69bea27c48a496ba7
+    last_write_checksum: sha1:b92d70980c26491b9d73f2774e17bbdff11c60d7
+    pristine_git_object: 69d89ed7d674351a1c27500540f8290d3e9b4f4a
   docs/models/virtualmachinenetworkattachmentresourcetype.md:
     id: c9e6ed7fb93f
     last_write_checksum: sha1:12b2ccb0e87fccb4d493d8091310b989102560c2
@@ -4159,8 +4159,8 @@ trackedFiles:
     pristine_git_object: 47a91f171d8191eaee750f558814db991a694ebc
   docs/models/virtualmachinepayloadattributes.md:
     id: 13701ce4e0e3
-    last_write_checksum: sha1:626b55470c458eca7d3c22ea6c80c214f7beb64c
-    pristine_git_object: 4c3af2b7d24e0eed6d3a81f343e29fc2c03b9ee2
+    last_write_checksum: sha1:320cefacdc488173cd2f2dc61d4e5890606d5966
+    pristine_git_object: eb266d544e478183d09b520fcfc2c6f0d3f6d64c
   docs/models/virtualmachinepayloadbilling.md:
     id: c4dab557e4f9
     last_write_checksum: sha1:0efdc1c23df2db26f37b6c44db043d376ba5b0e7
@@ -4543,8 +4543,8 @@ trackedFiles:
     pristine_git_object: 1f013fa5da823ed3dc37fb6bf3525811e958c43d
   docs/sdks/virtualmachinessdk/README.md:
     id: bb97444aaadf
-    last_write_checksum: sha1:3288d368fa2bf97f3e42d64c00ba67430da0682d
-    pristine_git_object: 74ce53ceb2b8ba07aa484404b4a8c08297f326f1
+    last_write_checksum: sha1:b4ee02bc2d8b7e4fa75358567b6b41320650a4fc
+    pristine_git_object: b3a68391c2a62f6461811f8dd1083028761f1a40
   docs/sdks/vpnsessions/README.md:
     id: f11a290517c1
     last_write_checksum: sha1:725ed678b048cba1e4047f4ec3f3a93d5cec74b1
@@ -4563,8 +4563,8 @@ trackedFiles:
     pristine_git_object: 250e4a286482ffcc3629575515a40adcb44a2702
   pyproject.toml:
     id: 5d07e7d72637
-    last_write_checksum: sha1:4921e24b0ae65d20db8ba524fcd606b459faf4eb
-    pristine_git_object: 8ae9af143ca568b78d82f41ad49a3d3488393722
+    last_write_checksum: sha1:272a81ed166da038d97042406dd343782a3a554b
+    pristine_git_object: 8125effcf144d26a7cbb2b19eeec866329c4088c
   scripts/prepare_readme.py:
     id: e0c5957a6035
     last_write_checksum: sha1:5354f07fd2821a42340f1573b7f3e029b8a852e1
@@ -4591,8 +4591,8 @@ trackedFiles:
     pristine_git_object: 7482ca81a653516ecd30fd1a10fdb6cc68839195
   src/latitudesh_python_sdk/_version.py:
     id: 65dde1ef31c9
-    last_write_checksum: sha1:21eaf0f8cc3047016908d32105aeebe58379fd91
-    pristine_git_object: 698431d9b0e93660d2bf35e7094e3fbe4e922d81
+    last_write_checksum: sha1:7957fdcdad2c8c95a58f9386ffa77d91747e5101
+    pristine_git_object: c0669a75f29edba1cca1fb2ffab52a2efcebe62f
   src/latitudesh_python_sdk/apikeys_sdk.py:
     id: 633cbc9c65bd
     last_write_checksum: sha1:af2a49602a6b6a0bc09a8c64a01481e9ded6230b
@@ -5911,8 +5911,8 @@ trackedFiles:
     pristine_git_object: 61d3c6c74ebbe0801b82eb1632a58f3b8172b824
   src/latitudesh_python_sdk/models/virtual_machine_attributes.py:
     id: 1d131260bece
-    last_write_checksum: sha1:169e5248f8dcdb00b6e5091ce1315d6ba3e01832
-    pristine_git_object: 2fea1f3fb3382a8e6227d086ec7e1a3c6b21ea5b
+    last_write_checksum: sha1:ae8ace93bdbaab15c0d1594a200134d28d3105a4
+    pristine_git_object: 17d575a870824030c16e091cd1c6578ebceafc36
   src/latitudesh_python_sdk/models/virtual_machine_backup.py:
     id: 5012d0991583
     last_write_checksum: sha1:eb72dd18f46a193e9cb5017dcc5c10e997945ac3
@@ -5935,20 +5935,20 @@ trackedFiles:
     pristine_git_object: 6fddc63d50c21c58f839c125961c3cd8b880de76
   src/latitudesh_python_sdk/models/virtual_machine_network_attachment_create_payload.py:
     id: 4c55adfd5d84
-    last_write_checksum: sha1:17ceadd4f3643ad672ba59378c79e54c6de1d2f6
-    pristine_git_object: 8a2689ac2188a342faeac1d83983ae1a165476d5
+    last_write_checksum: sha1:45efe11ddc4c406a4694792e4197751784cd8bde
+    pristine_git_object: e14d5b42796bafbd8f2d84d710e7d6da30c5002f
   src/latitudesh_python_sdk/models/virtual_machine_network_attachment_resource.py:
     id: f60b836be321
-    last_write_checksum: sha1:d81d659ab5f0ec38c1f3674cb701022312732d11
-    pristine_git_object: 0c79a172e337925f9defdcca71a7b7e8820f77fe
+    last_write_checksum: sha1:de9f67d6bfca3ab7b3716a45d4295642900db71c
+    pristine_git_object: f3275dd723b284911b6f1bc91656ca21617419ea
   src/latitudesh_python_sdk/models/virtual_machine_network_attachments.py:
     id: 6984fbba8c71
     last_write_checksum: sha1:75b7fddc946ce0fe6ca2600248b9d32b678f9bd3
     pristine_git_object: 6cbd2c088248ceba2225722ff3080353d59e9685
   src/latitudesh_python_sdk/models/virtual_machine_payload.py:
     id: 2aaa98fe453c
-    last_write_checksum: sha1:c28fa4bc40f3fee033e6a6b3067135d4b335d87e
-    pristine_git_object: 8affd219e23742bdb7acfb20f27956f2a9024f2e
+    last_write_checksum: sha1:986f434d7841350262726fa192db35ae275d4f24
+    pristine_git_object: 4e64d7e7382f4fdfef36338f4a57dd55fd026dc4
   src/latitudesh_python_sdk/models/virtual_machine_plans.py:
     id: 7d366f68b8e2
     last_write_checksum: sha1:00dc810aab48c4fcd71ca5d26ad4650a09c81453
@@ -6183,8 +6183,8 @@ trackedFiles:
     pristine_git_object: 461f6bae736723f6a819fc3dd612b128415c3cbe
   src/latitudesh_python_sdk/virtualmachines_sdk.py:
     id: 8d595f354593
-    last_write_checksum: sha1:a19b4d10222868741e6a87a2c9ebe65ca6f89566
-    pristine_git_object: ec3cab279f12cf52dfdb8303269df546199b33f6
+    last_write_checksum: sha1:76b2924e1191d0e88eb916b132358cc7393c3649
+    pristine_git_object: b939b7a879f8df8c55bfdf8e703529bbbb3b3aec
   src/latitudesh_python_sdk/vpnsessions.py:
     id: cad19f45a597
     last_write_checksum: sha1:488e1c6905cef14ab2898a1bc3adf3b5ee9eca57
@@ -8611,8 +8611,8 @@ examples:
   create-virtual-machine:
     Created:
       requestBody:
-        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "site": "DAL"}}}
-        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "site": "DAL"}}}
+        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "apply_network_on_boot": true, "site": "DAL"}}}
+        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "apply_network_on_boot": true, "site": "DAL"}}}
       responses:
         "201":
           application/vnd.api+json: {"data": {"id": "vm_mw49QDB5qagKb", "type": "virtual_machines", "attributes": {"name": "my-new-vm", "created_at": "2026-01-14T15:57:13+00:00", "status": "Starting", "primary_ipv4": "192.168.1.50", "operating_system": {"name": "Ubuntu 24.04 LTS", "slug": "ubuntu_24_04_x64_lts", "version": "24.04 x64 LTS", "features": {"raid": true, "ssh_keys": true, "user_data": true}, "distro": {"name": "Ubuntu", "slug": "ubuntu", "series": "noble"}}, "site": "FRA181", "billing": "monthly", "plan": {"id": "plan_VE1Wd3VXOXnZJ", "name": "g3.h100.large-131"}, "specs": {"vcpu": 16, "ram": "128 GB", "storage": "100 GB", "nic": "1 x 1 Gbps", "gpu": "1 x NVIDIA H100 Tensor Core GPU"}, "team": {"id": "team_zAbb72Zm3VS3N0o89Y48sGXv3mZ", "name": "690 Team", "slug": "690-team", "description": "690 Team", "address": "Apt. 922 405 Ondricka Lights, Lake Jennineview, SC 58925-4625", "currency": {"id": "cur_AW6Q2D9lqKLpr", "code": "BRL", "name": "Brazilian Real", "currency_id": null}, "status": "verified"}, "project": {"id": "proj_GMy1Dbk1ON50m", "name": "Lightweight Leather Lamp", "slug": "lightweight-leather-lamp", "description": "Sleek Wool Plate", "billing_type": "Normal", "billing_method": "Normal", "bandwidth_alert": false, "environment": null, "billing": {"subscription_id": null, "type": "Normal", "method": "Normal"}, "stats": {"databases": 0, "ip_addresses": 0, "prefixes": 0, "servers": 0, "storages": 0, "virtual_machines": 1, "vlans": 0}}}}}
@@ -8632,15 +8632,15 @@ examples:
           application/vnd.api+json: {}
     CreatedWithOS:
       requestBody:
-        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "operating_system": "ubuntu_24_04_x64_lts", "site": "DAL"}}}
-        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "operating_system": "ubuntu_24_04_x64_lts", "site": "DAL"}}}
+        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "operating_system": "ubuntu_24_04_x64_lts", "apply_network_on_boot": true, "site": "DAL"}}}
+        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "operating_system": "ubuntu_24_04_x64_lts", "apply_network_on_boot": true, "site": "DAL"}}}
       responses:
         "201":
           application/vnd.api+json: {}
     CreatedWithUserData:
       requestBody:
-        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "user_data": "ud_abc123", "site": "DAL"}}}
-        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "user_data": "ud_abc123", "site": "DAL"}}}
+        application/json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "user_data": "ud_abc123", "apply_network_on_boot": true, "site": "DAL"}}}
+        application/vnd.api+json: {"data": {"type": "virtual_machines", "attributes": {"name": "my-new-vm", "billing": "monthly", "project": "lightweight-leather-lamp", "user_data": "ud_abc123", "apply_network_on_boot": true, "site": "DAL"}}}
       responses:
         "201":
           application/vnd.api+json: {}
@@ -11078,7 +11078,7 @@ examples:
           application/vnd.api+json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Python SDK Changes:\n* `latitudesh.filesystem_storage.create_filesystem()`: \n  *  `request.data.attributes` **Changed** (Breaking ⚠️)\n  *  `response.data.attributes` **Changed**\n* `latitudesh.managed_databases.create_managed_database()`: \n  *  `request.data.attributes.name` **Changed** (Breaking ⚠️)\n* `latitudesh.kubernetes_clusters.get_kubernetes_cluster()`:  `error.status[403]` **Added**\n* `latitudesh.filesystem_storage.list_filesystems()`:  `response.data[].attributes` **Changed**\n* `latitudesh.public_networks.update_public_network_ip()`: **Added**\n* `latitudesh.public_networks.get_public_networks()`:  `response.data[].attributes.ips` **Added**\n* `latitudesh.public_networks.create_public_network()`:  `response.data.attributes.ips` **Added**\n* `latitudesh.public_networks.get_public_network()`:  `response.data.attributes.ips` **Added**\n* `latitudesh.kubernetes_clusters.list_kubernetes_clusters()`:  `error.status[403]` **Added**\n* `latitudesh.kubernetes_clusters.list_kubernetes_available_versions()`:  `error.status[403]` **Added**\n* `latitudesh.filesystem_storage.update_filesystem()`: \n  *  `request.data.id` **Changed**\n  *  `response.data.attributes` **Changed**\n* `latitudesh.block_storage.list_volumes()`:  `response.data[].attributes.nguid` **Added**\n* `latitudesh.block_storage.create_volume()`:  `response.data.attributes.nguid` **Added**\n* `latitudesh.block_storage.retrieve_volume()`:  `response.data.attributes.nguid` **Added**\n* `latitudesh.block_storage.map_volume()`:  `response.data.attributes.nguid` **Added**\n* `latitudesh.block_storage.unmap_volume()`:  `response.data.attributes.nguid` **Added**\n* `latitudesh.block_storage.update_volume()`: **Added**\n"
+releaseNotes: "## Python SDK Changes:\n* `latitudesh.virtual_machines.create()`: \n  *  `request.data.attributes.apply_network_on_boot` **Added**\n  *  `response.data.attributes.apply_network_on_boot` **Added**\n* `latitudesh.virtual_machines.list()`:  `response.data[].attributes.apply_network_on_boot` **Added**\n* `latitudesh.virtual_machines.get()`:  `response.data.attributes.apply_network_on_boot` **Added**\n* `latitudesh.virtual_machines.update_virtual_machine()`:  `response.data.attributes.apply_network_on_boot` **Added**\n* `latitudesh.virtual_machines.list_virtual_machine_network_attachments()`:  `response.data[].attributes` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
