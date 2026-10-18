@@ -15,8 +15,10 @@
 * [get_lks_node_pool](#get_lks_node_pool) - Get a node pool
 * [delete_lks_node_pool](#delete_lks_node_pool) - Delete a node pool
 * [update_lks_node_pool](#update_lks_node_pool) - Update a node pool
+* [list_lks_nodes](#list_lks_nodes) - List nodes
 * [list_lks_available_versions](#list_lks_available_versions) - List available Kubernetes versions
 * [list_lks_sites](#list_lks_sites) - List sites available for LKS
+* [list_lks_allocatable_servers](#list_lks_allocatable_servers) - List servers that can join an allocated node pool
 
 ## list_lks_clusters
 
@@ -543,11 +545,78 @@ with Latitudesh(
 
 ## create_lks_node_pool
 
-Adds a node pool to an LKS cluster. The platform provisions `count` servers of `plan` from stock, so both fields are required.
+Adds a node pool to an LKS cluster. `mode` decides where the pool's nodes come from:
 
-`kubernetes_version` defaults to the control-plane patch and may never be newer than it. `max_pods_per_node` is set once, here — it cannot be changed later.
+- `on_demand` (default): the platform provisions `count` servers of `plan` from stock, so both fields are required.
+- `allocated`: the pool is built from `server_ids`, bare metal servers already in the cluster project. Each server is reinstalled with the LKS node image, which erases its disks. `plan` and `count` are rejected: the pool uses the plan the servers share, and `count` is the number of servers. Each server that fails an eligibility check is reported as its own 422 error, pointing at its index in `server_ids` and listing every reason in `meta.reasons`. `GET /lks/allocatable_servers` shows which servers can join. Allocated node pools are available only in on-demand projects: a reserved project is refused with 422 `RESERVED_PROJECT_NOT_SUPPORTED`.
+
+`kubernetes_version` defaults to the control-plane patch and may never be newer than it. `max_pods_per_node` and `mode` are set once, here — they cannot be changed later.
 
 
+### Example Usage: Allocated
+
+<!-- UsageSnippet language="python" operationID="create-lks-node-pool" method="post" path="/lks/clusters/{cluster_id}/nodepools" example="Allocated" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.lks.create_lks_node_pool(cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.CreateLksNodePoolType.LKS_NODE_POOLS,
+        "attributes": {
+            "mode": latitudesh_python_sdk.CreateLksNodePoolMode.ALLOCATED,
+            "server_ids": [
+                "sv_9dQKr1pRMLyd",
+                "sv_pRMLydp0dQKr1",
+            ],
+            "name": "gpu-owned",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: AllocatedProvisioning
+
+<!-- UsageSnippet language="python" operationID="create-lks-node-pool" method="post" path="/lks/clusters/{cluster_id}/nodepools" example="AllocatedProvisioning" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.lks.create_lks_node_pool(cluster_id="<id>", data={
+        "type": latitudesh_python_sdk.CreateLksNodePoolType.LKS_NODE_POOLS,
+        "attributes": {
+            "server_ids": [
+                "sv_9dQKr1pRMLyd",
+            ],
+            "kubernetes_version": "1.36.3",
+            "max_pods_per_node": 110,
+            "taints": [
+                {
+                    "key": "dedicated",
+                    "value": "gpu",
+                    "effect": latitudesh_python_sdk.Effect.NO_SCHEDULE,
+                },
+            ],
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
 ### Example Usage: InsufficientPermissions
 
 <!-- UsageSnippet language="python" operationID="create-lks-node-pool" method="post" path="/lks/clusters/{cluster_id}/nodepools" example="InsufficientPermissions" -->
@@ -564,8 +633,9 @@ with Latitudesh(
     res = latitudesh.lks.create_lks_node_pool(cluster_id="<id>", data={
         "type": latitudesh_python_sdk.CreateLksNodePoolType.LKS_NODE_POOLS,
         "attributes": {
-            "plan": "<value>",
-            "count": 973849,
+            "server_ids": [
+                "sv_9dQKr1pRMLyd",
+            ],
             "kubernetes_version": "1.36.3",
             "max_pods_per_node": 110,
             "taints": [
@@ -624,8 +694,9 @@ with Latitudesh(
     res = latitudesh.lks.create_lks_node_pool(cluster_id="<id>", data={
         "type": latitudesh_python_sdk.CreateLksNodePoolType.LKS_NODE_POOLS,
         "attributes": {
-            "plan": "<value>",
-            "count": 973849,
+            "server_ids": [
+                "sv_9dQKr1pRMLyd",
+            ],
             "kubernetes_version": "1.36.3",
             "max_pods_per_node": 110,
             "taints": [
@@ -785,11 +856,13 @@ with Latitudesh(
 
 ## update_lks_node_pool
 
-Scales, renames, upgrades or re-labels a node pool. At least one attribute must be provided.
+Scales, renames, upgrades, re-labels or changes the servers of a node pool. At least one attribute must be provided.
 
 `labels` and `taints` are declarative replacements, not merges: omit the field to leave it untouched, send the whole map/list to replace it, or send `{}` / `[]` to clear it.
 
-A newer `kubernetes_version` rolls a node-recreating upgrade; it must not be lower than the pool's current patch nor newer than the control-plane patch. `max_pods_per_node` is immutable — a PATCH that carries it is rejected with 422 even if the value is unchanged.
+A newer `kubernetes_version` rolls a node-recreating upgrade; it must not be lower than the pool's current patch nor newer than the control-plane patch. `max_pods_per_node` and `mode` are immutable — a PATCH that carries either is rejected with 422 even if the value is unchanged.
+
+For an allocated node pool, `server_ids` replaces `count`: send the whole set of servers the pool should have. Added servers are checked as on create and reinstalled to join; removed servers are drained and reinstalled with a clean OS, with no data, keys or user data restored. A server set change cannot be combined with a `kubernetes_version` change.
 
 The node pool must be idle: one that is provisioning, updating, scaling, upgrading, paused or deleting rejects the request with 409.
 
@@ -867,6 +940,33 @@ with Latitudesh(
             "labels": {
                 "env": "prod",
             },
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: ReplaceServers
+
+<!-- UsageSnippet language="python" operationID="update-lks-node-pool" method="patch" path="/lks/clusters/{cluster_id}/nodepools/{id}" example="ReplaceServers" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.lks.update_lks_node_pool(cluster_id="<id>", id="<id>", data={
+        "type": latitudesh_python_sdk.UpdateLksNodePoolType.LKS_NODE_POOLS,
+        "attributes": {
+            "server_ids": [
+                "sv_9dQKr1pRMLyd",
+                "sv_pRMLydp0dQKr1",
+            ],
         },
     })
 
@@ -974,6 +1074,51 @@ with Latitudesh(
 | models.ErrorObject       | 502                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
+## list_lks_nodes
+
+Lists the nodes of a node pool, with the status of each node and of the server it runs on. Each node's `id` is a stable node ID (format: `lksno_<hash>`); `name` is its Kubernetes node name, as shown by `kubectl get nodes`. The response is not paginated; `meta.total` is the number of nodes returned.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="list-lks-nodes" method="get" path="/lks/clusters/{cluster_id}/nodepools/{node_pool_id}/nodes" example="OneNode" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.lks.list_lks_nodes(cluster_id="<id>", node_pool_id="<id>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `cluster_id`                                                                      | *str*                                                                             | :heavy_check_mark:                                                                | The cluster ID (format: `lksc_<hash>`).                                           |
+| `node_pool_id`                                                                    | *str*                                                                             | :heavy_check_mark:                                                                | The node pool ID (format: `lksnp_<hash>`).                                        |
+| `filter_status`                                                                   | *Optional[str]*                                                                   | :heavy_minus_sign:                                                                | Only return nodes in this status: `pending`, `ready`, `not_ready`, or `deleting`. |
+| `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
+
+### Response
+
+**[models.LksNodes](../../models/lksnodes.md)**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
+| models.ErrorObject       | 502                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+
 ## list_lks_available_versions
 
 Lists the Kubernetes patches the platform offers, with their lifecycle flags. Use a version with `available_for_creation: true` when creating a cluster or a node pool, and one with `available_for_upgrade: true` when upgrading. Exactly one entry has `default: true`.
@@ -1053,5 +1198,51 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 502                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+
+## list_lks_allocatable_servers
+
+Lists a project's servers at a site, with whether each one can join an allocated node pool right now. Pass the `id` of an allocatable server in `server_ids` when creating or updating an allocated node pool.
+
+When `allocatable` is false, `reasons` lists why, using the same codes that node pool create and update return per server. `node_pool_id` and `cluster_id` identify the pool a server already belongs to.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="list-lks-allocatable-servers" method="get" path="/lks/allocatable_servers" example="TwoServers" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.lks.list_lks_allocatable_servers(filter_project="<value>", filter_site="<value>")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `filter_project`                                                    | *str*                                                               | :heavy_check_mark:                                                  | Project id or slug                                                  |
+| `filter_site`                                                       | *str*                                                               | :heavy_check_mark:                                                  | Site slug                                                           |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.LksAllocatableServers](../../models/lksallocatableservers.md)**
+
+### Errors
+
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
 | models.ErrorObject       | 502                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |

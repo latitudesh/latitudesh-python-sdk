@@ -343,8 +343,10 @@ with Latitudesh(
 * [get_lks_node_pool](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/lks/README.md#get_lks_node_pool) - Get a node pool
 * [delete_lks_node_pool](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/lks/README.md#delete_lks_node_pool) - Delete a node pool
 * [update_lks_node_pool](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/lks/README.md#update_lks_node_pool) - Update a node pool
+* [list_lks_nodes](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/lks/README.md#list_lks_nodes) - List nodes
 * [list_lks_available_versions](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/lks/README.md#list_lks_available_versions) - List available Kubernetes versions
 * [list_lks_sites](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/lks/README.md#list_lks_sites) - List sites available for LKS
+* [list_lks_allocatable_servers](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/lks/README.md#list_lks_allocatable_servers) - List servers that can join an allocated node pool
 
 ### [ManagedDatabases](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md)
 
@@ -687,7 +689,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 65 of 197 methods.*
+* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 68 of 199 methods.*
 * [`ResponseValidationError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
