@@ -54,6 +54,8 @@ class VirtualMachinePayloadAttributesTypedDict(TypedDict):
     r"""A marketplace app reference (slug, e.g. \"openclaw\", or encoded id_hash \"mkapp_xxx\") to preinstall on the VM via cloud-init. Cannot be combined with operating_system; the app defines its own."""
     tags: NotRequired[Nullable[List[str]]]
     r"""Array of tag IDs to assign to the VM."""
+    apply_network_on_boot: NotRequired[bool]
+    r"""Re-apply the platform network configuration on every boot, so a virtual network attached to or detached from the VM is configured in the guest by the restart the attach or detach performs. Every boot, including a restart started inside the guest, rewrites cloud-init's own network file (for example `/etc/netplan/50-cloud-init.yaml`): keep custom network configuration in a separate file. Set at creation only; it cannot be changed later through the API. To stop the re-apply from inside the guest, create `/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg` containing `network: {config: disabled}`; networks attached afterwards must then be configured by hand. Defaults to true."""
     site: NotRequired[Nullable[str]]
     r"""Site/region slug where the VM is provisioned (e.g. DAL, SAO). Defaults to DAL when omitted."""
 
@@ -83,6 +85,9 @@ class VirtualMachinePayloadAttributes(BaseModel):
     tags: OptionalNullable[List[str]] = UNSET
     r"""Array of tag IDs to assign to the VM."""
 
+    apply_network_on_boot: Optional[bool] = True
+    r"""Re-apply the platform network configuration on every boot, so a virtual network attached to or detached from the VM is configured in the guest by the restart the attach or detach performs. Every boot, including a restart started inside the guest, rewrites cloud-init's own network file (for example `/etc/netplan/50-cloud-init.yaml`): keep custom network configuration in a separate file. Set at creation only; it cannot be changed later through the API. To stop the re-apply from inside the guest, create `/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg` containing `network: {config: disabled}`; networks attached afterwards must then be configured by hand. Defaults to true."""
+
     site: OptionalNullable[str] = "DAL"
     r"""Site/region slug where the VM is provisioned (e.g. DAL, SAO). Defaults to DAL when omitted."""
 
@@ -99,6 +104,7 @@ class VirtualMachinePayloadAttributes(BaseModel):
                 "user_data",
                 "marketplace_app",
                 "tags",
+                "apply_network_on_boot",
                 "site",
             ]
         )

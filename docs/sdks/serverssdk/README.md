@@ -972,9 +972,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 409                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## unlock
 
@@ -1814,5 +1815,5 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
+| models.ErrorObject       | 403, 404, 409, 422       | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |

@@ -1,0 +1,10 @@
+# LksNodeData
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  | Example                                                                      |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `id`                                                                         | *Optional[str]*                                                              | :heavy_minus_sign:                                                           | N/A                                                                          | lksno_3f9a2c71d0e84b                                                         |
+| `type`                                                                       | [Optional[models.LksNodeDataType]](../models/lksnodedatatype.md)             | :heavy_minus_sign:                                                           | N/A                                                                          |                                                                              |
+| `attributes`                                                                 | [Optional[models.LksNodeDataAttributes]](../models/lksnodedataattributes.md) | :heavy_minus_sign:                                                           | N/A                                                                          |                                                                              |

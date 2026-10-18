@@ -23,7 +23,11 @@ class LksNodePoolDataAttributesTypedDict(TypedDict):
     name: NotRequired[Nullable[str]]
     type: NotRequired[str]
     mode: NotRequired[str]
+    r"""on_demand: nodes are servers provisioned from stock. allocated: nodes are servers already in the project, reinstalled to join the pool."""
     plan: NotRequired[Nullable[str]]
+    r"""null for allocated node pools"""
+    server_ids: NotRequired[Nullable[List[str]]]
+    r"""Servers backing an allocated node pool; null for on_demand node pools"""
     description: NotRequired[Nullable[str]]
     count: NotRequired[Nullable[int]]
     max_pods_per_node: NotRequired[Nullable[int]]
@@ -33,7 +37,7 @@ class LksNodePoolDataAttributesTypedDict(TypedDict):
     status: NotRequired[Nullable[str]]
     message: NotRequired[Nullable[str]]
     reason: NotRequired[Nullable[str]]
-    r"""Machine-readable status reason (open enum)"""
+    r"""Machine-readable status reason (open enum). Allocated pools also report AdoptingServers, ServerNotEligible, ServerQuarantined, ServerReturnBlocked and ReturningServers."""
     ready_nodes: NotRequired[Nullable[int]]
     labels: NotRequired[Dict[str, str]]
     taints: NotRequired[List[LksNodePoolTaintTypedDict]]
@@ -47,8 +51,13 @@ class LksNodePoolDataAttributes(BaseModel):
     type: Optional[str] = None
 
     mode: Optional[str] = None
+    r"""on_demand: nodes are servers provisioned from stock. allocated: nodes are servers already in the project, reinstalled to join the pool."""
 
     plan: OptionalNullable[str] = UNSET
+    r"""null for allocated node pools"""
+
+    server_ids: OptionalNullable[List[str]] = UNSET
+    r"""Servers backing an allocated node pool; null for on_demand node pools"""
 
     description: OptionalNullable[str] = UNSET
 
@@ -66,7 +75,7 @@ class LksNodePoolDataAttributes(BaseModel):
     message: OptionalNullable[str] = UNSET
 
     reason: OptionalNullable[str] = UNSET
-    r"""Machine-readable status reason (open enum)"""
+    r"""Machine-readable status reason (open enum). Allocated pools also report AdoptingServers, ServerNotEligible, ServerQuarantined, ServerReturnBlocked and ReturningServers."""
 
     ready_nodes: OptionalNullable[int] = UNSET
 
@@ -86,6 +95,7 @@ class LksNodePoolDataAttributes(BaseModel):
                 "type",
                 "mode",
                 "plan",
+                "server_ids",
                 "description",
                 "count",
                 "max_pods_per_node",
@@ -105,6 +115,7 @@ class LksNodePoolDataAttributes(BaseModel):
             [
                 "name",
                 "plan",
+                "server_ids",
                 "description",
                 "count",
                 "max_pods_per_node",

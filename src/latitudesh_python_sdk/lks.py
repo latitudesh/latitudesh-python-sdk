@@ -1406,9 +1406,12 @@ class Lks(BaseSDK):
     ) -> models.LksNodePool:
         r"""Create a node pool
 
-        Adds a node pool to an LKS cluster. The platform provisions `count` servers of `plan` from stock, so both fields are required.
+        Adds a node pool to an LKS cluster. `mode` decides where the pool's nodes come from:
 
-        `kubernetes_version` defaults to the control-plane patch and may never be newer than it. `max_pods_per_node` is set once, here — it cannot be changed later.
+        - `on_demand` (default): the platform provisions `count` servers of `plan` from stock, so both fields are required.
+        - `allocated`: the pool is built from `server_ids`, bare metal servers already in the cluster project. Each server is reinstalled with the LKS node image, which erases its disks. `plan` and `count` are rejected: the pool uses the plan the servers share, and `count` is the number of servers. Each server that fails an eligibility check is reported as its own 422 error, pointing at its index in `server_ids` and listing every reason in `meta.reasons`. `GET /lks/allocatable_servers` shows which servers can join. Allocated node pools are available only in on-demand projects: a reserved project is refused with 422 `RESERVED_PROJECT_NOT_SUPPORTED`.
+
+        `kubernetes_version` defaults to the control-plane patch and may never be newer than it. `max_pods_per_node` and `mode` are set once, here — they cannot be changed later.
 
 
         :param cluster_id: The cluster ID (format: `lksc_<hash>`).
@@ -1518,9 +1521,12 @@ class Lks(BaseSDK):
     ) -> models.LksNodePool:
         r"""Create a node pool
 
-        Adds a node pool to an LKS cluster. The platform provisions `count` servers of `plan` from stock, so both fields are required.
+        Adds a node pool to an LKS cluster. `mode` decides where the pool's nodes come from:
 
-        `kubernetes_version` defaults to the control-plane patch and may never be newer than it. `max_pods_per_node` is set once, here — it cannot be changed later.
+        - `on_demand` (default): the platform provisions `count` servers of `plan` from stock, so both fields are required.
+        - `allocated`: the pool is built from `server_ids`, bare metal servers already in the cluster project. Each server is reinstalled with the LKS node image, which erases its disks. `plan` and `count` are rejected: the pool uses the plan the servers share, and `count` is the number of servers. Each server that fails an eligibility check is reported as its own 422 error, pointing at its index in `server_ids` and listing every reason in `meta.reasons`. `GET /lks/allocatable_servers` shows which servers can join. Allocated node pools are available only in on-demand projects: a reserved project is refused with 422 `RESERVED_PROJECT_NOT_SUPPORTED`.
+
+        `kubernetes_version` defaults to the control-plane patch and may never be newer than it. `max_pods_per_node` and `mode` are set once, here — they cannot be changed later.
 
 
         :param cluster_id: The cluster ID (format: `lksc_<hash>`).
@@ -2023,11 +2029,13 @@ class Lks(BaseSDK):
     ) -> models.LksNodePool:
         r"""Update a node pool
 
-        Scales, renames, upgrades or re-labels a node pool. At least one attribute must be provided.
+        Scales, renames, upgrades, re-labels or changes the servers of a node pool. At least one attribute must be provided.
 
         `labels` and `taints` are declarative replacements, not merges: omit the field to leave it untouched, send the whole map/list to replace it, or send `{}` / `[]` to clear it.
 
-        A newer `kubernetes_version` rolls a node-recreating upgrade; it must not be lower than the pool's current patch nor newer than the control-plane patch. `max_pods_per_node` is immutable — a PATCH that carries it is rejected with 422 even if the value is unchanged.
+        A newer `kubernetes_version` rolls a node-recreating upgrade; it must not be lower than the pool's current patch nor newer than the control-plane patch. `max_pods_per_node` and `mode` are immutable — a PATCH that carries either is rejected with 422 even if the value is unchanged.
+
+        For an allocated node pool, `server_ids` replaces `count`: send the whole set of servers the pool should have. Added servers are checked as on create and reinstalled to join; removed servers are drained and reinstalled with a clean OS, with no data, keys or user data restored. A server set change cannot be combined with a `kubernetes_version` change.
 
         The node pool must be idle: one that is provisioning, updating, scaling, upgrading, paused or deleting rejects the request with 409.
 
@@ -2142,11 +2150,13 @@ class Lks(BaseSDK):
     ) -> models.LksNodePool:
         r"""Update a node pool
 
-        Scales, renames, upgrades or re-labels a node pool. At least one attribute must be provided.
+        Scales, renames, upgrades, re-labels or changes the servers of a node pool. At least one attribute must be provided.
 
         `labels` and `taints` are declarative replacements, not merges: omit the field to leave it untouched, send the whole map/list to replace it, or send `{}` / `[]` to clear it.
 
-        A newer `kubernetes_version` rolls a node-recreating upgrade; it must not be lower than the pool's current patch nor newer than the control-plane patch. `max_pods_per_node` is immutable — a PATCH that carries it is rejected with 422 even if the value is unchanged.
+        A newer `kubernetes_version` rolls a node-recreating upgrade; it must not be lower than the pool's current patch nor newer than the control-plane patch. `max_pods_per_node` and `mode` are immutable — a PATCH that carries either is rejected with 422 even if the value is unchanged.
+
+        For an allocated node pool, `server_ids` replaces `count`: send the whole set of servers the pool should have. Added servers are checked as on create and reinstalled to join; removed servers are drained and reinstalled with a clean OS, with no data, keys or user data restored. A server set change cannot be combined with a `kubernetes_version` change.
 
         The node pool must be idle: one that is provisioning, updating, scaling, upgrading, paused or deleting rejects the request with 409.
 
@@ -2232,6 +2242,206 @@ class Lks(BaseSDK):
         if utils.match_response(
             http_res, ["403", "404", "409", "422"], "application/vnd.api+json"
         ):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def list_lks_nodes(
+        self,
+        *,
+        cluster_id: str,
+        node_pool_id: str,
+        filter_status: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.LksNodes:
+        r"""List nodes
+
+        Lists the nodes of a node pool, with the status of each node and of the server it runs on. Each node's `id` is a stable node ID (format: `lksno_<hash>`); `name` is its Kubernetes node name, as shown by `kubectl get nodes`. The response is not paginated; `meta.total` is the number of nodes returned.
+
+
+        :param cluster_id: The cluster ID (format: `lksc_<hash>`).
+        :param node_pool_id: The node pool ID (format: `lksnp_<hash>`).
+        :param filter_status: Only return nodes in this status: `pending`, `ready`, `not_ready`, or `deleting`.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListLksNodesRequest(
+            cluster_id=cluster_id,
+            node_pool_id=node_pool_id,
+            filter_status=filter_status,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/lks/clusters/{cluster_id}/nodepools/{node_pool_id}/nodes",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="list-lks-nodes",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["LKS"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(models.LksNodes, http_res)
+        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def list_lks_nodes_async(
+        self,
+        *,
+        cluster_id: str,
+        node_pool_id: str,
+        filter_status: Optional[str] = None,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.LksNodes:
+        r"""List nodes
+
+        Lists the nodes of a node pool, with the status of each node and of the server it runs on. Each node's `id` is a stable node ID (format: `lksno_<hash>`); `name` is its Kubernetes node name, as shown by `kubectl get nodes`. The response is not paginated; `meta.total` is the number of nodes returned.
+
+
+        :param cluster_id: The cluster ID (format: `lksc_<hash>`).
+        :param node_pool_id: The node pool ID (format: `lksnp_<hash>`).
+        :param filter_status: Only return nodes in this status: `pending`, `ready`, `not_ready`, or `deleting`.
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListLksNodesRequest(
+            cluster_id=cluster_id,
+            node_pool_id=node_pool_id,
+            filter_status=filter_status,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/lks/clusters/{cluster_id}/nodepools/{node_pool_id}/nodes",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="list-lks-nodes",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["LKS"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(models.LksNodes, http_res)
+        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "502", "application/vnd.api+json"):
@@ -2570,6 +2780,204 @@ class Lks(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.LksSites, http_res)
+        if utils.match_response(http_res, "502", "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def list_lks_allocatable_servers(
+        self,
+        *,
+        filter_project: str,
+        filter_site: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.LksAllocatableServers:
+        r"""List servers that can join an allocated node pool
+
+        Lists a project's servers at a site, with whether each one can join an allocated node pool right now. Pass the `id` of an allocatable server in `server_ids` when creating or updating an allocated node pool.
+
+        When `allocatable` is false, `reasons` lists why, using the same codes that node pool create and update return per server. `node_pool_id` and `cluster_id` identify the pool a server already belongs to.
+
+
+        :param filter_project: Project id or slug
+        :param filter_site: Site slug
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListLksAllocatableServersRequest(
+            filter_project=filter_project,
+            filter_site=filter_site,
+        )
+
+        req = self._build_request(
+            method="GET",
+            path="/lks/allocatable_servers",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="list-lks-allocatable-servers",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["LKS"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(models.LksAllocatableServers, http_res)
+        if utils.match_response(http_res, ["404", "422"], "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "502", "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def list_lks_allocatable_servers_async(
+        self,
+        *,
+        filter_project: str,
+        filter_site: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.LksAllocatableServers:
+        r"""List servers that can join an allocated node pool
+
+        Lists a project's servers at a site, with whether each one can join an allocated node pool right now. Pass the `id` of an allocatable server in `server_ids` when creating or updating an allocated node pool.
+
+        When `allocatable` is false, `reasons` lists why, using the same codes that node pool create and update return per server. `node_pool_id` and `cluster_id` identify the pool a server already belongs to.
+
+
+        :param filter_project: Project id or slug
+        :param filter_site: Site slug
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.ListLksAllocatableServersRequest(
+            filter_project=filter_project,
+            filter_site=filter_site,
+        )
+
+        req = self._build_request_async(
+            method="GET",
+            path="/lks/allocatable_servers",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=False,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="list-lks-allocatable-servers",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["LKS"],
+                extensions=None,
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        response_data: Any = None
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(models.LksAllocatableServers, http_res)
+        if utils.match_response(http_res, ["404", "422"], "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "502", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
