@@ -797,7 +797,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
+| models.ErrorObject       | 403, 404, 409, 422       | application/vnd.api+json |
 | models.ErrorObject       | 500                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 

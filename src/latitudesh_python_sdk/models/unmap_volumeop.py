@@ -2,16 +2,103 @@
 
 from __future__ import annotations
 from .volume_data import VolumeData, VolumeDataTypedDict
+from enum import Enum
 from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
-from latitudesh_python_sdk.utils import FieldMetadata, PathParamMetadata
+from latitudesh_python_sdk.utils import (
+    FieldMetadata,
+    PathParamMetadata,
+    RequestMetadata,
+)
 from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
+class UnmapVolumeBlockStorageType(str, Enum):
+    VOLUMES = "volumes"
+
+
+class UnmapVolumeBlockStorageAttributesTypedDict(TypedDict):
+    server_id: NotRequired[str]
+    r"""ID of the server to unmap the volume from. Required when the volume is mapped to more than one server; when it is mapped to a single server, that server is unmapped if this is omitted."""
+
+
+class UnmapVolumeBlockStorageAttributes(BaseModel):
+    server_id: Optional[str] = None
+    r"""ID of the server to unmap the volume from. Required when the volume is mapped to more than one server; when it is mapped to a single server, that server is unmapped if this is omitted."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["server_id"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class UnmapVolumeBlockStorageDataTypedDict(TypedDict):
+    type: NotRequired[UnmapVolumeBlockStorageType]
+    attributes: NotRequired[UnmapVolumeBlockStorageAttributesTypedDict]
+
+
+class UnmapVolumeBlockStorageData(BaseModel):
+    type: Optional[UnmapVolumeBlockStorageType] = None
+
+    attributes: Optional[UnmapVolumeBlockStorageAttributes] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["type", "attributes"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class UnmapVolumeBlockStorageRequestBodyTypedDict(TypedDict):
+    data: NotRequired[UnmapVolumeBlockStorageDataTypedDict]
+
+
+class UnmapVolumeBlockStorageRequestBody(BaseModel):
+    data: Optional[UnmapVolumeBlockStorageData] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["data"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
 class UnmapVolumeRequestTypedDict(TypedDict):
     id: str
     r"""Volume ID"""
+    request_body: NotRequired[UnmapVolumeBlockStorageRequestBodyTypedDict]
 
 
 class UnmapVolumeRequest(BaseModel):
@@ -19,6 +106,27 @@ class UnmapVolumeRequest(BaseModel):
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
     r"""Volume ID"""
+
+    request_body: Annotated[
+        Optional[UnmapVolumeBlockStorageRequestBody],
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
+    ] = None
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["RequestBody"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class UnmapVolumeMetaTypedDict(TypedDict):

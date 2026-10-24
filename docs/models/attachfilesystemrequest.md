@@ -1,0 +1,9 @@
+# AttachFilesystemRequest
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `filesystem_id`                                                                                                  | *str*                                                                                                            | :heavy_check_mark:                                                                                               | Filesystem ID                                                                                                    |
+| `request_body`                                                                                                   | [models.AttachFilesystemFilesystemStorageRequestBody](../models/attachfilesystemfilesystemstoragerequestbody.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |

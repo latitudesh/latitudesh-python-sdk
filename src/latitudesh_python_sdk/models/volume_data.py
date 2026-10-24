@@ -12,9 +12,10 @@ from latitudesh_python_sdk.types import (
     UNSET,
     UNSET_SENTINEL,
 )
+import pydantic
 from pydantic import model_serializer
 from typing import List, Optional
-from typing_extensions import NotRequired, TypedDict
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class VolumeDataType(str, Enum):
@@ -45,13 +46,68 @@ class Initiators(BaseModel):
         return m
 
 
-class StorageNetworkTypedDict(TypedDict):
-    r"""Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume."""
+class MappingsTypedDict(TypedDict):
+    server_id: NotRequired[Nullable[str]]
+    r"""ID of the mapped server."""
+    status: NotRequired[Nullable[str]]
+    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, \"unmapping\" while the mapping is being removed, or \"failed\". Mapping and unmapping are asynchronous, so poll the volume until this reaches a terminal state. The entry disappears once the server is fully unmapped."""
+    nqn: NotRequired[Nullable[str]]
+    r"""NVMe Qualified Name of the server."""
+    nsid: NotRequired[Nullable[int]]
+    r"""NVMe namespace ID of the mapping."""
+    host_cidr: NotRequired[Nullable[str]]
+    r"""Storage IP of the server, in CIDR notation. Null until the mapping status is \"mapped\"."""
+
+
+class Mappings(BaseModel):
+    server_id: OptionalNullable[str] = UNSET
+    r"""ID of the mapped server."""
+
+    status: OptionalNullable[str] = UNSET
+    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, \"unmapping\" while the mapping is being removed, or \"failed\". Mapping and unmapping are asynchronous, so poll the volume until this reaches a terminal state. The entry disappears once the server is fully unmapped."""
+
+    nqn: OptionalNullable[str] = UNSET
+    r"""NVMe Qualified Name of the server."""
+
+    nsid: OptionalNullable[int] = UNSET
+    r"""NVMe namespace ID of the mapping."""
+
+    host_cidr: OptionalNullable[str] = UNSET
+    r"""Storage IP of the server, in CIDR notation. Null until the mapping status is \"mapped\"."""
+
+    @model_serializer(mode="wrap")
+    def serialize_model(self, handler):
+        optional_fields = set(["server_id", "status", "nqn", "nsid", "host_cidr"])
+        nullable_fields = set(["server_id", "status", "nqn", "nsid", "host_cidr"])
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias or n
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
+class VolumeDataStorageNetworkTypedDict(TypedDict):
+    r"""Storage network the mapped servers join to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume."""
 
     vid: NotRequired[Nullable[int]]
     r"""VLAN ID of the storage VLAN to tag on the server bond."""
     host_cidr: NotRequired[Nullable[str]]
-    r"""Storage IP of the mapped server, in CIDR notation. Null until the mapping status is \"mapped\"."""
+    r"""Deprecated: use mappings[].host_cidr. Storage IP of the server when the volume is mapped to exactly one server and the mapping is \"mapped\"; null otherwise."""
     gateway: NotRequired[Nullable[str]]
     r"""Gateway of the storage network, used for the routes below."""
     routes: NotRequired[Nullable[List[str]]]
@@ -62,14 +118,19 @@ class StorageNetworkTypedDict(TypedDict):
     r"""NVMe-oF/TCP discovery portal port."""
 
 
-class StorageNetwork(BaseModel):
-    r"""Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume."""
+class VolumeDataStorageNetwork(BaseModel):
+    r"""Storage network the mapped servers join to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume."""
 
     vid: OptionalNullable[int] = UNSET
     r"""VLAN ID of the storage VLAN to tag on the server bond."""
 
-    host_cidr: OptionalNullable[str] = UNSET
-    r"""Storage IP of the mapped server, in CIDR notation. Null until the mapping status is \"mapped\"."""
+    host_cidr: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = UNSET
+    r"""Deprecated: use mappings[].host_cidr. Storage IP of the server when the volume is mapped to exactly one server and the mapping is \"mapped\"; null otherwise."""
 
     gateway: OptionalNullable[str] = UNSET
     r"""Gateway of the storage network, used for the routes below."""
@@ -114,41 +175,68 @@ class StorageNetwork(BaseModel):
 
 
 class BlockTypedDict(TypedDict):
-    r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
+    r"""NVMe-TCP block mappings of a high performance volume. A volume can be mapped to several servers at once; every server writes to the same NVMe namespace, so use a cluster-aware filesystem when more than one server mounts the volume. Null for volumes that are not mapped to any server."""
 
     status: NotRequired[Nullable[str]]
-    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, \"unmapping\" while the mapping is being removed, or \"failed\". Mapping and unmapping are asynchronous, so poll the volume until this reaches a terminal state. The block object becomes null once the volume is fully unmapped."""
+    r"""Deprecated: use mappings[].status. Status of the mapping when the volume is mapped to exactly one server; null otherwise."""
     nqn: NotRequired[Nullable[str]]
-    r"""NVMe Qualified Name of the mapped server."""
+    r"""Deprecated: use mappings[].nqn. NVMe Qualified Name of the server when the volume is mapped to exactly one server; null otherwise."""
     nsid: NotRequired[Nullable[int]]
-    r"""NVMe namespace ID of the mapping."""
+    r"""Deprecated: use mappings[].nsid. NVMe namespace ID of the mapping when the volume is mapped to exactly one server; null otherwise."""
     server_id: NotRequired[Nullable[str]]
-    r"""ID of the server the volume is mapped to."""
-    storage_network: NotRequired[Nullable[StorageNetworkTypedDict]]
-    r"""Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume."""
+    r"""Deprecated: use mappings[].server_id. ID of the server when the volume is mapped to exactly one server; null otherwise."""
+    mappings: NotRequired[List[MappingsTypedDict]]
+    r"""One entry per server the volume is mapped to."""
+    storage_network: NotRequired[Nullable[VolumeDataStorageNetworkTypedDict]]
+    r"""Storage network the mapped servers join to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume."""
 
 
 class Block(BaseModel):
-    r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
+    r"""NVMe-TCP block mappings of a high performance volume. A volume can be mapped to several servers at once; every server writes to the same NVMe namespace, so use a cluster-aware filesystem when more than one server mounts the volume. Null for volumes that are not mapped to any server."""
 
-    status: OptionalNullable[str] = UNSET
-    r"""Mapping lifecycle state: \"mapping\" while the mapping is being applied, \"mapped\" once the server can access the volume, \"unmapping\" while the mapping is being removed, or \"failed\". Mapping and unmapping are asynchronous, so poll the volume until this reaches a terminal state. The block object becomes null once the volume is fully unmapped."""
+    status: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = UNSET
+    r"""Deprecated: use mappings[].status. Status of the mapping when the volume is mapped to exactly one server; null otherwise."""
 
-    nqn: OptionalNullable[str] = UNSET
-    r"""NVMe Qualified Name of the mapped server."""
+    nqn: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = UNSET
+    r"""Deprecated: use mappings[].nqn. NVMe Qualified Name of the server when the volume is mapped to exactly one server; null otherwise."""
 
-    nsid: OptionalNullable[int] = UNSET
-    r"""NVMe namespace ID of the mapping."""
+    nsid: Annotated[
+        OptionalNullable[int],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = UNSET
+    r"""Deprecated: use mappings[].nsid. NVMe namespace ID of the mapping when the volume is mapped to exactly one server; null otherwise."""
 
-    server_id: OptionalNullable[str] = UNSET
-    r"""ID of the server the volume is mapped to."""
+    server_id: Annotated[
+        OptionalNullable[str],
+        pydantic.Field(
+            deprecated="warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+        ),
+    ] = UNSET
+    r"""Deprecated: use mappings[].server_id. ID of the server when the volume is mapped to exactly one server; null otherwise."""
 
-    storage_network: OptionalNullable[StorageNetwork] = UNSET
-    r"""Storage network the mapped server joins to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume."""
+    mappings: Optional[List[Mappings]] = None
+    r"""One entry per server the volume is mapped to."""
+
+    storage_network: OptionalNullable[VolumeDataStorageNetwork] = UNSET
+    r"""Storage network the mapped servers join to reach the volume over NVMe-TCP. Null until the network has been provisioned for the volume."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["status", "nqn", "nsid", "server_id", "storage_network"])
+        optional_fields = set(
+            ["status", "nqn", "nsid", "server_id", "mappings", "storage_network"]
+        )
         nullable_fields = set(["status", "nqn", "nsid", "server_id", "storage_network"])
         serialized = handler(self)
         m = {}
@@ -254,7 +342,7 @@ class VolumeDataAttributesTypedDict(TypedDict):
     nguid: NotRequired[Nullable[str]]
     r"""NVMe namespace globally unique identifier (NGUID) of the volume, exactly as reported by the storage cluster, in UUID form (e.g. \"b338cb51-7593-413d-8c87-2657af7ecae9\"). Without the dashes it matches the NGUID the mapped server reports for the NVMe device of the volume. Null when it has not been recorded for the volume."""
     block: NotRequired[Nullable[BlockTypedDict]]
-    r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
+    r"""NVMe-TCP block mappings of a high performance volume. A volume can be mapped to several servers at once; every server writes to the same NVMe namespace, so use a cluster-aware filesystem when more than one server mounts the volume. Null for volumes that are not mapped to any server."""
     keyring: NotRequired[Nullable[str]]
     r"""Keyring secret used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
     cluster_user: NotRequired[Nullable[str]]
@@ -283,7 +371,7 @@ class VolumeDataAttributes(BaseModel):
     r"""NVMe namespace globally unique identifier (NGUID) of the volume, exactly as reported by the storage cluster, in UUID form (e.g. \"b338cb51-7593-413d-8c87-2657af7ecae9\"). Without the dashes it matches the NGUID the mapped server reports for the NVMe device of the volume. Null when it has not been recorded for the volume."""
 
     block: OptionalNullable[Block] = UNSET
-    r"""NVMe-TCP block mapping of a high performance volume. Null for volumes that are not mapped to a server."""
+    r"""NVMe-TCP block mappings of a high performance volume. A volume can be mapped to several servers at once; every server writes to the same NVMe namespace, so use a cluster-aware filesystem when more than one server mounts the volume. Null for volumes that are not mapped to any server."""
 
     keyring: OptionalNullable[str] = UNSET
     r"""Keyring secret used to connect to the volume. Returned only for dashboard-origin requests; null until the volume is provisioned."""
