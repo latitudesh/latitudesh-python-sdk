@@ -30,6 +30,14 @@ class CreateBaselineBaselinesPreviewTargetType(str, Enum):
     PLATFORMS = "platforms"
 
 
+class CreateBaselineBaselinesPreviewRaid(str, Enum):
+    r"""RAID level for the default disk layout. With 4 or more disks (or a hardware RAID boot disk) the OS stays on the boot disk or a RAID 1 mirror and the remaining disks form the data array at /data at this level; with 2-3 disks the level applies to the OS across all disks. 'raid-10' is data-only, needs at least 4 data disks and is applied only at locations with the `raid_ten` feature. Mutually exclusive with disk_layout"""
+
+    RAID_0 = "raid-0"
+    RAID_1 = "raid-1"
+    RAID_10 = "raid-10"
+
+
 class CreateBaselineBaselinesPreviewBiosTypedDict(TypedDict):
     r"""Expected BIOS settings, keyed by setting id"""
 
@@ -55,6 +63,8 @@ class CreateBaselineBaselinesPreviewAttributesTypedDict(TypedDict):
     r"""User data the baseline expects to run on first boot"""
     disk_layout: NotRequired[List[BaselineDiskLayoutGroupTypedDict]]
     r"""Expected disk layout"""
+    raid: NotRequired[Nullable[CreateBaselineBaselinesPreviewRaid]]
+    r"""RAID level for the default disk layout. With 4 or more disks (or a hardware RAID boot disk) the OS stays on the boot disk or a RAID 1 mirror and the remaining disks form the data array at /data at this level; with 2-3 disks the level applies to the OS across all disks. 'raid-10' is data-only, needs at least 4 data disks and is applied only at locations with the `raid_ten` feature. Mutually exclusive with disk_layout"""
     bios: NotRequired[CreateBaselineBaselinesPreviewBiosTypedDict]
     r"""Expected BIOS settings, keyed by setting id"""
 
@@ -84,6 +94,9 @@ class CreateBaselineBaselinesPreviewAttributes(BaseModel):
     disk_layout: Optional[List[BaselineDiskLayoutGroup]] = None
     r"""Expected disk layout"""
 
+    raid: OptionalNullable[CreateBaselineBaselinesPreviewRaid] = UNSET
+    r"""RAID level for the default disk layout. With 4 or more disks (or a hardware RAID boot disk) the OS stays on the boot disk or a RAID 1 mirror and the remaining disks form the data array at /data at this level; with 2-3 disks the level applies to the OS across all disks. 'raid-10' is data-only, needs at least 4 data disks and is applied only at locations with the `raid_ten` feature. Mutually exclusive with disk_layout"""
+
     bios: Optional[CreateBaselineBaselinesPreviewBios] = None
     r"""Expected BIOS settings, keyed by setting id"""
 
@@ -96,10 +109,11 @@ class CreateBaselineBaselinesPreviewAttributes(BaseModel):
                 "ssh_key_ids",
                 "user_data_id",
                 "disk_layout",
+                "raid",
                 "bios",
             ]
         )
-        nullable_fields = set(["description", "user_data_id"])
+        nullable_fields = set(["description", "user_data_id", "raid"])
         serialized = handler(self)
         m = {}
 

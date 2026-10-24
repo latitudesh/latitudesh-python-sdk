@@ -3,7 +3,8 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `available`        | List[*str*]        | :heavy_minus_sign: | N/A                |
-| `in_stock`         | List[*str*]        | :heavy_minus_sign: | N/A                |
+| Field                                                                   | Type                                                                    | Required                                                                | Description                                                             | Example                                                                 |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `available`                                                             | List[*str*]                                                             | :heavy_minus_sign:                                                      | N/A                                                                     |                                                                         |
+| `in_stock`                                                              | List[*str*]                                                             | :heavy_minus_sign:                                                      | N/A                                                                     |                                                                         |
+| `in_stock_count`                                                        | Dict[str, *int*]                                                        | :heavy_minus_sign:                                                      | Servers in stock keyed by site slug. Only sites with stock are present. | {<br/>"SAO": 5<br/>}                                                    |

@@ -1,0 +1,9 @@
+# UnmapVolumeBlockStorageData
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `type`                                                                                               | [Optional[models.UnmapVolumeBlockStorageType]](../models/unmapvolumeblockstoragetype.md)             | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |
+| `attributes`                                                                                         | [Optional[models.UnmapVolumeBlockStorageAttributes]](../models/unmapvolumeblockstorageattributes.md) | :heavy_minus_sign:                                                                                   | N/A                                                                                                  |

@@ -2039,7 +2039,7 @@ class ObjectStorage(BaseSDK):
                 models.PostStorageBucketLifecycleRulesResponseBody, http_res
             )
         if utils.match_response(
-            http_res, ["403", "404", "422"], "application/vnd.api+json"
+            http_res, ["403", "404", "409", "422"], "application/vnd.api+json"
         ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
@@ -2157,7 +2157,7 @@ class ObjectStorage(BaseSDK):
                 models.PostStorageBucketLifecycleRulesResponseBody, http_res
             )
         if utils.match_response(
-            http_res, ["403", "404", "422"], "application/vnd.api+json"
+            http_res, ["403", "404", "409", "422"], "application/vnd.api+json"
         ):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)

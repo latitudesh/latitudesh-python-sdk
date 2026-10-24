@@ -10,7 +10,7 @@ from latitudesh_python_sdk.types import (
     UNSET_SENTINEL,
 )
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
@@ -27,6 +27,7 @@ class DeployConfigRole(str, Enum):
 class DeployConfigRaidLevel(str, Enum):
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
+    RAID_10 = "raid-10"
 
 
 class DeployConfigFilesystem(str, Enum):
@@ -78,6 +79,11 @@ class DiskLayout(BaseModel):
         return m
 
 
+class DeployConfigBios(str, Enum):
+    ENABLED = "enabled"
+    DISABLED = "disabled"
+
+
 class DeployConfigAttributesTypedDict(TypedDict):
     operating_system: NotRequired[str]
     hostname: NotRequired[str]
@@ -91,6 +97,8 @@ class DeployConfigAttributesTypedDict(TypedDict):
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
     public_network: NotRequired[Nullable[bool]]
     public_network_id: NotRequired[Nullable[str]]
+    bios: NotRequired[Nullable[Dict[str, DeployConfigBios]]]
+    r"""Custom BIOS settings applied on the last reinstall, reapplied on the next one unless it sends `bios`. Keys are BIOS setting names (e.g. `cpu_virtualization`), values are `enabled` or `disabled`."""
 
 
 class DeployConfigAttributes(BaseModel):
@@ -117,6 +125,9 @@ class DeployConfigAttributes(BaseModel):
 
     public_network_id: OptionalNullable[str] = UNSET
 
+    bios: OptionalNullable[Dict[str, DeployConfigBios]] = UNSET
+    r"""Custom BIOS settings applied on the last reinstall, reapplied on the next one unless it sends `bios`. Keys are BIOS setting names (e.g. `cpu_virtualization`), values are `enabled` or `disabled`."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
@@ -132,6 +143,7 @@ class DeployConfigAttributes(BaseModel):
                 "persistent_netboot",
                 "public_network",
                 "public_network_id",
+                "bios",
             ]
         )
         nullable_fields = set(
@@ -143,6 +155,7 @@ class DeployConfigAttributes(BaseModel):
                 "persistent_netboot",
                 "public_network",
                 "public_network_id",
+                "bios",
             ]
         )
         serialized = handler(self)

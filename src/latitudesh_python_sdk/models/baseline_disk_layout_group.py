@@ -23,10 +23,11 @@ class BaselineDiskLayoutGroupRole(str, Enum):
 
 
 class RaidLevel(str, Enum):
-    r"""RAID level for the group. Only valid for the 'os' and 'storage' roles"""
+    r"""RAID level for the group. Only valid for the 'os' and 'storage' roles; 'raid-10' is storage-only, needs at least 4 disks, and is applied only at locations with the `raid_ten` feature"""
 
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
+    RAID_10 = "raid-10"
 
 
 class Filesystem(str, Enum):
@@ -41,7 +42,7 @@ class BaselineDiskLayoutGroupTypedDict(TypedDict):
     count: NotRequired[int]
     r"""Number of disks in the group"""
     raid_level: NotRequired[Nullable[RaidLevel]]
-    r"""RAID level for the group. Only valid for the 'os' and 'storage' roles"""
+    r"""RAID level for the group. Only valid for the 'os' and 'storage' roles; 'raid-10' is storage-only, needs at least 4 disks, and is applied only at locations with the `raid_ten` feature"""
     filesystem: NotRequired[Nullable[Filesystem]]
     r"""Filesystem to format the group with. Only valid for the 'storage' role"""
     mount_point: NotRequired[Nullable[str]]
@@ -56,7 +57,7 @@ class BaselineDiskLayoutGroup(BaseModel):
     r"""Number of disks in the group"""
 
     raid_level: OptionalNullable[RaidLevel] = UNSET
-    r"""RAID level for the group. Only valid for the 'os' and 'storage' roles"""
+    r"""RAID level for the group. Only valid for the 'os' and 'storage' roles; 'raid-10' is storage-only, needs at least 4 disks, and is applied only at locations with the `raid_ten` feature"""
 
     filesystem: OptionalNullable[Filesystem] = UNSET
     r"""Filesystem to format the group with. Only valid for the 'storage' role"""

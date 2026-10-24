@@ -96,11 +96,12 @@ class CreateServerServersOperatingSystem(str, Enum, metaclass=utils.OpenEnumMeta
     UBUNTU_26_04_X64_LTS = "ubuntu_26_04_x64_lts"
 
 
-class CreateServerRaid(str, Enum):
-    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+class CreateServerServersRaid(str, Enum):
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration"""
 
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
+    RAID_10 = "raid-10"
 
 
 class CreateServerServersRole(str, Enum):
@@ -112,6 +113,7 @@ class CreateServerServersRole(str, Enum):
 class CreateServerServersRaidLevel(str, Enum):
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
+    RAID_10 = "raid-10"
 
 
 class CreateServerServersFilesystem(str, Enum):
@@ -187,8 +189,8 @@ class CreateServerServersAttributesTypedDict(TypedDict):
     r"""SSH Keys to set on the server"""
     user_data: NotRequired[Nullable[str]]
     r"""User data ID to set on the server. This is a custom script that will run after the deploy"""
-    raid: NotRequired[Nullable[CreateServerRaid]]
-    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+    raid: NotRequired[Nullable[CreateServerServersRaid]]
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration"""
     disk_layout: NotRequired[Nullable[List[CreateServerDiskLayoutTypedDict]]]
     ipxe: NotRequired[Nullable[str]]
     r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
@@ -226,8 +228,8 @@ class CreateServerServersAttributes(BaseModel):
     user_data: OptionalNullable[str] = UNSET
     r"""User data ID to set on the server. This is a custom script that will run after the deploy"""
 
-    raid: OptionalNullable[CreateServerRaid] = UNSET
-    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+    raid: OptionalNullable[CreateServerServersRaid] = UNSET
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration"""
 
     disk_layout: OptionalNullable[List[CreateServerDiskLayout]] = UNSET
 
