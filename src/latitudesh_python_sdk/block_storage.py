@@ -6,7 +6,7 @@ from latitudesh_python_sdk._hooks import HookContext
 from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
 from latitudesh_python_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Mapping, Optional, Union
+from typing import Any, Mapping, Optional, Union
 from typing_extensions import deprecated
 
 
@@ -268,8 +268,12 @@ class BlockStorage(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.CreateVolumeResponseBody, http_res)
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -364,8 +368,12 @@ class BlockStorage(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.CreateVolumeResponseBody, http_res)
+        if utils.match_response(http_res, "422", "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -932,7 +940,10 @@ class BlockStorage(BaseSDK):
         self,
         *,
         id: str,
-        data: Union[models.MountVolumeData, models.MountVolumeDataTypedDict],
+        data: Union[
+            models.MountVolumeBlockStorageData,
+            models.MountVolumeBlockStorageDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -961,8 +972,8 @@ class BlockStorage(BaseSDK):
 
         request = models.MountVolumeRequest(
             id=id,
-            request_body=models.MountVolumeRequestBody(
-                data=utils.get_pydantic_model(data, models.MountVolumeData),
+            request_body=models.MountVolumeBlockStorageRequestBody(
+                data=utils.get_pydantic_model(data, models.MountVolumeBlockStorageData),
             ),
         )
 
@@ -984,7 +995,7 @@ class BlockStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.MountVolumeRequestBody,
+                models.MountVolumeBlockStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1033,7 +1044,10 @@ class BlockStorage(BaseSDK):
         self,
         *,
         id: str,
-        data: Union[models.MountVolumeData, models.MountVolumeDataTypedDict],
+        data: Union[
+            models.MountVolumeBlockStorageData,
+            models.MountVolumeBlockStorageDataTypedDict,
+        ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1062,8 +1076,8 @@ class BlockStorage(BaseSDK):
 
         request = models.MountVolumeRequest(
             id=id,
-            request_body=models.MountVolumeRequestBody(
-                data=utils.get_pydantic_model(data, models.MountVolumeData),
+            request_body=models.MountVolumeBlockStorageRequestBody(
+                data=utils.get_pydantic_model(data, models.MountVolumeBlockStorageData),
             ),
         )
 
@@ -1085,7 +1099,7 @@ class BlockStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.MountVolumeRequestBody,
+                models.MountVolumeBlockStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1141,7 +1155,7 @@ class BlockStorage(BaseSDK):
     ) -> models.MapVolumeResponseBody:
         r"""Map volume
 
-        Maps a high performance volume to a server over NVMe-TCP.
+        Maps a high performance volume to a server over NVMe-TCP. Teams with multi-host mapping enabled can map a volume to several servers, once per server; otherwise a volume maps to one server. Every mapped server writes to the same NVMe namespace, so use a cluster-aware filesystem when more than one server mounts the volume.
 
         :param id: Volume ID
         :param data:
@@ -1241,7 +1255,7 @@ class BlockStorage(BaseSDK):
     ) -> models.MapVolumeResponseBody:
         r"""Map volume
 
-        Maps a high performance volume to a server over NVMe-TCP.
+        Maps a high performance volume to a server over NVMe-TCP. Teams with multi-host mapping enabled can map a volume to several servers, once per server; otherwise a volume maps to one server. Every mapped server writes to the same NVMe namespace, so use a cluster-aware filesystem when more than one server mounts the volume.
 
         :param id: Volume ID
         :param data:
@@ -1331,6 +1345,12 @@ class BlockStorage(BaseSDK):
         self,
         *,
         id: str,
+        data: Optional[
+            Union[
+                models.UnmapVolumeBlockStorageData,
+                models.UnmapVolumeBlockStorageDataTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1338,9 +1358,10 @@ class BlockStorage(BaseSDK):
     ) -> models.UnmapVolumeResponseBody:
         r"""Unmap volume
 
-        Unmaps a high performance volume from the server it is currently mapped to.
+        Unmaps a high performance volume from one of the servers it is mapped to.
 
         :param id: Volume ID
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1358,6 +1379,11 @@ class BlockStorage(BaseSDK):
 
         request = models.UnmapVolumeRequest(
             id=id,
+            request_body=models.UnmapVolumeBlockStorageRequestBody(
+                data=utils.get_pydantic_model(
+                    data, Optional[models.UnmapVolumeBlockStorageData]
+                ),
+            ),
         )
 
         req = self._build_request(
@@ -1373,6 +1399,13 @@ class BlockStorage(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body if request is not None else None,
+                False,
+                True,
+                "json",
+                Optional[models.UnmapVolumeBlockStorageRequestBody],
+            ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )
@@ -1417,6 +1450,12 @@ class BlockStorage(BaseSDK):
         self,
         *,
         id: str,
+        data: Optional[
+            Union[
+                models.UnmapVolumeBlockStorageData,
+                models.UnmapVolumeBlockStorageDataTypedDict,
+            ]
+        ] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1424,9 +1463,10 @@ class BlockStorage(BaseSDK):
     ) -> models.UnmapVolumeResponseBody:
         r"""Unmap volume
 
-        Unmaps a high performance volume from the server it is currently mapped to.
+        Unmaps a high performance volume from one of the servers it is mapped to.
 
         :param id: Volume ID
+        :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1444,6 +1484,11 @@ class BlockStorage(BaseSDK):
 
         request = models.UnmapVolumeRequest(
             id=id,
+            request_body=models.UnmapVolumeBlockStorageRequestBody(
+                data=utils.get_pydantic_model(
+                    data, Optional[models.UnmapVolumeBlockStorageData]
+                ),
+            ),
         )
 
         req = self._build_request_async(
@@ -1459,6 +1504,13 @@ class BlockStorage(BaseSDK):
             accept_header_value="application/vnd.api+json",
             http_headers=http_headers,
             security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body if request is not None else None,
+                False,
+                True,
+                "json",
+                Optional[models.UnmapVolumeBlockStorageRequestBody],
+            ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
         )

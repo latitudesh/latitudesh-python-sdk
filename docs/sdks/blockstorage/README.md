@@ -57,7 +57,7 @@ with Latitudesh(
 
 Allows you to add persistent storage to a project. These volumes can be used to store data across your servers.
 
-### Example Usage
+### Example Usage: Created
 
 <!-- UsageSnippet language="python" operationID="create-volume" method="post" path="/storage/volumes" example="Created" -->
 ```python
@@ -84,6 +84,33 @@ with Latitudesh(
     print(res)
 
 ```
+### Example Usage: LocationUnavailable
+
+<!-- UsageSnippet language="python" operationID="create-volume" method="post" path="/storage/volumes" example="LocationUnavailable" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER", ""),
+) as latitudesh:
+
+    res = latitudesh.block_storage.create_volume(data={
+        "type": latitudesh_python_sdk.CreateVolumeBlockStorageType.VOLUMES,
+        "attributes": {
+            "project": "<value>",
+            "name": "<value>",
+            "region": "<value>",
+            "size_in_gb": 185826,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
 
 ### Parameters
 
@@ -98,9 +125,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 422                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## retrieve_volume
 
@@ -244,7 +272,7 @@ with Latitudesh(
 ) as latitudesh:
 
     latitudesh.block_storage.mount_volume(id="<id>", data={
-        "type": latitudesh_python_sdk.MountVolumeType.VOLUMES,
+        "type": latitudesh_python_sdk.MountVolumeBlockStorageType.VOLUMES,
         "attributes": {
             "nqn": "nqn.2024-01.com.example:server01",
         },
@@ -256,11 +284,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | Volume ID                                                           |
-| `data`                                                              | [models.MountVolumeData](../../models/mountvolumedata.md)           | :heavy_check_mark:                                                  | N/A                                                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                         | Type                                                                              | Required                                                                          | Description                                                                       |
+| --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `id`                                                                              | *str*                                                                             | :heavy_check_mark:                                                                | Volume ID                                                                         |
+| `data`                                                                            | [models.MountVolumeBlockStorageData](../../models/mountvolumeblockstoragedata.md) | :heavy_check_mark:                                                                | N/A                                                                               |
+| `retries`                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                  | :heavy_minus_sign:                                                                | Configuration to override the default retry behavior of the client.               |
 
 ### Errors
 
@@ -270,7 +298,7 @@ with Latitudesh(
 
 ## map_volume
 
-Maps a high performance volume to a server over NVMe-TCP.
+Maps a high performance volume to a server over NVMe-TCP. Teams with multi-host mapping enabled can map a volume to several servers, once per server; otherwise a volume maps to one server. Every mapped server writes to the same NVMe namespace, so use a cluster-aware filesystem when more than one server mounts the volume.
 
 ### Example Usage
 
@@ -317,7 +345,7 @@ with Latitudesh(
 
 ## unmap_volume
 
-Unmaps a high performance volume from the server it is currently mapped to.
+Unmaps a high performance volume from one of the servers it is mapped to.
 
 ### Example Usage
 
@@ -331,7 +359,11 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER", ""),
 ) as latitudesh:
 
-    res = latitudesh.block_storage.unmap_volume(id="<id>")
+    res = latitudesh.block_storage.unmap_volume(id="<id>", data={
+        "attributes": {
+            "server_id": "sv_abcd1234",
+        },
+    })
 
     # Handle response
     print(res)
@@ -340,10 +372,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | Volume ID                                                           |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                                   | Type                                                                                        | Required                                                                                    | Description                                                                                 |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| `id`                                                                                        | *str*                                                                                       | :heavy_check_mark:                                                                          | Volume ID                                                                                   |
+| `data`                                                                                      | [Optional[models.UnmapVolumeBlockStorageData]](../../models/unmapvolumeblockstoragedata.md) | :heavy_minus_sign:                                                                          | N/A                                                                                         |
+| `retries`                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                            | :heavy_minus_sign:                                                                          | Configuration to override the default retry behavior of the client.                         |
 
 ### Response
 

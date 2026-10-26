@@ -11,43 +11,43 @@ from latitudesh_python_sdk.utils import (
 from typing_extensions import Annotated, TypedDict
 
 
-class MountVolumeType(str, Enum):
+class MountVolumeBlockStorageType(str, Enum):
     VOLUMES = "volumes"
 
 
-class MountVolumeAttributesTypedDict(TypedDict):
+class MountVolumeBlockStorageAttributesTypedDict(TypedDict):
     nqn: str
     r"""NVMe Qualified Name (NQN) of the client/server that will access the volume. Format: nqn.YYYY-MM.domain:identifier (e.g., \"nqn.2024-01.com.example:server01\"). This uniquely identifies the NVMe client and must be configured on the client server."""
 
 
-class MountVolumeAttributes(BaseModel):
+class MountVolumeBlockStorageAttributes(BaseModel):
     nqn: str
     r"""NVMe Qualified Name (NQN) of the client/server that will access the volume. Format: nqn.YYYY-MM.domain:identifier (e.g., \"nqn.2024-01.com.example:server01\"). This uniquely identifies the NVMe client and must be configured on the client server."""
 
 
-class MountVolumeDataTypedDict(TypedDict):
-    type: MountVolumeType
-    attributes: MountVolumeAttributesTypedDict
+class MountVolumeBlockStorageDataTypedDict(TypedDict):
+    type: MountVolumeBlockStorageType
+    attributes: MountVolumeBlockStorageAttributesTypedDict
 
 
-class MountVolumeData(BaseModel):
-    type: MountVolumeType
+class MountVolumeBlockStorageData(BaseModel):
+    type: MountVolumeBlockStorageType
 
-    attributes: MountVolumeAttributes
-
-
-class MountVolumeRequestBodyTypedDict(TypedDict):
-    data: MountVolumeDataTypedDict
+    attributes: MountVolumeBlockStorageAttributes
 
 
-class MountVolumeRequestBody(BaseModel):
-    data: MountVolumeData
+class MountVolumeBlockStorageRequestBodyTypedDict(TypedDict):
+    data: MountVolumeBlockStorageDataTypedDict
+
+
+class MountVolumeBlockStorageRequestBody(BaseModel):
+    data: MountVolumeBlockStorageData
 
 
 class MountVolumeRequestTypedDict(TypedDict):
     id: str
     r"""Volume ID"""
-    request_body: MountVolumeRequestBodyTypedDict
+    request_body: MountVolumeBlockStorageRequestBodyTypedDict
 
 
 class MountVolumeRequest(BaseModel):
@@ -57,6 +57,6 @@ class MountVolumeRequest(BaseModel):
     r"""Volume ID"""
 
     request_body: Annotated[
-        MountVolumeRequestBody,
+        MountVolumeBlockStorageRequestBody,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]

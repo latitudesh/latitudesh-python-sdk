@@ -14,11 +14,13 @@ class UpdateLksNodePoolType(str, Enum):
 
 
 class UpdateLksNodePoolAttributesTypedDict(TypedDict):
-    r"""At least one attribute must be provided. max_pods_per_node is set once, at creation, and is not updatable: a PATCH that carries it is rejected with 422."""
+    r"""At least one attribute must be provided. max_pods_per_node and mode are set once, at creation, and are not updatable: a PATCH that carries either is rejected with 422."""
 
     name: NotRequired[str]
     count: NotRequired[int]
-    r"""must be >= 1"""
+    r"""must be >= 1. on_demand node pools only; rejected for allocated node pools"""
+    server_ids: NotRequired[List[str]]
+    r"""Allocated node pools only. Declarative: send the whole set of servers the pool should have. Added servers are checked like on create and reinstalled to join; removed servers are drained and reinstalled with a clean OS. Cannot be combined with a kubernetes_version change."""
     kubernetes_version: NotRequired[str]
     r"""A newer patch rolls a node-recreating upgrade. Must not be lower than the current patch (422 DOWNGRADE_NOT_ALLOWED) nor newer than the control-plane patch (422 VERSION_SKEW)"""
     labels: NotRequired[Dict[str, str]]
@@ -29,12 +31,15 @@ class UpdateLksNodePoolAttributesTypedDict(TypedDict):
 
 
 class UpdateLksNodePoolAttributes(BaseModel):
-    r"""At least one attribute must be provided. max_pods_per_node is set once, at creation, and is not updatable: a PATCH that carries it is rejected with 422."""
+    r"""At least one attribute must be provided. max_pods_per_node and mode are set once, at creation, and are not updatable: a PATCH that carries either is rejected with 422."""
 
     name: Optional[str] = None
 
     count: Optional[int] = None
-    r"""must be >= 1"""
+    r"""must be >= 1. on_demand node pools only; rejected for allocated node pools"""
+
+    server_ids: Optional[List[str]] = None
+    r"""Allocated node pools only. Declarative: send the whole set of servers the pool should have. Added servers are checked like on create and reinstalled to join; removed servers are drained and reinstalled with a clean OS. Cannot be combined with a kubernetes_version change."""
 
     kubernetes_version: Optional[str] = None
     r"""A newer patch rolls a node-recreating upgrade. Must not be lower than the current patch (422 DOWNGRADE_NOT_ALLOWED) nor newer than the control-plane patch (422 VERSION_SKEW)"""
@@ -50,7 +55,15 @@ class UpdateLksNodePoolAttributes(BaseModel):
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["name", "count", "kubernetes_version", "labels", "taints", "description"]
+            [
+                "name",
+                "count",
+                "server_ids",
+                "kubernetes_version",
+                "labels",
+                "taints",
+                "description",
+            ]
         )
         serialized = handler(self)
         m = {}
@@ -69,14 +82,14 @@ class UpdateLksNodePoolAttributes(BaseModel):
 class UpdateLksNodePoolDataTypedDict(TypedDict):
     type: UpdateLksNodePoolType
     attributes: NotRequired[UpdateLksNodePoolAttributesTypedDict]
-    r"""At least one attribute must be provided. max_pods_per_node is set once, at creation, and is not updatable: a PATCH that carries it is rejected with 422."""
+    r"""At least one attribute must be provided. max_pods_per_node and mode are set once, at creation, and are not updatable: a PATCH that carries either is rejected with 422."""
 
 
 class UpdateLksNodePoolData(BaseModel):
     type: UpdateLksNodePoolType
 
     attributes: Optional[UpdateLksNodePoolAttributes] = None
-    r"""At least one attribute must be provided. max_pods_per_node is set once, at creation, and is not updatable: a PATCH that carries it is rejected with 422."""
+    r"""At least one attribute must be provided. max_pods_per_node and mode are set once, at creation, and are not updatable: a PATCH that carries either is rejected with 422."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):

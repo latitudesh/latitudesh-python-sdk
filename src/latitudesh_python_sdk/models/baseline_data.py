@@ -130,6 +130,14 @@ class BaselineDataUserData(BaseModel):
         return m
 
 
+class Raid(str, Enum):
+    r"""Expected RAID level with the default disk layout (data array on 4+ disk servers, the OS on 2-3 disk servers). Mutually exclusive with disk_layout"""
+
+    RAID_0 = "raid-0"
+    RAID_1 = "raid-1"
+    RAID_10 = "raid-10"
+
+
 class BiosTypedDict(TypedDict):
     r"""Expected BIOS settings, keyed by setting id"""
 
@@ -155,6 +163,8 @@ class BaselineDataAttributesTypedDict(TypedDict):
     r"""User data the baseline expects to run on first boot"""
     disk_layout: NotRequired[List[BaselineDiskLayoutGroupTypedDict]]
     r"""Expected disk layout"""
+    raid: NotRequired[Nullable[Raid]]
+    r"""Expected RAID level with the default disk layout (data array on 4+ disk servers, the OS on 2-3 disk servers). Mutually exclusive with disk_layout"""
     bios: NotRequired[BiosTypedDict]
     r"""Expected BIOS settings, keyed by setting id"""
     created_at: NotRequired[Nullable[str]]
@@ -186,6 +196,9 @@ class BaselineDataAttributes(BaseModel):
     disk_layout: Optional[List[BaselineDiskLayoutGroup]] = None
     r"""Expected disk layout"""
 
+    raid: OptionalNullable[Raid] = UNSET
+    r"""Expected RAID level with the default disk layout (data array on 4+ disk servers, the OS on 2-3 disk servers). Mutually exclusive with disk_layout"""
+
     bios: Optional[Bios] = None
     r"""Expected BIOS settings, keyed by setting id"""
 
@@ -204,12 +217,13 @@ class BaselineDataAttributes(BaseModel):
                 "ssh_keys",
                 "user_data",
                 "disk_layout",
+                "raid",
                 "bios",
                 "created_at",
             ]
         )
         nullable_fields = set(
-            ["description", "operating_system", "user_data", "created_at"]
+            ["description", "operating_system", "user_data", "raid", "created_at"]
         )
         serialized = handler(self)
         m = {}

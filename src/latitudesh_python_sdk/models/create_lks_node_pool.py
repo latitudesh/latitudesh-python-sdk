@@ -17,12 +17,23 @@ class CreateLksNodePoolDataType(str, Enum):
     BARE_METAL = "bare_metal"
 
 
+class CreateLksNodePoolMode(str, Enum):
+    r"""on_demand provisions new servers of `plan` from stock. allocated builds the pool from `server_ids`, servers already in the cluster project: each one is reinstalled with the LKS node image (erasing its disks) and, when it leaves the pool, reinstalled with a clean OS (no data, keys or user data are restored)."""
+
+    ON_DEMAND = "on_demand"
+    ALLOCATED = "allocated"
+
+
 class CreateLksNodePoolAttributesTypedDict(TypedDict):
-    plan: str
-    r"""Plan the pool nodes are provisioned from"""
-    count: int
-    r"""Number of nodes; must be >= 1"""
     type: NotRequired[CreateLksNodePoolDataType]
+    mode: NotRequired[CreateLksNodePoolMode]
+    r"""on_demand provisions new servers of `plan` from stock. allocated builds the pool from `server_ids`, servers already in the cluster project: each one is reinstalled with the LKS node image (erasing its disks) and, when it leaves the pool, reinstalled with a clean OS (no data, keys or user data are restored)."""
+    plan: NotRequired[str]
+    r"""Plan the pool nodes are provisioned from. Required in on_demand mode; rejected in allocated mode, where the plan is the one the servers already have"""
+    count: NotRequired[int]
+    r"""Number of nodes; must be >= 1. Required in on_demand mode; rejected in allocated mode, where it is the number of server_ids"""
+    server_ids: NotRequired[List[str]]
+    r"""Required in allocated mode and rejected in on_demand mode. Servers must be bare metal, in the cluster project and location, share one plan, have been deployed with bgp_ready and not belong to another node pool. Each server that fails a check is reported as its own 422 error pointing at its index."""
     kubernetes_version: NotRequired[str]
     r"""Patch; defaults to the cluster control-plane patch. Must not be newer than the control-plane patch (422 VERSION_SKEW)"""
     max_pods_per_node: NotRequired[int]
@@ -37,13 +48,19 @@ class CreateLksNodePoolAttributesTypedDict(TypedDict):
 
 
 class CreateLksNodePoolAttributes(BaseModel):
-    plan: str
-    r"""Plan the pool nodes are provisioned from"""
-
-    count: int
-    r"""Number of nodes; must be >= 1"""
-
     type: Optional[CreateLksNodePoolDataType] = None
+
+    mode: Optional[CreateLksNodePoolMode] = CreateLksNodePoolMode.ON_DEMAND
+    r"""on_demand provisions new servers of `plan` from stock. allocated builds the pool from `server_ids`, servers already in the cluster project: each one is reinstalled with the LKS node image (erasing its disks) and, when it leaves the pool, reinstalled with a clean OS (no data, keys or user data are restored)."""
+
+    plan: Optional[str] = None
+    r"""Plan the pool nodes are provisioned from. Required in on_demand mode; rejected in allocated mode, where the plan is the one the servers already have"""
+
+    count: Optional[int] = None
+    r"""Number of nodes; must be >= 1. Required in on_demand mode; rejected in allocated mode, where it is the number of server_ids"""
+
+    server_ids: Optional[List[str]] = None
+    r"""Required in allocated mode and rejected in on_demand mode. Servers must be bare metal, in the cluster project and location, share one plan, have been deployed with bgp_ready and not belong to another node pool. Each server that fails a check is reported as its own 422 error pointing at its index."""
 
     kubernetes_version: Optional[str] = None
     r"""Patch; defaults to the cluster control-plane patch. Must not be newer than the control-plane patch (422 VERSION_SKEW)"""
@@ -67,6 +84,10 @@ class CreateLksNodePoolAttributes(BaseModel):
         optional_fields = set(
             [
                 "type",
+                "mode",
+                "plan",
+                "count",
+                "server_ids",
                 "kubernetes_version",
                 "max_pods_per_node",
                 "name",
