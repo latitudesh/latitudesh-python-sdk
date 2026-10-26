@@ -31,6 +31,8 @@ class VirtualMachineAttributesFeaturesTypedDict(TypedDict):
     r"""Whether user data is supported"""
     rescue: NotRequired[bool]
     r"""Whether rescue mode is supported"""
+    arm64: NotRequired[bool]
+    r"""Whether the operating system can be deployed on ARM (arm64) servers"""
     workflow: NotRequired[bool]
     r"""Whether workflow is supported"""
 
@@ -50,12 +52,17 @@ class VirtualMachineAttributesFeatures(BaseModel):
     rescue: Optional[bool] = None
     r"""Whether rescue mode is supported"""
 
+    arm64: Optional[bool] = None
+    r"""Whether the operating system can be deployed on ARM (arm64) servers"""
+
     workflow: Optional[bool] = None
     r"""Whether workflow is supported"""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["raid", "ssh_keys", "user_data", "rescue", "workflow"])
+        optional_fields = set(
+            ["raid", "ssh_keys", "user_data", "rescue", "arm64", "workflow"]
+        )
         serialized = handler(self)
         m = {}
 
@@ -434,6 +441,8 @@ class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     tags: NotRequired[List[VirtualMachineAttributesTagsTypedDict]]
     team: NotRequired[TeamIncludeTypedDict]
     project: NotRequired[ProjectIncludeTypedDict]
+    apply_network_on_boot: NotRequired[bool]
+    r"""Whether the VM re-applies the platform network configuration on every boot. Set at creation; false for VMs created before this option was available. When false, configure networks attached to the VM inside the guest yourself, as described in [Private networks: configure the OS](https://www.latitude.sh/docs/networking/private-networks#step-3-configure-the-os)."""
     pending_restart: NotRequired[bool]
     r"""Deprecated, always false. Opt-in extra field, requested via `extra_fields[virtual_machines]=pending_restart`. Attaching and detaching restart the VM automatically."""
 
@@ -474,6 +483,9 @@ class VirtualMachineAttributesAttributes(BaseModel):
 
     project: Optional[ProjectInclude] = None
 
+    apply_network_on_boot: Optional[bool] = None
+    r"""Whether the VM re-applies the platform network configuration on every boot. Set at creation; false for VMs created before this option was available. When false, configure networks attached to the VM inside the guest yourself, as described in [Private networks: configure the OS](https://www.latitude.sh/docs/networking/private-networks#step-3-configure-the-os)."""
+
     pending_restart: Optional[bool] = None
     r"""Deprecated, always false. Opt-in extra field, requested via `extra_fields[virtual_machines]=pending_restart`. Attaching and detaching restart the VM automatically."""
 
@@ -496,6 +508,7 @@ class VirtualMachineAttributesAttributes(BaseModel):
                 "tags",
                 "team",
                 "project",
+                "apply_network_on_boot",
                 "pending_restart",
             ]
         )

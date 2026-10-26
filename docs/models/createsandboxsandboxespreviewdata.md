@@ -1,0 +1,9 @@
+# CreateSandboxSandboxesPreviewData
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                           | [Optional[models.CreateSandboxSandboxesPreviewType]](../models/createsandboxsandboxespreviewtype.md)             | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |
+| `attributes`                                                                                                     | [Optional[models.CreateSandboxSandboxesPreviewAttributes]](../models/createsandboxsandboxespreviewattributes.md) | :heavy_minus_sign:                                                                                               | N/A                                                                                                              |

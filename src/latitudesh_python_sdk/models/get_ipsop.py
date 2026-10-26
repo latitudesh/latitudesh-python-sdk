@@ -38,7 +38,7 @@ class GetIpsRequestTypedDict(TypedDict):
     filter_location: NotRequired[str]
     r"""The site slug to filter by"""
     filter_address: NotRequired[str]
-    r"""The address of IP to filter by starts_with"""
+    r"""The address of IP to filter by starts_with. Private IPs are only listed when this filter is set"""
     filter_additional: NotRequired[bool]
     r"""Filter by additional IPs (true) or management IPs (false)"""
     filter_available: NotRequired[bool]
@@ -98,7 +98,7 @@ class GetIpsRequest(BaseModel):
         pydantic.Field(alias="filter[address]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The address of IP to filter by starts_with"""
+    r"""The address of IP to filter by starts_with. Private IPs are only listed when this filter is set"""
 
     filter_additional: Annotated[
         Optional[bool],

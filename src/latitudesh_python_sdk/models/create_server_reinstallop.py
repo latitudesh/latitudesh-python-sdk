@@ -15,7 +15,7 @@ from latitudesh_python_sdk.utils import (
     RequestMetadata,
 )
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Dict, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
@@ -48,10 +48,11 @@ class CreateServerReinstallServersOperatingSystem(str, Enum):
 
 
 class CreateServerReinstallServersRaid(str, Enum):
-    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration"""
 
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
+    RAID_10 = "raid-10"
 
 
 class CreateServerReinstallServersRole(str, Enum):
@@ -63,6 +64,7 @@ class CreateServerReinstallServersRole(str, Enum):
 class CreateServerReinstallServersRaidLevel(str, Enum):
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
+    RAID_10 = "raid-10"
 
 
 class CreateServerReinstallServersFilesystem(str, Enum):
@@ -115,6 +117,11 @@ class CreateServerReinstallServersDiskLayout(BaseModel):
         return m
 
 
+class CreateServerReinstallServersBios(str, Enum):
+    ENABLED = "enabled"
+    DISABLED = "disabled"
+
+
 class CreateServerReinstallServersAttributesTypedDict(TypedDict):
     operating_system: NotRequired[CreateServerReinstallServersOperatingSystem]
     r"""The OS selected for the reinstall process"""
@@ -125,7 +132,7 @@ class CreateServerReinstallServersAttributesTypedDict(TypedDict):
     user_data: NotRequired[Nullable[str]]
     r"""User data ID to set upon reinstall"""
     raid: NotRequired[Nullable[CreateServerReinstallServersRaid]]
-    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration"""
     disk_layout: NotRequired[
         Nullable[List[CreateServerReinstallServersDiskLayoutTypedDict]]
     ]
@@ -134,9 +141,11 @@ class CreateServerReinstallServersAttributesTypedDict(TypedDict):
     persistent_netboot: NotRequired[bool]
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
     public_network: NotRequired[Nullable[bool]]
-    r"""**Preview.** Available to teams with public networks enabled. Set to 'true' to attach the server onto the given 'public_network_id', or 'false' to detach an existing public network, during the reinstall. Requires 'public_network_id' when attaching."""
+    r"""**Preview.** Available to teams with public networks enabled. Set to true to attach the server onto the given public_network_id. Requires public_network_id; the server must be public-network eligible."""
     public_network_id: NotRequired[Nullable[str]]
-    r"""ID of a customer public network to attach this server to during the reinstall. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. Applies to this reinstall only; omit it to leave any existing public network unchanged."""
+    r"""**Preview.** Available to teams with public networks enabled. ID of a customer public network to attach the server onto. Requires public_network: true. The public network must belong to the same project and location as the server and have a free address. A server already attached to another public network is detached from it first. Applies only to this reinstall; omitting it leaves an existing attachment."""
+    bios: NotRequired[Nullable[Dict[str, CreateServerReinstallServersBios]]]
+    r"""**Preview.** Available to teams with custom BIOS settings enabled. Custom BIOS settings applied before the OS is installed. Keys are BIOS setting names (e.g. `cpu_virtualization`, `simultaneous_multithreading`, `iommu`, `sr_iov`); only the settings listed in the server specs `supported_bios_settings` are accepted. Values are `enabled` or `disabled`. The settings are kept and reapplied on later reinstalls that omit `bios`; send `null` or `{}` to stop applying them. The reinstall fails if the settings cannot be applied."""
 
 
 class CreateServerReinstallServersAttributes(BaseModel):
@@ -153,7 +162,7 @@ class CreateServerReinstallServersAttributes(BaseModel):
     r"""User data ID to set upon reinstall"""
 
     raid: OptionalNullable[CreateServerReinstallServersRaid] = UNSET
-    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration"""
 
     disk_layout: OptionalNullable[List[CreateServerReinstallServersDiskLayout]] = UNSET
 
@@ -164,10 +173,13 @@ class CreateServerReinstallServersAttributes(BaseModel):
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
 
     public_network: OptionalNullable[bool] = UNSET
-    r"""**Preview.** Available to teams with public networks enabled. Set to 'true' to attach the server onto the given 'public_network_id', or 'false' to detach an existing public network, during the reinstall. Requires 'public_network_id' when attaching."""
+    r"""**Preview.** Available to teams with public networks enabled. Set to true to attach the server onto the given public_network_id. Requires public_network_id; the server must be public-network eligible."""
 
     public_network_id: OptionalNullable[str] = UNSET
-    r"""ID of a customer public network to attach this server to during the reinstall. The public network must belong to the same project and be in the same location as the server, and must have at least one free IP address. Applies to this reinstall only; omit it to leave any existing public network unchanged."""
+    r"""**Preview.** Available to teams with public networks enabled. ID of a customer public network to attach the server onto. Requires public_network: true. The public network must belong to the same project and location as the server and have a free address. A server already attached to another public network is detached from it first. Applies only to this reinstall; omitting it leaves an existing attachment."""
+
+    bios: OptionalNullable[Dict[str, CreateServerReinstallServersBios]] = UNSET
+    r"""**Preview.** Available to teams with custom BIOS settings enabled. Custom BIOS settings applied before the OS is installed. Keys are BIOS setting names (e.g. `cpu_virtualization`, `simultaneous_multithreading`, `iommu`, `sr_iov`); only the settings listed in the server specs `supported_bios_settings` are accepted. Values are `enabled` or `disabled`. The settings are kept and reapplied on later reinstalls that omit `bios`; send `null` or `{}` to stop applying them. The reinstall fails if the settings cannot be applied."""
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
@@ -183,6 +195,7 @@ class CreateServerReinstallServersAttributes(BaseModel):
                 "persistent_netboot",
                 "public_network",
                 "public_network_id",
+                "bios",
             ]
         )
         nullable_fields = set(
@@ -194,6 +207,7 @@ class CreateServerReinstallServersAttributes(BaseModel):
                 "ipxe",
                 "public_network",
                 "public_network_id",
+                "bios",
             ]
         )
         serialized = handler(self)

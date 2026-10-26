@@ -302,6 +302,9 @@ with Latitudesh(
 * [list_filesystems](docs/sdks/filesystemstorage/README.md#list_filesystems) - List filesystems
 * [delete_filesystem](docs/sdks/filesystemstorage/README.md#delete_filesystem) - Delete filesystem
 * [update_filesystem](docs/sdks/filesystemstorage/README.md#update_filesystem) - Update filesystem
+* [get_filesystem_attachment](docs/sdks/filesystemstorage/README.md#get_filesystem_attachment) - Get filesystem attachment
+* [attach_filesystem](docs/sdks/filesystemstorage/README.md#attach_filesystem) - Attach filesystem to server
+* [detach_filesystem](docs/sdks/filesystemstorage/README.md#detach_filesystem) - Detach filesystem from server
 
 ### [Firewalls](docs/sdks/firewallssdk/README.md)
 
@@ -314,6 +317,14 @@ with Latitudesh(
 * [assign](docs/sdks/firewallssdk/README.md#assign) - Assign server to firewall
 * [list_assignments](docs/sdks/firewallssdk/README.md#list_assignments) - Firewall assignments
 * [delete_assignment](docs/sdks/firewallssdk/README.md#delete_assignment) - Delete assignment
+
+### [Inference](docs/sdks/inference/README.md)
+
+* [get_inference_models](docs/sdks/inference/README.md#get_inference_models) - List available inference models
+* [get_inference_api_keys](docs/sdks/inference/README.md#get_inference_api_keys) - List inference API keys
+* [post_inference_api_key](docs/sdks/inference/README.md#post_inference_api_key) - Create an inference API key
+* [delete_inference_api_key](docs/sdks/inference/README.md#delete_inference_api_key) - Revoke an inference API key
+* [get_inference_usage](docs/sdks/inference/README.md#get_inference_usage) - Get inference usage for a project
 
 ### [IpAddresses](docs/sdks/ipaddressessdk/README.md)
 
@@ -343,8 +354,10 @@ with Latitudesh(
 * [get_lks_node_pool](docs/sdks/lks/README.md#get_lks_node_pool) - Get a node pool
 * [delete_lks_node_pool](docs/sdks/lks/README.md#delete_lks_node_pool) - Delete a node pool
 * [update_lks_node_pool](docs/sdks/lks/README.md#update_lks_node_pool) - Update a node pool
+* [list_lks_nodes](docs/sdks/lks/README.md#list_lks_nodes) - List nodes
 * [list_lks_available_versions](docs/sdks/lks/README.md#list_lks_available_versions) - List available Kubernetes versions
 * [list_lks_sites](docs/sdks/lks/README.md#list_lks_sites) - List sites available for LKS
+* [list_lks_allocatable_servers](docs/sdks/lks/README.md#list_lks_allocatable_servers) - List servers that can join an allocated node pool
 
 ### [ManagedDatabases](docs/sdks/manageddatabasessdk/README.md)
 
@@ -430,6 +443,14 @@ with Latitudesh(
 
 * [list](docs/sdks/roles/README.md#list) - List roles
 * [get](docs/sdks/roles/README.md#get) - Retrieve role
+
+### [SandboxesPreview](docs/sdks/sandboxespreview/README.md)
+
+* [get_sandboxes](docs/sdks/sandboxespreview/README.md#get_sandboxes) - List sandboxes
+* [create_sandbox](docs/sdks/sandboxespreview/README.md#create_sandbox) - Create sandbox
+* [get_sandbox](docs/sdks/sandboxespreview/README.md#get_sandbox) - Retrieve sandbox
+* [destroy_sandbox](docs/sdks/sandboxespreview/README.md#destroy_sandbox) - Delete sandbox
+* [exec_sandbox](docs/sdks/sandboxespreview/README.md#exec_sandbox) - Run a command in a sandbox
 
 ### [Servers](docs/sdks/serverssdk/README.md)
 
@@ -647,13 +668,7 @@ with Latitudesh(
     res = None
     try:
 
-        res = latitudesh.elastic_ips.create_elastic_ip(data={
-            "type": latitudesh_python_sdk.CreateElasticIPType.ELASTIC_IPS,
-            "attributes": {
-                "server_id": "sv_2GmAlJ6BXlK1a",
-                "project_id": "proj_AoW6vRnwkvLn0",
-            },
-        })
+        res = latitudesh.inference.get_inference_models(project_id="proj_AoW6vRnwkvLn0")
 
         # Handle response
         print(res)
@@ -687,7 +702,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 65 of 197 methods.*
+* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 74 of 212 methods.*
 * [`ResponseValidationError`](./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

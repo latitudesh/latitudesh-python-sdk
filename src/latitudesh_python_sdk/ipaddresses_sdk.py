@@ -46,7 +46,7 @@ class IPAddressesSDK(BaseSDK):
         :param filter_family: The protocol family to filter by
         :param filter_type: The protocol type to filter by
         :param filter_location: The site slug to filter by
-        :param filter_address: The address of IP to filter by starts_with
+        :param filter_address: The address of IP to filter by starts_with. Private IPs are only listed when this filter is set
         :param filter_additional: Filter by additional IPs (true) or management IPs (false)
         :param filter_available: Filter by unassigned IPs (true) or assigned IPs (false)
         :param filter_management: Filter by management IPs (true) or additional/elastic IPs (false)
@@ -213,7 +213,7 @@ class IPAddressesSDK(BaseSDK):
         :param filter_family: The protocol family to filter by
         :param filter_type: The protocol type to filter by
         :param filter_location: The site slug to filter by
-        :param filter_address: The address of IP to filter by starts_with
+        :param filter_address: The address of IP to filter by starts_with. Private IPs are only listed when this filter is set
         :param filter_additional: Filter by additional IPs (true) or management IPs (false)
         :param filter_available: Filter by unassigned IPs (true) or assigned IPs (false)
         :param filter_management: Filter by management IPs (true) or additional/elastic IPs (false)

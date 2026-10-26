@@ -23,6 +23,7 @@ if TYPE_CHECKING:
     from latitudesh_python_sdk.events_sdk import EventsSDK
     from latitudesh_python_sdk.filesystem_storage import FilesystemStorage
     from latitudesh_python_sdk.firewalls_sdk import FirewallsSDK
+    from latitudesh_python_sdk.inference import Inference
     from latitudesh_python_sdk.ipaddresses_sdk import IPAddressesSDK
     from latitudesh_python_sdk.kubernetes_clusters_sdk import KubernetesClustersSDK
     from latitudesh_python_sdk.lks import Lks
@@ -36,6 +37,7 @@ if TYPE_CHECKING:
     from latitudesh_python_sdk.public_networks_sdk import PublicNetworksSDK
     from latitudesh_python_sdk.regions_sdk import RegionsSDK
     from latitudesh_python_sdk.roles import Roles
+    from latitudesh_python_sdk.sandboxes_preview_ import SandboxesPreview
     from latitudesh_python_sdk.servers_sdk import ServersSDK
     from latitudesh_python_sdk.sshkeys_sdk import SSHKeysSDK
     from latitudesh_python_sdk.tags import Tags
@@ -58,6 +60,7 @@ class Latitudesh(BaseSDK):
     r"""Latitude.sh API: The Latitude.sh API is a RESTful API to manage your Latitude.sh account. It allows you to perform the same actions as the Latitude.sh dashboard."""
 
     api_keys: "APIKeysSDK"
+    inference: "Inference"
     baselines_preview: "BaselinesPreview"
     r"""Preview. Available to teams with the `baselines_api` feature flag. The shape of these endpoints may change before general availability."""
     billing: "Billing"
@@ -77,6 +80,8 @@ class Latitudesh(BaseSDK):
     user_data: "UserDataSDK"
     regions: "RegionsSDK"
     roles: "Roles"
+    sandboxes_preview: "SandboxesPreview"
+    r"""Preview. Available to teams with the `sandboxes_api` feature flag. The shape of these endpoints may change before general availability."""
     servers: "ServersSDK"
     filesystem_storage: "FilesystemStorage"
     block_storage: "BlockStorage"
@@ -94,6 +99,7 @@ class Latitudesh(BaseSDK):
     r"""Managed database instances (PostgreSQL, ClickHouse)"""
     _sub_sdk_map = {
         "api_keys": ("latitudesh_python_sdk.apikeys_sdk", "APIKeysSDK"),
+        "inference": ("latitudesh_python_sdk.inference", "Inference"),
         "baselines_preview": (
             "latitudesh_python_sdk.baselines_preview_",
             "BaselinesPreview",
@@ -124,6 +130,10 @@ class Latitudesh(BaseSDK):
         "user_data": ("latitudesh_python_sdk.userdata_sdk", "UserDataSDK"),
         "regions": ("latitudesh_python_sdk.regions_sdk", "RegionsSDK"),
         "roles": ("latitudesh_python_sdk.roles", "Roles"),
+        "sandboxes_preview": (
+            "latitudesh_python_sdk.sandboxes_preview_",
+            "SandboxesPreview",
+        ),
         "servers": ("latitudesh_python_sdk.servers_sdk", "ServersSDK"),
         "filesystem_storage": (
             "latitudesh_python_sdk.filesystem_storage",

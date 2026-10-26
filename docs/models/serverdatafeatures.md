@@ -10,4 +10,5 @@
 | `user_data`        | *Optional[bool]*   | :heavy_minus_sign: | N/A                |
 | `accelerate`       | *Optional[bool]*   | :heavy_minus_sign: | N/A                |
 | `rescue`           | *Optional[bool]*   | :heavy_minus_sign: | N/A                |
+| `arm64`            | *Optional[bool]*   | :heavy_minus_sign: | N/A                |
 | `workflow`         | *Optional[bool]*   | :heavy_minus_sign: | N/A                |
