@@ -46,10 +46,11 @@ class UpdateServerDeployConfigServersOperatingSystem(str, Enum):
 
 
 class UpdateServerDeployConfigServersRaid(str, Enum):
-    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration"""
 
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
+    RAID_10 = "raid-10"
 
 
 class UpdateServerDeployConfigServersRole(str, Enum):
@@ -61,6 +62,7 @@ class UpdateServerDeployConfigServersRole(str, Enum):
 class UpdateServerDeployConfigServersRaidLevel(str, Enum):
     RAID_0 = "raid-0"
     RAID_1 = "raid-1"
+    RAID_10 = "raid-10"
 
 
 class UpdateServerDeployConfigServersFilesystem(str, Enum):
@@ -118,7 +120,7 @@ class UpdateServerDeployConfigServersAttributesTypedDict(TypedDict):
         Nullable[UpdateServerDeployConfigServersOperatingSystem]
     ]
     raid: NotRequired[Nullable[UpdateServerDeployConfigServersRaid]]
-    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration"""
     disk_layout: NotRequired[
         Nullable[List[UpdateServerDeployConfigServersDiskLayoutTypedDict]]
     ]
@@ -145,7 +147,7 @@ class UpdateServerDeployConfigServersAttributes(BaseModel):
     ] = UNSET
 
     raid: OptionalNullable[UpdateServerDeployConfigServersRaid] = UNSET
-    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, or omit/null for no RAID configuration"""
+    r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration"""
 
     disk_layout: OptionalNullable[List[UpdateServerDeployConfigServersDiskLayout]] = (
         UNSET

@@ -11,7 +11,8 @@ value = CreateServerServersRaidLevel.RAID_0
 
 ## Values
 
-| Name     | Value    |
-| -------- | -------- |
-| `RAID_0` | raid-0   |
-| `RAID_1` | raid-1   |
+| Name      | Value     |
+| --------- | --------- |
+| `RAID_0`  | raid-0    |
+| `RAID_1`  | raid-1    |
+| `RAID_10` | raid-10   |

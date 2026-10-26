@@ -1,0 +1,9 @@
+# ExecSandboxRequest
+
+
+## Fields
+
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `sandbox_id`                                                                                         | *str*                                                                                                | :heavy_check_mark:                                                                                   | Sandbox name                                                                                         |
+| `request_body`                                                                                       | [models.ExecSandboxSandboxesPreviewRequestBody](../models/execsandboxsandboxespreviewrequestbody.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |

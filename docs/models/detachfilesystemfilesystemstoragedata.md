@@ -1,0 +1,9 @@
+# DetachFilesystemFilesystemStorageData
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                         | [models.DetachFilesystemFilesystemStorageType](../models/detachfilesystemfilesystemstoragetype.md)             | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `attributes`                                                                                                   | [models.DetachFilesystemFilesystemStorageAttributes](../models/detachfilesystemfilesystemstorageattributes.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

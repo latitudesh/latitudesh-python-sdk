@@ -1,0 +1,9 @@
+# AttachFilesystemFilesystemStorageData
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `type`                                                                                                         | [models.AttachFilesystemFilesystemStorageType](../models/attachfilesystemfilesystemstoragetype.md)             | :heavy_check_mark:                                                                                             | N/A                                                                                                            |
+| `attributes`                                                                                                   | [models.AttachFilesystemFilesystemStorageAttributes](../models/attachfilesystemfilesystemstorageattributes.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

@@ -168,6 +168,7 @@ class ServerDataFeaturesTypedDict(TypedDict):
     user_data: NotRequired[bool]
     accelerate: NotRequired[bool]
     rescue: NotRequired[bool]
+    arm64: NotRequired[bool]
     workflow: NotRequired[bool]
 
 
@@ -182,12 +183,22 @@ class ServerDataFeatures(BaseModel):
 
     rescue: Optional[bool] = None
 
+    arm64: Optional[bool] = None
+
     workflow: Optional[bool] = None
 
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
         optional_fields = set(
-            ["raid", "ssh_keys", "user_data", "accelerate", "rescue", "workflow"]
+            [
+                "raid",
+                "ssh_keys",
+                "user_data",
+                "accelerate",
+                "rescue",
+                "arm64",
+                "workflow",
+            ]
         )
         serialized = handler(self)
         m = {}
@@ -506,6 +517,7 @@ class ServerDataAttributesTypedDict(TypedDict):
     r"""`on` - The server is powered ON
     `off` - The server is powered OFF
     `unknown` - The server power status is unknown
+    `configuring_bios` - The server is applying custom BIOS settings at the start of a reinstall
     `disk_erasing` - The server is in reinstalling state `disk_erasing`
     `deploying` - The server is deploying or reinstalling
     `failed_deployment` - The server has failed deployment or reinstall
@@ -565,6 +577,7 @@ class ServerDataAttributes(BaseModel):
     r"""`on` - The server is powered ON
     `off` - The server is powered OFF
     `unknown` - The server power status is unknown
+    `configuring_bios` - The server is applying custom BIOS settings at the start of a reinstall
     `disk_erasing` - The server is in reinstalling state `disk_erasing`
     `deploying` - The server is deploying or reinstalling
     `failed_deployment` - The server has failed deployment or reinstall

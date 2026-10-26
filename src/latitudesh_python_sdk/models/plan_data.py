@@ -230,6 +230,8 @@ class Specs(BaseModel):
 class LocationsTypedDict(TypedDict):
     available: NotRequired[List[str]]
     in_stock: NotRequired[List[str]]
+    in_stock_count: NotRequired[Dict[str, int]]
+    r"""Servers in stock keyed by site slug. Only sites with stock are present."""
 
 
 class Locations(BaseModel):
@@ -237,9 +239,12 @@ class Locations(BaseModel):
 
     in_stock: Optional[List[str]] = None
 
+    in_stock_count: Optional[Dict[str, int]] = None
+    r"""Servers in stock keyed by site slug. Only sites with stock are present."""
+
     @model_serializer(mode="wrap")
     def serialize_model(self, handler):
-        optional_fields = set(["available", "in_stock"])
+        optional_fields = set(["available", "in_stock", "in_stock_count"])
         serialized = handler(self)
         m = {}
 

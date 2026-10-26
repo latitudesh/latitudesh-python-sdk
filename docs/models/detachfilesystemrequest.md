@@ -1,0 +1,9 @@
+# DetachFilesystemRequest
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `filesystem_id`                                                                                                  | *str*                                                                                                            | :heavy_check_mark:                                                                                               | Filesystem ID                                                                                                    |
+| `request_body`                                                                                                   | [models.DetachFilesystemFilesystemStorageRequestBody](../models/detachfilesystemfilesystemstoragerequestbody.md) | :heavy_check_mark:                                                                                               | N/A                                                                                                              |
