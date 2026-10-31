@@ -29,7 +29,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.sandboxes_preview.get_sandboxes(project_id="proj_6059EqYkOQj8p")
@@ -75,7 +75,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.sandboxes_preview.create_sandbox(data={
@@ -125,7 +125,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.sandboxes_preview.get_sandbox(sandbox_id="sbx-demo")
@@ -156,7 +156,7 @@ with Latitudesh(
 
 **Preview.** Available to teams with the `sandboxes_api` feature flag.
 
-Delete a sandbox.
+Delete a sandbox. Deletion completes in the background.
 
 
 ### Example Usage
@@ -168,7 +168,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.sandboxes_preview.destroy_sandbox(sandbox_id="<id>")
@@ -207,7 +207,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.sandboxes_preview.exec_sandbox(sandbox_id="sbx-demo", data={

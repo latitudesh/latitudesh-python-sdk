@@ -516,10 +516,6 @@ if TYPE_CHECKING:
         DeleteVirtualNetworksAssignmentsRequestTypedDict,
     )
     from .delete_volumeop import DeleteVolumeRequest, DeleteVolumeRequestTypedDict
-    from .delete_vpn_sessionop import (
-        DeleteVpnSessionRequest,
-        DeleteVpnSessionRequestTypedDict,
-    )
     from .deploy_config import (
         DeployConfig,
         DeployConfigAttributes,
@@ -1033,15 +1029,6 @@ if TYPE_CHECKING:
         GetVirtualNetworksResponseTypedDict,
     )
     from .get_vm_plansop import GetVMPlansRequest, GetVMPlansRequestTypedDict
-    from .get_vpn_sessionsop import (
-        FilterLocation,
-        GetVpnSessionsMeta,
-        GetVpnSessionsMetaTypedDict,
-        GetVpnSessionsRequest,
-        GetVpnSessionsRequestTypedDict,
-        GetVpnSessionsResponseBody,
-        GetVpnSessionsResponseBodyTypedDict,
-    )
     from .index_virtual_machineop import (
         IndexVirtualMachineRequest,
         IndexVirtualMachineRequestTypedDict,
@@ -1759,16 +1746,6 @@ if TYPE_CHECKING:
         PostUserDataUserDataRequestBodyTypedDict,
         PostUserDataUserDataType,
     )
-    from .post_vpn_sessionop import (
-        PostVpnSessionVpnSessionsAttributes,
-        PostVpnSessionVpnSessionsAttributesTypedDict,
-        PostVpnSessionVpnSessionsData,
-        PostVpnSessionVpnSessionsDataTypedDict,
-        PostVpnSessionVpnSessionsRequestBody,
-        PostVpnSessionVpnSessionsRequestBodyTypedDict,
-        PostVpnSessionVpnSessionsSite,
-        PostVpnSessionVpnSessionsType,
-    )
     from .project import (
         BillingMethod,
         BillingType,
@@ -1858,7 +1835,6 @@ if TYPE_CHECKING:
         PutSSHKeySSHKeysRequestBodyTypedDict,
         PutSSHKeySSHKeysType,
     )
-    from .put_vpn_sessionop import PutVpnSessionRequest, PutVpnSessionRequestTypedDict
     from .region import (
         Region,
         RegionAttributes,
@@ -1869,12 +1845,6 @@ if TYPE_CHECKING:
         RegionTypedDict,
     )
     from .region_country import RegionCountry, RegionCountryTypedDict
-    from .region_resource_data import (
-        RegionResourceData,
-        RegionResourceDataSite,
-        RegionResourceDataSiteTypedDict,
-        RegionResourceDataTypedDict,
-    )
     from .regions import (
         Regions,
         RegionsAttributes,
@@ -2641,18 +2611,6 @@ if TYPE_CHECKING:
         VolumeDataType,
         VolumeDataTypedDict,
     )
-    from .vpn_session_data_with_password import (
-        VpnSessionDataWithPassword,
-        VpnSessionDataWithPasswordAttributes,
-        VpnSessionDataWithPasswordAttributesTypedDict,
-        VpnSessionDataWithPasswordStatus,
-        VpnSessionDataWithPasswordType,
-        VpnSessionDataWithPasswordTypedDict,
-    )
-    from .vpn_session_with_password import (
-        VpnSessionWithPassword,
-        VpnSessionWithPasswordTypedDict,
-    )
 
 __all__ = [
     "APIError",
@@ -3068,8 +3026,6 @@ __all__ = [
     "DeleteVirtualNetworksAssignmentsRequestTypedDict",
     "DeleteVolumeRequest",
     "DeleteVolumeRequestTypedDict",
-    "DeleteVpnSessionRequest",
-    "DeleteVpnSessionRequestTypedDict",
     "DeployConfig",
     "DeployConfigAttributes",
     "DeployConfigAttributesTypedDict",
@@ -3201,7 +3157,6 @@ __all__ = [
     "FilesystemsMetaTypedDict",
     "FilesystemsTypedDict",
     "FilterFamily",
-    "FilterLocation",
     "FilterStatus",
     "FilterStockLevel",
     "FilterType",
@@ -3442,12 +3397,6 @@ __all__ = [
     "GetVirtualNetworksRequestTypedDict",
     "GetVirtualNetworksResponse",
     "GetVirtualNetworksResponseTypedDict",
-    "GetVpnSessionsMeta",
-    "GetVpnSessionsMetaTypedDict",
-    "GetVpnSessionsRequest",
-    "GetVpnSessionsRequestTypedDict",
-    "GetVpnSessionsResponseBody",
-    "GetVpnSessionsResponseBodyTypedDict",
     "Gpu",
     "GpuTypedDict",
     "Granularity",
@@ -4021,14 +3970,6 @@ __all__ = [
     "PostUserDataUserDataRequestBody",
     "PostUserDataUserDataRequestBodyTypedDict",
     "PostUserDataUserDataType",
-    "PostVpnSessionVpnSessionsAttributes",
-    "PostVpnSessionVpnSessionsAttributesTypedDict",
-    "PostVpnSessionVpnSessionsData",
-    "PostVpnSessionVpnSessionsDataTypedDict",
-    "PostVpnSessionVpnSessionsRequestBody",
-    "PostVpnSessionVpnSessionsRequestBodyTypedDict",
-    "PostVpnSessionVpnSessionsSite",
-    "PostVpnSessionVpnSessionsType",
     "Pricing",
     "PricingTypedDict",
     "Products",
@@ -4105,8 +4046,6 @@ __all__ = [
     "PutSSHKeySSHKeysRequestBody",
     "PutSSHKeySSHKeysRequestBodyTypedDict",
     "PutSSHKeySSHKeysType",
-    "PutVpnSessionRequest",
-    "PutVpnSessionRequestTypedDict",
     "QueryParamMetric",
     "QueryParamRange",
     "QuotaInMbps",
@@ -4129,10 +4068,6 @@ __all__ = [
     "RegionCountryTypedDict",
     "RegionData",
     "RegionDataTypedDict",
-    "RegionResourceData",
-    "RegionResourceDataSite",
-    "RegionResourceDataSiteTypedDict",
-    "RegionResourceDataTypedDict",
     "RegionType",
     "RegionTypedDict",
     "Regions",
@@ -4758,14 +4693,6 @@ __all__ = [
     "VolumeDataStorageNetworkTypedDict",
     "VolumeDataType",
     "VolumeDataTypedDict",
-    "VpnSessionDataWithPassword",
-    "VpnSessionDataWithPasswordAttributes",
-    "VpnSessionDataWithPasswordAttributesTypedDict",
-    "VpnSessionDataWithPasswordStatus",
-    "VpnSessionDataWithPasswordType",
-    "VpnSessionDataWithPasswordTypedDict",
-    "VpnSessionWithPassword",
-    "VpnSessionWithPasswordTypedDict",
     "WorkerStatus",
     "Workers",
     "WorkersTypedDict",
@@ -5178,8 +5105,6 @@ _dynamic_imports: dict[str, str] = {
     "DeleteVirtualNetworksAssignmentsRequestTypedDict": ".delete_virtual_networks_assignmentsop",
     "DeleteVolumeRequest": ".delete_volumeop",
     "DeleteVolumeRequestTypedDict": ".delete_volumeop",
-    "DeleteVpnSessionRequest": ".delete_vpn_sessionop",
-    "DeleteVpnSessionRequestTypedDict": ".delete_vpn_sessionop",
     "DeployConfig": ".deploy_config",
     "DeployConfigAttributes": ".deploy_config",
     "DeployConfigAttributesTypedDict": ".deploy_config",
@@ -5561,13 +5486,6 @@ _dynamic_imports: dict[str, str] = {
     "GetVirtualNetworksResponseTypedDict": ".get_virtual_networksop",
     "GetVMPlansRequest": ".get_vm_plansop",
     "GetVMPlansRequestTypedDict": ".get_vm_plansop",
-    "FilterLocation": ".get_vpn_sessionsop",
-    "GetVpnSessionsMeta": ".get_vpn_sessionsop",
-    "GetVpnSessionsMetaTypedDict": ".get_vpn_sessionsop",
-    "GetVpnSessionsRequest": ".get_vpn_sessionsop",
-    "GetVpnSessionsRequestTypedDict": ".get_vpn_sessionsop",
-    "GetVpnSessionsResponseBody": ".get_vpn_sessionsop",
-    "GetVpnSessionsResponseBodyTypedDict": ".get_vpn_sessionsop",
     "IndexVirtualMachineRequest": ".index_virtual_machineop",
     "IndexVirtualMachineRequestTypedDict": ".index_virtual_machineop",
     "IndexVirtualMachineResponse": ".index_virtual_machineop",
@@ -6159,14 +6077,6 @@ _dynamic_imports: dict[str, str] = {
     "PostUserDataUserDataRequestBody": ".post_user_dataop",
     "PostUserDataUserDataRequestBodyTypedDict": ".post_user_dataop",
     "PostUserDataUserDataType": ".post_user_dataop",
-    "PostVpnSessionVpnSessionsAttributes": ".post_vpn_sessionop",
-    "PostVpnSessionVpnSessionsAttributesTypedDict": ".post_vpn_sessionop",
-    "PostVpnSessionVpnSessionsData": ".post_vpn_sessionop",
-    "PostVpnSessionVpnSessionsDataTypedDict": ".post_vpn_sessionop",
-    "PostVpnSessionVpnSessionsRequestBody": ".post_vpn_sessionop",
-    "PostVpnSessionVpnSessionsRequestBodyTypedDict": ".post_vpn_sessionop",
-    "PostVpnSessionVpnSessionsSite": ".post_vpn_sessionop",
-    "PostVpnSessionVpnSessionsType": ".post_vpn_sessionop",
     "BillingMethod": ".project",
     "BillingType": ".project",
     "Environment": ".project",
@@ -6244,8 +6154,6 @@ _dynamic_imports: dict[str, str] = {
     "PutSSHKeySSHKeysRequestBody": ".put_ssh_keyop",
     "PutSSHKeySSHKeysRequestBodyTypedDict": ".put_ssh_keyop",
     "PutSSHKeySSHKeysType": ".put_ssh_keyop",
-    "PutVpnSessionRequest": ".put_vpn_sessionop",
-    "PutVpnSessionRequestTypedDict": ".put_vpn_sessionop",
     "Region": ".region",
     "RegionAttributes": ".region",
     "RegionAttributesTypedDict": ".region",
@@ -6255,10 +6163,6 @@ _dynamic_imports: dict[str, str] = {
     "RegionTypedDict": ".region",
     "RegionCountry": ".region_country",
     "RegionCountryTypedDict": ".region_country",
-    "RegionResourceData": ".region_resource_data",
-    "RegionResourceDataSite": ".region_resource_data",
-    "RegionResourceDataSiteTypedDict": ".region_resource_data",
-    "RegionResourceDataTypedDict": ".region_resource_data",
     "Regions": ".regions",
     "RegionsAttributes": ".regions",
     "RegionsAttributesTypedDict": ".regions",
@@ -6877,14 +6781,6 @@ _dynamic_imports: dict[str, str] = {
     "VolumeDataStorageNetworkTypedDict": ".volume_data",
     "VolumeDataType": ".volume_data",
     "VolumeDataTypedDict": ".volume_data",
-    "VpnSessionDataWithPassword": ".vpn_session_data_with_password",
-    "VpnSessionDataWithPasswordAttributes": ".vpn_session_data_with_password",
-    "VpnSessionDataWithPasswordAttributesTypedDict": ".vpn_session_data_with_password",
-    "VpnSessionDataWithPasswordStatus": ".vpn_session_data_with_password",
-    "VpnSessionDataWithPasswordType": ".vpn_session_data_with_password",
-    "VpnSessionDataWithPasswordTypedDict": ".vpn_session_data_with_password",
-    "VpnSessionWithPassword": ".vpn_session_with_password",
-    "VpnSessionWithPasswordTypedDict": ".vpn_session_with_password",
 }
 
 

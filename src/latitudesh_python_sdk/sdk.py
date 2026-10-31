@@ -53,7 +53,6 @@ if TYPE_CHECKING:
         VirtualMachineRestoresSDK,
     )
     from latitudesh_python_sdk.virtualmachines_sdk import VirtualMachinesSDK
-    from latitudesh_python_sdk.vpnsessions import VpnSessions
 
 
 class Latitudesh(BaseSDK):
@@ -94,7 +93,6 @@ class Latitudesh(BaseSDK):
     virtual_machine_backups: "VirtualMachineBackupsSDK"
     virtual_machine_restores: "VirtualMachineRestoresSDK"
     private_networks: "PrivateNetworks"
-    vpn_sessions: "VpnSessions"
     managed_databases: "ManagedDatabasesSDK"
     r"""Managed database instances (PostgreSQL, ClickHouse)"""
     _sub_sdk_map = {
@@ -164,7 +162,6 @@ class Latitudesh(BaseSDK):
             "latitudesh_python_sdk.privatenetworks",
             "PrivateNetworks",
         ),
-        "vpn_sessions": ("latitudesh_python_sdk.vpnsessions", "VpnSessions"),
         "managed_databases": (
             "latitudesh_python_sdk.managed_databases_sdk",
             "ManagedDatabasesSDK",
