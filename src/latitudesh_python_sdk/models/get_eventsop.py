@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 from .events import Events, EventsTypedDict
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 from latitudesh_python_sdk.utils import FieldMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
@@ -18,7 +23,7 @@ class GetEventsRequestTypedDict(TypedDict):
     filter_target_name: NotRequired[List[str]]
     r"""The target type(s) of the event to filter by"""
     filter_target_id: NotRequired[str]
-    r"""The target id of the event to filter by"""
+    r"""The target id of the event to filter by. An LKS cluster id also returns the events of the cluster node pools"""
     filter_action: NotRequired[str]
     r"""The action performed in event to filter by"""
     filter_created_at_gte: NotRequired[str]
@@ -64,7 +69,7 @@ class GetEventsRequest(BaseModel):
         pydantic.Field(alias="filter[target_id]"),
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""The target id of the event to filter by"""
+    r"""The target id of the event to filter by. An LKS cluster id also returns the events of the cluster node pools"""
 
     filter_action: Annotated[
         Optional[str],
@@ -122,6 +127,9 @@ class GetEventsRequest(BaseModel):
     r"""Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at. Example: `sort=-created_at` sorts by creation date descending."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -139,11 +147,14 @@ class GetEventsRequest(BaseModel):
                 "sort",
             ]
         )
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

@@ -181,7 +181,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list()
@@ -203,7 +203,7 @@ import os
 async def main():
 
     async with Latitudesh(
-        bearer=os.getenv("LATITUDESH_BEARER", ""),
+        bearer=os.getenv("LATITUDESH_BEARER"),
     ) as latitudesh:
 
         res = await latitudesh.api_keys.list_async()
@@ -233,7 +233,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list()
@@ -560,13 +560,6 @@ with Latitudesh(
 * [create_virtual_machine_network_attachment](docs/sdks/virtualmachinessdk/README.md#create_virtual_machine_network_attachment) - Attach a network to a VM
 * [destroy_virtual_machine_network_attachment](docs/sdks/virtualmachinessdk/README.md#destroy_virtual_machine_network_attachment) - Detach a network from a VM
 
-### [VpnSessions](docs/sdks/vpnsessions/README.md)
-
-* [list](docs/sdks/vpnsessions/README.md#list) - List VPN sessions
-* [create](docs/sdks/vpnsessions/README.md#create) - Create VPN session
-* [refresh_password](docs/sdks/vpnsessions/README.md#refresh_password) - Refresh VPN session
-* [delete](docs/sdks/vpnsessions/README.md#delete) - Delete VPN session
-
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
@@ -584,7 +577,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.events.list(page_size=20, page_number=1)
@@ -610,7 +603,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list(,
@@ -630,7 +623,7 @@ import os
 
 with Latitudesh(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list()
@@ -663,7 +656,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
     res = None
     try:
@@ -702,7 +695,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 74 of 212 methods.*
+* [`ErrorObject`](./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 74 of 208 methods.*
 * [`ResponseValidationError`](./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -738,7 +731,7 @@ import os
 with Latitudesh(
     server_idx=0,
     latitude_api_key="<insert your api key here>",
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list()
@@ -758,7 +751,7 @@ import os
 
 with Latitudesh(
     server_url="http://api.latitude.sh",
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list()
@@ -877,18 +870,20 @@ import os
 def main():
 
     with Latitudesh(
-        bearer=os.getenv("LATITUDESH_BEARER", ""),
+        bearer=os.getenv("LATITUDESH_BEARER"),
     ) as latitudesh:
         # Rest of application here...
+        pass
 
 
 # Or when using async:
 async def amain():
 
     async with Latitudesh(
-        bearer=os.getenv("LATITUDESH_BEARER", ""),
+        bearer=os.getenv("LATITUDESH_BEARER"),
     ) as latitudesh:
         # Rest of application here...
+        pass
 ```
 <!-- End Resource Management [resource-management] -->
 

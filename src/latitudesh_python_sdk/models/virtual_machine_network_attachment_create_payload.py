@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 from enum import Enum
-from latitudesh_python_sdk.types import BaseModel, UNSET_SENTINEL
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
 from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import NotRequired, TypedDict
@@ -27,13 +32,19 @@ class VirtualMachineNetworkAttachmentCreatePayloadAttributes(BaseModel):
     r"""Optional static IPv4 address with prefix (e.g. 10.0.0.5/24) for the NIC inside the guest. When omitted the NIC is configured for DHCP without a default route. VMs created with `apply_network_on_boot` enabled apply it on the restart the attach performs; on other VMs, configure it yourself on the interface whose MAC matches the attachment `mac_address`."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["address"])
+        exclude_none = current_exclude_none()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and exclude_none is False:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

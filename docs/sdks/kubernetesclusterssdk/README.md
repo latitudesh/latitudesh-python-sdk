@@ -31,7 +31,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.list_kubernetes_clusters(project_id="<id>")
@@ -49,7 +49,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.list_kubernetes_clusters(project_id="<id>")
@@ -98,7 +98,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.create_kubernetes_cluster(data={
@@ -128,7 +128,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.create_kubernetes_cluster(data={
@@ -154,7 +154,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.create_kubernetes_cluster(data={
@@ -212,7 +212,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.list_kubernetes_available_versions()
@@ -255,7 +255,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.get_kubernetes_cluster(kubernetes_cluster_id="<id>")
@@ -273,7 +273,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.get_kubernetes_cluster(kubernetes_cluster_id="<id>")
@@ -319,7 +319,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.kubernetes_clusters.delete_kubernetes_cluster(kubernetes_cluster_id="<id>")
@@ -380,7 +380,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -402,7 +402,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -424,7 +424,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -446,7 +446,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -468,7 +468,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -490,7 +490,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -514,7 +514,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -536,7 +536,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -560,7 +560,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -584,7 +584,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -608,7 +608,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -633,7 +633,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -657,7 +657,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -681,7 +681,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -705,7 +705,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -730,7 +730,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -754,7 +754,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -778,7 +778,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -800,7 +800,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -824,7 +824,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -848,7 +848,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -870,7 +870,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.update_kubernetes_cluster(kubernetes_cluster_id="<id>", data={
@@ -921,7 +921,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.kubernetes_clusters.get_kubernetes_cluster_kubeconfig(kubernetes_cluster_id="<id>")
