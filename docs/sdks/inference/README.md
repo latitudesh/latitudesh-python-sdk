@@ -24,7 +24,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.inference.get_inference_models(project_id="proj_AoW6vRnwkvLn0")
@@ -49,7 +49,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 401, 404                 | application/vnd.api+json |
+| models.ErrorObject       | 401, 403, 404            | application/vnd.api+json |
 | models.ErrorObject       | 503                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
@@ -67,7 +67,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.inference.get_inference_api_keys(project_id="proj_AoW6vRnwkvLn0")
@@ -92,7 +92,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 401, 404                 | application/vnd.api+json |
+| models.ErrorObject       | 401, 403, 404            | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## post_inference_api_key
@@ -111,7 +111,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.inference.post_inference_api_key(data={
@@ -142,7 +142,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404, 422                 | application/vnd.api+json |
+| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## delete_inference_api_key
@@ -160,7 +160,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.inference.delete_inference_api_key(project_id="proj_AoW6vRnwkvLn0", api_key_id="aitok_6VE1Wd37dXnZJ")
@@ -186,7 +186,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 404                      | application/vnd.api+json |
+| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_inference_usage
@@ -205,7 +205,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.inference.get_inference_usage(project_id="proj_AoW6vRnwkvLn0", from_=parse_datetime("2026-10-01T00:00:00Z"), to=parse_datetime("2026-10-02T00:00:00Z"), granularity=latitudesh_python_sdk.Granularity.SIXH)

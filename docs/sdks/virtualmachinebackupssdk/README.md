@@ -25,7 +25,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machine_backups.list_virtual_machine_scoped_backups(virtual_machine_id="<id>")
@@ -67,7 +67,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machine_backups.create_virtual_machine_backup(virtual_machine_id="<id>")
@@ -92,7 +92,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403                      | application/vnd.api+json |
+| models.ErrorObject       | 403, 409                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## list_virtual_machine_backups
@@ -109,7 +109,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machine_backups.list_virtual_machine_backups()
@@ -150,7 +150,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machine_backups.create_virtual_machine_backup_top_level()
@@ -175,7 +175,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403                      | application/vnd.api+json |
+| models.ErrorObject       | 403, 409                 | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_virtual_machine_backup
@@ -191,7 +191,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machine_backups.get_virtual_machine_backup(id="<id>")
@@ -233,7 +233,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machine_backups.delete_virtual_machine_backup(id="<id>")

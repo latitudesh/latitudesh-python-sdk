@@ -20,7 +20,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.traffic.get(filter_date_gte="2025-12-14T15:57:10Z", filter_date_lte="2026-01-14T15:57:10Z", filter_server="sv_A05EdQ50dvKYQ")
@@ -38,7 +38,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.traffic.get(filter_date_gte="2025-04-28T10:40:31Z", filter_date_lte="2025-04-28T18:40:31Z", filter_project="308")
@@ -56,7 +56,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.traffic.get(filter_date_gte="2025-04-28T10:40:31Z", filter_date_lte="2025-04-28T18:40:31Z", filter_server="198")
@@ -74,7 +74,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.traffic.get(filter_date_gte="invalid", filter_date_lte="invalid")
@@ -92,7 +92,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.traffic.get(filter_date_gte="2025-04-06T21:00:00Z", filter_date_lte="2025-05-06T21:00:00Z", filter_project="proj_AW6Q2D9lqKLpr")
@@ -110,7 +110,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.traffic.get(filter_date_gte="2025-04-06T21:00:00Z", filter_date_lte="2025-05-06T21:00:00Z", filter_server="sv_mw49QDB5qagKb")
@@ -153,7 +153,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.traffic.get_quota()
@@ -171,7 +171,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.traffic.get_quota()
@@ -189,7 +189,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.traffic.get_quota()
