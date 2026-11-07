@@ -29,7 +29,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.baselines_preview.get_baselines()
@@ -75,7 +75,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.baselines_preview.create_baseline(data={
@@ -147,7 +147,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.baselines_preview.get_baseline(baseline_id="bl_6059EqYkOQj8p")
@@ -190,7 +190,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.baselines_preview.destroy_baseline(baseline_id="<id>")
