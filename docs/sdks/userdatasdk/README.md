@@ -31,7 +31,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.list_project_user_data(project_id="proj_LYV8DZYQq5QoE", extra_fields_user_data="decoded_content")
@@ -76,7 +76,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.create(project_id="<id>", data={
@@ -101,7 +101,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.create(project_id="proj_8NkvdyMKdeLpx", data={
@@ -126,7 +126,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.create(project_id="<id>", data={
@@ -151,7 +151,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.create(project_id="<id>", data={
@@ -176,7 +176,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.create(project_id="<id>", data={
@@ -201,7 +201,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.create(project_id="<id>", data={
@@ -251,7 +251,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.get_project_user_data(project_id="123", user_data_id="123", extra_fields_user_data="decoded_content")
@@ -269,7 +269,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.get_project_user_data(project_id="proj_e8pKq0GYdWAob", user_data_id="ud_VLMmAD8EOwop2", extra_fields_user_data="decoded_content")
@@ -315,7 +315,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.update(project_id="<id>", user_data_id="<id>", data={
@@ -340,7 +340,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.update(project_id="<id>", user_data_id="<id>", data={
@@ -365,7 +365,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.update(project_id="proj_8NkvdyPXOeLpx", user_data_id="ud_Qk0Ryqv1dW36X", data={
@@ -391,7 +391,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.update(project_id="<id>", user_data_id="<id>", data={
@@ -416,7 +416,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.update(project_id="<id>", user_data_id="<id>", data={
@@ -441,7 +441,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.update(project_id="proj_e8pKq0aKDWAob", user_data_id="ud_2695BdKrOevVo", data={
@@ -466,7 +466,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.update(project_id="proj_QraYDPA3OpjwW", user_data_id="ud_byQrJdNJd30gv", data={
@@ -517,7 +517,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.user_data.delete(project_id="proj_x1ZJrdx5qg4LV", user_data_id="123")
@@ -554,7 +554,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.get_users_data(extra_fields_user_data="decoded_content", page_size=20, page_number=1)
@@ -603,7 +603,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.post_user_data(data={
@@ -651,7 +651,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.get_user_data(user_data_id="123", extra_fields_user_data="decoded_content")
@@ -669,7 +669,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.get_user_data(user_data_id="ud_MLGXPdWgdnNWk", extra_fields_user_data="decoded_content")
@@ -710,7 +710,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.user_data.delete_user_data(user_data_id="123")
@@ -747,7 +747,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.patch_user_data(user_data_id="ud_lpbV0DgRq4AWz", data={
@@ -773,7 +773,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.patch_user_data(user_data_id="ud_Av9BVDavORm1W", data={
@@ -798,7 +798,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.user_data.patch_user_data(user_data_id="ud_5LA73qkjdaJ2o", data={

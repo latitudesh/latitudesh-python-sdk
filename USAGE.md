@@ -6,7 +6,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list()
@@ -28,7 +28,7 @@ import os
 async def main():
 
     async with Latitudesh(
-        bearer=os.getenv("LATITUDESH_BEARER", ""),
+        bearer=os.getenv("LATITUDESH_BEARER"),
     ) as latitudesh:
 
         res = await latitudesh.api_keys.list_async()

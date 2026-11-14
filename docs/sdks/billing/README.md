@@ -20,7 +20,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.billing.list_usage(filter_project="proj_r0MK4O4kDa95w", filter_products=[

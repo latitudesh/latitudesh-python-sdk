@@ -597,7 +597,7 @@ class SandboxesPreview(BaseSDK):
 
         **Preview.** Available to teams with the `sandboxes_api` feature flag.
 
-        Delete a sandbox.
+        Delete a sandbox. Deletion completes in the background.
 
 
         :param sandbox_id: Sandbox name
@@ -662,7 +662,7 @@ class SandboxesPreview(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "204", "*"):
+        if utils.match_response(http_res, "202", "*"):
             return
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
@@ -686,7 +686,7 @@ class SandboxesPreview(BaseSDK):
 
         **Preview.** Available to teams with the `sandboxes_api` feature flag.
 
-        Delete a sandbox.
+        Delete a sandbox. Deletion completes in the background.
 
 
         :param sandbox_id: Sandbox name
@@ -751,7 +751,7 @@ class SandboxesPreview(BaseSDK):
             retry_config=retry_config,
         )
 
-        if utils.match_response(http_res, "204", "*"):
+        if utils.match_response(http_res, "202", "*"):
             return
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)

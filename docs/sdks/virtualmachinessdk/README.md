@@ -30,7 +30,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machines.create(data={
@@ -55,7 +55,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machines.create(data={
@@ -81,7 +81,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machines.create(data={
@@ -108,7 +108,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machines.create(data={
@@ -135,7 +135,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machines.create(data={
@@ -182,7 +182,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machines.list(extra_fields_virtual_machines="credentials", page_size=20, page_number=1)
@@ -232,7 +232,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machines.get(virtual_machine_id="vm_7vYAZqGBdMQ94", extra_fields_virtual_machines="credentials")
@@ -274,7 +274,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.virtual_machines.delete(virtual_machine_id="<id>")
@@ -311,7 +311,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machines.update_virtual_machine(virtual_machine_id="vm_7vYAZqGBdMQ94", data={
@@ -365,7 +365,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.virtual_machines.create_virtual_machine_action(virtual_machine_id="<id>", id="<id>", type_=latitudesh_python_sdk.CreateVirtualMachineActionVirtualMachinesType.VIRTUAL_MACHINES, attributes={
@@ -385,7 +385,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.virtual_machines.create_virtual_machine_action(virtual_machine_id="vm_5LA73qkjdaJ2o", id="vm_5LA73qkjdaJ2o", type_=latitudesh_python_sdk.CreateVirtualMachineActionVirtualMachinesType.VIRTUAL_MACHINES, attributes={
@@ -402,7 +402,7 @@ with Latitudesh(
 | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `virtual_machine_id`                                                                                                              | *str*                                                                                                                             | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
 | `id`                                                                                                                              | *str*                                                                                                                             | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
-| `type`                                                                                                                            | [models.CreateVirtualMachineActionVirtualMachinesType](../../models/createvirtualmachineactionvirtualmachinestype.md)             | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
+| `type_`                                                                                                                           | [models.CreateVirtualMachineActionVirtualMachinesType](../../models/createvirtualmachineactionvirtualmachinestype.md)             | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
 | `attributes`                                                                                                                      | [models.CreateVirtualMachineActionVirtualMachinesAttributes](../../models/createvirtualmachineactionvirtualmachinesattributes.md) | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
 | `retries`                                                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                  | :heavy_minus_sign:                                                                                                                | Configuration to override the default retry behavior of the client.                                                               |
 
@@ -427,7 +427,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machines.show_virtual_machine_metrics(virtual_machine_id="<id>", metric=latitudesh_python_sdk.QueryParamMetric.MEMORY)
@@ -471,7 +471,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machines.list_virtual_machine_network_attachments(virtual_machine_id="<id>")
@@ -522,7 +522,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machines.create_virtual_machine_network_attachment(virtual_machine_id="<id>", data={
@@ -573,7 +573,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machines.destroy_virtual_machine_network_attachment(virtual_machine_id="<id>", id="<id>")
