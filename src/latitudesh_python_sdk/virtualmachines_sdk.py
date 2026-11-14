@@ -1086,7 +1086,7 @@ class VirtualMachinesSDK(BaseSDK):
 
         :param virtual_machine_id:
         :param id:
-        :param type:
+        :param type_:
         :param attributes:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -1208,7 +1208,7 @@ class VirtualMachinesSDK(BaseSDK):
 
         :param virtual_machine_id:
         :param id:
-        :param type:
+        :param type_:
         :param attributes:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method

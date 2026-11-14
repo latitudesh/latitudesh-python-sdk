@@ -21,7 +21,7 @@ def get_body_content(req: httpx.Request) -> str:
 
 
 def get_default_logger() -> Logger:
-    if os.getenv("LATITUDESH_DEBUG"):
+    if os.getenv("LATITUDESH_DEBUG", "").strip().lower() in ("true", "1", "yes", "on"):
         logging.basicConfig(level=logging.DEBUG)
         return logging.getLogger("latitudesh_python_sdk")
     return NoOpLogger()

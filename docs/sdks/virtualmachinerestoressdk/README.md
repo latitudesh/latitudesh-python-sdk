@@ -25,7 +25,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machine_restores.list_virtual_machine_scoped_restores(virtual_machine_id="<id>", backup_id="<id>")
@@ -68,7 +68,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machine_restores.create_virtual_machine_restore(virtual_machine_id="<id>", backup_id="<id>")
@@ -112,7 +112,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machine_restores.list_backup_restores(backup_id="<id>")
@@ -154,7 +154,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machine_restores.list_virtual_machine_restores()
@@ -195,7 +195,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machine_restores.create_virtual_machine_restore_flat()
@@ -236,7 +236,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.virtual_machine_restores.get_virtual_machine_restore(id="<id>")
