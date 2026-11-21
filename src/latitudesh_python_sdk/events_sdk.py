@@ -39,7 +39,7 @@ class EventsSDK(BaseSDK):
         :param filter_author: The author ID or email to filter by
         :param filter_project: The project ID to filter by
         :param filter_target_name: The target type(s) of the event to filter by
-        :param filter_target_id: The target id of the event to filter by
+        :param filter_target_id: The target id of the event to filter by. An LKS cluster id also returns the events of the cluster node pools
         :param filter_action: The action performed in event to filter by
         :param filter_created_at_gte: The created at greater than equal date to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)
         :param filter_created_at_lte: The created at less than equal date to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)
@@ -194,7 +194,7 @@ class EventsSDK(BaseSDK):
         :param filter_author: The author ID or email to filter by
         :param filter_project: The project ID to filter by
         :param filter_target_name: The target type(s) of the event to filter by
-        :param filter_target_id: The target id of the event to filter by
+        :param filter_target_id: The target id of the event to filter by. An LKS cluster id also returns the events of the cluster node pools
         :param filter_action: The action performed in event to filter by
         :param filter_created_at_gte: The created at greater than equal date to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)
         :param filter_created_at_lte: The created at less than equal date to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)

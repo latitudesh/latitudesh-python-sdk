@@ -37,7 +37,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.list(filter_tags="tag_3lg8RjPJL7HK4jYBbLmxC0ZR0yVX,tag_5JgXW7Wyr6i5V85g2Y2MFWL8bXA", page_size=20, page_number=1)
@@ -57,7 +57,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.list(filter_tags="tag_pjAkRjVzw0tlYBA2WX1eHzW7w79,tag_yARk1KLJAvslWY7k5wNBCaKEV7e", page_size=20, page_number=1)
@@ -77,7 +77,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.list(page_size=20, page_number=1)
@@ -97,7 +97,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.list(filter_project="proj_g1mbDwrZqLv5B", page_size=20, page_number=1)
@@ -117,7 +117,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.list(filter_region="SAO", page_size=20, page_number=1)
@@ -137,7 +137,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.list(filter_tags="tag_0yrQNVQRLwHy0XwEGM6ESwLrW2PA", page_size=20, page_number=1)
@@ -157,7 +157,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.list(filter_ram_eql=32, page_size=20, page_number=1)
@@ -177,7 +177,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.list(filter_ram_gte=40, page_size=20, page_number=1)
@@ -197,7 +197,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.list(filter_ram_lte=40, page_size=20, page_number=1)
@@ -275,7 +275,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.create(data={
@@ -303,7 +303,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.create(data={
@@ -330,7 +330,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.create(data={
@@ -358,7 +358,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.create(data={
@@ -409,7 +409,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.get(server_id="sv_VE1Wd3aXDXnZJ")
@@ -451,7 +451,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update(server_id="sv_g1mbDwrZqLv5B", data={
@@ -477,7 +477,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update(server_id="sv_1ZJrdxe4qg4LV", data={
@@ -503,7 +503,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update(server_id="sv_w49QDBaQqagKb", data={
@@ -529,7 +529,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update(server_id="sv_yQrJdNAGO30gv", data={
@@ -554,7 +554,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update(server_id="sv_3YjJOLLNOvZ87", data={
@@ -580,7 +580,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update(server_id="sv_vYAZqGNJdMQ94", data={
@@ -607,7 +607,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update(server_id="sv_W6Q2D9lGqKLpr", data={
@@ -633,7 +633,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update(server_id="sv_LMmAD8k4qwop2", data={
@@ -681,7 +681,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.servers.delete(server_id="sv_WeGoqAZNDP7nz")
@@ -717,7 +717,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.get_deploy_config(server_id="sv_pRMLydp0dQKr1")
@@ -758,7 +758,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update_deploy_config(server_id="<id>", data={
@@ -779,7 +779,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update_deploy_config(server_id="sv_kjQwdEmXdYNVP", data={
@@ -800,7 +800,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update_deploy_config(server_id="sv_5AEmq7xMDBkWX", data={
@@ -821,7 +821,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update_deploy_config(server_id="sv_lkg1DeYLDvZE5", data={
@@ -851,7 +851,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.update_deploy_config(server_id="sv_Gr47ql4vqAg0m", data={
@@ -895,7 +895,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.lock(server_id="sv_VE1Wd3rXOXnZJ")
@@ -913,7 +913,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.lock(server_id="invalid")
@@ -931,7 +931,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.lock(server_id="sv_059EqYX2dQj8p")
@@ -949,7 +949,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.lock(server_id="sv_pbV0DgjKq4AWz")
@@ -990,7 +990,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.unlock(server_id="sv_A05EdQM4dvKYQ")
@@ -1008,7 +1008,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.unlock(server_id="invalid")
@@ -1026,7 +1026,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.unlock(server_id="sv_aNmodjoyqbE8W")
@@ -1044,7 +1044,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.unlock(server_id="sv_e8pKq0xYqWAob")
@@ -1085,7 +1085,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.create_out_of_band_connection(server_id="sv_8NkvdyGKDeLpx", data={
@@ -1109,7 +1109,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.create_out_of_band_connection(server_id="sv_lkg1DeYLDvZE5", data={
@@ -1133,7 +1133,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.create_out_of_band_connection(server_id="invalid-server", data={
@@ -1157,7 +1157,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.create_out_of_band_connection(server_id="sv_0MK4O44ROa95w", data={
@@ -1203,7 +1203,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.list_out_of_band_connections(server_id="sv_GnzRD5lvqM5yw")
@@ -1248,7 +1248,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.actions(server_id="sv_WVQJDMVBORbyE", data={
@@ -1272,7 +1272,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.actions(server_id="sv_e8pKq0xYqWAob", data={
@@ -1307,8 +1307,7 @@ with Latitudesh(
 
 ## create_ipmi_session
 
-Generates IPMI credentials for a given server. Remote access creates a VPN connection to the internal network of your server so you can connect to its IPMI.
-You will have to use a VPN client such as https://openvpn.net to connect. See `VPN Sessions` API to create a VPN connection.
+Generates IPMI credentials for a given server. Open `ipmi_url` in a browser to reach the server's IPMI directly, and sign in with the returned username and password.
 
 Related guide: https://docs.latitude.sh/docs/ipmi
 
@@ -1322,7 +1321,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.create_ipmi_session(server_id="sv_Qkm7dXaRq8nZV")
@@ -1340,7 +1339,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.create_ipmi_session(server_id="invalid")
@@ -1358,7 +1357,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.create_ipmi_session(server_id="sv_yQrJdNMGO30gv")
@@ -1398,7 +1397,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.start_rescue_mode(server_id="sv_WeGoqAWNOP7nz")
@@ -1416,7 +1415,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.start_rescue_mode(server_id="sv_GnzRD5lvqM5yw")
@@ -1456,7 +1455,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.exit_rescue_mode(server_id="sv_WVQJDMVBORbyE")
@@ -1474,7 +1473,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.exit_rescue_mode(server_id="sv_3YjJOLQNdvZ87")
@@ -1492,7 +1491,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.exit_rescue_mode(server_id="sv_1R3zq2JxqWxyn")
@@ -1532,7 +1531,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.schedule_deletion(server_id="sv_g1mbDwBZqLv5B")
@@ -1550,7 +1549,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.schedule_deletion(server_id="sv_Qkm7dXaRq8nZV")
@@ -1568,7 +1567,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.servers.schedule_deletion(server_id="sv_5xyZOnLMqWM0l")
@@ -1608,7 +1607,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.servers.unschedule_deletion(server_id="sv_Z8rodmJGq1jLB")
@@ -1644,7 +1643,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.servers.reinstall(server_id="sv_aNmodj6ydbE8W", data={
@@ -1669,7 +1668,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.servers.reinstall(server_id="<id>", data={
@@ -1689,7 +1688,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.servers.reinstall(server_id="sv_LGXPdWK8dnNWk", data={
@@ -1712,7 +1711,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.servers.reinstall(server_id="sv_Gr47qlKvdAg0m", data={
@@ -1740,7 +1739,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.servers.reinstall(server_id="sv_0L6WO1m1OPlXy", data={
@@ -1768,7 +1767,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.servers.reinstall(server_id="<id>", data={
@@ -1788,7 +1787,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.servers.reinstall(server_id="sv_RMLydp9XqQKr1", data={

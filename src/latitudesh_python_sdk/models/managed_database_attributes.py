@@ -10,7 +10,10 @@ from latitudesh_python_sdk.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
 )
+from latitudesh_python_sdk.types.basemodel import current_filtered_dump
 from pydantic import model_serializer
 from typing import Any, Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
@@ -43,6 +46,9 @@ class ManagedDatabaseAttributesSpecs(BaseModel):
     iops: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             ["cpu", "memory", "storage", "shards", "replicas", "iops"]
@@ -50,11 +56,15 @@ class ManagedDatabaseAttributesSpecs(BaseModel):
         nullable_fields = set(
             ["cpu", "memory", "storage", "shards", "replicas", "iops"]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -89,13 +99,20 @@ class ManagedDatabaseAttributesSite(BaseModel):
     facility: Optional[str] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["id", "name", "slug", "facility"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -119,14 +136,21 @@ class ManagedDatabaseAttributesRegion(BaseModel):
     site: OptionalNullable[ManagedDatabaseAttributesSite] = UNSET
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["city", "country", "site"])
         nullable_fields = set(["city", "country", "site"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -161,14 +185,21 @@ class ManagedDatabaseAttributesPlan(BaseModel):
     billing: Optional[str] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["id", "name", "slug", "billing"])
         nullable_fields = set(["name", "slug"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -219,6 +250,9 @@ class ManagedDatabaseAttributesCredentials(BaseModel):
     password: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -235,11 +269,15 @@ class ManagedDatabaseAttributesCredentials(BaseModel):
         nullable_fields = set(
             ["http_port", "tcp_port", "port", "database", "url", "password"]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -265,14 +303,21 @@ class Recovery(BaseModel):
     enabled: OptionalNullable[bool] = UNSET
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["enabled"])
         nullable_fields = set(["enabled"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -298,13 +343,20 @@ class Supabase(BaseModel):
     enabled: Optional[bool] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["enabled"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
@@ -381,6 +433,9 @@ class ManagedDatabaseAttributesAttributes(BaseModel):
     supabase: Optional[Supabase] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -407,11 +462,15 @@ class ManagedDatabaseAttributesAttributes(BaseModel):
         nullable_fields = set(
             ["namespace", "created_at", "specs", "play_url", "credentials"]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -443,13 +502,20 @@ class ManagedDatabaseAttributes(BaseModel):
     attributes: Optional[ManagedDatabaseAttributesAttributes] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["id", "type", "attributes"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:

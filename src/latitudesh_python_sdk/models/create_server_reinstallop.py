@@ -8,7 +8,10 @@ from latitudesh_python_sdk.types import (
     OptionalNullable,
     UNSET,
     UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
 )
+from latitudesh_python_sdk.types.basemodel import current_filtered_dump
 from latitudesh_python_sdk.utils import (
     FieldMetadata,
     PathParamMetadata,
@@ -92,14 +95,21 @@ class CreateServerReinstallServersDiskLayout(BaseModel):
     mount_point: OptionalNullable[str] = UNSET
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["raid_level", "filesystem", "mount_point"])
         nullable_fields = set(["raid_level", "filesystem", "mount_point"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -182,6 +192,9 @@ class CreateServerReinstallServersAttributes(BaseModel):
     r"""**Preview.** Available to teams with custom BIOS settings enabled. Custom BIOS settings applied before the OS is installed. Keys are BIOS setting names (e.g. `cpu_virtualization`, `simultaneous_multithreading`, `iommu`, `sr_iov`); only the settings listed in the server specs `supported_bios_settings` are accepted. Values are `enabled` or `disabled`. The settings are kept and reapplied on later reinstalls that omit `bios`; send `null` or `{}` to stop applying them. The reinstall fails if the settings cannot be applied."""
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(
             [
@@ -210,11 +223,15 @@ class CreateServerReinstallServersAttributes(BaseModel):
                 "bios",
             ]
         )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
             is_nullable_and_explicitly_set = (
                 k in nullable_fields
@@ -243,13 +260,20 @@ class CreateServerReinstallServersData(BaseModel):
     attributes: Optional[CreateServerReinstallServersAttributes] = None
 
     @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
     def serialize_model(self, handler):
         optional_fields = set(["attributes"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
         m = {}
 
         for n, f in type(self).model_fields.items():
-            k = f.alias or n
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
             val = serialized.get(k, serialized.get(n))
 
             if val != UNSET_SENTINEL:
