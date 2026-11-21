@@ -31,7 +31,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.list_for_project(project_id="proj_yQrJdNemO30gv", filter_tags="tag_N88P7WK0w5u4PKevRB5ahVeLaPW,tag_Wal9mQPJzJI7jWRreANNcblXGRP")
@@ -49,7 +49,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.list_for_project(project_id="proj_5AEmq7wMqBkWX", filter_tags="tag_5wKQ2Y9eoAi5plr4zlQ6tjl6rEw,tag_8GKKZ6B9MbtYl4K09gj4fXy9Nneg")
@@ -67,7 +67,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.list_for_project(project_id="proj_695BdKggdevVo", filter_tags="tag_JzoXbwJ7KgFM2J4wALjXHbVrjX4")
@@ -115,7 +115,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.create(project_id="proj_GnzRD5GYdM5yw", data={
@@ -140,7 +140,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.create(project_id="proj_059EqYE2qQj8p", data={
@@ -165,7 +165,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.create(project_id="proj_KXgRdRMKOv9k5", data={
@@ -215,7 +215,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.get(project_id="proj_kjQwdE0XOYNVP", ssh_key_id="ssh_zGr47qlMDAg0m")
@@ -260,7 +260,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.update(project_id="proj_GMy1DbW0ON50m", ssh_key_id="ssh_W6Q2D9plqKLpr", data={
@@ -285,7 +285,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.update(project_id="proj_v9BVDaR3ORm1W", ssh_key_id="ssh_zlkg1DegdvZE5", data={
@@ -313,7 +313,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.update(project_id="proj_0MoLqJZ0q57pY", ssh_key_id="ssh_RMLydp20DQKr1", data={
@@ -341,7 +341,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.update(project_id="proj_WVQJDMAvDRbyE", ssh_key_id="ssh_LMmAD8pEDwop2", data={
@@ -392,7 +392,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.ssh_keys.delete(project_id="proj_LA73qk4wDaJ2o", ssh_key_id="ssh_7vYAZqGBdMQ94")
@@ -429,7 +429,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.get_ssh_keys(filter_tags="tag_A06EMPEmKXhKBNKgWrv0CRZMN5a,tag_P7xlGZzYNZF4w3YXRrYMU7AjQEAX")
@@ -476,7 +476,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.post_ssh_key(data={
@@ -501,7 +501,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.post_ssh_key(data={
@@ -527,7 +527,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.post_ssh_key(data={
@@ -574,7 +574,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.get_ssh_key(ssh_key_id="ssh_LYV8DZ12q5QoE")
@@ -615,7 +615,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     latitudesh.ssh_keys.delete_ssh_key(ssh_key_id="ssh_KXgRdRa3Ov9k5")
@@ -652,7 +652,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.put_ssh_key(ssh_key_id="ssh_xkjQwdENqYNVP", data={
@@ -677,7 +677,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.put_ssh_key(ssh_key_id="ssh_GnzRD5xAqM5yw", data={
@@ -705,7 +705,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.put_ssh_key(ssh_key_id="ssh_VaNmodjeObE8W", data={
@@ -733,7 +733,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.ssh_keys.put_ssh_key(ssh_key_id="ssh_6059EqYkOQj8p", data={

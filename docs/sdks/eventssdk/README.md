@@ -20,7 +20,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.events.list(page_size=20, page_number=1)
@@ -40,7 +40,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.events.list(page_size=20, page_number=1)
@@ -60,7 +60,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.events.list(page_size=20, page_number=1)
@@ -80,7 +80,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.events.list(page_size=20, page_number=1)
@@ -100,7 +100,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.events.list(page_size=20, page_number=1)
@@ -120,7 +120,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.events.list(page_size=20, page_number=1)
@@ -140,7 +140,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.events.list(page_size=20, page_number=1)
@@ -159,7 +159,7 @@ with Latitudesh(
 | `filter_author`                                                                                                                                                         | *Optional[str]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                      | The author ID or email to filter by                                                                                                                                     |
 | `filter_project`                                                                                                                                                        | *Optional[str]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                      | The project ID to filter by                                                                                                                                             |
 | `filter_target_name`                                                                                                                                                    | List[*str*]                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                      | The target type(s) of the event to filter by                                                                                                                            |
-| `filter_target_id`                                                                                                                                                      | *Optional[str]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                      | The target id of the event to filter by                                                                                                                                 |
+| `filter_target_id`                                                                                                                                                      | *Optional[str]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                      | The target id of the event to filter by. An LKS cluster id also returns the events of the cluster node pools                                                            |
 | `filter_action`                                                                                                                                                         | *Optional[str]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                      | The action performed in event to filter by                                                                                                                              |
 | `filter_created_at_gte`                                                                                                                                                 | *Optional[str]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                      | The created at greater than equal date to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)                                                                          |
 | `filter_created_at_lte`                                                                                                                                                 | *Optional[str]*                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                      | The created at less than equal date to filter by, in ISO formatting (yyyy-MM-dd'T'HH:mm:ss)                                                                             |

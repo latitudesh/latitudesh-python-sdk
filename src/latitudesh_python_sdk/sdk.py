@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     from latitudesh_python_sdk.baselines_preview_ import BaselinesPreview
     from latitudesh_python_sdk.billing import Billing
     from latitudesh_python_sdk.block_storage import BlockStorage
+    from latitudesh_python_sdk.clusters import Clusters
     from latitudesh_python_sdk.elastic_ips_sdk import ElasticIpsSDK
     from latitudesh_python_sdk.events_sdk import EventsSDK
     from latitudesh_python_sdk.filesystem_storage import FilesystemStorage
@@ -53,7 +54,6 @@ if TYPE_CHECKING:
         VirtualMachineRestoresSDK,
     )
     from latitudesh_python_sdk.virtualmachines_sdk import VirtualMachinesSDK
-    from latitudesh_python_sdk.vpnsessions import VpnSessions
 
 
 class Latitudesh(BaseSDK):
@@ -78,6 +78,8 @@ class Latitudesh(BaseSDK):
     ssh_keys: "SSHKeysSDK"
     object_storage: "ObjectStorage"
     user_data: "UserDataSDK"
+    clusters: "Clusters"
+    r"""Projects that have a GPU cluster only. Every operation answers 404 PROJECT_NOT_A_CLUSTER for a project without one."""
     regions: "RegionsSDK"
     roles: "Roles"
     sandboxes_preview: "SandboxesPreview"
@@ -94,7 +96,6 @@ class Latitudesh(BaseSDK):
     virtual_machine_backups: "VirtualMachineBackupsSDK"
     virtual_machine_restores: "VirtualMachineRestoresSDK"
     private_networks: "PrivateNetworks"
-    vpn_sessions: "VpnSessions"
     managed_databases: "ManagedDatabasesSDK"
     r"""Managed database instances (PostgreSQL, ClickHouse)"""
     _sub_sdk_map = {
@@ -128,6 +129,7 @@ class Latitudesh(BaseSDK):
         "ssh_keys": ("latitudesh_python_sdk.sshkeys_sdk", "SSHKeysSDK"),
         "object_storage": ("latitudesh_python_sdk.object_storage", "ObjectStorage"),
         "user_data": ("latitudesh_python_sdk.userdata_sdk", "UserDataSDK"),
+        "clusters": ("latitudesh_python_sdk.clusters", "Clusters"),
         "regions": ("latitudesh_python_sdk.regions_sdk", "RegionsSDK"),
         "roles": ("latitudesh_python_sdk.roles", "Roles"),
         "sandboxes_preview": (
@@ -164,7 +166,6 @@ class Latitudesh(BaseSDK):
             "latitudesh_python_sdk.privatenetworks",
             "PrivateNetworks",
         ),
-        "vpn_sessions": ("latitudesh_python_sdk.vpnsessions", "VpnSessions"),
         "managed_databases": (
             "latitudesh_python_sdk.managed_databases_sdk",
             "ManagedDatabasesSDK",
