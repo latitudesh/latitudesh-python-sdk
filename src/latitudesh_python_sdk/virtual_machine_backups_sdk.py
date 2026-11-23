@@ -271,7 +271,7 @@ class VirtualMachineBackupsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualMachineBackup, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
+        if utils.match_response(http_res, ["403", "409"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, ["404", "4XX"], "*"):
@@ -362,7 +362,7 @@ class VirtualMachineBackupsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualMachineBackup, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
+        if utils.match_response(http_res, ["403", "409"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, ["404", "4XX"], "*"):
@@ -631,7 +631,7 @@ class VirtualMachineBackupsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualMachineBackup, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
+        if utils.match_response(http_res, ["403", "409"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, ["404", "4XX"], "*"):
@@ -732,7 +732,7 @@ class VirtualMachineBackupsSDK(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualMachineBackup, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
+        if utils.match_response(http_res, ["403", "409"], "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, ["404", "4XX"], "*"):
