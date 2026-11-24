@@ -181,7 +181,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list()
@@ -203,7 +203,7 @@ import os
 async def main():
 
     async with Latitudesh(
-        bearer=os.getenv("LATITUDESH_BEARER", ""),
+        bearer=os.getenv("LATITUDESH_BEARER"),
     ) as latitudesh:
 
         res = await latitudesh.api_keys.list_async()
@@ -233,7 +233,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list()
@@ -279,6 +279,17 @@ with Latitudesh(
 * [~~mount_volume~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#mount_volume) - Mount volume (deprecated) :warning: **Deprecated**
 * [map_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#map_volume) - Map volume
 * [unmap_volume](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/blockstorage/README.md#unmap_volume) - Unmap volume
+
+### [Clusters](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/clusters/README.md)
+
+* [get_project_cluster_requirements](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/clusters/README.md#get_project_cluster_requirements) - Get cluster requirements
+* [update_project_cluster_requirements](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/clusters/README.md#update_project_cluster_requirements) - Change cluster requirements
+* [sign_project_cluster_requirements](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/clusters/README.md#sign_project_cluster_requirements) - Sign cluster requirements
+* [get_project_cluster_requirement_signoffs](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/clusters/README.md#get_project_cluster_requirement_signoffs) - List cluster requirement sign-offs
+* [get_project_cluster_node_groups](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/clusters/README.md#get_project_cluster_node_groups) - List cluster node groups
+* [create_project_cluster_node_group](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/clusters/README.md#create_project_cluster_node_group) - Create a cluster node group
+* [delete_project_cluster_node_group](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/clusters/README.md#delete_project_cluster_node_group) - Delete a cluster node group
+* [update_project_cluster_node_group](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/clusters/README.md#update_project_cluster_node_group) - Update a cluster node group
 
 ### [ElasticIps](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/elasticipssdk/README.md)
 
@@ -560,13 +571,6 @@ with Latitudesh(
 * [create_virtual_machine_network_attachment](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#create_virtual_machine_network_attachment) - Attach a network to a VM
 * [destroy_virtual_machine_network_attachment](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#destroy_virtual_machine_network_attachment) - Detach a network from a VM
 
-### [VpnSessions](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md)
-
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md#list) - List VPN sessions
-* [create](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md#create) - Create VPN session
-* [refresh_password](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md#refresh_password) - Refresh VPN session
-* [delete](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/vpnsessions/README.md#delete) - Delete VPN session
-
 </details>
 <!-- End Available Resources and Operations [operations] -->
 
@@ -584,7 +588,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.events.list(page_size=20, page_number=1)
@@ -610,7 +614,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list(,
@@ -630,7 +634,7 @@ import os
 
 with Latitudesh(
     retry_config=RetryConfig("backoff", BackoffStrategy(1, 50, 1.1, 100), False),
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list()
@@ -663,7 +667,7 @@ import os
 
 
 with Latitudesh(
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
     res = None
     try:
@@ -702,7 +706,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 74 of 212 methods.*
+* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 74 of 216 methods.*
 * [`ResponseValidationError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>
@@ -738,7 +742,7 @@ import os
 with Latitudesh(
     server_idx=0,
     latitude_api_key="<insert your api key here>",
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list()
@@ -758,7 +762,7 @@ import os
 
 with Latitudesh(
     server_url="http://api.latitude.sh",
-    bearer=os.getenv("LATITUDESH_BEARER", ""),
+    bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
     res = latitudesh.api_keys.list()
@@ -877,18 +881,20 @@ import os
 def main():
 
     with Latitudesh(
-        bearer=os.getenv("LATITUDESH_BEARER", ""),
+        bearer=os.getenv("LATITUDESH_BEARER"),
     ) as latitudesh:
         # Rest of application here...
+        pass
 
 
 # Or when using async:
 async def amain():
 
     async with Latitudesh(
-        bearer=os.getenv("LATITUDESH_BEARER", ""),
+        bearer=os.getenv("LATITUDESH_BEARER"),
     ) as latitudesh:
         # Rest of application here...
+        pass
 ```
 <!-- End Resource Management [resource-management] -->
 
@@ -906,7 +912,7 @@ logging.basicConfig(level=logging.DEBUG)
 s = Latitudesh(debug_logger=logging.getLogger("latitudesh_python_sdk"))
 ```
 
-You can also enable a default debug logger by setting an environment variable `LATITUDESH_DEBUG` to true.
+You can also enable a default debug logger by setting an environment variable `LATITUDESH_DEBUG` to `true`, `1`, `yes` or `on` (case-insensitive). Any other value leaves it off.
 <!-- End Debugging [debug] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
