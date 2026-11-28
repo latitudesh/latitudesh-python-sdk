@@ -35,13 +35,15 @@ class CreateKubernetesClusterAttributesTypedDict(TypedDict):
     worker_plan: NotRequired[Nullable[str]]
     r"""The machine plan for worker nodes. Defaults to the control plane plan if not specified."""
     kubernetes_version: NotRequired[Nullable[str]]
-    r"""The Kubernetes version to install. Defaults to v1.34.3+rke2r1."""
+    r"""The Kubernetes version to install. Defaults to the latest available version."""
     control_plane_count: NotRequired[Nullable[int]]
     r"""Number of control plane nodes. Defaults to 1."""
     worker_count: NotRequired[Nullable[int]]
     r"""Number of worker nodes. Defaults to 1."""
     operating_system: NotRequired[Nullable[str]]
     r"""The operating system for the nodes. Defaults to ubuntu_24_04_x64_lts."""
+    worker_operating_system: NotRequired[Nullable[str]]
+    r"""Operating system slug override for worker nodes. Falls back to operating_system, then to the worker plan default (auto-resolves to ubuntu24_ml_in_a_box for GPU plans)."""
 
 
 class CreateKubernetesClusterAttributes(BaseModel):
@@ -64,7 +66,7 @@ class CreateKubernetesClusterAttributes(BaseModel):
     r"""The machine plan for worker nodes. Defaults to the control plane plan if not specified."""
 
     kubernetes_version: OptionalNullable[str] = UNSET
-    r"""The Kubernetes version to install. Defaults to v1.34.3+rke2r1."""
+    r"""The Kubernetes version to install. Defaults to the latest available version."""
 
     control_plane_count: OptionalNullable[int] = UNSET
     r"""Number of control plane nodes. Defaults to 1."""
@@ -74,6 +76,9 @@ class CreateKubernetesClusterAttributes(BaseModel):
 
     operating_system: OptionalNullable[str] = UNSET
     r"""The operating system for the nodes. Defaults to ubuntu_24_04_x64_lts."""
+
+    worker_operating_system: OptionalNullable[str] = UNSET
+    r"""Operating system slug override for worker nodes. Falls back to operating_system, then to the worker plan default (auto-resolves to ubuntu24_ml_in_a_box for GPU plans)."""
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
@@ -89,6 +94,7 @@ class CreateKubernetesClusterAttributes(BaseModel):
                 "control_plane_count",
                 "worker_count",
                 "operating_system",
+                "worker_operating_system",
             ]
         )
         nullable_fields = set(
@@ -100,6 +106,7 @@ class CreateKubernetesClusterAttributes(BaseModel):
                 "control_plane_count",
                 "worker_count",
                 "operating_system",
+                "worker_operating_system",
             ]
         )
         exclude_none = current_exclude_none()

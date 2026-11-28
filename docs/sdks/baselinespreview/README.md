@@ -105,7 +105,10 @@ with Latitudesh(
                     "mount_point": "/data",
                 },
             ],
-            "bios": {},
+            "bios": {
+                "simultaneous_multithreading": latitudesh_python_sdk.CreateBaselineSimultaneousMultithreading.ENABLED,
+                "processor_c_states": latitudesh_python_sdk.CreateBaselineProcessorCStates.DISABLED,
+            },
         },
     })
 

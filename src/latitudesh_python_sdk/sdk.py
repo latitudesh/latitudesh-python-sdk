@@ -32,7 +32,7 @@ if TYPE_CHECKING:
     from latitudesh_python_sdk.marketplace_apps_sdk import MarketplaceAppsSDK
     from latitudesh_python_sdk.object_storage import ObjectStorage
     from latitudesh_python_sdk.operatingsystems_sdk import OperatingSystemsSDK
-    from latitudesh_python_sdk.plans import Plans
+    from latitudesh_python_sdk.plans_sdk import PlansSDK
     from latitudesh_python_sdk.privatenetworks import PrivateNetworks
     from latitudesh_python_sdk.projects_sdk import ProjectsSDK
     from latitudesh_python_sdk.public_networks_sdk import PublicNetworksSDK
@@ -72,7 +72,7 @@ class Latitudesh(BaseSDK):
     operating_systems: "OperatingSystemsSDK"
     kubernetes_clusters: "KubernetesClustersSDK"
     lks: "Lks"
-    plans: "Plans"
+    plans: "PlansSDK"
     public_networks: "PublicNetworksSDK"
     projects: "ProjectsSDK"
     ssh_keys: "SSHKeysSDK"
@@ -120,7 +120,7 @@ class Latitudesh(BaseSDK):
             "KubernetesClustersSDK",
         ),
         "lks": ("latitudesh_python_sdk.lks", "Lks"),
-        "plans": ("latitudesh_python_sdk.plans", "Plans"),
+        "plans": ("latitudesh_python_sdk.plans_sdk", "PlansSDK"),
         "public_networks": (
             "latitudesh_python_sdk.public_networks_sdk",
             "PublicNetworksSDK",

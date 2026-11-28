@@ -163,11 +163,11 @@ class Raid(str, Enum):
 
 
 class BiosTypedDict(TypedDict):
-    r"""Expected BIOS settings, keyed by setting id"""
+    r"""Expected BIOS settings, keyed by setting id. New baselines accept only 'enabled' or 'disabled' values"""
 
 
 class Bios(BaseModel):
-    r"""Expected BIOS settings, keyed by setting id"""
+    r"""Expected BIOS settings, keyed by setting id. New baselines accept only 'enabled' or 'disabled' values"""
 
 
 class BaselineDataAttributesTypedDict(TypedDict):
@@ -190,7 +190,7 @@ class BaselineDataAttributesTypedDict(TypedDict):
     raid: NotRequired[Nullable[Raid]]
     r"""Expected RAID level with the default disk layout (data array on 4+ disk servers, the OS on 2-3 disk servers). Mutually exclusive with disk_layout"""
     bios: NotRequired[BiosTypedDict]
-    r"""Expected BIOS settings, keyed by setting id"""
+    r"""Expected BIOS settings, keyed by setting id. New baselines accept only 'enabled' or 'disabled' values"""
     created_at: NotRequired[Nullable[str]]
     r"""Date the baseline was created"""
 
@@ -224,7 +224,7 @@ class BaselineDataAttributes(BaseModel):
     r"""Expected RAID level with the default disk layout (data array on 4+ disk servers, the OS on 2-3 disk servers). Mutually exclusive with disk_layout"""
 
     bios: Optional[Bios] = None
-    r"""Expected BIOS settings, keyed by setting id"""
+    r"""Expected BIOS settings, keyed by setting id. New baselines accept only 'enabled' or 'disabled' values"""
 
     created_at: OptionalNullable[str] = UNSET
     r"""Date the baseline was created"""

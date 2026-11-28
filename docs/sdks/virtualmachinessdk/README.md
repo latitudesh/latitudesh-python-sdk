@@ -14,6 +14,8 @@
 * [list_virtual_machine_network_attachments](#list_virtual_machine_network_attachments) - List VM network attachments
 * [create_virtual_machine_network_attachment](#create_virtual_machine_network_attachment) - Attach a network to a VM
 * [destroy_virtual_machine_network_attachment](#destroy_virtual_machine_network_attachment) - Detach a network from a VM
+* [lock_virtual_machine](#lock_virtual_machine) - Lock virtual machine
+* [unlock_virtual_machine](#unlock_virtual_machine) - Unlock virtual machine
 
 ## create
 
@@ -58,7 +60,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
-    res = latitudesh.virtual_machines.create(data={
+    res = latitudesh.virtual_machines.create(x_correlation_id="e7229f39-2fae-455f-913f-fb987ca14af5", data={
         "type": latitudesh_python_sdk.VirtualMachinePayloadType.VIRTUAL_MACHINES,
         "attributes": {
             "name": "my-new-vm",
@@ -155,6 +157,7 @@ with Latitudesh(
 
 | Parameter                                                                               | Type                                                                                    | Required                                                                                | Description                                                                             |
 | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `x_correlation_id`                                                                      | *Optional[str]*                                                                         | :heavy_minus_sign:                                                                      | N/A                                                                                     |
 | `data`                                                                                  | [Optional[models.VirtualMachinePayloadData]](../../models/virtualmachinepayloaddata.md) | :heavy_minus_sign:                                                                      | N/A                                                                                     |
 | `retries`                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                        | :heavy_minus_sign:                                                                      | Configuration to override the default retry behavior of the client.                     |
 
@@ -185,7 +188,7 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
-    res = latitudesh.virtual_machines.list(extra_fields_virtual_machines="credentials", page_size=20, page_number=1)
+    res = latitudesh.virtual_machines.list(extra_fields_virtual_machines="credentials", page_size=20, page_number=1, x_correlation_id="0ce993a3-3aa8-44b7-9d33-403f64424d82")
 
     while res is not None:
         # Handle items
@@ -201,10 +204,11 @@ with Latitudesh(
 | `filter_project`                                                                                                                                                                                                                 | *Optional[str]*                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                               | The project ID or Slug to filter by                                                                                                                                                                                              |
 | `filter_tags`                                                                                                                                                                                                                    | *Optional[str]*                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                               | The tag IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2` will return VMs with `tag_1` AND `tag_2`.                                                                                                          |
 | `extra_fields_virtual_machines`                                                                                                                                                                                                  | *Optional[str]*                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                               | Comma-separated extra attributes that are lazy-loaded. Supported values: `credentials`, `pending_restart`. Example: `extra_fields[virtual_machines]=credentials,pending_restart`.                                                |
-| `sort`                                                                                                                                                                                                                           | *Optional[str]*                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                               | Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at, name, hostname, status. Example: `sort=status,-created_at` sorts by status ascending, then by creation date descending. |
+| `sort`                                                                                                                                                                                                                           | *Optional[str]*                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                               | Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at, status, name, hostname. Example: `sort=status,-created_at` sorts by status ascending, then by creation date descending. |
 | `page_size`                                                                                                                                                                                                                      | *Optional[int]*                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                               | Number of items to return per page                                                                                                                                                                                               |
 | `page_number`                                                                                                                                                                                                                    | *Optional[int]*                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                               | Page number to return (starts at 1)                                                                                                                                                                                              |
 | `stats_total`                                                                                                                                                                                                                    | *Optional[str]*                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                               | Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.                                                                                            |
+| `x_correlation_id`                                                                                                                                                                                                               | *Optional[str]*                                                                                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                                                                               | N/A                                                                                                                                                                                                                              |
 | `retries`                                                                                                                                                                                                                        | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                               | Configuration to override the default retry behavior of the client.                                                                                                                                                              |
 
 ### Response
@@ -298,10 +302,33 @@ with Latitudesh(
 
 ## update_virtual_machine
 
-Updates a Virtual Machine's display name (hostname).
+Updates a Virtual Machine: its display name (hostname), tags or billing cycle (200), or, sent on its
+own, its `plan` for a vertical upgrade (202).
 
 
-### Example Usage
+### Example Usage: OK
+
+<!-- UsageSnippet language="python" operationID="update-virtual-machine" method="patch" path="/virtual_machines/{virtual_machine_id}" example="OK" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.virtual_machines.update_virtual_machine(virtual_machine_id="<id>", data={
+        "type": latitudesh_python_sdk.VirtualMachineUpdatePayloadType.VIRTUAL_MACHINES,
+        "attributes": {},
+    }, x_correlation_id="ca5c35c5-926e-4318-945c-78e2e44be964")
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
 
 <!-- UsageSnippet language="python" operationID="update-virtual-machine" method="patch" path="/virtual_machines/{virtual_machine_id}" example="Success" -->
 ```python
@@ -333,6 +360,7 @@ with Latitudesh(
 | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | `virtual_machine_id`                                                                      | *str*                                                                                     | :heavy_check_mark:                                                                        | N/A                                                                                       |
 | `data`                                                                                    | [models.VirtualMachineUpdatePayloadData](../../models/virtualmachineupdatepayloaddata.md) | :heavy_check_mark:                                                                        | N/A                                                                                       |
+| `x_correlation_id`                                                                        | *Optional[str]*                                                                           | :heavy_minus_sign:                                                                        | N/A                                                                                       |
 | `retries`                                                                                 | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                          | :heavy_minus_sign:                                                                        | Configuration to override the default retry behavior of the client.                       |
 
 ### Response
@@ -594,6 +622,86 @@ with Latitudesh(
 ### Response
 
 **[models.DestroyVirtualMachineNetworkAttachmentResponseBody](../../models/destroyvirtualmachinenetworkattachmentresponsebody.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## lock_virtual_machine
+
+Locks the virtual machine. A locked virtual machine cannot be deleted or modified and no actions can be performed on it.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="lock-virtual-machine" method="post" path="/virtual_machines/{virtual_machine_id}/lock" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.virtual_machines.lock_virtual_machine(virtual_machine_id="vm_GMy1DbW0ON50m")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `virtual_machine_id`                                                | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.VirtualMachine](../../models/virtualmachine.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## unlock_virtual_machine
+
+Unlocks the virtual machine. A locked virtual machine cannot be deleted or modified and no actions can be performed on it.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="unlock-virtual-machine" method="post" path="/virtual_machines/{virtual_machine_id}/unlock" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.virtual_machines.unlock_virtual_machine(virtual_machine_id="vm_0MoLqJZ0q57pY")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `virtual_machine_id`                                                | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.VirtualMachine](../../models/virtualmachine.md)**
 
 ### Errors
 

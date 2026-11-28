@@ -4,6 +4,9 @@ from __future__ import annotations
 from enum import Enum
 from latitudesh_python_sdk.types import (
     BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
     UNSET_SENTINEL,
     current_exclude_none,
     serialize_with_info,
@@ -67,6 +70,7 @@ class VirtualNetworkAssignmentDataAttributesTypedDict(TypedDict):
     description: NotRequired[str]
     status: NotRequired[str]
     server: NotRequired[VirtualNetworkAssignmentDataServerTypedDict]
+    server_id: NotRequired[Nullable[str]]
 
 
 class VirtualNetworkAssignmentDataAttributes(BaseModel):
@@ -80,14 +84,24 @@ class VirtualNetworkAssignmentDataAttributes(BaseModel):
 
     server: Optional[VirtualNetworkAssignmentDataServer] = None
 
+    server_id: OptionalNullable[str] = UNSET
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
         optional_fields = set(
-            ["virtual_network_id", "vid", "description", "status", "server"]
+            [
+                "virtual_network_id",
+                "vid",
+                "description",
+                "status",
+                "server",
+                "server_id",
+            ]
         )
+        nullable_fields = set(["server_id"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -98,9 +112,17 @@ class VirtualNetworkAssignmentDataAttributes(BaseModel):
             if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

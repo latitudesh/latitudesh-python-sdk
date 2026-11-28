@@ -80,7 +80,7 @@ class Inference(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Inference"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/get-inference-models"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -176,7 +176,7 @@ class Inference(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Inference"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/get-inference-models"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -272,7 +272,9 @@ class Inference(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Inference"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-inference-api-keys"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -365,7 +367,9 @@ class Inference(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Inference"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-inference-api-keys"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -464,7 +468,9 @@ class Inference(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Inference"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/post-inference-api-key"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -565,7 +571,9 @@ class Inference(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Inference"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/post-inference-api-key"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -664,7 +672,9 @@ class Inference(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Inference"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/delete-inference-api-key"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -761,7 +771,9 @@ class Inference(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Inference"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/delete-inference-api-key"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -799,7 +811,7 @@ class Inference(BaseSDK):
     ) -> models.InferenceUsage:
         r"""Get inference usage for a project
 
-        Returns the project's inference requests, tokens and estimated cost for the window, per model and as a time series. The estimate uses current model prices.
+        Returns the project's inference requests, tokens and estimated cost for the window, per model and as a time series. The estimate uses current model prices and charges cached input tokens at the cached input price.
 
 
         :param project_id: Project ID or Slug
@@ -863,7 +875,7 @@ class Inference(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Inference"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/get-inference-usage"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -904,7 +916,7 @@ class Inference(BaseSDK):
     ) -> models.InferenceUsage:
         r"""Get inference usage for a project
 
-        Returns the project's inference requests, tokens and estimated cost for the window, per model and as a time series. The estimate uses current model prices.
+        Returns the project's inference requests, tokens and estimated cost for the window, per model and as a time series. The estimate uses current model prices and charges cached input tokens at the cached input price.
 
 
         :param project_id: Project ID or Slug
@@ -968,7 +980,7 @@ class Inference(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Inference"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/get-inference-usage"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

@@ -24,7 +24,7 @@ class CreateSandboxSandboxesPreviewAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""Name of the sandbox. Generated when omitted"""
     image: NotRequired[str]
-    r"""Container image to run. The runtime default is used when omitted"""
+    r"""Container image to run. Defaults to the Latitude sandbox image when omitted"""
     environment: NotRequired[Dict[str, str]]
     r"""Environment variables set in the sandbox"""
 
@@ -37,7 +37,7 @@ class CreateSandboxSandboxesPreviewAttributes(BaseModel):
     r"""Name of the sandbox. Generated when omitted"""
 
     image: Optional[str] = None
-    r"""Container image to run. The runtime default is used when omitted"""
+    r"""Container image to run. Defaults to the Latitude sandbox image when omitted"""
 
     environment: Optional[Dict[str, str]] = None
     r"""Environment variables set in the sandbox"""

@@ -39,6 +39,46 @@ class RetentionMode(str, Enum):
     GOVERNANCE = "GOVERNANCE"
 
 
+class ObjectStorageDataSiteTypedDict(TypedDict):
+    id: NotRequired[str]
+    name: NotRequired[str]
+    slug: NotRequired[str]
+    facility: NotRequired[str]
+
+
+class ObjectStorageDataSite(BaseModel):
+    id: Optional[str] = None
+
+    name: Optional[str] = None
+
+    slug: Optional[str] = None
+
+    facility: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "name", "slug", "facility"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
 class ObjectStorageDataRegionTypedDict(TypedDict):
     r"""Region information where the object storage is located"""
 
@@ -48,6 +88,7 @@ class ObjectStorageDataRegionTypedDict(TypedDict):
     r"""City identifier"""
     country: NotRequired[Nullable[str]]
     r"""Country name"""
+    site: NotRequired[Nullable[ObjectStorageDataSiteTypedDict]]
 
 
 class ObjectStorageDataRegion(BaseModel):
@@ -62,13 +103,15 @@ class ObjectStorageDataRegion(BaseModel):
     country: OptionalNullable[str] = UNSET
     r"""Country name"""
 
+    site: OptionalNullable[ObjectStorageDataSite] = UNSET
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["id", "city", "country"])
-        nullable_fields = set(["country"])
+        optional_fields = set(["id", "city", "country", "site"])
+        nullable_fields = set(["country", "site"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -132,6 +175,62 @@ class ObjectStorageDataCredentials(BaseModel):
         return m
 
 
+class BucketLoggingTypedDict(TypedDict):
+    r"""Delivery of this bucket's access logs to another bucket. Only present when bucket logging is configured."""
+
+    storage_id: NotRequired[str]
+    r"""Bucket that receives the access logs."""
+    prefix: NotRequired[Nullable[str]]
+    r"""Prefix for the log objects."""
+    key_format: NotRequired[Nullable[str]]
+    r"""Format of the log object keys: `SIMPLE_PREFIX`, `PARTITIONED_PREFIX_EVENT_TIME` or `PARTITIONED_PREFIX_DELIVERY_TIME`."""
+
+
+class BucketLogging(BaseModel):
+    r"""Delivery of this bucket's access logs to another bucket. Only present when bucket logging is configured."""
+
+    storage_id: Optional[str] = None
+    r"""Bucket that receives the access logs."""
+
+    prefix: OptionalNullable[str] = UNSET
+    r"""Prefix for the log objects."""
+
+    key_format: OptionalNullable[str] = UNSET
+    r"""Format of the log object keys: `SIMPLE_PREFIX`, `PARTITIONED_PREFIX_EVENT_TIME` or `PARTITIONED_PREFIX_DELIVERY_TIME`."""
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["storage_id", "prefix", "key_format"])
+        nullable_fields = set(["prefix", "key_format"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class ObjectStorageDataAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     r"""Display name of the object storage"""
@@ -161,6 +260,8 @@ class ObjectStorageDataAttributesTypedDict(TypedDict):
     r"""S3 access credentials. Only included when `extra_fields[object_storages]=credentials` is requested and the requesting user is the bucket's creator."""
     project: NotRequired[ProjectIncludeTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
+    bucket_logging: NotRequired[BucketLoggingTypedDict]
+    r"""Delivery of this bucket's access logs to another bucket. Only present when bucket logging is configured."""
 
 
 class ObjectStorageDataAttributes(BaseModel):
@@ -207,6 +308,9 @@ class ObjectStorageDataAttributes(BaseModel):
 
     team: Optional[TeamInclude] = None
 
+    bucket_logging: Optional[BucketLogging] = None
+    r"""Delivery of this bucket's access logs to another bucket. Only present when bucket logging is configured."""
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
@@ -229,6 +333,7 @@ class ObjectStorageDataAttributes(BaseModel):
                 "credentials",
                 "project",
                 "team",
+                "bucket_logging",
             ]
         )
         nullable_fields = set(

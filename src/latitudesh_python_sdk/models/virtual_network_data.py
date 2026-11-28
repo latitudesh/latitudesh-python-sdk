@@ -165,6 +165,7 @@ class VirtualNetworkDataAttributesTypedDict(TypedDict):
     r"""Tags associated with the virtual network"""
     storage: NotRequired[bool]
     r"""Whether this is an auto-provisioned storage service VLAN"""
+    site: NotRequired[Nullable[str]]
 
 
 class VirtualNetworkDataAttributes(BaseModel):
@@ -192,6 +193,8 @@ class VirtualNetworkDataAttributes(BaseModel):
     storage: Optional[bool] = None
     r"""Whether this is an auto-provisioned storage service VLAN"""
 
+    site: OptionalNullable[str] = UNSET
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
@@ -208,9 +211,10 @@ class VirtualNetworkDataAttributes(BaseModel):
                 "assignments_count",
                 "tags",
                 "storage",
+                "site",
             ]
         )
-        nullable_fields = set(["created_at"])
+        nullable_fields = set(["created_at", "site"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

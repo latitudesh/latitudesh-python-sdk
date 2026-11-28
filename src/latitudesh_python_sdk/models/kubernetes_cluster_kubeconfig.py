@@ -53,14 +53,14 @@ class KubernetesClusterKubeconfigAttributes(BaseModel):
 
 class KubernetesClusterKubeconfigDataTypedDict(TypedDict):
     id: NotRequired[str]
-    r"""The cluster name"""
+    r"""The cluster ID in hashed format (kc_<hash>)"""
     type: NotRequired[str]
     attributes: NotRequired[KubernetesClusterKubeconfigAttributesTypedDict]
 
 
 class KubernetesClusterKubeconfigData(BaseModel):
     id: Optional[str] = None
-    r"""The cluster name"""
+    r"""The cluster ID in hashed format (kc_<hash>)"""
 
     type: Optional[str] = None
 

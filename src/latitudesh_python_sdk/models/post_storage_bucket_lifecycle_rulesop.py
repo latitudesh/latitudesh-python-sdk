@@ -23,11 +23,11 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PostStorageBucketLifecycleRulesType(str, Enum):
+class PostStorageBucketLifecycleRulesObjectStorageType(str, Enum):
     LIFECYCLE_RULES = "lifecycle_rules"
 
 
-class PostStorageBucketLifecycleRulesAttributesTypedDict(TypedDict):
+class PostStorageBucketLifecycleRulesObjectStorageAttributesTypedDict(TypedDict):
     name: str
     r"""Name of the lifecycle rule"""
     expiration_days: int
@@ -42,7 +42,7 @@ class PostStorageBucketLifecycleRulesAttributesTypedDict(TypedDict):
     r"""Number of days after initiation to abort incomplete multipart uploads"""
 
 
-class PostStorageBucketLifecycleRulesAttributes(BaseModel):
+class PostStorageBucketLifecycleRulesObjectStorageAttributes(BaseModel):
     name: str
     r"""Name of the lifecycle rule"""
 
@@ -98,29 +98,29 @@ class PostStorageBucketLifecycleRulesAttributes(BaseModel):
         return m
 
 
-class PostStorageBucketLifecycleRulesDataTypedDict(TypedDict):
-    type: PostStorageBucketLifecycleRulesType
-    attributes: PostStorageBucketLifecycleRulesAttributesTypedDict
+class PostStorageBucketLifecycleRulesObjectStorageDataTypedDict(TypedDict):
+    type: PostStorageBucketLifecycleRulesObjectStorageType
+    attributes: PostStorageBucketLifecycleRulesObjectStorageAttributesTypedDict
 
 
-class PostStorageBucketLifecycleRulesData(BaseModel):
-    type: PostStorageBucketLifecycleRulesType
+class PostStorageBucketLifecycleRulesObjectStorageData(BaseModel):
+    type: PostStorageBucketLifecycleRulesObjectStorageType
 
-    attributes: PostStorageBucketLifecycleRulesAttributes
-
-
-class PostStorageBucketLifecycleRulesRequestBodyTypedDict(TypedDict):
-    data: PostStorageBucketLifecycleRulesDataTypedDict
+    attributes: PostStorageBucketLifecycleRulesObjectStorageAttributes
 
 
-class PostStorageBucketLifecycleRulesRequestBody(BaseModel):
-    data: PostStorageBucketLifecycleRulesData
+class PostStorageBucketLifecycleRulesObjectStorageRequestBodyTypedDict(TypedDict):
+    data: PostStorageBucketLifecycleRulesObjectStorageDataTypedDict
+
+
+class PostStorageBucketLifecycleRulesObjectStorageRequestBody(BaseModel):
+    data: PostStorageBucketLifecycleRulesObjectStorageData
 
 
 class PostStorageBucketLifecycleRulesRequestTypedDict(TypedDict):
     bucket_id: str
     r"""The object storage bucket ID"""
-    request_body: PostStorageBucketLifecycleRulesRequestBodyTypedDict
+    request_body: PostStorageBucketLifecycleRulesObjectStorageRequestBodyTypedDict
 
 
 class PostStorageBucketLifecycleRulesRequest(BaseModel):
@@ -130,8 +130,8 @@ class PostStorageBucketLifecycleRulesRequest(BaseModel):
     r"""The object storage bucket ID"""
 
     request_body: Annotated[
-        PostStorageBucketLifecycleRulesRequestBody,
-        FieldMetadata(request=RequestMetadata(media_type="application/vnd.api+json")),
+        PostStorageBucketLifecycleRulesObjectStorageRequestBody,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
 
 

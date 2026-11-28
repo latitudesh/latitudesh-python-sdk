@@ -1,6 +1,6 @@
 # RequirementsState
 
-draft while they're being prepared; awaiting_signature to review and sign; signed once an owner or administrator signs. Any later change asks for a new signature.
+draft while they're being prepared; awaiting_signature to review, change and sign; signed once an owner or administrator signs. Signed requirements are locked: changing them or their node groups answers 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them.
 
 ## Example Usage
 

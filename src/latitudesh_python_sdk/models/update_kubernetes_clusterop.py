@@ -28,5 +28,5 @@ class UpdateKubernetesClusterRequest(BaseModel):
 
     update_kubernetes_cluster: Annotated[
         UpdateKubernetesCluster,
-        FieldMetadata(request=RequestMetadata(media_type="application/vnd.api+json")),
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]

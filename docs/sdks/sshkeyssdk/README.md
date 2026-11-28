@@ -432,10 +432,12 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
-    res = latitudesh.ssh_keys.get_ssh_keys(filter_tags="tag_A06EMPEmKXhKBNKgWrv0CRZMN5a,tag_P7xlGZzYNZF4w3YXRrYMU7AjQEAX")
+    res = latitudesh.ssh_keys.get_ssh_keys(filter_tags="tag_A06EMPEmKXhKBNKgWrv0CRZMN5a,tag_P7xlGZzYNZF4w3YXRrYMU7AjQEAX", page_number=1, page_size=20)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
@@ -447,13 +449,13 @@ with Latitudesh(
 | `filter_scope`                                                                                                                        | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Filter by scope: `project` (has projects), `team` (no projects), or empty (all)                                                       |
 | `filter_tags`                                                                                                                         | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | The tags ids to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2`will return ssh keys with `tag_1` AND `tag_2`           |
 | `stats_total`                                                                                                                         | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`. |
-| `page_number`                                                                                                                         | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Page number for pagination                                                                                                            |
-| `page_size`                                                                                                                           | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Number of items per page                                                                                                              |
+| `page_number`                                                                                                                         | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Page number to return (starts at 1)                                                                                                   |
+| `page_size`                                                                                                                           | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Number of items to return per page                                                                                                    |
 | `retries`                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                      | :heavy_minus_sign:                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                   |
 
 ### Response
 
-**[models.SSHKeys](../../models/sshkeys.md)**
+**[models.GetSSHKeysResponse](../../models/getsshkeysresponse.md)**
 
 ### Errors
 

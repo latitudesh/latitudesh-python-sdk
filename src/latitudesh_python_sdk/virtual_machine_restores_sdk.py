@@ -82,19 +82,19 @@ class VirtualMachineRestoresSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machine restores"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/list-virtual-machine-scoped-restores"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualMachineRestores, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -176,19 +176,19 @@ class VirtualMachineRestoresSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machine restores"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/list-virtual-machine-scoped-restores"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualMachineRestores, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -291,7 +291,9 @@ class VirtualMachineRestoresSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machine restores"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-virtual-machine-restore"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -406,7 +408,9 @@ class VirtualMachineRestoresSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machine restores"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-virtual-machine-restore"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -497,19 +501,15 @@ class VirtualMachineRestoresSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machine restores"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/list-backup-restores"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualMachineRestores, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -588,19 +588,15 @@ class VirtualMachineRestoresSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machine restores"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/list-backup-restores"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualMachineRestores, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -672,19 +668,17 @@ class VirtualMachineRestoresSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machine restores"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/list-virtual-machine-restores"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualMachineRestores, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -756,19 +750,17 @@ class VirtualMachineRestoresSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machine restores"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/list-virtual-machine-restores"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualMachineRestores, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -857,7 +849,11 @@ class VirtualMachineRestoresSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machine restores"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/create-virtual-machine-restore-flat"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -958,7 +954,11 @@ class VirtualMachineRestoresSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machine restores"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/create-virtual-machine-restore-flat"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1046,19 +1046,17 @@ class VirtualMachineRestoresSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machine restores"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-virtual-machine-restore"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualMachineRestore, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1134,19 +1132,17 @@ class VirtualMachineRestoresSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machine restores"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-virtual-machine-restore"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
             retry_config=retry_config,
         )
 
-        response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.VirtualMachineRestore, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, ["404", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)

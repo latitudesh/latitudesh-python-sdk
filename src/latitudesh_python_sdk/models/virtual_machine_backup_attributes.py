@@ -73,6 +73,8 @@ class VirtualMachineBackupAttributesAttributesTypedDict(TypedDict):
     virtual_machine: NotRequired[VirtualMachineBackupAttributesVirtualMachineTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
     project: NotRequired[ProjectIncludeTypedDict]
+    progress: NotRequired[Nullable[int]]
+    r"""Backup completion percentage (0-100) reported by the hypervisor. Null until the first progress update is recorded."""
 
 
 class VirtualMachineBackupAttributesAttributes(BaseModel):
@@ -92,6 +94,9 @@ class VirtualMachineBackupAttributesAttributes(BaseModel):
 
     project: Optional[ProjectInclude] = None
 
+    progress: OptionalNullable[int] = UNSET
+    r"""Backup completion percentage (0-100) reported by the hypervisor. Null until the first progress update is recorded."""
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
@@ -107,9 +112,12 @@ class VirtualMachineBackupAttributesAttributes(BaseModel):
                 "virtual_machine",
                 "team",
                 "project",
+                "progress",
             ]
         )
-        nullable_fields = set(["size_bytes", "expires_at", "failure_reason"])
+        nullable_fields = set(
+            ["size_bytes", "expires_at", "failure_reason", "progress"]
+        )
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

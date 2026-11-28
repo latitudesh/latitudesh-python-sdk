@@ -30,30 +30,43 @@ class GetStorageAccessKeysRequest(BaseModel):
 
 
 class StandardTypedDict(TypedDict):
-    r"""Access key metadata. Exact fields depend on the storage provider."""
+    r"""Access key metadata."""
 
-    name: NotRequired[str]
+    name: NotRequired[Nullable[str]]
+    r"""Access key name."""
     username: NotRequired[str]
+    r"""Underlying IAM user the key belongs to."""
     access_key_id: NotRequired[str]
     status: NotRequired[str]
-    created_at: NotRequired[str]
+    r"""`Active` or `Inactive`."""
     region: NotRequired[Nullable[str]]
+    buckets: NotRequired[List[str]]
+    r"""Buckets the key can access."""
+    access: NotRequired[Nullable[str]]
+    r"""Access level across those buckets: `readonly`, `rw`, `fullaccess`, or `mixed_permissions` when it differs between buckets. Null for a key with no policy."""
 
 
 class Standard(BaseModel):
-    r"""Access key metadata. Exact fields depend on the storage provider."""
+    r"""Access key metadata."""
 
-    name: Optional[str] = None
+    name: OptionalNullable[str] = UNSET
+    r"""Access key name."""
 
     username: Optional[str] = None
+    r"""Underlying IAM user the key belongs to."""
 
     access_key_id: Optional[str] = None
 
     status: Optional[str] = None
-
-    created_at: Optional[str] = None
+    r"""`Active` or `Inactive`."""
 
     region: OptionalNullable[str] = UNSET
+
+    buckets: Optional[List[str]] = None
+    r"""Buckets the key can access."""
+
+    access: OptionalNullable[str] = UNSET
+    r"""Access level across those buckets: `readonly`, `rw`, `fullaccess`, or `mixed_permissions` when it differs between buckets. Null for a key with no policy."""
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
@@ -61,9 +74,17 @@ class Standard(BaseModel):
 
     def serialize_model(self, handler):
         optional_fields = set(
-            ["name", "username", "access_key_id", "status", "created_at", "region"]
+            [
+                "name",
+                "username",
+                "access_key_id",
+                "status",
+                "region",
+                "buckets",
+                "access",
+            ]
         )
-        nullable_fields = set(["region"])
+        nullable_fields = set(["name", "region", "access"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -91,30 +112,43 @@ class Standard(BaseModel):
 
 
 class HighPerformanceTypedDict(TypedDict):
-    r"""Access key metadata. Exact fields depend on the storage provider."""
+    r"""Access key metadata."""
 
-    name: NotRequired[str]
+    name: NotRequired[Nullable[str]]
+    r"""Access key name."""
     username: NotRequired[str]
+    r"""Underlying IAM user the key belongs to."""
     access_key_id: NotRequired[str]
     status: NotRequired[str]
-    created_at: NotRequired[str]
+    r"""`Active` or `Inactive`."""
     region: NotRequired[str]
+    buckets: NotRequired[List[str]]
+    r"""Buckets the key can access."""
+    access: NotRequired[Nullable[str]]
+    r"""Access level across those buckets: `readonly`, `rw`, `fullaccess`, or `mixed_permissions` when it differs between buckets. Null for a key with no policy."""
 
 
 class HighPerformance(BaseModel):
-    r"""Access key metadata. Exact fields depend on the storage provider."""
+    r"""Access key metadata."""
 
-    name: Optional[str] = None
+    name: OptionalNullable[str] = UNSET
+    r"""Access key name."""
 
     username: Optional[str] = None
+    r"""Underlying IAM user the key belongs to."""
 
     access_key_id: Optional[str] = None
 
     status: Optional[str] = None
-
-    created_at: Optional[str] = None
+    r"""`Active` or `Inactive`."""
 
     region: Optional[str] = None
+
+    buckets: Optional[List[str]] = None
+    r"""Buckets the key can access."""
+
+    access: OptionalNullable[str] = UNSET
+    r"""Access level across those buckets: `readonly`, `rw`, `fullaccess`, or `mixed_permissions` when it differs between buckets. Null for a key with no policy."""
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
@@ -122,8 +156,17 @@ class HighPerformance(BaseModel):
 
     def serialize_model(self, handler):
         optional_fields = set(
-            ["name", "username", "access_key_id", "status", "created_at", "region"]
+            [
+                "name",
+                "username",
+                "access_key_id",
+                "status",
+                "region",
+                "buckets",
+                "access",
+            ]
         )
+        nullable_fields = set(["name", "access"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -134,9 +177,17 @@ class HighPerformance(BaseModel):
             if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m

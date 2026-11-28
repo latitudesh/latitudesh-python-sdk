@@ -1,0 +1,384 @@
+# Plans
+
+## Overview
+
+### Available Operations
+
+* [list](#list) - List plans
+* [get](#get) - Retrieve plan
+* [list_bandwidth](#list_bandwidth) - List bandwidth plans
+* [update_bandwidth](#update_bandwidth) - Update bandwidth packages
+* [list_storage](#list_storage) - List storage plans
+* [get_lks_plans](#get_lks_plans) - List LKS plans
+* [list_vm_plans](#list_vm_plans) - List VM plans
+* [get_managed_database_plans](#get_managed_database_plans) - List managed database plans
+
+## list
+
+Lists all plans. Availability by region is included in `attributes.regions.locations.available[*]` node for a given plan.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get-plans" method="get" path="/plans" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.plans.list()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `filter_name`                                                                                                                                                                                                                                                                                                                                                            | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The plan name to filter by                                                                                                                                                                                                                                                                                                                                               |
+| `filter_slug`                                                                                                                                                                                                                                                                                                                                                            | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The plan slug to filter by                                                                                                                                                                                                                                                                                                                                               |
+| `filter_location`                                                                                                                                                                                                                                                                                                                                                        | *Optional[str]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The location of the site to filter by                                                                                                                                                                                                                                                                                                                                    |
+| `filter_stock_level`                                                                                                                                                                                                                                                                                                                                                     | [Optional[models.FilterStockLevel]](../../models/filterstocklevel.md)                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The stock level at the site to filter by                                                                                                                                                                                                                                                                                                                                 |
+| `filter_in_stock`                                                                                                                                                                                                                                                                                                                                                        | *Optional[bool]*                                                                                                                                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The stock available at the site to filter by                                                                                                                                                                                                                                                                                                                             |
+| `filter_gpu`                                                                                                                                                                                                                                                                                                                                                             | *Optional[bool]*                                                                                                                                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | Filter by the existence of an associated GPU                                                                                                                                                                                                                                                                                                                             |
+| `filter_ram`                                                                                                                                                                                                                                                                                                                                                             | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The ram size in Gigabytes to filter by, should be used with the following options:<br/>                              [eql] to filter for values equal to the provided value.<br/>                              [gte] to filter for values greater or equal to the provided value.<br/>                              [lte] to filter by values lower or equal to the provided value. |
+| `filter_disk`                                                                                                                                                                                                                                                                                                                                                            | *Optional[int]*                                                                                                                                                                                                                                                                                                                                                          | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | The disk size in Gigabytes to filter by, should be used with the following options:<br/>                              [eql] to filter for values equal to the provided value.<br/>                              [gte] to filter for values greater or equal to the provided value.<br/>                              [lte] to filter by values lower or equal to the provided value. |
+| `retries`                                                                                                                                                                                                                                                                                                                                                                | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                                                                                                                                                         | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                       | Configuration to override the default retry behavior of the client.                                                                                                                                                                                                                                                                                                      |
+
+### Response
+
+**[models.Plans](../../models/plans.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## get
+
+Retrieve plan
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get-plan" method="get" path="/plans/{plan_id}" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.plans.get(plan_id="plan_RMLydp20DQKr1")
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `plan_id`                                                           | *str*                                                               | :heavy_check_mark:                                                  | N/A                                                                 |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.Plan](../../models/plan.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## list_bandwidth
+
+Lists all bandwidth plans.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get-bandwidth-plans" method="get" path="/plans/bandwidth" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.plans.list_bandwidth(api_version="2023-06-01", page_size=20, page_number=1)
+
+    while res is not None:
+        # Handle items
+
+        res = res.next()
+
+```
+
+### Parameters
+
+| Parameter                                                                                                                             | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `api_version`                                                                                                                         | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | N/A                                                                                                                                   |
+| `filter_id`                                                                                                                           | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | The plan ID to filter by                                                                                                              |
+| `page_size`                                                                                                                           | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Number of items to return per page                                                                                                    |
+| `page_number`                                                                                                                         | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Page number to return (starts at 1)                                                                                                   |
+| `stats_total`                                                                                                                         | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`. |
+| `retries`                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                      | :heavy_minus_sign:                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                   |
+
+### Response
+
+**[models.GetBandwidthPlansResponse](../../models/getbandwidthplansresponse.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## update_bandwidth
+
+Allows to increase or decrease bandwidth packages. Only admins and owners can request.
+
+
+### Example Usage: Forbidden
+
+<!-- UsageSnippet language="python" operationID="update-plans-bandwidth" method="post" path="/plans/bandwidth" example="Forbidden" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.plans.update_bandwidth(data={
+        "type": latitudesh_python_sdk.UpdatePlansBandwidthPlansType.BANDWIDTH_PACKAGES,
+        "attributes": {
+            "project": "proj_v9BVDaEYDRm1W",
+            "quantity": 5,
+            "region_slug": "brazil",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+### Example Usage: Success
+
+<!-- UsageSnippet language="python" operationID="update-plans-bandwidth" method="post" path="/plans/bandwidth" example="Success" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.plans.update_bandwidth(data={
+        "type": latitudesh_python_sdk.UpdatePlansBandwidthPlansType.BANDWIDTH_PACKAGES,
+        "attributes": {
+            "project": "proj_z2A3DVZ3DnawP",
+            "quantity": 5,
+            "region_slug": "brazil",
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `data`                                                                                          | [Optional[models.UpdatePlansBandwidthPlansData]](../../models/updateplansbandwidthplansdata.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `retries`                                                                                       | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                | :heavy_minus_sign:                                                                              | Configuration to override the default retry behavior of the client.                             |
+
+### Response
+
+**[models.BandwidthPackages](../../models/bandwidthpackages.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## list_storage
+
+List storage plans
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get-storage-plans" method="get" path="/plans/storage" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.plans.list_storage()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `filter_storage_type`                                               | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Filter by storage type (filesystem, object, or volume)              |
+| `filter_storage_class`                                              | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | Filter by storage class (standard or high_performance)              |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.StoragePlans](../../models/storageplans.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## get_lks_plans
+
+Lists bare metal plans available to LKS with per-site capacity for a node pool.
+`attributes.regions.locations.in_stock_count` gives the number of servers a node pool can get, keyed by site slug.
+
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get-lks-plans" method="get" path="/plans/lks" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.plans.get_lks_plans()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.LksPlans](../../models/lksplans.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## list_vm_plans
+
+List VM plans
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get-vm-plans" method="get" path="/plans/virtual_machines" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.plans.list_vm_plans()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `filter_gpu`                                                        | *Optional[bool]*                                                    | :heavy_minus_sign:                                                  | Filter plans by GPU availability                                    |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.VirtualMachinePlans](../../models/virtualmachineplans.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
+## get_managed_database_plans
+
+List managed database plans
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="get-managed-database-plans" method="get" path="/plans/managed_databases" example="Success" -->
+```python
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.plans.get_managed_database_plans()
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+
+### Response
+
+**[models.ManagedDatabasePlans](../../models/manageddatabaseplans.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |

@@ -83,7 +83,9 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/list-kubernetes-clusters"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -179,7 +181,9 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/list-kubernetes-clusters"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -285,7 +289,9 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-kubernetes-cluster"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -396,7 +402,9 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/create-kubernetes-cluster"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -496,7 +504,11 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/list-kubernetes-available-versions"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -589,7 +601,11 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/list-kubernetes-available-versions"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -683,7 +699,9 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-kubernetes-cluster"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -779,7 +797,9 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-kubernetes-cluster"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -877,7 +897,9 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/delete-kubernetes-cluster"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -975,7 +997,9 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/delete-kubernetes-cluster"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1107,7 +1131,9 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/update-kubernetes-cluster"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1244,7 +1270,9 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/update-kubernetes-cluster"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1347,7 +1375,11 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/get-kubernetes-cluster-kubeconfig"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1445,7 +1477,11 @@ class KubernetesClustersSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Kubernetes Clusters"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/get-kubernetes-cluster-kubeconfig"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

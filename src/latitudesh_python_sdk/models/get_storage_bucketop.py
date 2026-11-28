@@ -9,7 +9,12 @@ from latitudesh_python_sdk.types import (
     serialize_with_info,
 )
 from latitudesh_python_sdk.types.basemodel import current_filtered_dump
-from latitudesh_python_sdk.utils import FieldMetadata, PathParamMetadata
+from latitudesh_python_sdk.utils import (
+    FieldMetadata,
+    PathParamMetadata,
+    QueryParamMetadata,
+)
+import pydantic
 from pydantic import model_serializer
 from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
@@ -18,6 +23,8 @@ from typing_extensions import Annotated, NotRequired, TypedDict
 class GetStorageBucketRequestTypedDict(TypedDict):
     id: str
     r"""The object storage ID"""
+    extra_fields_object_storages: NotRequired[str]
+    r"""The `credentials` are provided as extra attributes that are lazy loaded. Only the storage creator may request them. To request, set `extra_fields[object_storages]=credentials` in the query string."""
 
 
 class GetStorageBucketRequest(BaseModel):
@@ -25,6 +32,36 @@ class GetStorageBucketRequest(BaseModel):
         str, FieldMetadata(path=PathParamMetadata(style="simple", explode=False))
     ]
     r"""The object storage ID"""
+
+    extra_fields_object_storages: Annotated[
+        Optional[str],
+        pydantic.Field(alias="extra_fields[object_storages]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The `credentials` are provided as extra attributes that are lazy loaded. Only the storage creator may request them. To request, set `extra_fields[object_storages]=credentials` in the query string."""
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["extra_fields[object_storages]"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class GetStorageBucketResponseBodyTypedDict(TypedDict):

@@ -1,0 +1,12 @@
+# BucketLogging
+
+Delivery of this bucket's access logs to another bucket. Only present when bucket logging is configured.
+
+
+## Fields
+
+| Field                                                                                                                  | Type                                                                                                                   | Required                                                                                                               | Description                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `storage_id`                                                                                                           | *Optional[str]*                                                                                                        | :heavy_minus_sign:                                                                                                     | Bucket that receives the access logs.                                                                                  |
+| `prefix`                                                                                                               | *OptionalNullable[str]*                                                                                                | :heavy_minus_sign:                                                                                                     | Prefix for the log objects.                                                                                            |
+| `key_format`                                                                                                           | *OptionalNullable[str]*                                                                                                | :heavy_minus_sign:                                                                                                     | Format of the log object keys: `SIMPLE_PREFIX`, `PARTITIONED_PREFIX_EVENT_TIME` or `PARTITIONED_PREFIX_DELIVERY_TIME`. |

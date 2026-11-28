@@ -29,23 +29,29 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
-    res = latitudesh.block_storage.list_volumes(filter_project="proj_WeGoqA5AqP7nz")
+    res = latitudesh.block_storage.list_volumes(filter_project="proj_WeGoqA5AqP7nz", page_size=50, page_number=1)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `filter_project`                                                    | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The project ID or Slug to filter by                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                                                                             | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `filter_project`                                                                                                                      | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | The project ID or Slug to filter by                                                                                                   |
+| `filter_name`                                                                                                                         | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | The name to filter by (case-insensitive exact match)                                                                                  |
+| `page_size`                                                                                                                           | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Number of items to return per page                                                                                                    |
+| `page_number`                                                                                                                         | *Optional[int]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Page number to return (starts at 1)                                                                                                   |
+| `stats_total`                                                                                                                         | *Optional[str]*                                                                                                                       | :heavy_minus_sign:                                                                                                                    | Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`. |
+| `retries`                                                                                                                             | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                      | :heavy_minus_sign:                                                                                                                    | Configuration to override the default retry behavior of the client.                                                                   |
 
 ### Response
 
-**[models.ListVolumesResponseBody](../../models/listvolumesresponsebody.md)**
+**[models.ListVolumesResponse](../../models/listvolumesresponse.md)**
 
 ### Errors
 

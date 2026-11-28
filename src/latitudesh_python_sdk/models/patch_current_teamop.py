@@ -122,10 +122,19 @@ class PatchCurrentTeamRequest(BaseModel):
     ]
 
 
+class PatchCurrentTeamMetaTypedDict(TypedDict):
+    pass
+
+
+class PatchCurrentTeamMeta(BaseModel):
+    pass
+
+
 class PatchCurrentTeamResponseBodyTypedDict(TypedDict):
     r"""Success"""
 
     data: NotRequired[TeamTypedDict]
+    meta: NotRequired[PatchCurrentTeamMetaTypedDict]
 
 
 class PatchCurrentTeamResponseBody(BaseModel):
@@ -133,12 +142,14 @@ class PatchCurrentTeamResponseBody(BaseModel):
 
     data: Optional[Team] = None
 
+    meta: Optional[PatchCurrentTeamMeta] = None
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

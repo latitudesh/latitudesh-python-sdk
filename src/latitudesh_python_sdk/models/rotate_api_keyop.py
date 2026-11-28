@@ -36,10 +36,19 @@ class RotateAPIKeyRequest(BaseModel):
     ]
 
 
+class RotateAPIKeyMetaTypedDict(TypedDict):
+    pass
+
+
+class RotateAPIKeyMeta(BaseModel):
+    pass
+
+
 class RotateAPIKeyResponseBodyTypedDict(TypedDict):
     r"""Success"""
 
     data: NotRequired[APIKeyTypedDict]
+    meta: NotRequired[RotateAPIKeyMetaTypedDict]
 
 
 class RotateAPIKeyResponseBody(BaseModel):
@@ -47,12 +56,14 @@ class RotateAPIKeyResponseBody(BaseModel):
 
     data: Optional[APIKey] = None
 
+    meta: Optional[RotateAPIKeyMeta] = None
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

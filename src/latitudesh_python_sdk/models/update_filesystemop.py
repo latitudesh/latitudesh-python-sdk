@@ -26,12 +26,12 @@ class UpdateFilesystemFilesystemStorageType(str, Enum):
 
 class UpdateFilesystemFilesystemStorageAttributesTypedDict(TypedDict):
     size_in_gb: int
-    r"""Size in GB (not required, default is 1500)"""
+    r"""New size in GB. Filesystems can only grow."""
 
 
 class UpdateFilesystemFilesystemStorageAttributes(BaseModel):
     size_in_gb: int
-    r"""Size in GB (not required, default is 1500)"""
+    r"""New size in GB. Filesystems can only grow."""
 
 
 class UpdateFilesystemFilesystemStorageDataTypedDict(TypedDict):

@@ -23,11 +23,11 @@ from typing import Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
-class PatchStorageBucketLifecycleRuleType(str, Enum):
+class PatchStorageBucketLifecycleRuleObjectStorageType(str, Enum):
     LIFECYCLE_RULES = "lifecycle_rules"
 
 
-class PatchStorageBucketLifecycleRuleAttributesTypedDict(TypedDict):
+class PatchStorageBucketLifecycleRuleObjectStorageAttributesTypedDict(TypedDict):
     name: str
     r"""Name of the lifecycle rule"""
     enabled: NotRequired[bool]
@@ -42,7 +42,7 @@ class PatchStorageBucketLifecycleRuleAttributesTypedDict(TypedDict):
     r"""Number of days after initiation to abort incomplete multipart uploads"""
 
 
-class PatchStorageBucketLifecycleRuleAttributes(BaseModel):
+class PatchStorageBucketLifecycleRuleObjectStorageAttributes(BaseModel):
     name: str
     r"""Name of the lifecycle rule"""
 
@@ -104,23 +104,23 @@ class PatchStorageBucketLifecycleRuleAttributes(BaseModel):
         return m
 
 
-class PatchStorageBucketLifecycleRuleDataTypedDict(TypedDict):
-    type: PatchStorageBucketLifecycleRuleType
-    attributes: PatchStorageBucketLifecycleRuleAttributesTypedDict
+class PatchStorageBucketLifecycleRuleObjectStorageDataTypedDict(TypedDict):
+    type: PatchStorageBucketLifecycleRuleObjectStorageType
+    attributes: PatchStorageBucketLifecycleRuleObjectStorageAttributesTypedDict
 
 
-class PatchStorageBucketLifecycleRuleData(BaseModel):
-    type: PatchStorageBucketLifecycleRuleType
+class PatchStorageBucketLifecycleRuleObjectStorageData(BaseModel):
+    type: PatchStorageBucketLifecycleRuleObjectStorageType
 
-    attributes: PatchStorageBucketLifecycleRuleAttributes
-
-
-class PatchStorageBucketLifecycleRuleRequestBodyTypedDict(TypedDict):
-    data: PatchStorageBucketLifecycleRuleDataTypedDict
+    attributes: PatchStorageBucketLifecycleRuleObjectStorageAttributes
 
 
-class PatchStorageBucketLifecycleRuleRequestBody(BaseModel):
-    data: PatchStorageBucketLifecycleRuleData
+class PatchStorageBucketLifecycleRuleObjectStorageRequestBodyTypedDict(TypedDict):
+    data: PatchStorageBucketLifecycleRuleObjectStorageDataTypedDict
+
+
+class PatchStorageBucketLifecycleRuleObjectStorageRequestBody(BaseModel):
+    data: PatchStorageBucketLifecycleRuleObjectStorageData
 
 
 class PatchStorageBucketLifecycleRuleRequestTypedDict(TypedDict):
@@ -128,7 +128,7 @@ class PatchStorageBucketLifecycleRuleRequestTypedDict(TypedDict):
     r"""The object storage bucket ID"""
     id: str
     r"""The lifecycle rule ID"""
-    request_body: PatchStorageBucketLifecycleRuleRequestBodyTypedDict
+    request_body: PatchStorageBucketLifecycleRuleObjectStorageRequestBodyTypedDict
 
 
 class PatchStorageBucketLifecycleRuleRequest(BaseModel):
@@ -143,8 +143,8 @@ class PatchStorageBucketLifecycleRuleRequest(BaseModel):
     r"""The lifecycle rule ID"""
 
     request_body: Annotated[
-        PatchStorageBucketLifecycleRuleRequestBody,
-        FieldMetadata(request=RequestMetadata(media_type="application/vnd.api+json")),
+        PatchStorageBucketLifecycleRuleObjectStorageRequestBody,
+        FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
 
 
