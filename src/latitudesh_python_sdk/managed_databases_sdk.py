@@ -6,7 +6,8 @@ from latitudesh_python_sdk._hooks import HookContext
 from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
 from latitudesh_python_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Mapping, Optional, Union
+from typing import Any, Mapping, Optional, Union
+from typing_extensions import deprecated
 
 
 class ManagedDatabasesSDK(BaseSDK):
@@ -84,7 +85,9 @@ class ManagedDatabasesSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Managed Databases"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/show-managed-database-metrics"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -176,7 +179,9 @@ class ManagedDatabasesSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Managed Databases"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/show-managed-database-metrics"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -374,6 +379,9 @@ class ManagedDatabasesSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     def create_managed_database(
         self,
         *,
@@ -389,6 +397,8 @@ class ManagedDatabasesSDK(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ManagedDatabase:
         r"""Create a managed database
+
+        Managed Databases is in maintenance mode: new databases can no longer be created. This endpoint only accepts restores, which require `recovery.sourceDatabaseName` pointing to an existing database in the project.
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -459,8 +469,12 @@ class ManagedDatabasesSDK(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.ManagedDatabase, http_res)
+        if utils.match_response(http_res, "403", "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -470,6 +484,9 @@ class ManagedDatabasesSDK(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    @deprecated(
+        "warning: ** DEPRECATED ** - This will be removed in a future release, please migrate away from it as soon as possible."
+    )
     async def create_managed_database_async(
         self,
         *,
@@ -485,6 +502,8 @@ class ManagedDatabasesSDK(BaseSDK):
         http_headers: Optional[Mapping[str, str]] = None,
     ) -> models.ManagedDatabase:
         r"""Create a managed database
+
+        Managed Databases is in maintenance mode: new databases can no longer be created. This endpoint only accepts restores, which require `recovery.sourceDatabaseName` pointing to an existing database in the project.
 
         :param data:
         :param retries: Override the default retry configuration for this method
@@ -555,8 +574,12 @@ class ManagedDatabasesSDK(BaseSDK):
             retry_config=retry_config,
         )
 
+        response_data: Any = None
         if utils.match_response(http_res, "201", "application/vnd.api+json"):
             return unmarshal_json_response(models.ManagedDatabase, http_res)
+        if utils.match_response(http_res, "403", "application/vnd.api+json"):
+            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
+            raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)

@@ -13,6 +13,7 @@
 * [post_storage_buckets](#post_storage_buckets) - Create bucket
 * [get_storage_bucket](#get_storage_bucket) - Retrieve bucket
 * [delete_storage_buckets](#delete_storage_buckets) - Delete bucket
+* [patch_storage_buckets](#patch_storage_buckets) - Update bucket
 * [get_storage_bucket_lifecycle_rules](#get_storage_bucket_lifecycle_rules) - List lifecycle rules
 * [post_storage_bucket_lifecycle_rules](#post_storage_bucket_lifecycle_rules) - Create lifecycle rule
 * [get_storage_bucket_lifecycle_rule](#get_storage_bucket_lifecycle_rule) - Retrieve lifecycle rule
@@ -123,12 +124,12 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_access_keys(data={
-        "type": latitudesh_python_sdk.PostStorageAccessKeysType.ACCESS_KEYS,
+        "type": latitudesh_python_sdk.PostStorageAccessKeysObjectStorageType.ACCESS_KEYS,
         "attributes": {
             "project": "<value>",
-            "storage_class": latitudesh_python_sdk.PostStorageAccessKeysStorageClass.HIGH_PERFORMANCE,
+            "storage_class": latitudesh_python_sdk.PostStorageAccessKeysObjectStorageStorageClass.HIGH_PERFORMANCE,
             "name": "<value>",
-            "access_scope": latitudesh_python_sdk.AccessScope.LIMITED_ACCESS,
+            "access_scope": latitudesh_python_sdk.PostStorageAccessKeysAccessScope.LIMITED_ACCESS,
             "region": "<value>",
         },
     })
@@ -151,12 +152,12 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_access_keys(data={
-        "type": latitudesh_python_sdk.PostStorageAccessKeysType.ACCESS_KEYS,
+        "type": latitudesh_python_sdk.PostStorageAccessKeysObjectStorageType.ACCESS_KEYS,
         "attributes": {
             "project": "proj_6059EqYkOQj8p",
-            "storage_class": latitudesh_python_sdk.PostStorageAccessKeysStorageClass.STANDARD,
+            "storage_class": latitudesh_python_sdk.PostStorageAccessKeysObjectStorageStorageClass.STANDARD,
             "name": "my-access-key",
-            "access_scope": latitudesh_python_sdk.AccessScope.FULLACCESS,
+            "access_scope": latitudesh_python_sdk.PostStorageAccessKeysAccessScope.FULLACCESS,
             "region": "DAL",
         },
     })
@@ -179,21 +180,21 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_access_keys(data={
-        "type": latitudesh_python_sdk.PostStorageAccessKeysType.ACCESS_KEYS,
+        "type": latitudesh_python_sdk.PostStorageAccessKeysObjectStorageType.ACCESS_KEYS,
         "attributes": {
             "project": "proj_6059EqYkOQj8p",
-            "storage_class": latitudesh_python_sdk.PostStorageAccessKeysStorageClass.STANDARD,
+            "storage_class": latitudesh_python_sdk.PostStorageAccessKeysObjectStorageStorageClass.STANDARD,
             "name": "my-limited-key",
-            "access_scope": latitudesh_python_sdk.AccessScope.LIMITED_ACCESS,
+            "access_scope": latitudesh_python_sdk.PostStorageAccessKeysAccessScope.LIMITED_ACCESS,
             "region": "DAL",
             "bucket_permissions": [
                 {
                     "bucket_id": "bkt_6VE1Wd37dXnZJ",
-                    "permission": latitudesh_python_sdk.Permission.READONLY,
+                    "permission": latitudesh_python_sdk.PostStorageAccessKeysPermission.READONLY,
                 },
                 {
                     "bucket_id": "bkt_7WF2Xe48eYoAK",
-                    "permission": latitudesh_python_sdk.Permission.RW,
+                    "permission": latitudesh_python_sdk.PostStorageAccessKeysPermission.RW,
                 },
             ],
         },
@@ -217,12 +218,12 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_access_keys(data={
-        "type": latitudesh_python_sdk.PostStorageAccessKeysType.ACCESS_KEYS,
+        "type": latitudesh_python_sdk.PostStorageAccessKeysObjectStorageType.ACCESS_KEYS,
         "attributes": {
             "project": "<value>",
-            "storage_class": latitudesh_python_sdk.PostStorageAccessKeysStorageClass.HIGH_PERFORMANCE,
+            "storage_class": latitudesh_python_sdk.PostStorageAccessKeysObjectStorageStorageClass.HIGH_PERFORMANCE,
             "name": "<value>",
-            "access_scope": latitudesh_python_sdk.AccessScope.LIMITED_ACCESS,
+            "access_scope": latitudesh_python_sdk.PostStorageAccessKeysAccessScope.LIMITED_ACCESS,
             "region": "<value>",
         },
     })
@@ -234,10 +235,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                     | Type                                                                          | Required                                                                      | Description                                                                   |
-| ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| `data`                                                                        | [models.PostStorageAccessKeysData](../../models/poststorageaccesskeysdata.md) | :heavy_check_mark:                                                            | N/A                                                                           |
-| `retries`                                                                     | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)              | :heavy_minus_sign:                                                            | Configuration to override the default retry behavior of the client.           |
+| Parameter                                                                                               | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `data`                                                                                                  | [models.PostStorageAccessKeysObjectStorageData](../../models/poststorageaccesskeysobjectstoragedata.md) | :heavy_check_mark:                                                                                      | N/A                                                                                                     |
+| `retries`                                                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                        | :heavy_minus_sign:                                                                                      | Configuration to override the default retry behavior of the client.                                     |
 
 ### Response
 
@@ -347,30 +348,36 @@ with Latitudesh(
     bearer=os.getenv("LATITUDESH_BEARER"),
 ) as latitudesh:
 
-    res = latitudesh.object_storage.get_storage_buckets()
+    res = latitudesh.object_storage.get_storage_buckets(page_size=50, page_number=1)
 
-    # Handle response
-    print(res)
+    while res is not None:
+        # Handle items
+
+        res = res.next()
 
 ```
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `filter_project`                                                    | *Optional[str]*                                                     | :heavy_minus_sign:                                                  | The project ID or Slug to filter by                                 |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                                                                                                                                                                           | Type                                                                                                                                                                                                                                | Required                                                                                                                                                                                                                            | Description                                                                                                                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `filter_project`                                                                                                                                                                                                                    | *Optional[str]*                                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                  | The project ID or Slug to filter by                                                                                                                                                                                                 |
+| `filter_name`                                                                                                                                                                                                                       | *Optional[str]*                                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                  | The name to filter by (case-insensitive exact match)                                                                                                                                                                                |
+| `page_size`                                                                                                                                                                                                                         | *Optional[int]*                                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                  | Number of items to return per page                                                                                                                                                                                                  |
+| `page_number`                                                                                                                                                                                                                       | *Optional[int]*                                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                  | Page number to return (starts at 1)                                                                                                                                                                                                 |
+| `stats_total`                                                                                                                                                                                                                       | *Optional[str]*                                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                  | Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.                                                                                               |
+| `extra_fields_object_storages`                                                                                                                                                                                                      | *Optional[str]*                                                                                                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                                                  | The `credentials` are provided as extra attributes that are lazy loaded. Only storages where the requesting user is the creator will include them. To request, set `extra_fields[object_storages]=credentials` in the query string. |
+| `retries`                                                                                                                                                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                  | Configuration to override the default retry behavior of the client.                                                                                                                                                                 |
 
 ### Response
 
-**[models.ObjectStorages](../../models/objectstorages.md)**
+**[models.GetStorageBucketsResponse](../../models/getstoragebucketsresponse.md)**
 
 ### Errors
 
-| Error Type               | Status Code              | Content Type             |
-| ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403                      | application/vnd.api+json |
-| models.APIError          | 4XX, 5XX                 | \*/\*                    |
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
 
 ## post_storage_buckets
 
@@ -390,7 +397,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_buckets(data={
-        "type": latitudesh_python_sdk.PostStorageBucketsType.OBJECTS,
+        "type": latitudesh_python_sdk.PostStorageBucketsObjectStorageType.OBJECTS,
         "attributes": {
             "project": "proj_6059EqYkOQj8p",
             "name": "my-bucket",
@@ -416,7 +423,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_buckets(data={
-        "type": latitudesh_python_sdk.PostStorageBucketsType.OBJECTS,
+        "type": latitudesh_python_sdk.PostStorageBucketsObjectStorageType.OBJECTS,
         "attributes": {
             "project": "proj_6059EqYkOQj8p",
             "name": "customer-bucket",
@@ -444,7 +451,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_buckets(data={
-        "type": latitudesh_python_sdk.PostStorageBucketsType.OBJECTS,
+        "type": latitudesh_python_sdk.PostStorageBucketsObjectStorageType.OBJECTS,
         "attributes": {
             "project": "<value>",
             "name": "<value>",
@@ -470,7 +477,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_buckets(data={
-        "type": latitudesh_python_sdk.PostStorageBucketsType.OBJECTS,
+        "type": latitudesh_python_sdk.PostStorageBucketsObjectStorageType.OBJECTS,
         "attributes": {
             "project": "<value>",
             "name": "<value>",
@@ -496,7 +503,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_buckets(data={
-        "type": latitudesh_python_sdk.PostStorageBucketsType.OBJECTS,
+        "type": latitudesh_python_sdk.PostStorageBucketsObjectStorageType.OBJECTS,
         "attributes": {
             "project": "<value>",
             "name": "<value>",
@@ -511,10 +518,10 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                               | Type                                                                    | Required                                                                | Description                                                             |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| `data`                                                                  | [models.PostStorageBucketsData](../../models/poststoragebucketsdata.md) | :heavy_check_mark:                                                      | N/A                                                                     |
-| `retries`                                                               | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)        | :heavy_minus_sign:                                                      | Configuration to override the default retry behavior of the client.     |
+| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `data`                                                                                            | [models.PostStorageBucketsObjectStorageData](../../models/poststoragebucketsobjectstoragedata.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `retries`                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                  | :heavy_minus_sign:                                                                                | Configuration to override the default retry behavior of the client.                               |
 
 ### Response
 
@@ -553,10 +560,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
-| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| `id`                                                                | *str*                                                               | :heavy_check_mark:                                                  | The object storage ID                                               |
-| `retries`                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)    | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| Parameter                                                                                                                                                                                            | Type                                                                                                                                                                                                 | Required                                                                                                                                                                                             | Description                                                                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                                                                 | *str*                                                                                                                                                                                                | :heavy_check_mark:                                                                                                                                                                                   | The object storage ID                                                                                                                                                                                |
+| `extra_fields_object_storages`                                                                                                                                                                       | *Optional[str]*                                                                                                                                                                                      | :heavy_minus_sign:                                                                                                                                                                                   | The `credentials` are provided as extra attributes that are lazy loaded. Only the storage creator may request them. To request, set `extra_fields[object_storages]=credentials` in the query string. |
+| `retries`                                                                                                                                                                                            | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                                                                                                     | :heavy_minus_sign:                                                                                                                                                                                   | Configuration to override the default retry behavior of the client.                                                                                                                                  |
 
 ### Response
 
@@ -566,7 +574,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## delete_storage_buckets
@@ -606,6 +614,53 @@ with Latitudesh(
 | models.ErrorObject       | 500                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
+## patch_storage_buckets
+
+Updates versioning, locking and bucket logging settings for an object storage bucket.
+
+### Example Usage
+
+<!-- UsageSnippet language="python" operationID="patch-storage-buckets" method="patch" path="/storage/buckets/{id}" example="OK" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.object_storage.patch_storage_buckets(id="bucket_KXgRdRyoOv9k5", data={
+        "type": latitudesh_python_sdk.PatchStorageBucketsObjectStorageType.OBJECTS,
+        "attributes": {
+            "versioning": True,
+        },
+    })
+
+    # Handle response
+    print(res)
+
+```
+
+### Parameters
+
+| Parameter                                                                                           | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                | *str*                                                                                               | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `data`                                                                                              | [models.PatchStorageBucketsObjectStorageData](../../models/patchstoragebucketsobjectstoragedata.md) | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `retries`                                                                                           | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                    | :heavy_minus_sign:                                                                                  | Configuration to override the default retry behavior of the client.                                 |
+
+### Response
+
+**[models.PatchStorageBucketsResponseBody](../../models/patchstoragebucketsresponsebody.md)**
+
+### Errors
+
+| Error Type      | Status Code     | Content Type    |
+| --------------- | --------------- | --------------- |
+| models.APIError | 4XX, 5XX        | \*/\*           |
+
 ## get_storage_bucket_lifecycle_rules
 
 Lists all lifecycle rules for a specific object storage bucket.
@@ -644,7 +699,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## post_storage_bucket_lifecycle_rules
@@ -665,7 +720,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_bucket_lifecycle_rules(bucket_id="<id>", data={
-        "type": latitudesh_python_sdk.PostStorageBucketLifecycleRulesType.LIFECYCLE_RULES,
+        "type": latitudesh_python_sdk.PostStorageBucketLifecycleRulesObjectStorageType.LIFECYCLE_RULES,
         "attributes": {
             "name": "delete-old-logs",
             "prefix": "logs/",
@@ -691,7 +746,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_bucket_lifecycle_rules(bucket_id="<id>", data={
-        "type": latitudesh_python_sdk.PostStorageBucketLifecycleRulesType.LIFECYCLE_RULES,
+        "type": latitudesh_python_sdk.PostStorageBucketLifecycleRulesObjectStorageType.LIFECYCLE_RULES,
         "attributes": {
             "name": "full-cleanup-rule",
             "prefix": "temp/",
@@ -719,7 +774,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_bucket_lifecycle_rules(bucket_id="<id>", data={
-        "type": latitudesh_python_sdk.PostStorageBucketLifecycleRulesType.LIFECYCLE_RULES,
+        "type": latitudesh_python_sdk.PostStorageBucketLifecycleRulesObjectStorageType.LIFECYCLE_RULES,
         "attributes": {
             "name": "<value>",
             "expiration_days": 69486,
@@ -744,7 +799,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_bucket_lifecycle_rules(bucket_id="<id>", data={
-        "type": latitudesh_python_sdk.PostStorageBucketLifecycleRulesType.LIFECYCLE_RULES,
+        "type": latitudesh_python_sdk.PostStorageBucketLifecycleRulesObjectStorageType.LIFECYCLE_RULES,
         "attributes": {
             "name": "<value>",
             "expiration_days": 69486,
@@ -769,7 +824,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.post_storage_bucket_lifecycle_rules(bucket_id="<id>", data={
-        "type": latitudesh_python_sdk.PostStorageBucketLifecycleRulesType.LIFECYCLE_RULES,
+        "type": latitudesh_python_sdk.PostStorageBucketLifecycleRulesObjectStorageType.LIFECYCLE_RULES,
         "attributes": {
             "name": "<value>",
             "expiration_days": 69486,
@@ -783,11 +838,11 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `bucket_id`                                                                                       | *str*                                                                                             | :heavy_check_mark:                                                                                | The object storage bucket ID                                                                      |
-| `data`                                                                                            | [models.PostStorageBucketLifecycleRulesData](../../models/poststoragebucketlifecyclerulesdata.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `retries`                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                  | :heavy_minus_sign:                                                                                | Configuration to override the default retry behavior of the client.                               |
+| Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `bucket_id`                                                                                                                 | *str*                                                                                                                       | :heavy_check_mark:                                                                                                          | The object storage bucket ID                                                                                                |
+| `data`                                                                                                                      | [models.PostStorageBucketLifecycleRulesObjectStorageData](../../models/poststoragebucketlifecyclerulesobjectstoragedata.md) | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         |
+| `retries`                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                            | :heavy_minus_sign:                                                                                                          | Configuration to override the default retry behavior of the client.                                                         |
 
 ### Response
 
@@ -840,7 +895,7 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## delete_storage_bucket_lifecycle_rule
@@ -899,7 +954,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.patch_storage_bucket_lifecycle_rule(bucket_id="<id>", id="<id>", data={
-        "type": latitudesh_python_sdk.PatchStorageBucketLifecycleRuleType.LIFECYCLE_RULES,
+        "type": latitudesh_python_sdk.PatchStorageBucketLifecycleRuleObjectStorageType.LIFECYCLE_RULES,
         "attributes": {
             "name": "<value>",
         },
@@ -923,7 +978,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.patch_storage_bucket_lifecycle_rule(bucket_id="<id>", id="<id>", data={
-        "type": latitudesh_python_sdk.PatchStorageBucketLifecycleRuleType.LIFECYCLE_RULES,
+        "type": latitudesh_python_sdk.PatchStorageBucketLifecycleRuleObjectStorageType.LIFECYCLE_RULES,
         "attributes": {
             "name": "<value>",
         },
@@ -947,7 +1002,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.patch_storage_bucket_lifecycle_rule(bucket_id="<id>", id="<id>", data={
-        "type": latitudesh_python_sdk.PatchStorageBucketLifecycleRuleType.LIFECYCLE_RULES,
+        "type": latitudesh_python_sdk.PatchStorageBucketLifecycleRuleObjectStorageType.LIFECYCLE_RULES,
         "attributes": {
             "name": "<value>",
         },
@@ -971,7 +1026,7 @@ with Latitudesh(
 ) as latitudesh:
 
     res = latitudesh.object_storage.patch_storage_bucket_lifecycle_rule(bucket_id="<id>", id="<id>", data={
-        "type": latitudesh_python_sdk.PatchStorageBucketLifecycleRuleType.LIFECYCLE_RULES,
+        "type": latitudesh_python_sdk.PatchStorageBucketLifecycleRuleObjectStorageType.LIFECYCLE_RULES,
         "attributes": {
             "name": "delete-old-logs",
             "enabled": False,
@@ -986,12 +1041,12 @@ with Latitudesh(
 
 ### Parameters
 
-| Parameter                                                                                         | Type                                                                                              | Required                                                                                          | Description                                                                                       |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `bucket_id`                                                                                       | *str*                                                                                             | :heavy_check_mark:                                                                                | The object storage bucket ID                                                                      |
-| `id`                                                                                              | *str*                                                                                             | :heavy_check_mark:                                                                                | The lifecycle rule ID                                                                             |
-| `data`                                                                                            | [models.PatchStorageBucketLifecycleRuleData](../../models/patchstoragebucketlifecycleruledata.md) | :heavy_check_mark:                                                                                | N/A                                                                                               |
-| `retries`                                                                                         | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                  | :heavy_minus_sign:                                                                                | Configuration to override the default retry behavior of the client.                               |
+| Parameter                                                                                                                   | Type                                                                                                                        | Required                                                                                                                    | Description                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `bucket_id`                                                                                                                 | *str*                                                                                                                       | :heavy_check_mark:                                                                                                          | The object storage bucket ID                                                                                                |
+| `id`                                                                                                                        | *str*                                                                                                                       | :heavy_check_mark:                                                                                                          | The lifecycle rule ID                                                                                                       |
+| `data`                                                                                                                      | [models.PatchStorageBucketLifecycleRuleObjectStorageData](../../models/patchstoragebucketlifecycleruleobjectstoragedata.md) | :heavy_check_mark:                                                                                                          | N/A                                                                                                                         |
+| `retries`                                                                                                                   | [Optional[utils.RetryConfig]](../../models/utils/retryconfig.md)                                                            | :heavy_minus_sign:                                                                                                          | Configuration to override the default retry behavior of the client.                                                         |
 
 ### Response
 
@@ -1043,5 +1098,5 @@ with Latitudesh(
 
 | Error Type               | Status Code              | Content Type             |
 | ------------------------ | ------------------------ | ------------------------ |
-| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
 | models.APIError          | 4XX, 5XX                 | \*/\*                    |

@@ -1,0 +1,9 @@
+# PatchStorageBucketsObjectStorageData
+
+
+## Fields
+
+| Field                                                                                                        | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `type`                                                                                                       | [models.PatchStorageBucketsObjectStorageType](../models/patchstoragebucketsobjectstoragetype.md)             | :heavy_check_mark:                                                                                           | N/A                                                                                                          |
+| `attributes`                                                                                                 | [models.PatchStorageBucketsObjectStorageAttributes](../models/patchstoragebucketsobjectstorageattributes.md) | :heavy_check_mark:                                                                                           | N/A                                                                                                          |

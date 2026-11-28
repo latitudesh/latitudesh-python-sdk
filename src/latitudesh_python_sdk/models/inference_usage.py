@@ -17,13 +17,122 @@ from typing import Dict, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class EstimatedCostByMeterTypedDict(TypedDict):
+    r"""estimated_cost split by billing meter; input covers the uncached input tokens"""
+
+    input: NotRequired[Nullable[str]]
+    r"""Estimated USD for the meter at its current price; null when its tokens have no price"""
+    cached_input: NotRequired[Nullable[str]]
+    r"""Estimated USD for the meter at its current price; null when its tokens have no price"""
+    output: NotRequired[Nullable[str]]
+    r"""Estimated USD for the meter at its current price; null when its tokens have no price"""
+
+
+class EstimatedCostByMeter(BaseModel):
+    r"""estimated_cost split by billing meter; input covers the uncached input tokens"""
+
+    input: OptionalNullable[str] = UNSET
+    r"""Estimated USD for the meter at its current price; null when its tokens have no price"""
+
+    cached_input: OptionalNullable[str] = UNSET
+    r"""Estimated USD for the meter at its current price; null when its tokens have no price"""
+
+    output: OptionalNullable[str] = UNSET
+    r"""Estimated USD for the meter at its current price; null when its tokens have no price"""
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["input", "cached_input", "output"])
+        nullable_fields = set(["input", "cached_input", "output"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
+class TtftMsTypedDict(TypedDict):
+    r"""Time to first token in milliseconds over the range, measured at the cluster gateway for streamed requests"""
+
+    p50: NotRequired[Nullable[int]]
+    r"""Median; null when there is no streamed request"""
+
+
+class TtftMs(BaseModel):
+    r"""Time to first token in milliseconds over the range, measured at the cluster gateway for streamed requests"""
+
+    p50: OptionalNullable[int] = UNSET
+    r"""Median; null when there is no streamed request"""
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["p50"])
+        nullable_fields = set(["p50"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
+
+            if val != UNSET_SENTINEL:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
+                    m[k] = val
+
+        return m
+
+
 class ByModelTypedDict(TypedDict):
     model: NotRequired[str]
     requests: NotRequired[int]
     input_tokens: NotRequired[int]
+    r"""Input tokens, including cached input tokens"""
     output_tokens: NotRequired[int]
     estimated_cost: NotRequired[Nullable[str]]
-    r"""Estimated USD at current model prices; null when the model has no price"""
+    r"""Estimated USD at current model prices; null when tokens were used on a meter without a price"""
+    cached_input_tokens: NotRequired[int]
+    r"""Part of input_tokens served from the prompt cache"""
+    estimated_cost_by_meter: NotRequired[EstimatedCostByMeterTypedDict]
+    r"""estimated_cost split by billing meter; input covers the uncached input tokens"""
+    ttft_ms: NotRequired[TtftMsTypedDict]
+    r"""Time to first token in milliseconds over the range, measured at the cluster gateway for streamed requests"""
 
 
 class ByModel(BaseModel):
@@ -32,11 +141,21 @@ class ByModel(BaseModel):
     requests: Optional[int] = None
 
     input_tokens: Optional[int] = None
+    r"""Input tokens, including cached input tokens"""
 
     output_tokens: Optional[int] = None
 
     estimated_cost: OptionalNullable[str] = UNSET
-    r"""Estimated USD at current model prices; null when the model has no price"""
+    r"""Estimated USD at current model prices; null when tokens were used on a meter without a price"""
+
+    cached_input_tokens: Optional[int] = None
+    r"""Part of input_tokens served from the prompt cache"""
+
+    estimated_cost_by_meter: Optional[EstimatedCostByMeter] = None
+    r"""estimated_cost split by billing meter; input covers the uncached input tokens"""
+
+    ttft_ms: Optional[TtftMs] = None
+    r"""Time to first token in milliseconds over the range, measured at the cluster gateway for streamed requests"""
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
@@ -44,7 +163,16 @@ class ByModel(BaseModel):
 
     def serialize_model(self, handler):
         optional_fields = set(
-            ["model", "requests", "input_tokens", "output_tokens", "estimated_cost"]
+            [
+                "model",
+                "requests",
+                "input_tokens",
+                "output_tokens",
+                "estimated_cost",
+                "cached_input_tokens",
+                "estimated_cost_by_meter",
+                "ttft_ms",
+            ]
         )
         nullable_fields = set(["estimated_cost"])
         exclude_none = current_exclude_none()
@@ -76,14 +204,14 @@ class ByModel(BaseModel):
 class ModelsTypedDict(TypedDict):
     requests: NotRequired[int]
     estimated_cost: NotRequired[Nullable[str]]
-    r"""Estimated USD at current model prices; null when the model has no price"""
+    r"""Estimated USD at current model prices; null when tokens were used on a meter without a price"""
 
 
 class Models(BaseModel):
     requests: Optional[int] = None
 
     estimated_cost: OptionalNullable[str] = UNSET
-    r"""Estimated USD at current model prices; null when the model has no price"""
+    r"""Estimated USD at current model prices; null when tokens were used on a meter without a price"""
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):

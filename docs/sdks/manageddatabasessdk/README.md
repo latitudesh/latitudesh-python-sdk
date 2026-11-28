@@ -8,7 +8,7 @@ Managed database instances (PostgreSQL, ClickHouse)
 
 * [show_managed_database_metrics](#show_managed_database_metrics) - Show managed database metrics
 * [list_managed_databases](#list_managed_databases) - List managed databases
-* [create_managed_database](#create_managed_database) - Create a managed database
+* [~~create_managed_database~~](#create_managed_database) - Create a managed database :warning: **Deprecated**
 * [show_managed_database](#show_managed_database) - Show a managed database
 * [destroy_managed_database](#destroy_managed_database) - Destroy a managed database
 * [update_managed_database](#update_managed_database) - Update a managed database
@@ -97,13 +97,15 @@ with Latitudesh(
 | --------------- | --------------- | --------------- |
 | models.APIError | 4XX, 5XX        | \*/\*           |
 
-## create_managed_database
+## ~~create_managed_database~~
 
-Create a managed database
+Managed Databases is in maintenance mode: new databases can no longer be created. This endpoint only accepts restores, which require `recovery.sourceDatabaseName` pointing to an existing database in the project.
+
+> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
 
 ### Example Usage
 
-<!-- UsageSnippet language="python" operationID="create-managed-database" method="post" path="/managed_databases" -->
+<!-- UsageSnippet language="python" operationID="create-managed-database" method="post" path="/managed_databases" example="New databases are no longer accepted" -->
 ```python
 import latitudesh_python_sdk
 from latitudesh_python_sdk import Latitudesh
@@ -117,11 +119,14 @@ with Latitudesh(
     res = latitudesh.managed_databases.create_managed_database(data={
         "type": latitudesh_python_sdk.ManagedDatabasePayloadType.MANAGED_DATABASES,
         "attributes": {
-            "name": "my-postgres-db",
+            "name": "my-restored-db",
             "project_id": "proj_ABC123",
             "region": "ASH",
             "plan": "db.psql.small",
             "engine": "postgres",
+            "recovery": {
+                "source_database_name": "my-postgres-db",
+            },
         },
     })
 
@@ -143,9 +148,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## show_managed_database
 

@@ -9,7 +9,11 @@ from latitudesh_python_sdk.types import (
     serialize_with_info,
 )
 from latitudesh_python_sdk.types.basemodel import current_filtered_dump
-from latitudesh_python_sdk.utils import FieldMetadata, QueryParamMetadata
+from latitudesh_python_sdk.utils import (
+    FieldMetadata,
+    HeaderMetadata,
+    QueryParamMetadata,
+)
 import pydantic
 from pydantic import model_serializer
 from typing import Callable, Optional
@@ -24,13 +28,14 @@ class IndexVirtualMachineRequestTypedDict(TypedDict):
     extra_fields_virtual_machines: NotRequired[str]
     r"""Comma-separated extra attributes that are lazy-loaded. Supported values: `credentials`, `pending_restart`. Example: `extra_fields[virtual_machines]=credentials,pending_restart`."""
     sort: NotRequired[str]
-    r"""Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at, name, hostname, status. Example: `sort=status,-created_at` sorts by status ascending, then by creation date descending."""
+    r"""Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at, status, name, hostname. Example: `sort=status,-created_at` sorts by status ascending, then by creation date descending."""
     page_size: NotRequired[int]
     r"""Number of items to return per page"""
     page_number: NotRequired[int]
     r"""Page number to return (starts at 1)"""
     stats_total: NotRequired[str]
     r"""Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`."""
+    x_correlation_id: NotRequired[str]
 
 
 class IndexVirtualMachineRequest(BaseModel):
@@ -59,7 +64,7 @@ class IndexVirtualMachineRequest(BaseModel):
         Optional[str],
         FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
     ] = None
-    r"""Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at, name, hostname, status. Example: `sort=status,-created_at` sorts by status ascending, then by creation date descending."""
+    r"""Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at, status, name, hostname. Example: `sort=status,-created_at` sorts by status ascending, then by creation date descending."""
 
     page_size: Annotated[
         Optional[int],
@@ -82,6 +87,12 @@ class IndexVirtualMachineRequest(BaseModel):
     ] = None
     r"""Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`."""
 
+    x_correlation_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Correlation-ID"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
@@ -96,6 +107,7 @@ class IndexVirtualMachineRequest(BaseModel):
                 "page[size]",
                 "page[number]",
                 "stats[total]",
+                "X-Correlation-ID",
             ]
         )
         exclude_none = current_exclude_none()

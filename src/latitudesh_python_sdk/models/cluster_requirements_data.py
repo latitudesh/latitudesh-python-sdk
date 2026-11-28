@@ -24,7 +24,7 @@ class ClusterRequirementsDataType(str, Enum):
 
 
 class RequirementsState(str, Enum):
-    r"""draft while they're being prepared; awaiting_signature to review and sign; signed once an owner or administrator signs. Any later change asks for a new signature."""
+    r"""draft while they're being prepared; awaiting_signature to review, change and sign; signed once an owner or administrator signs. Signed requirements are locked: changing them or their node groups answers 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them."""
 
     DRAFT = "draft"
     AWAITING_SIGNATURE = "awaiting_signature"
@@ -272,13 +272,13 @@ class Kinds(str, Enum):
     OTHER = "other"
 
 
-class PlansModelTypedDict(TypedDict):
+class ClusterRequirementsDataPlansTypedDict(TypedDict):
     slug: NotRequired[str]
     name: NotRequired[str]
     os_options: NotRequired[List[ClusterOsOptionTypedDict]]
 
 
-class PlansModel(BaseModel):
+class ClusterRequirementsDataPlans(BaseModel):
     slug: Optional[str] = None
 
     name: Optional[str] = None
@@ -314,7 +314,7 @@ class NodeGroupOptionsTypedDict(TypedDict):
 
     kinds: NotRequired[List[Kinds]]
     max_server_count: NotRequired[int]
-    plans: NotRequired[List[PlansModelTypedDict]]
+    plans: NotRequired[List[ClusterRequirementsDataPlansTypedDict]]
 
 
 class NodeGroupOptions(BaseModel):
@@ -324,7 +324,7 @@ class NodeGroupOptions(BaseModel):
 
     max_server_count: Optional[int] = None
 
-    plans: Optional[List[PlansModel]] = None
+    plans: Optional[List[ClusterRequirementsDataPlans]] = None
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
@@ -390,7 +390,7 @@ class Signoff(BaseModel):
 
 class ClusterRequirementsDataAttributesTypedDict(TypedDict):
     requirements_state: NotRequired[RequirementsState]
-    r"""draft while they're being prepared; awaiting_signature to review and sign; signed once an owner or administrator signs. Any later change asks for a new signature."""
+    r"""draft while they're being prepared; awaiting_signature to review, change and sign; signed once an owner or administrator signs. Signed requirements are locked: changing them or their node groups answers 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them."""
     requirements_due_date: NotRequired[Nullable[date]]
     requirements: NotRequired[RequirementsTypedDict]
     r"""The cluster's requirements, and what is expected of each"""
@@ -406,7 +406,7 @@ class ClusterRequirementsDataAttributesTypedDict(TypedDict):
 
 class ClusterRequirementsDataAttributes(BaseModel):
     requirements_state: Optional[RequirementsState] = None
-    r"""draft while they're being prepared; awaiting_signature to review and sign; signed once an owner or administrator signs. Any later change asks for a new signature."""
+    r"""draft while they're being prepared; awaiting_signature to review, change and sign; signed once an owner or administrator signs. Signed requirements are locked: changing them or their node groups answers 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them."""
 
     requirements_due_date: OptionalNullable[date] = UNSET
 

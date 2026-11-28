@@ -123,19 +123,30 @@ class RegionData(BaseModel):
         return m
 
 
+class RegionMetaTypedDict(TypedDict):
+    pass
+
+
+class RegionMeta(BaseModel):
+    pass
+
+
 class RegionTypedDict(TypedDict):
     data: NotRequired[RegionDataTypedDict]
+    meta: NotRequired[RegionMetaTypedDict]
 
 
 class Region(BaseModel):
     data: Optional[RegionData] = None
+
+    meta: Optional[RegionMeta] = None
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

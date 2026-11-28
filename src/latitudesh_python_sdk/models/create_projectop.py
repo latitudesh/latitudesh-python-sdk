@@ -143,10 +143,19 @@ class CreateProjectProjectsRequestBody(BaseModel):
         return m
 
 
+class CreateProjectMetaTypedDict(TypedDict):
+    pass
+
+
+class CreateProjectMeta(BaseModel):
+    pass
+
+
 class CreateProjectResponseBodyTypedDict(TypedDict):
     r"""Created"""
 
     data: NotRequired[ProjectTypedDict]
+    meta: NotRequired[CreateProjectMetaTypedDict]
 
 
 class CreateProjectResponseBody(BaseModel):
@@ -154,12 +163,14 @@ class CreateProjectResponseBody(BaseModel):
 
     data: Optional[Project] = None
 
+    meta: Optional[CreateProjectMeta] = None
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

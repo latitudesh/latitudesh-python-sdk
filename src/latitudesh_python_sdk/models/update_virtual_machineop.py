@@ -5,18 +5,29 @@ from .virtual_machine_update_payload import (
     VirtualMachineUpdatePayload,
     VirtualMachineUpdatePayloadTypedDict,
 )
-from latitudesh_python_sdk.types import BaseModel
+from latitudesh_python_sdk.types import (
+    BaseModel,
+    UNSET_SENTINEL,
+    current_exclude_none,
+    serialize_with_info,
+)
+from latitudesh_python_sdk.types.basemodel import current_filtered_dump
 from latitudesh_python_sdk.utils import (
     FieldMetadata,
+    HeaderMetadata,
     PathParamMetadata,
     RequestMetadata,
 )
-from typing_extensions import Annotated, TypedDict
+import pydantic
+from pydantic import model_serializer
+from typing import Optional
+from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class UpdateVirtualMachineRequestTypedDict(TypedDict):
     virtual_machine_id: str
     virtual_machine_update_payload: VirtualMachineUpdatePayloadTypedDict
+    x_correlation_id: NotRequired[str]
 
 
 class UpdateVirtualMachineRequest(BaseModel):
@@ -28,3 +39,32 @@ class UpdateVirtualMachineRequest(BaseModel):
         VirtualMachineUpdatePayload,
         FieldMetadata(request=RequestMetadata(media_type="application/json")),
     ]
+
+    x_correlation_id: Annotated[
+        Optional[str],
+        pydantic.Field(alias="X-Correlation-ID"),
+        FieldMetadata(header=HeaderMetadata(style="simple", explode=False)),
+    ] = None
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["X-Correlation-ID"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m

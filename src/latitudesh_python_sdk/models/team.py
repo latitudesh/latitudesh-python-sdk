@@ -3,6 +3,7 @@
 from __future__ import annotations
 from .project_include import ProjectInclude, ProjectIncludeTypedDict
 from .user_include import UserInclude, UserIncludeTypedDict
+from enum import Enum
 from latitudesh_python_sdk.types import (
     BaseModel,
     Nullable,
@@ -268,9 +269,14 @@ class TeamAttributes(BaseModel):
         return m
 
 
+class TeamType(str, Enum):
+    TEAMS = "teams"
+
+
 class TeamTypedDict(TypedDict):
     id: NotRequired[str]
     attributes: NotRequired[TeamAttributesTypedDict]
+    type: NotRequired[TeamType]
 
 
 class Team(BaseModel):
@@ -278,12 +284,14 @@ class Team(BaseModel):
 
     attributes: Optional[TeamAttributes] = None
 
+    type: Optional[TeamType] = None
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["id", "attributes"])
+        optional_fields = set(["id", "attributes", "type"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

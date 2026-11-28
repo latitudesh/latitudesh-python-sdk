@@ -2,12 +2,13 @@
 
 from .basesdk import BaseSDK
 from datetime import date
+from jsonpath import JSONPath
 from latitudesh_python_sdk import models, utils
 from latitudesh_python_sdk._hooks import HookContext
 from latitudesh_python_sdk.types import OptionalNullable, UNSET
 from latitudesh_python_sdk.utils import get_security_from_env
 from latitudesh_python_sdk.utils.unmarshal_json_response import unmarshal_json_response
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Dict, List, Mapping, Optional, Union
 
 
 class ObjectStorage(BaseSDK):
@@ -395,7 +396,8 @@ class ObjectStorage(BaseSDK):
         self,
         *,
         data: Union[
-            models.PostStorageAccessKeysData, models.PostStorageAccessKeysDataTypedDict
+            models.PostStorageAccessKeysObjectStorageData,
+            models.PostStorageAccessKeysObjectStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -422,8 +424,10 @@ class ObjectStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageAccessKeysRequestBody(
-            data=utils.get_pydantic_model(data, models.PostStorageAccessKeysData),
+        request = models.PostStorageAccessKeysObjectStorageRequestBody(
+            data=utils.get_pydantic_model(
+                data, models.PostStorageAccessKeysObjectStorageData
+            ),
         )
 
         req = self._build_request(
@@ -440,7 +444,11 @@ class ObjectStorage(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.PostStorageAccessKeysRequestBody
+                request,
+                False,
+                False,
+                "json",
+                models.PostStorageAccessKeysObjectStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -496,7 +504,8 @@ class ObjectStorage(BaseSDK):
         self,
         *,
         data: Union[
-            models.PostStorageAccessKeysData, models.PostStorageAccessKeysDataTypedDict
+            models.PostStorageAccessKeysObjectStorageData,
+            models.PostStorageAccessKeysObjectStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -523,8 +532,10 @@ class ObjectStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageAccessKeysRequestBody(
-            data=utils.get_pydantic_model(data, models.PostStorageAccessKeysData),
+        request = models.PostStorageAccessKeysObjectStorageRequestBody(
+            data=utils.get_pydantic_model(
+                data, models.PostStorageAccessKeysObjectStorageData
+            ),
         )
 
         req = self._build_request_async(
@@ -541,7 +552,11 @@ class ObjectStorage(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.PostStorageAccessKeysRequestBody
+                request,
+                False,
+                False,
+                "json",
+                models.PostStorageAccessKeysObjectStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -991,16 +1006,26 @@ class ObjectStorage(BaseSDK):
         self,
         *,
         filter_project: Optional[str] = None,
+        filter_name: Optional[str] = None,
+        page_size: Optional[int] = 50,
+        page_number: Optional[int] = 1,
+        stats_total: Optional[str] = None,
+        extra_fields_object_storages: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ObjectStorages:
+    ) -> Optional[models.GetStorageBucketsResponse]:
         r"""List buckets
 
         Lists all object storages from a team.
 
         :param filter_project: The project ID or Slug to filter by
+        :param filter_name: The name to filter by (case-insensitive exact match)
+        :param page_size: Number of items to return per page
+        :param page_number: Page number to return (starts at 1)
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param extra_fields_object_storages: The `credentials` are provided as extra attributes that are lazy loaded. Only storages where the requesting user is the creator will include them. To request, set `extra_fields[object_storages]=credentials` in the query string.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1018,6 +1043,11 @@ class ObjectStorage(BaseSDK):
 
         request = models.GetStorageBucketsRequest(
             filter_project=filter_project,
+            filter_name=filter_name,
+            page_size=page_size,
+            page_number=page_number,
+            stats_total=stats_total,
+            extra_fields_object_storages=extra_fields_object_storages,
         )
 
         req = self._build_request(
@@ -1062,12 +1092,38 @@ class ObjectStorage(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        def next_func() -> Optional[models.GetStorageBucketsResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+            page = request.page_number if isinstance(request.page_number, int) else 1
+            next_page = page + 1
+
+            if not http_res.text:
+                return None
+            results = JSONPath("$.data").parse(body)
+            if len(results) == 0 or len(results[0]) == 0:
+                return None
+            limit_ = request.page_size if isinstance(request.page_size, int) else 50
+            if len(results[0]) < limit_:
+                return None
+
+            return self.get_storage_buckets(
+                filter_project=filter_project,
+                filter_name=filter_name,
+                page_size=page_size,
+                page_number=next_page,
+                stats_total=stats_total,
+                extra_fields_object_storages=extra_fields_object_storages,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.ObjectStorages, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
+            return models.GetStorageBucketsResponse(
+                result=unmarshal_json_response(models.ObjectStorages, http_res),
+                next=next_func,
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1081,16 +1137,26 @@ class ObjectStorage(BaseSDK):
         self,
         *,
         filter_project: Optional[str] = None,
+        filter_name: Optional[str] = None,
+        page_size: Optional[int] = 50,
+        page_number: Optional[int] = 1,
+        stats_total: Optional[str] = None,
+        extra_fields_object_storages: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
         http_headers: Optional[Mapping[str, str]] = None,
-    ) -> models.ObjectStorages:
+    ) -> Optional[models.GetStorageBucketsResponse]:
         r"""List buckets
 
         Lists all object storages from a team.
 
         :param filter_project: The project ID or Slug to filter by
+        :param filter_name: The name to filter by (case-insensitive exact match)
+        :param page_size: Number of items to return per page
+        :param page_number: Page number to return (starts at 1)
+        :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param extra_fields_object_storages: The `credentials` are provided as extra attributes that are lazy loaded. Only storages where the requesting user is the creator will include them. To request, set `extra_fields[object_storages]=credentials` in the query string.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1108,6 +1174,11 @@ class ObjectStorage(BaseSDK):
 
         request = models.GetStorageBucketsRequest(
             filter_project=filter_project,
+            filter_name=filter_name,
+            page_size=page_size,
+            page_number=page_number,
+            stats_total=stats_total,
+            extra_fields_object_storages=extra_fields_object_storages,
         )
 
         req = self._build_request_async(
@@ -1152,12 +1223,38 @@ class ObjectStorage(BaseSDK):
             retry_config=retry_config,
         )
 
-        response_data: Any = None
+        def next_func() -> Optional[models.GetStorageBucketsResponse]:
+            body = utils.unmarshal_json(http_res.text, Union[Dict[Any, Any], List[Any]])
+            page = request.page_number if isinstance(request.page_number, int) else 1
+            next_page = page + 1
+
+            if not http_res.text:
+                return None
+            results = JSONPath("$.data").parse(body)
+            if len(results) == 0 or len(results[0]) == 0:
+                return None
+            limit_ = request.page_size if isinstance(request.page_size, int) else 50
+            if len(results[0]) < limit_:
+                return None
+
+            return self.get_storage_buckets(
+                filter_project=filter_project,
+                filter_name=filter_name,
+                page_size=page_size,
+                page_number=next_page,
+                stats_total=stats_total,
+                extra_fields_object_storages=extra_fields_object_storages,
+                retries=retries,
+                server_url=server_url,
+                timeout_ms=timeout_ms,
+                http_headers=http_headers,
+            )
+
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
-            return unmarshal_json_response(models.ObjectStorages, http_res)
-        if utils.match_response(http_res, "403", "application/vnd.api+json"):
-            response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
-            raise models.ErrorObject(response_data, http_res)
+            return models.GetStorageBucketsResponse(
+                result=unmarshal_json_response(models.ObjectStorages, http_res),
+                next=next_func,
+            )
         if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
@@ -1171,7 +1268,8 @@ class ObjectStorage(BaseSDK):
         self,
         *,
         data: Union[
-            models.PostStorageBucketsData, models.PostStorageBucketsDataTypedDict
+            models.PostStorageBucketsObjectStorageData,
+            models.PostStorageBucketsObjectStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1198,8 +1296,10 @@ class ObjectStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageBucketsRequestBody(
-            data=utils.get_pydantic_model(data, models.PostStorageBucketsData),
+        request = models.PostStorageBucketsObjectStorageRequestBody(
+            data=utils.get_pydantic_model(
+                data, models.PostStorageBucketsObjectStorageData
+            ),
         )
 
         req = self._build_request(
@@ -1216,7 +1316,11 @@ class ObjectStorage(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.PostStorageBucketsRequestBody
+                request,
+                False,
+                False,
+                "json",
+                models.PostStorageBucketsObjectStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1273,7 +1377,8 @@ class ObjectStorage(BaseSDK):
         self,
         *,
         data: Union[
-            models.PostStorageBucketsData, models.PostStorageBucketsDataTypedDict
+            models.PostStorageBucketsObjectStorageData,
+            models.PostStorageBucketsObjectStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1300,8 +1405,10 @@ class ObjectStorage(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.PostStorageBucketsRequestBody(
-            data=utils.get_pydantic_model(data, models.PostStorageBucketsData),
+        request = models.PostStorageBucketsObjectStorageRequestBody(
+            data=utils.get_pydantic_model(
+                data, models.PostStorageBucketsObjectStorageData
+            ),
         )
 
         req = self._build_request_async(
@@ -1318,7 +1425,11 @@ class ObjectStorage(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.PostStorageBucketsRequestBody
+                request,
+                False,
+                False,
+                "json",
+                models.PostStorageBucketsObjectStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -1375,6 +1486,7 @@ class ObjectStorage(BaseSDK):
         self,
         *,
         id: str,
+        extra_fields_object_storages: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1385,6 +1497,7 @@ class ObjectStorage(BaseSDK):
         Shows details of a specific object storage.
 
         :param id: The object storage ID
+        :param extra_fields_object_storages: The `credentials` are provided as extra attributes that are lazy loaded. Only the storage creator may request them. To request, set `extra_fields[object_storages]=credentials` in the query string.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1402,6 +1515,7 @@ class ObjectStorage(BaseSDK):
 
         request = models.GetStorageBucketRequest(
             id=id,
+            extra_fields_object_storages=extra_fields_object_storages,
         )
 
         req = self._build_request(
@@ -1451,7 +1565,7 @@ class ObjectStorage(BaseSDK):
             return unmarshal_json_response(
                 models.GetStorageBucketResponseBody, http_res
             )
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1467,6 +1581,7 @@ class ObjectStorage(BaseSDK):
         self,
         *,
         id: str,
+        extra_fields_object_storages: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -1477,6 +1592,7 @@ class ObjectStorage(BaseSDK):
         Shows details of a specific object storage.
 
         :param id: The object storage ID
+        :param extra_fields_object_storages: The `credentials` are provided as extra attributes that are lazy loaded. Only the storage creator may request them. To request, set `extra_fields[object_storages]=credentials` in the query string.
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -1494,6 +1610,7 @@ class ObjectStorage(BaseSDK):
 
         request = models.GetStorageBucketRequest(
             id=id,
+            extra_fields_object_storages=extra_fields_object_storages,
         )
 
         req = self._build_request_async(
@@ -1543,7 +1660,7 @@ class ObjectStorage(BaseSDK):
             return unmarshal_json_response(
                 models.GetStorageBucketResponseBody, http_res
             )
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1749,6 +1866,216 @@ class ObjectStorage(BaseSDK):
 
         raise models.APIError("Unexpected response received", http_res)
 
+    def patch_storage_buckets(
+        self,
+        *,
+        id: str,
+        data: Union[
+            models.PatchStorageBucketsObjectStorageData,
+            models.PatchStorageBucketsObjectStorageDataTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.PatchStorageBucketsResponseBody:
+        r"""Update bucket
+
+        Updates versioning, locking and bucket logging settings for an object storage bucket.
+
+        :param id:
+        :param data:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.PatchStorageBucketsRequest(
+            id=id,
+            request_body=models.PatchStorageBucketsObjectStorageRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PatchStorageBucketsObjectStorageData
+                ),
+            ),
+        )
+
+        req = self._build_request(
+            method="PATCH",
+            path="/storage/buckets/{id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                False,
+                "json",
+                models.PatchStorageBucketsObjectStorageRequestBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="patch-storage-buckets",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Object Storage"],
+                extensions={"x-mint": {"href": "/api-reference/patch-storage-buckets"}},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(
+                models.PatchStorageBucketsResponseBody, http_res
+            )
+        if utils.match_response(http_res, ["403", "422", "4XX"], "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def patch_storage_buckets_async(
+        self,
+        *,
+        id: str,
+        data: Union[
+            models.PatchStorageBucketsObjectStorageData,
+            models.PatchStorageBucketsObjectStorageDataTypedDict,
+        ],
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.PatchStorageBucketsResponseBody:
+        r"""Update bucket
+
+        Updates versioning, locking and bucket logging settings for an object storage bucket.
+
+        :param id:
+        :param data:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.PatchStorageBucketsRequest(
+            id=id,
+            request_body=models.PatchStorageBucketsObjectStorageRequestBody(
+                data=utils.get_pydantic_model(
+                    data, models.PatchStorageBucketsObjectStorageData
+                ),
+            ),
+        )
+
+        req = self._build_request_async(
+            method="PATCH",
+            path="/storage/buckets/{id}",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=True,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            get_serialized_body=lambda: utils.serialize_request_body(
+                request.request_body,
+                False,
+                False,
+                "json",
+                models.PatchStorageBucketsObjectStorageRequestBody,
+            ),
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="patch-storage-buckets",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Object Storage"],
+                extensions={"x-mint": {"href": "/api-reference/patch-storage-buckets"}},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(
+                models.PatchStorageBucketsResponseBody, http_res
+            )
+        if utils.match_response(http_res, ["403", "422", "4XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
     def get_storage_bucket_lifecycle_rules(
         self,
         *,
@@ -1831,7 +2158,7 @@ class ObjectStorage(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.LifecycleRules, http_res)
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1925,7 +2252,7 @@ class ObjectStorage(BaseSDK):
         response_data: Any = None
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.LifecycleRules, http_res)
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -1942,8 +2269,8 @@ class ObjectStorage(BaseSDK):
         *,
         bucket_id: str,
         data: Union[
-            models.PostStorageBucketLifecycleRulesData,
-            models.PostStorageBucketLifecycleRulesDataTypedDict,
+            models.PostStorageBucketLifecycleRulesObjectStorageData,
+            models.PostStorageBucketLifecycleRulesObjectStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -1973,9 +2300,9 @@ class ObjectStorage(BaseSDK):
 
         request = models.PostStorageBucketLifecycleRulesRequest(
             bucket_id=bucket_id,
-            request_body=models.PostStorageBucketLifecycleRulesRequestBody(
+            request_body=models.PostStorageBucketLifecycleRulesObjectStorageRequestBody(
                 data=utils.get_pydantic_model(
-                    data, models.PostStorageBucketLifecycleRulesData
+                    data, models.PostStorageBucketLifecycleRulesObjectStorageData
                 ),
             ),
         )
@@ -1998,7 +2325,7 @@ class ObjectStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PostStorageBucketLifecycleRulesRequestBody,
+                models.PostStorageBucketLifecycleRulesObjectStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2060,8 +2387,8 @@ class ObjectStorage(BaseSDK):
         *,
         bucket_id: str,
         data: Union[
-            models.PostStorageBucketLifecycleRulesData,
-            models.PostStorageBucketLifecycleRulesDataTypedDict,
+            models.PostStorageBucketLifecycleRulesObjectStorageData,
+            models.PostStorageBucketLifecycleRulesObjectStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2091,9 +2418,9 @@ class ObjectStorage(BaseSDK):
 
         request = models.PostStorageBucketLifecycleRulesRequest(
             bucket_id=bucket_id,
-            request_body=models.PostStorageBucketLifecycleRulesRequestBody(
+            request_body=models.PostStorageBucketLifecycleRulesObjectStorageRequestBody(
                 data=utils.get_pydantic_model(
-                    data, models.PostStorageBucketLifecycleRulesData
+                    data, models.PostStorageBucketLifecycleRulesObjectStorageData
                 ),
             ),
         )
@@ -2116,7 +2443,7 @@ class ObjectStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PostStorageBucketLifecycleRulesRequestBody,
+                models.PostStorageBucketLifecycleRulesObjectStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2260,7 +2587,7 @@ class ObjectStorage(BaseSDK):
             return unmarshal_json_response(
                 models.GetStorageBucketLifecycleRuleResponseBody, http_res
             )
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -2359,7 +2686,7 @@ class ObjectStorage(BaseSDK):
             return unmarshal_json_response(
                 models.GetStorageBucketLifecycleRuleResponseBody, http_res
             )
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -2577,8 +2904,8 @@ class ObjectStorage(BaseSDK):
         bucket_id: str,
         id: str,
         data: Union[
-            models.PatchStorageBucketLifecycleRuleData,
-            models.PatchStorageBucketLifecycleRuleDataTypedDict,
+            models.PatchStorageBucketLifecycleRuleObjectStorageData,
+            models.PatchStorageBucketLifecycleRuleObjectStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2610,9 +2937,9 @@ class ObjectStorage(BaseSDK):
         request = models.PatchStorageBucketLifecycleRuleRequest(
             bucket_id=bucket_id,
             id=id,
-            request_body=models.PatchStorageBucketLifecycleRuleRequestBody(
+            request_body=models.PatchStorageBucketLifecycleRuleObjectStorageRequestBody(
                 data=utils.get_pydantic_model(
-                    data, models.PatchStorageBucketLifecycleRuleData
+                    data, models.PatchStorageBucketLifecycleRuleObjectStorageData
                 ),
             ),
         )
@@ -2635,7 +2962,7 @@ class ObjectStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PatchStorageBucketLifecycleRuleRequestBody,
+                models.PatchStorageBucketLifecycleRuleObjectStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2698,8 +3025,8 @@ class ObjectStorage(BaseSDK):
         bucket_id: str,
         id: str,
         data: Union[
-            models.PatchStorageBucketLifecycleRuleData,
-            models.PatchStorageBucketLifecycleRuleDataTypedDict,
+            models.PatchStorageBucketLifecycleRuleObjectStorageData,
+            models.PatchStorageBucketLifecycleRuleObjectStorageDataTypedDict,
         ],
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
@@ -2731,9 +3058,9 @@ class ObjectStorage(BaseSDK):
         request = models.PatchStorageBucketLifecycleRuleRequest(
             bucket_id=bucket_id,
             id=id,
-            request_body=models.PatchStorageBucketLifecycleRuleRequestBody(
+            request_body=models.PatchStorageBucketLifecycleRuleObjectStorageRequestBody(
                 data=utils.get_pydantic_model(
-                    data, models.PatchStorageBucketLifecycleRuleData
+                    data, models.PatchStorageBucketLifecycleRuleObjectStorageData
                 ),
             ),
         )
@@ -2756,7 +3083,7 @@ class ObjectStorage(BaseSDK):
                 False,
                 False,
                 "json",
-                models.PatchStorageBucketLifecycleRuleRequestBody,
+                models.PatchStorageBucketLifecycleRuleObjectStorageRequestBody,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -2895,7 +3222,7 @@ class ObjectStorage(BaseSDK):
             return unmarshal_json_response(
                 models.GetStorageBucketMetricsResponseBody, http_res
             )
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):
@@ -2989,7 +3316,7 @@ class ObjectStorage(BaseSDK):
             return unmarshal_json_response(
                 models.GetStorageBucketMetricsResponseBody, http_res
             )
-        if utils.match_response(http_res, ["403", "404"], "application/vnd.api+json"):
+        if utils.match_response(http_res, "404", "application/vnd.api+json"):
             response_data = unmarshal_json_response(models.ErrorObjectData, http_res)
             raise models.ErrorObject(response_data, http_res)
         if utils.match_response(http_res, "4XX", "*"):

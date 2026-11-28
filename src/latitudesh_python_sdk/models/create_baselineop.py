@@ -41,12 +41,95 @@ class CreateBaselineBaselinesPreviewRaid(str, Enum):
     RAID_10 = "raid-10"
 
 
+class CreateBaselineCPUVirtualization(str, Enum):
+    ENABLED = "enabled"
+    DISABLED = "disabled"
+
+
+class CreateBaselineSimultaneousMultithreading(str, Enum):
+    ENABLED = "enabled"
+    DISABLED = "disabled"
+
+
+class CreateBaselineIommu(str, Enum):
+    ENABLED = "enabled"
+    DISABLED = "disabled"
+
+
+class CreateBaselineSrIov(str, Enum):
+    ENABLED = "enabled"
+    DISABLED = "disabled"
+
+
+class CreateBaselineProcessorCStates(str, Enum):
+    ENABLED = "enabled"
+    DISABLED = "disabled"
+
+
+class CreateBaselineTurboBoost(str, Enum):
+    ENABLED = "enabled"
+    DISABLED = "disabled"
+
+
 class CreateBaselineBaselinesPreviewBiosTypedDict(TypedDict):
-    r"""Expected BIOS settings, keyed by setting id"""
+    r"""Expected BIOS settings, keyed by setting id. Each value is the string 'enabled' or 'disabled'. Whether a server supports a setting is checked when the baseline is delivered"""
+
+    cpu_virtualization: NotRequired[CreateBaselineCPUVirtualization]
+    simultaneous_multithreading: NotRequired[CreateBaselineSimultaneousMultithreading]
+    iommu: NotRequired[CreateBaselineIommu]
+    sr_iov: NotRequired[CreateBaselineSrIov]
+    processor_c_states: NotRequired[CreateBaselineProcessorCStates]
+    turbo_boost: NotRequired[CreateBaselineTurboBoost]
 
 
 class CreateBaselineBaselinesPreviewBios(BaseModel):
-    r"""Expected BIOS settings, keyed by setting id"""
+    r"""Expected BIOS settings, keyed by setting id. Each value is the string 'enabled' or 'disabled'. Whether a server supports a setting is checked when the baseline is delivered"""
+
+    cpu_virtualization: Optional[CreateBaselineCPUVirtualization] = None
+
+    simultaneous_multithreading: Optional[CreateBaselineSimultaneousMultithreading] = (
+        None
+    )
+
+    iommu: Optional[CreateBaselineIommu] = None
+
+    sr_iov: Optional[CreateBaselineSrIov] = None
+
+    processor_c_states: Optional[CreateBaselineProcessorCStates] = None
+
+    turbo_boost: Optional[CreateBaselineTurboBoost] = None
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(
+            [
+                "cpu_virtualization",
+                "simultaneous_multithreading",
+                "iommu",
+                "sr_iov",
+                "processor_c_states",
+                "turbo_boost",
+            ]
+        )
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
 
 
 class CreateBaselineBaselinesPreviewAttributesTypedDict(TypedDict):
@@ -69,7 +152,7 @@ class CreateBaselineBaselinesPreviewAttributesTypedDict(TypedDict):
     raid: NotRequired[Nullable[CreateBaselineBaselinesPreviewRaid]]
     r"""RAID level for the default disk layout. With 4 or more disks (or a hardware RAID boot disk) the OS stays on the boot disk or a RAID 1 mirror and the remaining disks form the data array at /data at this level; with 2-3 disks the level applies to the OS across all disks. 'raid-10' is data-only, needs at least 4 data disks and is applied only at locations with the `raid_ten` feature. Mutually exclusive with disk_layout"""
     bios: NotRequired[CreateBaselineBaselinesPreviewBiosTypedDict]
-    r"""Expected BIOS settings, keyed by setting id"""
+    r"""Expected BIOS settings, keyed by setting id. Each value is the string 'enabled' or 'disabled'. Whether a server supports a setting is checked when the baseline is delivered"""
 
 
 class CreateBaselineBaselinesPreviewAttributes(BaseModel):
@@ -101,7 +184,7 @@ class CreateBaselineBaselinesPreviewAttributes(BaseModel):
     r"""RAID level for the default disk layout. With 4 or more disks (or a hardware RAID boot disk) the OS stays on the boot disk or a RAID 1 mirror and the remaining disks form the data array at /data at this level; with 2-3 disks the level applies to the OS across all disks. 'raid-10' is data-only, needs at least 4 data disks and is applied only at locations with the `raid_ten` feature. Mutually exclusive with disk_layout"""
 
     bios: Optional[CreateBaselineBaselinesPreviewBios] = None
-    r"""Expected BIOS settings, keyed by setting id"""
+    r"""Expected BIOS settings, keyed by setting id. Each value is the string 'enabled' or 'disabled'. Whether a server supports a setting is checked when the baseline is delivered"""
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):

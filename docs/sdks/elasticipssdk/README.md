@@ -452,15 +452,16 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## create_elastic_ip_bgp_session
 
 Announce an elastic IP from a server over BGP
 
-### Example Usage
+### Example Usage: Accepted
 
 <!-- UsageSnippet language="python" operationID="create-elastic-ip-bgp-session" method="post" path="/elastic_ips/{elastic_ip_id}/bgp_sessions" example="Accepted" -->
 ```python
@@ -484,6 +485,27 @@ with Latitudesh(
     print(res)
 
 ```
+### Example Usage: Unprocessable Entity
+
+<!-- UsageSnippet language="python" operationID="create-elastic-ip-bgp-session" method="post" path="/elastic_ips/{elastic_ip_id}/bgp_sessions" example="Unprocessable Entity" -->
+```python
+import latitudesh_python_sdk
+from latitudesh_python_sdk import Latitudesh
+import os
+
+
+with Latitudesh(
+    bearer=os.getenv("LATITUDESH_BEARER"),
+) as latitudesh:
+
+    res = latitudesh.elastic_ips.create_elastic_ip_bgp_session(elastic_ip_id="<id>", data={
+        "type": latitudesh_python_sdk.CreateBgpSessionType.BGP_SESSIONS,
+    })
+
+    # Handle response
+    print(res)
+
+```
 
 ### Parameters
 
@@ -499,9 +521,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 404, 422            | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## get_elastic_ip_bgp_session
 
@@ -540,9 +563,10 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 404                      | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |
 
 ## delete_elastic_ip_bgp_session
 
@@ -577,6 +601,7 @@ with Latitudesh(
 
 ### Errors
 
-| Error Type      | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| models.APIError | 4XX, 5XX        | \*/\*           |
+| Error Type               | Status Code              | Content Type             |
+| ------------------------ | ------------------------ | ------------------------ |
+| models.ErrorObject       | 403, 404                 | application/vnd.api+json |
+| models.APIError          | 4XX, 5XX                 | \*/\*                    |

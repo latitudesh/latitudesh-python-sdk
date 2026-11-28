@@ -12,13 +12,21 @@ from latitudesh_python_sdk.types.basemodel import current_filtered_dump
 from latitudesh_python_sdk.utils import FieldMetadata, QueryParamMetadata
 import pydantic
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Callable, List, Optional
 from typing_extensions import Annotated, NotRequired, TypedDict
 
 
 class ListVolumesRequestTypedDict(TypedDict):
     filter_project: NotRequired[str]
     r"""The project ID or Slug to filter by"""
+    filter_name: NotRequired[str]
+    r"""The name to filter by (case-insensitive exact match)"""
+    page_size: NotRequired[int]
+    r"""Number of items to return per page"""
+    page_number: NotRequired[int]
+    r"""Page number to return (starts at 1)"""
+    stats_total: NotRequired[str]
+    r"""Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`."""
 
 
 class ListVolumesRequest(BaseModel):
@@ -29,12 +37,48 @@ class ListVolumesRequest(BaseModel):
     ] = None
     r"""The project ID or Slug to filter by"""
 
+    filter_name: Annotated[
+        Optional[str],
+        pydantic.Field(alias="filter[name]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""The name to filter by (case-insensitive exact match)"""
+
+    page_size: Annotated[
+        Optional[int],
+        pydantic.Field(alias="page[size]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 50
+    r"""Number of items to return per page"""
+
+    page_number: Annotated[
+        Optional[int],
+        pydantic.Field(alias="page[number]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = 1
+    r"""Page number to return (starts at 1)"""
+
+    stats_total: Annotated[
+        Optional[str],
+        pydantic.Field(alias="stats[total]"),
+        FieldMetadata(query=QueryParamMetadata(style="form", explode=True)),
+    ] = None
+    r"""Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`."""
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["filter[project]"])
+        optional_fields = set(
+            [
+                "filter[project]",
+                "filter[name]",
+                "page[size]",
+                "page[number]",
+                "stats[total]",
+            ]
+        )
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -53,10 +97,19 @@ class ListVolumesRequest(BaseModel):
         return m
 
 
+class ListVolumesMetaTypedDict(TypedDict):
+    pass
+
+
+class ListVolumesMeta(BaseModel):
+    pass
+
+
 class ListVolumesResponseBodyTypedDict(TypedDict):
     r"""Success"""
 
     data: NotRequired[List[VolumeDataTypedDict]]
+    meta: NotRequired[ListVolumesMetaTypedDict]
 
 
 class ListVolumesResponseBody(BaseModel):
@@ -64,12 +117,14 @@ class ListVolumesResponseBody(BaseModel):
 
     data: Optional[List[VolumeData]] = None
 
+    meta: Optional[ListVolumesMeta] = None
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -86,3 +141,13 @@ class ListVolumesResponseBody(BaseModel):
                     m[k] = val
 
         return m
+
+
+class ListVolumesResponseTypedDict(TypedDict):
+    result: ListVolumesResponseBodyTypedDict
+
+
+class ListVolumesResponse(BaseModel):
+    next: Callable[[], Optional[ListVolumesResponse]]
+
+    result: ListVolumesResponseBody

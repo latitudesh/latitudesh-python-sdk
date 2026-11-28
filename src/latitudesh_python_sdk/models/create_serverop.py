@@ -119,16 +119,11 @@ class CreateServerServersRaidLevel(str, Enum):
     RAID_10 = "raid-10"
 
 
-class CreateServerServersFilesystem(str, Enum):
-    EXT4 = "ext4"
-    XFS = "xfs"
-
-
 class CreateServerDiskLayoutTypedDict(TypedDict):
     count: int
     role: CreateServerServersRole
     raid_level: NotRequired[Nullable[CreateServerServersRaidLevel]]
-    filesystem: NotRequired[Nullable[CreateServerServersFilesystem]]
+    filesystem: NotRequired[Nullable[str]]
     mount_point: NotRequired[Nullable[str]]
 
 
@@ -139,7 +134,7 @@ class CreateServerDiskLayout(BaseModel):
 
     raid_level: OptionalNullable[CreateServerServersRaidLevel] = UNSET
 
-    filesystem: OptionalNullable[CreateServerServersFilesystem] = UNSET
+    filesystem: OptionalNullable[str] = UNSET
 
     mount_point: OptionalNullable[str] = UNSET
 
@@ -202,8 +197,9 @@ class CreateServerServersAttributesTypedDict(TypedDict):
     raid: NotRequired[Nullable[CreateServerServersRaid]]
     r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration"""
     disk_layout: NotRequired[Nullable[List[CreateServerDiskLayoutTypedDict]]]
+    r"""Per-group disk layout. Mutually exclusive with `raid`."""
     ipxe: NotRequired[Nullable[str]]
-    r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
+    r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system. Scripts may include the placeholders `{{ PUBLIC_IP }}`, `{{ PUBLIC_GW }}` and `{{ NETMASK }}`, which are rendered with the assigned server values."""
     public_network: NotRequired[Nullable[bool]]
     r"""**Preview.** Available to teams with public networks enabled. Set to true to deploy the server attached to the given public_network_id. Requires public_network_id; only public-network-capable stock is selected."""
     public_network_id: NotRequired[Nullable[str]]
@@ -242,9 +238,10 @@ class CreateServerServersAttributes(BaseModel):
     r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration"""
 
     disk_layout: OptionalNullable[List[CreateServerDiskLayout]] = UNSET
+    r"""Per-group disk layout. Mutually exclusive with `raid`."""
 
     ipxe: OptionalNullable[str] = UNSET
-    r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system."""
+    r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when iPXE is selected as operating system. Scripts may include the placeholders `{{ PUBLIC_IP }}`, `{{ PUBLIC_GW }}` and `{{ NETMASK }}`, which are rendered with the assigned server values."""
 
     public_network: OptionalNullable[bool] = UNSET
     r"""**Preview.** Available to teams with public networks enabled. Set to true to deploy the server attached to the given public_network_id. Requires public_network_id; only public-network-capable stock is selected."""

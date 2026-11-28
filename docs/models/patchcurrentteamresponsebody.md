@@ -5,6 +5,7 @@ Success
 
 ## Fields
 
-| Field                                      | Type                                       | Required                                   | Description                                |
-| ------------------------------------------ | ------------------------------------------ | ------------------------------------------ | ------------------------------------------ |
-| `data`                                     | [Optional[models.Team]](../models/team.md) | :heavy_minus_sign:                         | N/A                                        |
+| Field                                                                      | Type                                                                       | Required                                                                   | Description                                                                |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `data`                                                                     | [Optional[models.Team]](../models/team.md)                                 | :heavy_minus_sign:                                                         | N/A                                                                        |
+| `meta`                                                                     | [Optional[models.PatchCurrentTeamMeta]](../models/patchcurrentteammeta.md) | :heavy_minus_sign:                                                         | N/A                                                                        |

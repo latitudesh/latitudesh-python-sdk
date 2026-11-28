@@ -191,7 +191,7 @@ with Latitudesh(
 
 ## get_inference_usage
 
-Returns the project's inference requests, tokens and estimated cost for the window, per model and as a time series. The estimate uses current model prices.
+Returns the project's inference requests, tokens and estimated cost for the window, per model and as a time series. The estimate uses current model prices and charges cached input tokens at the cached input price.
 
 
 ### Example Usage

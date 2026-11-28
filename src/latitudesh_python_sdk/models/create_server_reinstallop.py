@@ -70,16 +70,11 @@ class CreateServerReinstallServersRaidLevel(str, Enum):
     RAID_10 = "raid-10"
 
 
-class CreateServerReinstallServersFilesystem(str, Enum):
-    EXT4 = "ext4"
-    XFS = "xfs"
-
-
 class CreateServerReinstallServersDiskLayoutTypedDict(TypedDict):
     count: int
     role: CreateServerReinstallServersRole
     raid_level: NotRequired[Nullable[CreateServerReinstallServersRaidLevel]]
-    filesystem: NotRequired[Nullable[CreateServerReinstallServersFilesystem]]
+    filesystem: NotRequired[Nullable[str]]
     mount_point: NotRequired[Nullable[str]]
 
 
@@ -90,7 +85,7 @@ class CreateServerReinstallServersDiskLayout(BaseModel):
 
     raid_level: OptionalNullable[CreateServerReinstallServersRaidLevel] = UNSET
 
-    filesystem: OptionalNullable[CreateServerReinstallServersFilesystem] = UNSET
+    filesystem: OptionalNullable[str] = UNSET
 
     mount_point: OptionalNullable[str] = UNSET
 
@@ -146,8 +141,9 @@ class CreateServerReinstallServersAttributesTypedDict(TypedDict):
     disk_layout: NotRequired[
         Nullable[List[CreateServerReinstallServersDiskLayoutTypedDict]]
     ]
+    r"""Per-group disk layout. Cannot be sent together with `raid` in the same request; a `raid` already stored on the server is superseded."""
     ipxe: NotRequired[Nullable[str]]
-    r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected."""
+    r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected. Scripts may include the placeholders `{{ PUBLIC_IP }}`, `{{ PUBLIC_GW }}` and `{{ NETMASK }}`, which are rendered with the assigned server values."""
     persistent_netboot: NotRequired[bool]
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
     public_network: NotRequired[Nullable[bool]]
@@ -155,7 +151,7 @@ class CreateServerReinstallServersAttributesTypedDict(TypedDict):
     public_network_id: NotRequired[Nullable[str]]
     r"""**Preview.** Available to teams with public networks enabled. ID of a customer public network to attach the server onto. Requires public_network: true. The public network must belong to the same project and location as the server and have a free address. A server already attached to another public network is detached from it first. Applies only to this reinstall; omitting it leaves an existing attachment."""
     bios: NotRequired[Nullable[Dict[str, CreateServerReinstallServersBios]]]
-    r"""**Preview.** Available to teams with custom BIOS settings enabled. Custom BIOS settings applied before the OS is installed. Keys are BIOS setting names (e.g. `cpu_virtualization`, `simultaneous_multithreading`, `iommu`, `sr_iov`); only the settings listed in the server specs `supported_bios_settings` are accepted. Values are `enabled` or `disabled`. The settings are kept and reapplied on later reinstalls that omit `bios`; send `null` or `{}` to stop applying them. The reinstall fails if the settings cannot be applied."""
+    r"""**Preview.** Available to teams with custom BIOS settings enabled. Custom BIOS settings applied before the OS is installed. Keys are BIOS setting names (e.g. `cpu_virtualization`, `simultaneous_multithreading`, `iommu`, `sr_iov`); only the settings listed in the server specs `supported_bios_settings` are accepted. Values are `enabled` or `disabled`. Applied only by the reinstall that sends them; they persist in the firmware, and a later reinstall that omits `bios` leaves them as they are. The reinstall fails if the settings cannot be applied."""
 
 
 class CreateServerReinstallServersAttributes(BaseModel):
@@ -175,9 +171,10 @@ class CreateServerReinstallServersAttributes(BaseModel):
     r"""RAID mode for the server. Set to 'raid-0' for RAID 0, 'raid-1' for RAID 1, 'raid-10' for RAID 10 on the data disks (only at locations with the `raid_ten` feature), or omit/null for no RAID configuration"""
 
     disk_layout: OptionalNullable[List[CreateServerReinstallServersDiskLayout]] = UNSET
+    r"""Per-group disk layout. Cannot be sent together with `raid` in the same request; a `raid` already stored on the server is superseded."""
 
     ipxe: OptionalNullable[str] = UNSET
-    r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected."""
+    r"""URL where iPXE script is stored on, OR the iPXE script encoded in base64. This attribute is required when operating system iPXE is selected. Scripts may include the placeholders `{{ PUBLIC_IP }}`, `{{ PUBLIC_GW }}` and `{{ NETMASK }}`, which are rendered with the assigned server values."""
 
     persistent_netboot: Optional[bool] = None
     r"""Keep network boot enabled so the server iPXE-boots on every reboot instead of booting from disk. Only supported with the 'ipxe' operating system."""
@@ -189,7 +186,7 @@ class CreateServerReinstallServersAttributes(BaseModel):
     r"""**Preview.** Available to teams with public networks enabled. ID of a customer public network to attach the server onto. Requires public_network: true. The public network must belong to the same project and location as the server and have a free address. A server already attached to another public network is detached from it first. Applies only to this reinstall; omitting it leaves an existing attachment."""
 
     bios: OptionalNullable[Dict[str, CreateServerReinstallServersBios]] = UNSET
-    r"""**Preview.** Available to teams with custom BIOS settings enabled. Custom BIOS settings applied before the OS is installed. Keys are BIOS setting names (e.g. `cpu_virtualization`, `simultaneous_multithreading`, `iommu`, `sr_iov`); only the settings listed in the server specs `supported_bios_settings` are accepted. Values are `enabled` or `disabled`. The settings are kept and reapplied on later reinstalls that omit `bios`; send `null` or `{}` to stop applying them. The reinstall fails if the settings cannot be applied."""
+    r"""**Preview.** Available to teams with custom BIOS settings enabled. Custom BIOS settings applied before the OS is installed. Keys are BIOS setting names (e.g. `cpu_virtualization`, `simultaneous_multithreading`, `iommu`, `sr_iov`); only the settings listed in the server specs `supported_bios_settings` are accepted. Values are `enabled` or `disabled`. Applied only by the reinstall that sends them; they persist in the firmware, and a later reinstall that omits `bios` leaves them as they are. The reinstall fails if the settings cannot be applied."""
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):

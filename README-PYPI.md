@@ -374,7 +374,7 @@ with Latitudesh(
 
 * [show_managed_database_metrics](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#show_managed_database_metrics) - Show managed database metrics
 * [list_managed_databases](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#list_managed_databases) - List managed databases
-* [create_managed_database](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#create_managed_database) - Create a managed database
+* [~~create_managed_database~~](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#create_managed_database) - Create a managed database :warning: **Deprecated**
 * [show_managed_database](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#show_managed_database) - Show a managed database
 * [destroy_managed_database](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#destroy_managed_database) - Destroy a managed database
 * [update_managed_database](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/manageddatabasessdk/README.md#update_managed_database) - Update a managed database
@@ -396,6 +396,7 @@ with Latitudesh(
 * [post_storage_buckets](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#post_storage_buckets) - Create bucket
 * [get_storage_bucket](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_bucket) - Retrieve bucket
 * [delete_storage_buckets](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#delete_storage_buckets) - Delete bucket
+* [patch_storage_buckets](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#patch_storage_buckets) - Update bucket
 * [get_storage_bucket_lifecycle_rules](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_bucket_lifecycle_rules) - List lifecycle rules
 * [post_storage_bucket_lifecycle_rules](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#post_storage_bucket_lifecycle_rules) - Create lifecycle rule
 * [get_storage_bucket_lifecycle_rule](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/objectstorage/README.md#get_storage_bucket_lifecycle_rule) - Retrieve lifecycle rule
@@ -407,16 +408,16 @@ with Latitudesh(
 
 * [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/operatingsystemssdk/README.md#list) - List operating systems
 
-### [Plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md)
+### [Plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/planssdk/README.md)
 
-* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list) - List plans
-* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#get) - Retrieve plan
-* [list_bandwidth](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_bandwidth) - List bandwidth plans
-* [update_bandwidth](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#update_bandwidth) - Update bandwidth packages
-* [list_storage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_storage) - List storage plans
-* [get_lks_plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#get_lks_plans) - List LKS plans
-* [list_vm_plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#list_vm_plans) - List VM plans
-* [get_managed_database_plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/plans/README.md#get_managed_database_plans) - List managed database plans
+* [list](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/planssdk/README.md#list) - List plans
+* [get](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/planssdk/README.md#get) - Retrieve plan
+* [list_bandwidth](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/planssdk/README.md#list_bandwidth) - List bandwidth plans
+* [update_bandwidth](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/planssdk/README.md#update_bandwidth) - Update bandwidth packages
+* [list_storage](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/planssdk/README.md#list_storage) - List storage plans
+* [get_lks_plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/planssdk/README.md#get_lks_plans) - List LKS plans
+* [list_vm_plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/planssdk/README.md#list_vm_plans) - List VM plans
+* [get_managed_database_plans](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/planssdk/README.md#get_managed_database_plans) - List managed database plans
 
 ### [PrivateNetworks](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/privatenetworks/README.md)
 
@@ -570,6 +571,8 @@ with Latitudesh(
 * [list_virtual_machine_network_attachments](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#list_virtual_machine_network_attachments) - List VM network attachments
 * [create_virtual_machine_network_attachment](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#create_virtual_machine_network_attachment) - Attach a network to a VM
 * [destroy_virtual_machine_network_attachment](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#destroy_virtual_machine_network_attachment) - Detach a network from a VM
+* [lock_virtual_machine](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#lock_virtual_machine) - Lock virtual machine
+* [unlock_virtual_machine](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/docs/sdks/virtualmachinessdk/README.md#unlock_virtual_machine) - Unlock virtual machine
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -706,7 +709,7 @@ with Latitudesh(
 
 
 **Inherit from [`LatitudeshError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/latitudesherror.py)**:
-* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 74 of 216 methods.*
+* [`ErrorObject`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/errorobject.py): Applicable to 70 of 219 methods.*
 * [`ResponseValidationError`](https://github.com/latitudesh/latitudesh-python-sdk/blob/master/./src/latitudesh_python_sdk/models/responsevalidationerror.py): Type mismatch between the response data and the expected Pydantic model. Provides access to the Pydantic validation error via the `cause` attribute.
 
 </details>

@@ -207,7 +207,7 @@ class Clusters(BaseSDK):
     ) -> models.ClusterRequirements:
         r"""Change cluster requirements
 
-        Applies one change to your requirements: add or remove a requirement or the checks of a block, or set what a requirement expects. Signed requirements need to be signed again. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Needs an owner, administrator or collaborator.
+        Applies one change to your requirements: add or remove a requirement or the checks of a block, or set what a requirement expects. Signed requirements are locked and answer 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Needs an owner, administrator or collaborator.
 
         :param project_id: The ID or slug of a project that has a GPU cluster
         :param data:
@@ -314,7 +314,7 @@ class Clusters(BaseSDK):
     ) -> models.ClusterRequirements:
         r"""Change cluster requirements
 
-        Applies one change to your requirements: add or remove a requirement or the checks of a block, or set what a requirement expects. Signed requirements need to be signed again. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Needs an owner, administrator or collaborator.
+        Applies one change to your requirements: add or remove a requirement or the checks of a block, or set what a requirement expects. Signed requirements are locked and answer 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Needs an owner, administrator or collaborator.
 
         :param project_id: The ID or slug of a project that has a GPU cluster
         :param data:
@@ -987,7 +987,7 @@ class Clusters(BaseSDK):
     ) -> models.ClusterNodeGroup:
         r"""Create a cluster node group
 
-        Adds a node group to your cluster. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements need to be signed again. Needs an owner, administrator or collaborator.
+        Adds a node group to your cluster. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements are locked and answer 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them. Needs an owner, administrator or collaborator.
 
         :param project_id: The ID or slug of a project that has a GPU cluster
         :param data:
@@ -1092,7 +1092,7 @@ class Clusters(BaseSDK):
     ) -> models.ClusterNodeGroup:
         r"""Create a cluster node group
 
-        Adds a node group to your cluster. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements need to be signed again. Needs an owner, administrator or collaborator.
+        Adds a node group to your cluster. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements are locked and answer 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them. Needs an owner, administrator or collaborator.
 
         :param project_id: The ID or slug of a project that has a GPU cluster
         :param data:
@@ -1384,7 +1384,7 @@ class Clusters(BaseSDK):
     ) -> models.ClusterNodeGroup:
         r"""Update a cluster node group
 
-        Changes the attributes sent of one of your cluster's node groups. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements need to be signed again. Needs an owner, administrator or collaborator.
+        Changes the attributes sent of one of your cluster's node groups. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements are locked and answer 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them. Needs an owner, administrator or collaborator.
 
         :param project_id: The ID or slug of a project that has a GPU cluster
         :param id: The node group ID
@@ -1467,7 +1467,7 @@ class Clusters(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.ClusterNodeGroup, http_res)
-        if utils.match_response(http_res, ["403", "404", "422", "4XX"], "*"):
+        if utils.match_response(http_res, ["403", "404", "409", "422", "4XX"], "*"):
             http_res_text = utils.stream_to_text(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):
@@ -1492,7 +1492,7 @@ class Clusters(BaseSDK):
     ) -> models.ClusterNodeGroup:
         r"""Update a cluster node group
 
-        Changes the attributes sent of one of your cluster's node groups. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements need to be signed again. Needs an owner, administrator or collaborator.
+        Changes the attributes sent of one of your cluster's node groups. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements are locked and answer 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them. Needs an owner, administrator or collaborator.
 
         :param project_id: The ID or slug of a project that has a GPU cluster
         :param id: The node group ID
@@ -1575,7 +1575,7 @@ class Clusters(BaseSDK):
 
         if utils.match_response(http_res, "200", "application/vnd.api+json"):
             return unmarshal_json_response(models.ClusterNodeGroup, http_res)
-        if utils.match_response(http_res, ["403", "404", "422", "4XX"], "*"):
+        if utils.match_response(http_res, ["403", "404", "409", "422", "4XX"], "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):

@@ -245,6 +245,7 @@ class VirtualMachineAttributesCredentialsTypedDict(TypedDict):
     username: NotRequired[Nullable[str]]
     r"""The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS. Returns null when the VM is not running."""
     host: NotRequired[Nullable[str]]
+    r"""The address to connect to the VM."""
     password: NotRequired[Nullable[str]]
     ssh_keys: NotRequired[Nullable[List[VirtualMachineAttributesSSHKeysTypedDict]]]
 
@@ -256,6 +257,7 @@ class VirtualMachineAttributesCredentials(BaseModel):
     r"""The SSH username for the VM, determined by the operating system (e.g., ubuntu, centos, ec2-user). Defaults to ubuntu if not specified by the OS. Returns null when the VM is not running."""
 
     host: OptionalNullable[str] = UNSET
+    r"""The address to connect to the VM."""
 
     password: OptionalNullable[str] = UNSET
 
@@ -482,6 +484,51 @@ class VirtualMachineAttributesTags(BaseModel):
         return m
 
 
+class PublicIPType(str, Enum):
+    r"""How the VM holds its public IP: `direct`, a BGP-announced address on its own NIC (every VM outside a VPC); `floating`, a public address the VPC router maps onto the private address of the VM; null when the VM has no public IP."""
+
+    DIRECT = "direct"
+    FLOATING = "floating"
+
+
+class VirtualMachineAttributesVpcTypedDict(TypedDict):
+    r"""The VPC this virtual machine is in and its private address there, or null"""
+
+    id: NotRequired[str]
+    private_ipv4: NotRequired[str]
+
+
+class VirtualMachineAttributesVpc(BaseModel):
+    r"""The VPC this virtual machine is in and its private address there, or null"""
+
+    id: Optional[str] = None
+
+    private_ipv4: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "private_ipv4"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
 class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     created_at: NotRequired[str]
@@ -511,6 +558,12 @@ class VirtualMachineAttributesAttributesTypedDict(TypedDict):
     r"""Whether the VM re-applies the platform network configuration on every boot. Set at creation; false for VMs created before this option was available. When false, configure networks attached to the VM inside the guest yourself, as described in [Private networks: configure the OS](https://www.latitude.sh/docs/networking/private-networks#step-3-configure-the-os)."""
     pending_restart: NotRequired[bool]
     r"""Deprecated, always false. Opt-in extra field, requested via `extra_fields[virtual_machines]=pending_restart`. Attaching and detaching restart the VM automatically."""
+    public_ip_type: NotRequired[Nullable[PublicIPType]]
+    r"""How the VM holds its public IP: `direct`, a BGP-announced address on its own NIC (every VM outside a VPC); `floating`, a public address the VPC router maps onto the private address of the VM; null when the VM has no public IP."""
+    vpc: NotRequired[Nullable[VirtualMachineAttributesVpcTypedDict]]
+    r"""The VPC this virtual machine is in and its private address there, or null"""
+    locked: NotRequired[bool]
+    r"""Whether the VM is locked. A locked VM cannot be updated, deleted, powered on/off, rebooted, or have networks attached/detached until it is unlocked."""
 
 
 class VirtualMachineAttributesAttributes(BaseModel):
@@ -555,6 +608,15 @@ class VirtualMachineAttributesAttributes(BaseModel):
     pending_restart: Optional[bool] = None
     r"""Deprecated, always false. Opt-in extra field, requested via `extra_fields[virtual_machines]=pending_restart`. Attaching and detaching restart the VM automatically."""
 
+    public_ip_type: OptionalNullable[PublicIPType] = UNSET
+    r"""How the VM holds its public IP: `direct`, a BGP-announced address on its own NIC (every VM outside a VPC); `floating`, a public address the VPC router maps onto the private address of the VM; null when the VM has no public IP."""
+
+    vpc: OptionalNullable[VirtualMachineAttributesVpc] = UNSET
+    r"""The VPC this virtual machine is in and its private address there, or null"""
+
+    locked: Optional[bool] = None
+    r"""Whether the VM is locked. A locked VM cannot be updated, deleted, powered on/off, rebooted, or have networks attached/detached until it is unlocked."""
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
@@ -579,6 +641,9 @@ class VirtualMachineAttributesAttributes(BaseModel):
                 "project",
                 "apply_network_on_boot",
                 "pending_restart",
+                "public_ip_type",
+                "vpc",
+                "locked",
             ]
         )
         nullable_fields = set(
@@ -590,6 +655,8 @@ class VirtualMachineAttributesAttributes(BaseModel):
                 "billing",
                 "user_data",
                 "marketplace_app",
+                "public_ip_type",
+                "vpc",
             ]
         )
         exclude_none = current_exclude_none()

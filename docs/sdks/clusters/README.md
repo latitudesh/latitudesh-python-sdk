@@ -57,7 +57,7 @@ with Latitudesh(
 
 ## update_project_cluster_requirements
 
-Applies one change to your requirements: add or remove a requirement or the checks of a block, or set what a requirement expects. Signed requirements need to be signed again. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Needs an owner, administrator or collaborator.
+Applies one change to your requirements: add or remove a requirement or the checks of a block, or set what a requirement expects. Signed requirements are locked and answer 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Needs an owner, administrator or collaborator.
 
 ### Example Usage
 
@@ -233,7 +233,7 @@ with Latitudesh(
 
 ## create_project_cluster_node_group
 
-Adds a node group to your cluster. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements need to be signed again. Needs an owner, administrator or collaborator.
+Adds a node group to your cluster. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements are locked and answer 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them. Needs an owner, administrator or collaborator.
 
 ### Example Usage
 
@@ -320,7 +320,7 @@ with Latitudesh(
 
 ## update_project_cluster_node_group
 
-Changes the attributes sent of one of your cluster's node groups. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements need to be signed again. Needs an owner, administrator or collaborator.
+Changes the attributes sent of one of your cluster's node groups. Only available for projects that have a GPU cluster; any other project answers 404 PROJECT_NOT_A_CLUSTER. Signed requirements are locked and answer 409 REQUIREMENTS_SIGNED until your Latitude.sh contact reopens them. Needs an owner, administrator or collaborator.
 
 ### Example Usage
 

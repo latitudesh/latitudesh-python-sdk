@@ -48,6 +48,7 @@ class VirtualMachinePayloadAttributesTypedDict(TypedDict):
     plan: NotRequired[Nullable[str]]
     r"""The plan ID or Slug for the Virtual Machine"""
     ssh_keys: NotRequired[Nullable[List[str]]]
+    r"""IDs of the SSH keys to authorize on the VM. When SSH keys are sent the VM gets no password."""
     project: NotRequired[str]
     operating_system: NotRequired[Nullable[str]]
     r"""The operating system slug for the Virtual Machine. If not specified, defaults to ubuntu_24_04_x64_lts for CPU plans or ubuntu24_ml_in_a_box for GPU plans."""
@@ -73,6 +74,7 @@ class VirtualMachinePayloadAttributes(BaseModel):
     r"""The plan ID or Slug for the Virtual Machine"""
 
     ssh_keys: OptionalNullable[List[str]] = UNSET
+    r"""IDs of the SSH keys to authorize on the VM. When SSH keys are sent the VM gets no password."""
 
     project: Optional[str] = "my-project"
 

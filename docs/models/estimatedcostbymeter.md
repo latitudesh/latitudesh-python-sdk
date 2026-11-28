@@ -1,0 +1,12 @@
+# EstimatedCostByMeter
+
+estimated_cost split by billing meter; input covers the uncached input tokens
+
+
+## Fields
+
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `input`                                                                              | *OptionalNullable[str]*                                                              | :heavy_minus_sign:                                                                   | Estimated USD for the meter at its current price; null when its tokens have no price | 0.000125                                                                             |
+| `cached_input`                                                                       | *OptionalNullable[str]*                                                              | :heavy_minus_sign:                                                                   | Estimated USD for the meter at its current price; null when its tokens have no price | 0.000125                                                                             |
+| `output`                                                                             | *OptionalNullable[str]*                                                              | :heavy_minus_sign:                                                                   | Estimated USD for the meter at its current price; null when its tokens have no price | 0.000125                                                                             |

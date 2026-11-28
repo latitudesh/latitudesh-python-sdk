@@ -199,14 +199,6 @@ class Target(BaseModel):
         return m
 
 
-class PropertiesTypedDict(TypedDict):
-    r"""Additional event-specific data"""
-
-
-class Properties(BaseModel):
-    r"""Additional event-specific data"""
-
-
 class EventDataAttributesTypedDict(TypedDict):
     action: NotRequired[str]
     created_at: NotRequired[str]
@@ -214,8 +206,6 @@ class EventDataAttributesTypedDict(TypedDict):
     project: NotRequired[EventDataProjectTypedDict]
     team: NotRequired[EventDataTeamTypedDict]
     target: NotRequired[TargetTypedDict]
-    properties: NotRequired[Nullable[PropertiesTypedDict]]
-    r"""Additional event-specific data"""
 
 
 class EventDataAttributes(BaseModel):
@@ -231,26 +221,14 @@ class EventDataAttributes(BaseModel):
 
     target: Optional[Target] = None
 
-    properties: OptionalNullable[Properties] = UNSET
-    r"""Additional event-specific data"""
-
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
         optional_fields = set(
-            [
-                "action",
-                "created_at",
-                "author",
-                "project",
-                "team",
-                "target",
-                "properties",
-            ]
+            ["action", "created_at", "author", "project", "team", "target"]
         )
-        nullable_fields = set(["properties"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -261,17 +239,9 @@ class EventDataAttributes(BaseModel):
             if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
-            is_nullable_and_explicitly_set = (
-                k in nullable_fields
-                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
-            )
 
             if val != UNSET_SENTINEL:
-                if (
-                    val is not None
-                    or k not in optional_fields
-                    or is_nullable_and_explicitly_set
-                ):
+                if val is not None or k not in optional_fields:
                     m[k] = val
 
         return m

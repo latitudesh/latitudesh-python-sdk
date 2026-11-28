@@ -51,7 +51,7 @@ class ElasticIPDataServerTypedDict(TypedDict):
 
     id: NotRequired[str]
     hostname: NotRequired[str]
-    primary_ipv4: NotRequired[str]
+    primary_ipv4: NotRequired[Nullable[str]]
     operating_system: NotRequired[Nullable[str]]
 
 
@@ -62,7 +62,7 @@ class ElasticIPDataServer(BaseModel):
 
     hostname: Optional[str] = None
 
-    primary_ipv4: Optional[str] = None
+    primary_ipv4: OptionalNullable[str] = UNSET
 
     operating_system: OptionalNullable[str] = UNSET
 
@@ -72,7 +72,7 @@ class ElasticIPDataServer(BaseModel):
 
     def serialize_model(self, handler):
         optional_fields = set(["id", "hostname", "primary_ipv4", "operating_system"])
-        nullable_fields = set(["operating_system"])
+        nullable_fields = set(["primary_ipv4", "operating_system"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -249,7 +249,7 @@ class ElasticIPDataAttributesTypedDict(TypedDict):
     r"""The timestamp when the Elastic IP was created"""
     server: NotRequired[Nullable[ElasticIPDataServerTypedDict]]
     r"""The server this Elastic IP is assigned to. Returns null when the Elastic IP is not assigned to a server or when the assigned server is not active (e.g., decommissioning or deleted)."""
-    project: NotRequired[ElasticIPDataProjectTypedDict]
+    project: NotRequired[Nullable[ElasticIPDataProjectTypedDict]]
     r"""The project this Elastic IP belongs to"""
     region: NotRequired[Nullable[ElasticIPDataRegionTypedDict]]
     r"""The region where this Elastic IP is located"""
@@ -277,7 +277,7 @@ class ElasticIPDataAttributes(BaseModel):
     server: OptionalNullable[ElasticIPDataServer] = UNSET
     r"""The server this Elastic IP is assigned to. Returns null when the Elastic IP is not assigned to a server or when the assigned server is not active (e.g., decommissioning or deleted)."""
 
-    project: Optional[ElasticIPDataProject] = None
+    project: OptionalNullable[ElasticIPDataProject] = UNSET
     r"""The project this Elastic IP belongs to"""
 
     region: OptionalNullable[ElasticIPDataRegion] = UNSET
@@ -301,7 +301,7 @@ class ElasticIPDataAttributes(BaseModel):
                 "region",
             ]
         )
-        nullable_fields = set(["server", "region"])
+        nullable_fields = set(["server", "project", "region"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

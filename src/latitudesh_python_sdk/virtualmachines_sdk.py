@@ -14,6 +14,7 @@ class VirtualMachinesSDK(BaseSDK):
     def create(
         self,
         *,
+        x_correlation_id: Optional[str] = None,
         data: Optional[
             Union[
                 models.VirtualMachinePayloadData,
@@ -30,6 +31,7 @@ class VirtualMachinesSDK(BaseSDK):
         Creates a new Virtual Machine.
 
 
+        :param x_correlation_id:
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -46,9 +48,12 @@ class VirtualMachinesSDK(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.VirtualMachinePayload(
-            data=utils.get_pydantic_model(
-                data, Optional[models.VirtualMachinePayloadData]
+        request = models.CreateVirtualMachineRequest(
+            x_correlation_id=x_correlation_id,
+            virtual_machine_payload=models.VirtualMachinePayload(
+                data=utils.get_pydantic_model(
+                    data, Optional[models.VirtualMachinePayloadData]
+                ),
             ),
         )
 
@@ -66,7 +71,11 @@ class VirtualMachinesSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.VirtualMachinePayload
+                request.virtual_machine_payload,
+                False,
+                False,
+                "json",
+                models.VirtualMachinePayload,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -113,6 +122,7 @@ class VirtualMachinesSDK(BaseSDK):
     async def create_async(
         self,
         *,
+        x_correlation_id: Optional[str] = None,
         data: Optional[
             Union[
                 models.VirtualMachinePayloadData,
@@ -129,6 +139,7 @@ class VirtualMachinesSDK(BaseSDK):
         Creates a new Virtual Machine.
 
 
+        :param x_correlation_id:
         :param data:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
@@ -145,9 +156,12 @@ class VirtualMachinesSDK(BaseSDK):
         else:
             base_url = self._get_url(base_url, url_variables)
 
-        request = models.VirtualMachinePayload(
-            data=utils.get_pydantic_model(
-                data, Optional[models.VirtualMachinePayloadData]
+        request = models.CreateVirtualMachineRequest(
+            x_correlation_id=x_correlation_id,
+            virtual_machine_payload=models.VirtualMachinePayload(
+                data=utils.get_pydantic_model(
+                    data, Optional[models.VirtualMachinePayloadData]
+                ),
             ),
         )
 
@@ -165,7 +179,11 @@ class VirtualMachinesSDK(BaseSDK):
             http_headers=http_headers,
             security=self.sdk_configuration.security,
             get_serialized_body=lambda: utils.serialize_request_body(
-                request, False, False, "json", models.VirtualMachinePayload
+                request.virtual_machine_payload,
+                False,
+                False,
+                "json",
+                models.VirtualMachinePayload,
             ),
             allow_empty_value=None,
             timeout_ms=timeout_ms,
@@ -219,6 +237,7 @@ class VirtualMachinesSDK(BaseSDK):
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
         stats_total: Optional[str] = None,
+        x_correlation_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -232,10 +251,11 @@ class VirtualMachinesSDK(BaseSDK):
         :param filter_project: The project ID or Slug to filter by
         :param filter_tags: The tag IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2` will return VMs with `tag_1` AND `tag_2`.
         :param extra_fields_virtual_machines: Comma-separated extra attributes that are lazy-loaded. Supported values: `credentials`, `pending_restart`. Example: `extra_fields[virtual_machines]=credentials,pending_restart`.
-        :param sort: Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at, name, hostname, status. Example: `sort=status,-created_at` sorts by status ascending, then by creation date descending.
+        :param sort: Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at, status, name, hostname. Example: `sort=status,-created_at` sorts by status ascending, then by creation date descending.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param x_correlation_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -259,6 +279,7 @@ class VirtualMachinesSDK(BaseSDK):
             page_size=page_size,
             page_number=page_number,
             stats_total=stats_total,
+            x_correlation_id=x_correlation_id,
         )
 
         req = self._build_request(
@@ -325,6 +346,7 @@ class VirtualMachinesSDK(BaseSDK):
                 page_size=page_size,
                 page_number=next_page,
                 stats_total=stats_total,
+                x_correlation_id=x_correlation_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -359,6 +381,7 @@ class VirtualMachinesSDK(BaseSDK):
         page_size: Optional[int] = 20,
         page_number: Optional[int] = 1,
         stats_total: Optional[str] = None,
+        x_correlation_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -372,10 +395,11 @@ class VirtualMachinesSDK(BaseSDK):
         :param filter_project: The project ID or Slug to filter by
         :param filter_tags: The tag IDs to filter by, separated by comma, e.g. `filter[tags]=tag_1,tag_2` will return VMs with `tag_1` AND `tag_2`.
         :param extra_fields_virtual_machines: Comma-separated extra attributes that are lazy-loaded. Supported values: `credentials`, `pending_restart`. Example: `extra_fields[virtual_machines]=credentials,pending_restart`.
-        :param sort: Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at, name, hostname, status. Example: `sort=status,-created_at` sorts by status ascending, then by creation date descending.
+        :param sort: Comma-separated sort fields. Prefix a field with `-` for descending order. Supported fields: created_at, status, name, hostname. Example: `sort=status,-created_at` sorts by status ascending, then by creation date descending.
         :param page_size: Number of items to return per page
         :param page_number: Page number to return (starts at 1)
         :param stats_total: Request aggregate stats in the response `meta`. Use `count` to get the total number of records, returned as `meta.stats.total.count`.
+        :param x_correlation_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -399,6 +423,7 @@ class VirtualMachinesSDK(BaseSDK):
             page_size=page_size,
             page_number=page_number,
             stats_total=stats_total,
+            x_correlation_id=x_correlation_id,
         )
 
         req = self._build_request_async(
@@ -465,6 +490,7 @@ class VirtualMachinesSDK(BaseSDK):
                 page_size=page_size,
                 page_number=next_page,
                 stats_total=stats_total,
+                x_correlation_id=x_correlation_id,
                 retries=retries,
                 server_url=server_url,
                 timeout_ms=timeout_ms,
@@ -855,6 +881,7 @@ class VirtualMachinesSDK(BaseSDK):
             models.VirtualMachineUpdatePayloadData,
             models.VirtualMachineUpdatePayloadDataTypedDict,
         ],
+        x_correlation_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -862,11 +889,13 @@ class VirtualMachinesSDK(BaseSDK):
     ) -> models.VirtualMachine:
         r"""Update VM
 
-        Updates a Virtual Machine's display name (hostname).
+        Updates a Virtual Machine: its display name (hostname), tags or billing cycle (200), or, sent on its
+        own, its `plan` for a vertical upgrade (202).
 
 
         :param virtual_machine_id:
         :param data:
+        :param x_correlation_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -884,6 +913,7 @@ class VirtualMachinesSDK(BaseSDK):
 
         request = models.UpdateVirtualMachineRequest(
             virtual_machine_id=virtual_machine_id,
+            x_correlation_id=x_correlation_id,
             virtual_machine_update_payload=models.VirtualMachineUpdatePayload(
                 data=utils.get_pydantic_model(
                     data, models.VirtualMachineUpdatePayloadData
@@ -961,6 +991,7 @@ class VirtualMachinesSDK(BaseSDK):
             models.VirtualMachineUpdatePayloadData,
             models.VirtualMachineUpdatePayloadDataTypedDict,
         ],
+        x_correlation_id: Optional[str] = None,
         retries: OptionalNullable[utils.RetryConfig] = UNSET,
         server_url: Optional[str] = None,
         timeout_ms: Optional[int] = None,
@@ -968,11 +999,13 @@ class VirtualMachinesSDK(BaseSDK):
     ) -> models.VirtualMachine:
         r"""Update VM
 
-        Updates a Virtual Machine's display name (hostname).
+        Updates a Virtual Machine: its display name (hostname), tags or billing cycle (200), or, sent on its
+        own, its `plan` for a vertical upgrade (202).
 
 
         :param virtual_machine_id:
         :param data:
+        :param x_correlation_id:
         :param retries: Override the default retry configuration for this method
         :param server_url: Override the default server URL for this method
         :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
@@ -990,6 +1023,7 @@ class VirtualMachinesSDK(BaseSDK):
 
         request = models.UpdateVirtualMachineRequest(
             virtual_machine_id=virtual_machine_id,
+            x_correlation_id=x_correlation_id,
             virtual_machine_update_payload=models.VirtualMachineUpdatePayload(
                 data=utils.get_pydantic_model(
                     data, models.VirtualMachineUpdatePayloadData
@@ -1566,7 +1600,11 @@ class VirtualMachinesSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machines"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/list-virtual-machine-network-attachments"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1655,7 +1693,11 @@ class VirtualMachinesSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machines"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/list-virtual-machine-network-attachments"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1770,7 +1812,11 @@ class VirtualMachinesSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machines"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/create-virtual-machine-network-attachment"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1885,7 +1931,11 @@ class VirtualMachinesSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machines"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/create-virtual-machine-network-attachment"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1981,7 +2031,11 @@ class VirtualMachinesSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machines"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/destroy-virtual-machine-network-attachment"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2077,7 +2131,11 @@ class VirtualMachinesSDK(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["Virtual machines"],
-                extensions=None,
+                extensions={
+                    "x-mint": {
+                        "href": "/api-reference/destroy-virtual-machine-network-attachment"
+                    }
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2089,6 +2147,354 @@ class VirtualMachinesSDK(BaseSDK):
                 models.DestroyVirtualMachineNetworkAttachmentResponseBody, http_res
             )
         if utils.match_response(http_res, ["403", "404", "422", "4XX"], "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def lock_virtual_machine(
+        self,
+        *,
+        virtual_machine_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VirtualMachine:
+        r"""Lock virtual machine
+
+        Locks the virtual machine. A locked virtual machine cannot be deleted or modified and no actions can be performed on it.
+
+        :param virtual_machine_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.LockVirtualMachineRequest(
+            virtual_machine_id=virtual_machine_id,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/virtual_machines/{virtual_machine_id}/lock",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="lock-virtual-machine",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Virtual machines"],
+                extensions={"x-mint": {"href": "/api-reference/lock-virtual-machine"}},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(models.VirtualMachine, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def lock_virtual_machine_async(
+        self,
+        *,
+        virtual_machine_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VirtualMachine:
+        r"""Lock virtual machine
+
+        Locks the virtual machine. A locked virtual machine cannot be deleted or modified and no actions can be performed on it.
+
+        :param virtual_machine_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.LockVirtualMachineRequest(
+            virtual_machine_id=virtual_machine_id,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/virtual_machines/{virtual_machine_id}/lock",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="lock-virtual-machine",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Virtual machines"],
+                extensions={"x-mint": {"href": "/api-reference/lock-virtual-machine"}},
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(models.VirtualMachine, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = await utils.stream_to_text_async(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    def unlock_virtual_machine(
+        self,
+        *,
+        virtual_machine_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VirtualMachine:
+        r"""Unlock virtual machine
+
+        Unlocks the virtual machine. A locked virtual machine cannot be deleted or modified and no actions can be performed on it.
+
+        :param virtual_machine_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UnlockVirtualMachineRequest(
+            virtual_machine_id=virtual_machine_id,
+        )
+
+        req = self._build_request(
+            method="POST",
+            path="/virtual_machines/{virtual_machine_id}/unlock",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = self.do_request(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="unlock-virtual-machine",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Virtual machines"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/unlock-virtual-machine"}
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(models.VirtualMachine, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+        if utils.match_response(http_res, "5XX", "*"):
+            http_res_text = utils.stream_to_text(http_res)
+            raise models.APIError("API error occurred", http_res, http_res_text)
+
+        raise models.APIError("Unexpected response received", http_res)
+
+    async def unlock_virtual_machine_async(
+        self,
+        *,
+        virtual_machine_id: str,
+        retries: OptionalNullable[utils.RetryConfig] = UNSET,
+        server_url: Optional[str] = None,
+        timeout_ms: Optional[int] = None,
+        http_headers: Optional[Mapping[str, str]] = None,
+    ) -> models.VirtualMachine:
+        r"""Unlock virtual machine
+
+        Unlocks the virtual machine. A locked virtual machine cannot be deleted or modified and no actions can be performed on it.
+
+        :param virtual_machine_id:
+        :param retries: Override the default retry configuration for this method
+        :param server_url: Override the default server URL for this method
+        :param timeout_ms: Override the default request timeout configuration for this method in milliseconds
+        :param http_headers: Additional headers to set or replace on requests.
+        """
+        base_url = None
+        url_variables = None
+        if timeout_ms is None:
+            timeout_ms = self.sdk_configuration.timeout_ms
+
+        if server_url is not None:
+            base_url = server_url
+        else:
+            base_url = self._get_url(base_url, url_variables)
+
+        request = models.UnlockVirtualMachineRequest(
+            virtual_machine_id=virtual_machine_id,
+        )
+
+        req = self._build_request_async(
+            method="POST",
+            path="/virtual_machines/{virtual_machine_id}/unlock",
+            base_url=base_url,
+            url_variables=url_variables,
+            request=request,
+            request_body_required=False,
+            request_has_path_params=True,
+            request_has_query_params=True,
+            user_agent_header="user-agent",
+            accept_header_value="application/vnd.api+json",
+            http_headers=http_headers,
+            security=self.sdk_configuration.security,
+            allow_empty_value=None,
+            timeout_ms=timeout_ms,
+        )
+
+        if retries == UNSET:
+            if self.sdk_configuration.retry_config is not UNSET:
+                retries = self.sdk_configuration.retry_config
+
+        retry_config = None
+        if isinstance(retries, utils.RetryConfig):
+            retry_config = (retries, ["429", "500", "502", "503", "504"])
+
+        http_res = await self.do_request_async(
+            hook_ctx=HookContext(
+                config=self.sdk_configuration,
+                base_url=base_url or "",
+                operation_id="unlock-virtual-machine",
+                oauth2_scopes=None,
+                security_source=get_security_from_env(
+                    self.sdk_configuration.security, models.Security
+                ),
+                tags=["Virtual machines"],
+                extensions={
+                    "x-mint": {"href": "/api-reference/unlock-virtual-machine"}
+                },
+            ),
+            request=req,
+            is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
+            retry_config=retry_config,
+        )
+
+        if utils.match_response(http_res, "200", "application/vnd.api+json"):
+            return unmarshal_json_response(models.VirtualMachine, http_res)
+        if utils.match_response(http_res, "4XX", "*"):
             http_res_text = await utils.stream_to_text_async(http_res)
             raise models.APIError("API error occurred", http_res, http_res_text)
         if utils.match_response(http_res, "5XX", "*"):

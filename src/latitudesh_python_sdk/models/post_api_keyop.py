@@ -14,10 +14,19 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class PostAPIKeyMetaTypedDict(TypedDict):
+    pass
+
+
+class PostAPIKeyMeta(BaseModel):
+    pass
+
+
 class PostAPIKeyResponseBodyTypedDict(TypedDict):
     r"""Created"""
 
     data: NotRequired[APIKeyTypedDict]
+    meta: NotRequired[PostAPIKeyMetaTypedDict]
 
 
 class PostAPIKeyResponseBody(BaseModel):
@@ -25,12 +34,14 @@ class PostAPIKeyResponseBody(BaseModel):
 
     data: Optional[APIKey] = None
 
+    meta: Optional[PostAPIKeyMeta] = None
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

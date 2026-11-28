@@ -230,6 +230,8 @@ class NodesTypedDict(TypedDict):
     r"""Internal/private IP address"""
     external_ip: NotRequired[Nullable[str]]
     r"""External/public IP address"""
+    version: NotRequired[Nullable[str]]
+    r"""The Kubernetes version the node runs"""
 
 
 class Nodes(BaseModel):
@@ -260,6 +262,9 @@ class Nodes(BaseModel):
     external_ip: OptionalNullable[str] = UNSET
     r"""External/public IP address"""
 
+    version: OptionalNullable[str] = UNSET
+    r"""The Kubernetes version the node runs"""
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
@@ -276,10 +281,11 @@ class Nodes(BaseModel):
                 "ip",
                 "internal_ip",
                 "external_ip",
+                "version",
             ]
         )
         nullable_fields = set(
-            ["hostname", "server_id", "ip", "internal_ip", "external_ip"]
+            ["hostname", "server_id", "ip", "internal_ip", "external_ip", "version"]
         )
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()

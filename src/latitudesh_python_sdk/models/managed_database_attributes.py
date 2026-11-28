@@ -296,10 +296,14 @@ class ManagedDatabaseAttributesCredentials(BaseModel):
 
 
 class RecoveryTypedDict(TypedDict):
+    r"""Omitted on list."""
+
     enabled: NotRequired[Nullable[bool]]
 
 
 class Recovery(BaseModel):
+    r"""Omitted on list."""
+
     enabled: OptionalNullable[bool] = UNSET
 
     @model_serializer(mode="wrap")
@@ -370,6 +374,7 @@ class ManagedDatabaseAttributesAttributesTypedDict(TypedDict):
     name: NotRequired[str]
     engine: NotRequired[str]
     status: NotRequired[str]
+    r"""On show, derived from database health: `running` (all instances ready), `degraded` (some instances ready), `restoring` (restore from backup in progress), `provisioning`, `error` (no instance ready), `deleting`, `not_found` or `unknown`. On list, derived from the inventory status: `running`, `provisioning`, `stopped` or `error`. Treat as an open string; new values may be added."""
     namespace: NotRequired[Nullable[str]]
     created_at: NotRequired[Nullable[str]]
     specs: NotRequired[Nullable[ManagedDatabaseAttributesSpecsTypedDict]]
@@ -382,12 +387,13 @@ class ManagedDatabaseAttributesAttributesTypedDict(TypedDict):
     play_url: NotRequired[Nullable[str]]
     credentials: NotRequired[Nullable[ManagedDatabaseAttributesCredentialsTypedDict]]
     parameters: NotRequired[Dict[str, str]]
-    r"""Custom PostgreSQL parameters"""
+    r"""Custom PostgreSQL parameters. Omitted on list."""
     pooler: NotRequired[Dict[str, Any]]
-    r"""PgBouncer pooler configuration"""
+    r"""PgBouncer pooler configuration. Omitted on list."""
     backup: NotRequired[Dict[str, Any]]
-    r"""Scheduled backup configuration"""
+    r"""Scheduled backup configuration. On list, only `enabled` is returned."""
     recovery: NotRequired[RecoveryTypedDict]
+    r"""Omitted on list."""
     supabase: NotRequired[SupabaseTypedDict]
 
 
@@ -397,6 +403,7 @@ class ManagedDatabaseAttributesAttributes(BaseModel):
     engine: Optional[str] = None
 
     status: Optional[str] = None
+    r"""On show, derived from database health: `running` (all instances ready), `degraded` (some instances ready), `restoring` (restore from backup in progress), `provisioning`, `error` (no instance ready), `deleting`, `not_found` or `unknown`. On list, derived from the inventory status: `running`, `provisioning`, `stopped` or `error`. Treat as an open string; new values may be added."""
 
     namespace: OptionalNullable[str] = UNSET
 
@@ -420,15 +427,16 @@ class ManagedDatabaseAttributesAttributes(BaseModel):
     credentials: OptionalNullable[ManagedDatabaseAttributesCredentials] = UNSET
 
     parameters: Optional[Dict[str, str]] = None
-    r"""Custom PostgreSQL parameters"""
+    r"""Custom PostgreSQL parameters. Omitted on list."""
 
     pooler: Optional[Dict[str, Any]] = None
-    r"""PgBouncer pooler configuration"""
+    r"""PgBouncer pooler configuration. Omitted on list."""
 
     backup: Optional[Dict[str, Any]] = None
-    r"""Scheduled backup configuration"""
+    r"""Scheduled backup configuration. On list, only `enabled` is returned."""
 
     recovery: Optional[Recovery] = None
+    r"""Omitted on list."""
 
     supabase: Optional[Supabase] = None
 

@@ -4,88 +4,93 @@ from __future__ import annotations
 from enum import Enum
 from latitudesh_python_sdk.types import (
     BaseModel,
+    Nullable,
+    OptionalNullable,
+    UNSET,
     UNSET_SENTINEL,
     current_exclude_none,
     serialize_with_info,
 )
 from latitudesh_python_sdk.types.basemodel import current_filtered_dump
 from pydantic import model_serializer
-from typing import List, Optional
+from typing import Any, List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class PostStorageAccessKeysType(str, Enum):
+class PostStorageAccessKeysObjectStorageType(str, Enum):
     ACCESS_KEYS = "access_keys"
 
 
-class PostStorageAccessKeysStorageClass(str, Enum):
+class PostStorageAccessKeysObjectStorageStorageClass(str, Enum):
     r"""Backend storage tier. `standard` provisions the key on Wasabi; `high_performance` provisions it on VAST."""
 
     STANDARD = "standard"
     HIGH_PERFORMANCE = "high_performance"
 
 
-class AccessScope(str, Enum):
+class PostStorageAccessKeysAccessScope(str, Enum):
     r"""`fullaccess` grants access to all of the project's buckets. `limited_access` restricts the key to the buckets listed in `bucket_permissions`."""
 
     FULLACCESS = "fullaccess"
     LIMITED_ACCESS = "limited_access"
 
 
-class Permission(str, Enum):
+class PostStorageAccessKeysPermission(str, Enum):
     r"""`readonly` grants read-only access; `rw` grants read and write access."""
 
     READONLY = "readonly"
     RW = "rw"
 
 
-class BucketPermissionsTypedDict(TypedDict):
+class PostStorageAccessKeysBucketPermissionsTypedDict(TypedDict):
     bucket_id: str
     r"""Bucket (object storage) ID to grant access to."""
-    permission: Permission
+    permission: PostStorageAccessKeysPermission
     r"""`readonly` grants read-only access; `rw` grants read and write access."""
 
 
-class BucketPermissions(BaseModel):
+class PostStorageAccessKeysBucketPermissions(BaseModel):
     bucket_id: str
     r"""Bucket (object storage) ID to grant access to."""
 
-    permission: Permission
+    permission: PostStorageAccessKeysPermission
     r"""`readonly` grants read-only access; `rw` grants read and write access."""
 
 
-class PostStorageAccessKeysAttributesTypedDict(TypedDict):
+class PostStorageAccessKeysObjectStorageAttributesTypedDict(TypedDict):
     project: str
     r"""Project ID or slug the access key belongs to."""
-    storage_class: PostStorageAccessKeysStorageClass
+    storage_class: PostStorageAccessKeysObjectStorageStorageClass
     r"""Backend storage tier. `standard` provisions the key on Wasabi; `high_performance` provisions it on VAST."""
     name: str
     r"""Name for the access key. Normalized server-side (lowercased, with special characters replaced by hyphens)."""
-    access_scope: AccessScope
+    access_scope: PostStorageAccessKeysAccessScope
     r"""`fullaccess` grants access to all of the project's buckets. `limited_access` restricts the key to the buckets listed in `bucket_permissions`."""
     region: str
     r"""Region slug (e.g., `DAL`, `SAO2`). Selects the VAST cluster for `high_performance` storage. Required for all requests."""
-    bucket_permissions: NotRequired[List[BucketPermissionsTypedDict]]
+    bucket_permissions: NotRequired[
+        List[PostStorageAccessKeysBucketPermissionsTypedDict]
+    ]
     r"""Per-bucket permissions. Required when `access_scope` is `limited_access`; ignored for `fullaccess`."""
 
 
-class PostStorageAccessKeysAttributes(BaseModel):
+class PostStorageAccessKeysObjectStorageAttributes(BaseModel):
     project: str
     r"""Project ID or slug the access key belongs to."""
 
-    storage_class: PostStorageAccessKeysStorageClass
+    storage_class: PostStorageAccessKeysObjectStorageStorageClass
     r"""Backend storage tier. `standard` provisions the key on Wasabi; `high_performance` provisions it on VAST."""
 
     name: str
     r"""Name for the access key. Normalized server-side (lowercased, with special characters replaced by hyphens)."""
 
-    access_scope: AccessScope
+    access_scope: PostStorageAccessKeysAccessScope
     r"""`fullaccess` grants access to all of the project's buckets. `limited_access` restricts the key to the buckets listed in `bucket_permissions`."""
 
     region: str
     r"""Region slug (e.g., `DAL`, `SAO2`). Selects the VAST cluster for `high_performance` storage. Required for all requests."""
 
-    bucket_permissions: Optional[List[BucketPermissions]] = None
+    bucket_permissions: Optional[List[PostStorageAccessKeysBucketPermissions]] = None
     r"""Per-bucket permissions. Required when `access_scope` is `limited_access`; ignored for `fullaccess`."""
 
     @model_serializer(mode="wrap")
@@ -112,26 +117,26 @@ class PostStorageAccessKeysAttributes(BaseModel):
         return m
 
 
-class PostStorageAccessKeysDataTypedDict(TypedDict):
-    type: PostStorageAccessKeysType
-    attributes: PostStorageAccessKeysAttributesTypedDict
+class PostStorageAccessKeysObjectStorageDataTypedDict(TypedDict):
+    type: PostStorageAccessKeysObjectStorageType
+    attributes: PostStorageAccessKeysObjectStorageAttributesTypedDict
 
 
-class PostStorageAccessKeysData(BaseModel):
-    type: PostStorageAccessKeysType
+class PostStorageAccessKeysObjectStorageData(BaseModel):
+    type: PostStorageAccessKeysObjectStorageType
 
-    attributes: PostStorageAccessKeysAttributes
-
-
-class PostStorageAccessKeysRequestBodyTypedDict(TypedDict):
-    data: PostStorageAccessKeysDataTypedDict
+    attributes: PostStorageAccessKeysObjectStorageAttributes
 
 
-class PostStorageAccessKeysRequestBody(BaseModel):
-    data: PostStorageAccessKeysData
+class PostStorageAccessKeysObjectStorageRequestBodyTypedDict(TypedDict):
+    data: PostStorageAccessKeysObjectStorageDataTypedDict
 
 
-class PostStorageAccessKeysObjectStorageType(str, Enum):
+class PostStorageAccessKeysObjectStorageRequestBody(BaseModel):
+    data: PostStorageAccessKeysObjectStorageData
+
+
+class PostStorageAccessKeysObjectStorageResponseType(str, Enum):
     ACCESS_KEYS = "access_keys"
 
 
@@ -146,7 +151,7 @@ class AccessKeyTypedDict(TypedDict):
     r"""Access key ID (high_performance / VAST)."""
     secret_key: NotRequired[str]
     r"""Secret key (high_performance / VAST). Returned only once."""
-    name: NotRequired[str]
+    name: NotRequired[Nullable[str]]
     r"""Access key name."""
     status: NotRequired[str]
     r"""Access key status (e.g., `Active`)."""
@@ -169,7 +174,7 @@ class AccessKey(BaseModel):
     secret_key: Optional[str] = None
     r"""Secret key (high_performance / VAST). Returned only once."""
 
-    name: Optional[str] = None
+    name: OptionalNullable[str] = UNSET
     r"""Access key name."""
 
     status: Optional[str] = None
@@ -194,6 +199,7 @@ class AccessKey(BaseModel):
                 "username",
             ]
         )
+        nullable_fields = set(["name"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -204,29 +210,51 @@ class AccessKey(BaseModel):
             if k not in serialized and n not in serialized and skip_filtered:
                 continue
             val = serialized.get(k, serialized.get(n))
+            is_nullable_and_explicitly_set = (
+                k in nullable_fields
+                and (self.__pydantic_fields_set__.intersection({n}))  # pylint: disable=no-member
+            )
 
             if val != UNSET_SENTINEL:
-                if val is not None or k not in optional_fields:
+                if (
+                    val is not None
+                    or k not in optional_fields
+                    or is_nullable_and_explicitly_set
+                ):
                     m[k] = val
 
         return m
 
 
-class PostStorageAccessKeysObjectStorageAttributesTypedDict(TypedDict):
-    access_key: NotRequired[AccessKeyTypedDict]
-    r"""The newly created access key. The secret is included only in this create response and cannot be retrieved again. Field names depend on the provider: `standard` (Wasabi) returns `access_key_id` and `secret_access_key`; `high_performance` (VAST) returns `access_key` and `secret_key`."""
+class PostStorageAccessKeysUserTypedDict(TypedDict):
+    r"""Provider-side IAM user the access key belongs to."""
+
+    user_id: NotRequired[Any]
+    r"""Provider user ID (a string for Wasabi, an integer for VAST)."""
+    username: NotRequired[str]
+    r"""Provider user name."""
+    arn: NotRequired[str]
+    r"""Provider user ARN or identifier."""
 
 
-class PostStorageAccessKeysObjectStorageAttributes(BaseModel):
-    access_key: Optional[AccessKey] = None
-    r"""The newly created access key. The secret is included only in this create response and cannot be retrieved again. Field names depend on the provider: `standard` (Wasabi) returns `access_key_id` and `secret_access_key`; `high_performance` (VAST) returns `access_key` and `secret_key`."""
+class PostStorageAccessKeysUser(BaseModel):
+    r"""Provider-side IAM user the access key belongs to."""
+
+    user_id: Optional[Any] = None
+    r"""Provider user ID (a string for Wasabi, an integer for VAST)."""
+
+    username: Optional[str] = None
+    r"""Provider user name."""
+
+    arn: Optional[str] = None
+    r"""Provider user ARN or identifier."""
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["access_key"])
+        optional_fields = set(["user_id", "username", "arn"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -245,15 +273,55 @@ class PostStorageAccessKeysObjectStorageAttributes(BaseModel):
         return m
 
 
-class PostStorageAccessKeysObjectStorageDataTypedDict(TypedDict):
-    type: NotRequired[PostStorageAccessKeysObjectStorageType]
-    attributes: NotRequired[PostStorageAccessKeysObjectStorageAttributesTypedDict]
+class PostStorageAccessKeysObjectStorageResponseAttributesTypedDict(TypedDict):
+    access_key: NotRequired[AccessKeyTypedDict]
+    r"""The newly created access key. The secret is included only in this create response and cannot be retrieved again. Field names depend on the provider: `standard` (Wasabi) returns `access_key_id` and `secret_access_key`; `high_performance` (VAST) returns `access_key` and `secret_key`."""
+    user: NotRequired[PostStorageAccessKeysUserTypedDict]
+    r"""Provider-side IAM user the access key belongs to."""
 
 
-class PostStorageAccessKeysObjectStorageData(BaseModel):
-    type: Optional[PostStorageAccessKeysObjectStorageType] = None
+class PostStorageAccessKeysObjectStorageResponseAttributes(BaseModel):
+    access_key: Optional[AccessKey] = None
+    r"""The newly created access key. The secret is included only in this create response and cannot be retrieved again. Field names depend on the provider: `standard` (Wasabi) returns `access_key_id` and `secret_access_key`; `high_performance` (VAST) returns `access_key` and `secret_key`."""
 
-    attributes: Optional[PostStorageAccessKeysObjectStorageAttributes] = None
+    user: Optional[PostStorageAccessKeysUser] = None
+    r"""Provider-side IAM user the access key belongs to."""
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["access_key", "user"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class PostStorageAccessKeysObjectStorageResponseDataTypedDict(TypedDict):
+    type: NotRequired[PostStorageAccessKeysObjectStorageResponseType]
+    attributes: NotRequired[
+        PostStorageAccessKeysObjectStorageResponseAttributesTypedDict
+    ]
+
+
+class PostStorageAccessKeysObjectStorageResponseData(BaseModel):
+    type: Optional[PostStorageAccessKeysObjectStorageResponseType] = None
+
+    attributes: Optional[PostStorageAccessKeysObjectStorageResponseAttributes] = None
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
@@ -282,13 +350,13 @@ class PostStorageAccessKeysObjectStorageData(BaseModel):
 class PostStorageAccessKeysResponseBodyTypedDict(TypedDict):
     r"""Created"""
 
-    data: NotRequired[PostStorageAccessKeysObjectStorageDataTypedDict]
+    data: NotRequired[PostStorageAccessKeysObjectStorageResponseDataTypedDict]
 
 
 class PostStorageAccessKeysResponseBody(BaseModel):
     r"""Created"""
 
-    data: Optional[PostStorageAccessKeysObjectStorageData] = None
+    data: Optional[PostStorageAccessKeysObjectStorageResponseData] = None
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):

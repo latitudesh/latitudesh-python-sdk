@@ -36,10 +36,19 @@ class UpdateAPIKeyRequest(BaseModel):
     ]
 
 
+class UpdateAPIKeyMetaTypedDict(TypedDict):
+    pass
+
+
+class UpdateAPIKeyMeta(BaseModel):
+    pass
+
+
 class UpdateAPIKeyResponseBodyTypedDict(TypedDict):
     r"""Success - Update name without rotating token"""
 
     data: NotRequired[APIKeyTypedDict]
+    meta: NotRequired[UpdateAPIKeyMetaTypedDict]
 
 
 class UpdateAPIKeyResponseBody(BaseModel):
@@ -47,12 +56,14 @@ class UpdateAPIKeyResponseBody(BaseModel):
 
     data: Optional[APIKey] = None
 
+    meta: Optional[UpdateAPIKeyMeta] = None
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

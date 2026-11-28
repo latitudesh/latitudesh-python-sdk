@@ -104,10 +104,19 @@ class PostSSHKeySSHKeysRequestBody(BaseModel):
     data: PostSSHKeySSHKeysData
 
 
+class PostSSHKeyMetaTypedDict(TypedDict):
+    pass
+
+
+class PostSSHKeyMeta(BaseModel):
+    pass
+
+
 class PostSSHKeyResponseBodyTypedDict(TypedDict):
     r"""Created"""
 
     data: NotRequired[SSHKeyDataTypedDict]
+    meta: NotRequired[PostSSHKeyMetaTypedDict]
 
 
 class PostSSHKeyResponseBody(BaseModel):
@@ -115,12 +124,14 @@ class PostSSHKeyResponseBody(BaseModel):
 
     data: Optional[SSHKeyData] = None
 
+    meta: Optional[PostSSHKeyMeta] = None
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

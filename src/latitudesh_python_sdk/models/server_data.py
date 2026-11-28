@@ -580,6 +580,47 @@ class Credentials(BaseModel):
         return m
 
 
+class VpcTypedDict(TypedDict):
+    r"""**Preview.** The VPC this server is in, or null."""
+
+    id: NotRequired[str]
+    private_ipv4: NotRequired[str]
+    name: NotRequired[str]
+
+
+class Vpc(BaseModel):
+    r"""**Preview.** The VPC this server is in, or null."""
+
+    id: Optional[str] = None
+
+    private_ipv4: Optional[str] = None
+
+    name: Optional[str] = None
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["id", "private_ipv4", "name"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
 class ServerDataAttributesTypedDict(TypedDict):
     tags: NotRequired[List[ServerDataTagsTypedDict]]
     hostname: NotRequired[str]
@@ -622,6 +663,7 @@ class ServerDataAttributesTypedDict(TypedDict):
     r"""Feature slugs supported by the server hardware (e.g. `direct_remote_access`)."""
     rescue_allowed: NotRequired[bool]
     primary_ipv4: NotRequired[Nullable[str]]
+    r"""The public IPv4. For a server in a VPC, its floating public IP, or null without one."""
     primary_ipv6: NotRequired[Nullable[str]]
     created_at: NotRequired[Nullable[str]]
     scheduled_deletion_at: NotRequired[Nullable[str]]
@@ -634,6 +676,8 @@ class ServerDataAttributesTypedDict(TypedDict):
     r"""Latest provisioning credentials, lazy loaded. Request it with `extra_fields[servers]=credentials`. Empty when the latest provisioning has no valid credentials."""
     project: NotRequired[ProjectIncludeTypedDict]
     team: NotRequired[TeamIncludeTypedDict]
+    vpc: NotRequired[Nullable[VpcTypedDict]]
+    r"""**Preview.** The VPC this server is in, or null."""
 
 
 class ServerDataAttributes(BaseModel):
@@ -694,6 +738,7 @@ class ServerDataAttributes(BaseModel):
     rescue_allowed: Optional[bool] = None
 
     primary_ipv4: OptionalNullable[str] = UNSET
+    r"""The public IPv4. For a server in a VPC, its floating public IP, or null without one."""
 
     primary_ipv6: OptionalNullable[str] = UNSET
 
@@ -717,6 +762,9 @@ class ServerDataAttributes(BaseModel):
     project: Optional[ProjectInclude] = None
 
     team: Optional[TeamInclude] = None
+
+    vpc: OptionalNullable[Vpc] = UNSET
+    r"""**Preview.** The VPC this server is in, or null."""
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
@@ -753,6 +801,7 @@ class ServerDataAttributes(BaseModel):
                 "credentials",
                 "project",
                 "team",
+                "vpc",
             ]
         )
         nullable_fields = set(
@@ -767,6 +816,7 @@ class ServerDataAttributes(BaseModel):
                 "created_at",
                 "scheduled_deletion_at",
                 "credentials",
+                "vpc",
             ]
         )
         exclude_none = current_exclude_none()

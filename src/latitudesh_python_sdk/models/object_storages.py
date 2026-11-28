@@ -14,19 +14,30 @@ from typing import List, Optional
 from typing_extensions import NotRequired, TypedDict
 
 
+class ObjectStoragesMetaTypedDict(TypedDict):
+    pass
+
+
+class ObjectStoragesMeta(BaseModel):
+    pass
+
+
 class ObjectStoragesTypedDict(TypedDict):
     data: NotRequired[List[ObjectStorageDataTypedDict]]
+    meta: NotRequired[ObjectStoragesMetaTypedDict]
 
 
 class ObjectStorages(BaseModel):
     data: Optional[List[ObjectStorageData]] = None
+
+    meta: Optional[ObjectStoragesMeta] = None
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

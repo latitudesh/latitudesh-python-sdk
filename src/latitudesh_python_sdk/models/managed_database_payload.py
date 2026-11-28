@@ -27,18 +27,16 @@ class ManagedDatabasePayloadBilling(str, Enum):
 
 
 class ManagedDatabasePayloadRecoveryTypedDict(TypedDict):
-    r"""Restore from a source database backup at create (postgres only)"""
+    r"""Restore from a source database backup (postgres only). Required: Managed Databases no longer accepts new databases, only restores."""
 
-    source_database_name: NotRequired[str]
+    source_database_name: str
     backup_id: NotRequired[str]
 
 
 class ManagedDatabasePayloadRecovery(BaseModel):
-    r"""Restore from a source database backup at create (postgres only)"""
+    r"""Restore from a source database backup (postgres only). Required: Managed Databases no longer accepts new databases, only restores."""
 
-    source_database_name: Annotated[
-        Optional[str], pydantic.Field(alias="sourceDatabaseName")
-    ] = None
+    source_database_name: Annotated[str, pydantic.Field(alias="sourceDatabaseName")]
 
     backup_id: Annotated[Optional[str], pydantic.Field(alias="backupId")] = None
 
@@ -47,7 +45,7 @@ class ManagedDatabasePayloadRecovery(BaseModel):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["sourceDatabaseName", "backupId"])
+        optional_fields = set(["backupId"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -77,6 +75,8 @@ class ManagedDatabasePayloadAttributesTypedDict(TypedDict):
     r"""Plan slug (e.g. db.psql.small)"""
     engine: str
     r"""Database engine"""
+    recovery: ManagedDatabasePayloadRecoveryTypedDict
+    r"""Restore from a source database backup (postgres only). Required: Managed Databases no longer accepts new databases, only restores."""
     billing: NotRequired[ManagedDatabasePayloadBilling]
     r"""Billing cycle (postgres/clickhouse). Defaults to monthly when omitted."""
     parameters: NotRequired[Dict[str, Any]]
@@ -85,8 +85,6 @@ class ManagedDatabasePayloadAttributesTypedDict(TypedDict):
     r"""PgBouncer pooler configuration at create (postgres only)"""
     backup: NotRequired[Dict[str, Any]]
     r"""Scheduled backup configuration at create (postgres only)"""
-    recovery: NotRequired[ManagedDatabasePayloadRecoveryTypedDict]
-    r"""Restore from a source database backup at create (postgres only)"""
     replica_regions: NotRequired[List[str]]
     r"""Optional. Reserved for cross-region read replicas (postgres only): accepted and validated, but replica provisioning is not yet active."""
 
@@ -107,6 +105,9 @@ class ManagedDatabasePayloadAttributes(BaseModel):
     engine: str
     r"""Database engine"""
 
+    recovery: ManagedDatabasePayloadRecovery
+    r"""Restore from a source database backup (postgres only). Required: Managed Databases no longer accepts new databases, only restores."""
+
     billing: Optional[ManagedDatabasePayloadBilling] = None
     r"""Billing cycle (postgres/clickhouse). Defaults to monthly when omitted."""
 
@@ -119,9 +120,6 @@ class ManagedDatabasePayloadAttributes(BaseModel):
     backup: Optional[Dict[str, Any]] = None
     r"""Scheduled backup configuration at create (postgres only)"""
 
-    recovery: Optional[ManagedDatabasePayloadRecovery] = None
-    r"""Restore from a source database backup at create (postgres only)"""
-
     replica_regions: Optional[List[str]] = None
     r"""Optional. Reserved for cross-region read replicas (postgres only): accepted and validated, but replica provisioning is not yet active."""
 
@@ -131,7 +129,7 @@ class ManagedDatabasePayloadAttributes(BaseModel):
 
     def serialize_model(self, handler):
         optional_fields = set(
-            ["billing", "parameters", "pooler", "backup", "recovery", "replica_regions"]
+            ["billing", "parameters", "pooler", "backup", "replica_regions"]
         )
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()

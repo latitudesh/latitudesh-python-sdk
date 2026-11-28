@@ -88,6 +88,7 @@ class MembershipAttributes(BaseModel):
 class MembershipDataTypedDict(TypedDict):
     id: NotRequired[str]
     attributes: NotRequired[MembershipAttributesTypedDict]
+    type: NotRequired[str]
 
 
 class MembershipData(BaseModel):
@@ -95,12 +96,14 @@ class MembershipData(BaseModel):
 
     attributes: Optional[MembershipAttributes] = None
 
+    type: Optional[str] = None
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["id", "attributes"])
+        optional_fields = set(["id", "attributes", "type"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
@@ -119,19 +122,30 @@ class MembershipData(BaseModel):
         return m
 
 
+class MembershipMetaTypedDict(TypedDict):
+    pass
+
+
+class MembershipMeta(BaseModel):
+    pass
+
+
 class MembershipTypedDict(TypedDict):
     data: NotRequired[MembershipDataTypedDict]
+    meta: NotRequired[MembershipMetaTypedDict]
 
 
 class Membership(BaseModel):
     data: Optional[MembershipData] = None
+
+    meta: Optional[MembershipMeta] = None
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(["data"])
+        optional_fields = set(["data", "meta"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

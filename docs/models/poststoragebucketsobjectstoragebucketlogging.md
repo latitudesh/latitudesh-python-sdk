@@ -1,0 +1,12 @@
+# PostStorageBucketsObjectStorageBucketLogging
+
+Delivers the access logs of this bucket to another bucket. Only supported for high_performance storage.
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `storage_id`                                                                             | *str*                                                                                    | :heavy_check_mark:                                                                       | Bucket that receives the access logs, in the same project and region.                    |
+| `prefix`                                                                                 | *Optional[str]*                                                                          | :heavy_minus_sign:                                                                       | Prefix for the log objects.                                                              |
+| `key_format`                                                                             | [Optional[models.PostStorageBucketsKeyFormat]](../models/poststoragebucketskeyformat.md) | :heavy_minus_sign:                                                                       | Format of the log object keys. Defaults to SIMPLE_PREFIX.                                |

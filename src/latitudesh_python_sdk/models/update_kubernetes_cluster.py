@@ -32,6 +32,8 @@ class UpdateKubernetesClusterAttributesTypedDict(TypedDict):
     r"""Plan slug for worker nodes. Required when scaling from 0 workers. Ignored when scaling an existing deployment."""
     kubernetes_version: NotRequired[str]
     r"""Target Kubernetes version for upgrade (e.g., v1.35.0+rke2r1). Mutually exclusive with scaling operations. Must be one minor version higher than current."""
+    worker_operating_system: NotRequired[Nullable[str]]
+    r"""Operating system slug for worker nodes when scaling from 0. Falls back to the worker plan default (auto-resolves to ubuntu24_ml_in_a_box for GPU plans)."""
 
 
 class UpdateKubernetesClusterAttributes(BaseModel):
@@ -49,15 +51,24 @@ class UpdateKubernetesClusterAttributes(BaseModel):
     kubernetes_version: Optional[str] = None
     r"""Target Kubernetes version for upgrade (e.g., v1.35.0+rke2r1). Mutually exclusive with scaling operations. Must be one minor version higher than current."""
 
+    worker_operating_system: OptionalNullable[str] = UNSET
+    r"""Operating system slug for worker nodes when scaling from 0. Falls back to the worker plan default (auto-resolves to ubuntu24_ml_in_a_box for GPU plans)."""
+
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
         optional_fields = set(
-            ["worker_count", "control_plane_count", "worker_plan", "kubernetes_version"]
+            [
+                "worker_count",
+                "control_plane_count",
+                "worker_plan",
+                "kubernetes_version",
+                "worker_operating_system",
+            ]
         )
-        nullable_fields = set(["worker_plan"])
+        nullable_fields = set(["worker_plan", "worker_operating_system"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)

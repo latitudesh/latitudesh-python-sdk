@@ -79,7 +79,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/list-lks-clusters"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -173,7 +173,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/list-lks-clusters"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -274,7 +274,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/create-lks-cluster"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -377,7 +377,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/create-lks-cluster"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -475,7 +475,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/get-lks-cluster"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -571,7 +571,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/get-lks-cluster"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -665,7 +665,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/delete-lks-cluster"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -761,7 +761,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/delete-lks-cluster"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -873,7 +873,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/update-lks-cluster"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -985,7 +985,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/update-lks-cluster"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1081,7 +1081,9 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-lks-cluster-kubeconfig"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1177,7 +1179,9 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/get-lks-cluster-kubeconfig"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1273,7 +1277,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/list-lks-node-pools"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1367,7 +1371,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/list-lks-node-pools"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1480,7 +1484,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/create-lks-node-pool"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1595,7 +1599,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/create-lks-node-pool"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1694,7 +1698,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/get-lks-node-pool"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1791,7 +1795,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/get-lks-node-pool"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1888,7 +1892,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/delete-lks-node-pool"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -1987,7 +1991,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/delete-lks-node-pool"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2110,7 +2114,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/update-lks-node-pool"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2233,7 +2237,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/update-lks-node-pool"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2335,7 +2339,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/list-lks-nodes"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2435,7 +2439,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/list-lks-nodes"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2529,7 +2533,9 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/list-lks-available-versions"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2623,7 +2629,9 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/list-lks-available-versions"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2710,7 +2718,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/list-lks-sites"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2794,7 +2802,7 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={"x-mint": {"href": "/api-reference/list-lks-sites"}},
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2890,7 +2898,9 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/list-lks-allocatable-servers"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),
@@ -2989,7 +2999,9 @@ class Lks(BaseSDK):
                     self.sdk_configuration.security, models.Security
                 ),
                 tags=["LKS"],
-                extensions=None,
+                extensions={
+                    "x-mint": {"href": "/api-reference/list-lks-allocatable-servers"}
+                },
             ),
             request=req,
             is_error_status_code=lambda c: utils.match_status_codes(["4XX", "5XX"], c),

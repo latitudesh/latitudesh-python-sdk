@@ -18,18 +18,18 @@ from typing import Optional
 from typing_extensions import NotRequired, TypedDict
 
 
-class PostStorageBucketsType(str, Enum):
+class PostStorageBucketsObjectStorageType(str, Enum):
     OBJECTS = "objects"
 
 
-class PostStorageBucketsStorageClass(str, Enum):
+class PostStorageBucketsObjectStorageStorageClass(str, Enum):
     r"""Backend storage tier. `standard` is the default S3-compatible tier. `high_performance` is a lower-latency, higher-throughput tier available in select regions only."""
 
     STANDARD = "standard"
     HIGH_PERFORMANCE = "high_performance"
 
 
-class PostStorageBucketsRetentionMode(str, Enum):
+class PostStorageBucketsObjectStorageRetentionMode(str, Enum):
     r"""Object Lock retention mode applied to new objects. `GOVERNANCE` allows privileged users to override the retention; `COMPLIANCE` cannot be overridden by anyone. Only applies when `locking` is `true`."""
 
     NONE = "NONE"
@@ -37,7 +37,62 @@ class PostStorageBucketsRetentionMode(str, Enum):
     GOVERNANCE = "GOVERNANCE"
 
 
-class PostStorageBucketsAttributesTypedDict(TypedDict):
+class PostStorageBucketsKeyFormat(str, Enum):
+    r"""Format of the log object keys. Defaults to SIMPLE_PREFIX."""
+
+    SIMPLE_PREFIX = "SIMPLE_PREFIX"
+    PARTITIONED_PREFIX_EVENT_TIME = "PARTITIONED_PREFIX_EVENT_TIME"
+    PARTITIONED_PREFIX_DELIVERY_TIME = "PARTITIONED_PREFIX_DELIVERY_TIME"
+
+
+class PostStorageBucketsObjectStorageBucketLoggingTypedDict(TypedDict):
+    r"""Delivers the access logs of this bucket to another bucket. Only supported for high_performance storage."""
+
+    storage_id: str
+    r"""Bucket that receives the access logs, in the same project and region."""
+    prefix: NotRequired[str]
+    r"""Prefix for the log objects."""
+    key_format: NotRequired[PostStorageBucketsKeyFormat]
+    r"""Format of the log object keys. Defaults to SIMPLE_PREFIX."""
+
+
+class PostStorageBucketsObjectStorageBucketLogging(BaseModel):
+    r"""Delivers the access logs of this bucket to another bucket. Only supported for high_performance storage."""
+
+    storage_id: str
+    r"""Bucket that receives the access logs, in the same project and region."""
+
+    prefix: Optional[str] = None
+    r"""Prefix for the log objects."""
+
+    key_format: Optional[PostStorageBucketsKeyFormat] = None
+    r"""Format of the log object keys. Defaults to SIMPLE_PREFIX."""
+
+    @model_serializer(mode="wrap")
+    def _serialize_model_with_info(self, handler, info):
+        return serialize_with_info(self.serialize_model, handler, info)
+
+    def serialize_model(self, handler):
+        optional_fields = set(["prefix", "key_format"])
+        exclude_none = current_exclude_none()
+        skip_filtered = exclude_none is False or current_filtered_dump()
+        serialized = handler(self)
+        m = {}
+
+        for n, f in type(self).model_fields.items():
+            k = f.alias if f.alias is not None else n
+            if k not in serialized and n not in serialized and skip_filtered:
+                continue
+            val = serialized.get(k, serialized.get(n))
+
+            if val != UNSET_SENTINEL:
+                if val is not None or k not in optional_fields:
+                    m[k] = val
+
+        return m
+
+
+class PostStorageBucketsObjectStorageAttributesTypedDict(TypedDict):
     project: str
     r"""Project ID or slug"""
     name: str
@@ -48,19 +103,21 @@ class PostStorageBucketsAttributesTypedDict(TypedDict):
     r"""Whether to create a scoped storage bucket. When true, the bucket is isolated to a specific customer context. Defaults to false."""
     customer: NotRequired[str]
     r"""Customer identifier for scoped storage. Used when `scoped` is true to create customer-specific bucket isolation."""
-    storage_class: NotRequired[PostStorageBucketsStorageClass]
+    storage_class: NotRequired[PostStorageBucketsObjectStorageStorageClass]
     r"""Backend storage tier. `standard` is the default S3-compatible tier. `high_performance` is a lower-latency, higher-throughput tier available in select regions only."""
     versioning: NotRequired[bool]
     r"""Enable S3 object versioning. Versioning can be suspended later unless Object Lock is enabled; enabling Object Lock requires versioning and prevents versioning from being suspended."""
     locking: NotRequired[bool]
     r"""Enable S3 Object Lock (WORM). Must be enabled at bucket creation; cannot be added to an existing bucket. When `locking` is `true`, `versioning` is automatically enabled."""
-    retention_mode: NotRequired[PostStorageBucketsRetentionMode]
+    retention_mode: NotRequired[PostStorageBucketsObjectStorageRetentionMode]
     r"""Object Lock retention mode applied to new objects. `GOVERNANCE` allows privileged users to override the retention; `COMPLIANCE` cannot be overridden by anyone. Only applies when `locking` is `true`."""
     retention_period: NotRequired[Nullable[int]]
     r"""Default retention period, in days, applied to new objects when Object Lock is enabled. Only applies when `locking` is `true`."""
+    bucket_logging: NotRequired[PostStorageBucketsObjectStorageBucketLoggingTypedDict]
+    r"""Delivers the access logs of this bucket to another bucket. Only supported for high_performance storage."""
 
 
-class PostStorageBucketsAttributes(BaseModel):
+class PostStorageBucketsObjectStorageAttributes(BaseModel):
     project: str
     r"""Project ID or slug"""
 
@@ -76,8 +133,8 @@ class PostStorageBucketsAttributes(BaseModel):
     customer: Optional[str] = None
     r"""Customer identifier for scoped storage. Used when `scoped` is true to create customer-specific bucket isolation."""
 
-    storage_class: Optional[PostStorageBucketsStorageClass] = (
-        PostStorageBucketsStorageClass.STANDARD
+    storage_class: Optional[PostStorageBucketsObjectStorageStorageClass] = (
+        PostStorageBucketsObjectStorageStorageClass.STANDARD
     )
     r"""Backend storage tier. `standard` is the default S3-compatible tier. `high_performance` is a lower-latency, higher-throughput tier available in select regions only."""
 
@@ -87,13 +144,16 @@ class PostStorageBucketsAttributes(BaseModel):
     locking: Optional[bool] = False
     r"""Enable S3 Object Lock (WORM). Must be enabled at bucket creation; cannot be added to an existing bucket. When `locking` is `true`, `versioning` is automatically enabled."""
 
-    retention_mode: Optional[PostStorageBucketsRetentionMode] = (
-        PostStorageBucketsRetentionMode.NONE
+    retention_mode: Optional[PostStorageBucketsObjectStorageRetentionMode] = (
+        PostStorageBucketsObjectStorageRetentionMode.NONE
     )
     r"""Object Lock retention mode applied to new objects. `GOVERNANCE` allows privileged users to override the retention; `COMPLIANCE` cannot be overridden by anyone. Only applies when `locking` is `true`."""
 
     retention_period: OptionalNullable[int] = UNSET
     r"""Default retention period, in days, applied to new objects when Object Lock is enabled. Only applies when `locking` is `true`."""
+
+    bucket_logging: Optional[PostStorageBucketsObjectStorageBucketLogging] = None
+    r"""Delivers the access logs of this bucket to another bucket. Only supported for high_performance storage."""
 
     @model_serializer(mode="wrap")
     def _serialize_model_with_info(self, handler, info):
@@ -109,6 +169,7 @@ class PostStorageBucketsAttributes(BaseModel):
                 "locking",
                 "retention_mode",
                 "retention_period",
+                "bucket_logging",
             ]
         )
         nullable_fields = set(["retention_period"])
@@ -138,23 +199,23 @@ class PostStorageBucketsAttributes(BaseModel):
         return m
 
 
-class PostStorageBucketsDataTypedDict(TypedDict):
-    type: PostStorageBucketsType
-    attributes: PostStorageBucketsAttributesTypedDict
+class PostStorageBucketsObjectStorageDataTypedDict(TypedDict):
+    type: PostStorageBucketsObjectStorageType
+    attributes: PostStorageBucketsObjectStorageAttributesTypedDict
 
 
-class PostStorageBucketsData(BaseModel):
-    type: PostStorageBucketsType
+class PostStorageBucketsObjectStorageData(BaseModel):
+    type: PostStorageBucketsObjectStorageType
 
-    attributes: PostStorageBucketsAttributes
-
-
-class PostStorageBucketsRequestBodyTypedDict(TypedDict):
-    data: PostStorageBucketsDataTypedDict
+    attributes: PostStorageBucketsObjectStorageAttributes
 
 
-class PostStorageBucketsRequestBody(BaseModel):
-    data: PostStorageBucketsData
+class PostStorageBucketsObjectStorageRequestBodyTypedDict(TypedDict):
+    data: PostStorageBucketsObjectStorageDataTypedDict
+
+
+class PostStorageBucketsObjectStorageRequestBody(BaseModel):
+    data: PostStorageBucketsObjectStorageData
 
 
 class PostStorageBucketsResponseBodyTypedDict(TypedDict):

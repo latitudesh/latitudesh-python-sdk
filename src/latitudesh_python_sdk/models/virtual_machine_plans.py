@@ -355,7 +355,6 @@ class VirtualMachinePlansDataStockLevel(str, Enum):
 
 class VirtualMachinePlansRegionsTypedDict(TypedDict):
     name: NotRequired[str]
-    available: NotRequired[List[str]]
     pricing: NotRequired[Dict[str, VirtualMachinePlansPricingTypedDict]]
     r"""Prices keyed by ISO 4217 currency code (e.g. USD, BRL)."""
     locations: NotRequired[VirtualMachinePlansLocationsTypedDict]
@@ -365,8 +364,6 @@ class VirtualMachinePlansRegionsTypedDict(TypedDict):
 
 class VirtualMachinePlansRegions(BaseModel):
     name: Optional[str] = None
-
-    available: Optional[List[str]] = None
 
     pricing: Optional[Dict[str, VirtualMachinePlansPricing]] = None
     r"""Prices keyed by ISO 4217 currency code (e.g. USD, BRL)."""
@@ -381,9 +378,7 @@ class VirtualMachinePlansRegions(BaseModel):
         return serialize_with_info(self.serialize_model, handler, info)
 
     def serialize_model(self, handler):
-        optional_fields = set(
-            ["name", "available", "pricing", "locations", "stock_level"]
-        )
+        optional_fields = set(["name", "pricing", "locations", "stock_level"])
         exclude_none = current_exclude_none()
         skip_filtered = exclude_none is False or current_filtered_dump()
         serialized = handler(self)
